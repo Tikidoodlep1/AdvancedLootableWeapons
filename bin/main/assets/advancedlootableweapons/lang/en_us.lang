@@ -1,0 +1,14 @@
+item.ingot_steel.name=Steel Ingot
+item.ingot_kobold.name=Kobold Steel Ingot
+item.ingot_crystallite.name=Crystallite Ingot
+item.ingot_platinum.name=Platinum Ingot
+item.ingot_bronze.name=Bronze Ingot
+item.ingot_frost_steel.name=Frost Steel Ingot
+item.ingot_ebony.name=Ebony Ingot
+item.ingot_demonscale.name=Dusk Steel Ingot
+item.ingot_silver.name=Silver Ingot
+item.ingot_copper.name=Copper Ingot
+item.ingot_shadow_platinum.name=Shadow Platinum Ingot
+item.ingot_obsidian.name=Obsidian Ingot
+
+tile.block_steel.name=Steel Block
