@@ -24,9 +24,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ToolDagger extends Item implements IHasModel{
 	
-	private final float attackDamage;
+	private float attackDamage;
 	private final double attackSpeed = 0.0D;
-	private final Item.ToolMaterial material;
+	private final ToolMaterial material;
 	
 	public ToolDagger(String name, ToolMaterial material) {
 		setUnlocalizedName(name);
@@ -34,20 +34,27 @@ public class ToolDagger extends Item implements IHasModel{
 		setCreativeTab(CreativeTabs.MATERIALS);
 		
 		ItemInit.items.add(this);
+		
 		this.material = material;
 		this.setMaxDamage(material.getMaxUses());
 		this.attackDamage = 1.5F + material.getAttackDamage();
 		this.maxStackSize = 1;
 	}
-
+	
 	@Override
 	public void registerModels() {
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
-	public float getAttackDamage()
+	@Override
+	public boolean isEnchantable(ItemStack stack)
     {
-        return this.attackDamage;
+        return true;
+    }
+	
+	public float getAttackDamage(){
+		float x = this.attackDamage;
+        return x;
     }
 	
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
@@ -121,6 +128,10 @@ public class ToolDagger extends Item implements IHasModel{
     {
         return this.material.toString();
     }
+	
+	public ToolMaterial getToolMaterial() {
+		return this.material;
+	}
 	
 	@SideOnly(Side.CLIENT)
     public boolean isFull3D()

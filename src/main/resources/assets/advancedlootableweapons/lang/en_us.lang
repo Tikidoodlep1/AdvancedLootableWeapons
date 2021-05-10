@@ -1,14 +1,57 @@
-item.ingot_steel.name=Steel Ingot
+item.ingot_tin.name=Tin Ingot
 item.ingot_kobold.name=Kobold Steel Ingot
-item.ingot_crystallite.name=Crystallite Ingot
-item.ingot_platinum.name=Platinum Ingot
-item.ingot_bronze.name=Bronze Ingot
-item.ingot_frost_steel.name=Frost Steel Ingot
-item.ingot_ebony.name=Ebony Ingot
-item.ingot_demonscale.name=Dusk Steel Ingot
-item.ingot_silver.name=Silver Ingot
 item.ingot_copper.name=Copper Ingot
+item.ingot_silver.name=Silver Ingot
+item.ingot_bronze.name=Bronze Ingot
+item.ingot_platinum.name=Platinum Ingot
+item.ingot_steel.name=Steel Ingot
 item.ingot_shadow_platinum.name=Shadow Platinum Ingot
+item.ingot_frost_steel.name=Frost Steel Ingot
 item.ingot_obsidian.name=Obsidian Ingot
+item.ingot_crystallite.name=Crystallite Ingot
+item.ingot_demonscale.name=Dusk Steel Ingot
+
+
+item.dagger_wood.name=Wood Dagger
+item.dagger_iron.name=Iron Dagger
+item.dagger_kobold.name=Kobold Steel Dagger
+item.dagger_copper.name=Copper Dagger
+item.dagger_silver.name=Silver Dagger
+item.dagger_bronze.name=Bronze Dagger
+item.dagger_platinum.name=Platinum Dagger
+item.dagger_steel.name=Steel Dagger
+item.dagger_shadow_platinum.name=Shadow Platinum Dagger
+item.dagger_frost_steel.name=Frost Steel Dagger
+item.dagger_obsidian.name=Obsidian Dagger
+item.dagger_crystallite.name=Crystallite Dagger
+item.dagger_demonscale.name=Dusk Steel Dagger
+
+
+item.kabutowari_steel.name=Steel Kabutowari
+
+
+item.stone_sharpening_stone.name=Cobble Sharpening Stone
+item.iron_sharpening_stone.name=Iron Sharpening Stone
+item.kobold_sharpening_stone.name=Kobold Steel Sharpening Stone
+item.copper_sharpening_stone.name=Copper Sharpening Stone
+item.silver_sharpening_stone.name=Silver Sharpening Stone
+item.bronze_sharpening_stone.name=Bronze Sharpening Stone
+item.platinum_sharpening_stone.name=Platinum Sharpening Stone
+item.steel_sharpening_stone.name=Steel Sharpening Stone
+item.shadow_platinum_sharpening_stone.name=Shadow Platinum Sharpening Stone
+item.frost_steel_sharpening_stone.name=Frost Steel Sharpening Stone
+item.obsidian_sharpening_stone.name=Obsidian Sharpening Stone
+item.crystallite_sharpening_stone.name=Crystallite Sharpening Stone
+item.demonscale_sharpening_stone.name=Dusk Steel Sharpening Stone
+
 
 tile.block_steel.name=Steel Block
+
+
+container.sharpeningStone=Sharpen Weapon
+
+
+enchantment.refined=Refined
+
+
+attribute.name.generic.bonusAttackDamage=Bonus Attack Damage

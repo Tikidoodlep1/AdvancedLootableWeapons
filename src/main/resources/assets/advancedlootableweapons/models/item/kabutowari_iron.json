@@ -1,0 +1,35 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "advancedlootableweapons:items/kabutowari_iron"
+	},
+
+	"display": {
+
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, -60 ],
+            "translation": [ 0, 3.2, 2.5 ],
+            "scale": [ 1, 1, 1 ]
+        },
+
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, 60 ],
+            "translation": [ 0, 3.2, 2.5 ],
+            "scale": [ 1, 1, 1 ]
+        },
+
+        "firstperson_righthand": {
+            "rotation": [ 0, -100, 25 ],
+            "translation": [ 1.13, 1.13, -1.5 ],
+            "scale": [ 1, 1, 1 ]
+        },
+
+        "firstperson_lefthand": {
+            "rotation": [ 0, 100, -25 ],
+            "translation": [ 1.13, 1.13, -1.5 ],
+            "scale": [ 1, 1, 1 ]
+        }
+
+    }
+
+}
