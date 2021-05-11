@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
+import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.block.Block;
@@ -13,10 +14,12 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,6 +30,7 @@ public class ToolDagger extends Item implements IHasModel{
 	private float attackDamage;
 	private final double attackSpeed = 0.0D;
 	private final ToolMaterial material;
+	private double bonusDamage;
 	
 	public ToolDagger(String name, ToolMaterial material) {
 		setUnlocalizedName(name);
@@ -39,6 +43,7 @@ public class ToolDagger extends Item implements IHasModel{
 		this.setMaxDamage(material.getMaxUses());
 		this.attackDamage = 1.5F + material.getAttackDamage();
 		this.maxStackSize = 1;
+		this.bonusDamage = 0;
 	}
 	
 	@Override
@@ -53,7 +58,7 @@ public class ToolDagger extends Item implements IHasModel{
     }
 	
 	public float getAttackDamage(){
-		float x = this.attackDamage;
+		float x = attackDamage;
         return x;
     }
 	
@@ -90,7 +95,20 @@ public class ToolDagger extends Item implements IHasModel{
 	
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
+		Iterable<ItemStack> armorlist = attacker.getArmorInventoryList();
+		ArmorBonusesBase armor;
+		for(ItemStack i: armorlist) {
+			if(i.getItem() instanceof ArmorBonusesBase) {
+				armor = (ArmorBonusesBase)i.getItem();
+				this.bonusDamage = armor.getBonusAttackDamage();
+			}else {
+				this.bonusDamage = 0.0D;
+			}
+		}
+		
+		target.setHealth(target.getHealth() - (float)this.bonusDamage);
         stack.damageItem(1, attacker);
+        target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
         return true;
     }
 	
@@ -139,6 +157,39 @@ public class ToolDagger extends Item implements IHasModel{
         return true;
     }
 	
+	/*
+	public void setBonusDamage(double damage) {
+		this.attackDamage += damage;
+		this.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+	}
+	
+	public void clearBonusDamage() {
+		this.attackDamage = 1.5F + material.getAttackDamage();
+	}
+	
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if(entityIn instanceof EntityPlayer) {
+			ArmorBonusesBase armor;
+			EntityPlayer player = (EntityPlayer)entityIn;
+			Iterable<ItemStack> armorlist = player.getArmorInventoryList();
+			for(ItemStack i: armorlist) {
+				if(i.getItem() instanceof ArmorBonusesBase && !flag) {
+					armor = (ArmorBonusesBase)i.getItem();
+					setBonusDamage(armor.getBonusAttackDamage());
+					flag = true;
+				}else if(flag) {
+					clearBonusDamage();
+					getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+					break;
+				}
+			}
+			getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+		}else {
+			clearBonusDamage();
+			getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+		}
+	}
+	*/
 }
-
-

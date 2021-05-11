@@ -50,7 +50,20 @@ public class ContainerSharpeningStone extends Container{
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 80, 56){
         	public boolean isItemValid(ItemStack stack)
             {
-            	if(stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1).equalsIgnoreCase(activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'))) && !stack.getItem().getUnlocalizedName().contains("ingot")) {
+        		String check = stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1);
+        		String check2 = activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'));
+        		if(check.equalsIgnoreCase("shadow")) {
+        			check = "shadow_platinum";
+        		}else if(check.equalsIgnoreCase("frost")) {
+        			check = "frost_steel";
+        		}
+        		if(check2.equalsIgnoreCase("shadow")) {
+        			check2 = "shadow_platinum";
+        		}else if(check2.equalsIgnoreCase("frost")) {
+        			check2 = "frost_steel";
+        		}
+        		
+            	if(check.equalsIgnoreCase(check2) && !stack.getItem().getUnlocalizedName().contains("ingot")) {
             			if(EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) < 6){
             				ItemStack copyStack = stack.copy();
             				enchLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, copyStack);

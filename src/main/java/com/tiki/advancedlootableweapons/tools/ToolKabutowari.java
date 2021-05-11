@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
+import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.block.Block;
@@ -13,19 +14,23 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ToolKabutowari extends Item implements IHasModel{
+	
 	private float attackDamage;
 	private double attackSpeed = 0.2D;
 	private final ToolMaterial material;
+	private double bonusDamage;
 	
 	public ToolKabutowari(String name, ToolMaterial material) {
 		setUnlocalizedName(name);
@@ -38,6 +43,7 @@ public class ToolKabutowari extends Item implements IHasModel{
 		this.setMaxDamage(material.getMaxUses());
 		this.attackDamage = 1.0F + material.getAttackDamage();
 		this.maxStackSize = 1;
+		this.bonusDamage = 0;
 	}
 	
 	@Override
@@ -89,7 +95,20 @@ public class ToolKabutowari extends Item implements IHasModel{
 	
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
+		Iterable<ItemStack> armorlist = attacker.getArmorInventoryList();
+		ArmorBonusesBase armor;
+		for(ItemStack i: armorlist) {
+			if(i.getItem() instanceof ArmorBonusesBase) {
+				armor = (ArmorBonusesBase)i.getItem();
+				this.bonusDamage = armor.getBonusAttackDamage();
+			}else {
+				this.bonusDamage = 0.0D;
+			}
+		}
+		
+		target.setHealth(target.getHealth() - (float)this.bonusDamage);
         stack.damageItem(1, attacker);
+        target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
         return true;
     }
 	

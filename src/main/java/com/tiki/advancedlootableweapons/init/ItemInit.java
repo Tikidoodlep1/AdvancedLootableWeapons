@@ -75,7 +75,7 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	      public static final ToolMaterial MAT_DEMONSCALE = EnumHelper.addToolMaterial("mat_demonscale", 3, 812, 8.5F, 8.25F, 14).setRepairItem(new ItemStack(INGOT_DEMONSCALE));
 	
 	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("amat_steel", ModInfo.ID + ":steel", 40, new int[]{4,7,9,4}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.5F).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_DEMONSCALE = EnumHelper.addArmorMaterial("amat_demonscale", ModInfo.ID + ":demonscale", 40, new int[]{9,12,14,9}, 14, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0F).setRepairItem(new ItemStack(INGOT_DEMONSCALE));
+	public static final ArmorMaterial AMAT_DEMONSCALE = EnumHelper.addArmorMaterial("amat_demonscale", ModInfo.ID + ":demonscale", 40, new int[]{0,12,14,9}, 14, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 3.0F).setRepairItem(new ItemStack(INGOT_DEMONSCALE));
 	
 	
 	//Tools
@@ -140,5 +140,5 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	public static final Item LEGGINGS_STEEL = new ArmorBase("leggings_steel", AMAT_STEEL, 2, EntityEquipmentSlot.LEGS).setMaxStackSize(1);
 	public static final Item BOOTS_STEEL = new ArmorBase("boots_steel", AMAT_STEEL, 1, EntityEquipmentSlot.FEET).setMaxStackSize(1);
 	
-	public static final Item HELMET_DEMONSCALE = new ArmorBonusesBase("helmet_demonscale", AMAT_DEMONSCALE, 1, EntityEquipmentSlot.HEAD, 0, 50.0D, 0.2D).setMaxStackSize(1);
+	public static final Item HELMET_DEMONSCALE = new ArmorBonusesBase("helmet_demonscale", AMAT_DEMONSCALE, 1, EntityEquipmentSlot.HEAD, 50.0D, 50.0D, 0.2D).setMaxStackSize(1);
 }

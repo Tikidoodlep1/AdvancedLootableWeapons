@@ -4,17 +4,11 @@ import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.tools.ToolDagger;
-import com.tiki.advancedlootableweapons.tools.ToolKabutowari;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 	
@@ -53,17 +47,15 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
         if (equipmentSlot == this.armorType)
         {
         	multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(Alw.MAX_HEALTH_MODIFIER, "Armor modifier", this.totalHealth, 0));
-        	multimap.put(Alw.BONUS_ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.totalDamage, 0));
+        	multimap.put(Alw.BONUS_ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Armor modifier", this.totalDamage, 0));
         	multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.totalMoveSpeed, 0));
         }
 
         return multimap;
     }
 	
-	//@SideOnly(Side.CLIENT)
-    //public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    //{
-	//	tooltip.add(TextFormatting.BLUE + "+" + this.bonusDamage + " bonus damage");
-    //}
+	public double getBonusAttackDamage() {
+		return this.bonusDamage;
+	}
 	
 }

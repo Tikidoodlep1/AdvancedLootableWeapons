@@ -27,7 +27,19 @@ item.dagger_crystallite.name=Crystallite Dagger
 item.dagger_demonscale.name=Dusk Steel Dagger
 
 
+item.kabutowari_wood.name=Wood Kabutowari
+item.kabutowari_iron.name=Iron Kabutowari
+item.kabutowari_kobold.name=Kobold Steel Kabutowari
+item.kabutowari_copper.name=Copper Kabutowari
+item.kabutowari_silver.name=Silver Kabutowari
+item.kabutowari_bronze.name=Bronze Kabutowari
+item.kabutowari_platinum.name=Platinum Kabutowari
 item.kabutowari_steel.name=Steel Kabutowari
+item.kabutowari_shadow_platinum.name=Shadow Platinum Kabutowari
+item.kabutowari_frost_steel.name=Frost Steel Kabutowari
+item.kabutowari_obsidian.name=Obsidian Kabutowari
+item.kabutowari_crystallite.name=Crystallite Kabutowari
+item.kabutowari_demonscale.name=Dusk Steel Kabutowari
 
 
 item.stone_sharpening_stone.name=Cobble Sharpening Stone
