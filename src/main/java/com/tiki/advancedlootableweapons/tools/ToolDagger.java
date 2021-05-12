@@ -14,12 +14,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -100,15 +98,19 @@ public class ToolDagger extends Item implements IHasModel{
 		for(ItemStack i: armorlist) {
 			if(i.getItem() instanceof ArmorBonusesBase) {
 				armor = (ArmorBonusesBase)i.getItem();
-				this.bonusDamage = armor.getBonusAttackDamage();
+				if(armor.armorType == EntityEquipmentSlot.CHEST) {
+					this.bonusDamage = armor.getBonusAttackDamage();
+					target.setHealth(target.getHealth() - (float)this.bonusDamage);
+					break;
+				}
 			}else {
 				this.bonusDamage = 0.0D;
+				target.setHealth(target.getHealth() - (float)this.bonusDamage);
 			}
 		}
 		
-		target.setHealth(target.getHealth() - (float)this.bonusDamage);
         stack.damageItem(1, attacker);
-        target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
+        //target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
         return true;
     }
 	

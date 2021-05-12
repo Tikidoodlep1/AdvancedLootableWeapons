@@ -9,7 +9,7 @@ item.ingot_shadow_platinum.name=Shadow Platinum Ingot
 item.ingot_frost_steel.name=Frost Steel Ingot
 item.ingot_obsidian.name=Obsidian Ingot
 item.ingot_crystallite.name=Crystallite Ingot
-item.ingot_demonscale.name=Dusk Steel Ingot
+item.ingot_dusksteel.name=Dusk Steel Ingot
 
 
 item.dagger_wood.name=Wood Dagger
@@ -24,7 +24,7 @@ item.dagger_shadow_platinum.name=Shadow Platinum Dagger
 item.dagger_frost_steel.name=Frost Steel Dagger
 item.dagger_obsidian.name=Obsidian Dagger
 item.dagger_crystallite.name=Crystallite Dagger
-item.dagger_demonscale.name=Dusk Steel Dagger
+item.dagger_dusksteel.name=Dusk Steel Dagger
 
 
 item.kabutowari_wood.name=Wood Kabutowari
@@ -39,7 +39,7 @@ item.kabutowari_shadow_platinum.name=Shadow Platinum Kabutowari
 item.kabutowari_frost_steel.name=Frost Steel Kabutowari
 item.kabutowari_obsidian.name=Obsidian Kabutowari
 item.kabutowari_crystallite.name=Crystallite Kabutowari
-item.kabutowari_demonscale.name=Dusk Steel Kabutowari
+item.kabutowari_dusksteel.name=Dusk Steel Kabutowari
 
 
 item.stone_sharpening_stone.name=Cobble Sharpening Stone
@@ -54,7 +54,59 @@ item.shadow_platinum_sharpening_stone.name=Shadow Platinum Sharpening Stone
 item.frost_steel_sharpening_stone.name=Frost Steel Sharpening Stone
 item.obsidian_sharpening_stone.name=Obsidian Sharpening Stone
 item.crystallite_sharpening_stone.name=Crystallite Sharpening Stone
-item.demonscale_sharpening_stone.name=Dusk Steel Sharpening Stone
+item.dusksteel_sharpening_stone.name=Dusk Steel Sharpening Stone
+
+
+item.helmet_kobold.name=Kobold Steel Helmet
+item.helmet_copper.name=Copper Helmet
+item.helmet_silver.name=Silver Helmet
+item.helmet_bronze.name=Bronze Helmet
+item.helmet_platinum.name=Platinum Helmet
+item.helmet_steel.name=Steel Helmet
+item.helmet_shadow_platinum.name=Shadow Platinum Helmet
+item.helmet_frost_steel.name=Frost Steel Helmet
+item.helmet_obsidian.name=Obsidian Helmet
+item.helmet_crystallite.name=Crystallite Helmet
+item.helmet_dusksteel.name=Dusk Steel Helmet
+
+
+item.chestplate_kobold.name=Kobold Steel Chestplate
+item.chestplate_copper.name=Copper Chestplate
+item.chestplate_silver.name=Silver Chestplate
+item.chestplate_bronze.name=Bronze Chestplate
+item.chestplate_platinum.name=Platinum Chestplate
+item.chestplate_steel.name=Steel Chestplate
+item.chestplate_shadow_platinum.name=Shadow Platinum Chestplate
+item.chestplate_frost_steel.name=Frost Steel Chestplate
+item.chestplate_obsidian.name=Obsidian Chestplate
+item.chestplate_crystallite.name=Crystallite Chestplate
+item.chestplate_dusksteel.name=Dusk Steel Chestplate
+
+
+item.leggings_kobold.name=Kobold Steel Leggings
+item.leggings_copper.name=Copper Leggings
+item.leggings_silver.name=Silver Leggings
+item.leggings_bronze.name=Bronze Leggings
+item.leggings_platinum.name=Platinum Leggings
+item.leggings_steel.name=Steel Leggings
+item.leggings_shadow_platinum.name=Shadow Platinum Leggings
+item.leggings_frost_steel.name=Frost Steel Leggings
+item.leggings_obsidian.name=Obsidian Leggings
+item.leggings_crystallite.name=Crystallite Leggings
+item.leggings_dusksteel.name=Dusk Steel Leggings
+
+
+item.boots_kobold.name=Kobold Steel Boots
+item.boots_copper.name=Copper Boots
+item.boots_silver.name=Silver Boots
+item.boots_bronze.name=Bronze Boots
+item.boots_platinum.name=Platinum Boots
+item.boots_steel.name=Steel Boots
+item.boots_shadow_platinum.name=Shadow Platinum Boots
+item.boots_frost_steel.name=Frost Steel Boots
+item.boots_obsidian.name=Obsidian Boots
+item.boots_crystallite.name=Crystallite Boots
+item.boots_dusksteel.name=Dusk Steel Boots
 
 
 tile.block_steel.name=Steel Block
