@@ -1,0 +1,9 @@
+{
+    "variants":
+    {
+        "normal":
+        {
+            "model": "advancedlootableweapons:block_platinum"
+        }
+    }
+}

@@ -44,6 +44,7 @@ public class ItemInit {
 	public static final Item INGOT_COPPER = new ItemBase("ingot_copper");
 	public static final Item INGOT_SILVER = new ItemBase("ingot_silver");
 	public static final Item INGOT_SHADOW_PLATINUM = new ItemBase("ingot_shadow_platinum");
+	public static final Item CRYSTAL = new ItemBase("crystal");
 	
 	/*
 	 * Materials
