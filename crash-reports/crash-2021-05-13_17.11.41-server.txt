@@ -1,0 +1,99 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 5/13/21 5:11 PM
+Description: Ticking player
+
+java.lang.NullPointerException: Ticking player
+	at com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace.isUsableByPlayer(TileEntityAlloyFurnace.java:276)
+	at com.tiki.advancedlootableweapons.inventory.ContainerAlloyFurnace.canInteractWith(ContainerAlloyFurnace.java:87)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:367)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2174)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2133)
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:672)
+	at net.minecraft.world.World.updateEntities(World.java:1909)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace.isUsableByPlayer(TileEntityAlloyFurnace.java:276)
+	at com.tiki.advancedlootableweapons.inventory.ContainerAlloyFurnace.canInteractWith(ContainerAlloyFurnace.java:87)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:367)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2174)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:871)
+	at net.minecraft.world.World.updateEntity(World.java:2133)
+
+-- Player being ticked --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 259
+	Entity Name: tiki_doodle_p
+	Entity's Exact location: 11.62, 64.00, 28.16
+	Entity's Block location: World: (11,64,28), Chunk: (at 11,4,12 in 0,1; contains blocks 0,0,16 to 15,255,31), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:672)
+	at net.minecraft.world.World.updateEntities(World.java:1909)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:643)
+
+-- Affected level --
+Details:
+	Level name: Test
+	All players: 1 total; [EntityPlayerMP['tiki_doodle_p'/259, l='Test', x=11.62, y=64.00, z=28.16]]
+	Chunk stats: ServerChunkCache: 625 Drop: 0
+	Level seed: -6244956933124239849
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (23,64,24), Chunk: (at 7,4,8 in 1,1; contains blocks 16,0,16 to 31,255,31), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 319581 game time, 1084 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 49358 (now: false), thunder time: 4265 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:842)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:743)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:592)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_231, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 484822288 bytes (462 MB) / 1893203968 bytes (1805 MB) up to 7616856064 bytes (7264 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP 9.42 Powered by Forge 14.23.5.2847 6 mods loaded, 6 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State  | ID                      | Version      | Source                           | Signature |
+	|:------ |:----------------------- |:------------ |:-------------------------------- |:--------- |
+	| LCHIJA | minecraft               | 1.12.2       | minecraft.jar                    | None      |
+	| LCHIJA | mcp                     | 9.42         | minecraft.jar                    | None      |
+	| LCHIJA | FML                     | 8.0.99.99    | forgeSrc-1.12.2-14.23.5.2847.jar | None      |
+	| LCHIJA | forge                   | 14.23.5.2847 | forgeSrc-1.12.2-14.23.5.2847.jar | None      |
+	| LCHIJA | advancedlootableweapons | Alpha 0.1    | main                             | None      |
+	| LCHIJA | jei                     | 4.15.0.291   | jei_1.12.2-4.15.0.291.jar        | None      |
+
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['tiki_doodle_p'/259, l='Test', x=11.62, y=64.00, z=28.16]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -31,6 +32,7 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
+		TileEntityHandler.registerTileEntities();
 		
 	}
 	

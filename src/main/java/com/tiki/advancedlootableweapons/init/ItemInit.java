@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
+import com.tiki.advancedlootableweapons.blocks.BlockBase;
 import com.tiki.advancedlootableweapons.items.ItemBase;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.tools.ToolAxe;
@@ -15,17 +16,20 @@ import com.tiki.advancedlootableweapons.tools.ToolPickaxe;
 import com.tiki.advancedlootableweapons.tools.ToolShovel;
 import com.tiki.advancedlootableweapons.tools.ToolSword;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemInit {
 
-	public static final List<Item> items = new ArrayList<Item>();
+	public static final List<Item> items = new ArrayList<Item>();	
 	
 	//Items
 	public static final Item INGOT_TIN = new ItemBase("ingot_tin");

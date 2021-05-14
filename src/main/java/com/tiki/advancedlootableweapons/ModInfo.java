@@ -9,5 +9,5 @@ public class ModInfo {
 	public static final String COMMONPROXY = "com.tiki.advancedlootableweapons.proxy.CommonProxy";
 	
 	public static final int GUI_SHARPENING_STONE = 0;
-	public static final int GUI_SINTERING_FURNACE = 1;
+	public static final int GUI_ALLOY_FURNACE = 1;
 }

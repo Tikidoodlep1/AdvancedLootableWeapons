@@ -110,9 +110,11 @@ item.boots_dusksteel.name=Dusk Steel Boots
 
 
 tile.block_steel.name=Steel Block
+tile.alloy_furnace.name=Alloy Furnace
 
 
 container.sharpeningStone=Sharpen Weapon
+container.alloy_furnace=Alloy Furnace
 
 
 enchantment.refined=Refined
