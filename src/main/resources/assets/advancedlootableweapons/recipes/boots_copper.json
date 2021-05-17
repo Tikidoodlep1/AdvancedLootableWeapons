@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_copper"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:boots_copper",
+		"count": 1
+	}
+}

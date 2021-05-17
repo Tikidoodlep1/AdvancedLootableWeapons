@@ -23,14 +23,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ToolDagger extends Item implements IHasModel{
+public class ToolStabSword extends Item implements IHasModel{
 	
 	private float attackDamage;
-	private final double attackSpeed = 0.0D;
+	private double attackSpeed;
 	private final ToolMaterial material;
 	private double bonusDamage;
+	private float reach;
 	
-	public ToolDagger(String name, ToolMaterial material) {
+	public ToolStabSword(String name, ToolMaterial material, String type) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.MATERIALS);
@@ -39,11 +40,25 @@ public class ToolDagger extends Item implements IHasModel{
 		
 		this.material = material;
 		this.setMaxDamage(material.getMaxUses());
-		this.attackDamage = 1.5F + material.getAttackDamage();
 		this.maxStackSize = 1;
 		this.bonusDamage = 0;
+		this.getAttributes(type, material);
 	}
 	
+	private void getAttributes(String type, ToolMaterial material) {
+		switch(type){
+			case "kabutowari":
+				this.attackSpeed = 0.2D;
+				this.attackDamage = 1.0F + material.getAttackDamage();
+				this.reach = 4.6F;
+				break;
+			case "dagger":
+				this.attackSpeed = 0.0D;
+				this.attackDamage = 1.5F + material.getAttackDamage();
+				this.reach = 4.1F;
+		}
+	}
+
 	@Override
 	public void registerModels() {
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");
@@ -56,7 +71,7 @@ public class ToolDagger extends Item implements IHasModel{
     }
 	
 	public float getAttackDamage(){
-		float x = attackDamage;
+		float x = this.attackDamage;
         return x;
     }
 	
@@ -129,7 +144,7 @@ public class ToolDagger extends Item implements IHasModel{
     }
 	
 	public float getReach() {
-		return 4.1F;
+		return reach;
 	}
 	
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
@@ -158,40 +173,4 @@ public class ToolDagger extends Item implements IHasModel{
     {
         return true;
     }
-	
-	/*
-	public void setBonusDamage(double damage) {
-		this.attackDamage += damage;
-		this.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
-	}
-	
-	public void clearBonusDamage() {
-		this.attackDamage = 1.5F + material.getAttackDamage();
-	}
-	
-	
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		if(entityIn instanceof EntityPlayer) {
-			ArmorBonusesBase armor;
-			EntityPlayer player = (EntityPlayer)entityIn;
-			Iterable<ItemStack> armorlist = player.getArmorInventoryList();
-			for(ItemStack i: armorlist) {
-				if(i.getItem() instanceof ArmorBonusesBase && !flag) {
-					armor = (ArmorBonusesBase)i.getItem();
-					setBonusDamage(armor.getBonusAttackDamage());
-					flag = true;
-				}else if(flag) {
-					clearBonusDamage();
-					getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
-					break;
-				}
-			}
-			getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
-		}else {
-			clearBonusDamage();
-			getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
-		}
-	}
-	*/
 }

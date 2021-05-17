@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SSS",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_dusksteel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:helmet_dusksteel",
+		"count": 1
+	}
+}

@@ -1,15 +1,25 @@
 package com.tiki.advancedlootableweapons.armor;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 	
@@ -17,8 +27,9 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 	private double bonusDamage;
 	private double bonusMoveSpeed;
 	private double totalDamage;
+	private int tier;
 
-	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusDamage, double bonusMoveSpeed) {
+	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusDamage, double bonusMoveSpeed, int tier) {
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -30,9 +41,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 		this.bonusDamage = bonusDamage;
 		this.bonusMoveSpeed = bonusMoveSpeed;
 		this.totalDamage = this.bonusDamage;
+		this.tier = tier;
 	}
 	
-	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusMoveSpeed) {
+	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusMoveSpeed, int tier) {
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -42,6 +54,7 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 		
 		this.bonusHealth = bonusHealth;
 		this.bonusMoveSpeed = bonusMoveSpeed;
+		this.tier = tier;
 	}
 
 	@Override
@@ -80,4 +93,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 	public double getBonusAttackDamage() {
 		return this.bonusDamage;
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+		tooltip.add(TextFormatting.BLUE + "Tier: " + TextFormatting.YELLOW + "" + TextFormatting.ITALIC + this.tier);
+    }
 }

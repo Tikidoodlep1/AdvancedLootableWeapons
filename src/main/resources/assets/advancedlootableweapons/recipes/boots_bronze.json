@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_bronze"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:boots_bronze",
+		"count": 1
+	}
+}

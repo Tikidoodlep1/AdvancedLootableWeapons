@@ -30,6 +30,12 @@ public class AlloyFurnaceRecipes
 		addAlloyingRecipe(new ItemStack(Items.COAL, 1, 1), new ItemStack(Items.IRON_INGOT), new ItemStack(ItemInit.INGOT_STEEL), 5.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_STEEL, 2), new ItemStack(ItemInit.CRYSTAL), new ItemStack(ItemInit.INGOT_CRYSTALLITE, 2), 10.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.CRYSTAL), new ItemStack(ItemInit.INGOT_STEEL, 2), new ItemStack(ItemInit.INGOT_CRYSTALLITE, 2), 10.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SILVER), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_FROST_STEEL), 8.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_SILVER), new ItemStack(ItemInit.INGOT_FROST_STEEL), 8.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.SHADOW_BLOB), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), 8.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.SHADOW_BLOB), new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), 8.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
 	}
 	
 	public void addAlloyingRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 
