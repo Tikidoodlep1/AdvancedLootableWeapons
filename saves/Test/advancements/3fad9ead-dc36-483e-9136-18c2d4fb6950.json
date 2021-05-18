@@ -5,6 +5,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/tools/wooden_axe": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/magenta_concrete_powder": {
     "criteria": {
       "has_sand": "2021-04-29 13:00:40 -0700"
@@ -65,6 +71,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/ladder": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/iron_nugget": {
     "criteria": {
       "has_iron_ingot": "2021-05-12 23:18:56 -0700"
@@ -98,6 +110,12 @@
   "minecraft:recipes/building_blocks/red_sandstone": {
     "criteria": {
       "has_sand": "2021-05-06 12:11:46 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_shovel": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
     },
     "done": true
   },
@@ -149,6 +167,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/wooden_sword": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/blue_concrete_powder": {
     "criteria": {
       "has_sand": "2021-04-29 13:00:40 -0700"
@@ -176,6 +200,12 @@
   "minecraft:recipes/building_blocks/andesite": {
     "criteria": {
       "has_stone": "2021-05-11 13:57:31 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_hoe": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
     },
     "done": true
   },
@@ -420,6 +450,12 @@
   "minecraft:recipes/tools/iron_hoe": {
     "criteria": {
       "has_iron_ingot": "2021-05-12 23:18:56 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/wooden_pickaxe": {
+    "criteria": {
+      "has_stick": "2021-05-17 00:42:03 -0700"
     },
     "done": true
   },

@@ -1,99 +1,99 @@
-[23:23:45] [main/INFO] [GradleStart]: username: alex.x.eye@gmail.com
-[23:23:45] [main/INFO] [GradleStart]: Extra: []
-[23:23:45] [main/INFO] [GradleStart]: Password found, attempting login
-[23:23:45] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication]: Logging in with username & password
-[23:23:46] [main/INFO] [GradleStart]: Login Succesful!
-[23:23:46] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, [], --assetsDir, C:/Users/alexx/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --userType, mojang, --accessToken{REDACTED}, --version, 1.12.2, --uuid, 3fad9eaddc36483e913618c2d4fb6950, --username, tiki_doodle_p, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
-[23:23:46] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[23:23:46] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
-[23:23:46] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
-[23:23:46] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
-[23:23:46] [main/INFO] [FML]: Forge Mod Loader version 14.23.5.2847 for Minecraft 1.12.2 loading
-[23:23:46] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_231, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jdk1.8.0_231\jre
-[23:23:46] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
-[23:23:46] [main/ERROR] [FML]: Full: C:\Users\alexx\.gradle\caches\modules-2\files-2.1\org.apache.maven\maven-artifact\3.5.3\7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4\maven-artifact-3.5.3.jar
-[23:23:46] [main/ERROR] [FML]: Trimmed: c:/users/alexx/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
-[23:23:46] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[23:23:46] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
-[23:23:47] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
-[23:23:47] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
-[23:23:47] [main/INFO] [FML]: Searching C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\.\mods for mods
-[23:23:47] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[23:23:47] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[23:23:47] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[23:23:47] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[23:23:47] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[23:23:47] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[23:23:47] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[23:23:47] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[23:23:47] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[23:23:49] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
-[23:23:49] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[23:23:49] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[23:23:49] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[23:23:49] [main/INFO] [GradleStart]: Remapping AccessTransformer rules...
-[23:23:49] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[23:23:49] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[23:23:49] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[23:23:50] [Client thread/INFO] [net.minecraft.client.Minecraft]: Setting user: tiki_doodle_p
-[23:23:52] [Client thread/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[23:23:52] [Client thread/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
-[23:23:52] [Client thread/INFO] [FML]: -- System Details --
+[23:09:31] [main/INFO] [GradleStart]: username: alex.x.eye@gmail.com
+[23:09:31] [main/INFO] [GradleStart]: Extra: []
+[23:09:31] [main/INFO] [GradleStart]: Password found, attempting login
+[23:09:31] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication]: Logging in with username & password
+[23:09:32] [main/INFO] [GradleStart]: Login Succesful!
+[23:09:32] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, [], --assetsDir, C:/Users/alexx/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --userType, mojang, --accessToken{REDACTED}, --version, 1.12.2, --uuid, 3fad9eaddc36483e913618c2d4fb6950, --username, tiki_doodle_p, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[23:09:32] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[23:09:32] [main/INFO] [FML]: Forge Mod Loader version 14.23.5.2847 for Minecraft 1.12.2 loading
+[23:09:32] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_231, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jdk1.8.0_231\jre
+[23:09:32] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[23:09:32] [main/ERROR] [FML]: Full: C:\Users\alexx\.gradle\caches\modules-2\files-2.1\org.apache.maven\maven-artifact\3.5.3\7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4\maven-artifact-3.5.3.jar
+[23:09:32] [main/ERROR] [FML]: Trimmed: c:/users/alexx/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[23:09:32] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[23:09:32] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[23:09:32] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[23:09:32] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[23:09:32] [main/INFO] [FML]: Searching C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\.\mods for mods
+[23:09:32] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[23:09:32] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[23:09:32] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[23:09:32] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[23:09:32] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[23:09:34] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[23:09:34] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[23:09:34] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[23:09:34] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[23:09:35] [main/INFO] [GradleStart]: Remapping AccessTransformer rules...
+[23:09:35] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[23:09:35] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[23:09:35] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[23:09:35] [Client thread/INFO] [net.minecraft.client.Minecraft]: Setting user: tiki_doodle_p
+[23:09:38] [Client thread/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[23:09:38] [Client thread/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
+[23:09:38] [Client thread/INFO] [FML]: -- System Details --
 Details:
 	Minecraft Version: 1.12.2
 	Operating System: Windows 10 (amd64) version 10.0
 	Java Version: 1.8.0_231, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 429295640 bytes (409 MB) / 822607872 bytes (784 MB) up to 7616856064 bytes (7264 MB)
+	Memory: 417183056 bytes (397 MB) / 821035008 bytes (783 MB) up to 7616856064 bytes (7264 MB)
 	JVM Flags: 0 total; 
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
 	GL info: ' Vendor: 'ATI Technologies Inc.' Version: '4.6.14757 Compatibility Profile Context 20.12.1 27.20.14501.28009' Renderer: 'Radeon RX 5500 XT'
-[23:23:53] [Client thread/INFO] [FML]: MinecraftForge v14.23.5.2847 Initialized
-[23:23:53] [Client thread/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
-[23:23:53] [Client thread/INFO] [FML]: Invalid recipe found with multiple oredict ingredients in the same ingredient...
-[23:23:53] [Client thread/INFO] [FML]: Replaced 1227 ore ingredients
-[23:23:53] [Client thread/INFO] [FML]: Searching C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\.\mods for mods
-[23:23:54] [Client thread/INFO] [FML]: Forge Mod Loader has identified 6 mods to load
-[23:23:54] [Client thread/WARN] [FML]: ****************************************
-[23:23:54] [Client thread/WARN] [FML]: * The API JustEnoughItemsAPI from source C:\Users\alexx\.gradle\caches\modules-2\files-2.1\mezz.jei\jei_1.12.2\4.15.0.291\b7ce5f00e9709e08e81c597dc2d7336f58b7fe8e\jei_1.12.2-4.15.0.291.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
-[23:23:54] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
-[23:23:54] [Client thread/WARN] [FML]: ****************************************
-[23:23:54] [Client thread/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, advancedlootableweapons, jei] at CLIENT
-[23:23:54] [Client thread/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, advancedlootableweapons, jei] at SERVER
-[23:23:55] [Client thread/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Advanced Lootable Weapons, FMLFileResourcePack:Just Enough Items
-[23:23:55] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 99879000 nanos
-[23:23:55] [Client thread/INFO] [FML]: Processing ObjectHolder annotations
-[23:23:55] [Client thread/INFO] [FML]: Found 1168 ObjectHolder annotations
-[23:23:55] [Client thread/INFO] [FML]: Identifying ItemStackHolder annotations
-[23:23:55] [Client thread/INFO] [FML]: Found 0 ItemStackHolder annotations
-[23:23:55] [Client thread/INFO] [FML]: Configured a dormant chunk cache size of 0
-[23:23:55] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
-[23:23:55] [Client thread/INFO] [FML]: Applying holder lookups
-[23:23:55] [Client thread/INFO] [FML]: Holder lookups applied
-[23:23:55] [Client thread/INFO] [FML]: Applying holder lookups
-[23:23:55] [Client thread/INFO] [FML]: Holder lookups applied
-[23:23:55] [Client thread/INFO] [FML]: Applying holder lookups
-[23:23:55] [Client thread/INFO] [FML]: Holder lookups applied
-[23:23:56] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: OUTDATED Target: 14.23.5.2855
-[23:23:56] [Client thread/INFO] [FML]: Applying holder lookups
-[23:23:56] [Client thread/INFO] [FML]: Holder lookups applied
-[23:23:56] [Client thread/INFO] [FML]: Injecting itemstacks
-[23:23:56] [Client thread/INFO] [FML]: Itemstack injection complete
-[23:23:59] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
-[23:24:00] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
-[23:24:00] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[23:24:00] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
-[23:24:00] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
-[23:24:05] [Client thread/INFO] [FML]: Max texture size: 16384
-[23:24:06] [Client thread/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 1024x512 textures-atlas
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:pickaxe_steel#inventory for item "advancedlootableweapons:pickaxe_steel", normal location exception: 
+[23:09:38] [Client thread/INFO] [FML]: MinecraftForge v14.23.5.2847 Initialized
+[23:09:38] [Client thread/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[23:09:38] [Client thread/INFO] [FML]: Invalid recipe found with multiple oredict ingredients in the same ingredient...
+[23:09:39] [Client thread/INFO] [FML]: Replaced 1227 ore ingredients
+[23:09:39] [Client thread/INFO] [FML]: Searching C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\.\mods for mods
+[23:09:40] [Client thread/INFO] [FML]: Forge Mod Loader has identified 6 mods to load
+[23:09:40] [Client thread/WARN] [FML]: ****************************************
+[23:09:40] [Client thread/WARN] [FML]: * The API JustEnoughItemsAPI from source C:\Users\alexx\.gradle\caches\modules-2\files-2.1\mezz.jei\jei_1.12.2\4.15.0.291\b7ce5f00e9709e08e81c597dc2d7336f58b7fe8e\jei_1.12.2-4.15.0.291.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[23:09:40] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[23:09:40] [Client thread/WARN] [FML]: ****************************************
+[23:09:40] [Client thread/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, advancedlootableweapons, jei] at CLIENT
+[23:09:40] [Client thread/INFO] [FML]: Attempting connection with missing mods [minecraft, mcp, FML, forge, advancedlootableweapons, jei] at SERVER
+[23:09:40] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 129732900 nanos
+[23:09:40] [Client thread/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Advanced Lootable Weapons, FMLFileResourcePack:Just Enough Items
+[23:09:41] [Client thread/INFO] [FML]: Processing ObjectHolder annotations
+[23:09:41] [Client thread/INFO] [FML]: Found 1168 ObjectHolder annotations
+[23:09:41] [Client thread/INFO] [FML]: Identifying ItemStackHolder annotations
+[23:09:41] [Client thread/INFO] [FML]: Found 0 ItemStackHolder annotations
+[23:09:41] [Client thread/INFO] [FML]: Configured a dormant chunk cache size of 0
+[23:09:41] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Starting version check at http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[23:09:41] [Client thread/INFO] [FML]: Applying holder lookups
+[23:09:41] [Client thread/INFO] [FML]: Holder lookups applied
+[23:09:41] [Client thread/INFO] [FML]: Applying holder lookups
+[23:09:41] [Client thread/INFO] [FML]: Holder lookups applied
+[23:09:41] [Client thread/INFO] [FML]: Applying holder lookups
+[23:09:41] [Client thread/INFO] [FML]: Holder lookups applied
+[23:09:41] [Client thread/INFO] [FML]: Applying holder lookups
+[23:09:41] [Client thread/INFO] [FML]: Holder lookups applied
+[23:09:41] [Client thread/INFO] [FML]: Injecting itemstacks
+[23:09:41] [Client thread/INFO] [FML]: Itemstack injection complete
+[23:09:41] [Forge Version Check/INFO] [forge.VersionCheck]: [forge] Found status: OUTDATED Target: 14.23.5.2855
+[23:09:45] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[23:09:45] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[23:09:45] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[23:09:45] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
+[23:09:46] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[23:09:51] [Client thread/INFO] [FML]: Max texture size: 16384
+[23:09:52] [Client thread/INFO] [net.minecraft.client.renderer.texture.TextureMap]: Created: 1024x512 textures-atlas
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:pickaxe_steel#inventory for item "advancedlootableweapons:pickaxe_steel", normal location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:item/pickaxe_steel with loader VanillaLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:302) ~[ModelLoader.class:?]
@@ -124,7 +124,7 @@ Caused by: java.io.FileNotFoundException: advancedlootableweapons:models/item/pi
 	at net.minecraftforge.client.model.ModelLoader$VanillaLoader.loadModel(ModelLoader.java:861) ~[ModelLoader$VanillaLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:pickaxe_steel#inventory for item "advancedlootableweapons:pickaxe_steel", blockstate location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:pickaxe_steel#inventory for item "advancedlootableweapons:pickaxe_steel", blockstate location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:pickaxe_steel#inventory with loader VariantLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:296) ~[ModelLoader.class:?]
@@ -152,7 +152,7 @@ Caused by: net.minecraft.client.renderer.block.model.ModelBlockDefinition$Missin
 	at net.minecraftforge.client.model.ModelLoader$VariantLoader.loadModel(ModelLoader.java:1175) ~[ModelLoader$VariantLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:shovel_steel#inventory for item "advancedlootableweapons:shovel_steel", normal location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:shovel_steel#inventory for item "advancedlootableweapons:shovel_steel", normal location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:item/shovel_steel with loader VanillaLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:302) ~[ModelLoader.class:?]
@@ -183,7 +183,7 @@ Caused by: java.io.FileNotFoundException: advancedlootableweapons:models/item/sh
 	at net.minecraftforge.client.model.ModelLoader$VanillaLoader.loadModel(ModelLoader.java:861) ~[ModelLoader$VanillaLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:shovel_steel#inventory for item "advancedlootableweapons:shovel_steel", blockstate location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:shovel_steel#inventory for item "advancedlootableweapons:shovel_steel", blockstate location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:shovel_steel#inventory with loader VariantLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:296) ~[ModelLoader.class:?]
@@ -211,7 +211,7 @@ Caused by: net.minecraft.client.renderer.block.model.ModelBlockDefinition$Missin
 	at net.minecraftforge.client.model.ModelLoader$VariantLoader.loadModel(ModelLoader.java:1175) ~[ModelLoader$VariantLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:chestplate_platinum#inventory for item "advancedlootableweapons:chestplate_platinum", normal location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:chestplate_platinum#inventory for item "advancedlootableweapons:chestplate_platinum", normal location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:item/chestplate_platinum with loader VanillaLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:302) ~[ModelLoader.class:?]
@@ -242,7 +242,7 @@ Caused by: java.io.FileNotFoundException: advancedlootableweapons:models/item/ch
 	at net.minecraftforge.client.model.ModelLoader$VanillaLoader.loadModel(ModelLoader.java:861) ~[ModelLoader$VanillaLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:chestplate_platinum#inventory for item "advancedlootableweapons:chestplate_platinum", blockstate location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:chestplate_platinum#inventory for item "advancedlootableweapons:chestplate_platinum", blockstate location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:chestplate_platinum#inventory with loader VariantLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:296) ~[ModelLoader.class:?]
@@ -270,7 +270,7 @@ Caused by: net.minecraft.client.renderer.block.model.ModelBlockDefinition$Missin
 	at net.minecraftforge.client.model.ModelLoader$VariantLoader.loadModel(ModelLoader.java:1175) ~[ModelLoader$VariantLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:hoe_steel#inventory for item "advancedlootableweapons:hoe_steel", normal location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:hoe_steel#inventory for item "advancedlootableweapons:hoe_steel", normal location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:item/hoe_steel with loader VanillaLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:302) ~[ModelLoader.class:?]
@@ -301,7 +301,7 @@ Caused by: java.io.FileNotFoundException: advancedlootableweapons:models/item/ho
 	at net.minecraftforge.client.model.ModelLoader$VanillaLoader.loadModel(ModelLoader.java:861) ~[ModelLoader$VanillaLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:hoe_steel#inventory for item "advancedlootableweapons:hoe_steel", blockstate location exception: 
+[23:09:52] [Client thread/ERROR] [FML]: Exception loading model for variant advancedlootableweapons:hoe_steel#inventory for item "advancedlootableweapons:hoe_steel", blockstate location exception: 
 net.minecraftforge.client.model.ModelLoaderRegistry$LoaderException: Exception loading model advancedlootableweapons:hoe_steel#inventory with loader VariantLoader.INSTANCE, skipping
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:161) ~[ModelLoaderRegistry.class:?]
 	at net.minecraftforge.client.model.ModelLoader.loadItemModels(ModelLoader.java:296) ~[ModelLoader.class:?]
@@ -329,143 +329,144 @@ Caused by: net.minecraft.client.renderer.block.model.ModelBlockDefinition$Missin
 	at net.minecraftforge.client.model.ModelLoader$VariantLoader.loadModel(ModelLoader.java:1175) ~[ModelLoader$VariantLoader.class:?]
 	at net.minecraftforge.client.model.ModelLoaderRegistry.getModel(ModelLoaderRegistry.java:157) ~[ModelLoaderRegistry.class:?]
 	... 20 more
-[23:24:06] [Client thread/FATAL] [FML]: Suppressed additional 4 model loading errors for domain advancedlootableweapons
-[23:24:07] [Client thread/INFO] [FML]: Applying holder lookups
-[23:24:07] [Client thread/INFO] [FML]: Holder lookups applied
-[23:24:07] [Client thread/INFO] [jei]: Created: 256x128 textures-atlas
-[23:24:07] [Client thread/INFO] [FML]: Injecting itemstacks
-[23:24:07] [Client thread/INFO] [FML]: Itemstack injection complete
-[23:24:07] [Client thread/INFO] [jei]: Starting JEI...
-[23:24:07] [Client thread/INFO] [jei]: Registering recipe categories...
-[23:24:07] [Client thread/INFO] [jei]: Registering recipe categories took 29.40 ms
-[23:24:07] [Client thread/INFO] [jei]: Registering mod plugins...
-[23:24:07] [Client thread/INFO] [jei]: Registering mod plugins took 165.0 ms
-[23:24:07] [Client thread/INFO] [jei]: Building recipe registry...
-[23:24:07] [Client thread/INFO] [jei]: Building recipe registry took 73.01 ms
-[23:24:07] [Client thread/INFO] [jei]: Building ingredient list...
-[23:24:07] [Client thread/INFO] [jei]: Building ingredient list took 26.45 ms
-[23:24:07] [Client thread/INFO] [jei]: Building ingredient filter...
-[23:24:07] [Client thread/INFO] [jei]: Building ingredient filter took 109.0 ms
-[23:24:07] [Client thread/INFO] [jei]: Building bookmarks...
-[23:24:07] [Client thread/INFO] [jei]: Building bookmarks took 9.161 ms
-[23:24:07] [Client thread/INFO] [jei]: Building runtime...
-[23:24:08] [Client thread/INFO] [jei]: Building runtime took 96.61 ms
-[23:24:08] [Client thread/INFO] [jei]: Starting JEI took 705.0 ms
-[23:24:08] [Client thread/INFO] [FML]: Forge Mod Loader has successfully loaded 6 mods
-[23:24:08] [Client thread/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
-[23:24:08] [Client thread/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: The following texture errors were found.
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:   DOMAIN advancedlootableweapons
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: --------------------------------------------------
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:   domain advancedlootableweapons is missing 60 textures
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     domain advancedlootableweapons has 1 location:
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       mod advancedlootableweapons resources at C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\bin\main
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     The missing resources for domain advancedlootableweapons are:
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_dusksteel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_tin.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_bronze.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_kobold.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_bronze.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_kobold.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_obsidian.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/dagger_iron.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_dusksteel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/dagger_wood.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/kabutowari_iron.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_shadow_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_bronze.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_kobold.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_shadow_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/shadow.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_bronze.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_shadow_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_dusksteel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_frost_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_frost_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_obsidian.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_kobold.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/kabutowari_wood.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_bronze.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_shadow_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_copper.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_tin.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_frost_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_dusksteel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_obsidian.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_shadow_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_crystallite.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_frost_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_silver.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_dusksteel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_obsidian.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_platinum.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/crystal.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_frost_steel.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_kobold.png
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     No other errors exist for domain advancedlootableweapons
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
-[23:24:08] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
-[23:24:11] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
-[23:24:11] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
-[23:24:11] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
-[23:24:11] [Server thread/INFO] [FML]: Registry Block: Found a missing id from the world advancedlootableweapons:sintering_furnace
-[23:24:11] [Server thread/INFO] [FML]: Registry Block: Found a missing id from the world advancedlootableweapons:alloy_smelter
-[23:24:11] [Server thread/INFO] [FML]: Applying holder lookups
-[23:24:11] [Server thread/INFO] [FML]: Holder lookups applied
-[23:24:11] [Server thread/INFO] [FML]: Loading dimension 0 (Test) (net.minecraft.server.integrated.IntegratedServer@186b48af)
-[23:24:12] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
-[23:24:12] [Server thread/INFO] [FML]: Loading dimension -1 (Test) (net.minecraft.server.integrated.IntegratedServer@186b48af)
-[23:24:12] [Server thread/INFO] [FML]: Loading dimension 1 (Test) (net.minecraft.server.integrated.IntegratedServer@186b48af)
-[23:24:12] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
-[23:24:13] [Server thread/WARN] [net.minecraft.world.WorldServer]: Keeping entity minecraft:cow that already exists with UUID 309718ea-9b68-46b2-9b09-0c8eb3e876dd
-[23:24:13] [Server thread/INFO] [FML]: Unloading dimension -1
-[23:24:13] [Server thread/INFO] [FML]: Unloading dimension 1
-[23:24:13] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
-[23:24:14] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
-[23:24:14] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
-[23:24:14] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 6 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.5.2847,advancedlootableweapons@Alpha 0.1,mcp@9.42,jei@4.15.0.291
-[23:24:14] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
-[23:24:14] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
-[23:24:14] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: tiki_doodle_p[local:E:fbc9c005] logged in with entity id 265 at (11.574173759334297, 64.0, 27.020339255208068)
-[23:24:14] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: tiki_doodle_p joined the game
-[23:24:15] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[23:24:15] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
-[23:24:15] [Client thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 119 advancements
-[23:24:17] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
-[23:24:17] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
-[23:24:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
-[23:24:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
-[23:24:18] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: tiki_doodle_p lost connection: Disconnected
-[23:24:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: tiki_doodle_p left the game
-[23:24:18] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Stopping singleplayer server as player logged out
-[23:24:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
-[23:24:18] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
-[23:24:18] [Server thread/INFO] [FML]: Unloading dimension 0
-[23:24:18] [Server thread/INFO] [FML]: Applying holder lookups
-[23:24:18] [Server thread/INFO] [FML]: Holder lookups applied
-[23:24:19] [Client thread/INFO] [net.minecraft.client.Minecraft]: Stopping!
-[23:24:19] [Client thread/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
-[23:24:19] [Client thread/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com
+[23:09:52] [Client thread/FATAL] [FML]: Suppressed additional 4 model loading errors for domain advancedlootableweapons
+[23:09:53] [Client thread/INFO] [FML]: Applying holder lookups
+[23:09:53] [Client thread/INFO] [FML]: Holder lookups applied
+[23:09:53] [Client thread/INFO] [jei]: Created: 256x128 textures-atlas
+[23:09:53] [Client thread/INFO] [FML]: Injecting itemstacks
+[23:09:53] [Client thread/INFO] [FML]: Itemstack injection complete
+[23:09:53] [Client thread/INFO] [jei]: Starting JEI...
+[23:09:53] [Client thread/INFO] [jei]: Registering recipe categories...
+[23:09:54] [Client thread/INFO] [jei]: Registering recipe categories took 35.17 ms
+[23:09:54] [Client thread/INFO] [jei]: Registering mod plugins...
+[23:09:54] [Client thread/INFO] [jei]: Registering mod plugins took 197.3 ms
+[23:09:54] [Client thread/INFO] [jei]: Building recipe registry...
+[23:09:54] [Client thread/INFO] [jei]: Building recipe registry took 81.39 ms
+[23:09:54] [Client thread/INFO] [jei]: Building ingredient list...
+[23:09:54] [Client thread/INFO] [jei]: Building ingredient list took 30.85 ms
+[23:09:54] [Client thread/INFO] [jei]: Building ingredient filter...
+[23:09:54] [Client thread/INFO] [jei]: Building ingredient filter took 164.5 ms
+[23:09:54] [Client thread/INFO] [jei]: Building bookmarks...
+[23:09:54] [Client thread/INFO] [jei]: Building bookmarks took 13.17 ms
+[23:09:54] [Client thread/INFO] [jei]: Building runtime...
+[23:09:54] [Client thread/INFO] [jei]: Building runtime took 114.4 ms
+[23:09:54] [Client thread/INFO] [jei]: Starting JEI took 873.6 ms
+[23:09:54] [Client thread/INFO] [FML]: Forge Mod Loader has successfully loaded 6 mods
+[23:09:54] [Client thread/WARN] [net.minecraft.client.settings.GameSettings]: Skipping bad option: lastServer:
+[23:09:54] [Client thread/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: The following texture errors were found.
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:   DOMAIN advancedlootableweapons
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: --------------------------------------------------
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:   domain advancedlootableweapons is missing 60 textures
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     domain advancedlootableweapons has 1 location:
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       mod advancedlootableweapons resources at C:\Users\alexx\Documents\GitHub\AdvancedLootableWeapons\bin\main
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     The missing resources for domain advancedlootableweapons are:
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_dusksteel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_tin.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_bronze.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_kobold.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_bronze.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_kobold.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_obsidian.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/dagger_iron.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_dusksteel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/dagger_wood.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/kabutowari_iron.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_shadow_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_bronze.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_kobold.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_shadow_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/shadow.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_bronze.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_shadow_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_dusksteel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_frost_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_frost_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_obsidian.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_kobold.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/kabutowari_wood.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_bronze.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_shadow_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_copper.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_tin.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_frost_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_dusksteel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_obsidian.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_shadow_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/boots_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_crystallite.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_frost_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_silver.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/chestplate_dusksteel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/helmet_obsidian.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_ore_platinum.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/crystal.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/blocks/block_frost_steel.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:       textures/items/leggings_kobold.png
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: -------------------------
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]:     No other errors exist for domain advancedlootableweapons
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: ==================================================
+[23:09:55] [Client thread/ERROR] [FML.TEXTURE_ERRORS]: +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+[23:09:58] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Starting integrated minecraft server version 1.12.2
+[23:09:58] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Generating keypair
+[23:09:58] [Server thread/INFO] [FML]: Injecting existing registry data into this server instance
+[23:09:58] [Server thread/INFO] [FML]: Registry Block: Found a missing id from the world advancedlootableweapons:sintering_furnace
+[23:09:58] [Server thread/INFO] [FML]: Registry Block: Found a missing id from the world advancedlootableweapons:alloy_smelter
+[23:09:58] [Server thread/INFO] [FML]: Applying holder lookups
+[23:09:58] [Server thread/INFO] [FML]: Holder lookups applied
+[23:09:59] [Server thread/INFO] [FML]: Loading dimension 0 (Test) (net.minecraft.server.integrated.IntegratedServer@71263de8)
+[23:09:59] [Server thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 488 advancements
+[23:09:59] [Server thread/INFO] [FML]: Loading dimension -1 (Test) (net.minecraft.server.integrated.IntegratedServer@71263de8)
+[23:09:59] [Server thread/INFO] [FML]: Loading dimension 1 (Test) (net.minecraft.server.integrated.IntegratedServer@71263de8)
+[23:09:59] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing start region for level 0
+[23:10:00] [Server thread/WARN] [net.minecraft.world.WorldServer]: Keeping entity minecraft:cow that already exists with UUID 309718ea-9b68-46b2-9b09-0c8eb3e876dd
+[23:10:00] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Preparing spawn area: 74%
+[23:10:00] [Server thread/INFO] [FML]: Unloading dimension -1
+[23:10:00] [Server thread/INFO] [FML]: Unloading dimension 1
+[23:10:01] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Changing view distance to 12, from 10
+[23:10:02] [Netty Local Client IO #0/INFO] [FML]: Server protocol version 2
+[23:10:02] [Netty Server IO #1/INFO] [FML]: Client protocol version 2
+[23:10:02] [Netty Server IO #1/INFO] [FML]: Client attempting to join with 6 mods : minecraft@1.12.2,FML@8.0.99.99,forge@14.23.5.2847,advancedlootableweapons@Alpha 0.1,mcp@9.42,jei@4.15.0.291
+[23:10:02] [Netty Local Client IO #0/INFO] [FML]: [Netty Local Client IO #0] Client side modded connection established
+[23:10:02] [Server thread/INFO] [FML]: [Server thread] Server side modded connection established
+[23:10:02] [Server thread/INFO] [net.minecraft.server.management.PlayerList]: tiki_doodle_p[local:E:22318089] logged in with entity id 260 at (12.074222332899318, 67.98627353664922, 26.325536126826538)
+[23:10:02] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: tiki_doodle_p joined the game
+[23:10:03] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[23:10:03] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
+[23:10:03] [Client thread/INFO] [net.minecraft.advancements.AdvancementList]: Loaded 125 advancements
+[23:10:29] [Server thread/INFO] [net.minecraft.server.integrated.IntegratedServer]: Saving and pausing game...
+[23:10:29] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
+[23:10:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Stopping server
+[23:10:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving players
+[23:10:30] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: tiki_doodle_p lost connection: Disconnected
+[23:10:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: tiki_doodle_p left the game
+[23:10:30] [Server thread/INFO] [net.minecraft.network.NetHandlerPlayServer]: Stopping singleplayer server as player logged out
+[23:10:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving worlds
+[23:10:30] [Server thread/INFO] [net.minecraft.server.MinecraftServer]: Saving chunks for level 'Test'/overworld
+[23:10:30] [Server thread/INFO] [FML]: Unloading dimension 0
+[23:10:30] [Server thread/INFO] [FML]: Applying holder lookups
+[23:10:30] [Server thread/INFO] [FML]: Holder lookups applied
+[23:10:31] [Client thread/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[23:10:31] [Client thread/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[23:10:31] [Client thread/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com

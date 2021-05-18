@@ -118,6 +118,7 @@ container.alloy_furnace=Alloy Furnace
 
 
 enchantment.refined=Refined
+enchantment.rand_damage= 
 
 
 attribute.name.generic.bonusAttackDamage=Bonus Attack Damage
