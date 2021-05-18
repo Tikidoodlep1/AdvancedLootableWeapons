@@ -1,6 +1,10 @@
 package com.tiki.advancedlootableweapons.tools;
 
+import java.util.List;
 import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
@@ -11,6 +15,7 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,6 +25,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -35,6 +41,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	private float reach;
 	private boolean rand;
 	private float randDamage;
+	private float tempRandDamage;
 	private String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
 	private String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
 	private Random randGen = new Random();
@@ -72,6 +79,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	@Override
 	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn){
 		this.rand = randGen.nextBoolean();
+		NBTTagCompound nbt = new NBTTagCompound();
 		
 		if(this.rand == true) {
 			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)]);
@@ -79,10 +87,28 @@ public class ToolStabSword extends Item implements IHasModel{
 			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
 		}
 		
-		//stack.addEnchantment(EnchantmentInit.RAND_DAMAGE, 1);
-		//this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
-		//this.getItemAttributeModifiers(EntityEquipmentSlot.MAINHAND);
+		if(randGen.nextBoolean() == true) {
+			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+		}else{
+			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+			this.randDamage += (this.randDamage * 2);
+		}
+		
+		nbt = stack.getOrCreateSubCompound("damageModifier");
+		nbt.setFloat("bonusDamage", this.randDamage);
+		this.tempRandDamage = nbt.getFloat("bonusDamage");
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.tempRandDamage, 0), EntityEquipmentSlot.MAINHAND);
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)(this.getAttackDamage() + 1), 0), EntityEquipmentSlot.MAINHAND);
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
+        stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
 	}
+
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+    {
+		tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4) + " Attack Speed");
+		
+    }
 	
 	@Override
 	public void registerModels() {
@@ -163,7 +189,6 @@ public class ToolStabSword extends Item implements IHasModel{
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0));
             multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0));
-            
         }
         
         return multimap;
