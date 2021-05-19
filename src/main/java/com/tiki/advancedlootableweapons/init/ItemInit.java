@@ -127,6 +127,35 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	public static final Item KABUTOWARI_CRYSTALLITE = new ToolStabSword("kabutowari_crystallite", MAT_CRYSTALLITE, "kabutowari").setMaxStackSize(1);
 	public static final Item KABUTOWARI_DUSKSTEEL = new ToolStabSword("kabutowari_dusksteel", MAT_DUSKSTEEL, "kabutowari").setMaxStackSize(1);
 	
+	//Rapiers
+	public static final Item RAPIER_WOOD = new ToolStabSword("rapier_wood", ToolMaterial.WOOD, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_IRON = new ToolStabSword("rapier_iron", ToolMaterial.IRON, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_KOBOLD = new ToolStabSword("rapier_kobold", MAT_KOBOLD, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_COPPER = new ToolStabSword("rapier_copper", MAT_COPPER, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_SILVER = new ToolStabSword("rapier_silver", MAT_SILVER, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_BRONZE = new ToolStabSword("rapier_bronze", MAT_BRONZE, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_PLATINUM = new ToolStabSword("rapier_platinum", MAT_PLATINUM, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_STEEL = new ToolStabSword("rapier_steel", MAT_STEEL, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_SHADOW_PLATINUM = new ToolStabSword("rapier_shadow_platinum", MAT_SHADOW_PLATINUM, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_FROST_STEEL = new ToolStabSword("rapier_frost_steel", MAT_FROST_STEEL, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_OBSIDIAN = new ToolStabSword("rapier_obsidian", MAT_OBSIDIAN, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_CRYSTALLITE = new ToolStabSword("rapier_crystallite", MAT_CRYSTALLITE, "rapier").setMaxStackSize(1);
+	public static final Item RAPIER_DUSKSTEEL = new ToolStabSword("rapier_dusksteel", MAT_DUSKSTEEL, "rapier").setMaxStackSize(1);
+	
+	//Rapiers
+	public static final Item TALWAR_WOOD = new ToolStabSword("talwar_wood", ToolMaterial.WOOD, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_IRON = new ToolStabSword("talwar_iron", ToolMaterial.IRON, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_KOBOLD = new ToolStabSword("talwar_kobold", MAT_KOBOLD, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_COPPER = new ToolStabSword("talwar_copper", MAT_COPPER, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_SILVER = new ToolStabSword("talwar_silver", MAT_SILVER, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_BRONZE = new ToolStabSword("talwar_bronze", MAT_BRONZE, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_PLATINUM = new ToolStabSword("talwar_platinum", MAT_PLATINUM, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_STEEL = new ToolStabSword("talwar_steel", MAT_STEEL, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_SHADOW_PLATINUM = new ToolStabSword("talwar_shadow_platinum", MAT_SHADOW_PLATINUM, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_FROST_STEEL = new ToolStabSword("talwar_frost_steel", MAT_FROST_STEEL, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_OBSIDIAN = new ToolStabSword("talwar_obsidian", MAT_OBSIDIAN, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_CRYSTALLITE = new ToolStabSword("talwar_crystallite", MAT_CRYSTALLITE, "talwar").setMaxStackSize(1);
+	public static final Item TALWAR_DUSKSTEEL = new ToolStabSword("talwar_dusksteel", MAT_DUSKSTEEL, "talwar").setMaxStackSize(1);
 	
 	//Sharpening Stones
 	public static final Item STONE_SHARPENING_STONE = new ItemSharpeningStone("stone_sharpening_stone", ToolMaterial.WOOD).setMaxStackSize(16);

@@ -64,15 +64,26 @@ public class ToolStabSword extends Item implements IHasModel{
 	
 	private void getAttributes(String type, ToolMaterial material) {		
 		switch(type){
+			case "dagger":
+				this.attackSpeed = 0.0D;
+				this.attackDamage = 1.5F + material.getAttackDamage();
+				this.reach = 4.1F;
+				break;
 			case "kabutowari":
 				this.attackSpeed = 0.2D;
 				this.attackDamage = 1.0F + material.getAttackDamage();
 				this.reach = 4.6F;
 				break;
-			case "dagger":
-				this.attackSpeed = 0.0D;
-				this.attackDamage = 1.5F + material.getAttackDamage();
-				this.reach = 4.1F;
+			case "rapier":
+				this.attackSpeed = 0.6D;
+				this.attackDamage = 0.5F + material.getAttackDamage();
+				this.reach = 5.6F;
+				break;
+			case "talwar":
+				this.attackSpeed = -1.4D;
+				this.attackDamage = 3.25F + material.getAttackDamage();
+				this.reach = 5.4F;
+				break;
 		}
 	}
 	

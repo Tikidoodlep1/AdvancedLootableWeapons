@@ -42,6 +42,36 @@ item.kabutowari_crystallite.name=Crystallite Kabutowari
 item.kabutowari_dusksteel.name=Dusk Steel Kabutowari
 
 
+item.rapier_wood.name=Wood Rapier
+item.rapier_iron.name=Iron Rapier
+item.rapier_kobold.name=Kobold Steel Rapier
+item.rapier_copper.name=Copper Rapier
+item.rapier_silver.name=Silver Rapier
+item.rapier_bronze.name=Bronze Rapier
+item.rapier_platinum.name=Platinum Rapier
+item.rapier_steel.name=Steel Rapier
+item.rapier_shadow_platinum.name=Shadow Platinum Rapier
+item.rapier_frost_steel.name=Frost Steel Rapier
+item.rapier_obsidian.name=Obsidian Rapier
+item.rapier_crystallite.name=Crystallite Rapier
+item.rapier_dusksteel.name=Dusk Steel Rapier
+
+
+item.talwar_wood.name=Wood Talwar
+item.talwar_iron.name=Iron Talwar
+item.talwar_kobold.name=Kobold Steel Talwar
+item.talwar_copper.name=Copper Talwar
+item.talwar_silver.name=Silver Talwar
+item.talwar_bronze.name=Bronze Talwar
+item.talwar_platinum.name=Platinum Talwar
+item.talwar_steel.name=Steel Talwar
+item.talwar_shadow_platinum.name=Shadow Platinum Talwar
+item.talwar_frost_steel.name=Frost Steel Talwar
+item.talwar_obsidian.name=Obsidian Talwar
+item.talwar_crystallite.name=Crystallite Talwar
+item.talwar_dusksteel.name=Dusk Steel Talwar
+
+
 item.stone_sharpening_stone.name=Cobble Sharpening Stone
 item.iron_sharpening_stone.name=Iron Sharpening Stone
 item.kobold_sharpening_stone.name=Kobold Steel Sharpening Stone
