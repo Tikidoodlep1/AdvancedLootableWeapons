@@ -15,3 +15,5 @@ gradle-app.setting
 options.txt
 usercache.json
 usernamecache.json
+crash-reports
+screenshots
