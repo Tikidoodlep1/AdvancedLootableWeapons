@@ -24,7 +24,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2847"
+    version = "1.0"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -72,10 +72,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     // compile against the JEI API but do not include it at runtime
-    deobfProvided "mezz.jei:jei_${mc_version}:${jeiversion}:api"
-    compile "mezz.jei:jei_${mc_version}:${jeiversion}"
+    //deobfProvided "mezz.jei:jei_${mc_version}:${jeiversion}:api"
+    //compile "mezz.jei:jei_${mc_version}:${jeiversion}"
     // at runtime, use the full JEI jar
-    runtime "mezz.jei:jei_${mc_version}:${jeiversion}"
+    //runtime "mezz.jei:jei_${mc_version}:${jeiversion}"
 	
 	compile fileTree(dir: './libs', include: '*.jar')
 }
