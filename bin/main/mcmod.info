@@ -2,13 +2,13 @@
 {
   "modid": "advancedlootableweapons",
   "name": "Advanced Lootable Weapons",
-  "description": "This aim of this mod is to create extremely diverse weapon drops without losing configurability.",
+  "description": "This aim of this mod is to create extremely diverse weapons without losing configurability.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["Tiki"],
-  "credits": "The SAO Experience Pack by Tiki",
+  "credits": "Tiki",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
