@@ -84,6 +84,9 @@ public class ToolStabSword extends Item implements IHasModel{
 				this.attackDamage = 3.25F + material.getAttackDamage();
 				this.reach = 5.4F;
 				break;
+			case "cleaver":
+				this.attackSpeed = -2.6D;
+				this.attackDamage = 4.5F + material.getAttackDamage();
 		}
 	}
 	

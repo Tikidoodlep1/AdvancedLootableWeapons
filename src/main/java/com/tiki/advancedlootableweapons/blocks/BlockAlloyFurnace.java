@@ -50,6 +50,7 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
 		setSoundType(SoundType.METAL);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
 		this.isBurning = false;
+		this.setHarvestLevel("pickaxe", 2);
 	}
 	
 	@Override

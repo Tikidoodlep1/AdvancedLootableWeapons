@@ -7,6 +7,8 @@ import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -15,7 +17,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+//@Mod.EventBusSubscriber
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER)
 public class Alw {
 	@Instance
@@ -41,6 +45,7 @@ public class Alw {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		RegistryHandler.preInitRegistries(event);
+		MinecraftForge.EVENT_BUS.register(instance);
 	}
 	
 	@EventHandler
@@ -59,5 +64,9 @@ public class Alw {
 		RegistryHandler.serverRegistries(event);
 	}
 	
+	@SubscribeEvent
+	public void onBlockAttemptBreak(LeftClickBlock event) {
+		proxy.onBlockAttemptBreak(event);
+	}
 	
 }

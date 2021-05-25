@@ -34,5 +34,5 @@ public class BlockInit {
 	public static final Block block_ore_tin = new BlockBase("block_ore_tin", Material.ROCK, CreativeTabs.MATERIALS);
 	
 	//misc
-	public static final Block alloy_furnace = new BlockAlloyFurnace("alloy_furnace");
+	public static final Block alloy_furnace = new BlockAlloyFurnace("alloy_furnace").setHardness(1.6F).setResistance(1.0F);
 }

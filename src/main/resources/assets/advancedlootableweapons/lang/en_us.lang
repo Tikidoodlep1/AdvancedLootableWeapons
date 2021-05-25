@@ -72,6 +72,21 @@ item.talwar_crystallite.name=Crystallite Talwar
 item.talwar_dusksteel.name=Dusk Steel Talwar
 
 
+item.stone_forge_hammer.name=Stone Forge Hammer
+item.iron_forge_hammer.name=Iron Forge Hammer
+item.kobold_forge_hammer.name=Kobold Forge Hammer
+item.copper_forge_hammer.name=Copper Forge Hammer
+item.silver_forge_hammer.name=Silver Forge Hammer
+item.bronze_forge_hammer.name=Bronze Forge Hammer
+item.platinum_forge_hammer.name=Platinum Forge Hammer
+item.steel_forge_hammer.name=Steel Forge Hammer
+item.shadow_platinum_forge_hammer.name=Shadow Platinum Forge Hammer
+item.frost_steel_forge_hammer.name=Frost Steel Forge Hammer
+item.obsidian_forge_hammer.name=Obsidian Forge Hammer
+item.crystallite_forge_hammer.name=Crystallite Forge Hammer
+item.dusksteel_forge_hammer.name=Dusksteel Forge Hammer
+
+
 item.stone_sharpening_stone.name=Cobble Sharpening Stone
 item.iron_sharpening_stone.name=Iron Sharpening Stone
 item.kobold_sharpening_stone.name=Kobold Steel Sharpening Stone
@@ -85,6 +100,23 @@ item.frost_steel_sharpening_stone.name=Frost Steel Sharpening Stone
 item.obsidian_sharpening_stone.name=Obsidian Sharpening Stone
 item.crystallite_sharpening_stone.name=Crystallite Sharpening Stone
 item.dusksteel_sharpening_stone.name=Dusk Steel Sharpening Stone
+
+
+item.hot_tool_head.cool.name=Cool Tool Head
+item.hot_tool_head.warm.name=Warm Tool Head
+item.hot_tool_head.hot.name=Hot Tool Head
+item.dagger_hot_tool_head.cool.name=Cool Dagger Head
+item.dagger_hot_tool_head.warm.name=Warm Dagger Head
+item.dagger_hot_tool_head.hot.name=Hot Dagger Head
+item.kabutowari_hot_tool_head.cool.name=Cool Kabutowari Head
+item.kabutowari_hot_tool_head.warm.name=Warm Kabutowari Head
+item.kabutowari_hot_tool_head.hot.name=Hot Kabutowari Head
+item.talwar_hot_tool_head.cool.name=Cool Talwar Head
+item.talwar_hot_tool_head.warm.name=Warm Talwar Head
+item.talwar_hot_tool_head.hot.name=Hot Talwar Head
+item.rapier_hot_tool_head.cool.name=Cool Rapier Head
+item.rapier_hot_tool_head.warm.name=Warm Rapier Head
+item.rapier_hot_tool_head.hot.name=Hot Rapier Head
 
 
 item.helmet_kobold.name=Kobold Steel Helmet
@@ -148,7 +180,6 @@ container.alloy_furnace=Alloy Furnace
 
 
 enchantment.refined=Refined
-enchantment.rand_damage= 
 
 
 attribute.name.generic.bonusAttackDamage=Bonus Attack Damage

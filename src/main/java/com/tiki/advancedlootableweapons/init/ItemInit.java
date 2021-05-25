@@ -6,8 +6,10 @@ import java.util.List;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.items.ItemBase;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.tools.ToolAxe;
+import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolHoe;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import com.tiki.advancedlootableweapons.tools.ToolPickaxe;
@@ -157,6 +159,21 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	public static final Item TALWAR_CRYSTALLITE = new ToolStabSword("talwar_crystallite", MAT_CRYSTALLITE, "talwar").setMaxStackSize(1);
 	public static final Item TALWAR_DUSKSTEEL = new ToolStabSword("talwar_dusksteel", MAT_DUSKSTEEL, "talwar").setMaxStackSize(1);
 	
+	//Cleavers
+	public static final Item CLEAVER_WOOD = new ToolStabSword("cleaver_wood", ToolMaterial.WOOD, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_IRON = new ToolStabSword("cleaver_iron", ToolMaterial.IRON, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_KOBOLD = new ToolStabSword("cleaver_kobold", MAT_KOBOLD, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_COPPER = new ToolStabSword("cleaver_copper", MAT_COPPER, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_SILVER = new ToolStabSword("cleaver_silver", MAT_SILVER, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_BRONZE = new ToolStabSword("cleaver_bronze", MAT_BRONZE, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_PLATINUM = new ToolStabSword("cleaver_platinum", MAT_PLATINUM, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_STEEL = new ToolStabSword("cleaver_steel", MAT_STEEL, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_SHADOW_PLATINUM = new ToolStabSword("cleaver_shadow_platinum", MAT_SHADOW_PLATINUM, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_FROST_STEEL = new ToolStabSword("cleaver_frost_steel", MAT_FROST_STEEL, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_OBSIDIAN = new ToolStabSword("cleaver_obsidian", MAT_OBSIDIAN, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_CRYSTALLITE = new ToolStabSword("cleaver_crystallite", MAT_CRYSTALLITE, "cleaver").setMaxStackSize(1);
+	public static final Item CLEAVER_DUSKSTEEL = new ToolStabSword("cleaver_dusksteel", MAT_DUSKSTEEL, "cleaver").setMaxStackSize(1);
+	
 	//Sharpening Stones
 	public static final Item STONE_SHARPENING_STONE = new ItemSharpeningStone("stone_sharpening_stone", ToolMaterial.WOOD).setMaxStackSize(16);
 	public static final Item IRON_SHARPENING_STONE = new ItemSharpeningStone("iron_sharpening_stone", ToolMaterial.IRON).setMaxStackSize(16);
@@ -172,6 +189,27 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	public static final Item CRYSTALLITE_SHARPENING_STONE = new ItemSharpeningStone("crystallite_sharpening_stone", MAT_CRYSTALLITE).setMaxStackSize(16);
 	public static final Item DUSKSTEEL_SHARPENING_STONE = new ItemSharpeningStone("dusksteel_sharpening_stone", MAT_DUSKSTEEL).setMaxStackSize(16);
 	
+	//Forge Hammers
+	public static final Item STONE_FORGE_HAMMER = new ToolForgeHammer("stone_forge_hammer", ToolMaterial.WOOD).setMaxStackSize(1);
+	public static final Item IRON_FORGE_HAMMER = new ToolForgeHammer("iron_forge_hammer", ToolMaterial.IRON).setMaxStackSize(1);
+	public static final Item KOBOLD_FORGE_HAMMER = new ToolForgeHammer("kobold_forge_hammer", MAT_KOBOLD).setMaxStackSize(1);
+	public static final Item COPPER_FORGE_HAMMER = new ToolForgeHammer("copper_forge_hammer", MAT_COPPER).setMaxStackSize(1);
+	public static final Item SILVER_FORGE_HAMMER = new ToolForgeHammer("silver_forge_hammer", MAT_SILVER).setMaxStackSize(1);
+	public static final Item BRONZE_FORGE_HAMMER = new ToolForgeHammer("bronze_forge_hammer", MAT_BRONZE).setMaxStackSize(1);
+	public static final Item PLATINUM_FORGE_HAMMER = new ToolForgeHammer("platinum_forge_hammer", MAT_PLATINUM).setMaxStackSize(1);
+	public static final Item STEEL_FORGE_HAMMER = new ToolForgeHammer("steel_forge_hammer", MAT_STEEL).setMaxStackSize(1);
+	public static final Item SHADOW_PLATINUM_FORGE_HAMMER = new ToolForgeHammer("shadow_platinum_forge_hammer", MAT_SHADOW_PLATINUM).setMaxStackSize(1);
+	public static final Item FROST_STEEL_FORGE_HAMMER = new ToolForgeHammer("frost_steel_forge_hammer", MAT_FROST_STEEL).setMaxStackSize(1);
+	public static final Item OBSIDIAN_FORGE_HAMMER = new ToolForgeHammer("obsidian_forge_hammer", MAT_OBSIDIAN).setMaxStackSize(1);
+	public static final Item CRYSTALLITE_FORGE_HAMMER = new ToolForgeHammer("crystallite_forge_hammer", MAT_CRYSTALLITE).setMaxStackSize(1);
+	public static final Item DUSKSTEEL_FORGE_HAMMER = new ToolForgeHammer("dusksteel_forge_hammer", MAT_DUSKSTEEL).setMaxStackSize(1);
+	
+	//Hot Tool Heads
+	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head");
+	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head");
+	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head");
+	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head");
 	
 	//Armor
 	public static final Item HELMET_KOBOLD = new ArmorBonusesBase("helmet_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00160000512D, 3).setMaxStackSize(1);
