@@ -72,6 +72,21 @@ item.talwar_crystallite.name=Crystallite Talwar
 item.talwar_dusksteel.name=Dusk Steel Talwar
 
 
+item.cleaver_wood.name=Wood Cleaver
+item.cleaver_iron.name=Iron Cleaver
+item.cleaver_kobold.name=Kobold Steel Cleaver
+item.cleaver_copper.name=Copper Cleaver
+item.cleaver_silver.name=Silver Cleaver
+item.cleaver_bronze.name=Bronze Cleaver
+item.cleaver_platinum.name=Platinum Cleaver
+item.cleaver_steel.name=Steel Cleaver
+item.cleaver_shadow_platinum.name=Shadow Platinum Cleaver
+item.cleaver_frost_steel.name=Frost Steel Cleaver
+item.cleaver_obsidian.name=Obsidian Cleaver
+item.cleaver_crystallite.name=Crystallite Cleaver
+item.cleaver_dusksteel.name=Dusk Steel Cleaver
+
+
 item.stone_forge_hammer.name=Stone Forge Hammer
 item.iron_forge_hammer.name=Iron Forge Hammer
 item.kobold_forge_hammer.name=Kobold Forge Hammer
@@ -117,6 +132,9 @@ item.talwar_hot_tool_head.hot.name=Hot Talwar Head
 item.rapier_hot_tool_head.cool.name=Cool Rapier Head
 item.rapier_hot_tool_head.warm.name=Warm Rapier Head
 item.rapier_hot_tool_head.hot.name=Hot Rapier Head
+item.cleaver_hot_tool_head.cool.name=Cool Cleaver Head
+item.cleaver_hot_tool_head.warm.name=Warm Cleaver Head
+item.cleaver_hot_tool_head.hot.name=Hot Cleaver Head
 
 
 item.helmet_kobold.name=Kobold Steel Helmet
