@@ -102,7 +102,7 @@ public class ContainerAlloyFurnace extends Container
 			}
 			else if(index != 2 && index != 1 && index != 0) 
 			{		
-				Slot slot1 = (Slot)this.inventorySlots.get(index + 1);
+				Slot slot1 = (Slot)this.inventorySlots.get(index);
 				
 				if(!AlloyFurnaceRecipes.getInstance().getAlloyingResult(stack1, slot1.getStack()).isEmpty())
 				{
@@ -132,7 +132,7 @@ public class ContainerAlloyFurnace extends Container
 					}
 				}
 			} 
-			else if(!this.mergeItemStack(stack1, 4, 40, false)) 
+			else if(!this.mergeItemStack(stack1, 4, 39, false)) 
 			{
 				return ItemStack.EMPTY;
 			}

@@ -29,6 +29,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/oak_wooden_slab": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/snow": {
     "criteria": {
       "has_snowball": "2021-05-09 10:45:14 -0700"
@@ -68,6 +74,18 @@
   "minecraft:recipes/decorations/magenta_bed": {
     "criteria": {
       "has_magenta_wool": "2021-05-08 00:58:43 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/trapdoor": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },
@@ -131,6 +149,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/redstone/wooden_pressure_plate": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/tools/shears": {
     "criteria": {
       "has_iron_ingot": "2021-05-12 23:18:56 -0700"
@@ -143,9 +167,21 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/stick": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/coal_block": {
     "criteria": {
       "has_at_least_9_coal": "2021-05-12 23:18:54 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/sign": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },
@@ -179,6 +215,18 @@
     },
     "done": true
   },
+  "minecraft:recipes/redstone/wooden_button": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/dispenser": {
+    "criteria": {
+      "has_bow": "2021-06-01 10:41:08 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/blue_concrete_powder": {
     "criteria": {
       "has_sand": "2021-04-29 13:00:40 -0700"
@@ -194,6 +242,12 @@
   "minecraft:recipes/combat/iron_leggings": {
     "criteria": {
       "has_iron_ingot": "2021-05-12 23:18:56 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/fence": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },
@@ -260,6 +314,12 @@
   "minecraft:story/iron_tools": {
     "criteria": {
       "iron_pickaxe": "2021-05-23 23:13:12 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/fence_gate": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },
@@ -422,6 +482,7 @@
   "minecraft:adventure/adventuring_time": {
     "criteria": {
       "taiga_cold_hills": "2021-04-29 13:01:11 -0700",
+      "deep_ocean": "2021-06-01 10:46:46 -0700",
       "taiga_cold": "2021-04-27 00:00:54 -0700",
       "ocean": "2021-05-03 12:45:22 -0700",
       "cold_beach": "2021-04-27 00:01:13 -0700",
@@ -480,6 +541,12 @@
   "minecraft:recipes/transportation/birch_boat": {
     "criteria": {
       "entered_water": "2021-05-03 12:57:06 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/oak_stairs": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },
@@ -665,6 +732,12 @@
   "minecraft:story/smelt_iron": {
     "criteria": {
       "iron": "2021-05-12 23:18:56 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/wooden_door": {
+    "criteria": {
+      "has_planks": "2021-05-26 11:10:24 -0700"
     },
     "done": true
   },

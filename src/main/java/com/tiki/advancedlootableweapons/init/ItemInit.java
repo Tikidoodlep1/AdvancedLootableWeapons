@@ -11,9 +11,11 @@ import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.tools.ToolAxe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolHoe;
-import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import com.tiki.advancedlootableweapons.tools.ToolPickaxe;
 import com.tiki.advancedlootableweapons.tools.ToolShovel;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolSpear;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import com.tiki.advancedlootableweapons.tools.ToolSword;
 
 import net.minecraft.init.SoundEvents;
@@ -174,6 +176,156 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	public static final Item CLEAVER_CRYSTALLITE = new ToolStabSword("cleaver_crystallite", MAT_CRYSTALLITE, "cleaver").setMaxStackSize(1);
 	public static final Item CLEAVER_DUSKSTEEL = new ToolStabSword("cleaver_dusksteel", MAT_DUSKSTEEL, "cleaver").setMaxStackSize(1);
 	
+	//Maces
+	public static final Item MACE_WOOD = new ToolStabSword("mace_wood", ToolMaterial.WOOD, "mace").setMaxStackSize(1);
+	public static final Item MACE_IRON = new ToolStabSword("mace_iron", ToolMaterial.IRON, "mace").setMaxStackSize(1);
+	public static final Item MACE_KOBOLD = new ToolStabSword("mace_kobold", MAT_KOBOLD, "mace").setMaxStackSize(1);
+	public static final Item MACE_COPPER = new ToolStabSword("mace_copper", MAT_COPPER, "mace").setMaxStackSize(1);
+	public static final Item MACE_SILVER = new ToolStabSword("mace_silver", MAT_SILVER, "mace").setMaxStackSize(1);
+	public static final Item MACE_BRONZE = new ToolStabSword("mace_bronze", MAT_BRONZE, "mace").setMaxStackSize(1);
+	public static final Item MACE_PLATINUM = new ToolStabSword("mace_platinum", MAT_PLATINUM, "mace").setMaxStackSize(1);
+	public static final Item MACE_STEEL = new ToolStabSword("mace_steel", MAT_STEEL, "mace").setMaxStackSize(1);
+	public static final Item MACE_SHADOW_PLATINUM = new ToolStabSword("mace_shadow_platinum", MAT_SHADOW_PLATINUM, "mace").setMaxStackSize(1);
+	public static final Item MACE_FROST_STEEL = new ToolStabSword("mace_frost_steel", MAT_FROST_STEEL, "mace").setMaxStackSize(1);
+	public static final Item MACE_OBSIDIAN = new ToolStabSword("mace_obsidian", MAT_OBSIDIAN, "mace").setMaxStackSize(1);
+	public static final Item MACE_CRYSTALLITE = new ToolStabSword("mace_crystallite", MAT_CRYSTALLITE, "mace").setMaxStackSize(1);
+	public static final Item MACE_DUSKSTEEL = new ToolStabSword("mace_dusksteel", MAT_DUSKSTEEL, "mace").setMaxStackSize(1);
+	
+	//Staffs
+	public static final Item STAFF_WOOD = new ToolStabSword("staff_wood", ToolMaterial.WOOD, "staff").setMaxStackSize(1);
+	public static final Item STAFF_IRON = new ToolStabSword("staff_iron", ToolMaterial.IRON, "staff").setMaxStackSize(1);
+	public static final Item STAFF_KOBOLD = new ToolStabSword("staff_kobold", MAT_KOBOLD, "staff").setMaxStackSize(1);
+	public static final Item STAFF_COPPER = new ToolStabSword("staff_copper", MAT_COPPER, "staff").setMaxStackSize(1);
+	public static final Item STAFF_SILVER = new ToolStabSword("staff_silver", MAT_SILVER, "staff").setMaxStackSize(1);
+	public static final Item STAFF_BRONZE = new ToolStabSword("staff_bronze", MAT_BRONZE, "staff").setMaxStackSize(1);
+	public static final Item STAFF_PLATINUM = new ToolStabSword("staff_platinum", MAT_PLATINUM, "staff").setMaxStackSize(1);
+	public static final Item STAFF_STEEL = new ToolStabSword("staff_steel", MAT_STEEL, "staff").setMaxStackSize(1);
+	public static final Item STAFF_SHADOW_PLATINUM = new ToolStabSword("staff_shadow_platinum", MAT_SHADOW_PLATINUM, "staff").setMaxStackSize(1);
+	public static final Item STAFF_FROST_STEEL = new ToolStabSword("staff_frost_steel", MAT_FROST_STEEL, "staff").setMaxStackSize(1);
+	public static final Item STAFF_OBSIDIAN = new ToolStabSword("staff_obsidian", MAT_OBSIDIAN, "staff").setMaxStackSize(1);
+	public static final Item STAFF_CRYSTALLITE = new ToolStabSword("staff_crystallite", MAT_CRYSTALLITE, "staff").setMaxStackSize(1);
+	public static final Item STAFF_DUSKSTEEL = new ToolStabSword("staff_dusksteel", MAT_DUSKSTEEL, "staff").setMaxStackSize(1);
+	
+	//Longswords
+	public static final Item LONGSWORD_WOOD = new ToolSlashSword("longsword_wood", ToolMaterial.WOOD, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_IRON = new ToolSlashSword("longsword_iron", ToolMaterial.IRON, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_KOBOLD = new ToolSlashSword("longsword_kobold", MAT_KOBOLD, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_COPPER = new ToolSlashSword("longsword_copper", MAT_COPPER, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_SILVER = new ToolSlashSword("longsword_silver", MAT_SILVER, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_BRONZE = new ToolSlashSword("longsword_bronze", MAT_BRONZE, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_PLATINUM = new ToolSlashSword("longsword_platinum", MAT_PLATINUM, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_STEEL = new ToolSlashSword("longsword_steel", MAT_STEEL, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_SHADOW_PLATINUM = new ToolSlashSword("longsword_shadow_platinum", MAT_SHADOW_PLATINUM, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_FROST_STEEL = new ToolSlashSword("longsword_frost_steel", MAT_FROST_STEEL, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_OBSIDIAN = new ToolSlashSword("longsword_obsidian", MAT_OBSIDIAN, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_CRYSTALLITE = new ToolSlashSword("longsword_crystallite", MAT_CRYSTALLITE, "longsword").setMaxStackSize(1);
+	public static final Item LONGSWORD_DUSKSTEEL = new ToolSlashSword("longsword_dusksteel", MAT_DUSKSTEEL, "longsword").setMaxStackSize(1);
+	
+	//Kodachis
+	public static final Item KODACHI_WOOD = new ToolSlashSword("kodachi_wood", ToolMaterial.WOOD, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_IRON = new ToolSlashSword("kodachi_iron", ToolMaterial.IRON, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_KOBOLD = new ToolSlashSword("kodachi_kobold", MAT_KOBOLD, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_COPPER = new ToolSlashSword("kodachi_copper", MAT_COPPER, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_SILVER = new ToolSlashSword("kodachi_silver", MAT_SILVER, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_BRONZE = new ToolSlashSword("kodachi_bronze", MAT_BRONZE, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_PLATINUM = new ToolSlashSword("kodachi_platinum", MAT_PLATINUM, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_STEEL = new ToolSlashSword("kodachi_steel", MAT_STEEL, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_SHADOW_PLATINUM = new ToolSlashSword("kodachi_shadow_platinum", MAT_SHADOW_PLATINUM, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_FROST_STEEL = new ToolSlashSword("kodachi_frost_steel", MAT_FROST_STEEL, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_OBSIDIAN = new ToolSlashSword("kodachi_obsidian", MAT_OBSIDIAN, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_CRYSTALLITE = new ToolSlashSword("kodachi_crystallite", MAT_CRYSTALLITE, "kodachi").setMaxStackSize(1);
+	public static final Item KODACHI_DUSKSTEEL = new ToolSlashSword("kodachi_dusksteel", MAT_DUSKSTEEL, "kodachi").setMaxStackSize(1);
+	
+	//Battleaxes
+	public static final Item BATTLEAXE_WOOD = new ToolSlashSword("battleaxe_wood", ToolMaterial.WOOD, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_IRON = new ToolSlashSword("battleaxe_iron", ToolMaterial.IRON, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_KOBOLD = new ToolSlashSword("battleaxe_kobold", MAT_KOBOLD, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_COPPER = new ToolSlashSword("battleaxe_copper", MAT_COPPER, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_SILVER = new ToolSlashSword("battleaxe_silver", MAT_SILVER, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_BRONZE = new ToolSlashSword("battleaxe_bronze", MAT_BRONZE, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_PLATINUM = new ToolSlashSword("battleaxe_platinum", MAT_PLATINUM, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_STEEL = new ToolSlashSword("battleaxe_steel", MAT_STEEL, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_SHADOW_PLATINUM = new ToolSlashSword("battleaxe_shadow_platinum", MAT_SHADOW_PLATINUM, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_FROST_STEEL = new ToolSlashSword("battleaxe_frost_steel", MAT_FROST_STEEL, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_OBSIDIAN = new ToolSlashSword("battleaxe_obsidian", MAT_OBSIDIAN, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_CRYSTALLITE = new ToolSlashSword("battleaxe_crystallite", MAT_CRYSTALLITE, "battleaxe").setMaxStackSize(1);
+	public static final Item BATTLEAXE_DUSKSTEEL = new ToolSlashSword("battleaxe_dusksteel", MAT_DUSKSTEEL, "battleaxe").setMaxStackSize(1);
+	
+	//Zweihanders
+	public static final Item ZWEIHANDER_WOOD = new ToolSlashSword("zweihander_wood", ToolMaterial.WOOD, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_IRON = new ToolSlashSword("zweihander_iron", ToolMaterial.IRON, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_KOBOLD = new ToolSlashSword("zweihander_kobold", MAT_KOBOLD, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_COPPER = new ToolSlashSword("zweihander_copper", MAT_COPPER, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_SILVER = new ToolSlashSword("zweihander_silver", MAT_SILVER, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_BRONZE = new ToolSlashSword("zweihander_bronze", MAT_BRONZE, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_PLATINUM = new ToolSlashSword("zweihander_platinum", MAT_PLATINUM, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_STEEL = new ToolSlashSword("zweihander_steel", MAT_STEEL, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_SHADOW_PLATINUM = new ToolSlashSword("zweihander_shadow_platinum", MAT_SHADOW_PLATINUM, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_FROST_STEEL = new ToolSlashSword("zweihander_frost_steel", MAT_FROST_STEEL, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_OBSIDIAN = new ToolSlashSword("zweihander_obsidian", MAT_OBSIDIAN, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_CRYSTALLITE = new ToolSlashSword("zweihander_crystallite", MAT_CRYSTALLITE, "zweihander").setMaxStackSize(1);
+	public static final Item ZWEIHANDER_DUSKSTEEL = new ToolSlashSword("zweihander_dusksteel", MAT_DUSKSTEEL, "zweihander").setMaxStackSize(1);
+	
+	//Nodachis
+	public static final Item NODACHI_WOOD = new ToolSlashSword("nodachi_wood", ToolMaterial.WOOD, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_IRON = new ToolSlashSword("nodachi_iron", ToolMaterial.IRON, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_KOBOLD = new ToolSlashSword("nodachi_kobold", MAT_KOBOLD, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_COPPER = new ToolSlashSword("nodachi_copper", MAT_COPPER, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_SILVER = new ToolSlashSword("nodachi_silver", MAT_SILVER, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_BRONZE = new ToolSlashSword("nodachi_bronze", MAT_BRONZE, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_PLATINUM = new ToolSlashSword("nodachi_platinum", MAT_PLATINUM, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_STEEL = new ToolSlashSword("nodachi_steel", MAT_STEEL, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_SHADOW_PLATINUM = new ToolSlashSword("nodachi_shadow_platinum", MAT_SHADOW_PLATINUM, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_FROST_STEEL = new ToolSlashSword("nodachi_frost_steel", MAT_FROST_STEEL, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_OBSIDIAN = new ToolSlashSword("nodachi_obsidian", MAT_OBSIDIAN, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_CRYSTALLITE = new ToolSlashSword("nodachi_crystallite", MAT_CRYSTALLITE, "nodachi").setMaxStackSize(1);
+	public static final Item NODACHI_DUSKSTEEL = new ToolSlashSword("nodachi_dusksteel", MAT_DUSKSTEEL, "nodachi").setMaxStackSize(1);
+	
+	//Sabres
+	public static final Item SABRE_WOOD = new ToolSlashSword("sabre_wood", ToolMaterial.WOOD, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_IRON = new ToolSlashSword("sabre_iron", ToolMaterial.IRON, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_KOBOLD = new ToolSlashSword("sabre_kobold", MAT_KOBOLD, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_COPPER = new ToolSlashSword("sabre_copper", MAT_COPPER, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_SILVER = new ToolSlashSword("sabre_silver", MAT_SILVER, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_BRONZE = new ToolSlashSword("sabre_bronze", MAT_BRONZE, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_PLATINUM = new ToolSlashSword("sabre_platinum", MAT_PLATINUM, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_STEEL = new ToolSlashSword("sabre_steel", MAT_STEEL, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_SHADOW_PLATINUM = new ToolSlashSword("sabre_shadow_platinum", MAT_SHADOW_PLATINUM, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_FROST_STEEL = new ToolSlashSword("sabre_frost_steel", MAT_FROST_STEEL, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_OBSIDIAN = new ToolSlashSword("sabre_obsidian", MAT_OBSIDIAN, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_CRYSTALLITE = new ToolSlashSword("sabre_crystallite", MAT_CRYSTALLITE, "sabre").setMaxStackSize(1);
+	public static final Item SABRE_DUSKSTEEL = new ToolSlashSword("sabre_dusksteel", MAT_DUSKSTEEL, "sabre").setMaxStackSize(1);
+	
+	//Makhairas
+	public static final Item MAKHAIRA_WOOD = new ToolSlashSword("makhaira_wood", ToolMaterial.WOOD, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_IRON = new ToolSlashSword("makhaira_iron", ToolMaterial.IRON, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_KOBOLD = new ToolSlashSword("makhaira_kobold", MAT_KOBOLD, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_COPPER = new ToolSlashSword("makhaira_copper", MAT_COPPER, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_SILVER = new ToolSlashSword("makhaira_silver", MAT_SILVER, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_BRONZE = new ToolSlashSword("makhaira_bronze", MAT_BRONZE, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_PLATINUM = new ToolSlashSword("makhaira_platinum", MAT_PLATINUM, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_STEEL = new ToolSlashSword("makhaira_steel", MAT_STEEL, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_SHADOW_PLATINUM = new ToolSlashSword("makhaira_shadow_platinum", MAT_SHADOW_PLATINUM, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_FROST_STEEL = new ToolSlashSword("makhaira_frost_steel", MAT_FROST_STEEL, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_OBSIDIAN = new ToolSlashSword("makhaira_obsidian", MAT_OBSIDIAN, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_CRYSTALLITE = new ToolSlashSword("makhaira_crystallite", MAT_CRYSTALLITE, "makhaira").setMaxStackSize(1);
+	public static final Item MAKHAIRA_DUSKSTEEL = new ToolSlashSword("makhaira_dusksteel", MAT_DUSKSTEEL, "makhaira").setMaxStackSize(1);
+	
+	//Spears
+	public static final Item SPEAR_WOOD = new ToolSpear("spear_wood", ToolMaterial.WOOD).setMaxStackSize(1);
+	public static final Item SPEAR_IRON = new ToolSpear("spear_iron", ToolMaterial.IRON).setMaxStackSize(1);
+	public static final Item SPEAR_KOBOLD = new ToolSpear("spear_kobold", MAT_KOBOLD).setMaxStackSize(1);
+	public static final Item SPEAR_COPPER = new ToolSpear("spear_copper", MAT_COPPER).setMaxStackSize(1);
+	public static final Item SPEAR_SILVER = new ToolSpear("spear_silver", MAT_SILVER).setMaxStackSize(1);
+	public static final Item SPEAR_BRONZE = new ToolSpear("spear_bronze", MAT_BRONZE).setMaxStackSize(1);
+	public static final Item SPEAR_PLATINUM = new ToolSpear("spear_platinum", MAT_PLATINUM).setMaxStackSize(1);
+	public static final Item SPEAR_STEEL = new ToolSpear("spear_steel", MAT_STEEL).setMaxStackSize(1);
+	public static final Item SPEAR_SHADOW_PLATINUM = new ToolSpear("spear_shadow_platinum", MAT_SHADOW_PLATINUM).setMaxStackSize(1);
+	public static final Item SPEAR_FROST_STEEL = new ToolSpear("spear_frost_steel", MAT_FROST_STEEL).setMaxStackSize(1);
+	public static final Item SPEAR_OBSIDIAN = new ToolSpear("spear_obsidian", MAT_OBSIDIAN).setMaxStackSize(1);
+	public static final Item SPEAR_CRYSTALLITE = new ToolSpear("spear_crystallite", MAT_CRYSTALLITE).setMaxStackSize(1);
+	public static final Item SPEAR_DUSKSTEEL = new ToolSpear("spear_dusksteel", MAT_DUSKSTEEL).setMaxStackSize(1);
+	
 	//Sharpening Stones
 	public static final Item STONE_SHARPENING_STONE = new ItemSharpeningStone("stone_sharpening_stone", ToolMaterial.WOOD).setMaxStackSize(16);
 	public static final Item IRON_SHARPENING_STONE = new ItemSharpeningStone("iron_sharpening_stone", ToolMaterial.IRON).setMaxStackSize(16);
@@ -206,10 +358,70 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	
 	//Hot Tool Heads
 	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head");
+	
 	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head");
+	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2");
+	
 	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5");
+	
 	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head");
+	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2");
+	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3");
+	
 	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head");
+	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2");
+	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3");
+	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4");
+	
+	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head");
+	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2");
+	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3");
+	
+	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head");
+	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2");
+	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3");
+	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4");
+	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5");
+	
+	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head");
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2");
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3");
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4");
+	
+	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head");
+	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2");
+	public static final Item KODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kodachi_hot_tool_head_3");
+	public static final Item KODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kodachi_hot_tool_head_4");
+	
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head");
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2");
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3");
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4");
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5");
+	
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head");
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2");
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3");
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4");
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5");
+	
+	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head");
+	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2");
+	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3");
+	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4");
+	
+	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head");
+	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2");
+	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3");
+	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4");
+	
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head");
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2");
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3");
 	
 	//Armor
 	public static final Item HELMET_KOBOLD = new ArmorBonusesBase("helmet_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00160000512D, 3).setMaxStackSize(1);

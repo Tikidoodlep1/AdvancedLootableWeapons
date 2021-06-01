@@ -1,12 +1,9 @@
 package com.tiki.advancedlootableweapons.items;
 
 import java.util.List;
-import java.util.Set;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Sets;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.ModInfo;
@@ -14,13 +11,11 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.ContainerSharpeningStone;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -35,13 +30,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemSharpeningStone extends Item implements IHasModel{
 	
 	private final ToolMaterial material;
-	//private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet();
 	
 	public ItemSharpeningStone(String name, ToolMaterial materialIn) {
-		//super(materialIn, EFFECTIVE_ON);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		this.material = materialIn;
 		
@@ -62,7 +55,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 		if(!worldIn.isRemote) {
 			ContainerSharpeningStone.sendActiveMaterial(this);
 			playerIn.openGui(Alw.instance, ModInfo.GUI_SHARPENING_STONE, worldIn, handIn.ordinal(), -1, -1);
-			//itemstack.shrink(1);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 		}else {
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);

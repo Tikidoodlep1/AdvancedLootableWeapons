@@ -18,18 +18,14 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IInventory
 {
@@ -192,8 +188,18 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 						this.smeltItem();
 						flag1 = true;
 					}
+				}else if(this.inventory.get(0).isEmpty() || this.inventory.get(1).isEmpty()) {
+					this.cookTime = 0;
 				}
 			}
+		}
+		
+		if(flag) {
+			if(this.getBlockType() instanceof BlockAlloyFurnace) {
+				 BlockAlloyFurnace.setState(true, this.getWorld(), pos);
+			}
+		}else if(!flag){
+			BlockAlloyFurnace.setState(false, this.getWorld(), pos);
 		}
 	}
 	
@@ -274,13 +280,10 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	public boolean isUsableByPlayer(EntityPlayer player) 
 	{
 		if(this.world.getTileEntity(this.pos) != this) {
-			System.out.print("Is NOT usable");
 			return false; 
 		}else if(player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D) {
-			System.out.print("Is usable");
 			return true;
 		}else {
-			System.out.print("Is NOT usable");
 			return false;
 		}
 	}

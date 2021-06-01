@@ -4,6 +4,7 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
+import com.tiki.advancedlootableweapons.init.EntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.block.Block;
@@ -59,6 +60,8 @@ public class RegistryHandler {
 	public static void preInitRegistries(FMLPreInitializationEvent event)
 	{
 		//ModConfiguration.registerConfig(event);
+		EntityInit.registerEntities();
+		RenderHandler.registerEntityRenders();
 	}
 	
 	public static void initRegistries(FMLInitializationEvent event)

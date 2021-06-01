@@ -6,7 +6,6 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,11 +20,11 @@ public class ToolForgeHammer extends Item implements IHasModel{
 	public ToolForgeHammer(String name, ToolMaterial material) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 		
-		this.setMaxDamage(material.getMaxUses() / 2);
+		this.setMaxDamage(material.getMaxUses() / 50);
 		this.maxStackSize = 1;
 		this.attackDamage = material.getAttackDamage();
 		this.canRepair = true;

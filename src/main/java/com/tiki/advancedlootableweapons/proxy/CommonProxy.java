@@ -1,5 +1,7 @@
 package com.tiki.advancedlootableweapons.proxy;
 
+import com.tiki.advancedlootableweapons.Alw;
+import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 
 import net.minecraft.block.Block;
@@ -20,7 +22,7 @@ public class CommonProxy {
 		if(block == Blocks.ANVIL) {
 			EntityPlayer player = event.getEntityPlayer();
 			if(player.inventory.getCurrentItem().getItem() instanceof ToolForgeHammer) {
-				
+				player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), (int)player.posX, (int)player.posY, (int)player.posZ);
 				event.setCanceled(true);
 			}
 		}

@@ -4,7 +4,6 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ItemBase extends Item implements IHasModel{
@@ -12,7 +11,7 @@ public class ItemBase extends Item implements IHasModel{
 	public ItemBase(String name) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 	}

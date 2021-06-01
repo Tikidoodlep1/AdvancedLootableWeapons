@@ -20,7 +20,7 @@ public class ItemHotToolHead extends Item implements IHasModel{
 	public ItemHotToolHead(String name){
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 		
@@ -62,14 +62,15 @@ public class ItemHotToolHead extends Item implements IHasModel{
 	public String getUnlocalizedName(ItemStack stack)
     {
         int i = stack.getMetadata();
-        if(i <= 3001) {
+        if(i <= 2999) {
         	return super.getUnlocalizedName() + ".hot";
-        }else if(i >= 3000 && i <= 5999) {
+        }else if(i >= 3000 && i <= 4999) {
         	return super.getUnlocalizedName() + ".warm";
         }else {
         	return super.getUnlocalizedName() + ".cool";
         }
     }
+	
 	
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)

@@ -16,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -50,7 +49,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	public ToolStabSword(String name, ToolMaterial material, String type) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 		
@@ -88,6 +87,22 @@ public class ToolStabSword extends Item implements IHasModel{
 				this.attackSpeed = -2.6D;
 				this.attackDamage = 4.5F + material.getAttackDamage();
 				this.reach = 5.0F;
+				break;
+			case "mace":
+				this.attackSpeed = -1.0D;
+				this.attackDamage = 2.5F + material.getAttackDamage();
+				this.reach = 5.0F;
+				break;
+			case "staff":
+				this.attackSpeed = -1.6D;
+				this.attackDamage = 2.0F + material.getAttackDamage();
+				this.reach = 6.6F;
+				break;
+			case "spear":
+				this.attackSpeed = -2.8D;
+				this.attackDamage = 2.5F + material.getAttackDamage();
+				this.reach = 7.0F;
+				break;
 		}
 	}
 	

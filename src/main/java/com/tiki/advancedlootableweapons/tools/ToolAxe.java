@@ -10,7 +10,6 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -26,7 +25,7 @@ public class ToolAxe extends ItemTool implements IHasModel{
         this.attackSpeed = ATTACK_SPEEDS[material.ordinal()];
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 	}

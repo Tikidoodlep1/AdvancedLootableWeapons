@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockBase;
+import com.tiki.advancedlootableweapons.blocks.BlockForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -34,5 +35,6 @@ public class BlockInit {
 	public static final Block block_ore_tin = new BlockBase("block_ore_tin", Material.ROCK, CreativeTabs.MATERIALS);
 	
 	//misc
-	public static final Block alloy_furnace = new BlockAlloyFurnace("alloy_furnace").setHardness(1.6F).setResistance(1.0F);
+	public static final Block alloy_furnace = new BlockAlloyFurnace("alloy_furnace").setHardness(1.7F).setResistance(1.8F);
+	public static final Block forge = new BlockForge("forge").setHardness(1.6F).setResistance(1.7F);
 }

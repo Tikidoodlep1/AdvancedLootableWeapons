@@ -80,7 +80,7 @@ public class ContainerSharpeningStone extends Container{
             			}
             			if(player.inventory.getSlotFor(new ItemStack(activeStone)) == -1) {
             				player.addItemStackToInventory(stack);
-            				Minecraft.getMinecraft().player.closeScreen();
+            				player.closeScreen();
             	        }
             	        //stack.shrink(1);
             		return true;

@@ -16,7 +16,6 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -24,7 +23,6 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -41,15 +39,15 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
-	private final boolean isBurning;
+	//private final boolean isBurning;
 	private static boolean keepinventory;
 	
 	public BlockAlloyFurnace(String name) 
 	{
-		super(name, Material.IRON, CreativeTabs.MATERIALS);
+		super(name, Material.IRON, Alw.AlwTab);
 		setSoundType(SoundType.METAL);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
-		this.isBurning = false;
+		//this.isBurning = false;
 		this.setHarvestLevel("pickaxe", 2);
 	}
 	
@@ -71,7 +69,6 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
 		if(!worldIn.isRemote)
 		{
 			playerIn.openGui(Alw.instance, ModInfo.GUI_ALLOY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
-			System.out.print("-running OpenGui-");
 		}
 		
 		return true;
@@ -100,13 +97,12 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
     @SuppressWarnings("incomplete-switch")
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        if (this.isBurning)
+        if (stateIn.getValue(BURNING))
         {
             EnumFacing enumfacing = (EnumFacing)stateIn.getValue(FACING);
             double d0 = (double)pos.getX() + 0.5D;
             double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
             double d2 = (double)pos.getZ() + 0.5D;
-            double d3 = 0.52D;
             double d4 = rand.nextDouble() * 0.6D - 0.3D;
 
             if (rand.nextDouble() < 0.1D)
@@ -162,9 +158,9 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityFurnace)
+            if (tileentity instanceof TileEntityAlloyFurnace)
             {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFurnace)tileentity);
+                InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityAlloyFurnace)tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
         }

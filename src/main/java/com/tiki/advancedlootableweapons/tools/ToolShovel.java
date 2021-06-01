@@ -4,7 +4,6 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemSpade;
 
 public class ToolShovel extends ItemSpade implements IHasModel {
@@ -13,7 +12,7 @@ public class ToolShovel extends ItemSpade implements IHasModel {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
 	}

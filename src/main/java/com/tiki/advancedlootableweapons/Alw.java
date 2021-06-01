@@ -3,8 +3,10 @@ package com.tiki.advancedlootableweapons;
 import java.util.UUID;
 
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
+import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
 import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +40,7 @@ public class Alw {
 	public static final UUID LEGS_MAX_HEALTH_MODIFIER = UUID.fromString("9d422672-1e4d-4e57-ae47-a589b72f1a38");
 	public static final UUID FEET_MAX_HEALTH_MODIFIER = UUID.fromString("d39be1d1-4e3e-4c25-a135-c53b4a00dbcc");
 	
+	public static final CreativeTabs AlwTab = new AlwCreativeTab("alwcreativetab");
 	
 	@SidedProxy(clientSide = ModInfo.CLIENTPROXY, serverSide = ModInfo.COMMONPROXY)
 	public static CommonProxy proxy;
