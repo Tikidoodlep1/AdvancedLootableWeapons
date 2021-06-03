@@ -9,7 +9,10 @@ import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -72,4 +75,8 @@ public class Alw {
 		proxy.onBlockAttemptBreak(event);
 	}
 	
+	@SubscribeEvent
+	public void onButtonPressed(GuiScreenEvent.ActionPerformedEvent.Post event) {
+		proxy.onButtonPressed(event);
+	}
 }

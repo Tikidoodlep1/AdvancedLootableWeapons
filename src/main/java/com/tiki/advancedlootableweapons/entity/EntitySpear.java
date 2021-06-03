@@ -14,11 +14,18 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntitySpear extends EntityArrow{
@@ -31,10 +38,16 @@ public class EntitySpear extends EntityArrow{
     private int ticksInAir;
     private ItemStack arrowStack;
     public String material;
+    private float spearDamage;
+    public int spearDurability;
+    public static final DataParameter<ItemStack> ITEMSTACK = EntityDataManager.<ItemStack>createKey(EntitySpear.class, DataSerializers.ITEM_STACK);
     
-    public EntitySpear(World worldIn, EntityLivingBase shooter, String material) {
+    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, float spearDamage, int spearDurability, ItemStack stack) {
     	this(worldIn, shooter);
     	this.material = material;
+    	this.spearDamage = spearDamage;
+    	this.spearDurability = spearDurability;
+    	this.setItemStack(stack);
     }
     
 	public EntitySpear(World worldIn, EntityLivingBase shooter) {
@@ -56,10 +69,87 @@ public class EntitySpear extends EntityArrow{
 		this.knockbackStrength = 1;
 	}
 	
+	public void setItemStack(ItemStack stack) {
+		if(stack == null || stack.isEmpty() || !(stack.getItem() instanceof ToolSpear)) {
+			throw new IllegalArgumentException("Item Stack needs to be a Spear!");
+		}
+		this.dataManager.set(ITEMSTACK, stack);
+	}
+	
+	public ItemStack getItemStack() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(ITEMSTACK);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return ItemStack.EMPTY;
+		}
+	}
+	
+	@Override
+	protected void entityInit() {
+		super.entityInit();
+		this.dataManager.register(ITEMSTACK, ItemStack.EMPTY);
+	}
+	
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		compound.setInteger("durability", this.spearDurability);
+		
+		if(this.getItemStack() != null && !this.getItemStack().isEmpty()) {
+			compound.setTag("itemstack", this.getItemStack().writeToNBT(new NBTTagCompound()));
+		}
+	}
+	
+	public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        if (compound.hasKey("durability", 99))
+        {
+            this.spearDurability = compound.getInteger("durability");
+        }
+        
+        setItemStack(new ItemStack(compound.getCompoundTag("itemstack")));
+    }
+	
+	@Override
+	public void onCollideWithPlayer(EntityPlayer entityIn)
+    {
+        if (!this.world.isRemote && this.inGround && this.arrowShake <= 0)
+        {
+            boolean flag = this.pickupStatus == EntityArrow.PickupStatus.ALLOWED || this.pickupStatus == EntityArrow.PickupStatus.CREATIVE_ONLY && entityIn.capabilities.isCreativeMode;
+
+            if (!(this.pickupStatus == EntityArrow.PickupStatus.ALLOWED))//&& !entityIn.inventory.addItemStackToInventory(this.getArrowStack()))
+            {
+                flag = false;
+            }
+            
+            if (flag)
+            {
+                ItemStack stack = this.getItemStack();
+                stack.setItemDamage(this.spearDurability);
+                if(stack.getItem().getDurabilityForDisplay(stack) < 1.0 || stack.getItem().getDurabilityForDisplay(stack) == Double.POSITIVE_INFINITY) {
+                	//entityIn.onItemPickup(this, 1);
+                	//entityIn.inventory.addItemStackToInventory(this.arrowStack);
+                	this.setItemDurability(entityIn, this.arrowStack);
+                }else if(stack.getItem().getDurabilityForDisplay(stack) >= 1.0) {
+                	playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+                	System.out.println("Item Durability is: " + (stack.getItem().getDurabilityForDisplay(stack)));
+                	System.out.println("Item Current Damage is: " + (stack.getItemDamage()));
+                } 
+                this.setDead();
+            }
+        }
+    }
+	
+	public void setItemDurability(EntityPlayer player, ItemStack stack){
+		int slot = player.inventory.getFirstEmptyStack();
+		player.inventory.add(slot, stack);
+		ItemStack item = player.inventory.getStackInSlot(slot);
+		item.setItemDamage(this.spearDurability);
+	}
+	
 	public void setArrowStack(ToolSpear spear) {
 		this.arrowStack = new ItemStack(spear);
 	}
-
+	
 	@Override
 	protected ItemStack getArrowStack() {
 		return this.arrowStack;
@@ -89,11 +179,17 @@ public class EntitySpear extends EntityArrow{
         if (entity != null)
         {
             float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            int i = MathHelper.ceil((double)f * this.getDamage());
+            float i = MathHelper.ceil((double)f * this.spearDamage);
 
             if (this.getIsCritical())
             {
-                i += this.rand.nextInt(i / 2 + 2);
+                i = i + (this.rand.nextInt(((int)i / 4)) + this.rand.nextFloat());
+            }
+            
+            if(i - ((int)i) > 0.5) {
+            	i = ((int)i + 1);
+            }else {
+            	i = (int)i;
             }
 
             DamageSource damagesource;
@@ -148,11 +244,14 @@ public class EntitySpear extends EntityArrow{
                 }
 
                 this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-
+                
+                /*
                 if (!(entity instanceof EntityEnderman))
                 {
                     this.setDead();
                 }
+                */
+                
             }
             else
             {

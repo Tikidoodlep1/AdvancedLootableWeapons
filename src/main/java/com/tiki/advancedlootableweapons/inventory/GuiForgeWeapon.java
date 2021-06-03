@@ -5,13 +5,15 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.handlers.NetworkHandler;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.proxy.ForgeWeaponButtonPacket;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -22,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.reflect.internal.Trees.This;
 
 @SideOnly(Side.CLIENT)
 public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
@@ -34,6 +35,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    private final GuiWeaponButton button2 = new GuiWeaponButton(1, 50, 100, 20, 20, "Kabutowari");
 	    private final GuiWeaponButton button3 = new GuiWeaponButton(2, 80, 100, 20, 20, "Talwar");
 	    private final GuiWeaponButton button4 = new GuiWeaponButton(3, 110, 100, 20, 20, "Rapier");
+	    private int buttonPressed;
 
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, World worldIn)
 	    {
@@ -49,36 +51,35 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        this.addButton(button4);
 	    }
 	    
-	    protected void actionPerformed(GuiButton button) {
+	    public void setButtonPressed(int button) {
+	    	this.buttonPressed = button;
+	    }
+	    
+	    public int getButtonPressed() {
+	    	return this.buttonPressed;
+	    }
+	    
+	    protected void actionPerformed(GuiButton button){
+	    	if(this.container.getSlot(0).getStack().getItem() instanceof ItemHotToolHead)
 	    	if(button.id == 0) {
-	        	if(this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	        		this.container.buttonPressed = 1;
-	        		this.container.changeItem();
-	        		System.out.print("CONTAINER.BUTTONPRESSED IS EQUAL TO 1");
-	        	}
+	    		this.setButtonPressed(1);
+	        	//this.buttonPressed = 1;
 	        }
 	    	if(button.id == 1) {
-	        	if(this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	        		this.container.buttonPressed = 2;
-	        		this.container.changeItem();
-	        		System.out.print("CONTAINER.BUTTONPRESSED IS EQUAL TO 2");
-	        	}
+	    		this.setButtonPressed(2);
+	    		//this.buttonPressed = 2;
 	        }
 	    	if(button.id == 2) {
-	        	if(this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	        		this.container.buttonPressed = 3;
-	        		this.container.changeItem();
-	        		System.out.print("CONTAINER.BUTTONPRESSED IS EQUAL TO 3");
-	        	}
+	    		this.setButtonPressed(3);
+	    		//this.buttonPressed = 3;
 	        }
 	    	if(button.id == 3) {
-	        	if(this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	        		this.container.buttonPressed = 4;
-	        		this.container.changeItem();
-	        		System.out.print("CONTAINER.BUTTONPRESSED IS EQUAL TO 4");
-	        	}
+	    		this.setButtonPressed(4);
+	    		//this.buttonPressed = 4;
 	        }
+	    	//NetworkHandler.sendToServer(new ForgeWeaponButtonPacket(this.getButtonPressed()));
 	    }
+	    
 	    
 	    public void initGui()
 	    {
@@ -87,16 +88,16 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        this.inventorySlots.removeListener(this);
 	        this.inventorySlots.addListener(this);
 	    }
-
-
+	    
+	    
 	    public void onGuiClosed()
 	    {
 	        super.onGuiClosed();
 	        Keyboard.enableRepeatEvents(false);
 	        this.inventorySlots.removeListener(this);
 	    }
-
-
+	    
+	    
 	    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	    {
 	        GlStateManager.disableLighting();
@@ -105,8 +106,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 
 	        GlStateManager.enableLighting();
 	    }
-
-
+	    
+	    
 	    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	    {
 	        super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -121,8 +122,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
 	    }
-
-
+	    
+	    
 	    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	    {
 	        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -133,23 +134,21 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        this.drawButtons();
 	    }
 	    
-
+	    
 	    public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)
 	    {
 	        this.sendSlotContents(containerToSend, 0, containerToSend.getSlot(0).getStack());
-	        this.sendSlotContents(containerToSend, 1, containerToSend.getSlot(1).getStack());
 	    }
-
-
+	    
 	    public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack)
 	    {
 	    }
-
-
+	    
+	    
 	    public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue)
 	    {
 	    }
-
+	    
 	    public void sendAllWindowProperties(Container containerIn, IInventory inventory)
 	    {
 	    }

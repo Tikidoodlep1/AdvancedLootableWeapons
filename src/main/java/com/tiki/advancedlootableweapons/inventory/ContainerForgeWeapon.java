@@ -2,10 +2,15 @@ package com.tiki.advancedlootableweapons.inventory;
 
 import java.util.Map;
 
+import com.tiki.advancedlootableweapons.blocks.recipes.AnvilRecipes;
+import com.tiki.advancedlootableweapons.handlers.NetworkHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.proxy.ForgeWeaponButtonPacket;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -25,6 +30,7 @@ public class ContainerForgeWeapon extends Container{
     private final World world;
     public int buttonPressed;
     private final EntityPlayer player;
+    private ItemStack outputStack;
 
     Map<Enchantment, Integer> data;
     
@@ -40,15 +46,21 @@ public class ContainerForgeWeapon extends Container{
         this.inputSlot = new InventoryBasic("Forge Weapon", false, 1);
         this.world = worldIn;
         this.player = player;
+        this.buttonPressed = -1;
         
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 80, 33){
         	public boolean isItemValid(ItemStack stack)
             {
-        		return stack.getItem() instanceof ItemHotToolHead;
+        		if(stack.getItem() instanceof ItemHotToolHead) {
+        			changeItem();
+        			return true;
+        		}else {
+        		return false;
+        		}
             }
         });
         
-        this.addSlotToContainer(new Slot(this.outputSlot, 1, 80, 33){
+        this.addSlotToContainer(new Slot(this.outputSlot, 1, 80, 55){
         	public boolean isItemValid(ItemStack stack)
             {
         		return false;
@@ -73,54 +85,47 @@ public class ContainerForgeWeapon extends Container{
 		int heat = this.getSlot(0).getStack().getItemDamage();
 		if(this.buttonPressed != -1) {
 	        if(this.inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	        		int weapon = this.buttonPressed;
-	        		if(weapon == 1) {
-	        			ItemStack stack = new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD);
-	        			this.inputSlot.decrStackSize(0, 1);
-	        			this.outputSlot.setInventorySlotContents(1, stack);
-	        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        		}else if(weapon == 2) {
-	        			ItemStack stack = new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD);
-	        			this.inputSlot.decrStackSize(0, 1);
-	        			this.outputSlot.setInventorySlotContents(1, stack);
-	        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        		}else if(weapon == 3) {
-	        			ItemStack stack = new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD);
-	        			this.inputSlot.decrStackSize(0, 1);
-	        			this.outputSlot.setInventorySlotContents(1, stack);
-	        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        		}else if(weapon == 4) {
-	        			ItemStack stack = new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD);
-	        			this.inputSlot.decrStackSize(0, 1);
-	        			this.outputSlot.setInventorySlotContents(1, stack);
-	        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        		}
-	        		this.buttonPressed = -1;
-	        	}else if(this.inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD))) {
-	        		ItemStack stack = new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD_2);
-        			this.inputSlot.decrStackSize(0, 1);
-        			this.outputSlot.setInventorySlotContents(1, stack);
-        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        	}else if(this.inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD))) {
-	        		ItemStack stack = new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_2);
-        			this.inputSlot.decrStackSize(0, 1);
-        			this.outputSlot.setInventorySlotContents(1, stack);
-        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        	}else if(this.inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD))) {
-	        		ItemStack stack = new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD_2);
-        			this.inputSlot.decrStackSize(0, 1);
-        			this.outputSlot.setInventorySlotContents(1, stack);
-        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
-	        	}else if(this.inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD))) {
-	        		ItemStack stack = new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD_2);
-        			this.inputSlot.decrStackSize(0, 1);
-        			this.outputSlot.setInventorySlotContents(1, stack);
-        			this.outputSlot.getStackInSlot(1).setItemDamage(heat);
+	        	int weapon = this.buttonPressed;
+	        	if(weapon == 1) {
+	        		ItemStack stack = new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD);
+	        		stack.setItemDamage(heat);
+	        		this.inputSlot.decrStackSize(0, 1);
+        			player.addItemStackToInventory(stack);
+	        		//this.outputSlot.setInventorySlotContents(1, stack);
+	        		//this.outputSlot.getStackInSlot(1).setItemDamage(heat);
+	        	}else if(weapon == 2) {
+	        		ItemStack stack = new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD);
+	        		stack.setItemDamage(heat);
+	        		this.inputSlot.decrStackSize(0, 1);
+        			player.addItemStackToInventory(stack);
+	        	}else if(weapon == 3) {
+	        		ItemStack stack = new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD);
+	        		stack.setItemDamage(heat);
+	        		this.inputSlot.decrStackSize(0, 1);
+        			player.addItemStackToInventory(stack);
+	        	}else if(weapon == 4) {
+	        		ItemStack stack = new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD);
+	        		stack.setItemDamage(heat);
+	        		this.inputSlot.decrStackSize(0, 1);
+        			player.addItemStackToInventory(stack);
+	        	}else {
+	        		ItemStack result = AnvilRecipes.getInstance().getForgingResult(this.inputSlot.getStackInSlot(0));
+	        		this.outputStack = result;
+	        		System.out.print("RESULT IS: " + result.getDisplayName());
+	        		this.inputSlot.clear();
+	        		this.outputSlot.setInventorySlotContents(1, result);
 	        	}
+	        	this.buttonPressed = -1;
 	        }
-		
+		}
 	}
-	
+	/*
+	public void syncNewContainer(EntityPlayer player) {
+		if(player instanceof EntityPlayerMP) {
+			NetworkHandler.sendTo(new ForgeWeaponButtonPacket(this.buttonPressed), ((EntityPlayerMP)player));
+		}
+	}
+	*/
 	public ItemStack getInventoryStack() {
 		return this.inventoryItemStacks.get(0);
 	}
@@ -128,13 +133,13 @@ public class ContainerForgeWeapon extends Container{
     public void onCraftMatrixChanged(IInventory inventoryIn)
     {
         super.onCraftMatrixChanged(inventoryIn);
-        
     }
     
     public void addListener(IContainerListener listener)
     {
         super.addListener(listener);
         listener.sendAllWindowProperties(this, inputSlot);
+        listener.sendAllWindowProperties(this, outputSlot);
     }
     
     @SideOnly(Side.CLIENT)

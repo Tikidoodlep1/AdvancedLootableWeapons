@@ -14,7 +14,6 @@ public class GuiWeaponButton extends GuiButton{
 	
 	public GuiWeaponButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText) {
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
-		
 	}
 	
 	

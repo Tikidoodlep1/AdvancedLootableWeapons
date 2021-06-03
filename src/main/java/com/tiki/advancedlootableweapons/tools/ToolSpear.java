@@ -17,7 +17,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ToolSpear extends ToolStabSword{
-
+	
 	public ToolSpear(String name, ToolMaterial material) {
 		super(name, material, "spear");
 	}
@@ -31,16 +31,8 @@ public class ToolSpear extends ToolStabSword{
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-
-        if (!playerIn.capabilities.isCreativeMode)
-        {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
-        }
-        else
-        {
-            playerIn.setActiveHand(handIn);
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
-        }
+        playerIn.setActiveHand(handIn);
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
     }
 	
 	@Override
@@ -65,7 +57,8 @@ public class ToolSpear extends ToolStabSword{
 	private void createSpearEntity(World worldIn, EntityPlayer playerIn, ItemStack stack, float f){
 		if (!worldIn.isRemote)
         {
-            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterial().toString());
+            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getAttackDamage(), this.getDamage(stack), stack);
+            System.out.print(this.getToolMaterialName());
             entityspear.setArrowStack(this);
             entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             boolean flag1 = playerIn.capabilities.isCreativeMode;
@@ -122,11 +115,15 @@ public class ToolSpear extends ToolStabSword{
 
                     if (!worldIn.isRemote)
                     {
-                        createSpearEntity(worldIn, entityplayer, stack, f);
+                    	stack.setItemDamage(stack.getItemDamage() + 1);
+                    	if(this.getMaxDamage(stack) - this.getDamage(stack)  >= 0) {
+                    		createSpearEntity(worldIn, entityplayer, stack, f);
+                    		worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    	}else {
+                    		stack.shrink(1);
+                    		worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    	}
                     }
-
-
-                    worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
                     if (!flag1 && !flag)
                     {

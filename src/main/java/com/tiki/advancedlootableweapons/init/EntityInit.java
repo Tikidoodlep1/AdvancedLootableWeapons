@@ -12,7 +12,6 @@ public class EntityInit {
 
 	public static void registerEntities() {
 		registerEntity("spear", EntitySpear.class, 100, 50);
-		registerEntity("steel_spear", EntitySpear.class, 100, 50);
 	}
 	
 	private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range) {
