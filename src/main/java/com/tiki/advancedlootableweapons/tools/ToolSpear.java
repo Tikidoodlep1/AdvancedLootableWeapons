@@ -1,7 +1,11 @@
 package com.tiki.advancedlootableweapons.tools;
 
+import java.util.Random;
+
 import com.tiki.advancedlootableweapons.entity.EntitySpear;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentDurability;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +14,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -115,7 +120,23 @@ public class ToolSpear extends ToolStabSword{
 
                     if (!worldIn.isRemote)
                     {
-                    	stack.setItemDamage(stack.getItemDamage() + 1);
+                    	if(stack.isItemEnchanted()) {
+                    		NBTTagList list = stack.getEnchantmentTagList();
+                    		Random rando = new Random();
+                    		for(int e = 0; e < list.tagCount(); e++) {
+                    			if(list.getCompoundTagAt(e).hasKey("id")) {
+                    				if(Enchantment.getEnchantmentByID(list.getCompoundTagAt(e).getShort("id")) instanceof EnchantmentDurability) {
+                    					int level = list.getCompoundTagAt(e).getShort("lvl");
+                    					if(level > 1) {
+                    						level *= 0.75;
+                    					}
+                    					if(!((1-(rando.nextDouble() / level)) > 0.6)) {
+                    						stack.setItemDamage(stack.getItemDamage() + 1);
+                    					}
+                    				}
+                    			}
+                    		}
+                    	}
                     	if(this.getMaxDamage(stack) - this.getDamage(stack)  >= 0) {
                     		createSpearEntity(worldIn, entityplayer, stack, f);
                     		worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);

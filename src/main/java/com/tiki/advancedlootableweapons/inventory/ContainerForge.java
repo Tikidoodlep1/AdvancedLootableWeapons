@@ -82,12 +82,15 @@ public class ContainerForge extends Container
 			
 			if(index == 3) 
 			{
-				if(!this.mergeItemStack(stack1, 4, 40, true)) return ItemStack.EMPTY;
+				if(!this.mergeItemStack(stack1, 4, 35, true)) return ItemStack.EMPTY;
 				slot.onSlotChange(stack1, stack);
 			}
 			else if(index != 2 && index != 1 && index != 0) 
-			{		
-				Slot slot1 = (Slot)this.inventorySlots.get(index + 1);
+			{
+				Slot slot1 = (Slot)this.inventorySlots.get(index);
+				if(index + 1 < this.inventorySlots.size()) {
+					slot1 = (Slot)this.inventorySlots.get(index + 1);
+				}
 				
 				if(!slot1.getHasStack())
 				{
@@ -97,7 +100,7 @@ public class ContainerForge extends Container
 					}
 					else if(index >= 4 && index < 31)
 					{
-						if(!this.mergeItemStack(stack1, 31, 40, false)) return ItemStack.EMPTY;
+						if(!this.mergeItemStack(stack1, 31, 35, false)) return ItemStack.EMPTY;
 					}
 					else if(index >= 31 && index < 40 && !this.mergeItemStack(stack1, 4, 31, false))
 					{
@@ -105,7 +108,7 @@ public class ContainerForge extends Container
 					}
 				}
 			} 
-			else if(!this.mergeItemStack(stack1, 4, 40, false)) 
+			else if(!this.mergeItemStack(stack1, 4, 35, false)) 
 			{
 				return ItemStack.EMPTY;
 			}

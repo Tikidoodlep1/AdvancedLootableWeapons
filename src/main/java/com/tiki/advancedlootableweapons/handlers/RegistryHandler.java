@@ -26,14 +26,13 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
-		
+		ItemInit.createRecipes();
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
 		TileEntityHandler.registerTileEntities();
-		
 	}
 	
 	@SubscribeEvent

@@ -9,6 +9,7 @@ import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 //@Mod.EventBusSubscriber
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER)
@@ -30,6 +32,8 @@ public class Alw {
 	@Instance
 	public static Alw instance;
 	
+	public static final IAttribute MATERIAL = new RangedAttribute((IAttribute)null, "attribute.toolMaterial", 0.0D, 0.0D, 12.0D).setDescription("Material");
+	public static final UUID MATERIAL_MODIFIER = UUID.fromString("ac55927e-2f67-4b25-a284-a4c26f42d9aa");
 	public static final IAttribute ATTACK_RANGE = new RangedAttribute((IAttribute)null, "generic.reachDistance", 5.0D, 0.0D, 1024.0D).setDescription("Attack Range");
 	public static final UUID ATTACK_RANGE_MODIFIER = UUID.fromString("972be6b4-924d-445f-afae-941b737f1b84");
 	public static final IAttribute BONUS_ATTACK_DAMAGE = new RangedAttribute((IAttribute)null, "generic.bonusAttackDamage", 0.0D, 0.0D, 2048.0D).setDescription("Bonus Attack Damage").setShouldWatch(true);
@@ -76,7 +80,7 @@ public class Alw {
 	}
 	
 	@SubscribeEvent
-	public void onButtonPressed(GuiScreenEvent.ActionPerformedEvent.Post event) {
-		proxy.onButtonPressed(event);
+	public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+		proxy.onItemCrafted(event);
 	}
 }

@@ -8,7 +8,8 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["Tiki"],
-  "credits": "The SAO Experience Pack by Tiki",
+  "credits": "Programming: Tiki
+  Textures: Ravioli's Gale & AprilFaded",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

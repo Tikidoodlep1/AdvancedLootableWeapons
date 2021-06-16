@@ -61,7 +61,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 		}
 	}
 	
-	
 	public static class SharpeningStone implements IInteractionObject
     {
         private final World world;

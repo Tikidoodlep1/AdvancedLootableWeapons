@@ -3,7 +3,6 @@ package com.tiki.advancedlootableweapons.handlers;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

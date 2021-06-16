@@ -4,7 +4,6 @@ import java.util.Map;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,6 +49,7 @@ public class ContainerSharpeningStone extends Container{
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 80, 56){
         	public boolean isItemValid(ItemStack stack)
             {
+        		System.out.println("Checking if Item is valid");
         		String check = stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1);
         		String check2 = activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'));
         		if(check.equalsIgnoreCase("shadow")) {
@@ -82,7 +82,6 @@ public class ContainerSharpeningStone extends Container{
             				player.addItemStackToInventory(stack);
             				player.closeScreen();
             	        }
-            	        //stack.shrink(1);
             		return true;
             	}else {
             		return false;
@@ -109,8 +108,6 @@ public class ContainerSharpeningStone extends Container{
             public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack)
             {
                 ContainerSharpeningStone.this.inputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
-                
-				//data.put(EnchantmentInit.REFINED, enchLevel += 1);
 				
 				if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) >= 1)
 				{
@@ -119,19 +116,7 @@ public class ContainerSharpeningStone extends Container{
 	                stack.addEnchantment(EnchantmentInit.REFINED, 1);
 				}
 				
-                //if(EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) >= 1){
-                //stack.addEnchantment(EnchantmentInit.REFINED, EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) + 1);
-                //}else {
-                //	stack.addEnchantment(EnchantmentInit.REFINED, 1);
-                //}
-                
                 thePlayer.inventory.getStackInSlot(thePlayer.inventory.getSlotFor(new ItemStack(activeStone))).shrink(1);
-                
-                //if(!thePlayer.addItemStackToInventory(stack)) {
-                //	thePlayer.entityDropItem(stack, 0);
-                //}else {
-                //	thePlayer.addItemStackToInventory(stack);
-                //}
                 
 
              if (!worldIn.isRemote)
@@ -194,14 +179,12 @@ public class ContainerSharpeningStone extends Container{
             this.clearContainer(playerIn, this.world, this.inputSlot);
         }
     }
-
-
+    
     public boolean canInteractWith(EntityPlayer playerIn)
     {
         return true;
     }
-
-
+    
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -214,7 +197,7 @@ public class ContainerSharpeningStone extends Container{
 
             if (index == 2)
             {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true))
+                if (!this.mergeItemStack(itemstack1, 3, 38, true))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -223,12 +206,12 @@ public class ContainerSharpeningStone extends Container{
             }
             else if (index != 0 && index != 1)
             {
-                if (index >= 3 && index < 39 && !this.mergeItemStack(itemstack1, 0, 2, false))
+                if (index >= 3 && index < 38 && !this.mergeItemStack(itemstack1, 0, 2, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
+            else if (!this.mergeItemStack(itemstack1, 3, 38, false))
             {
                 return ItemStack.EMPTY;
             }
@@ -252,6 +235,5 @@ public class ContainerSharpeningStone extends Container{
 
         return itemstack;
     }
-
 }
 

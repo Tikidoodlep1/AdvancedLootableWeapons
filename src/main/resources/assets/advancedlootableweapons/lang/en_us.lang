@@ -102,6 +102,141 @@ item.mace_crystallite.name=Crystallite Mace
 item.mace_dusksteel.name=Dusk Steel Mace
 
 
+item.staff_wood.name=Wooden Staff
+item.staff_iron.name=Iron Staff
+item.staff_kobold.name=Kobold Steel Staff
+item.staff_copper.name=Copper Staff
+item.staff_silver.name=Silver Staff
+item.staff_bronze.name=Bronze Staff
+item.staff_platinum.name=Platinum Staff
+item.staff_steel.name=Steel Staff
+item.staff_shadow_platinum.name=Shadow Platinum Staff
+item.staff_frost_steel.name=Frost Steel Staff
+item.staff_obsidian.name=Obsidian Staff
+item.staff_crystallite.name=Crystallite Staff
+item.staff_dusksteel.name=Dusk Steel Staff
+
+
+item.longsword_wood.name=Wooden Longsword
+item.longsword_iron.name=Iron Longsword
+item.longsword_kobold.name=Kobold Steel Longsword
+item.longsword_copper.name=Copper Longsword
+item.longsword_silver.name=Silver Longsword
+item.longsword_bronze.name=Bronze Longsword
+item.longsword_platinum.name=Platinum Longsword
+item.longsword_steel.name=Steel Longsword
+item.longsword_shadow_platinum.name=Shadow Platinum Longsword
+item.longsword_frost_steel.name=Frost Steel Longsword
+item.longsword_obsidian.name=Obsidian Longsword
+item.longsword_crystallite.name=Crystallite Longsword
+item.longsword_dusksteel.name=Dusk Steel Longsword
+
+
+item.kodachi_wood.name=Wooden Kodachi
+item.kodachi_iron.name=Iron Kodachi
+item.kodachi_kobold.name=Kobold Steel Kodachi
+item.kodachi_copper.name=Copper Kodachi
+item.kodachi_silver.name=Silver Kodachi
+item.kodachi_bronze.name=Bronze Kodachi
+item.kodachi_platinum.name=Platinum Kodachi
+item.kodachi_steel.name=Steel Kodachi
+item.kodachi_shadow_platinum.name=Shadow Platinum Kodachi
+item.kodachi_frost_steel.name=Frost Steel Kodachi
+item.kodachi_obsidian.name=Obsidian Kodachi
+item.kodachi_crystallite.name=Crystallite Kodachi
+item.kodachi_dusksteel.name=Dusk Steel Kodachi
+
+
+item.battleaxe_wood.name=Wooden Battleaxe
+item.battleaxe_iron.name=Iron Battleaxe
+item.battleaxe_kobold.name=Kobold Steel Battleaxe
+item.battleaxe_copper.name=Copper Battleaxe
+item.battleaxe_silver.name=Silver Battleaxe
+item.battleaxe_bronze.name=Bronze Battleaxe
+item.battleaxe_platinum.name=Platinum Battleaxe
+item.battleaxe_steel.name=Steel Battleaxe
+item.battleaxe_shadow_platinum.name=Shadow Platinum Battleaxe
+item.battleaxe_frost_steel.name=Frost Steel Battleaxe
+item.battleaxe_obsidian.name=Obsidian Battleaxe
+item.battleaxe_crystallite.name=Crystallite Battleaxe
+item.battleaxe_dusksteel.name=Dusk Steel Battleaxe
+
+
+item.zweihander_wood.name=Wooden Zweihander
+item.zweihander_iron.name=Iron Zweihander
+item.zweihander_kobold.name=Kobold Steel Zweihander
+item.zweihander_copper.name=Copper Zweihander
+item.zweihander_silver.name=Silver Zweihander
+item.zweihander_bronze.name=Bronze Zweihander
+item.zweihander_platinum.name=Platinum Zweihander
+item.zweihander_steel.name=Steel Zweihander
+item.zweihander_shadow_platinum.name=Shadow Platinum Zweihander
+item.zweihander_frost_steel.name=Frost Steel Zweihander
+item.zweihander_obsidian.name=Obsidian Zweihander
+item.zweihander_crystallite.name=Crystallite Zweihander
+item.zweihander_dusksteel.name=Dusk Steel Zweihander
+
+
+item.nodachi_wood.name=Wooden Nodachi
+item.nodachi_iron.name=Iron Nodachi
+item.nodachi_kobold.name=Kobold Steel Nodachi
+item.nodachi_copper.name=Copper Nodachi
+item.nodachi_silver.name=Silver Nodachi
+item.nodachi_bronze.name=Bronze Nodachi
+item.nodachi_platinum.name=Platinum Nodachi
+item.nodachi_steel.name=Steel Nodachi
+item.nodachi_shadow_platinum.name=Shadow Platinum Nodachi
+item.nodachi_frost_steel.name=Frost Steel Nodachi
+item.nodachi_obsidian.name=Obsidian Nodachi
+item.nodachi_crystallite.name=Crystallite Nodachi
+item.nodachi_dusksteel.name=Dusk Steel Nodachi
+
+
+item.sabre_wood.name=Wooden Sabre
+item.sabre_iron.name=Iron Sabre
+item.sabre_kobold.name=Kobold Steel Sabre
+item.sabre_copper.name=Copper Sabre
+item.sabre_silver.name=Silver Sabre
+item.sabre_bronze.name=Bronze Sabre
+item.sabre_platinum.name=Platinum Sabre
+item.sabre_steel.name=Steel Sabre
+item.sabre_shadow_platinum.name=Shadow Platinum Sabre
+item.sabre_frost_steel.name=Frost Steel Sabre
+item.sabre_obsidian.name=Obsidian Sabre
+item.sabre_crystallite.name=Crystallite Sabre
+item.sabre_dusksteel.name=Dusk Steel Sabre
+
+
+item.makhaira_wood.name=Wooden Makhaira
+item.makhaira_iron.name=Iron Makhaira
+item.makhaira_kobold.name=Kobold Steel Makhaira
+item.makhaira_copper.name=Copper Makhaira
+item.makhaira_silver.name=Silver Makhaira
+item.makhaira_bronze.name=Bronze Makhaira
+item.makhaira_platinum.name=Platinum Makhaira
+item.makhaira_steel.name=Steel Makhaira
+item.makhaira_shadow_platinum.name=Shadow Platinum Makhaira
+item.makhaira_frost_steel.name=Frost Steel Makhaira
+item.makhaira_obsidian.name=Obsidian Makhaira
+item.makhaira_crystallite.name=Crystallite Makhaira
+item.makhaira_dusksteel.name=Dusk Steel Makhaira
+
+
+item.spear_wood.name=Wooden Spear
+item.spear_iron.name=Iron Spear
+item.spear_kobold.name=Kobold Steel Spear
+item.spear_copper.name=Copper Spear
+item.spear_silver.name=Silver Spear
+item.spear_bronze.name=Bronze Spear
+item.spear_platinum.name=Platinum Spear
+item.spear_steel.name=Steel Spear
+item.spear_shadow_platinum.name=Shadow Platinum Spear
+item.spear_frost_steel.name=Frost Steel Spear
+item.spear_obsidian.name=Obsidian Spear
+item.spear_crystallite.name=Crystallite Spear
+item.spear_dusksteel.name=Dusk Steel Spear
+
+
 item.stone_forge_hammer.name=Stone Forge Hammer
 item.iron_forge_hammer.name=Iron Forge Hammer
 item.kobold_forge_hammer.name=Kobold Forge Hammer
@@ -135,6 +270,13 @@ item.dusksteel_sharpening_stone.name=Dusk Steel Sharpening Stone
 item.hot_tool_head.cool.name=Cool Tool Head
 item.hot_tool_head.warm.name=Warm Tool Head
 item.hot_tool_head.hot.name=Hot Tool Head
+
+item.hot_tool_rod.cool.name=Cool Weapon Handle(Stage 1)
+item.hot_tool_rod.warm.name=Warm Weapon Handle(Stage 1)
+item.hot_tool_rod.hot.name=Hot Weapon Handle(Stage 1)
+item.hot_tool_rod_2.cool.name=Cool Weapon Handle(Finished)
+item.hot_tool_rod_2.warm.name=Warm Weapon Handle(Finished)
+item.hot_tool_rod_2.hot.name=Hot Weapon Handle(Finished)
 
 item.dagger_hot_tool_head.cool.name=Cool Dagger Head(Stage 1)
 item.dagger_hot_tool_head.warm.name=Warm Dagger Head(Stage 1)
@@ -366,6 +508,7 @@ item.boots_crystallite.name=Crystallite Boots
 item.boots_dusksteel.name=Dusk Steel Boots
 
 
+tile.block_tin.name=Tin Block
 tile.block_kobold.name=Kobold Steel Block
 tile.block_copper.name=Copper Block
 tile.block_silver.name=Silver Block
@@ -393,6 +536,7 @@ item.crystal.name=Crystal
 container.sharpeningStone=Sharpen Weapon
 container.alloy_furnace=Alloy Furnace
 container.forge=Forge
+container.forgeWeapon=Anvil Forging
 
 
 enchantment.refined=Refined

@@ -15,6 +15,6 @@ public class EntityInit {
 	}
 	
 	private static void registerEntity(String name, Class<? extends Entity> entity, int id, int range) {
-		EntityRegistry.registerModEntity(new ResourceLocation(ModInfo.ID + "." + name), entity, name, id, Alw.instance, range, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(ModInfo.ID + ":" + name), entity, name, id, Alw.instance, range, 1, true);
 	}
 }

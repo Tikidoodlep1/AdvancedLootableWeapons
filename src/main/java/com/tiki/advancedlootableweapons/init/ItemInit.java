@@ -23,12 +23,20 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemInit {
 
 	public static final List<Item> items = new ArrayList<Item>();	
+	
+	//Recipes with meta
+	public static void createRecipes() {
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_long_tool_rod"), new ResourceLocation("long_tool_rod"), new ItemStack(LONG_TOOL_ROD, 1, 6000), new Object[] {"z", "z", Character.valueOf('z'), new ItemStack(HOT_TOOL_ROD_2, 1, OreDictionary.WILDCARD_VALUE)});
+	}
 	
 	//Items
 	public static final Item INGOT_TIN = new ItemBase("ingot_tin");
@@ -358,6 +366,10 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	
 	//Hot Tool Heads
 	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head");
+	
+	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod");
+	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2");
+	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod");
 	
 	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head");
 	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2");

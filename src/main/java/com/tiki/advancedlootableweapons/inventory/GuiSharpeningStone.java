@@ -32,7 +32,7 @@ public class GuiSharpeningStone extends GuiContainer implements IContainerListen
 
 	    public GuiSharpeningStone(InventoryPlayer inventoryIn, World worldIn)
 	    {
-	        super(new ContainerSharpeningStone(inventoryIn, worldIn, Minecraft.getMinecraft().player));
+	        super(new ContainerSharpeningStone(inventoryIn, worldIn, inventoryIn.player));
 	        this.playerInventory = inventoryIn;
 	        this.stone = (ContainerSharpeningStone)this.inventorySlots;
 	        if(item instanceof ItemSharpeningStone) {

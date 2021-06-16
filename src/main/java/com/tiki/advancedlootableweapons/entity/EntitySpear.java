@@ -5,6 +5,8 @@ import com.tiki.advancedlootableweapons.tools.ToolSpear;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,7 +16,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -116,7 +121,7 @@ public class EntitySpear extends EntityArrow{
         {
             boolean flag = this.pickupStatus == EntityArrow.PickupStatus.ALLOWED || this.pickupStatus == EntityArrow.PickupStatus.CREATIVE_ONLY && entityIn.capabilities.isCreativeMode;
 
-            if (!(this.pickupStatus == EntityArrow.PickupStatus.ALLOWED))//&& !entityIn.inventory.addItemStackToInventory(this.getArrowStack()))
+            if (!(this.pickupStatus == EntityArrow.PickupStatus.ALLOWED))
             {
                 flag = false;
             }
@@ -126,13 +131,17 @@ public class EntitySpear extends EntityArrow{
                 ItemStack stack = this.getItemStack();
                 stack.setItemDamage(this.spearDurability);
                 if(stack.getItem().getDurabilityForDisplay(stack) < 1.0 || stack.getItem().getDurabilityForDisplay(stack) == Double.POSITIVE_INFINITY) {
-                	//entityIn.onItemPickup(this, 1);
-                	//entityIn.inventory.addItemStackToInventory(this.arrowStack);
-                	this.setItemDurability(entityIn, this.arrowStack);
+                	ItemStack copyStack = this.arrowStack;
+                	if(stack.isItemEnchanted()) {
+                		NBTTagList list = stack.getEnchantmentTagList();
+                		for(int e = 0; e < list.tagCount(); e++) {
+                			if(list.getCompoundTagAt(e).hasKey("id") && list.getCompoundTagAt(e).hasKey("lvl") && list.getCompoundTagAt(e).getShort("lvl") != 0)
+                			copyStack.addEnchantment(Enchantment.getEnchantmentByID(list.getCompoundTagAt(e).getShort("id")), list.getCompoundTagAt(e).getShort("lvl"));
+                		}
+                	}
+                	this.setItemDurability(entityIn, copyStack);
                 }else if(stack.getItem().getDurabilityForDisplay(stack) >= 1.0) {
                 	playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
-                	System.out.println("Item Durability is: " + (stack.getItem().getDurabilityForDisplay(stack)));
-                	System.out.println("Item Current Damage is: " + (stack.getItemDamage()));
                 } 
                 this.setDead();
             }
