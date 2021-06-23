@@ -73,7 +73,9 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    
 	    public void updateScreen(){
 	    	if(container != null) {
-	    		if(this.buttonsDrawn == false && this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
+	    		//System.out.println(this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().getDisplayName());
+	    		//System.out.println(this.container.getSlot(0).getStack().getDisplayName());
+	    		if(this.buttonsDrawn == false && this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
 	    			this.daggerButton.enabled = true;
 	    			this.daggerButton.visible = true;
 	    			
@@ -121,7 +123,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    			
 	    			this.buttonsDrawn = true;
 	    			System.out.println("Enabling Buttons");
-	    		}else if(this.buttonsDrawn == true && !(this.container.getSlot(0).getHasStack() || this.container.getSlot(0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)))){
+	    		}else if(this.buttonsDrawn == true && !(this.container.getSlotFromInventory(this.container.inputSlot, 0).getHasStack() || this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)))){
 	    			this.daggerButton.enabled = false;
 	    			this.daggerButton.visible = false;
 	    			
@@ -182,10 +184,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    }
 	    
 	    protected void actionPerformed(GuiButton button){
-	    	//if(this.container.getSlot(0).getStack().getItem() instanceof ItemHotToolHead) {
-	    		this.setButtonPressed(button.id);
-	    		this.mc.playerController.sendEnchantPacket(this.container.windowId, this.getButtonPressed());
-	    	//}
+	    	this.setButtonPressed(button.id);
+	    	this.mc.playerController.sendEnchantPacket(this.container.windowId, this.getButtonPressed());
 	    }
 	    
 	    @Override
@@ -193,7 +193,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    {
 	        GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
-	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 50, 3, 4210752);
+	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 62, 3, 4210752);
 
 	        GlStateManager.enableLighting();
 	    }

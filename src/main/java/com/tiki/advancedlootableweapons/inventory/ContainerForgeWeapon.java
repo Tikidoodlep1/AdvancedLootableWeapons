@@ -1,13 +1,20 @@
 package com.tiki.advancedlootableweapons.inventory;
 
 import java.util.HashMap;
+
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -21,8 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerForgeWeapon extends Container{
 	
-    private final IInventory inputSlot;
-    private final IInventory forgeSlots;
+    public final IInventory inputSlot;
+    private boolean slot1Enabled, slot2Enabled;
     private final World world;
     private int buttonPressed;
     private ItemStack[] toolHeadArr = new ItemStack[] {new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD), new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD_2),
@@ -52,10 +59,11 @@ public class ContainerForgeWeapon extends Container{
     
 	public ContainerForgeWeapon(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
     {
-        this.inputSlot = new InventoryBasic("Forge Weapon", true, 1);
-        this.forgeSlots = new InventoryBasic("Forge Weapons", true, 2);
+        this.inputSlot = new InventoryBasic("Forge Weapon", true, 4);
         this.world = worldIn;
         this.buttonPressed = -1;
+        this.slot1Enabled = false;
+        this.slot2Enabled = false;
         ingots.put("Iron", ToolMaterial.IRON);
         ingots.put("Kobold", ItemInit.MAT_KOBOLD);
         ingots.put("Copper", ItemInit.MAT_COPPER);
@@ -69,13 +77,86 @@ public class ContainerForgeWeapon extends Container{
         ingots.put("Crystallite", ItemInit.MAT_CRYSTALLITE);
         ingots.put("Dusksteel", ItemInit.MAT_DUSKSTEEL);
         
+        this.addSlotToContainer(new Slot(this.inputSlot, 1, 0, 0) {
+        	public boolean isItemValid(ItemStack stack)
+            {
+        		if(slot1Enabled == false) {
+        			return false;
+        		}else {
+        			if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) || stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD))) {
+        				return true;
+        			}else {
+        				return false;
+        			}
+        		}
+            }
+        	
+        	public int getSlotStackLimit() {
+        		return 1;
+        	}
+        	
+        	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack)
+            {
+        		inputSlot.setInventorySlotContents(3, ItemStack.EMPTY);
+                return stack;
+            }
+        });
+        
+        this.addSlotToContainer(new Slot(this.inputSlot, 2, -20, -20) {
+        	public boolean isItemValid(ItemStack stack)
+            {
+        		if(slot2Enabled == false) {
+        			return false;
+        		}else {
+        			if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) || stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD))) {
+        				return true;
+        			}else {
+        				return false;
+        			}
+        		}
+            }
+        	
+        	public int getSlotStackLimit() {
+        		return 1;
+        	}
+        	
+        	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack)
+            {
+        		inputSlot.setInventorySlotContents(3, ItemStack.EMPTY);
+                return stack;
+            }
+        });
+        
+        this.addSlotToContainer(new Slot(this.inputSlot, 3, 0, 0) {
+        	public boolean isItemValid(ItemStack stack)
+            {
+        		return false;
+            }
+        	
+        	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack)
+            {
+                return stack;
+            }
+        });
+        
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 80, 33) {
         	public boolean isItemValid(ItemStack stack)
             {
         		if(stack.getItem() instanceof ItemHotToolHead || ingots.containsKey(getItemString(stack))) {
-        			for(int j = 0; j < toolHeadArr.length; j++) {
-        				if(stack.isItemEqualIgnoreDurability(toolHeadArr[j])) {
-        					addSlots(j);
+        			if(!(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)))) {
+        				if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+        					addSlots(1);
+        					System.out.println("Adding slots for: " + 1);
+        				}else {
+        					for(int j = 0; j < toolHeadArr.length; j++) {
+        						if(stack.isItemEqualIgnoreDurability(toolHeadArr[j])) {
+        							addSlots(j);
+        							System.out.println("Adding slots for: " + j);
+        							break;
+        						}else {
+        							addSlots(-1);
+        						}
+        					}
         				}
         			}
         			changeItem(stack);
@@ -88,10 +169,14 @@ public class ContainerForgeWeapon extends Container{
         	public int getSlotStackLimit() {
         		return 1;
         	}
-        });
-        
-        this.addSlotToContainer(new Slot(this.forgeSlots, 1, 0, 0) {
         	
+        	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack)
+            {
+        		thePlayer.inventory.placeItemBackInInventory(worldIn, inputSlot.removeStackFromSlot(1));
+        		thePlayer.inventory.placeItemBackInInventory(worldIn, inputSlot.removeStackFromSlot(2));
+        		addSlots(-1);
+                return stack;
+            }
         });
         
         for (int i = 0; i < 3; ++i)
@@ -107,6 +192,516 @@ public class ContainerForgeWeapon extends Container{
             this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
     }
+	
+	private void checkItem(ItemStack stack) {
+		System.out.println("is slot 1 equal to a hot tood rod: " + (inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) || inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD))));
+		System.out.println("Slot 1 is: " + inputSlot.getStackInSlot(1).getDisplayName());
+		if(slot1Enabled == true && (inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) || inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD)))) {
+			ItemStack result;
+			ItemStack input = inputSlot.getStackInSlot(0);
+			ItemStack toolRod = inputSlot.getStackInSlot(1);
+			NBTTagCompound nbt = new NBTTagCompound();
+			NBTTagCompound nbt2 = new NBTTagCompound();
+			NBTTagCompound list = new NBTTagCompound();
+			NBTTagCompound list2 = new NBTTagCompound();
+			String material, material2;
+			nbt.setString("Material", nbt.getString("Material"));
+			nbt.setDouble("reducedDamage", nbt.getDouble("reducedDamage"));
+			nbt.setInteger("reducedDurability", nbt.getInteger("reducedDurability"));
+			nbt2.setString("Material", nbt2.getString("Material"));
+			nbt2.setDouble("reducedDamage", nbt2.getDouble("reducedDamage"));
+			nbt2.setInteger("reducedDurability", nbt2.getInteger("reducedDurability"));
+			
+			for(int j = 0; j < toolHeadArr.length; j++) {
+				if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)) || stack.isItemEqualIgnoreDurability(toolHeadArr[j]) && (j == 1 || j == 6 || j == 9 || j == 13 || j == 16 || j == 21 || j == 25 || j == 29 || j == 34 || j == 39 || j == 43 || j == 47 || j == 50 || j == 52)) {
+					if(!input.hasTagCompound()) {
+						input.setTagCompound(nbt);
+					}
+					list = input.getTagCompound();
+					
+					if(!toolRod.hasTagCompound()) {
+						toolRod.setTagCompound(nbt2);
+					}
+					list2 = toolRod.getTagCompound();
+					
+					material = list.getString("Material");
+					material2 = list2.getString("Material");
+					nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + list2.getDouble("reducedDamage"));
+					nbt.setInteger("reducedDurabiity", list.getInteger("reducedDurability") + list2.getInteger("reducedDurability"));
+					System.out.println("Are Materials the same: " + material.equalsIgnoreCase(material2) + ", individual materials are: " + material + ", " + material2);
+					if(material.equalsIgnoreCase(material2)){
+						switch(material) {
+							case "Iron":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_IRON);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_IRON);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_IRON);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Kobold":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_KOBOLD);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_KOBOLD);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_KOBOLD);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Copper":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_COPPER);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_COPPER);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_COPPER);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Silver":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_SILVER);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_SILVER);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_SILVER);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Bronze":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_BRONZE);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_BRONZE);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_BRONZE);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Platinum":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_PLATINUM);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_PLATINUM);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Steel":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_STEEL);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_STEEL);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Shadow_Platinum":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_SHADOW_PLATINUM);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_SHADOW_PLATINUM);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_SHADOW_PLATINUM);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Frost_Steel":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_FROST_STEEL);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_FROST_STEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_FROST_STEEL);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Obsidian":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_OBSIDIAN);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_OBSIDIAN);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_OBSIDIAN);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Crystallite":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_CRYSTALLITE);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_CRYSTALLITE);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_CRYSTALLITE);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							case "Dusksteel":
+								if(getWeapon(j).equalsIgnoreCase("dagger")) {
+									result = new ItemStack(ItemInit.DAGGER_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kabutowari")) {
+									result = new ItemStack(ItemInit.KABUTOWARI_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("rapier")) {
+									result = new ItemStack(ItemInit.RAPIER_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("talwar")) {
+									result = new ItemStack(ItemInit.TALWAR_DUSKSTEEL);
+								}else if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD))) {
+									result = new ItemStack(ItemInit.CLEAVER_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("mace")) {
+									result = new ItemStack(ItemInit.MACE_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("staff")) {
+									result = new ItemStack(ItemInit.STAFF_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("spear")) {
+									result = new ItemStack(ItemInit.SPEAR_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("longsword")) {
+									result = new ItemStack(ItemInit.LONGSWORD_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("kodachi")) {
+									result = new ItemStack(ItemInit.KODACHI_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("battleaxe")) {
+									result = new ItemStack(ItemInit.BATTLEAXE_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("zweihander")) {
+									result = new ItemStack(ItemInit.ZWEIHANDER_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("nodachi")) {
+									result = new ItemStack(ItemInit.NODACHI_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("sabre")) {
+									result = new ItemStack(ItemInit.SABRE_DUSKSTEEL);
+								}else if(getWeapon(j).equalsIgnoreCase("makhaira")) {
+									result = new ItemStack(ItemInit.MAKHAIRA_DUSKSTEEL);
+								}else {
+									result = ItemStack.EMPTY;
+								}
+								break;
+							default:
+								System.out.println("material not found, can't make a weapon");
+								result = ItemStack.EMPTY;
+						}
+						if(result != ItemStack.EMPTY) {
+							inputSlot.setInventorySlotContents(3, result);
+							inputSlot.getStackInSlot(3).setTagCompound(nbt);
+							if(getWeapon(j) == "dagger" || getWeapon(j) == "kabutowari" || getWeapon(j) == "rapier" || getWeapon(j) == "talwar" || stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)) || getWeapon(j) == "mace" || getWeapon(j) == "staff" || getWeapon(j) == "spear") {
+								((ToolStabSword)inputSlot.getStackInSlot(3).getItem()).setMaximumDamage(result, (list.getInteger("reducedDurability") + list2.getInteger("reducedDurability")));
+								((ToolStabSword)inputSlot.getStackInSlot(3).getItem()).generateNameAndModifiers(inputSlot.getStackInSlot(3), (list.getDouble("reducedDamage") + list2.getDouble("reducedDamage")));
+							}else {
+								((ToolSlashSword)inputSlot.getStackInSlot(3).getItem()).setMaximumDamage(result, (list.getInteger("reducedDurability") + list2.getInteger("reducedDurability")));
+								((ToolSlashSword)inputSlot.getStackInSlot(3).getItem()).generateNameAndModifiers(inputSlot.getStackInSlot(3), (list.getDouble("reducedDamage") + list2.getDouble("reducedDamage")));
+							}
+							inputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
+							inputSlot.setInventorySlotContents(1, ItemStack.EMPTY);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void addSlots(int toolHead) {
+		System.out.println("Attempting to add slots for: " + toolHead);
+		if(toolHead == 1 || toolHead == 6 || toolHead == 9 || toolHead == 13 || toolHead == 16 || toolHead == 21 || toolHead == 25 || toolHead == 29 || toolHead == 34 || toolHead == 39 || toolHead == 43 || toolHead == 47 || toolHead == 50) {
+			this.getSlotFromInventory(this.inputSlot, 1).xPos = 80;
+			this.getSlotFromInventory(this.inputSlot, 1).yPos = 51;
+			this.getSlotFromInventory(this.inputSlot, 3).xPos = 108;
+			this.getSlotFromInventory(this.inputSlot, 3).yPos = 33;
+			slot1Enabled = true;
+		}else if(toolHead == 52) {
+			this.getSlotFromInventory(this.inputSlot, 1).xPos = 80;
+			this.getSlotFromInventory(this.inputSlot, 1).yPos = 51;
+			this.getSlotFromInventory(this.inputSlot, 2).xPos = 80;
+			this.getSlotFromInventory(this.inputSlot, 2).yPos = 69;
+			this.getSlotFromInventory(this.inputSlot, 3).xPos = 108;
+			this.getSlotFromInventory(this.inputSlot, 3).yPos = 33;
+			slot1Enabled = true;
+			slot2Enabled = true;
+		}else {
+			this.getSlotFromInventory(this.inputSlot, 1).xPos = 0;
+			this.getSlotFromInventory(this.inputSlot, 1).yPos = 0;
+			this.getSlotFromInventory(this.inputSlot, 2).xPos = 0;
+			this.getSlotFromInventory(this.inputSlot, 2).yPos = 0;
+			this.getSlotFromInventory(this.inputSlot, 3).xPos = 0;
+			this.getSlotFromInventory(this.inputSlot, 3).yPos = 0;
+			slot1Enabled = false;
+			slot2Enabled = false;
+		}
+	}
 	
 	protected String getItemString(ItemStack stack) {
 		if(stack.isItemEqual(new ItemStack(Items.IRON_INGOT))) {
@@ -172,8 +767,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int)(checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int)(checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 1) {
@@ -181,8 +776,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 2) {
@@ -190,8 +785,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 3) {
@@ -199,8 +794,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 4) {
@@ -208,8 +803,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 5) {
@@ -217,8 +812,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 6) {
@@ -226,8 +821,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 7) {
@@ -235,8 +830,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 8) {
@@ -244,8 +839,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 9) {
@@ -253,8 +848,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 10) {
@@ -262,8 +857,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 11) {
@@ -271,8 +866,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 12) {
@@ -280,8 +875,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 13) {
@@ -289,8 +884,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}else if(weapon == 14) {
@@ -298,8 +893,8 @@ public class ContainerForgeWeapon extends Container{
         		changeStack.setItemDamage(heat);
         		inputSlot.decrStackSize(0, 1);
         		inputSlot.setInventorySlotContents(0, changeStack);
-        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+        		nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+    			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
         		nbt.setString("Material", list.getString("Material"));
         		inputSlot.getStackInSlot(0).setTagCompound(nbt);
         	}
@@ -315,6 +910,7 @@ public class ContainerForgeWeapon extends Container{
 					return true;
 				}
 			}else if(weapon == 99) {
+				checkItem(stack);
 				System.out.println("button pressed is 99");
 				if(ingots.containsKey(getItemString(stack))) {
 					ItemStack result = new ItemStack(ItemInit.HOT_TOOL_HEAD);
@@ -336,8 +932,8 @@ public class ContainerForgeWeapon extends Container{
 	        			result.setItemDamage(heat);
 	        			inputSlot.decrStackSize(0, 1);
 	        			inputSlot.setInventorySlotContents(0, result);
-	        			nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack, nbt));
-	        			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack, nbt) * 100));
+	        			nbt.setDouble("reducedDamage", list.getDouble("reducedDamage") + checkHeat(stack));
+	        			nbt.setInteger("reducedDurability", list.getInteger("reducedDurability") + (int) (checkHeat(stack) * 100));
 	                	nbt.setString("Material", list.getString("Material"));
 	                	inputSlot.getStackInSlot(0).setTagCompound(nbt);
 	        			return true;
@@ -350,17 +946,49 @@ public class ContainerForgeWeapon extends Container{
     	}
 	}
 	
-	private double checkHeat(ItemStack stack, NBTTagCompound nbt) {
+	private String getWeapon(int weaponInt) {
+		switch(weaponInt) {
+			case 1:
+				return "dagger";
+			case 6:
+				return "kabutowari";
+			case 9:
+				return "talwar";
+			case 13:
+				return "rapier";
+			case 16:
+				return "mace";
+			case 21:
+				return "staff";
+			case 25:
+				return "longsword";
+			case 29:
+				return "kodachi";
+			case 34:
+				return "battleaxe";
+			case 39:
+				return "zweihander";
+			case 43:
+				return "nodachi";
+			case 47:
+				return "sabre";
+			case 50:
+				return "makhaira";
+			case 52:
+				return "spear";
+			default:
+				return "";
+		}	
+	}
+	
+	private double checkHeat(ItemStack stack) {
 		int heat = stack.getItemDamage();
 		if(inputSlot.getStackInSlot(0).getItem() instanceof ItemHotToolHead) {
 			if(heat <= 2999) {
-				System.out.println("adding 0.0");
 				return 0.0D;
 			}else if(heat >= 2999 && heat <= 4999) {
-				System.out.println("adding 0.25");
 				return 0.25D;
 			}else {
-				System.out.println("adding 0.5");
 				return 0.5D;
 			}
 		}
@@ -372,7 +1000,7 @@ public class ContainerForgeWeapon extends Container{
 		
 		for(int i = 0; i < toolHeadArr.length; i++) {
 			if(newStack.isItemEqualIgnoreDurability(toolHeadArr[i])) {
-				if(i != 1 && i != 6 && i != 9 && i != 13 && i != 16 && i != 21 && i != 25 && i != 29 && i != 34 && i != 39 && i != 43 && i != 47 && i != 50 && i != 52 && (i + 1) < toolHeadArr.length) {
+				if(i != 1 && i != 6 && i != 9 && i != 13 && i != 16 && i != 21 && i != 25 && i != 29 && i != 34 && i != 39 && i != 43 && i != 47 && i != 50 && i != 52 && i != 54 && (i + 1) < toolHeadArr.length) {
 					return toolHeadArr[i + 1];
 				}else {
 					if(i >= toolHeadArr.length) {

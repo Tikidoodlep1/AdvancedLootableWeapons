@@ -39,6 +39,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	private String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
 	private String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
 	private Random randGen = new Random();
+	private NBTTagCompound nbt = new NBTTagCompound();
 	
 	public ToolSlashSword(String name, ToolMaterial material, String type) {
 		super(material);
@@ -54,6 +55,30 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		this.bonusDamage = 0;
 		this.getAttributes(type, material);
 		this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+	}
+	
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		NBTTagCompound tag = new NBTTagCompound();
+		tag = stack.getTagCompound();
+		int durability;
+		if(tag == null || this.nbt == null || (this.material.getMaxUses() - tag.getInteger("maxDurability")) <= 0) {
+			durability = 1;
+			return durability;
+		}else {
+			durability = tag.getInteger("maxDurability");
+			return this.material.getMaxUses() - durability;
+		}
+	}
+	
+	public void setMaximumDamage(ItemStack stack, int maxDamage) {
+		NBTTagCompound tag = stack.getTagCompound();
+		this.nbt.setInteger("maxDurability", maxDamage);
+		System.out.println("durability is: " + this.nbt.getInteger("maxDurability") + ", " + maxDamage);
+		System.out.println("Tag durability is: " + tag.getInteger("reducedDurability"));
+		System.out.println(tag.getKeySet());
+		System.out.println("total durability is: " + (this.material.getMaxUses() + this.nbt.getInteger("maxDurability")));
+		stack.setTagCompound(this.nbt);
 	}
 	
 	private void getAttributes(String type, ToolMaterial material) {		
@@ -113,13 +138,38 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			this.randDamage += (this.randDamage * 2);
 		}
 		
-		nbt = stack.getOrCreateSubCompound("damageModifier");
 		nbt.setFloat("bonusDamage", this.randDamage);
 		this.tempRandDamage = nbt.getFloat("bonusDamage");
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.tempRandDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)(this.getAttackDamage() + 1), 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
         stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
+        stack.setTagCompound(this.nbt);
+	}
+	
+	public void generateNameAndModifiers(ItemStack stack, double reducedDamage) {
+		this.rand = randGen.nextBoolean();
+		
+		if(this.rand == true) {
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)]);
+		}else {
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
+		}
+		
+		if(randGen.nextBoolean() == true) {
+			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+		}else{
+			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+			this.randDamage += (this.randDamage * 2);
+		}
+		
+		this.nbt.setFloat("bonusDamage", this.randDamage);
+		this.tempRandDamage = this.nbt.getFloat("bonusDamage");
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)((this.getAttackDamage() + 1) - reducedDamage), 0), EntityEquipmentSlot.MAINHAND);
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
+		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.tempRandDamage, 0), EntityEquipmentSlot.MAINHAND);
+		stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
+		stack.setTagCompound(this.nbt);
 	}
 	
 	@SideOnly(Side.CLIENT)

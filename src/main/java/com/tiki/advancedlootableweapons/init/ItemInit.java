@@ -89,7 +89,7 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	
 	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", 20, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.25F).setRepairItem(new ItemStack(INGOT_KOBOLD));
 	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("amat_copper", ModInfo.ID + ":copper", 25, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.56F).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + "silver", 27, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.69F).setRepairItem(new ItemStack(INGOT_SILVER));
+	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + ":silver", 27, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.69F).setRepairItem(new ItemStack(INGOT_SILVER));
 	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("amat_bronze", ModInfo.ID + ":bronze", 32, new int[]{5,9,12,5}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_BRONZE));
 	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("amat_platinum", ModInfo.ID + ":platinum", 20, new int[]{7,13,17,8}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.25F).setRepairItem(new ItemStack(INGOT_PLATINUM));
 	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("amat_steel", ModInfo.ID + ":steel", 40, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.5F).setRepairItem(new ItemStack(INGOT_STEEL));
@@ -101,11 +101,11 @@ public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMateria
 	
 	
 	//Tools
-	public static final Item AXE_STEEL = new ToolAxe("axe_steel", MAT_STEEL);
-	public static final Item HOE_STEEL = new ToolHoe("hoe_steel", MAT_STEEL);
-	public static final Item PICKAXE_STEEL = new ToolPickaxe("pickaxe_steel", MAT_STEEL);
-	public static final Item SHOVEL_STEEL = new ToolShovel("shovel_steel", MAT_STEEL);
-	public static final Item SWORD_STEEL = new ToolSword("sword_steel", MAT_STEEL);
+	//public static final Item AXE_STEEL = new ToolAxe("axe_steel", MAT_STEEL);
+	//public static final Item HOE_STEEL = new ToolHoe("hoe_steel", MAT_STEEL);
+	//public static final Item PICKAXE_STEEL = new ToolPickaxe("pickaxe_steel", MAT_STEEL);
+	//public static final Item SHOVEL_STEEL = new ToolShovel("shovel_steel", MAT_STEEL);
+	//public static final Item SWORD_STEEL = new ToolSword("sword_steel", MAT_STEEL);
 	
 	
 	//Daggers
