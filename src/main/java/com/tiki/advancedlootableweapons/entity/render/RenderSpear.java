@@ -12,7 +12,7 @@ public class RenderSpear extends RenderThrownItem<EntitySpear>{
 	public static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/entity/spear.png");
 	
 	public RenderSpear(RenderManager renderManagerIn) {
-		super(renderManagerIn, new ModelSpear(), 1.0F, 180, TEXTURES);
+		super(renderManagerIn, new ModelSpear(), 0.3F, 0, TEXTURES);
 	}
 
 	@Override

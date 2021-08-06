@@ -59,10 +59,18 @@ public class ToolSpear extends ToolStabSword{
         return f;
     }
 	
+	private float getBonusDamage() {
+		return this.nbt.getFloat("bonusDamage");
+	}
+	
+	private double getReducedDamage() {
+		return this.nbt.getDouble("reducedDamage");
+	}
+	
 	private void createSpearEntity(World worldIn, EntityPlayer playerIn, ItemStack stack, float f){
 		if (!worldIn.isRemote)
         {
-            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getAttackDamage(), this.getDamage(stack), stack);
+            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getAttackDamage(), this.getDamage(stack), this.getMaxDamage(stack), this.getReducedDamage(), this.getBonusDamage(), stack);
             System.out.print(this.getToolMaterialName());
             entityspear.setArrowStack(this);
             entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);

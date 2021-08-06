@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons;
 
+import java.io.File;
 import java.util.UUID;
 
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
@@ -27,6 +28,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class Alw {
 	@Instance
 	public static Alw instance;
+	
+	public static File config;
 	
 	public static final IAttribute MATERIAL = new RangedAttribute((IAttribute)null, "attribute.toolMaterial", 0.0D, 0.0D, 12.0D).setDescription("Material");
 	public static final UUID MATERIAL_MODIFIER = UUID.fromString("ac55927e-2f67-4b25-a284-a4c26f42d9aa");

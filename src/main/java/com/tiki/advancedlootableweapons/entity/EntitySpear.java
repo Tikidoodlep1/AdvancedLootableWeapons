@@ -5,8 +5,8 @@ import com.tiki.advancedlootableweapons.tools.ToolSpear;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,21 +16,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class EntitySpear extends EntityArrow{
@@ -45,13 +40,22 @@ public class EntitySpear extends EntityArrow{
     public String material;
     private float spearDamage;
     public int spearDurability;
+    private int spearMaxDurability;
+    private String customName;
+    private double reducedDamage;
+    private float bonusDamage;
+    
     public static final DataParameter<ItemStack> ITEMSTACK = EntityDataManager.<ItemStack>createKey(EntitySpear.class, DataSerializers.ITEM_STACK);
     
-    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, float spearDamage, int spearDurability, ItemStack stack) {
+    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, float spearDamage, int spearDurability, int spearMaxDurability, double reducedDamage, float bonusDamage, ItemStack stack) {
     	this(worldIn, shooter);
     	this.material = material;
     	this.spearDamage = spearDamage;
     	this.spearDurability = spearDurability;
+    	this.spearMaxDurability = spearMaxDurability;
+    	this.customName = stack.getDisplayName();
+    	this.reducedDamage = reducedDamage;
+    	this.bonusDamage = bonusDamage;
     	this.setItemStack(stack);
     }
     
@@ -97,7 +101,11 @@ public class EntitySpear extends EntityArrow{
 	}
 	
 	public void writeEntityToNBT(NBTTagCompound compound) {
-		compound.setInteger("durability", this.spearDurability);
+		compound.setInteger("spearDurability", this.spearDurability);
+		compound.setInteger("maxSpearDurability", this.spearMaxDurability);
+		compound.setDouble("reducedSpearDamage", this.reducedDamage);
+		compound.setFloat("bonusSpearDamage", this.bonusDamage);
+		compound.setString("customName", this.customName);
 		
 		if(this.getItemStack() != null && !this.getItemStack().isEmpty()) {
 			compound.setTag("itemstack", this.getItemStack().writeToNBT(new NBTTagCompound()));
@@ -106,9 +114,29 @@ public class EntitySpear extends EntityArrow{
 	
 	public void readEntityFromNBT(NBTTagCompound compound)
     {
-        if (compound.hasKey("durability", 99))
+        if (compound.hasKey("spearDurability", 99))
         {
-            this.spearDurability = compound.getInteger("durability");
+            this.spearDurability = compound.getInteger("spearDurability");
+        }
+        
+        if (compound.hasKey("maxSpearDurability", 99))
+        {
+            this.spearMaxDurability = compound.getInteger("maxSpearDurability");
+        }
+        
+        if(compound.hasKey("customName", 8))
+        {
+        	this.customName = compound.getString("customName");
+        }
+        
+        if(compound.hasKey("reducedSpearDamage", 99))
+        {
+        	this.reducedDamage = compound.getDouble("reducedSpearDamage");
+        }
+        
+        if(compound.hasKey("bonusSpearDamage", 99))
+        {
+        	this.bonusDamage = compound.getFloat("bonusSpearDamage");
         }
         
         setItemStack(new ItemStack(compound.getCompoundTag("itemstack")));
@@ -139,8 +167,8 @@ public class EntitySpear extends EntityArrow{
                 			copyStack.addEnchantment(Enchantment.getEnchantmentByID(list.getCompoundTagAt(e).getShort("id")), list.getCompoundTagAt(e).getShort("lvl"));
                 		}
                 	}
-                	this.setItemDurability(entityIn, copyStack);
-                }else if(stack.getItem().getDurabilityForDisplay(stack) >= 1.0) {
+                	this.setItemAttributes(entityIn, copyStack, this.spearMaxDurability);
+                }else if(this.spearDurability >= this.spearMaxDurability) {
                 	playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
                 } 
                 this.setDead();
@@ -148,13 +176,21 @@ public class EntitySpear extends EntityArrow{
         }
     }
 	
-	public void setItemDurability(EntityPlayer player, ItemStack stack){
-		int slot = player.inventory.getFirstEmptyStack();
-		player.inventory.add(slot, stack);
-		ItemStack item = player.inventory.getStackInSlot(slot);
-		item.setItemDamage(this.spearDurability);
+	/**
+	 * Sets the spear's attributes when the player picks it up.
+	 */
+	public void setItemAttributes(EntityPlayer player, ItemStack stack, int maxDurability){
+		if(!player.capabilities.isCreativeMode) {
+			int slot = player.inventory.getFirstEmptyStack();
+			player.inventory.add(slot, stack);
+			ItemStack item = player.inventory.getStackInSlot(slot);
+			((ToolSpear)item.getItem()).setMaximumDamage(item, maxDurability);
+			((ToolSpear)item.getItem()).generateModifiers(item, this.reducedDamage, this.bonusDamage);
+			item.setItemDamage(this.spearDurability);
+			item.setStackDisplayName(this.customName);
+		}
 	}
-	
+	 
 	public void setArrowStack(ToolSpear spear) {
 		this.arrowStack = new ItemStack(spear);
 	}

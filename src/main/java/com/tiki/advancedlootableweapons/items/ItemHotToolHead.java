@@ -54,6 +54,16 @@ public class ItemHotToolHead extends Item implements IHasModel{
 		});
 	}
 	
+	public String getMaterial(ItemStack toolHead) {
+		NBTTagCompound tag = new NBTTagCompound();
+		tag = toolHead.getTagCompound();
+		if(toolHead.hasTagCompound() && tag.hasKey("Material")) {
+			return tag.getString("Material");
+		}else {
+			return "Material not found";
+		}
+	}
+	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -63,11 +73,11 @@ public class ItemHotToolHead extends Item implements IHasModel{
 			tooltip.add(TextFormatting.BLUE + nbt.getString("Material"));
 		}
 		
-		if(stack.hasTagCompound() && nbt.hasKey("reducedDamage")) {
+		if(stack.hasTagCompound() && nbt.hasKey("addedDamage")) {
 			tooltip.add(TextFormatting.BLUE + "Forging Quality");
 			tooltip.add(TextFormatting.GRAY + "--------------------");
-			tooltip.add(TextFormatting.RED + "-" + nbt.getDouble("reducedDamage") + " Damage");
-			tooltip.add(TextFormatting.RED + "-" + nbt.getInteger("reducedDurability") + " Durability");
+			tooltip.add(TextFormatting.BLUE + "+" + nbt.getDouble("addedDamage") + " Damage");
+			tooltip.add(TextFormatting.BLUE + "+" + nbt.getInteger("addedDurability") + " Durability");
 			tooltip.add(TextFormatting.GRAY + "--------------------");
 		}
     }

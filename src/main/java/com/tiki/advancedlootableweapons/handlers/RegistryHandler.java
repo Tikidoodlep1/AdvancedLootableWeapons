@@ -25,8 +25,16 @@ public class RegistryHandler {
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
+		if(ConfigHandler.USE_IMAGINARY_RESOURCES == true) {
+			ItemInit.createImaginaries();
+		}
+		if(ConfigHandler.ENABLE_ARMORS == true) {
+			ItemInit.enableArmors();
+		}
+		ItemInit.enableWeapons();
+		
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
-		ItemInit.createRecipes();
+		//ItemInit.createRecipes(); nothing in the function \'_'/
 	}
 	
 	@SubscribeEvent
@@ -58,9 +66,9 @@ public class RegistryHandler {
 	
 	public static void preInitRegistries(FMLPreInitializationEvent event)
 	{
-		//ModConfiguration.registerConfig(event);
 		EntityInit.registerEntities();
 		RenderHandler.registerEntityRenders();
+		ConfigHandler.registerConfig(event);
 	}
 	
 	public static void initRegistries(FMLInitializationEvent event)
