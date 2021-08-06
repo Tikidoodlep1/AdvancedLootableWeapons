@@ -68,6 +68,9 @@ public class ForgeWeaponRecipes {
 	}
 	
 	public ItemStack getItemResult(String material, ItemStack input1, ItemStack input2) {
+		if(input1.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) && input2.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2))) {
+			return new ItemStack(ItemInit.LONG_TOOL_ROD);
+		}
 		Table<ItemStack, ItemStack, Map<String, ItemStack>> recipe = this.getDualCraftingList();
 		Map<String, ItemStack> recipeMap;
 		

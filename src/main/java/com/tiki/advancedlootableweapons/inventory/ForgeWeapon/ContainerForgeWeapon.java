@@ -172,7 +172,7 @@ public class ContainerForgeWeapon extends Container{
 			nbt2.setInteger("addedDurability", nbt2.getInteger("addedDurability"));
 			
 			for(int j = 0; j < toolHeadArr.length; j++) {
-				if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)) || stack.isItemEqualIgnoreDurability(toolHeadArr[j]) && (j == 1 || j == 6 || j == 9 || j == 13 || j == 16 || j == 21 || j == 25 || j == 27 || j == 32 || j == 37 || j == 41 || j == 45 || j == 48 || j == 50 || j == 52)) {
+				if((inputSlot.getStackInSlot(0).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) && inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2))) || stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)) || stack.isItemEqualIgnoreDurability(toolHeadArr[j]) && (j == 1 || j == 6 || j == 9 || j == 13 || j == 16 || j == 21 || j == 25 || j == 27 || j == 32 || j == 37 || j == 41 || j == 45 || j == 48 || j == 50 || j == 52)) {
 					if(!input.hasTagCompound()) {
 						input.setTagCompound(nbt);
 					}
@@ -191,6 +191,7 @@ public class ContainerForgeWeapon extends Container{
 					if(material.equalsIgnoreCase(material2)){
 						ForgeWeaponRecipes recipe = new ForgeWeaponRecipes();
 						result = recipe.getItemResult(material, input, toolRod);
+						System.out.println("result: " + result);
 						if(result != ItemStack.EMPTY) {
 							inputSlot.setInventorySlotContents(2, result);
 							//inputSlot.getStackInSlot(2).setTagCompound(nbt);
@@ -200,6 +201,14 @@ public class ContainerForgeWeapon extends Container{
 							}else if(result.getItem() instanceof ToolSlashSword){
 								((ToolSlashSword)inputSlot.getStackInSlot(2).getItem()).setMaximumDamage(result, (list.getInteger("addedDurability") + list2.getInteger("addedDurability")));
 								((ToolSlashSword)inputSlot.getStackInSlot(2).getItem()).generateNameAndModifiers(inputSlot.getStackInSlot(2), (list.getDouble("addedDamage") + list2.getDouble("addedDamage")));
+							}else if(result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD))) {
+								nbt.setString("Material", material);
+								inputSlot.getStackInSlot(2).setTagCompound(nbt);
+								if((((inputSlot.getStackInSlot(0).getItemDamage() + inputSlot.getStackInSlot(1).getItemDamage())/2) + 2800) < 6000) {
+									inputSlot.getStackInSlot(2).setItemDamage(((inputSlot.getStackInSlot(0).getItemDamage() + inputSlot.getStackInSlot(1).getItemDamage())/2) + 2800);
+								}else {
+									inputSlot.getStackInSlot(2).setItemDamage(6000);
+								}
 							}
 							inputSlot.setInventorySlotContents(0, ItemStack.EMPTY);
 							inputSlot.setInventorySlotContents(1, ItemStack.EMPTY);
@@ -425,11 +434,9 @@ public class ContainerForgeWeapon extends Container{
 						return true;
 					}else if(stack.getItem() instanceof ItemHotToolHead) {
 						ItemStack result = ItemStack.EMPTY;
-						if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) && inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2))) {
-							result = new ItemStack(ItemInit.LONG_TOOL_ROD);
-						}else {
-							result = getNextToolHead(stack);
-						}
+						System.out.println("slot 0 is: " + inputSlot.getStackInSlot(0) + ", slot 1 is: " + inputSlot.getStackInSlot(1));
+						result = getNextToolHead(stack);
+						System.out.println("Result is: " + result);
 						NBTTagCompound list = new NBTTagCompound();
 						list = stack.getTagCompound();
 						int heat = stack.getItemDamage() + 2800;
