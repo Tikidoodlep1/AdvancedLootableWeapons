@@ -19,6 +19,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -80,42 +81,42 @@ public class ToolStabSword extends Item implements IHasModel{
 	private void getAttributes(String type, ToolMaterial material) {		
 		switch(type){
 			case "dagger":
-				this.attackSpeed = 0.0D;
+				this.attackSpeed = ConfigHandler.GLOBAL_DAGGER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_DAGGER_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 4.1F;
 				break;
 			case "kabutowari":
-				this.attackSpeed = 0.2D;
+				this.attackSpeed = ConfigHandler.GLOBAL_KABUTOWARI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KABUTOWARI_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 4.6F;
 				break;
 			case "rapier":
-				this.attackSpeed = 0.6D;
+				this.attackSpeed = ConfigHandler.GLOBAL_RAPIER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_RAPIER_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.6F;
 				break;
 			case "talwar":
-				this.attackSpeed = -1.4D;
+				this.attackSpeed = ConfigHandler.GLOBAL_TALWAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_TALWAR_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.4F;
 				break;
 			case "cleaver":
-				this.attackSpeed = -2.6D;
+				this.attackSpeed = ConfigHandler.GLOBAL_CLEAVER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_CLEAVER_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.0F;
 				break;
 			case "mace":
-				this.attackSpeed = -1.0D;
+				this.attackSpeed = ConfigHandler.GLOBAL_MACE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MACE_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.0F;
 				break;
 			case "staff":
-				this.attackSpeed = -1.6D;
+				this.attackSpeed = ConfigHandler.GLOBAL_STAFF_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_STAFF_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 6.6F;
 				break;
 			case "spear":
-				this.attackSpeed = -2.8D;
+				this.attackSpeed = ConfigHandler.GLOBAL_SPEAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SPEAR_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 7.0F;
 				break;
@@ -212,7 +213,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4.0) + " Attack Speed");
+		//tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4.0) + " Attack Speed");
     }
 	
 	@Override
@@ -298,6 +299,11 @@ public class ToolStabSword extends Item implements IHasModel{
         
         return multimap;
     }
+	
+	@Override
+	public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+		return false;
+	}
 	
 	public float getReach() {
 		return reach;

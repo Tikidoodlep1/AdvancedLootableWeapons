@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"W",
+		"S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:long_weapon_handle"
+		},
+		"W":
+		{ 
+			"item": "advancedlootableweapons:spear_head"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:spear_wood",
+		"count": 1
+	}
+}

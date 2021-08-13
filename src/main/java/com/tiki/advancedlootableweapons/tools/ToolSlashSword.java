@@ -72,40 +72,40 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		stack.setTagCompound(this.nbt);
 	}
 	
-	private void getAttributes(String type, ToolMaterial material) {		
+	private void getAttributes(String type, ToolMaterial material) {
 		switch(type){
 			case "longsword":
-				this.attackSpeed = -1.4D;
+				this.attackSpeed = ConfigHandler.GLOBAL_LONGSWORD_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 6.0F;
 				break;
 			case "kodachi":
-				this.attackSpeed = 0.0D;
+				this.attackSpeed = ConfigHandler.GLOBAL_KODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.8F;
+				this.reach = 4.3F;
 				break;
 			case "battleaxe":
-				this.attackSpeed = -1.7D;
+				this.attackSpeed = ConfigHandler.GLOBAL_BATTLEAXE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 6.2F;
 				break;
 			case "zweihander":
-				this.attackSpeed = -2.4D;
+				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 6.4F;
 				break;
 			case "nodachi":
-				this.attackSpeed = -1.8D;
+				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_NODACHI_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.8F;
 				break;
 			case "sabre":
-				this.attackSpeed = -0.4D;
+				this.attackSpeed = ConfigHandler.GLOBAL_SABRE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SABRE_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.4F;
 				break;
 			case "makhaira":
-				this.attackSpeed = -0.8D;
+				this.attackSpeed = ConfigHandler.GLOBAL_MAKHAIRA_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MAKHAIRA_BASE_DAMAGE + material.getAttackDamage();
 				this.reach = 5.6F;
 		}
@@ -187,7 +187,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4) + " Attack Speed");
+		//tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4) + " Attack Speed");
 		
     }
 

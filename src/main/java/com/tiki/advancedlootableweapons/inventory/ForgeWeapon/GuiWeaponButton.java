@@ -10,12 +10,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiWeaponButton extends GuiButton{
-
+	protected static final ResourceLocation OVERLAY = new ResourceLocation(ModInfo.ID + ":textures/gui/button_overlay.png");
 	protected static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/button.png");
-	private int cooldown;
+	private int cooldown, overlayX, overlayY;
 	
-	public GuiWeaponButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText) {
+	public GuiWeaponButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int overlayX, int overlayY) {
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
+		this.overlayX = overlayX;
+		this.overlayY = overlayY;
 	}
 	
 	@Override
@@ -45,6 +47,8 @@ public class GuiWeaponButton extends GuiButton{
         {
             mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
             this.drawTexturedModalRect(this.x, this.y, 0, 0, 20, 20);
+            mc.getTextureManager().bindTexture(OVERLAY);
+            this.drawTexturedModalRect(this.x, this.y, overlayX, overlayY, 20, 20);
         }
     }
 }	

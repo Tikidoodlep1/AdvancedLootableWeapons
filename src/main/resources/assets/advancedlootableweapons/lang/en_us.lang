@@ -281,6 +281,7 @@ item.long_tool_rod.cool.name=Cool Long Weapon Handle(Finished)
 item.long_tool_rod.warm.name=Warm Long Weapon Handle(Finished)
 item.long_tool_rod.hot.name=Hot Long Weapon Handle(Finished)
 
+item.dagger_head.name=Wooden Dagger Head
 item.dagger_hot_tool_head.cool.name=Cool Dagger Head(Stage 1)
 item.dagger_hot_tool_head.warm.name=Warm Dagger Head(Stage 1)
 item.dagger_hot_tool_head.hot.name=Hot Dagger Head(Stage 1)
@@ -288,6 +289,7 @@ item.dagger_hot_tool_head_2.cool.name=Cool Dagger Head(Finished)
 item.dagger_hot_tool_head_2.warm.name=Warm Dagger Head(Finished)
 item.dagger_hot_tool_head_2.hot.name=Hot Dagger Head(Finished)
 
+item.kabutowari_head=Wooden Kabutowari Head
 item.kabutowari_hot_tool_head.cool.name=Cool Kabutowari Head(Stage 1)
 item.kabutowari_hot_tool_head.warm.name=Warm Kabutowari Head(Stage 1)
 item.kabutowari_hot_tool_head.hot.name=Hot Kabutowari Head(Stage 1)
@@ -304,6 +306,7 @@ item.kabutowari_hot_tool_head_5.cool.name=Cool Kabutowari Head(Finished)
 item.kabutowari_hot_tool_head_5.warm.name=Warm Kabutowari Head(Finished)
 item.kabutowari_hot_tool_head_5.hot.name=Hot Kabutowari Head(Finished)
 
+item.talwar_head.name=Wooden Talwar Head
 item.talwar_hot_tool_head.cool.name=Cool Talwar Head(Stage 1)
 item.talwar_hot_tool_head.warm.name=Warm Talwar Head(Stage 1)
 item.talwar_hot_tool_head.hot.name=Hot Talwar Head(Stage 1)
@@ -314,6 +317,7 @@ item.talwar_hot_tool_head_3.cool.name=Cool Talwar Head(Finished)
 item.talwar_hot_tool_head_3.warm.name=Warm Talwar Head(Finished)
 item.talwar_hot_tool_head_3.hot.name=Hot Talwar Head(Finished)
 
+item.rapier_head.name=Wooden Rapier Head
 item.rapier_hot_tool_head.cool.name=Cool Rapier Head(Stage 1)
 item.rapier_hot_tool_head.warm.name=Warm Rapier Head(Stage 1)
 item.rapier_hot_tool_head.hot.name=Hot Rapier Head(Stage 1)
@@ -327,10 +331,12 @@ item.rapier_hot_tool_head_4.cool.name=Cool Rapier Head(Finished)
 item.rapier_hot_tool_head_4.warm.name=Warm Rapier Head(Finished)
 item.rapier_hot_tool_head_4.hot.name=Hot Rapier Head(Finished)
 
+item.cleaver_head.name=Wooden Cleaver Head
 item.cleaver_hot_tool_head.cool.name=Cool Cleaver Head(Finished)
 item.cleaver_hot_tool_head.warm.name=Warm Cleaver Head(Finished)
 item.cleaver_hot_tool_head.hot.name=Hot Cleaver Head(Finished)
 
+item.mace_head.name=Wooden Mace Head
 item.mace_hot_tool_head.cool.name=Cool Mace Head(Stage 1)
 item.mace_hot_tool_head.warm.name=Warm Mace Head(Stage 1)
 item.mace_hot_tool_head.hot.name=Hot Mace Head(Stage 1)
@@ -341,6 +347,7 @@ item.mace_hot_tool_head_3.cool.name=Cool Mace Head(Finished)
 item.mace_hot_tool_head_3.warm.name=Warm Mace Head(Finished)
 item.mace_hot_tool_head_3.hot.name=Hot Mace Head(Finished)
 
+item.staff_head.name=Wooden Staff Head
 item.staff_hot_tool_head.cool.name=Cool Staff Head(Stage 1)
 item.staff_hot_tool_head.warm.name=Warm Staff Head(Stage 1)
 item.staff_hot_tool_head.hot.name=Hot Staff Head(Stage 1)
@@ -357,6 +364,7 @@ item.staff_hot_tool_head_5.cool.name=Cool Staff Head(Finished)
 item.staff_hot_tool_head_5.warm.name=Warm Staff Head(Finished)
 item.staff_hot_tool_head_5.hot.name=Hot Staff Head(Finished)
 
+item.longsword_head.name=Wooden Longsword Head
 item.longsword_hot_tool_head.cool.name=Cool Longsword Head(Stage 1)
 item.longsword_hot_tool_head.warm.name=Warm Longsword Head(Stage 1)
 item.longsword_hot_tool_head.hot.name=Hot Longsword Head(Stage 1)
@@ -370,6 +378,7 @@ item.longsword_hot_tool_head_4.cool.name=Cool Longsword Head(Finished)
 item.longsword_hot_tool_head_4.warm.name=Warm Longsword Head(Finished)
 item.longsword_hot_tool_head_4.hot.name=Hot Longsword Head(Finished)
 
+item.kodachi_head.name=Wooden Kodachi Head
 item.kodachi_hot_tool_head.cool.name=Cool Kodachi Head(Stage 1)
 item.kodachi_hot_tool_head.warm.name=Warm Kodachi Head(Stage 1)
 item.kodachi_hot_tool_head.hot.name=Hot Kodachi Head(Stage 1)
@@ -377,6 +386,7 @@ item.kodachi_hot_tool_head_2.cool.name=Cool Kodachi Head(Finished)
 item.kodachi_hot_tool_head_2.warm.name=Warm Kodachi Head(Finished)
 item.kodachi_hot_tool_head_2.hot.name=Hot Kodachi Head(Finished)
 
+item.battleaxe_head.name=Wooden Battleaxe Head
 item.battleaxe_hot_tool_head.cool.name=Cool Battleaxe Head(Stage 1)
 item.battleaxe_hot_tool_head.warm.name=Warm Battleaxe Head(Stage 1)
 item.battleaxe_hot_tool_head.hot.name=Hot Battleaxe Head(Stage 1)
@@ -393,6 +403,7 @@ item.battleaxe_hot_tool_head_5.cool.name=Cool Battleaxe Head(Finished)
 item.battleaxe_hot_tool_head_5.warm.name=Warm Battleaxe Head(Finished)
 item.battleaxe_hot_tool_head_5.hot.name=Hot Battleaxe Head(Finished)
 
+item.zweihander_head.name=Wooden Zweihander head
 item.zweihander_hot_tool_head.cool.name=Cool Zweihander Head(Stage 1)
 item.zweihander_hot_tool_head.warm.name=Warm Zweihander Head(Stage 1)
 item.zweihander_hot_tool_head.hot.name=Hot Zweihander Head(Stage 1)
@@ -409,6 +420,7 @@ item.zweihander_hot_tool_head_5.cool.name=Cool Zweihander Head(Finished)
 item.zweihander_hot_tool_head_5.warm.name=Warm Zweihander Head(Finished)
 item.zweihander_hot_tool_head_5.hot.name=Hot Zweihander Head(Finished)
 
+item.nodachi_head.name=Wooden Nodachi Head
 item.nodachi_hot_tool_head.cool.name=Cool Nodachi Head(Stage 1)
 item.nodachi_hot_tool_head.warm.name=Warm Nodachi Head(Stage 1)
 item.nodachi_hot_tool_head.hot.name=Hot Nodachi Head(Stage 1)
@@ -422,6 +434,7 @@ item.nodachi_hot_tool_head_4.cool.name=Cool Nodachi Head(Finished)
 item.nodachi_hot_tool_head_4.warm.name=Warm Nodachi Head(Finished)
 item.nodachi_hot_tool_head_4.hot.name=Hot Nodachi Head(Finished)
 
+item.sabre_head.name=Wooden Sabre Head
 item.sabre_hot_tool_head.cool.name=Cool Sabre Head(Stage 1)
 item.sabre_hot_tool_head.warm.name=Warm Sabre Head(Stage 1)
 item.sabre_hot_tool_head.hot.name=Hot Sabre Head(Stage 1)
@@ -435,6 +448,7 @@ item.sabre_hot_tool_head_4.cool.name=Cool Sabre Head(Finished)
 item.sabre_hot_tool_head_4.warm.name=Warm Sabre Head(Finished)
 item.sabre_hot_tool_head_4.hot.name=Hot Sabre Head(Finished)
 
+item.makhaira_head.name=Wooden Makhaira Head
 item.makhaira_hot_tool_head.cool.name=Cool Makhaira Head(Stage 1)
 item.makhaira_hot_tool_head.warm.name=Warm Makhaira Head(Stage 1)
 item.makhaira_hot_tool_head.hot.name=Hot Makhaira Head(Stage 1)
@@ -445,6 +459,7 @@ item.makhaira_hot_tool_head_3.cool.name=Cool Makhaira Head(Finished)
 item.makhaira_hot_tool_head_3.warm.name=Warm Makhaira Head(Finished)
 item.makhaira_hot_tool_head_3.hot.name=Hot Makhaira Head(Finished)
 
+item.spear_head.name=Wooden Spear Head
 item.spear_hot_tool_head.cool.name=Cool Spear Head(Stage 1)
 item.spear_hot_tool_head.warm.name=Warm Spear Head(Stage 1)
 item.spear_hot_tool_head.hot.name=Hot Spear Head(Stage 1)
@@ -453,6 +468,7 @@ item.spear_hot_tool_head_2.warm.name=Warm Spear Head(Finished)
 item.spear_hot_tool_head_2.hot.name=Hot Spear Head(Finished)
 
 
+item.minecraft:iron_helmet.name=Iron Helmet
 item.helmet_kobold.name=Kobold Steel Helmet
 item.helmet_copper.name=Copper Helmet
 item.helmet_silver.name=Silver Helmet
@@ -466,6 +482,7 @@ item.helmet_crystallite.name=Crystallite Helmet
 item.helmet_dusksteel.name=Dusk Steel Helmet
 
 
+item.minecraft:iron_chestplate.name=Iron Chestplate
 item.chestplate_kobold.name=Kobold Steel Chestplate
 item.chestplate_copper.name=Copper Chestplate
 item.chestplate_silver.name=Silver Chestplate
@@ -479,6 +496,7 @@ item.chestplate_crystallite.name=Crystallite Chestplate
 item.chestplate_dusksteel.name=Dusk Steel Chestplate
 
 
+item.minecraft:iron_leggings.name=Iron Leggings
 item.leggings_kobold.name=Kobold Steel Leggings
 item.leggings_copper.name=Copper Leggings
 item.leggings_silver.name=Silver Leggings
@@ -492,6 +510,7 @@ item.leggings_crystallite.name=Crystallite Leggings
 item.leggings_dusksteel.name=Dusk Steel Leggings
 
 
+item.minecraft:iron_boots.name=Iron Boots
 item.boots_kobold.name=Kobold Steel Boots
 item.boots_copper.name=Copper Boots
 item.boots_silver.name=Silver Boots

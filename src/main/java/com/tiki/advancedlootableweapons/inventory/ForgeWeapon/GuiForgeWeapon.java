@@ -18,26 +18,26 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
-	
+		
 		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon.png");
-	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, "Dagger");
-	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 20, 20, "Kabutowari");
-	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 20, 20, "Talwar");
-	    private final GuiWeaponButton rapierButton = new GuiWeaponButton(3, 30, 70, 20, 20, "Rapier");
-	    private final GuiWeaponButton maceButton = new GuiWeaponButton(4, 60, 70, 20, 20, "Mace");
-	    private final GuiWeaponButton cleaverButton = new GuiWeaponButton(5, 90, 70, 20, 20, "Cleaver");
-	    private final GuiWeaponButton staffButton = new GuiWeaponButton(6, 30, 100, 20, 20, "Staff");
-	    private final GuiWeaponButton longswordButton = new GuiWeaponButton(7, 60, 100, 20, 20, "Longsword");
-	    private final GuiWeaponButton kodachiButton = new GuiWeaponButton(8, 90, 100, 20, 20, "Kodachi");
-	    private final GuiWeaponButton battleaxeButton = new GuiWeaponButton(9, 30, 130, 20, 20, "Battleaxe");
-	    private final GuiWeaponButton zweihanderButton = new GuiWeaponButton(10, 60, 130, 20, 20, "Zweihander");
-	    private final GuiWeaponButton nodachiButton = new GuiWeaponButton(11, 90, 130, 20, 20, "Nodachi");
-	    private final GuiWeaponButton sabreButton = new GuiWeaponButton(12, 30, 160, 20, 20, "Sabre");
-	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, "Makhaira");
-	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear");
+	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, "Dagger", 0, 0);
+	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 20, 20, "Kabutowari", 21, 0);
+	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 20, 20, "Talwar", 61, 0);
+	    private final GuiWeaponButton rapierButton = new GuiWeaponButton(3, 30, 70, 20, 20, "Rapier", 41, 0);
+	    private final GuiWeaponButton maceButton = new GuiWeaponButton(4, 60, 70, 20, 20, "Mace", 0, 20);
+	    private final GuiWeaponButton cleaverButton = new GuiWeaponButton(5, 90, 70, 20, 20, "Cleaver", 21, 20);
+	    private final GuiWeaponButton staffButton = new GuiWeaponButton(6, 30, 100, 20, 20, "Staff", 41, 20);
+	    private final GuiWeaponButton longswordButton = new GuiWeaponButton(7, 60, 100, 20, 20, "Longsword", 61, 20);
+	    private final GuiWeaponButton kodachiButton = new GuiWeaponButton(8, 90, 100, 20, 20, "Kodachi", 0, 40);
+	    private final GuiWeaponButton battleaxeButton = new GuiWeaponButton(9, 30, 130, 20, 20, "Battleaxe", 21, 40);
+	    private final GuiWeaponButton zweihanderButton = new GuiWeaponButton(10, 60, 130, 20, 20, "Zweihander", 41, 40);
+	    private final GuiWeaponButton nodachiButton = new GuiWeaponButton(11, 90, 130, 20, 20, "Nodachi", 61, 40);
+	    private final GuiWeaponButton sabreButton = new GuiWeaponButton(12, 30, 160, 20, 20, "Sabre", 0, 60);
+	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, "Makhaira", 21, 60);
+	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear", 41, 60);
 	    
-	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 60, this.getGuiTop() + 190, 20, 20, "Tool Handle");
-	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon");
+	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 60, this.getGuiTop() + 190, 20, 20, "Tool Handle", 61, 60);
+	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon", 61, 60);
 	    private int buttonPressed;
 	    private boolean buttonsDrawn;
 	    private final ContainerForgeWeapon container;

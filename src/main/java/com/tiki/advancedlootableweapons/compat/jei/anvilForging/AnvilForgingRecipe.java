@@ -8,24 +8,30 @@ import com.tiki.advancedlootableweapons.compat.jei.JEICompat;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 
-public class AnvilForgingRecipe  implements IRecipeWrapper{
+public class AnvilForgingRecipe implements IRecipeWrapper{
 	private final List<ItemStack> inputs;
 	private final ItemStack output;
 	
 	public AnvilForgingRecipe(List<ItemStack> inputs, ItemStack output) {
 		this.inputs = inputs;
 		this.output = output;
+		
+	}
+	
+	public ItemStack getoutput(){
+		return this.output;
 	}
 	
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInputs(ItemStack.class, inputs);
-		ingredients.setOutput(ItemStack.class, output);
+		ingredients.setInputs(VanillaTypes.ITEM, inputs);
+		ingredients.setOutput(VanillaTypes.ITEM, output);
 	}
 	
 	@Override

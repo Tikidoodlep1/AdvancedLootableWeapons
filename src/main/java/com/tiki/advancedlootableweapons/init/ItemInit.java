@@ -13,13 +13,19 @@ import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemInit {
 
@@ -27,7 +33,21 @@ public class ItemInit {
 	
 	//Recipes with meta
 	public static void createRecipes() {
-		//GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_long_tool_rod"), new ResourceLocation("long_tool_rod"), new ItemStack(LONG_TOOL_ROD, 1, 6000), new Object[] {"z", "z", Character.valueOf('z'), new ItemStack(HOT_TOOL_ROD_2, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_dagger_head"), new ResourceLocation("dagger_head"), new ItemStack(DAGGER_HEAD), new Object[] {" w", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_kabutowari_head"), new ResourceLocation("kabutowari_head"), new ItemStack(KABUTOWARI_HEAD), new Object[] {"  w", "w w", " w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_rapier_head"), new ResourceLocation("rapier_head"), new ItemStack(RAPIER_HEAD), new Object[] {"w  ", " w ", "  w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_talwar_head"), new ResourceLocation("talwar_head"), new ItemStack(TALWAR_HEAD), new Object[] {" w", "w ", " w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_mace_head"), new ResourceLocation("mace_head"), new ItemStack(MACE_HEAD), new Object[] {"w w", " w ", "w w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_cleaver_head"), new ResourceLocation("cleaver_head"), new ItemStack(CLEAVER_HEAD), new Object[] {"ww", " w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_staff_head"), new ResourceLocation("staff_head"), new ItemStack(STAFF_HEAD, 2), new Object[] {"w  ", "ww ", " ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_longsword_head"), new ResourceLocation("longsword_head"), new ItemStack(LONGSWORD_HEAD), new Object[] {" w ", " w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_battleaxe_head"), new ResourceLocation("battleaxe_head"), new ItemStack(BATTLEAXE_HEAD), new Object[] {"www", "w w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_zweihander_head"), new ResourceLocation("zweihander_head"), new ItemStack(ZWEIHANDER_HEAD), new Object[] {" w ", "www", " w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_kodachi_head"), new ResourceLocation("kodachi_head"), new ItemStack(KODACHI_HEAD), new Object[] {"w ", "ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_nodachi_head"), new ResourceLocation("nodachi_head"), new ItemStack(NODACHI_HEAD), new Object[] {"w", "w", "w", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_sabre_head"), new ResourceLocation("sabre_head"), new ItemStack(SABRE_HEAD), new Object[] {" w", "w ", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_makhaira_head"), new ResourceLocation("makhaira_head"), new ItemStack(MAKHAIRA_HEAD), new Object[] {" w", "ww", "ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_spear_head"), new ResourceLocation("spear_head"), new ItemStack(SPEAR_HEAD), new Object[] {" w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 	}
 	
 	//Items
@@ -44,9 +64,26 @@ public class ItemInit {
 	public static Item INGOT_CRYSTALLITE;
 	public static Item INGOT_DUSKSTEEL;
 	
-	public static final Item CRYSTAL = new ItemBase("crystal");
-	public static final Item SHADOW = new ItemBase("shadow");
-	public static final Item SHADOW_BLOB = new ItemBase("shadow_blob");
+	public static Item CRYSTAL;
+	public static Item SHADOW;
+	public static Item SHADOW_BLOB;
+	
+	public static final Item DAGGER_HEAD = new ItemBase("dagger_head");
+	public static final Item KABUTOWARI_HEAD = new ItemBase("kabutowari_head");
+	public static final Item RAPIER_HEAD = new ItemBase("rapier_head");
+	public static final Item TALWAR_HEAD = new ItemBase("talwar_head");
+	public static final Item MACE_HEAD = new ItemBase("mace_head");
+	public static final Item CLEAVER_HEAD = new ItemBase("cleaver_head");
+	public static final Item STAFF_HEAD = new ItemBase("staff_head");
+	public static final Item LONGSWORD_HEAD = new ItemBase("longsword_head");
+	public static final Item BATTLEAXE_HEAD = new ItemBase("battleaxe_head");
+	public static final Item ZWEIHANDER_HEAD = new ItemBase("zweihander_head");
+	public static final Item KODACHI_HEAD = new ItemBase("kodachi_head");
+	public static final Item NODACHI_HEAD = new ItemBase("nodachi_head");
+	public static final Item SABRE_HEAD = new ItemBase("sabre_head");
+	public static final Item MAKHAIRA_HEAD = new ItemBase("makhaira_head");
+	public static final Item SPEAR_HEAD = new ItemBase("spear_head");
+	public static final Item LONG_WEAPON_HANDLE = new ItemBase("long_weapon_handle");
 	
 	/*
 	 * Materials
@@ -64,7 +101,7 @@ public class ItemInit {
      * IRON("iron", 15, new int[]{2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F),
      * DIAMOND("diamond", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F);
      * 
-     * (String name, String textureName, int maxDamageFactorIn, int[] damageReductionAmountArrayIn, int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn)
+     * (String name, String textureName, int maxDamageFactorIn, int[] damageReductionAmountArrayIn(boots, legs, chest, head), int enchantabilityIn, SoundEvent soundEventIn, float toughnessIn)
 	 */
 	
 	//Mats Declarations
@@ -432,6 +469,11 @@ public class ItemInit {
 	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2");
 	
 	//Armor
+	public static Item HELMET_IRON;
+	public static Item CHESTPLATE_IRON;
+	public static Item LEGGINGS_IRON;
+	public static Item BOOTS_IRON;
+	
 	public static Item HELMET_KOBOLD;
 	public static Item CHESTPLATE_KOBOLD;
 	public static Item LEGGINGS_KOBOLD;
@@ -749,6 +791,11 @@ public class ItemInit {
 	}
 	
 	public static void enableArmors() {
+		HELMET_IRON = new ArmorBonusesBase("minecraft:iron_helmet", ArmorMaterial.IRON, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+		CHESTPLATE_STEEL = new ArmorBonusesBase("minecraft:iron_chestplate", ArmorMaterial.IRON, 1, EntityEquipmentSlot.CHEST, 2.0D, 1.875D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+		LEGGINGS_STEEL = new ArmorBonusesBase("minecraft:iron_leggings", ArmorMaterial.IRON, 2, EntityEquipmentSlot.LEGS, 2.0D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+		BOOTS_STEEL = new ArmorBonusesBase("minecraft:iron_boots", ArmorMaterial.IRON, 1, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+		
 		HELMET_COPPER = new ArmorBonusesBase("helmet_copper", AMAT_COPPER, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
 		CHESTPLATE_COPPER = new ArmorBonusesBase("chestplate_copper", AMAT_COPPER, 1, EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3).setMaxStackSize(1);
 		LEGGINGS_COPPER = new ArmorBonusesBase("leggings_copper", AMAT_COPPER, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00941253012D, 3).setMaxStackSize(1);
@@ -784,18 +831,22 @@ public class ItemInit {
 			CHESTPLATE_KOBOLD = new ArmorBonusesBase("chestplate_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.CHEST, 3.125D, 1.228D, -0.00767681028D, 3).setMaxStackSize(1);
 			LEGGINGS_KOBOLD = new ArmorBonusesBase("leggings_kobold", AMAT_KOBOLD, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00767681028D, 3).setMaxStackSize(1);
 			BOOTS_KOBOLD = new ArmorBonusesBase("boots_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.FEET, 2.5D, -0.00160000512D, 3).setMaxStackSize(1);
+			
 			HELMET_SHADOW_PLATINUM = new ArmorBonusesBase("helmet_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.HEAD, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
 			CHESTPLATE_SHADOW_PLATINUM = new ArmorBonusesBase("chestplate_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.CHEST, 5.75D, 5.042D, -0.01800630762D, 6).setMaxStackSize(1);
 			LEGGINGS_SHADOW_PLATINUM = new ArmorBonusesBase("leggings_shadow_platinum", AMAT_SHADOW_PLATINUM, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.01800630762D, 6).setMaxStackSize(1);
 			BOOTS_SHADOW_PLATINUM = new ArmorBonusesBase("boots_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.FEET, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
+			
 			HELMET_FROST_STEEL = new ArmorBonusesBase("helmet_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.HEAD, 5.0D, -0.00200179212D, 6).setMaxStackSize(1);
 			CHESTPLATE_FROST_STEEL = new ArmorBonusesBase("chestplate_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.CHEST, 5.75D, 2.802D, -0.01000717488D, 6).setMaxStackSize(1);
 			LEGGINGS_FROST_STEEL = new ArmorBonusesBase("leggings_frost_steel", AMAT_FROST_STEEL, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.01000717488D, 6).setMaxStackSize(1);
 			BOOTS_FROST_STEEL = new ArmorBonusesBase("boots_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.FEET, 5.0D, -00.00200179212D, 6).setMaxStackSize(1);
+			
 			HELMET_CRYSTALLITE = new ArmorBonusesBase("helmet_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.HEAD, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
 			CHESTPLATE_CRYSTALLITE = new ArmorBonusesBase("chestplate_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.CHEST, 7.0D, 4.486D, -0.01201610988D, 7).setMaxStackSize(1);
 			LEGGINGS_CRYSTALLITE = new ArmorBonusesBase("leggings_crystallite", AMAT_CRYSTALLITE, 2, EntityEquipmentSlot.LEGS, 7.0D, -0.01201610988D, 7).setMaxStackSize(1);
 			BOOTS_CRYSTALLITE = new ArmorBonusesBase("boots_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.FEET, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
+			
 			HELMET_DUSKSTEEL = new ArmorBonusesBase("helmet_dusksteel", AMAT_DUSKSTEEL, 1, EntityEquipmentSlot.HEAD, 7.25D, -0.00180089862D, 8).setMaxStackSize(1);
 			CHESTPLATE_DUSKSTEEL = new ArmorBonusesBase("chestplate_dusksteel", AMAT_DUSKSTEEL, 1, EntityEquipmentSlot.CHEST, 7.75D, 5.042D, -0.00900270738D, 8).setMaxStackSize(1);
 			LEGGINGS_DUSKSTEEL = new ArmorBonusesBase("leggings_dusksteel", AMAT_DUSKSTEEL, 2, EntityEquipmentSlot.LEGS, 7.75D, -0.00900270738D, 8).setMaxStackSize(1);
@@ -804,6 +855,9 @@ public class ItemInit {
 	}
 	
 	public static void createImaginaries() {
+		CRYSTAL = new ItemBase("crystal");
+		SHADOW = new ItemBase("shadow");
+		SHADOW_BLOB = new ItemBase("shadow_blob");
 		INGOT_KOBOLD = new ItemBase("ingot_kobold");
 		INGOT_SHADOW_PLATINUM = new ItemBase("ingot_shadow_platinum");
 		INGOT_FROST_STEEL = new ItemBase("ingot_frost_steel");
