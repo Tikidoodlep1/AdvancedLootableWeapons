@@ -65,6 +65,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/furnace_minecart": {
+    "criteria": {
+      "has_minecart": "2021-08-12 23:18:56 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/tools/iron_pickaxe": {
     "criteria": {
       "has_iron_ingot": "2021-06-15 12:40:32 -0700"
@@ -134,6 +140,12 @@
   "minecraft:story/shiny_gear": {
     "criteria": {
       "diamond_helmet": "2021-08-05 12:03:21 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/hopper_minecart": {
+    "criteria": {
+      "has_minecart": "2021-08-12 23:18:56 -0700"
     },
     "done": true
   },
@@ -242,6 +254,18 @@
   "minecraft:recipes/food/cake": {
     "criteria": {
       "has_egg": "2021-07-27 17:48:05 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/detector_rail": {
+    "criteria": {
+      "has_rail": "2021-08-12 23:18:59 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/golden_rail": {
+    "criteria": {
+      "has_rail": "2021-08-12 23:18:59 -0700"
     },
     "done": true
   },
@@ -506,6 +530,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/chest_minecart": {
+    "criteria": {
+      "has_minecart": "2021-08-12 23:18:56 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/decorations/armor_stand": {
     "criteria": {
       "has_stone_slab": "2021-08-05 11:54:17 -0700"
@@ -650,6 +680,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/activator_rail": {
+    "criteria": {
+      "has_rail": "2021-08-12 23:18:59 -0700"
+    },
+    "done": true
+  },
   "minecraft:adventure/kill_all_mobs": {
     "criteria": {
       "zombie": "2021-06-14 14:37:48 -0700",
@@ -673,6 +709,12 @@
   "minecraft:recipes/building_blocks/stonebrick": {
     "criteria": {
       "has_stone": "2021-08-05 22:56:55 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/tnt_minecart": {
+    "criteria": {
+      "has_minecart": "2021-08-12 23:18:56 -0700"
     },
     "done": true
   },
@@ -703,6 +745,12 @@
   "minecraft:recipes/redstone/dark_oak_fence_gate": {
     "criteria": {
       "has_planks": "2021-08-07 19:58:59 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/rail": {
+    "criteria": {
+      "has_minecart": "2021-08-12 23:18:56 -0700"
     },
     "done": true
   },

@@ -11,6 +11,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -79,7 +80,7 @@ public class Alw {
 	}
 	
 	@SubscribeEvent
-	public void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-		proxy.onItemCrafted(event);
+	public void onLivingDrops(LivingDropsEvent event) {
+		proxy.onEntityDrops(event);
 	}
 }
