@@ -1,14 +1,9 @@
 package com.tiki.advancedlootableweapons.compat.jei.anvilForging;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
-import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
-import com.tiki.advancedlootableweapons.compat.jei.alloyFurnace.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
 
@@ -21,11 +16,10 @@ import net.minecraftforge.oredict.OreDictionary;
 public class AnvilForgingRecipeMaker {
 
 	public static List<AnvilForgingRecipe> getRecipes(IJeiHelpers helpers){
-		IStackHelper stackHelper = helpers.getStackHelper();
 		ForgeWeaponRecipes instance = new ForgeWeaponRecipes();
 		Table<Integer, ItemStack, Multimap<ItemStack, ItemStack>> recipes = instance.getJeiCraftingList();
 		List<AnvilForgingRecipe> jeiRecipes = Lists.newArrayList();
-		ItemStack input1 = null, input2 = null, output = null;
+		ItemStack input1 = null, input2 = null, output = null, tempItemStack = null;
 		NonNullList<ItemStack> input1List = NonNullList.<ItemStack>create();
 		NonNullList<ItemStack> input2List = NonNullList.<ItemStack>create();
 		Multimap<ItemStack, ItemStack> tempStack;
@@ -47,16 +41,22 @@ public class AnvilForgingRecipeMaker {
 						output = stack3;
 						if(!(input1List.isEmpty())) {
 							for(ItemStack temp1 : input1List) {
-								inputs = Lists.newArrayList(temp1, input2);
-								AnvilForgingRecipe recipe = new AnvilForgingRecipe(inputs, output);
-								jeiRecipes.add(recipe);
+								if(tempItemStack == null || !(temp1.isItemEqualIgnoreDurability(tempItemStack))) {
+									tempItemStack = temp1;
+									inputs = Lists.newArrayList(temp1, input2);
+									AnvilForgingRecipe recipe = new AnvilForgingRecipe(inputs, output);
+									jeiRecipes.add(recipe);
+								}
 							}
 						}
 						if(!(input2List.isEmpty())) {
 							for(ItemStack temp2 : input2List) {
-								inputs = Lists.newArrayList(input1, temp2);
-								AnvilForgingRecipe recipe = new AnvilForgingRecipe(inputs, output);
-								jeiRecipes.add(recipe);
+								if(tempItemStack == null || !(temp2.isItemEqualIgnoreDurability(tempItemStack))) {
+									tempItemStack = temp2;
+									inputs = Lists.newArrayList(input1, temp2);
+									AnvilForgingRecipe recipe = new AnvilForgingRecipe(inputs, output);
+									jeiRecipes.add(recipe);
+								}
 							}
 						}
 						if(input1List.isEmpty() && input2List.isEmpty()) {

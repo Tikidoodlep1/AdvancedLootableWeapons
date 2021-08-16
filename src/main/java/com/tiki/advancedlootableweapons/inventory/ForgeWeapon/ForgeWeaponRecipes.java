@@ -7,6 +7,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
@@ -53,22 +54,22 @@ public class ForgeWeaponRecipes {
 	private Map<ItemStack, Integer> expValues = Maps.<ItemStack, Integer>newHashMap();
 	
 	public ForgeWeaponRecipes() {
-		registerNewRecipe(new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "dagger", 2);
-		registerNewRecipe(new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "kabutowari", 5);
-		registerNewRecipe(new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "rapier", 4);
-		registerNewRecipe(new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "talwar", 3);
-		registerNewRecipe(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "cleaver", 1);
-		registerNewRecipe(new ItemStack(ItemInit.MACE_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "mace", 3);
-		registerNewRecipe(new ItemStack(ItemInit.STAFF_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "staff", 6);
-		registerNewRecipe(new ItemStack(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "longsword", 4);
-		registerNewRecipe(new ItemStack(ItemInit.KODACHI_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "kodachi", 4);
-		registerNewRecipe(new ItemStack(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "battleaxe", 6);
-		registerNewRecipe(new ItemStack(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "zweihander", 6);
-		registerNewRecipe(new ItemStack(ItemInit.NODACHI_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "nodachi", 4);
-		registerNewRecipe(new ItemStack(ItemInit.SABRE_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "sabre", 4);
-		registerNewRecipe(new ItemStack(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "makhaira", 3);
-		registerNewRecipe(new ItemStack(ItemInit.SPEAR_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.LONG_TOOL_ROD), "spear", 3);
-		registerNewRecipe(new ItemStack(ItemInit.HOT_TOOL_ROD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "handle", 2);
+		registerNewRecipe(new ItemStack(ItemInit.DAGGER_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "dagger", ConfigHandler.GLOBAL_DAGGER_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "kabutowari", ConfigHandler.GLOBAL_KABUTOWARI_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.RAPIER_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "rapier", ConfigHandler.GLOBAL_RAPIER_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.TALWAR_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "talwar", ConfigHandler.GLOBAL_TALWAR_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "cleaver", ConfigHandler.GLOBAL_CLEAVER_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.MACE_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "mace", ConfigHandler.GLOBAL_MACE_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.STAFF_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "staff", ConfigHandler.GLOBAL_STAFF_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "longsword", ConfigHandler.GLOBAL_LONGSWORD_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.KODACHI_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "kodachi", ConfigHandler.GLOBAL_KODACHI_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "battleaxe", ConfigHandler.GLOBAL_BATTLEAXE_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5), new ItemStack(ItemInit.LONG_TOOL_ROD), "zweihander", ConfigHandler.GLOBAL_ZWEIHANDER_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.NODACHI_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "nodachi", ConfigHandler.GLOBAL_NODACHI_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.SABRE_HOT_TOOL_HEAD_4), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "sabre", ConfigHandler.GLOBAL_SABRE_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "makhaira", ConfigHandler.GLOBAL_MAKHAIRA_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.SPEAR_HOT_TOOL_HEAD_2), new ItemStack(ItemInit.LONG_TOOL_ROD), "spear", ConfigHandler.GLOBAL_SPEAR_CRAFTING_EXP);
+		registerNewRecipe(new ItemStack(ItemInit.HOT_TOOL_ROD_2), new ItemStack(ItemInit.HOT_TOOL_ROD_2), "handle", ConfigHandler.GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP);
 		registerJeiHotToolHeadRecipes();
 	}
 	
@@ -98,17 +99,12 @@ public class ForgeWeaponRecipes {
 		for(ItemStack stack1 : recipe.rowKeySet()) {
 			if(input1.getItem() instanceof ItemHotToolHead && input1.isItemEqualIgnoreDurability(stack1)) {
 				String mat = material;
-				//System.out.println("Material = " + mat);
 				for(ItemStack stack2 : recipe.columnKeySet()) {
 					if(input2.isItemEqualIgnoreDurability(stack2)) {
-						//System.out.println("1: " + stack1 + "2: " + stack2);
 						if(recipe.contains(stack1, stack2)) {
 							recipeMap = recipe.get(stack1, stack2);
-							//for(Entry<String, ItemStack> type : recipe.get(stack1, stack2).entrySet()) {
 							for(String type : recipeMap.keySet()) {
-								//System.out.println("Type = " + type + ", " + recipeMap.get(type));
 								if(mat.equalsIgnoreCase(type)) {
-									//System.out.println("return value is: " + recipeMap.get(type));
 									return recipeMap.get(type);
 								}
 							}
@@ -118,6 +114,16 @@ public class ForgeWeaponRecipes {
 			}
 		}
 		return ItemStack.EMPTY;
+	}
+	
+	public int getExpValue(ItemStack stack) {
+		Map<ItemStack, Integer> exp = getExpValues();
+		for(ItemStack compStack : exp.keySet()) {
+			if(compStack.isItemEqualIgnoreDurability(stack)) {
+				return exp.get(compStack);
+			}
+		}
+		return 0;
 	}
 	
 	public Map<ItemStack, Integer> getExpValues(){
@@ -142,7 +148,6 @@ public class ForgeWeaponRecipes {
 	private void coverMaterials(ItemStack input1, ItemStack input2, String type, int exp) {
 		switch(type) {
 		case "dagger":
-			//daggerMaterials.put("Wood", new ItemStack(ItemInit.DAGGER_WOOD));
 			daggerMaterials.put("Iron", new ItemStack(ItemInit.DAGGER_IRON));
 			daggerMaterials.put("Kobold", new ItemStack(ItemInit.DAGGER_KOBOLD));
 			daggerMaterials.put("Copper", new ItemStack(ItemInit.DAGGER_COPPER));
@@ -163,7 +168,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, daggerJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.DAGGER_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.DAGGER_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.DAGGER_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.DAGGER_COPPER), exp+1);
@@ -178,7 +182,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.DAGGER_DUSKSTEEL), exp+6);
 			break;
 		case "kabutowari":
-			//kabutowariMaterials.put("Wood", new ItemStack(ItemInit.KABUTOWARI_WOOD));
 			kabutowariMaterials.put("Iron", new ItemStack(ItemInit.KABUTOWARI_IRON));
 			kabutowariMaterials.put("Kobold", new ItemStack(ItemInit.KABUTOWARI_KOBOLD));
 			kabutowariMaterials.put("Copper", new ItemStack(ItemInit.KABUTOWARI_COPPER));
@@ -199,7 +202,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, kabutowariJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.KABUTOWARI_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.KABUTOWARI_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.KABUTOWARI_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.KABUTOWARI_COPPER), exp+1);
@@ -214,7 +216,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.KABUTOWARI_DUSKSTEEL), exp+6);
 			break;
 		case "rapier":
-			//rapierMaterials.put("Wood", new ItemStack(ItemInit.RAPIER_WOOD));
 			rapierMaterials.put("Iron", new ItemStack(ItemInit.RAPIER_IRON));
 			rapierMaterials.put("Kobold", new ItemStack(ItemInit.RAPIER_KOBOLD));
 			rapierMaterials.put("Copper", new ItemStack(ItemInit.RAPIER_COPPER));
@@ -235,7 +236,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, rapierJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.RAPIER_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.RAPIER_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.RAPIER_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.RAPIER_COPPER), exp+1);
@@ -250,7 +250,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.RAPIER_DUSKSTEEL), exp+6);
 			break;
 		case "talwar":
-			//talwarMaterials.put("Wood", new ItemStack(ItemInit.TALWAR_WOOD));
 			talwarMaterials.put("Iron", new ItemStack(ItemInit.TALWAR_IRON));
 			talwarMaterials.put("Kobold", new ItemStack(ItemInit.TALWAR_KOBOLD));
 			talwarMaterials.put("Copper", new ItemStack(ItemInit.TALWAR_COPPER));
@@ -271,7 +270,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, talwarJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.TALWAR_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.TALWAR_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.TALWAR_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.TALWAR_COPPER), exp+1);
@@ -286,7 +284,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.TALWAR_DUSKSTEEL), exp+6);
 			break;
 		case "cleaver":
-			//cleaverMaterials.put("Wood", new ItemStack(ItemInit.CLEAVER_WOOD));
 			cleaverMaterials.put("Iron", new ItemStack(ItemInit.CLEAVER_IRON));
 			cleaverMaterials.put("Kobold", new ItemStack(ItemInit.CLEAVER_KOBOLD));
 			cleaverMaterials.put("Copper", new ItemStack(ItemInit.CLEAVER_COPPER));
@@ -306,9 +303,7 @@ public class ForgeWeaponRecipes {
 			for(int i = 0; i < 13; i++) {
 				jeiRecipes.put(i, input1, cleaverJeiMap);
 			}
-			
-			//expValues.put(new ItemStack(ItemInit.CLEAVER_WOOD), exp);
-			expValues.put(new ItemStack(ItemInit.CLEAVER_IRON), exp);
+						expValues.put(new ItemStack(ItemInit.CLEAVER_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.CLEAVER_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.CLEAVER_COPPER), exp+1);
 			expValues.put(new ItemStack(ItemInit.CLEAVER_SILVER), exp+2);
@@ -322,7 +317,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.CLEAVER_DUSKSTEEL), exp+6);
 			break;
 		case "mace":
-			//maceMaterials.put("Wood", new ItemStack(ItemInit.MACE_WOOD));
 			maceMaterials.put("Iron", new ItemStack(ItemInit.MACE_IRON));
 			maceMaterials.put("Kobold", new ItemStack(ItemInit.MACE_KOBOLD));
 			maceMaterials.put("Copper", new ItemStack(ItemInit.MACE_COPPER));
@@ -343,7 +337,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, maceJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.MACE_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.MACE_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.MACE_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.MACE_COPPER), exp+1);
@@ -358,7 +351,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.MACE_DUSKSTEEL), exp+6);
 			break;
 		case "staff":
-			//staffMaterials.put("Wood", new ItemStack(ItemInit.STAFF_WOOD));
 			staffMaterials.put("Iron", new ItemStack(ItemInit.STAFF_IRON));
 			staffMaterials.put("Kobold", new ItemStack(ItemInit.STAFF_KOBOLD));
 			staffMaterials.put("Copper", new ItemStack(ItemInit.STAFF_COPPER));
@@ -379,7 +371,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, staffJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.STAFF_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.STAFF_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.STAFF_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.STAFF_COPPER), exp+1);
@@ -394,7 +385,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.STAFF_DUSKSTEEL), exp+6);
 			break;
 		case "longsword":
-			//longswordMaterials.put("Wood", new ItemStack(ItemInit.LONGSWORD_WOOD));
 			longswordMaterials.put("Iron", new ItemStack(ItemInit.LONGSWORD_IRON));
 			longswordMaterials.put("Kobold", new ItemStack(ItemInit.LONGSWORD_KOBOLD));
 			longswordMaterials.put("Copper", new ItemStack(ItemInit.LONGSWORD_COPPER));
@@ -415,7 +405,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, longswordJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.LONGSWORD_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.LONGSWORD_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.LONGSWORD_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.LONGSWORD_COPPER), exp+1);
@@ -430,7 +419,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.LONGSWORD_DUSKSTEEL), exp+6);
 			break;
 		case "kodachi":
-			//kodachiMaterials.put("Wood", new ItemStack(ItemInit.KODACHI_WOOD));
 			kodachiMaterials.put("Iron", new ItemStack(ItemInit.KODACHI_IRON));
 			kodachiMaterials.put("Kobold", new ItemStack(ItemInit.KODACHI_KOBOLD));
 			kodachiMaterials.put("Copper", new ItemStack(ItemInit.KODACHI_COPPER));
@@ -451,7 +439,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, kodachiJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.KODACHI_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.KODACHI_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.KODACHI_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.KODACHI_COPPER), exp+1);
@@ -466,7 +453,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.KODACHI_DUSKSTEEL), exp+6);
 			break;
 		case "battleaxe":
-			//battleaxeMaterials.put("Wood", new ItemStack(ItemInit.BATTLEAXE_WOOD));
 			battleaxeMaterials.put("Iron", new ItemStack(ItemInit.BATTLEAXE_IRON));
 			battleaxeMaterials.put("Kobold", new ItemStack(ItemInit.BATTLEAXE_KOBOLD));
 			battleaxeMaterials.put("Copper", new ItemStack(ItemInit.BATTLEAXE_COPPER));
@@ -487,7 +473,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, battleaxeJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.BATTLEAXE_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.BATTLEAXE_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.BATTLEAXE_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.BATTLEAXE_COPPER), exp+1);
@@ -502,7 +487,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.BATTLEAXE_DUSKSTEEL), exp+6);
 			break;
 		case "zweihander":
-			//zweihanderMaterials.put("Wood", new ItemStack(ItemInit.ZWEIHANDER_WOOD));
 			zweihanderMaterials.put("Iron", new ItemStack(ItemInit.ZWEIHANDER_IRON));
 			zweihanderMaterials.put("Kobold", new ItemStack(ItemInit.ZWEIHANDER_KOBOLD));
 			zweihanderMaterials.put("Copper", new ItemStack(ItemInit.ZWEIHANDER_COPPER));
@@ -523,7 +507,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, zweihanderJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.ZWEIHANDER_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.ZWEIHANDER_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.ZWEIHANDER_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.ZWEIHANDER_COPPER), exp+1);
@@ -538,7 +521,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.ZWEIHANDER_DUSKSTEEL), exp+6);
 			break;
 		case "nodachi":
-			//nodachiMaterials.put("Wood", new ItemStack(ItemInit.NODACHI_WOOD));
 			nodachiMaterials.put("Iron", new ItemStack(ItemInit.NODACHI_IRON));
 			nodachiMaterials.put("Kobold", new ItemStack(ItemInit.NODACHI_KOBOLD));
 			nodachiMaterials.put("Copper", new ItemStack(ItemInit.NODACHI_COPPER));
@@ -559,7 +541,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, nodachiJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.NODACHI_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.NODACHI_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.NODACHI_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.NODACHI_COPPER), exp+1);
@@ -574,7 +555,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.NODACHI_DUSKSTEEL), exp+6);
 			break;
 		case "sabre":
-			//sabreMaterials.put("Wood", new ItemStack(ItemInit.SABRE_WOOD));
 			sabreMaterials.put("Iron", new ItemStack(ItemInit.SABRE_IRON));
 			sabreMaterials.put("Kobold", new ItemStack(ItemInit.SABRE_KOBOLD));
 			sabreMaterials.put("Copper", new ItemStack(ItemInit.SABRE_COPPER));
@@ -595,7 +575,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, sabreJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.SABRE_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.SABRE_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.SABRE_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.SABRE_COPPER), exp+1);
@@ -610,7 +589,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.SABRE_DUSKSTEEL), exp+6);
 			break;
 		case "makhaira":
-			//makhairaMaterials.put("Wood", new ItemStack(ItemInit.MAKHAIRA_WOOD));
 			makhairaMaterials.put("Iron", new ItemStack(ItemInit.MAKHAIRA_IRON));
 			makhairaMaterials.put("Kobold", new ItemStack(ItemInit.MAKHAIRA_KOBOLD));
 			makhairaMaterials.put("Copper", new ItemStack(ItemInit.MAKHAIRA_COPPER));
@@ -631,7 +609,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, makhairaJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.MAKHAIRA_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.MAKHAIRA_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.MAKHAIRA_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.MAKHAIRA_COPPER), exp+1);
@@ -646,7 +623,6 @@ public class ForgeWeaponRecipes {
 			expValues.put(new ItemStack(ItemInit.MAKHAIRA_DUSKSTEEL), exp+6);
 			break;
 		case "spear":
-			//spearMaterials.put("Wood", new ItemStack(ItemInit.SPEAR_WOOD));
 			spearMaterials.put("Iron", new ItemStack(ItemInit.SPEAR_IRON));
 			spearMaterials.put("Kobold", new ItemStack(ItemInit.SPEAR_KOBOLD));
 			spearMaterials.put("Copper", new ItemStack(ItemInit.SPEAR_COPPER));
@@ -667,7 +643,6 @@ public class ForgeWeaponRecipes {
 				jeiRecipes.put(i, input1, spearJeiMap);
 			}
 			
-			//expValues.put(new ItemStack(ItemInit.SPEAR_WOOD), exp);
 			expValues.put(new ItemStack(ItemInit.SPEAR_IRON), exp);
 			expValues.put(new ItemStack(ItemInit.SPEAR_KOBOLD), exp+1);
 			expValues.put(new ItemStack(ItemInit.SPEAR_COPPER), exp+1);

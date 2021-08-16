@@ -30,6 +30,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_SABRES = true;
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
+	public static boolean OVERRIDE_VANILLA_ARMORS = true;
 	
 	public static float GLOBAL_DAGGER_BASE_DAMAGE = 2.0F;
 	public static float GLOBAL_KABUTOWARI_BASE_DAMAGE = 2.25F;
@@ -46,6 +47,7 @@ public class ConfigHandler {
 	public static float GLOBAL_NODACHI_BASE_DAMAGE = 4.65F;
 	public static float GLOBAL_SABRE_BASE_DAMAGE = 2.75F;
 	public static float GLOBAL_MAKHAIRA_BASE_DAMAGE = 3.0F;
+	
 	public static float GLOBAL_DAGGER_ATTACK_SPEED = 3.2F;
 	public static float GLOBAL_KABUTOWARI_ATTACK_SPEED = 2.4F;
 	public static float GLOBAL_RAPIER_ATTACK_SPEED = 3.6F;
@@ -61,6 +63,24 @@ public class ConfigHandler {
 	public static float GLOBAL_SABRE_ATTACK_SPEED = 2.4F;
 	public static float GLOBAL_MAKHAIRA_ATTACK_SPEED = 2.2F;
 	public static float GLOBAL_SPEAR_ATTACK_SPEED = 1.0F;
+	
+	public static int GLOBAL_DAGGER_CRAFTING_EXP = 2;
+	public static int GLOBAL_KABUTOWARI_CRAFTING_EXP = 5;
+	public static int GLOBAL_RAPIER_CRAFTING_EXP = 4;
+	public static int GLOBAL_TALWAR_CRAFTING_EXP = 3;
+	public static int GLOBAL_CLEAVER_CRAFTING_EXP = 1;
+	public static int GLOBAL_MACE_CRAFTING_EXP = 3;
+	public static int GLOBAL_STAFF_CRAFTING_EXP = 6;
+	public static int GLOBAL_LONGSWORD_CRAFTING_EXP = 4;
+	public static int GLOBAL_BATTLEAXE_CRAFTING_EXP = 6;
+	public static int GLOBAL_ZWEIHANDER_CRAFTING_EXP = 6;
+	public static int GLOBAL_KODACHI_CRAFTING_EXP = 2;
+	public static int GLOBAL_NODACHI_CRAFTING_EXP = 4;
+	public static int GLOBAL_SABRE_CRAFTING_EXP = 4;
+	public static int GLOBAL_MAKHAIRA_CRAFTING_EXP = 3;
+	public static int GLOBAL_SPEAR_CRAFTING_EXP = 3;
+	public static int GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = 4;
+	
 	
 	public static boolean USE_ARMOR_WEIGHT = true;
 	public static boolean USE_ARMOR_BONUS_HEALTH = true;
@@ -148,7 +168,7 @@ public class ConfigHandler {
 		GLOBAL_SABRE_BASE_DAMAGE = config.getFloat("Global Sabre Base Damage", category, 3.0F, 0.0F, 100.0F, "Will only work if \"Enable Sabres\" is true. This modifies the damage of all types of sabres, regardless of material.");
 		GLOBAL_MAKHAIRA_BASE_DAMAGE = config.getFloat("Global Makhaira Base Damage", category, 2.75F, 0.0F, 100.0F, "Will only work if \"Enable Makhairas\" is true. This modifies the damage of all types of makhairas, regardless of material.");
 		
-		GLOBAL_DAGGER_ATTACK_SPEED = config.getFloat("Global Dagger Attack Speed", category, 3.2F, 0.0F, 6.0F, "Will only work if \\\"Enable Daggers\\\" is true. This modifies the attack speed of all types of daggers, regardless of material.");
+		GLOBAL_DAGGER_ATTACK_SPEED = config.getFloat("Global Dagger Attack Speed", category, 3.2F, 0.0F, 6.0F, "Will only work if \"Enable Daggers\" is true. This modifies the attack speed of all types of daggers, regardless of material.");
 		GLOBAL_KABUTOWARI_ATTACK_SPEED = config.getFloat("Global Kabutowari Attack Speed", category, 2.4F, 0.0F, 6.0F, "Will only work if \"Enable Kabutowaris\" is true. This modifies the attack speed of all types of kabutowaris, regardless of material.");
 		GLOBAL_RAPIER_ATTACK_SPEED = config.getFloat("Global Rapier Attack Speed", category, 3.6F, 0.0F, 6.0F, "Will only work if \"Enable Rapiers\" is true. This modifies the attack speed of all types of rapiers, regardless of material.");
 		GLOBAL_TALWAR_ATTACK_SPEED = config.getFloat("Global Talwar Attack Speed", category, 1.8F, 0.0F, 6.0F, "Will only work if \"Enable Talwars\" is true. This modifies the attack speed of all types of talwars, regardless of material.");
@@ -164,12 +184,30 @@ public class ConfigHandler {
 		GLOBAL_SABRE_ATTACK_SPEED = config.getFloat("Global Sabre Attack Speed", category, 2.4F, 0.0F, 6.0F, "Will only work if \"Enable Sabres\" is true. This modifies the attack speed of all types of sabres, regardless of material.");
 		GLOBAL_MAKHAIRA_ATTACK_SPEED = config.getFloat("Global Makhaira Attack Speed", category, 2.2F, 0.0F, 6.0F, "Will only work if \"Enable Makhairas\" is true. This modifies the attack speed of all types of makhairas, regardless of material.");
 		
+		GLOBAL_DAGGER_CRAFTING_EXP = config.getInt("Global Dagger Crafting Exp", category, 2, 0, 100, "Will only work if \"Enable Daggers\" is true. This modifies the exp you get from crafting daggers.");
+		GLOBAL_KABUTOWARI_CRAFTING_EXP = config.getInt("Global Kabutowari Crafting Exp", category, 5, 0, 100, "Will only work if \"Enable Kabutowaris\" is true. This modifies the exp you get from crafting kabutowaris.");
+		GLOBAL_RAPIER_CRAFTING_EXP = config.getInt("Global Rapier Crafting Exp", category, 4, 0, 100, "Will only work if \"Enable Rapiers\" is true. This modifies the exp you get from crafting rapiers.");
+		GLOBAL_TALWAR_CRAFTING_EXP = config.getInt("Global Talwars Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable talwars\" is true. This modifies the exp you get from crafting talwars.");
+		GLOBAL_CLEAVER_CRAFTING_EXP = config.getInt("Global Cleaver Crafting Exp", category, 1, 0, 100, "Will only work if \"Enable Cleavers\" is true. This modifies the exp you get from crafting cleavers.");
+		GLOBAL_MACE_CRAFTING_EXP = config.getInt("Global Mace Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable Maces\" is true. This modifies the exp you get from crafting maces.");
+		GLOBAL_STAFF_CRAFTING_EXP = config.getInt("Global Staff Crafting Exp", category, 6, 0, 100, "Will only work if \"Enable Staffs\" is true. This modifies the exp you get from crafting staffs.");
+		GLOBAL_LONGSWORD_CRAFTING_EXP = config.getInt("Global Longsword Crafting Exp", category, 4, 0, 100, "Will only work if \"Enable Longswords\" is true. This modifies the exp you get from crafting longswords.");
+		GLOBAL_BATTLEAXE_CRAFTING_EXP = config.getInt("Global Battleaxe Crafting Exp", category, 6, 0, 100, "Will only work if \"Enable Battleaxes\" is true. This modifies the exp you get from crafting battleaxes.");
+		GLOBAL_ZWEIHANDER_CRAFTING_EXP = config.getInt("Global Zweihanders Crafting Exp", category, 6, 0, 100, "Will only work if \"Enable Zweihanders\" is true. This modifies the exp you get from crafting zweihanders.");
+		GLOBAL_KODACHI_CRAFTING_EXP = config.getInt("Global Kodachi Crafting Exp", category, 2, 0, 100, "Will only work if \"Enable Kodachis\" is true. This modifies the exp you get from crafting kodachis.");
+		GLOBAL_NODACHI_CRAFTING_EXP = config.getInt("Global Nodachi Crafting Exp", category, 4, 0, 100, "Will only work if \"Enable Nodahcis\" is true. This modifies the exp you get from crafting nodachis.");
+		GLOBAL_SABRE_CRAFTING_EXP = config.getInt("Global Sabre Crafting Exp", category, 4, 0, 100, "Will only work if \"Enable Sabres\" is true. This modifies the exp you get from crafting sabres.");
+		GLOBAL_MAKHAIRA_CRAFTING_EXP = config.getInt("Global Makhaira Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable Makhairas\" is true. This modifies the exp you get from crafting makhairas.");
+		GLOBAL_SPEAR_CRAFTING_EXP = config.getInt("Global Spear Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable Spears\" is true. This modifies the exp you get from crafting spears.");
+		GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = config.getInt("Global Long Weapon Handle Crafting Exp", category, 4, 0, 100, "This modifies the exp you get from crafting long weapon handles.");
+		
 		//**********************************GENERAL MODIFICATION**********************************
 		category = "GENERAL MODIFICATION";
 		config.addCustomCategoryComment(category, "General modifications such as enabling or disabling certain items. || WARNING: DISABLING ITEMS WILL MAKE THEM VANISH IF THEY EXISTED IN ANY WORLD THAT IS LOADED.");
 		USE_CUSTOM_WEAPON_REACH = config.getBoolean("Use Custom Weapon Reach", category, true, "Use the custom set weapon reach. Disabling this will make things like spears have the same reach as things like daggers. (True/False)");
 		
 		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. (True/False)");
+		OVERRIDE_VANILLA_ARMORS = config.getBoolean("Override Vanilla Armors", category, true, "Should vanilla armors be given tiers, weights, bonus health, and bonus damage. (True/False)");
 		ENABLE_DAGGERS = config.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = config.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");
 		ENABLE_RAPIERS = config.getBoolean("Enable Rapiers", category, true, "Enable or disable rapiers in-game. (True/False)");

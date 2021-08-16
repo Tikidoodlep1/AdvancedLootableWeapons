@@ -469,10 +469,25 @@ public class ItemInit {
 	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2");
 	
 	//Armor
+	public static Item HELMET_LEATHER;
+	public static Item CHESTPLATE_LEATHER;
+	public static Item LEGGINGS_LEATHER;
+	public static Item BOOTS_LEATHER;
+	
 	public static Item HELMET_IRON;
 	public static Item CHESTPLATE_IRON;
 	public static Item LEGGINGS_IRON;
 	public static Item BOOTS_IRON;
+	
+	public static Item HELMET_GOLD;
+	public static Item CHESTPLATE_GOLD;
+	public static Item LEGGINGS_GOLD;
+	public static Item BOOTS_GOLD;
+	
+	public static Item HELMET_DIAMOND;
+	public static Item CHESTPLATE_DIAMOND;
+	public static Item LEGGINGS_DIAMOND;
+	public static Item BOOTS_DIAMOND;
 	
 	public static Item HELMET_KOBOLD;
 	public static Item CHESTPLATE_KOBOLD;
@@ -791,11 +806,27 @@ public class ItemInit {
 	}
 	
 	public static void enableArmors() {
-		HELMET_IRON = new ArmorBonusesBase("minecraft:iron_helmet", ArmorMaterial.IRON, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-		CHESTPLATE_STEEL = new ArmorBonusesBase("minecraft:iron_chestplate", ArmorMaterial.IRON, 1, EntityEquipmentSlot.CHEST, 2.0D, 1.875D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-		LEGGINGS_STEEL = new ArmorBonusesBase("minecraft:iron_leggings", ArmorMaterial.IRON, 2, EntityEquipmentSlot.LEGS, 2.0D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-		BOOTS_STEEL = new ArmorBonusesBase("minecraft:iron_boots", ArmorMaterial.IRON, 1, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-		
+		if(ConfigHandler.OVERRIDE_VANILLA_ARMORS) {
+			HELMET_LEATHER = new ArmorBonusesBase("minecraft:leather_helmet", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_LEATHER = new ArmorBonusesBase("minecraft:leather_chestplate", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.CHEST, 0.5D, 0D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_LEATHER = new ArmorBonusesBase("minecraft:leather_leggings", ArmorMaterial.LEATHER, 2, EntityEquipmentSlot.LEGS, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_LEATHER = new ArmorBonusesBase("minecraft:leather_boots", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.FEET, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			
+			HELMET_IRON = new ArmorBonusesBase("minecraft:iron_helmet", ArmorMaterial.IRON, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_IRON = new ArmorBonusesBase("minecraft:iron_chestplate", ArmorMaterial.IRON, 1, EntityEquipmentSlot.CHEST, 2.125D, 1.875D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_IRON = new ArmorBonusesBase("minecraft:iron_leggings", ArmorMaterial.IRON, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_IRON = new ArmorBonusesBase("minecraft:iron_boots", ArmorMaterial.IRON, 1, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			
+			HELMET_GOLD = new ArmorBonusesBase("minecraft:golden_helmet", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_GOLD = new ArmorBonusesBase("minecraft:golden_chestplate", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.CHEST, 2.125D, 4.113D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_GOLD = new ArmorBonusesBase("minecraft:golden_leggings", ArmorMaterial.GOLD, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_GOLD = new ArmorBonusesBase("minecraft:golden_boots", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.FEET, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			
+			HELMET_DIAMOND = new ArmorBonusesBase("minecraft:diamond_helmet", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.HEAD, 3.5D, -0.00160000512D, 4).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_DIAMOND = new ArmorBonusesBase("minecraft:diamond_chestplate", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.CHEST, 4.125D, 1.031D, -0.00467681028D, 4).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_leggings", ArmorMaterial.DIAMOND, 2, EntityEquipmentSlot.LEGS, 4.125D, -0.00467681028D, 4).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_boots", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.FEET, 3.5D, -0.00160000512D, 4).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+		}
 		HELMET_COPPER = new ArmorBonusesBase("helmet_copper", AMAT_COPPER, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
 		CHESTPLATE_COPPER = new ArmorBonusesBase("chestplate_copper", AMAT_COPPER, 1, EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3).setMaxStackSize(1);
 		LEGGINGS_COPPER = new ArmorBonusesBase("leggings_copper", AMAT_COPPER, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00941253012D, 3).setMaxStackSize(1);

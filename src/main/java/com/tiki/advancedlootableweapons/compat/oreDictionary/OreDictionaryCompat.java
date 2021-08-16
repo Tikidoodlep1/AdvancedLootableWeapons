@@ -13,7 +13,6 @@ public class OreDictionaryCompat {
 		OreDictionary.registerOre("ingotBronze", ItemInit.INGOT_BRONZE);
 		OreDictionary.registerOre("ingotPlatinum", ItemInit.INGOT_PLATINUM);
 		OreDictionary.registerOre("ingotSteel", ItemInit.INGOT_STEEL);
-		OreDictionary.registerOre("ingotCopper", ItemInit.SHADOW_BLOB);
 		
 		OreDictionary.registerOre("oreCopper", BlockInit.ore_copper);
 		OreDictionary.registerOre("oreSilver", BlockInit.ore_silver);

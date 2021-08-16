@@ -468,7 +468,10 @@ item.spear_hot_tool_head_2.warm.name=Warm Spear Head(Finished)
 item.spear_hot_tool_head_2.hot.name=Hot Spear Head(Finished)
 
 
+item.minecraft:leather_helmet.name=Leather Helmet
 item.minecraft:iron_helmet.name=Iron Helmet
+item.minecraft:golden_helmet.name=Gold Helmet
+item.minecraft:diamond_helmet.name=Diamond Helmet
 item.helmet_kobold.name=Kobold Steel Helmet
 item.helmet_copper.name=Copper Helmet
 item.helmet_silver.name=Silver Helmet
@@ -482,7 +485,10 @@ item.helmet_crystallite.name=Crystallite Helmet
 item.helmet_dusksteel.name=Dusk Steel Helmet
 
 
+item.minecraft:leather_chestplate.name=Leather Chestplate
 item.minecraft:iron_chestplate.name=Iron Chestplate
+item.minecraft:golden_chestplate.name=Gold Chestplate
+item.minecraft:diamond_chestplate.name=Diamond Chestplate
 item.chestplate_kobold.name=Kobold Steel Chestplate
 item.chestplate_copper.name=Copper Chestplate
 item.chestplate_silver.name=Silver Chestplate
@@ -496,7 +502,10 @@ item.chestplate_crystallite.name=Crystallite Chestplate
 item.chestplate_dusksteel.name=Dusk Steel Chestplate
 
 
+item.minecraft:leather_leggings.name=Leather Leggings
 item.minecraft:iron_leggings.name=Iron Leggings
+item.minecraft:golden_leggings.name=Gold Leggings
+item.minecraft:diamond_leggings.name=Diamond Leggings
 item.leggings_kobold.name=Kobold Steel Leggings
 item.leggings_copper.name=Copper Leggings
 item.leggings_silver.name=Silver Leggings
@@ -510,7 +519,10 @@ item.leggings_crystallite.name=Crystallite Leggings
 item.leggings_dusksteel.name=Dusk Steel Leggings
 
 
+item.minecraft:leather_boots.name=Leather Boots
 item.minecraft:iron_boots.name=Iron Boots
+item.minecraft:golden_boots.name=Gold Boots
+item.minecraft:diamond_boots.name=Diamond Boots
 item.boots_kobold.name=Kobold Steel Boots
 item.boots_copper.name=Copper Boots
 item.boots_silver.name=Silver Boots
