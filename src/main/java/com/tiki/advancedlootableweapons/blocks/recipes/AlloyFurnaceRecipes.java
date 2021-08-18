@@ -6,9 +6,9 @@ import java.util.Map.Entry;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -25,14 +25,15 @@ public class AlloyFurnaceRecipes
 	
 	private AlloyFurnaceRecipes() 
 	{
-		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_TIN), new ItemStack(ItemInit.INGOT_COPPER), new ItemStack(ItemInit.INGOT_BRONZE, 2),4.0F);
-		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.COAL), new ItemStack(ItemInit.INGOT_STEEL), 5.0F);
-		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT), new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemInit.INGOT_STEEL), 5.0F);
+		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(BlockInit.rock_feldspar), new ItemStack(ItemInit.INGOT_KOBOLD, 4), 2.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.NUGGET_TIN), new ItemStack(ItemInit.INGOT_COPPER), new ItemStack(ItemInit.INGOT_BRONZE, 1), 4.0F);
+		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
+		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SILVER), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_FROST_STEEL), 8.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.SHADOW_BLOB), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), 8.0F);
-		addAlloyingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_OBSIDIAN), 9.0F);
-		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.CRYSTAL), new ItemStack(ItemInit.INGOT_CRYSTALLITE, 2), 10.0F);
-		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.SHARD_OBSIDIAN), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_OBSIDIAN), 9.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.CRYSTAL, 4), new ItemStack(ItemInit.INGOT_CRYSTALLITE, 2), 10.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM, 4), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
 	}
 	
 	public void addAlloyingRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 

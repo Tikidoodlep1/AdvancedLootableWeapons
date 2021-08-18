@@ -1,13 +1,17 @@
 package com.tiki.advancedlootableweapons.proxy;
 
+import java.util.List;
 import java.util.Random;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.handlers.GlobalDropsHandler;
+import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockObsidian;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 
 public class CommonProxy {
 	public void registerItemRenderer(Item item, int meta, String id) {}
@@ -37,13 +42,33 @@ public class CommonProxy {
 	
 	public void onEntityDrops(LivingDropsEvent event) {
 		Random rand = new Random();
-		if(rand.nextInt(100) > 90) {
+		System.out.println("Entity: " + event.getEntity().getName() + " = " + GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass()));
+		if(rand.nextInt(100) > 10 && GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass())) {
 			Entity entity = event.getEntity();
 			if(event.getLootingLevel() > 0) {
 				entity.entityDropItem(new ItemStack(ItemInit.SHADOW, rand.nextInt(event.getLootingLevel() + 1)), 0.25F);
+				entity.playSound(SoundHandler.SHADOW_DROP, 1.0F, 1.0F);
 			}else {
 				entity.entityDropItem(new ItemStack(ItemInit.SHADOW, 1), 0.25F);
+				entity.playSound(SoundHandler.SHADOW_DROP, 1.0F, 1.0F);
 			}
+		}
+	}
+
+	public void onBlockDrops(HarvestDropsEvent event) {
+		Block block = event.getState().getBlock();
+		if(block instanceof BlockObsidian) {
+			if(event.isSilkTouching()) {
+				return;
+			}
+			
+			Random rand = new Random();
+			List<ItemStack> drops = event.getDrops();
+			int count;
+			int max = 4;
+			drops.clear();
+			count = rand.nextInt(max) + 1;
+			drops.add(new ItemStack(ItemInit.SHARD_OBSIDIAN, count));
 		}
 	}
 }

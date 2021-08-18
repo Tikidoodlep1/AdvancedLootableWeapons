@@ -2,6 +2,8 @@ package com.tiki.advancedlootableweapons.tools;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+
 import javax.annotation.Nullable;
 
 import com.google.common.collect.HashMultimap;
@@ -74,8 +76,10 @@ public class ToolStabSword extends Item implements IHasModel{
 	}
 	
 	public void setMaximumDamage(ItemStack stack, int maxDamage) {
-		this.nbt.setInteger("maxDurability", maxDamage);
-		stack.setTagCompound(this.nbt);
+		NBTTagCompound newNBT = new NBTTagCompound();
+		newNBT.setInteger("maxDurability", maxDamage);
+		//this.nbt.setInteger("maxDurability", maxDamage);
+		stack.setTagCompound(newNBT);//this.nbt);
 	}
 	
 	private void getAttributes(String type, ToolMaterial material) {		
@@ -154,6 +158,8 @@ public class ToolStabSword extends Item implements IHasModel{
 	*/
 	
 	public void generateNameAndModifiers(ItemStack stack, double addedDamage) {
+		
+		System.out.println("Running GenerateNameAndModifiers!!!!!!!!");
 		//float tempRandDamage;
 		float randDamage;
 		double totalDamage;
@@ -165,6 +171,10 @@ public class ToolStabSword extends Item implements IHasModel{
 				newTag.setInteger("maxDurability", tag.getInteger("maxDurability"));
 			}
 		}
+		
+		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+		totalDamage = ((this.getAttackDamage() + 1) + randDamage + addedDamage);
+		newTag.setDouble("totalDamage", totalDamage);
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
@@ -172,9 +182,8 @@ public class ToolStabSword extends Item implements IHasModel{
 		}else {
 			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
 		}
-		
 		//if(randGen.nextBoolean() == true) {
-		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+		
 		//}else{
 			//randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
 			//randDamage += (randDamage * 2);
@@ -186,18 +195,21 @@ public class ToolStabSword extends Item implements IHasModel{
 		//this.addedDamage = this.nbt.getDouble("addedDamage");
 		//System.out.println("Random damage is: " + randDamage + ", TempRandDamage is: " + tempRandDamage);
 		//System.out.println("GetDamage: " + (this.getAttackDamage() + 1) + ", addedDamage: " + addedDamage);
-		totalDamage = ((this.getAttackDamage() + 1) + randDamage + addedDamage);
+		
 		//System.out.println("Total Damage: " + totalDamage);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
 		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
 			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
 		}
+		System.out.println("Running Modifiers!!!!!!!!");
 		//stack.setTagCompound(this.nbt);
 	}
 	
-	public void generateModifiers(ItemStack stack, double addedDamage, float randDamage){
+	/*
+	public void generateModifiers(ItemStack stack, double addedDamage){
 		double totalDamage;
+		float randDamage;
 		
 		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
 		
@@ -208,6 +220,15 @@ public class ToolStabSword extends Item implements IHasModel{
 			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
 		}
 		//stack.setTagCompound(this.nbt);
+	}
+	*/
+	
+	public double getAttackSpeed() {
+		return this.attackSpeed;
+	}
+	
+	public static UUID getAttackSpeedModifierUUID() {
+		return ATTACK_SPEED_MODIFIER;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -228,8 +249,7 @@ public class ToolStabSword extends Item implements IHasModel{
     }
 	
 	public float getAttackDamage(){
-		float x = this.attackDamage;
-        return x;
+		return this.attackDamage;
     }
 	
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
@@ -281,7 +301,7 @@ public class ToolStabSword extends Item implements IHasModel{
 			}
 		}
 		
-        stack.damageItem(1, attacker);
+        stack.attemptDamageItem(1, new Random(), null);//damageItem(1, attacker);
         //target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
         return true;
     }
@@ -306,14 +326,20 @@ public class ToolStabSword extends Item implements IHasModel{
 	}
 	
 	public float getReach() {
-		return reach;
+		return this.reach;
 	}
 	
+	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         ItemStack mat = this.material.getRepairItemStack();
-        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
-        return super.getIsRepairable(toRepair, repair);
+        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) {
+        	return true; 
+        }else if(mat.isItemEqualIgnoreDurability(repair)){
+        	return true;
+        }else {
+        	return false;
+        }
     }
 	
 	public int getItemEnchantability()

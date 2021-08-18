@@ -30,7 +30,7 @@ public class ItemHotToolHead extends Item implements IHasModel{
 	public ItemHotToolHead(String name){
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(Alw.AlwTab);
+		setCreativeTab(Alw.AlwToolHeadsTab);
 		
 		ItemInit.items.add(this);
 		
@@ -119,5 +119,11 @@ public class ItemHotToolHead extends Item implements IHasModel{
         	items.add(new ItemStack(this, 1, 3000));
         	items.add(new ItemStack(this, 1, 0));
         }
+    }
+	
+	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book)
+    {
+        return false;
     }
 }

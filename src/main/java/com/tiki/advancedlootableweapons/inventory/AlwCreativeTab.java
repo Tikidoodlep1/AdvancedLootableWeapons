@@ -6,7 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 public class AlwCreativeTab extends CreativeTabs{
-
+	
 	public AlwCreativeTab(String label) {
 		super(label);
 	}

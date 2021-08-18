@@ -7,18 +7,17 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 public class BlockBase extends Block implements IHasModel
 {
-	public BlockBase(String name, Material material, CreativeTabs tab) 
+	public BlockBase(String name, Material material) 
 	{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(Alw.AlwTab);
+		setCreativeTab(Alw.AlwBlocksTab);
 		
 		BlockInit.blocks.add(this);
 		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));

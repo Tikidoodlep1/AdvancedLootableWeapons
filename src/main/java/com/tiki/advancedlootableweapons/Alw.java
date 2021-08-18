@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.UUID;
 
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
+import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
+import com.tiki.advancedlootableweapons.inventory.AlwToolHeadsCreativeTab;
 import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +15,7 @@ import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -22,7 +25,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 //@Mod.EventBusSubscriber
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER)
@@ -48,6 +50,8 @@ public class Alw {
 	public static final UUID FEET_MAX_HEALTH_MODIFIER = UUID.fromString("d39be1d1-4e3e-4c25-a135-c53b4a00dbcc");
 	
 	public static final CreativeTabs AlwTab = new AlwCreativeTab("alwcreativetab");
+	public static final CreativeTabs AlwBlocksTab = new AlwBlocksCreativeTab("alwblockscreativetab");
+	public static final CreativeTabs AlwToolHeadsTab = new AlwToolHeadsCreativeTab("alwtoolheadscreativetab");
 	
 	@SidedProxy(clientSide = ModInfo.CLIENTPROXY, serverSide = ModInfo.COMMONPROXY)
 	public static CommonProxy proxy;
@@ -82,5 +86,10 @@ public class Alw {
 	@SubscribeEvent
 	public void onLivingDrops(LivingDropsEvent event) {
 		proxy.onEntityDrops(event);
+	}
+	
+	@SubscribeEvent
+	public void onBlockDrops(HarvestDropsEvent event) {
+		proxy.onBlockDrops(event);
 	}
 }

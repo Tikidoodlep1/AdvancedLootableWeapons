@@ -10,6 +10,7 @@ import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -557,17 +558,7 @@ public class ContainerForgeWeapon extends Container{
 	private void damageItem(int amount, ItemStack forgeHammer) {
 		if(forgeHammer.attemptDamageItem(amount, new Random(), null)) {
 			player.inventory.deleteStack(forgeHammer);
-			player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
-			/*if(player.inventory.findSlotMatchingUnusedItem(forgeHammer) == -1) {
-				for(ItemStack inv : player.inventory.mainInventory) {
-	        		if(inv.isItemEqualIgnoreDurability(forgeHammer)) {
-	        		
-	        		}
-	        	}
-			}else {
-				player.inventory.decrStackSize(player.inventory.findSlotMatchingUnusedItem(forgeHammer), 1);
-			}
-			*/
+			Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 		}
 	}
 	

@@ -79,6 +79,8 @@ public class RegistryHandler {
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(Alw.instance, new GuiHandler());
 		OreDictionaryCompat.registerOres();
+		SoundHandler.registerSounds();
+		GlobalDropsHandler.registerDrops();
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)

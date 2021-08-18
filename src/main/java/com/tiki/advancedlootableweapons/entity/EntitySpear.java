@@ -1,20 +1,27 @@
 package com.tiki.advancedlootableweapons.entity;
 
+import java.util.Random;
+
+import com.tiki.advancedlootableweapons.Alw;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -38,25 +45,27 @@ public class EntitySpear extends EntityArrow{
     private int ticksInAir;
     private ItemStack arrowStack;
     public String material;
-    private float spearDamage;
-    public int spearDurability;
-    private int spearMaxDurability;
-    private String customName;
-    private double reducedDamage;
-    private float bonusDamage;
     
     public static final DataParameter<ItemStack> ITEMSTACK = EntityDataManager.<ItemStack>createKey(EntitySpear.class, DataSerializers.ITEM_STACK);
+    public static final DataParameter<Integer> MAX_DURABILITY = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
+    public static final DataParameter<Float> DAMAGE = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
+    public static final DataParameter<Float> ATTACK_SPEED = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
+    public static final DataParameter<Integer> DURABILITY = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
+    public static final DataParameter<Float> REACH = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
+    public static final DataParameter<String> CUSTOM_NAME = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
     
-    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, float spearDamage, int spearDurability, int spearMaxDurability, double reducedDamage, float bonusDamage, ItemStack stack) {
+    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, int spearDurability, int maxDurability, double attackDamage, float reach, double attackSpeed, ItemStack stack) {
     	this(worldIn, shooter);
     	this.material = material;
-    	this.spearDamage = spearDamage;
-    	this.spearDurability = spearDurability;
-    	this.spearMaxDurability = spearMaxDurability;
-    	this.customName = stack.getDisplayName();
-    	this.reducedDamage = reducedDamage;
-    	this.bonusDamage = bonusDamage;
+    	this.setNameData(stack.getDisplayName());
     	this.setItemStack(stack);
+    	this.setDamageData(attackDamage);
+    	this.setDurabilityData(spearDurability);
+    	this.setMaxDurabilityData(maxDurability);
+    	this.setAttackSpeedData(attackSpeed);
+    	this.setReachData(reach);
+    	
+    	//System.out.println("Setting Max Durability data as: " + maxDurability);
     }
     
 	public EntitySpear(World worldIn, EntityLivingBase shooter) {
@@ -78,14 +87,14 @@ public class EntitySpear extends EntityArrow{
 		this.knockbackStrength = 1;
 	}
 	
-	public void setItemStack(ItemStack stack) {
+	private void setItemStack(ItemStack stack) {
 		if(stack == null || stack.isEmpty() || !(stack.getItem() instanceof ToolSpear)) {
 			throw new IllegalArgumentException("Item Stack needs to be a Spear!");
 		}
 		this.dataManager.set(ITEMSTACK, stack);
 	}
 	
-	public ItemStack getItemStack() {
+	private ItemStack getItemStack() {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(ITEMSTACK);
 		}else {
@@ -94,53 +103,103 @@ public class EntitySpear extends EntityArrow{
 		}
 	}
 	
+	private void setMaxDurabilityData(int dur) {
+		if(dur > 0) {
+			this.dataManager.set(MAX_DURABILITY, dur);
+		}
+	}
+	
+	private int getMaxDurabilityData() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(MAX_DURABILITY);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return 0;
+		}
+	}
+	
+	private void setDamageData(double damage) {
+		if(damage > 0) {
+			this.dataManager.set(DAMAGE, (float)damage);
+		}
+	}
+	
+	private double getDamageData() {
+		if(!this.dataManager.isEmpty()) {
+			return (double)this.dataManager.get(DAMAGE);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return 0D;
+		}
+	}
+	
+	private void setAttackSpeedData(double as) {
+		this.dataManager.set(ATTACK_SPEED, (float)as);
+	}
+	
+	private double getAttackSpeedData() {
+		if(!this.dataManager.isEmpty()) {
+			return (double)this.dataManager.get(ATTACK_SPEED);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return 0D;
+		}
+	}
+	
+	private void setDurabilityData(int dur) {
+		if(dur > 0) {
+			this.dataManager.set(DURABILITY, dur);
+		}
+	}
+	
+	private int getDurabilityData() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(DURABILITY);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return 0;
+		}
+	}
+	
+	private void setReachData(float reach) {
+		this.dataManager.set(REACH, reach);
+	}
+	
+	private float getReachData() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(REACH);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return 0F;
+		}
+	}
+	
+	private void setNameData(String name) {
+		if(name != null || name != "") {
+			this.dataManager.set(CUSTOM_NAME, name);
+		}
+	}
+	
+	private String getNameData() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(CUSTOM_NAME);
+		}else {
+			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			return this.arrowStack.getDisplayName();
+		}
+	}
+	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		this.dataManager.register(ITEMSTACK, ItemStack.EMPTY);
+		this.dataManager.register(MAX_DURABILITY, 1);
+		this.dataManager.register(DAMAGE, 0F);
+		this.dataManager.register(ATTACK_SPEED, 0F);
+		this.dataManager.register(DURABILITY, 0);
+		this.dataManager.register(REACH, 4.0F);
+		this.dataManager.register(CUSTOM_NAME, "");
 	}
-	
-	public void writeEntityToNBT(NBTTagCompound compound) {
-		compound.setInteger("spearDurability", this.spearDurability);
-		compound.setInteger("maxSpearDurability", this.spearMaxDurability);
-		compound.setDouble("reducedSpearDamage", this.reducedDamage);
-		compound.setFloat("bonusSpearDamage", this.bonusDamage);
-		compound.setString("customName", this.customName);
-		
-		if(this.getItemStack() != null && !this.getItemStack().isEmpty()) {
-			compound.setTag("itemstack", this.getItemStack().writeToNBT(new NBTTagCompound()));
-		}
-	}
-	
-	public void readEntityFromNBT(NBTTagCompound compound)
-    {
-        if (compound.hasKey("spearDurability", 99))
-        {
-            this.spearDurability = compound.getInteger("spearDurability");
-        }
-        
-        if (compound.hasKey("maxSpearDurability", 99))
-        {
-            this.spearMaxDurability = compound.getInteger("maxSpearDurability");
-        }
-        
-        if(compound.hasKey("customName", 8))
-        {
-        	this.customName = compound.getString("customName");
-        }
-        
-        if(compound.hasKey("reducedSpearDamage", 99))
-        {
-        	this.reducedDamage = compound.getDouble("reducedSpearDamage");
-        }
-        
-        if(compound.hasKey("bonusSpearDamage", 99))
-        {
-        	this.bonusDamage = compound.getFloat("bonusSpearDamage");
-        }
-        
-        setItemStack(new ItemStack(compound.getCompoundTag("itemstack")));
-    }
 	
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn)
@@ -157,7 +216,6 @@ public class EntitySpear extends EntityArrow{
             if (flag)
             {
                 ItemStack stack = this.getItemStack();
-                stack.setItemDamage(this.spearDurability);
                 if(stack.getItem().getDurabilityForDisplay(stack) < 1.0 || stack.getItem().getDurabilityForDisplay(stack) == Double.POSITIVE_INFINITY) {
                 	ItemStack copyStack = this.arrowStack;
                 	if(stack.isItemEnchanted()) {
@@ -167,9 +225,9 @@ public class EntitySpear extends EntityArrow{
                 			copyStack.addEnchantment(Enchantment.getEnchantmentByID(list.getCompoundTagAt(e).getShort("id")), list.getCompoundTagAt(e).getShort("lvl"));
                 		}
                 	}
-                	this.setItemAttributes(entityIn, copyStack, this.spearMaxDurability);
-                }else if(this.spearDurability >= this.spearMaxDurability) {
-                	playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+                	this.setItemAttributes(entityIn, copyStack, this.getMaxDurabilityData());
+                }else if(this.getDurabilityData() >= this.getMaxDurabilityData()) {
+                	playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.8F, 1.0F);
                 } 
                 this.setDead();
             }
@@ -181,16 +239,25 @@ public class EntitySpear extends EntityArrow{
 	 */
 	public void setItemAttributes(EntityPlayer player, ItemStack stack, int maxDurability){
 		if(!player.capabilities.isCreativeMode) {
+			NBTTagCompound newNBT = new NBTTagCompound();
 			int slot = player.inventory.getFirstEmptyStack();
 			player.inventory.add(slot, stack);
 			ItemStack item = player.inventory.getStackInSlot(slot);
 			((ToolSpear)item.getItem()).setMaximumDamage(item, maxDurability);
-			((ToolSpear)item.getItem()).generateModifiers(item, this.reducedDamage, this.bonusDamage);
-			item.setItemDamage(this.spearDurability);
-			item.setStackDisplayName(this.customName);
+			//System.out.println("Spear Max Durability is: " + maxDurability);
+			newNBT = item.getTagCompound();
+			newNBT.setDouble("totalDamage", (double)this.getDamageData());
+			item.setItemDamage(this.getDurabilityData());
+			item.attemptDamageItem(1, new Random(), null);
+			item.setStackDisplayName(this.getNameData());
+			item.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getDamageData(), 0), EntityEquipmentSlot.MAINHAND);
+			item.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ToolStabSword.getAttackSpeedModifierUUID(), "Weapon modifier", (double)this.getAttackSpeedData(), 0), EntityEquipmentSlot.MAINHAND);
+			if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
+				item.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReachData() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
+			}
 		}
 	}
-	 
+	
 	public void setArrowStack(ToolSpear spear) {
 		this.arrowStack = new ItemStack(spear);
 	}
@@ -224,7 +291,7 @@ public class EntitySpear extends EntityArrow{
         if (entity != null)
         {
             float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            float i = MathHelper.ceil((double)f * this.spearDamage);
+            float i = MathHelper.ceil((double)f * this.getDamageData());
 
             if (this.getIsCritical())
             {

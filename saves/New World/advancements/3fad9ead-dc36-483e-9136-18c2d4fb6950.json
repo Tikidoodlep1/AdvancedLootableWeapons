@@ -95,6 +95,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/building_blocks/dark_prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2021-08-17 10:13:19 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/redstone": {
     "criteria": {
       "has_redstone_block": "2021-06-14 14:36:47 -0700"
@@ -203,6 +209,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/black_carpet": {
+    "criteria": {
+      "has_black_wool": "2021-08-17 12:37:52 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/redstone_lamp": {
     "criteria": {
       "has_glowstone": "2021-08-05 22:55:56 -0700"
@@ -215,9 +227,21 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/light_blue_wool": {
     "criteria": {
       "has_white_wool": "2021-06-14 14:38:36 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_obsidian": "2021-08-17 14:41:20 -0700"
     },
     "done": true
   },
@@ -236,6 +260,12 @@
   "minecraft:recipes/combat/wooden_sword": {
     "criteria": {
       "has_stick": "2021-08-07 20:22:35 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_banner": {
+    "criteria": {
+      "has_gray_wool": "2021-08-17 12:37:33 -0700"
     },
     "done": true
   },
@@ -317,6 +347,18 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/black_banner": {
+    "criteria": {
+      "has_black_wool": "2021-08-17 12:37:52 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/gray_carpet": {
+    "criteria": {
+      "has_gray_wool": "2021-08-17 12:37:33 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/misc/bucket": {
     "criteria": {
       "has_iron_ingot": "2021-06-15 12:40:32 -0700"
@@ -347,9 +389,21 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/gray_bed": {
+    "criteria": {
+      "has_gray_wool": "2021-08-17 12:37:33 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/redstone/hopper": {
     "criteria": {
       "has_iron_ingot": "2021-06-15 12:40:32 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/bone_meal_from_bone": {
+    "criteria": {
+      "has_bone": "2021-08-17 12:10:44 -0700"
     },
     "done": true
   },
@@ -410,6 +464,18 @@
   "minecraft:recipes/misc/coal": {
     "criteria": {
       "has_coal_block": "2021-06-28 22:52:45 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine_bricks": {
+    "criteria": {
+      "has_prismarine_shard": "2021-08-17 10:13:19 -0700"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2021-08-17 14:41:20 -0700"
     },
     "done": true
   },
@@ -517,9 +583,11 @@
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
+      "extreme_hills_with_trees": "2021-08-17 13:10:04 -0700",
       "forest_hills": "2021-06-03 10:54:27 -0700",
       "plains": "2021-06-03 00:56:39 -0700",
       "taiga": "2021-06-03 00:56:34 -0700",
+      "extreme_hills": "2021-08-17 13:10:02 -0700",
       "river": "2021-06-03 00:56:37 -0700"
     },
     "done": false
@@ -578,6 +646,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/combat/stone_sword": {
     "criteria": {
       "has_cobblestone": "2021-06-14 14:27:26 -0700"
@@ -596,6 +670,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2021-08-17 14:41:20 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/tools/iron_shovel": {
     "criteria": {
       "has_iron_ingot": "2021-06-15 12:40:32 -0700"
@@ -605,6 +685,12 @@
   "minecraft:recipes/brewing/fermented_spider_eye": {
     "criteria": {
       "has_spider_eye": "2021-06-15 20:39:24 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
     },
     "done": true
   },
@@ -635,6 +721,24 @@
   "minecraft:recipes/combat/leather_boots": {
     "criteria": {
       "has_leather": "2021-06-03 12:19:08 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/black_bed": {
+    "criteria": {
+      "has_black_wool": "2021-08-17 12:37:52 -0700"
     },
     "done": true
   },
@@ -674,6 +778,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "entered_water": "2021-08-16 16:56:40 -0700"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/pink_wool": {
     "criteria": {
       "has_white_wool": "2021-06-14 14:38:36 -0700"
@@ -688,8 +798,11 @@
   },
   "minecraft:adventure/kill_all_mobs": {
     "criteria": {
+      "polar_bear": "2021-08-17 12:11:03 -0700",
+      "evoker": "2021-08-16 16:56:01 -0700",
       "zombie": "2021-06-14 14:37:48 -0700",
       "cave_spider": "2021-06-15 20:39:15 -0700",
+      "guardian": "2021-08-17 10:13:18 -0700",
       "creeper": "2021-06-03 10:41:31 -0700"
     },
     "done": false
@@ -751,6 +864,12 @@
   "minecraft:recipes/transportation/rail": {
     "criteria": {
       "has_minecart": "2021-08-12 23:18:56 -0700"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/prismarine": {
+    "criteria": {
+      "has_prismarine_shard": "2021-08-17 10:13:19 -0700"
     },
     "done": true
   },

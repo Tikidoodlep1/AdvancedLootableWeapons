@@ -2,10 +2,10 @@
 {
   "modid": "advancedlootableweapons",
   "name": "Advanced Lootable Weapons",
-  "description": "This aim of this mod is to create extremely diverse weapon drops without losing configurability.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "description": "This aim of this mod is to create extremely diverse weapons without losing configurability.",
+  "version": "1.0",
+  "mcversion": "1.12",
+  "url": "https://advanced-lootable-weapons.fandom.com/wiki/Advanced_Lootable_Weapons_Wiki",
   "updateUrl": "",
   "authorList": ["Tiki"],
   "credits": "Programming: Tiki

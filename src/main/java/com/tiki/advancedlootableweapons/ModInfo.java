@@ -4,7 +4,7 @@ public class ModInfo {
 
 	public static final String ID = "advancedlootableweapons";
 	public static final String NAME = "Advanced Lootable Weapons";
-	public static final String VER = "Alpha 0.9";
+	public static final String VER = "Alpha 1.0";
 	public static final String CLIENTPROXY = "com.tiki.advancedlootableweapons.proxy.ClientProxy";
 	public static final String COMMONPROXY = "com.tiki.advancedlootableweapons.proxy.CommonProxy";
 	

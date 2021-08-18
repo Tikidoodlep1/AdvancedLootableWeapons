@@ -1,0 +1,8 @@
+{
+	"item.shadow.drop":
+	{
+		"category": "entity",
+		"subtitle": "item.shadow.drop",
+		"sounds": [{ "name": "advancedlootableweapons:shadow_drop", "stream": true}]
+	}
+}

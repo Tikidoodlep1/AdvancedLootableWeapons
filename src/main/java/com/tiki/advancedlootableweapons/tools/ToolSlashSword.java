@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.tools;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -87,12 +88,12 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			case "battleaxe":
 				this.attackSpeed = ConfigHandler.GLOBAL_BATTLEAXE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.2F;
+				this.reach = 6.4F;
 				break;
 			case "zweihander":
 				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.4F;
+				this.reach = 6.2F;
 				break;
 			case "nodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
@@ -184,6 +185,10 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		//stack.setTagCompound(this.nbt);
 	}
 	
+	public static UUID getAttackSpeedModifierUUID() {
+		return ATTACK_SPEED_MODIFIER;
+	}
+	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -237,16 +242,22 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			}
 		}
 		
-        stack.damageItem(1, attacker);
+		stack.attemptDamageItem(1, new Random(), null);
         //target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
         return true;
     }
 	
+	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
     {
         ItemStack mat = this.material.getRepairItemStack();
-        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
-        return super.getIsRepairable(toRepair, repair);
+        if (!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) {
+        	return true; 
+        }else if(mat.isItemEqualIgnoreDurability(repair)){
+        	return true;
+        }else {
+        	return false;
+        }
     }
 	
 	public int getItemEnchantability()

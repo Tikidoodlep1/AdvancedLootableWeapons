@@ -35,7 +35,7 @@ public class BlockAlwOre extends Block implements IHasModel{
 		super(Material.ROCK);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(Alw.AlwTab);
+		setCreativeTab(Alw.AlwBlocksTab);
 		
 		BlockInit.blocks.add(this);
 		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));

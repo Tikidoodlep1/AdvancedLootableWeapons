@@ -44,7 +44,7 @@ public class BlockAlloyFurnace extends BlockBase implements ITileEntityProvider
 	
 	public BlockAlloyFurnace(String name) 
 	{
-		super(name, Material.IRON, Alw.AlwTab);
+		super(name, Material.IRON);
 		setSoundType(SoundType.METAL);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BURNING, false));
 		//this.isBurning = false;

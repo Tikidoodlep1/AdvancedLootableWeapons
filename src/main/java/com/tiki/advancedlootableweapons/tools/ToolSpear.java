@@ -14,6 +14,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -59,18 +60,31 @@ public class ToolSpear extends ToolStabSword{
         return f;
     }
 	
-	private float getBonusDamage() {
-		return this.nbt.getFloat("bonusDamage");
-	}
-	
-	private double getReducedDamage() {
-		return this.nbt.getDouble("reducedDamage");
-	}
-	
 	private void createSpearEntity(World worldIn, EntityPlayer playerIn, ItemStack stack, float f){
 		if (!worldIn.isRemote)
         {
-            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getAttackDamage(), this.getDamage(stack), this.getMaxDamage(stack), this.getReducedDamage(), this.getBonusDamage(), stack);
+			double totalDamage;
+			int maxDur;
+			if(stack.hasTagCompound() /*&& !(stack.getTagCompound().hasNoTags())*/) {
+				//System.out.println("stack has a tag compound");
+				NBTTagCompound tag = stack.getTagCompound();
+				if(tag.hasKey("totalDamage", 99)) {
+					//System.out.println("stack has totalDamage: " + tag.getDouble("totalDamage"));
+					totalDamage = tag.getDouble("totalDamage");
+				}else {
+					//System.out.println("stack doesn't have totalDamage");
+					totalDamage = this.getAttackDamage() + 1;
+				}
+			}else {
+				//System.out.println("stack doesn't have a tag compound");
+				totalDamage = this.getAttackDamage() + 1;
+			}
+			if((this.getMaxDamage(stack) - this.getToolMaterial().getMaxUses()) < 0) {
+				maxDur = 0;
+			}else {
+				maxDur = (this.getMaxDamage(stack) - this.getToolMaterial().getMaxUses());
+			}
+            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getDamage(stack), maxDur, totalDamage, this.getReach(), this.getAttackSpeed(), stack);
             System.out.print(this.getToolMaterialName());
             entityspear.setArrowStack(this);
             entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
@@ -124,8 +138,6 @@ public class ToolSpear extends ToolStabSword{
 
                 if ((double)f >= 0.1D)
                 {
-                    boolean flag1 = entityplayer.capabilities.isCreativeMode;
-
                     if (!worldIn.isRemote)
                     {
                     	if(stack.isItemEnchanted()) {
@@ -154,7 +166,7 @@ public class ToolSpear extends ToolStabSword{
                     	}
                     }
 
-                    if (!flag1 && !flag)
+                    if (!flag)
                     {
                         stack.shrink(1);
 
