@@ -18,10 +18,17 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -189,6 +196,81 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return ATTACK_SPEED_MODIFIER;
 	}
 	
+	@Override
+	protected RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
+		float f = playerIn.rotationPitch;
+        float f1 = playerIn.rotationYaw;
+        double d0 = playerIn.posX;
+        double d1 = playerIn.posY + (double)playerIn.getEyeHeight();
+        double d2 = playerIn.posZ;
+        Vec3d vec3d = new Vec3d(d0, d1, d2);
+        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
+        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
+        float f4 = -MathHelper.cos(-f * 0.017453292F);
+        float f5 = MathHelper.sin(-f * 0.017453292F);
+        float f6 = f3 * f4;
+        float f7 = f2 * f4;
+        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
+        Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
+        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+	}
+	
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		World world = entityLiving.getEntityWorld();
+		float reach = this.getReach();//(float) ((this.getReach() - 6.4) + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+		//System.out.println("Default reach is: " + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+		//System.out.println("reach is: " + reach);
+		float f = entityLiving.rotationPitch;
+        float f1 = entityLiving.rotationYaw;
+        double d0 = entityLiving.posX;
+        double d1 = entityLiving.posY + (double)entityLiving.getEyeHeight();
+        double d2 = entityLiving.posZ;
+        Vec3d vec3d = new Vec3d(d0, d1, d2);
+        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
+        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
+        float f4 = -MathHelper.cos(-f * 0.017453292F);
+        float f5 = MathHelper.sin(-f * 0.017453292F);
+        float f6 = f3 * f4;
+        float f7 = f2 * f4;
+        Vec3d vec3d1 = vec3d.addVector((double)f6 * reach, (double)f5 * reach, (double)f7 * reach);
+        
+		AxisAlignedBB axis = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
+		//System.out.println("minX: " + axis.minX + ", minY: " + axis.minY + ", minZ: " + axis.minZ + ", maxX: " + axis.maxX + ", maxY: " + axis.maxY + ", maxZ: " + axis.maxZ);
+		
+		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
+		//System.out.println(entList);
+		EntityLivingBase ent = null;
+		
+		double distClosest = Double.MAX_VALUE;
+		for(EntityLivingBase e : entList) {
+			if(!e.equals(entityLiving)) {
+				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
+				//System.out.println("dist: " + dist);
+				
+				if(dist < distClosest) {
+					ent = e;
+					distClosest = dist;
+				}
+			}
+		}
+		
+		//System.out.println(ent);
+		if(ent != null) {
+			//System.out.println("entity is not null!");
+			if(entityLiving instanceof EntityPlayer) {
+				((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
+				if(!((EntityPlayer) entityLiving).isCreative()) {
+					stack.attemptDamageItem(1, new Random(), null);
+				}
+			}else {
+				entityLiving.attackEntityAsMob(ent);
+				stack.attemptDamageItem(1, new Random(), null);
+			}
+		}
+		return false;
+	}
+	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
@@ -233,17 +315,17 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 				armor = (ArmorBonusesBase)i.getItem();
 				if(armor.armorType == EntityEquipmentSlot.CHEST) {
 					this.bonusDamage = armor.getBonusAttackDamage();
-					target.setHealth(target.getHealth() - (float)this.bonusDamage);
+					if(attacker instanceof EntityPlayer) {
+						target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)attacker), (float)this.bonusDamage);
+					}else {
+						target.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float)this.bonusDamage);
+					}
 					break;
 				}
-			}else {
-				this.bonusDamage = 0.0D;
-				target.setHealth(target.getHealth() - (float)this.bonusDamage);
 			}
 		}
 		
-		stack.attemptDamageItem(1, new Random(), null);
-        //target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
+		//stack.attemptDamageItem(1, new Random(), null);
         return true;
     }
 	

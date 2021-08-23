@@ -4,5 +4,11 @@
 		"category": "entity",
 		"subtitle": "item.shadow.drop",
 		"sounds": [{ "name": "advancedlootableweapons:shadow_drop", "stream": true}]
+	},
+	"item.sharpening_stone.use":
+	{
+		"category": "item",
+		"subtitle": "item.sharpening_stone.use",
+		"sounds": [{ "name": "advancedlootableweapons:sharpening_stone", "stream": true}]
 	}
 }

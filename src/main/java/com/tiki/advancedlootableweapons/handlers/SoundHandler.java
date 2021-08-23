@@ -8,10 +8,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class SoundHandler {
 
-	public static SoundEvent SHADOW_DROP;
+	public static SoundEvent SHADOW_DROP, SHARPENING_STONE;
 	
 	public static void registerSounds() {
 		SHADOW_DROP = registerSound("item.shadow.drop");
+		SHARPENING_STONE = registerSound("item.sharpening_stone.use");
 	}
 	
 	private static SoundEvent registerSound(String name) {

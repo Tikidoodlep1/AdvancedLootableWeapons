@@ -2,15 +2,15 @@ package com.tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockAlwOre;
 import com.tiki.advancedlootableweapons.blocks.BlockBase;
+import com.tiki.advancedlootableweapons.blocks.BlockCrystalliteOre;
+import com.tiki.advancedlootableweapons.blocks.BlockFeldspar;
 import com.tiki.advancedlootableweapons.blocks.BlockForge;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 
 public class BlockInit {
 	public static final List<Block> blocks = new ArrayList<Block>();
@@ -30,15 +30,15 @@ public class BlockInit {
 	
 	
 	//Rocks
-	public static final Block cobble_feldspar = new BlockBase("cobble_feldspar", Material.ROCK);
-	public static final Block rock_feldspar = new BlockAlwOre("rock_feldspar", Item.getItemFromBlock(cobble_feldspar), 1, 1);
+	public static final Block cobble_feldspar = new BlockFeldspar("cobble_feldspar");
+	public static final Block rock_feldspar = new BlockFeldspar("rock_feldspar");
 	
 	
 	//Ores
 	public static final Block ore_silver = new BlockAlwOre("ore_silver");
 	public static final Block ore_copper = new BlockAlwOre("ore_copper");
 	public static final Block ore_platinum = new BlockAlwOre("ore_platinum");
-	public static final Block ore_crystallite = new BlockAlwOre("ore_crystallite", ItemInit.CRYSTAL, 2, 3);
+	public static final Block ore_crystallite = new BlockCrystalliteOre("ore_crystallite");
 	public static final Block ore_tin = new BlockAlwOre("ore_tin");
 	
 	

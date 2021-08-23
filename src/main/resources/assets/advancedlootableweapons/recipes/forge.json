@@ -1,0 +1,32 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"CCC",
+		"CBC",
+		"CLC"
+	],
+
+	"key":
+	{
+		"C":
+		{
+			"item": "minecraft:cobblestone"
+		},
+		"B":
+		{ 
+			"item": "minecraft:coal_block"
+		},
+		"L":
+		{
+			"item": "minecraft:lava_bucket"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:forge",
+		"count": 1
+	}
+}

@@ -48,7 +48,12 @@ public class ItemInit {
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_sabre_head"), new ResourceLocation("sabre_head"), new ItemStack(SABRE_HEAD), new Object[] {" w", "w ", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_makhaira_head"), new ResourceLocation("makhaira_head"), new ItemStack(MAKHAIRA_HEAD), new Object[] {" w", "ww", "ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_spear_head"), new ResourceLocation("spear_head"), new ItemStack(SPEAR_HEAD), new Object[] {" w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
+		
 		GameRegistry.addSmelting(BlockInit.cobble_feldspar, new ItemStack(BlockInit.rock_feldspar), 0.1F);
+		GameRegistry.addSmelting(BlockInit.ore_copper, new ItemStack(ItemInit.INGOT_COPPER), 1.0F);
+		GameRegistry.addSmelting(BlockInit.ore_tin, new ItemStack(ItemInit.INGOT_TIN), 1.0F);
+		GameRegistry.addSmelting(BlockInit.ore_silver, new ItemStack(ItemInit.INGOT_SILVER), 1.0F);
+		GameRegistry.addSmelting(BlockInit.ore_platinum, new ItemStack(ItemInit.INGOT_PLATINUM), 1.0F);
 	}
 	
 	//Items

@@ -37,7 +37,7 @@ public class AlloyFurnaceRecipe implements IRecipeWrapper{
 			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience", exp);
 			FontRenderer renderer = minecraft.fontRenderer;
 			int StringWidth = renderer.getStringWidth(expString);
-			renderer.drawString(expString, recipeWidth - 28, 46, Color.GRAY.getRGB());
+			renderer.drawString(expString, recipeWidth - 30, 16, Color.GRAY.getRGB());
 		}
 	}
 }

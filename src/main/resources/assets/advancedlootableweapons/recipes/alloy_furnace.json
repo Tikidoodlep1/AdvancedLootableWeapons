@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"III",
+		"I I",
+		"SSS"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		"S":
+		{ 
+			"item": "minecraft:stone_slab",
+			"data": 0
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:alloy_furnace",
+		"count": 1
+	}
+}

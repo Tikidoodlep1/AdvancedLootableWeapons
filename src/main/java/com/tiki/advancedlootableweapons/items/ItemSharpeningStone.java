@@ -74,7 +74,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
             this.stone = stone;
         }
 
-
         public String getName()
         {
             return "sharpening_stone";

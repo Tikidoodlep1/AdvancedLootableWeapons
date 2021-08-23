@@ -556,6 +556,7 @@ public class ContainerForgeWeapon extends Container{
 	}
 	
 	private void damageItem(int amount, ItemStack forgeHammer) {
+		Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 		if(forgeHammer.attemptDamageItem(amount, new Random(), null)) {
 			player.inventory.deleteStack(forgeHammer);
 			Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);

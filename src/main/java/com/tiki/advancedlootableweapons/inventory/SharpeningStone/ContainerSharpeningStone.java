@@ -1,6 +1,8 @@
 package com.tiki.advancedlootableweapons.inventory.SharpeningStone;
 
 import java.util.Map;
+
+import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 
@@ -8,6 +10,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
@@ -46,10 +49,10 @@ public class ContainerSharpeningStone extends Container{
         this.inputSlot = new InventoryBasic("Sharpening Stone", true, 1);
         this.world = worldIn;
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 0, 80, 56){
+        this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 43){
         	public boolean isItemValid(ItemStack stack)
             {
-        		System.out.println("Checking if Item is valid");
+        		//System.out.println("Checking if Item is valid");
         		String check = stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1);
         		String check2 = activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'));
         		if(check.equalsIgnoreCase("shadow")) {
@@ -94,7 +97,7 @@ public class ContainerSharpeningStone extends Container{
         	}
         });
         
-        this.addSlotToContainer(new Slot(this.outputSlot, 1, 80, 13)
+        this.addSlotToContainer(new Slot(this.outputSlot, 1, 114, 43)
         {
             public boolean isItemValid(ItemStack stack)
             {
@@ -118,15 +121,12 @@ public class ContainerSharpeningStone extends Container{
 				
                 thePlayer.inventory.getStackInSlot(thePlayer.inventory.getSlotFor(new ItemStack(activeStone))).shrink(1);
                 
-
-             if (!worldIn.isRemote)
-             {
-                 worldIn.playEvent(1030, player.getPosition(), 0);
-             }
+                thePlayer.playSound(SoundHandler.SHARPENING_STONE, 1.0f, 1.0f);
+                
              return stack;
             }
         });
-
+        
         for (int i = 0; i < 3; ++i)
         {
             for (int j = 0; j < 9; ++j)
