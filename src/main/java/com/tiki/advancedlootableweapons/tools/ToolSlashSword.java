@@ -85,37 +85,37 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			case "longsword":
 				this.attackSpeed = ConfigHandler.GLOBAL_LONGSWORD_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.0F;
+				this.reach = 5.14F;
 				break;
 			case "kodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_KODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.3F;
+				this.reach = 4.49F;
 				break;
 			case "battleaxe":
 				this.attackSpeed = ConfigHandler.GLOBAL_BATTLEAXE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.4F;
+				this.reach = 5.20F;
 				break;
 			case "zweihander":
 				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.2F;
+				this.reach = 5.76F;
 				break;
 			case "nodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_NODACHI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.8F;
+				this.reach = 5.66F;
 				break;
 			case "sabre":
 				this.attackSpeed = ConfigHandler.GLOBAL_SABRE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SABRE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.4F;
+				this.reach = 4.92F;
 				break;
 			case "makhaira":
 				this.attackSpeed = ConfigHandler.GLOBAL_MAKHAIRA_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MAKHAIRA_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.6F;
+				this.reach = 4.56F;
 		}
 	}
 	
@@ -248,24 +248,28 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
 				//System.out.println("dist: " + dist);
 				
-				if(dist < distClosest) {
+				if(dist < this.getReach() && dist < distClosest) {
 					ent = e;
 					distClosest = dist;
 				}
 			}
 		}
 		
+		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
+		//System.out.println("trace: " + trace);
 		//System.out.println(ent);
 		if(ent != null) {
+			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
 			//System.out.println("entity is not null!");
-			if(entityLiving instanceof EntityPlayer) {
-				((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
-				if(!((EntityPlayer) entityLiving).isCreative()) {
+				if(entityLiving instanceof EntityPlayer) {
+					((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
+					if(!((EntityPlayer) entityLiving).isCreative()) {
+						stack.attemptDamageItem(1, new Random(), null);
+					}
+				}else {
+					entityLiving.attackEntityAsMob(ent);
 					stack.attemptDamageItem(1, new Random(), null);
 				}
-			}else {
-				entityLiving.attackEntityAsMob(ent);
-				stack.attemptDamageItem(1, new Random(), null);
 			}
 		}
 		return false;

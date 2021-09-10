@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import com.google.common.collect.Table;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
 
@@ -29,13 +30,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IInventory
 {
+	private AlloyFurnaceRecipes recipes = AlloyFurnaceRecipes.getInstance();
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	private String customName;
 	
 	private int burnTime;
 	private int currentBurnTime;
 	private int cookTime;
-	private int totalCookTime = 200;
+	private int totalCookTime = 400;
 
 	@Override
 	public String getName() {
@@ -204,7 +206,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	}
 	
 	public int getCookTime(ItemStack input1, ItemStack input2) {
-		return 200;
+		return 400;
 	}
 	
 	private boolean canSmelt() 
@@ -212,7 +214,8 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		if(((ItemStack)this.inventory.get(0)).isEmpty() || ((ItemStack)this.inventory.get(1)).isEmpty()) return false;
 		else 
 		{
-			ItemStack result = AlloyFurnaceRecipes.getInstance().getAlloyingResult((ItemStack)this.inventory.get(0), (ItemStack)this.inventory.get(1));	
+			//make this account for the number of input items needed :)
+			ItemStack result = AlloyFurnaceRecipes.getInstance().getAlloyingResult((ItemStack)this.inventory.get(0), (ItemStack)this.inventory.get(1));
 			if(result.isEmpty()) return false;
 			else
 			{
@@ -238,8 +241,8 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 				output.grow(result.getCount());
 			}
 			
-			input1.shrink(1);
-			input2.shrink(1);
+			input1.shrink(recipes.getInputCount(input1));
+			input2.shrink(recipes.getInputCount(input2));
 		}
 	}
 	

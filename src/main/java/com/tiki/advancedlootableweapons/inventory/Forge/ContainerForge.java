@@ -24,9 +24,8 @@ public class ContainerForge extends Container
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
-				}else {
-					return false;
 				}
+				return false;
 			}
 		});
 		
@@ -69,61 +68,54 @@ public class ContainerForge extends Container
 		return this.tileentity.isUsableByPlayer(playerIn);
 	}
 	
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) 
-	{
-		ItemStack stack = ItemStack.EMPTY;
-		Slot slot = (Slot)this.inventorySlots.get(index);
-		
-		if(slot != null && slot.getHasStack()) 
-		{
-			ItemStack stack1 = slot.getStack();
-			stack = stack1.copy();
-			
-			if(index == 3) 
-			{
-				if(!this.mergeItemStack(stack1, 4, 35, true)) return ItemStack.EMPTY;
-				slot.onSlotChange(stack1, stack);
-			}
-			else if(index != 2 && index != 1 && index != 0) 
-			{
-				Slot slot1 = (Slot)this.inventorySlots.get(index);
-				if(index + 1 < this.inventorySlots.size()) {
-					slot1 = (Slot)this.inventorySlots.get(index + 1);
-				}
-				
-				if(!slot1.getHasStack())
-				{
-					if(!this.mergeItemStack(stack1, 0, 2, false)) 
-					{
-						return ItemStack.EMPTY;
-					}
-					else if(index >= 4 && index < 31)
-					{
-						if(!this.mergeItemStack(stack1, 31, 35, false)) return ItemStack.EMPTY;
-					}
-					else if(index >= 31 && index < 40 && !this.mergeItemStack(stack1, 4, 31, false))
-					{
-						return ItemStack.EMPTY;
-					}
-				}
-			} 
-			else if(!this.mergeItemStack(stack1, 4, 35, false)) 
-			{
-				return ItemStack.EMPTY;
-			}
-			if(stack1.isEmpty())
-			{
-				slot.putStack(ItemStack.EMPTY);
-			}
-			else
-			{
-				slot.onSlotChanged();
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+    {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+        
+        if (slot != null && slot.getHasStack())
+        {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+            
+            if (index == 0)
+            {
+                if (!this.mergeItemStack(itemstack1, 1, 37, true))
+                {
+                    return ItemStack.EMPTY;
+                }
+                slot.onSlotChange(itemstack1, itemstack);
+            }
+            else if (index != 0)
+            {
+                if (index >= 1 && index < 37 && !this.mergeItemStack(itemstack1, 0, 1, false))
+                {
+                    return ItemStack.EMPTY;
+                }
+                //playerIn.inventoryContainer.getSlot(index).decrStackSize(64);
+            }
+            else if (!this.mergeItemStack(itemstack1, 1, 37, false))
+            {
+                return ItemStack.EMPTY;
+            }
 
-			}
-			if(stack1.getCount() == stack.getCount()) return ItemStack.EMPTY;
-			slot.onTake(playerIn, stack1);
-		}
-		return stack;
-	}
+            if (itemstack1.isEmpty())
+            {
+                slot.putStack(ItemStack.EMPTY);
+            }
+            else
+            {
+                slot.onSlotChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount())
+            {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, itemstack1);
+        }
+
+        return itemstack;
+    }
 }

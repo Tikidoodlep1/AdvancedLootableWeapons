@@ -2,14 +2,14 @@
 {
   "modid": "advancedlootableweapons",
   "name": "Advanced Lootable Weapons",
-  "description": "This aim of this mod is to create extremely diverse weapons without losing configurability.",
+  "description": "This aim of this mod is to create extremely diverse weapons without losing the ability to play both vanilla and modded.",
   "version": "1.0",
   "mcversion": "1.12",
   "url": "https://advanced-lootable-weapons.fandom.com/wiki/Advanced_Lootable_Weapons_Wiki",
   "updateUrl": "",
-  "authorList": ["Tiki"],
+  "authorList": ["Tiki", "Azurren", "DinoSoup", "Ravioli's Gale", "AprilFaded"],
   "credits": "Programming: Tiki
-  Textures: Ravioli's Gale & AprilFaded",
+  Textures: DinoSoup, Ravioli's Gale, & AprilFaded",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

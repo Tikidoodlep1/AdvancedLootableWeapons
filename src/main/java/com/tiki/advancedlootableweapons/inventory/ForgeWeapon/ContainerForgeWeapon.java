@@ -648,33 +648,33 @@ public class ContainerForgeWeapon extends Container{
     {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-
+        System.out.println(index);
         if (slot != null && slot.getHasStack())
         {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-
-            if (index == 2)
+            
+            if (index == 0 || index == 1 || index == 2)
             {
-                if (!this.mergeItemStack(itemstack1, 3, 36, true))
+                if (!this.mergeItemStack(itemstack1, 3, 39, true))
                 {
                     return ItemStack.EMPTY;
                 }
-
+                
                 slot.onSlotChange(itemstack1, itemstack);
             }
             else if (index != 0 && index != 1)
             {
-                if (index >= 3 && index < 36 && !this.mergeItemStack(itemstack1, 0, 2, false))
+                if (index >= 3 && index < 39 && !this.mergeItemStack(itemstack1, 0, 2, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 3, 36, false))
+            else if (!this.mergeItemStack(itemstack1, 3, 39, false))
             {
                 return ItemStack.EMPTY;
             }
-
+            
             if (itemstack1.isEmpty())
             {
                 slot.putStack(ItemStack.EMPTY);

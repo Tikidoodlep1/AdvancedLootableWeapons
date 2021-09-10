@@ -28,23 +28,10 @@ public class AlloyFurnaceRecipes
 	{
 		FurnaceRecipes furnace = FurnaceRecipes.instance();
 		
+		//Add all normal furnace recipes to this so it can be used as a more efficient alternative to the furnace :)
 		for(ItemStack input : FurnaceRecipes.instance().getSmeltingList().keySet()) {
 			addAlloyingRecipe(input, input, new ItemStack(furnace.getSmeltingResult(input).getItem(), 2), (furnace.getSmeltingExperience(input) * 2));
 		}
-		
-		/*
-		//Misc Furnace
-		addAlloyingRecipe(new ItemStack(Blocks.SAND), new ItemStack(Blocks.SAND), new ItemStack(Blocks.GLASS, 2), 0.2F);
-		addAlloyingRecipe(new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.COBBLESTONE), new ItemStack(Blocks.STONE, 2), 0.2F);
-		
-		//Ores
-		addAlloyingRecipe(new ItemStack(Blocks.IRON_ORE), new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT, 2), 2.0F);
-		addAlloyingRecipe(new ItemStack(Blocks.GOLD_ORE), new ItemStack(Blocks.GOLD_ORE), new ItemStack(Items.GOLD_INGOT, 2), 2.0F);
-		addAlloyingRecipe(new ItemStack(BlockInit.ore_copper), new ItemStack(BlockInit.ore_copper), new ItemStack(ItemInit.INGOT_COPPER, 2), 2.0F);
-		addAlloyingRecipe(new ItemStack(BlockInit.ore_tin), new ItemStack(BlockInit.ore_tin), new ItemStack(ItemInit.INGOT_TIN, 2), 2.0F);
-		addAlloyingRecipe(new ItemStack(BlockInit.ore_silver), new ItemStack(BlockInit.ore_silver), new ItemStack(ItemInit.INGOT_SILVER, 2), 2.0F);
-		addAlloyingRecipe(new ItemStack(BlockInit.ore_platinum), new ItemStack(BlockInit.ore_platinum), new ItemStack(ItemInit.INGOT_PLATINUM, 2), 2.0F);
-		*/
 		
 		//Alloys
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(BlockInit.rock_feldspar), new ItemStack(ItemInit.INGOT_KOBOLD, 4), 2.0F);
@@ -58,12 +45,23 @@ public class AlloyFurnaceRecipes
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM, 4), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
 	}
 	
+	public int getInputCount(ItemStack stack) {
+		ItemStack copyStack = new ItemStack(stack.getItem());
+		for(ItemStack rowStack : this.smeltingList.rowKeySet()) {
+			ItemStack rowCopy = new ItemStack(rowStack.getItem());
+			if(rowCopy.isItemEqualIgnoreDurability(copyStack)) {
+				return rowStack.getCount();
+			}
+		}
+		return -1;
+	}
+	
 	public void addAlloyingRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) 
 	{
 		if(getAlloyingResult(input1, input2) != ItemStack.EMPTY || getAlloyingResult(input2, input1) != ItemStack.EMPTY) return;
 		this.smeltingList.put(input1, input2, result);
 		this.smeltingList.put(input2, input1, result);
-		this.experienceList.put(result, Float.valueOf(experience));
+		this.experienceList.put(result, experience);
 	}
 	
 	public ItemStack getAlloyingResult(ItemStack input1, ItemStack input2) 
@@ -94,11 +92,21 @@ public class AlloyFurnaceRecipes
 		return this.smeltingList;
 	}
 	
+	public Map<ItemStack, Float> getExperienceMap(){
+		return this.experienceList;
+	}
+	
 	public float getAlloyingExperience(ItemStack stack)
 	{
-		for (ItemStack output : this.experienceList.keySet()) 
+		Map<ItemStack, Float> exp = getExperienceMap();
+		ItemStack checkStack = new ItemStack(stack.getItem());
+		System.out.println("expStack is: " + stack);
+		for (ItemStack output : exp.keySet()) 
 		{
-			return this.experienceList.get(output);
+			if(checkStack.isItemEqualIgnoreDurability(new ItemStack(output.getItem()))) {
+				System.out.println(output + " : " + exp.get(output));
+				return exp.get(output);
+			}
 		}
 		return 0.0F;
 	}

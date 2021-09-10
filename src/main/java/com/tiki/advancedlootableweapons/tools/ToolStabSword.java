@@ -18,7 +18,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -41,7 +40,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ToolStabSword extends Item implements IHasModel{
-	
 	private float attackDamage;
 	private double attackSpeed;
 	private final ToolMaterial material;
@@ -88,47 +86,47 @@ public class ToolStabSword extends Item implements IHasModel{
 		stack.setTagCompound(newNBT);//this.nbt);
 	}
 	
-	private void getAttributes(String type, ToolMaterial material) {		
+	private void getAttributes(String type, ToolMaterial material) {
 		switch(type){
 			case "dagger":
 				this.attackSpeed = ConfigHandler.GLOBAL_DAGGER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_DAGGER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 3.6F;
+				this.reach = 4.21F;
 				break;
 			case "kabutowari":
 				this.attackSpeed = ConfigHandler.GLOBAL_KABUTOWARI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KABUTOWARI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.1F;
+				this.reach = 4.39F;
 				break;
 			case "rapier":
 				this.attackSpeed = ConfigHandler.GLOBAL_RAPIER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_RAPIER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.1F;
+				this.reach = 5.29F;
 				break;
 			case "talwar":
 				this.attackSpeed = ConfigHandler.GLOBAL_TALWAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_TALWAR_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.9F;
+				this.reach = 5.0F;
 				break;
 			case "cleaver":
 				this.attackSpeed = ConfigHandler.GLOBAL_CLEAVER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_CLEAVER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.5F;
+				this.reach = 4.28F;
 				break;
 			case "mace":
 				this.attackSpeed = ConfigHandler.GLOBAL_MACE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MACE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.5F;
+				this.reach = 4.75F;
 				break;
 			case "staff":
 				this.attackSpeed = ConfigHandler.GLOBAL_STAFF_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_STAFF_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.1F;
+				this.reach = 6.28F;
 				break;
 			case "spear":
 				this.attackSpeed = ConfigHandler.GLOBAL_SPEAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SPEAR_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.5F;
+				this.reach = 6.74F;
 				break;
 		}
 	}
@@ -251,15 +249,16 @@ public class ToolStabSword extends Item implements IHasModel{
         float f5 = MathHelper.sin(-f * 0.017453292F);
         float f6 = f3 * f4;
         float f7 = f2 * f4;
-        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
+        double d3 = this.getReach();
         Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
         return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
 	}
 	
-	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+	@Nullable
+	public EntityLivingBase canHitAnyEntities(EntityLivingBase entityLiving) {
 		World world = entityLiving.getEntityWorld();
-		float reach = this.getReach();//(float) ((this.getReach() - 5.5) + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+		float reach = this.getReach();//(float) ((this.getReach() - 6.4) + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+		//System.out.println("Default reach is: " + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
 		//System.out.println("reach is: " + reach);
 		float f = entityLiving.rotationPitch;
         float f1 = entityLiving.rotationYaw;
@@ -288,21 +287,36 @@ public class ToolStabSword extends Item implements IHasModel{
 				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
 				//System.out.println("dist: " + dist);
 				
-				if(dist < distClosest) {
+				if(dist < this.getReach() && dist < distClosest) {
 					ent = e;
 					distClosest = dist;
 				}
 			}
 		}
 		
+		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
+		//System.out.println("trace: " + trace);
 		//System.out.println(ent);
 		if(ent != null) {
-			System.out.println("entity is not null!");
-			if(entityLiving instanceof EntityPlayer) {
-				((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
-				if(!((EntityPlayer) entityLiving).isCreative()) {
-					stack.attemptDamageItem(1, new Random(), null);
+			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
+			//System.out.println("entity is not null!");
+				if(entityLiving instanceof EntityPlayer) {
+					return ent;
+				}else {
+					return ent;
 				}
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		EntityLivingBase ent = canHitAnyEntities(entityLiving);
+		if(ent != null) {
+			if(!((EntityPlayer) entityLiving).isCreative()) {
+				((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
+				stack.attemptDamageItem(1, new Random(), null);
 			}else {
 				entityLiving.attackEntityAsMob(ent);
 				stack.attemptDamageItem(1, new Random(), null);
