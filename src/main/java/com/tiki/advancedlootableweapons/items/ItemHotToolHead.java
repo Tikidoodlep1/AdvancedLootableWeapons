@@ -45,7 +45,7 @@ public class ItemHotToolHead extends Item implements IHasModel{
 				int i = stack.getMetadata();
 		        if(i <= 2999) {
 		        	return 0;
-		        }else if(i >= 2999 && i <= 5999) {
+		        }else if(i >= 2999 && i <= 4999) {
 		        	return 1;
 		        }else {
 		        	return 2;

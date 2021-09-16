@@ -53,7 +53,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 		BlockPos pos = new BlockPos((int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 		
 		if(!worldIn.isRemote) {
-			ContainerSharpeningStone.sendActiveMaterial(this);
 			playerIn.openGui(Alw.instance, ModInfo.GUI_SHARPENING_STONE, worldIn, handIn.ordinal(), -1, -1);
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 		}else {
@@ -108,4 +107,7 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 		tooltip.add("Right-click with this item to sharpen your weapons!");
     }
 
+	public String getMaterial() {
+		return this.material.toString();
+	}
 }

@@ -5,6 +5,8 @@ import java.util.Map;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -29,7 +31,7 @@ public class ContainerSharpeningStone extends Container{
     private final IInventory inputSlot;
     private final World world;
 
-    private static ItemSharpeningStone activeStone;
+    private ItemSharpeningStone activeStone;
     int enchLevel;
     Map<Enchantment, Integer> data;
     
@@ -38,22 +40,36 @@ public class ContainerSharpeningStone extends Container{
     {
         this(playerInventory, worldIn, player);
     }
-
-    public static void sendActiveMaterial(ItemSharpeningStone stone) {
-    	activeStone = stone;
-    }
     
 	public ContainerSharpeningStone(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
     {
         this.outputSlot = new InventoryCraftResult();
         this.inputSlot = new InventoryBasic("Sharpening Stone", true, 1);
         this.world = worldIn;
+        for(ItemStack i : player.inventory.mainInventory) {
+        	if(i.getItem() instanceof ItemSharpeningStone) {
+        		activeStone = (ItemSharpeningStone)i.getItem();
+        		break;
+        	}
+        }
+        if(this.activeStone == null) {
+        	player.closeScreen();
+        }
         
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 43){
         	public boolean isItemValid(ItemStack stack)
             {
-        		//System.out.println("Checking if Item is valid");
         		String check = stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1);
+        		for(ItemStack i : player.inventory.mainInventory) {
+                	if(i.getItem() instanceof ItemSharpeningStone) {
+                		ItemSharpeningStone stone = (ItemSharpeningStone)i.getItem();
+                		String tempMatPath = stone.getMaterial();
+                		if(tempMatPath.substring(tempMatPath.indexOf('_') + 1).toLowerCase().equalsIgnoreCase(check)) {
+                			activeStone = (ItemSharpeningStone)i.getItem();
+                			break;
+                		}
+                	}
+                }
         		String check2 = activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'));
         		if(check.equalsIgnoreCase("shadow")) {
         			check = "shadow_platinum";
@@ -66,7 +82,9 @@ public class ContainerSharpeningStone extends Container{
         			check2 = "frost_steel";
         		}
         		
-            	if(check.equalsIgnoreCase(check2) && !stack.getItem().getUnlocalizedName().contains("ingot")) {
+        		System.out.println("check 1 is: " + check + ", check 2 is: " + check2);
+        		
+            	if(check.equalsIgnoreCase(check2) && (stack.getItem() instanceof ToolStabSword || stack.getItem() instanceof ToolSlashSword)) {
             			if(EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) < 6){
             				ItemStack copyStack = stack.copy();
             				enchLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, copyStack);
