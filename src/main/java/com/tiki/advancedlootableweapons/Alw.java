@@ -34,11 +34,11 @@ public class Alw {
 	
 	public static File config;
 	
-	public static final IAttribute MATERIAL = new RangedAttribute((IAttribute)null, "attribute.toolMaterial", 0.0D, 0.0D, 12.0D).setDescription("Material");
+	public static final IAttribute MATERIAL = new RangedAttribute((IAttribute)null, "attribute.toolMaterial", 0.0D, 0.0D, 12.0D);
 	public static final UUID MATERIAL_MODIFIER = UUID.fromString("ac55927e-2f67-4b25-a284-a4c26f42d9aa");
-	public static final IAttribute ATTACK_RANGE = new RangedAttribute((IAttribute)null, "generic.reachDistance", 5.0D, 0.0D, 1024.0D).setDescription("Attack Range");
+	public static final IAttribute ATTACK_RANGE = new RangedAttribute((IAttribute)null, "generic.reachDistance", 5.0D, 0.0D, 1024.0D);
 	public static final UUID ATTACK_RANGE_MODIFIER = UUID.fromString("972be6b4-924d-445f-afae-941b737f1b84");
-	public static final IAttribute BONUS_ATTACK_DAMAGE = new RangedAttribute((IAttribute)null, "generic.bonusAttackDamage", 0.0D, 0.0D, 2048.0D).setDescription("Bonus Attack Damage").setShouldWatch(true);
+	public static final IAttribute BONUS_ATTACK_DAMAGE = new RangedAttribute((IAttribute)null, "generic.bonusAttackDamage", 0.0D, 0.0D, 2048.0D);
 	public static final UUID BONUS_ATTACK_DAMAGE_MODIFIER = UUID.fromString("6cc22d6f-317d-43c4-9617-732527c08f6a");
 	public static final UUID HEAD_MOVEMENT_SPEED_MODIFIER = UUID.fromString("e0d86ef8-95f3-40d6-a641-7505ca4e0af2");
 	public static final UUID CHEST_MOVEMENT_SPEED_MODIFIER = UUID.fromString("447d94e0-8018-4fef-acad-1b7a21d58cce");

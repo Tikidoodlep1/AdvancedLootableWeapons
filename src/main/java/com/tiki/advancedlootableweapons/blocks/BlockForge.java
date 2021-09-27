@@ -7,6 +7,8 @@ import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -29,7 +31,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,8 +42,9 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	private static boolean keepinventory;
+	protected static final AxisAlignedBB FORGE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 2.0D, 2.0D, 2.0D);
 	
-	public BlockForge(String name) 
+	public BlockForge(String name)
 	{
 		super(name, Material.IRON);
 		setSoundType(SoundType.METAL);
@@ -47,6 +52,26 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 		this.setHarvestLevel("pickaxe", 1);
 		this.fullBlock = false;
 	}
+	
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {        
+        if (worldIn.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != this)
+        {
+            worldIn.setBlockToAir(pos);
+        }else if(worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() != this) {
+        	if (!worldIn.isRemote)
+        	{
+            	this.dropBlockAsItem(worldIn, pos, state, 0);
+        	}
+        	
+        	worldIn.setBlockToAir(pos);
+        }
+    }
+	
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        return FORGE_AABB;
+    }
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state)

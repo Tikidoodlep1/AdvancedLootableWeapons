@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/dusksteel_sharpening_stone"
+		"layer0": "advancedlootableweapons:items/iron_forge_hammer"
 	}
 }

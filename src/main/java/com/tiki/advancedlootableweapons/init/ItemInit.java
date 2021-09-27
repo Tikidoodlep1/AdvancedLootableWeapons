@@ -400,7 +400,7 @@ public class ItemInit {
 	public static Item DUSKSTEEL_SHARPENING_STONE;
 	
 	//Forge Hammers
-	public static final Item STONE_FORGE_HAMMER = new ToolForgeHammer("stone_forge_hammer", ToolMaterial.WOOD).setMaxStackSize(1);
+	public static final Item STONE_FORGE_HAMMER = new ToolForgeHammer("stone_forge_hammer", ToolMaterial.STONE).setMaxStackSize(1);
 	public static final Item IRON_FORGE_HAMMER = new ToolForgeHammer("iron_forge_hammer", ToolMaterial.IRON).setMaxStackSize(1);
 	public static Item KOBOLD_FORGE_HAMMER;
 	public static final Item COPPER_FORGE_HAMMER = new ToolForgeHammer("copper_forge_hammer", MAT_COPPER).setMaxStackSize(1);
