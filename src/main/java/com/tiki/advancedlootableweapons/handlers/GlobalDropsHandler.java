@@ -54,26 +54,26 @@ public class GlobalDropsHandler {
 			String clsName = cls.getName();
 			String firstFormattedName = clsName.substring(21);
 			String secondFormattedName = firstFormattedName.substring(firstFormattedName.indexOf('.') + 7).toUpperCase();
-			System.out.println("formatted name is: " + secondFormattedName);
+			//System.out.println("formatted name is: " + secondFormattedName);
 			MobType type = getEntityType(cls);
 			MobType hostility = getEntityHostility(cls);
 			try {
 				if(!ConfigHandler.ONLY_BOSS_DROPS_SHADOW) {
 					if((ConfigHandler.LAND_MOBS_DROP_SHADOW && type.equals(MobType.LAND)) || (ConfigHandler.WATER_MOBS_DROP_SHADOW && type.equals(MobType.WATER)) || (ConfigHandler.AIR_MOBS_DROP_SHADOW && type.equals(MobType.AIR)) || (ConfigHandler.BOSS_DROPS_SHADOW && isEntityBoss(cls))) {
 						if((ConfigHandler.PEACEFUL_MOBS_DROP_SHADOW && hostility.equals(MobType.PEACEFUL)) || (ConfigHandler.NEUTRAL_MOBS_DROP_SHADOW && hostility.equals(MobType.NEUTRAL)) || (ConfigHandler.HOSTILE_MOBS_DROP_SHADOW && hostility.equals(MobType.HOSTILE))) {
-							System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
+							//System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
 							entityMap.put(cls, ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getBoolean(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW")));
 						}else {
-							System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
+							//System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
 							entityMap.put(cls, false);
 						}
 					}else {
-						System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
+						//System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
 						entityMap.put(cls, false);
 					}
 				}else {
 					if(isEntityBoss(cls)) {
-						System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
+						//System.out.println(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getName() + ", MobType: " + type.toString() + " & " + hostility.toString());
 						entityMap.put(cls, ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW").getBoolean(ConfigHandler.class.getDeclaredField(secondFormattedName + "_DROP_SHADOW")));
 					}
 				}

@@ -7,8 +7,6 @@ import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -31,9 +29,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,7 +38,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	private static boolean keepinventory;
-	protected static final AxisAlignedBB FORGE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 2.0D, 2.0D, 2.0D);
 	
 	public BlockForge(String name)
 	{
@@ -52,26 +47,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 		this.setHarvestLevel("pickaxe", 1);
 		this.fullBlock = false;
 	}
-	
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {        
-        if (worldIn.getBlockState(pos.offset(EnumFacing.UP)).getBlock() != this)
-        {
-            worldIn.setBlockToAir(pos);
-        }else if(worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() != this) {
-        	if (!worldIn.isRemote)
-        	{
-            	this.dropBlockAsItem(worldIn, pos, state, 0);
-        	}
-        	
-        	worldIn.setBlockToAir(pos);
-        }
-    }
-	
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        return FORGE_AABB;
-    }
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
@@ -122,49 +97,26 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	}
 	
 	@SideOnly(Side.CLIENT)
-    @SuppressWarnings("incomplete-switch")
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-		EnumFacing enumfacing = (EnumFacing)stateIn.getValue(FACING);
-        double d0 = (double)pos.getX() + 0.5D + rand.nextDouble() * 4.0D / 16.0D;
-        double d1 = (double)pos.getY() + rand.nextDouble() * 6.0D / 16.0D;
-        double d2 = (double)pos.getZ() + 0.5D;
-        double d4 = rand.nextDouble() * 0.6D - 0.3D;
+        double d0 = (double)pos.getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+        double d1 = (double)pos.getY() + 0.2D + rand.nextDouble() * 6.0D / 16.0D;
+        double d2 = (double)pos.getZ() + 0.3D + rand.nextDouble()* 6.0D / 16.0D;
 
         if (rand.nextDouble() < 0.1D)
         {
             worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.75D, (double)pos.getZ() + 0.5D, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
         }
-
-        switch (enumfacing)
-        {
-            case WEST:
-            	//-0.52D
-                worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + 0.75D, d2 + d4, 0.0D, 0.0D, 0.0D);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1+ 0.75D, d2 + d4, 0.0D, 0.0D, 0.0D);
-                break;
-            case EAST:
-            	//+0.52D
-                worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + 0.75D, d2 + d4, 0.0D, 0.0D, 0.0D);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1 + 0.75D, d2 + d4, 0.0D, 0.0D, 0.0D);
-                break;
-            case NORTH:
-            	//+d4
-                worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + 0.75D, d2 - 0.52D, 0.0D, 0.0D, 0.0D);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1 + 0.75D, d2 - 0.52D, 0.0D, 0.0D, 0.0D);
-                break;
-            case SOUTH:
-            	//+d4
-                worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1 + 0.75D, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
-                worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1 + 0.75D, d2 + 0.52D, 0.0D, 0.0D, 0.0D);
-        }
+        
+        worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+        worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
     }
 	
 	public static void setState(boolean active, World worldIn, BlockPos pos) 
 	{
 		IBlockState state = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
-		System.out.println("TILE ENTITY INFORMATION: " + tileentity.getTileData());
+		//System.out.println("TILE ENTITY INFORMATION: " + tileentity.getTileData());
 		keepinventory = true;
 		
 		worldIn.setBlockState(pos, BlockInit.forge.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);

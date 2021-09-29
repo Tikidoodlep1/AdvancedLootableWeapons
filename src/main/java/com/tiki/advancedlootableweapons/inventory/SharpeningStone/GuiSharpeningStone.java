@@ -2,6 +2,8 @@ package com.tiki.advancedlootableweapons.inventory.SharpeningStone;
 
 import java.io.IOException;
 
+import org.lwjgl.input.Keyboard;
+
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 
