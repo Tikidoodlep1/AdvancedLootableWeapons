@@ -28,6 +28,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -249,13 +250,13 @@ public class ToolStabSword extends Item implements IHasModel{
         float f5 = MathHelper.sin(-f * 0.017453292F);
         float f6 = f3 * f4;
         float f7 = f2 * f4;
-        double d3 = this.getReach();
+        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
         Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
         return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
 	}
 	
-	@Nullable
-	public EntityLivingBase canHitAnyEntities(EntityLivingBase entityLiving) {
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		World world = entityLiving.getEntityWorld();
 		float reach = this.getReach();//(float) ((this.getReach() - 6.4) + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
 		//System.out.println("Default reach is: " + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
@@ -301,25 +302,14 @@ public class ToolStabSword extends Item implements IHasModel{
 			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
 			//System.out.println("entity is not null!");
 				if(entityLiving instanceof EntityPlayer) {
-					return ent;
+					((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
+					if(!((EntityPlayer) entityLiving).isCreative()) {
+						stack.attemptDamageItem(1, new Random(), null);
+					}
 				}else {
-					return ent;
+					entityLiving.attackEntityAsMob(ent);
+					stack.attemptDamageItem(1, new Random(), null);
 				}
-			}
-		}
-		return null;
-	}
-	
-	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-		EntityLivingBase ent = canHitAnyEntities(entityLiving);
-		if(ent != null) {
-			if(!((EntityPlayer) entityLiving).isCreative()) {
-				((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
-				stack.attemptDamageItem(1, new Random(), null);
-			}else {
-				entityLiving.attackEntityAsMob(ent);
-				stack.attemptDamageItem(1, new Random(), null);
 			}
 		}
 		return false;
@@ -386,17 +376,17 @@ public class ToolStabSword extends Item implements IHasModel{
 				armor = (ArmorBonusesBase)i.getItem();
 				if(armor.armorType == EntityEquipmentSlot.CHEST) {
 					this.bonusDamage = armor.getBonusAttackDamage();
-					target.setHealth(target.getHealth() - (float)this.bonusDamage);
+					if(attacker instanceof EntityPlayer) {
+						target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)attacker), (float)this.bonusDamage);
+					}else {
+						target.attackEntityFrom(DamageSource.causeMobDamage(attacker), (float)this.bonusDamage);
+					}
 					break;
 				}
-			}else {
-				this.bonusDamage = 0.0D;
-				target.setHealth(target.getHealth() - (float)this.bonusDamage);
 			}
 		}
 		
-        stack.attemptDamageItem(1, new Random(), null);//damageItem(1, attacker);
-        //target.onDeath(DamageSource.causePlayerDamage((EntityPlayer)attacker));
+		//stack.attemptDamageItem(1, new Random(), null);
         return true;
     }
 	

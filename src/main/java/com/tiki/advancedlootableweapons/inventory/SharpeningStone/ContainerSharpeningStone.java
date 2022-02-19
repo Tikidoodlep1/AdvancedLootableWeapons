@@ -82,7 +82,7 @@ public class ContainerSharpeningStone extends Container{
         			check2 = "frost_steel";
         		}
         		
-        		System.out.println("check 1 is: " + check + ", check 2 is: " + check2);
+        		//System.out.println("check 1 is: " + check + ", check 2 is: " + check2);
         		
             	if(check.equalsIgnoreCase(check2) && (stack.getItem() instanceof ToolStabSword || stack.getItem() instanceof ToolSlashSword)) {
             			if(EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) < 6){

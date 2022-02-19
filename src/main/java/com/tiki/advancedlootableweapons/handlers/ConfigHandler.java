@@ -134,6 +134,7 @@ public class ConfigHandler {
 	public static float CRYSTALLITE_ARMOR_HARDNESS = 3.75F;
 	public static float DUSKSTEEL_ARMOR_HARDNESS = 4.88F;
 	
+	public static float SHADOW_DROP_RATE = 0.05F;
 	public static boolean LAND_MOBS_DROP_SHADOW = true;
 	public static boolean AIR_MOBS_DROP_SHADOW = false;
 	public static boolean WATER_MOBS_DROP_SHADOW = false;
@@ -344,6 +345,7 @@ public class ConfigHandler {
 		
 		category = "GLOBAL DROPS";
 		config.addCustomCategoryComment(category, "You can modify which vanilla mobs drop shadows, blood, etc... NOTE: Turning individual mobs to false will override any general category they're in. Ex. if \"Zombie - Shadow\" is false, but \"Hostile Mobs - Shadow\" is true, the zombie will NOT drop the shadow item.");
+		SHADOW_DROP_RATE = config.getFloat("Shadow Drop Rate", category, 0.05F, 0.01F, 1.0F, "The drop rate for the shadow item in percentage, 0.05 = 5%");
 		LAND_MOBS_DROP_SHADOW = config.getBoolean("Land Mobs - Shadow", category, true, "Should land mobs drop the shadow item? (True/False)");
 		WATER_MOBS_DROP_SHADOW = config.getBoolean("Water Mobs - Shadow", category, false, "Should water mobs drop the shadow item? (True/False)");
 		AIR_MOBS_DROP_SHADOW = config.getBoolean("Air Mobs - Shadow", category, false, "Should air mobs drop the shadow item? NOTE: The ender dragon and wither are considered flying, but \"Bosses - Shadow\" will override this option. (True/False)");
