@@ -83,8 +83,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	public void setMaximumDamage(ItemStack stack, int maxDamage) {
 		NBTTagCompound newNBT = new NBTTagCompound();
 		newNBT.setInteger("maxDurability", maxDamage);
-		//this.nbt.setInteger("maxDurability", maxDamage);
-		stack.setTagCompound(newNBT);//this.nbt);
+		stack.setTagCompound(newNBT);
 	}
 	
 	private void getAttributes(String type, ToolMaterial material) {
@@ -132,40 +131,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		}
 	}
 	
-	/*
-	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn){
-		this.rand = randGen.nextBoolean();
-		
-		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)]);
-		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
-		}
-		
-		if(randGen.nextBoolean() == true) {
-			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
-		}else{
-			this.randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
-			this.randDamage += (this.randDamage * 2);
-		}
-		
-		this.nbt.setFloat("bonusDamage", this.randDamage);
-		this.tempRandDamage = nbt.getFloat("bonusDamage");
-		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.tempRandDamage, 0), EntityEquipmentSlot.MAINHAND);
-		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)((this.getAttackDamage() + 1) - nbt.getDouble("reducedDamage")), 0), EntityEquipmentSlot.MAINHAND);
-		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
-		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
-			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
-		}
-        stack.setTagCompound(this.nbt);
-	}
-	*/
-	
 	public void generateNameAndModifiers(ItemStack stack, double addedDamage) {
-		
-		//System.out.println("Running GenerateNameAndModifiers!!!!!!!!");
-		//float tempRandDamage;
 		float randDamage;
 		double totalDamage;
 		this.rand = randGen.nextBoolean();
@@ -187,46 +153,13 @@ public class ToolStabSword extends Item implements IHasModel{
 		}else {
 			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
 		}
-		//if(randGen.nextBoolean() == true) {
 		
-		//}else{
-			//randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
-			//randDamage += (randDamage * 2);
-		//}
-		
-		//this.nbt.setFloat("bonusDamage", randDamage);
-		//tempRandDamage = this.nbt.getFloat("bonusDamage");
-		//this.nbt.setDouble("addedDamage", addedDamage);
-		//this.addedDamage = this.nbt.getDouble("addedDamage");
-		//System.out.println("Random damage is: " + randDamage + ", TempRandDamage is: " + tempRandDamage);
-		//System.out.println("GetDamage: " + (this.getAttackDamage() + 1) + ", addedDamage: " + addedDamage);
-		
-		//System.out.println("Total Damage: " + totalDamage);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
 		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
 			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
 		}
-		//System.out.println("Running Modifiers!!!!!!!!");
-		//stack.setTagCompound(this.nbt);
 	}
-	
-	/*
-	public void generateModifiers(ItemStack stack, double addedDamage){
-		double totalDamage;
-		float randDamage;
-		
-		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
-		
-		totalDamage = ((this.getAttackDamage() + 1) + randDamage + addedDamage);
-		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
-		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
-		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
-			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
-		}
-		//stack.setTagCompound(this.nbt);
-	}
-	*/
 	
 	public double getAttackSpeed() {
 		return this.attackSpeed;
@@ -258,9 +191,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		World world = entityLiving.getEntityWorld();
-		float reach = this.getReach();//(float) ((this.getReach() - 6.4) + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
-		//System.out.println("Default reach is: " + entityLiving.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue());
-		//System.out.println("reach is: " + reach);
+		float reach = this.getReach();
 		float f = entityLiving.rotationPitch;
         float f1 = entityLiving.rotationYaw;
         double d0 = entityLiving.posX;
@@ -276,17 +207,14 @@ public class ToolStabSword extends Item implements IHasModel{
         Vec3d vec3d1 = vec3d.addVector((double)f6 * reach, (double)f5 * reach, (double)f7 * reach);
         
 		AxisAlignedBB axis = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
-		//System.out.println("minX: " + axis.minX + ", minY: " + axis.minY + ", minZ: " + axis.minZ + ", maxX: " + axis.maxX + ", maxY: " + axis.maxY + ", maxZ: " + axis.maxZ);
 		
 		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
-		//System.out.println(entList);
 		EntityLivingBase ent = null;
 		
 		double distClosest = Double.MAX_VALUE;
 		for(EntityLivingBase e : entList) {
 			if(!e.equals(entityLiving)) {
 				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
-				//System.out.println("dist: " + dist);
 				
 				if(dist < this.getReach() && dist < distClosest) {
 					ent = e;
@@ -296,11 +224,9 @@ public class ToolStabSword extends Item implements IHasModel{
 		}
 		
 		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
-		//System.out.println("trace: " + trace);
-		//System.out.println(ent);
+		
 		if(ent != null) {
 			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
-			//System.out.println("entity is not null!");
 				if(entityLiving instanceof EntityPlayer) {
 					((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
 					if(!((EntityPlayer) entityLiving).isCreative()) {
@@ -386,7 +312,6 @@ public class ToolStabSword extends Item implements IHasModel{
 			}
 		}
 		
-		//stack.attemptDamageItem(1, new Random(), null);
         return true;
     }
 	

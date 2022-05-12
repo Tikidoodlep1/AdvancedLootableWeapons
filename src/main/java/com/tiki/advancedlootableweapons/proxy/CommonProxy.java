@@ -43,7 +43,6 @@ public class CommonProxy {
 	
 	public void onEntityDrops(LivingDropsEvent event) {
 		Random rand = new Random();
-		//System.out.println("Entity: " + event.getEntity().getName() + " = " + GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass()));
 		if((rand.nextInt(100) + 1) < ConfigHandler.SHADOW_DROP_RATE*100 && GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass())) {
 			Entity entity = event.getEntity();
 			if(event.getLootingLevel() > 0) {

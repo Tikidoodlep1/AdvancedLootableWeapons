@@ -59,16 +59,6 @@ public class WorldGenCustomOres implements IWorldGenerator{
 			
 			gen.generate(world, rand, new BlockPos(x, y, z));
 		}
-		/*
-		for(int i = 0; i < chance; i++) {
-			//rand.nextInt(100);
-			int x = chunkX * 16 + rand.nextInt(16);
-			int y = minHeight + rand.nextInt(heightDiff);
-			int z = chunkZ * 16 + rand.nextInt(16);
-			
-			gen.generate(world, rand, new BlockPos(x,y,z));
-		}
-		*/
 	}
 	
 }

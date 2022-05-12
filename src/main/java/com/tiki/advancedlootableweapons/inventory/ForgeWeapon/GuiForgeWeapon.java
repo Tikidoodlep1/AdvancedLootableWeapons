@@ -3,7 +3,6 @@ package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 import java.io.IOException;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -39,14 +38,12 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 60, this.getGuiTop() + 190, 20, 20, "Tool Handle", 61, 60);
 	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon", 61, 60);
 	    private int buttonPressed;
-	    private boolean buttonsDrawn;
 	    private final ContainerForgeWeapon container;
 
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, ContainerForgeWeapon container)
 	    {
 	    	super(new ContainerForgeWeapon(inventoryIn, inventoryIn.player.getEntityWorld(), inventoryIn.player));
 	        this.container = container;
-	        this.buttonsDrawn = true;
 	        this.drawButtons();
 	    }
 	    
@@ -72,107 +69,6 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    }
 	    
 	    public void updateScreen(){
-	    	if(container != null) {
-	    		//System.out.println(this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().getDisplayName());
-	    		//System.out.println(this.container.getSlot(0).getStack().getDisplayName());
-	    		if(this.buttonsDrawn == false && this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-	    			this.daggerButton.enabled = true;
-	    			this.daggerButton.visible = true;
-	    			
-	    			this.kabutowariButton.enabled = true;
-	    			this.kabutowariButton.visible = true;
-	    			
-	    			this.talwarButton.enabled = true;
-	    			this.talwarButton.visible = true;
-	    			
-	    			this.rapierButton.enabled = true;
-	    			this.rapierButton.visible = true;
-	    			
-	    			this.maceButton.enabled = true;
-	    			this.maceButton.visible = true;
-	    			
-	    			this.cleaverButton.enabled = true;
-	    			this.cleaverButton.visible = true;
-	    			
-	    			this.staffButton.enabled = true;
-	    			this.staffButton.visible = true;
-	    			
-	    			this.longswordButton.enabled = true;
-	    			this.longswordButton.visible = true;
-	    			
-	    			this.kodachiButton.enabled = true;
-	    			this.kodachiButton.visible = true;
-	    			
-	    			this.battleaxeButton.enabled = true;
-	    			this.battleaxeButton.visible = true;
-	    			
-	    			this.zweihanderButton.enabled = true;
-	    			this.zweihanderButton.visible = true;
-	    			
-	    			this.nodachiButton.enabled = true;
-	    			this.nodachiButton.visible = true;
-	    			
-	    			this.sabreButton.enabled = true;
-	    			this.sabreButton.visible = true;
-	    			
-	    			this.makhairaButton.enabled = true;
-	    			this.makhairaButton.visible = true;
-	    			
-	    			this.spearButton.enabled = true;
-	    			this.spearButton.visible = true;
-	    			
-	    			this.buttonsDrawn = true;
-	    			System.out.println("Enabling Buttons");
-	    		}else if(this.buttonsDrawn == true && !(this.container.getSlotFromInventory(this.container.inputSlot, 0).getHasStack() || this.container.getSlotFromInventory(this.container.inputSlot, 0).getStack().isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)))){
-	    			this.daggerButton.enabled = false;
-	    			this.daggerButton.visible = false;
-	    			
-	    			this.kabutowariButton.enabled = false;
-	    			this.kabutowariButton.visible = false;
-	    			
-	    			this.talwarButton.enabled = false;
-	    			this.talwarButton.visible = false;
-	    			
-	    			this.rapierButton.enabled = false;
-	    			this.rapierButton.visible = false;
-	    			
-	    			this.maceButton.enabled = false;
-	    			this.maceButton.visible = false;
-	    			
-	    			this.cleaverButton.enabled = false;
-	    			this.cleaverButton.visible = false;
-	    			
-	    			this.staffButton.enabled = false;
-	    			this.staffButton.visible = false;
-	    			
-	    			this.longswordButton.enabled = false;
-	    			this.longswordButton.visible = false;
-	    			
-	    			this.kodachiButton.enabled = false;
-	    			this.kodachiButton.visible = false;
-	    			
-	    			this.battleaxeButton.enabled = false;
-	    			this.battleaxeButton.visible = false;
-	    			
-	    			this.zweihanderButton.enabled = false;
-	    			this.zweihanderButton.visible = false;
-	    			
-	    			this.nodachiButton.enabled = false;
-	    			this.nodachiButton.visible = false;
-	    			
-	    			this.sabreButton.enabled = false;
-	    			this.sabreButton.visible = false;
-	    			
-	    			this.makhairaButton.enabled = false;
-	    			this.makhairaButton.visible = false;
-	    			
-	    			this.spearButton.enabled = false;
-	    			this.spearButton.visible = false;
-	    			
-	    			this.buttonsDrawn = false;
-	    			System.out.println("Disabling Buttons");
-	    		}
-	    	}
 	    }
 	    
 	    public void setButtonPressed(int button) {
@@ -224,7 +120,6 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 	        this.drawButtons();
 	    }
-	    
 	    
 	    public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)
 	    {

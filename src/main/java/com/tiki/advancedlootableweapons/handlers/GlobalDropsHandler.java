@@ -87,10 +87,6 @@ public class GlobalDropsHandler {
 				e.printStackTrace();
 			}
 		}
-		
-		for(Class<? extends EntityLivingBase> clazz : entityMap.keySet()) {
-			System.out.println(clazz.getName() + ", " + entityMap.get(clazz));
-		}
 	}
 	
 	public static Map<Class<? extends EntityLivingBase>, Boolean> getEntityMap(){

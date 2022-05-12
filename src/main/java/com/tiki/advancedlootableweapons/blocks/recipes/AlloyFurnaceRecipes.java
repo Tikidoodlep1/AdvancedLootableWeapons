@@ -100,11 +100,11 @@ public class AlloyFurnaceRecipes
 	{
 		Map<ItemStack, Float> exp = getExperienceMap();
 		ItemStack checkStack = new ItemStack(stack.getItem());
-		System.out.println("expStack is: " + stack);
+		//System.out.println("expStack is: " + stack);
 		for (ItemStack output : exp.keySet()) 
 		{
 			if(checkStack.isItemEqualIgnoreDurability(new ItemStack(output.getItem()))) {
-				System.out.println(output + " : " + exp.get(output));
+				//System.out.println(output + " : " + exp.get(output));
 				return exp.get(output);
 			}
 		}
