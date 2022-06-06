@@ -301,97 +301,96 @@ public class ContainerForgeWeapon extends Container {
 		nbt.setInteger("addedDurability", nbt.getInteger("addedDurability"));
 		
 		int weapon = this.buttonPressed;
-		
-		if(stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
-			NBTTagCompound list = new NBTTagCompound();
-			list = stack.getTagCompound();
-			int heat = stack.getItemDamage() + 2800;
-			if(heat > 6000) {
-				heat = 6000;
-			}
-			System.out.println("button pressed is " + this.buttonPressed);
-        	if(weapon <= 14 && getItemString(inputSlot.getStackInSlot(1), false).equalsIgnoreCase(list.getString("Material"))) {
-        		ItemStack changeStack = WeaponLevels.getStackByOrdinal(weapon);
-        		System.out.println(changeStack.toString());
-        		changeStack.setItemDamage(heat);
-        		inputSlot.decrStackSize(0, 1);
-        		inputSlot.decrStackSize(1, 1);
-        		inputSlot.setInventorySlotContents(2, changeStack);
-        		nbt.setDouble("addedDamage", list.getDouble("addedDamage") + checkHeat(stack));
-    			nbt.setInteger("addedDurability", list.getInteger("addedDurability") + (int) (checkHeat(stack) * 100));
-        		nbt.setString("Material", list.getString("Material"));
-        		inputSlot.getStackInSlot(2).setTagCompound(nbt);
-        		damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
-        		if(!(player.inventory.getStackInSlot(toolForgeHammer).getItem() instanceof ToolForgeHammer)) {
-					toolForgeHammer = -1;
+		if(inputSlot.getStackInSlot(2).getItem() == Items.AIR) {
+			if(weapon <= 14 && stack.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD))) {
+				NBTTagCompound list = new NBTTagCompound();
+				list = stack.getTagCompound();
+				int heat = stack.getItemDamage() + 2800;
+				if(heat > 6000) {
+					heat = 6000;
 				}
-        	}
-        	return true;
-		}else {
-			if(weapon == 98) {
-				if(ingotMap.containsKey(getItemString(stack, false))) {
-					ItemStack changeStack = new ItemStack(ItemInit.HOT_TOOL_ROD);
-					changeStack.setItemDamage(6000);
+				if(getItemString(inputSlot.getStackInSlot(1), false).equalsIgnoreCase(list.getString("Material"))) {
+					ItemStack changeStack = WeaponLevels.getStackByOrdinal(weapon);
+					changeStack.setItemDamage(heat);
 					inputSlot.decrStackSize(0, 1);
+					inputSlot.decrStackSize(1, 1);
 					inputSlot.setInventorySlotContents(2, changeStack);
+					nbt.setDouble("addedDamage", list.getDouble("addedDamage") + checkHeat(stack));
+					nbt.setInteger("addedDurability", list.getInteger("addedDurability") + (int) (checkHeat(stack) * 100));
+					nbt.setString("Material", list.getString("Material"));
 					inputSlot.getStackInSlot(2).setTagCompound(nbt);
 					damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
 					if(!(player.inventory.getStackInSlot(toolForgeHammer).getItem() instanceof ToolForgeHammer)) {
 						toolForgeHammer = -1;
 					}
-					return true;
 				}
-			}else if(weapon == 99) {
-				if(checkItem(stack) == false) {
-					boolean containsOreDict = false;
-					for(NonNullList<ItemStack> oreStack : oreDictMap.values()) {
-	        			if(OreDictionary.containsMatch(false, oreStack, stack)) {
-	        				containsOreDict = true;
-	        			}
-	        		}
-					if(ingotMap.containsKey(getItemString(stack, false)) || containsOreDict) {
-						ItemStack result = new ItemStack(ItemInit.HOT_TOOL_HEAD);
-						result.setItemDamage(6000);
+				return true;
+			}else {
+				if(weapon == 98) {
+					if(ingotMap.containsKey(getItemString(stack, false))) {
+						ItemStack changeStack = new ItemStack(ItemInit.HOT_TOOL_ROD);
+						changeStack.setItemDamage(6000);
 						inputSlot.decrStackSize(0, 1);
-						inputSlot.setInventorySlotContents(2, result);
+						inputSlot.setInventorySlotContents(2, changeStack);
 						inputSlot.getStackInSlot(2).setTagCompound(nbt);
 						damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
 						if(!(player.inventory.getStackInSlot(toolForgeHammer).getItem() instanceof ToolForgeHammer)) {
 							toolForgeHammer = -1;
 						}
 						return true;
-					}else if(stack.getItem() instanceof ItemHotToolHead) {
-						ItemStack result = ItemStack.EMPTY;
-						result = getNextToolHead(inputSlot.getStackInSlot(0)); // just changed from getNextToolHead(stack) 
-						NBTTagCompound list = new NBTTagCompound();
-						list = stack.getTagCompound();
-						int heat = stack.getItemDamage() + 2800;
-						System.out.println("Next tool head is: " + getNextToolHead(inputSlot.getStackInSlot(0)).getDisplayName());
-						if(result.getItem() instanceof ItemHotToolHead && getItemString(inputSlot.getStackInSlot(1), false).equalsIgnoreCase(list.getString("Material")) && !(result.isItemEqualIgnoreDurability(ItemStack.EMPTY) && result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)) || result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)))){
-							if(heat > 6000) {
-								heat = 6000;
+					}
+				}else if(weapon == 99) {
+					if(checkItem(stack) == false) {
+						boolean containsOreDict = false;
+						for(NonNullList<ItemStack> oreStack : oreDictMap.values()) {
+							if(OreDictionary.containsMatch(false, oreStack, stack)) {
+								containsOreDict = true;
 							}
-							result.setItemDamage(heat);
+						}
+						if(ingotMap.containsKey(getItemString(stack, false)) || containsOreDict) {
+							ItemStack result = new ItemStack(ItemInit.HOT_TOOL_HEAD);
+							result.setItemDamage(6000);
 							inputSlot.decrStackSize(0, 1);
-							inputSlot.decrStackSize(1, 1);
 							inputSlot.setInventorySlotContents(2, result);
-							nbt.setDouble("addedDamage", list.getDouble("addedDamage") + checkHeat(stack));
-							nbt.setInteger("addedDurability", list.getInteger("addedDurability") + (int) (checkHeat(stack) * 100));
-							nbt.setString("Material", list.getString("Material"));
 							inputSlot.getStackInSlot(2).setTagCompound(nbt);
 							damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
 							if(!(player.inventory.getStackInSlot(toolForgeHammer).getItem() instanceof ToolForgeHammer)) {
 								toolForgeHammer = -1;
 							}
 							return true;
-						}else {
-							return false;
+						}else if(stack.getItem() instanceof ItemHotToolHead) {
+							ItemStack result = ItemStack.EMPTY;
+							result = getNextToolHead(inputSlot.getStackInSlot(0));
+							NBTTagCompound list = new NBTTagCompound();
+							list = stack.getTagCompound();
+							int heat = stack.getItemDamage() + 2800;
+						//																This section requires each hammering of the material to use an extra ingot
+							if(result.getItem() instanceof ItemHotToolHead /*&& getItemString(inputSlot.getStackInSlot(1), false).equalsIgnoreCase(list.getString("Material"))*/ && !(result.isItemEqualIgnoreDurability(ItemStack.EMPTY) && result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_HEAD)) || result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.CLEAVER_HOT_TOOL_HEAD)))){
+								if(heat > 6000) {
+									heat = 6000;
+								}
+								result.setItemDamage(heat);
+								inputSlot.decrStackSize(0, 1);
+								//inputSlot.decrStackSize(1, 1);
+								inputSlot.setInventorySlotContents(2, result);
+								nbt.setDouble("addedDamage", list.getDouble("addedDamage") + checkHeat(stack));
+								nbt.setInteger("addedDurability", list.getInteger("addedDurability") + (int) (checkHeat(stack) * 100));
+								nbt.setString("Material", list.getString("Material"));
+								inputSlot.getStackInSlot(2).setTagCompound(nbt);
+								damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
+								if(!(player.inventory.getStackInSlot(toolForgeHammer).getItem() instanceof ToolForgeHammer)) {
+									toolForgeHammer = -1;
+								}
+								return true;
+							}else {
+								return false;
+							}
 						}
 					}
 				}
 			}
-			return false;
     	}
+		return false;
 	}
 	
 	private void damageItem(int amount, ItemStack forgeHammer) {

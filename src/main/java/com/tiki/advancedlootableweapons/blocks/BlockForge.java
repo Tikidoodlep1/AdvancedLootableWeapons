@@ -41,8 +41,8 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	
 	public BlockForge(String name)
 	{
-		super(name, Material.IRON);
-		setSoundType(SoundType.METAL);
+		super(name, Material.ROCK);
+		setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setHarvestLevel("pickaxe", 1);
 		this.fullBlock = false;

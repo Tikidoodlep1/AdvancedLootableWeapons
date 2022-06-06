@@ -22,11 +22,11 @@ public class BlockBase extends Block implements IHasModel
 		BlockInit.blocks.add(this);
 		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
 	}
-	
+
 	@Override
 	public void registerModels() 
 	{
 		Alw.proxy.registerModel(Item.getItemFromBlock(this), 0);
-	}
+	}	
 
 }

@@ -11,4 +11,5 @@ public class ModInfo {
 	public static final int GUI_ALLOY_FURNACE = 1;
 	public static final int GUI_FORGE = 2;
 	public static final int GUI_FORGE_WEAPON = 3;
+	public static final int GUI_FORGE_2 = 4;
 }

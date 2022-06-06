@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
-public class BlockFeldspar extends BlockBase{
+public class BlockFeldspar extends BlockBase {
 
 	public BlockFeldspar(String name) {
 		super(name, Material.ROCK);

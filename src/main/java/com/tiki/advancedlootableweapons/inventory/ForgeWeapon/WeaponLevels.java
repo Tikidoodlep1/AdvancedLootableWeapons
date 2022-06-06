@@ -74,6 +74,9 @@ public enum WeaponLevels {
 	SPEAR_HOT_TOOL_HEAD(ItemInit.SPEAR_HOT_TOOL_HEAD, 1, "spear"),
 	SPEAR_HOT_TOOL_HEAD_2(ItemInit.SPEAR_HOT_TOOL_HEAD_2, 2, "spear"),
 	
+	HOT_TOOL_ROD(ItemInit.HOT_TOOL_ROD, 1, "toolrod"),
+	HOT_TOOL_ROD_2(ItemInit.HOT_TOOL_ROD_2, 2, "toolrod"),
+	
 	NULL(null, -1, "null");
 	
 	private final Item item;

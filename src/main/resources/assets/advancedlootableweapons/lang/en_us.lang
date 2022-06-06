@@ -290,9 +290,7 @@ item.hot_tool_rod.hot.name=Hot Weapon Handle(Stage 1)
 item.hot_tool_rod_2.cool.name=Cool Weapon Handle(Finished)
 item.hot_tool_rod_2.warm.name=Warm Weapon Handle(Finished)
 item.hot_tool_rod_2.hot.name=Hot Weapon Handle(Finished)
-item.long_tool_rod.cool.name=Cool Long Weapon Handle(Finished)
-item.long_tool_rod.warm.name=Warm Long Weapon Handle(Finished)
-item.long_tool_rod.hot.name=Hot Long Weapon Handle(Finished)
+item.long_weapon_handle.cool.name=Long Weapon Handle
 
 item.dagger_head.name=Wooden Dagger Head
 item.dagger_hot_tool_head.cool.name=Cool Dagger Head(Stage 1)
@@ -560,24 +558,41 @@ tile.block_shadow_platinum.name=Shadow Platinum Block
 tile.block_frost_steel.name=Frost Steel Block
 tile.block_crystallite.name=Crystallite Block
 tile.block_dusksteel.name=Dusksteel Block
-tile.block_ore_copper.name=Copper Ore
-tile.block_ore_silver.name=Silver Ore
-tile.block_ore_tin.name=Tin Ore
-tile.block_ore_platinum.name=Platinum Ore
-tile.block_ore_crystallite.name=Crystallite Ore
+tile.ore_copper.name=Copper Ore
+tile.ore_silver.name=Silver Ore
+tile.ore_tin.name=Tin Ore
+tile.ore_platinum.name=Platinum Ore
+tile.ore_crystallite.name=Crystallite Ore
+tile.cobble_feldspar.name=Cobbled Feldspar
+tile.rock_feldspar.name=Feldspar
+tile.block_brick_diorite.name=Diorite Bricks
+tile.block_brick_gravel.name=Gravel Bricks
+tile.block_powder_gravel.name=Gravel Clay Powder
+tile.block_powder_diorite.name=Diorite Clay Powder
+tile.block_clay_diorite.name=Diorite Clay
+tile.block_clay_granite.name=Granite Clay
 tile.alloy_furnace.name=Alloy Furnace
 tile.forge.name=Forge
+tile.advanced_forge.name=Advanced Forge
 
 
 item.shadow.name=Shadow
 item.shadow_blob.name=Congealed Shadow
 item.crystal.name=Crystal
 item.shard_obsidian.name=Obsidian Shard
+item.powder_feldspar.name=Feldspar Powder
+item.brick_diorite.name=Diorite Brick
+item.clay_diorite.name=Diorite Clay
+item.powder_diorite.name=Diorite Powder
+item.brick_granite.name=Granite Brick
+item.clay_granite.name=Granite Clay
+item.powder_granite.name=Granite Powder
 
 
 container.sharpeningStone=Sharpen Weapon
 container.alloy_furnace=Alloy Furnace
 container.forge=Forge
+container.forge2=Advanced Forge
 container.forgeWeapon=Anvil Forging
 
 

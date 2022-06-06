@@ -42,6 +42,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	private double bonusDamage;
 	private float reach;
 	private boolean rand;
+	private String type;
 	private String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
 	private String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
 	private Random randGen = new Random();
@@ -56,6 +57,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		ItemInit.items.add(this);
 		
 		this.material = material;
+		this.type = type;
 		this.setMaxDamage(material.getMaxUses());
 		this.maxStackSize = 1;
 		this.bonusDamage = 0;
@@ -133,9 +135,9 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)]);
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)]);
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}
 		
 		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
@@ -152,24 +154,24 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return ATTACK_SPEED_MODIFIER;
 	}
 	
-	@Override
-	protected RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
-		float f = playerIn.rotationPitch;
-        float f1 = playerIn.rotationYaw;
-        double d0 = playerIn.posX;
-        double d1 = playerIn.posY + (double)playerIn.getEyeHeight();
-        double d2 = playerIn.posZ;
-        Vec3d vec3d = new Vec3d(d0, d1, d2);
-        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
-        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
-        float f4 = -MathHelper.cos(-f * 0.017453292F);
-        float f5 = MathHelper.sin(-f * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
-        Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
-        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
-	}
+//	@Override
+//	protected RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
+//		float f = playerIn.rotationPitch;
+//        float f1 = playerIn.rotationYaw;
+//        double d0 = playerIn.posX;
+//        double d1 = playerIn.posY + (double)playerIn.getEyeHeight();
+//        double d2 = playerIn.posZ;
+//        Vec3d vec3d = new Vec3d(d0, d1, d2);
+//        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
+//        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
+//        float f4 = -MathHelper.cos(-f * 0.017453292F);
+//        float f5 = MathHelper.sin(-f * 0.017453292F);
+//        float f6 = f3 * f4;
+//        float f7 = f2 * f4;
+//        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
+//        Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
+//        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
+//	}
 	
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {

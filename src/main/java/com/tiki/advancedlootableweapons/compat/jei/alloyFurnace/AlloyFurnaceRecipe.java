@@ -12,7 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 
-public class AlloyFurnaceRecipe implements IRecipeWrapper{
+public class AlloyFurnaceRecipe implements IRecipeWrapper {
 
 	private final List<ItemStack> inputs;
 	private final ItemStack output;
@@ -22,6 +22,7 @@ public class AlloyFurnaceRecipe implements IRecipeWrapper{
 		this.output = output;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ingredients.setInputs(ItemStack.class, inputs);
@@ -36,8 +37,7 @@ public class AlloyFurnaceRecipe implements IRecipeWrapper{
 		if(exp > 0){
 			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience", exp);
 			FontRenderer renderer = minecraft.fontRenderer;
-			int StringWidth = renderer.getStringWidth(expString);
-			renderer.drawString(expString, recipeWidth - 30, 16, Color.GRAY.getRGB());
+			renderer.drawString(expString, recipeWidth - 30, 48, Color.GRAY.getRGB());
 		}
 	}
 }

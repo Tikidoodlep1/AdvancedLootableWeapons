@@ -28,14 +28,17 @@ public class AlloyFurnaceRecipes
 	{
 		FurnaceRecipes furnace = FurnaceRecipes.instance();
 		
-		//Add all normal furnace recipes to this so it can be used as a more efficient alternative to the furnace :)
 		for(ItemStack input : FurnaceRecipes.instance().getSmeltingList().keySet()) {
-			addAlloyingRecipe(input, input, new ItemStack(furnace.getSmeltingResult(input).getItem(), 2), (furnace.getSmeltingExperience(input) * 2));
+			ItemStack result = furnace.getSmeltingResult(input);
+			if(result.getItem() == Items.IRON_INGOT || result.getItem() == Items.GOLD_INGOT || result.getItem() == Items.IRON_NUGGET || result.getItem() == Items.GOLD_NUGGET) {
+				addAlloyingRecipe(input, input, new ItemStack(result.getItem(), 2), (furnace.getSmeltingExperience(input) * 2));
+			}
 		}
 		
 		//Alloys
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(BlockInit.rock_feldspar), new ItemStack(ItemInit.INGOT_KOBOLD, 4), 2.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.NUGGET_TIN), new ItemStack(ItemInit.INGOT_COPPER), new ItemStack(ItemInit.INGOT_BRONZE, 1), 4.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_TIN), new ItemStack(ItemInit.INGOT_COPPER, 9), new ItemStack(ItemInit.INGOT_BRONZE, 1), 20.0F);
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SILVER), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_FROST_STEEL), 8.0F);
