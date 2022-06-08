@@ -135,9 +135,9 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}
 		
 		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
@@ -193,20 +193,21 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
         
 		AxisAlignedBB axis = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
 		
-		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
-		EntityLivingBase ent = null;
+//		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
+//		EntityLivingBase ent = null;
+		EntityLivingBase ent = world.findNearestEntityWithinAABB(EntityLivingBase.class, axis, entityLiving);
 		
-		double distClosest = Double.MAX_VALUE;
-		for(EntityLivingBase e : entList) {
-			if(!e.equals(entityLiving)) {
-				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
-				
-				if(dist < this.getReach() && dist < distClosest) {
-					ent = e;
-					distClosest = dist;
-				}
-			}
-		}
+//		double distClosest = Double.MAX_VALUE;
+//		for(EntityLivingBase e : entList) {
+//			if(!e.equals(entityLiving)) {
+//				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
+//				
+//				if(dist < this.getReach() && dist < distClosest) {
+//					ent = e;
+//					distClosest = dist;
+//				}
+//			}
+//		}
 		
 		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
 		if(ent != null) {

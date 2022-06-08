@@ -17,10 +17,10 @@ public class RenderSpear extends RenderThrownItem<EntitySpear>{
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntitySpear entity) {
-		if(entity == null || entity.material == null) {
-			return new ResourceLocation(ModInfo.ID + ":textures/entity/wood_spear.png");
+		if(entity == null) {
+			return new ResourceLocation(ModInfo.ID + ":textures/entity/spear.png");
 		}
-		switch(entity.material) {
+		switch(entity.getMaterial()) {
 		case "WOOD":
 			return new ResourceLocation(ModInfo.ID + ":textures/entity/wood_spear.png");
 		case "IRON":

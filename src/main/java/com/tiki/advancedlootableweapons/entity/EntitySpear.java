@@ -35,7 +35,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntitySpear extends EntityArrow{
+public class EntitySpear extends EntityArrow {
 	private int knockbackStrength;
 	private int xTile;
     private int yTile;
@@ -44,7 +44,6 @@ public class EntitySpear extends EntityArrow{
     private int inData;
     private int ticksInAir;
     private ItemStack arrowStack;
-    public String material;
     
     public static final DataParameter<ItemStack> ITEMSTACK = EntityDataManager.<ItemStack>createKey(EntitySpear.class, DataSerializers.ITEM_STACK);
     public static final DataParameter<Integer> MAX_DURABILITY = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
@@ -53,10 +52,10 @@ public class EntitySpear extends EntityArrow{
     public static final DataParameter<Integer> DURABILITY = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
     public static final DataParameter<Float> REACH = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
     public static final DataParameter<String> CUSTOM_NAME = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
+    public static final DataParameter<String> MATERIAL = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
     
-    public EntitySpear(World worldIn, EntityLivingBase shooter, String material, int spearDurability, int maxDurability, double attackDamage, float reach, double attackSpeed, ItemStack stack) {
+    public EntitySpear(World worldIn, EntityLivingBase shooter, int spearDurability, int maxDurability, double attackDamage, float reach, double attackSpeed, ItemStack stack) {
     	this(worldIn, shooter);
-    	this.material = material;
     	this.setNameData(stack.getDisplayName());
     	this.setItemStack(stack);
     	this.setDamageData(attackDamage);
@@ -64,8 +63,6 @@ public class EntitySpear extends EntityArrow{
     	this.setMaxDurabilityData(maxDurability);
     	this.setAttackSpeedData(attackSpeed);
     	this.setReachData(reach);
-    	
-    	//System.out.println("Setting Max Durability data as: " + maxDurability);
     }
     
 	public EntitySpear(World worldIn, EntityLivingBase shooter) {
@@ -101,6 +98,14 @@ public class EntitySpear extends EntityArrow{
 			System.out.print("!! DATA MANAGER IS EMPTY !!");
 			return ItemStack.EMPTY;
 		}
+	}
+	
+	public void setMaterial(String mat) {
+		this.dataManager.set(MATERIAL, mat);
+	}
+	
+	public String getMaterial() {
+		return this.dataManager.get(MATERIAL);
 	}
 	
 	private void setMaxDurabilityData(int dur) {
@@ -199,6 +204,7 @@ public class EntitySpear extends EntityArrow{
 		this.dataManager.register(DURABILITY, 0);
 		this.dataManager.register(REACH, 4.0F);
 		this.dataManager.register(CUSTOM_NAME, "");
+		this.dataManager.register(MATERIAL, "");
 	}
 	
 	@Override

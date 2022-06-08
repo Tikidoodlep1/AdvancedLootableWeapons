@@ -12,6 +12,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class AnvilForgingRecipe implements IRecipeWrapper{
@@ -38,8 +39,8 @@ public class AnvilForgingRecipe implements IRecipeWrapper{
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		ForgeWeaponRecipes recipes = new ForgeWeaponRecipes();
 		float exp = -1;
-		for(Entry<ItemStack, Integer> entry : recipes.getExpValues().entrySet()) {
-			if(output.isItemEqualIgnoreDurability(entry.getKey())){
+		for(Entry<Item, Integer> entry : recipes.getExpValues().entrySet()) {
+			if(output.getItem() == entry.getKey()){
 				exp = entry.getValue();
 			}
 		}

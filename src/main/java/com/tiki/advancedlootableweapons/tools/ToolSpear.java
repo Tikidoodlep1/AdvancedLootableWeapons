@@ -22,7 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class ToolSpear extends ToolStabSword{
+public class ToolSpear extends ToolStabSword {
 	
 	public ToolSpear(String name, ToolMaterial material) {
 		super(name, material, "spear");
@@ -65,18 +65,14 @@ public class ToolSpear extends ToolStabSword{
         {
 			double totalDamage;
 			int maxDur;
-			if(stack.hasTagCompound() /*&& !(stack.getTagCompound().hasNoTags())*/) {
-				//System.out.println("stack has a tag compound");
+			if(stack.hasTagCompound()) {
 				NBTTagCompound tag = stack.getTagCompound();
 				if(tag.hasKey("totalDamage", 99)) {
-					//System.out.println("stack has totalDamage: " + tag.getDouble("totalDamage"));
 					totalDamage = tag.getDouble("totalDamage");
 				}else {
-					//System.out.println("stack doesn't have totalDamage");
 					totalDamage = this.getAttackDamage() + 1;
 				}
 			}else {
-				//System.out.println("stack doesn't have a tag compound");
 				totalDamage = this.getAttackDamage() + 1;
 			}
 			if((this.getMaxDamage(stack) - this.getToolMaterial().getMaxUses()) < 0) {
@@ -84,8 +80,8 @@ public class ToolSpear extends ToolStabSword{
 			}else {
 				maxDur = (this.getMaxDamage(stack) - this.getToolMaterial().getMaxUses());
 			}
-            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getToolMaterialName(), this.getDamage(stack), maxDur, totalDamage, this.getReach(), this.getAttackSpeed(), stack);
-            System.out.print(this.getToolMaterialName());
+            EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getDamage(stack), maxDur, totalDamage, this.getReach(), this.getAttackSpeed(), stack);
+            entityspear.setMaterial(this.getToolMaterialName());
             entityspear.setArrowStack(this);
             entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             boolean flag1 = playerIn.capabilities.isCreativeMode;

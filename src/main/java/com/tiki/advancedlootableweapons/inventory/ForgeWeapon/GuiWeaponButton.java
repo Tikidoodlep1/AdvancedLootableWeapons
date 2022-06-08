@@ -18,11 +18,17 @@ public class GuiWeaponButton extends GuiButton{
 		super(buttonId, x, y, widthIn, heightIn, buttonText);
 		this.overlayX = overlayX;
 		this.overlayY = overlayY;
+		this.enabled = true;
+		this.visible = true;
 	}
 	
 	@Override
 	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
     {
+		if(mouseX > 109) {
+			return false;
+		}
+		
 		if(this.cooldown == 0 && this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) {
 			this.cooldown = 1;
 			this.createTimer();
@@ -32,6 +38,7 @@ public class GuiWeaponButton extends GuiButton{
     }
 	
 	private void createTimer() {
+		System.out.println("Creating new timer");
 		Timer t = new Timer("buttonCD");
 		t.schedule(new TimerTask() {
 			@Override

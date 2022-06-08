@@ -11,6 +11,7 @@ import com.tiki.advancedlootableweapons.blocks.BlockFeldspar;
 import com.tiki.advancedlootableweapons.blocks.BlockForge;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
+import com.tiki.advancedlootableweapons.blocks.BlockJawCrusher;
 import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
 import com.tiki.advancedlootableweapons.blocks.BlockQuartzClay;
 
@@ -58,4 +59,5 @@ public class BlockInit {
 	public static final Block forge = new BlockForge("forge").setHardness(2.0F).setResistance(3.7F);
 	public static final Block forge2 = new BlockForge2("advanced_forge").setHardness(3.0F).setResistance(4.7F);
 	public static final Block forge2_1 = new BlockForge2Placeholder("advanced_forge_1").setHardness(3.0F).setResistance(4.7F);
+	public static final Block crusher = new BlockJawCrusher("jaw_crusher", Material.IRON).setHardness(2.5F).setResistance(7.0F);
 }

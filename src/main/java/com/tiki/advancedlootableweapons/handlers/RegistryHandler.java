@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.init.EntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
 import com.tiki.advancedlootableweapons.world.WorldGenCustomOres;
 
 import net.minecraft.block.Block;

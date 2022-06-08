@@ -43,7 +43,7 @@ public enum WeaponLevels {
 	LONGSWORD_HOT_TOOL_HEAD_4(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4, 4, "longsword"),
 	
 	KODACHI_HOT_TOOL_HEAD(ItemInit.KODACHI_HOT_TOOL_HEAD, 1, "kodachi"),
-	KODACHI_HOT_TOOL_HEAD_2(ItemInit.KODACHI_HOT_TOOL_HEAD, 2, "kodachi"),
+	KODACHI_HOT_TOOL_HEAD_2(ItemInit.KODACHI_HOT_TOOL_HEAD_2, 2, "kodachi"),
 	
 	BATTLEAXE_HOT_TOOL_HEAD(ItemInit.BATTLEAXE_HOT_TOOL_HEAD, 1, "battleaxe"),
 	BATTLEAXE_HOT_TOOL_HEAD_2(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2, 2, "battleaxe"),
@@ -92,6 +92,7 @@ public enum WeaponLevels {
 	public static ItemStack getWeaponByLevelAndType(int level, String type) {		
 		for(WeaponLevels w : values()) {
 			if(w.level == level && w.weaponType == type) {
+				System.out.println(w.weaponType + " level: " + w.level);
 				return new ItemStack(w.item);
 			}
 		}
@@ -101,6 +102,7 @@ public enum WeaponLevels {
 	public static WeaponLevels getWeaponByStack(ItemStack stack) {
 		for(WeaponLevels w : values()) {
 			if(w.item.equals(stack.getItem())) {
+				System.out.println(w.toString());
 				return w;
 			}
 		}

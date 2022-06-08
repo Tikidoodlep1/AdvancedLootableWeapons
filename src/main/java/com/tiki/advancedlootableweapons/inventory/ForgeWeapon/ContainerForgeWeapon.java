@@ -35,7 +35,7 @@ public class ContainerForgeWeapon extends Container {
     private final World world;
     private int buttonPressed;
     private EntityPlayer player;
-    private static final ForgeWeaponRecipes recipes = new ForgeWeaponRecipes();
+    private static final ForgeWeaponRecipes recipes = ForgeWeaponRecipes.INSTANCE;
     private static final Map<String, ItemStack> ingotMap = Maps.<String, ItemStack>newHashMap();
     private static final Map<String, NonNullList<ItemStack>> oreDictMap = Maps.<String, NonNullList<ItemStack>>newHashMap();
     
@@ -161,7 +161,6 @@ public class ContainerForgeWeapon extends Container {
         		    }
         		}
         		
-        		System.out.println("Does recipes contain an exp value: " + recipes.getExpValue(stack) + ", stack is: " + stack);
         		if(recipes.getExpValue(stack) > 0) {
         			thePlayer.addExperience(recipes.getExpValue(stack));
         			thePlayer.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
@@ -185,6 +184,8 @@ public class ContainerForgeWeapon extends Container {
     }
 	
 	private boolean checkItem(ItemStack stack) {
+		System.out.println("checkItem(" + stack.getUnlocalizedName() + ")");
+		
 		if((inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.HOT_TOOL_ROD_2)) || inputSlot.getStackInSlot(1).isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD)))) {
 			ItemStack result = ItemStack.EMPTY;
 			ItemStack input = inputSlot.getStackInSlot(0);
@@ -219,18 +220,25 @@ public class ContainerForgeWeapon extends Container {
 				nbt.setInteger("addedDurability", list.getInteger("addedDurability") + list2.getInteger("addedDurability"));
 				System.out.println("Are Materials the same: " + material.equalsIgnoreCase(material2) + ", individual materials are: " + material + ", " + material2);
 				if(material.equalsIgnoreCase(material2)){
-					ForgeWeaponRecipes recipe = new ForgeWeaponRecipes();
-					result = recipe.getItemResult(material, input, toolRod);
+					result = recipes.getItemResult(material, input.getItem(), toolRod.getItem());
+					NBTTagCompound resNBT = new NBTTagCompound();
+					resNBT.setString("Material", list.getString("Material"));
 					System.out.println("result: " + result);
 					if(result != ItemStack.EMPTY) {
 						inputSlot.setInventorySlotContents(2, result);
 						if(result.getItem() instanceof ToolStabSword) {
 							((ToolStabSword)inputSlot.getStackInSlot(2).getItem()).setMaximumDamage(result, (list.getInteger("addedDurability") + list2.getInteger("addedDurability")));
 							((ToolStabSword)inputSlot.getStackInSlot(2).getItem()).generateNameAndModifiers(inputSlot.getStackInSlot(2), (list.getDouble("addedDamage") + list2.getDouble("addedDamage")));
+							
+							//inputSlot.getStackInSlot(2).setTagCompound(resNBT);
+							
 							damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
 						}else if(result.getItem() instanceof ToolSlashSword){
 							((ToolSlashSword)inputSlot.getStackInSlot(2).getItem()).setMaximumDamage(result, (list.getInteger("addedDurability") + list2.getInteger("addedDurability")));
 							((ToolSlashSword)inputSlot.getStackInSlot(2).getItem()).generateNameAndModifiers(inputSlot.getStackInSlot(2), (list.getDouble("addedDamage") + list2.getDouble("addedDamage")));
+							
+							//inputSlot.getStackInSlot(2).setTagCompound(resNBT);
+							
 							damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
 						}else if(result.isItemEqualIgnoreDurability(new ItemStack(ItemInit.LONG_TOOL_ROD))) {
 							nbt.setString("Material", material);
@@ -292,6 +300,8 @@ public class ContainerForgeWeapon extends Container {
     }
 	
 	public boolean changeItem(ItemStack stack) {
+		System.out.println("changeItem(ItemStack stack)");
+		
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setString("Material", getItemString(stack, false));
 		if(nbt.getString("Material").equalsIgnoreCase("")) {
@@ -361,6 +371,7 @@ public class ContainerForgeWeapon extends Container {
 						}else if(stack.getItem() instanceof ItemHotToolHead) {
 							ItemStack result = ItemStack.EMPTY;
 							result = getNextToolHead(inputSlot.getStackInSlot(0));
+							System.out.println(result.getItem().getUnlocalizedName());
 							NBTTagCompound list = new NBTTagCompound();
 							list = stack.getTagCompound();
 							int heat = stack.getItemDamage() + 2800;
@@ -422,11 +433,13 @@ public class ContainerForgeWeapon extends Container {
 	
     public void onCraftMatrixChanged(IInventory inventoryIn)
     {
+    	System.out.println("onCraftMatrixChanged()");
         super.onCraftMatrixChanged(inventoryIn);
     }
     
     public void addListener(IContainerListener listener)
     {
+    	System.out.println("addListener()");
         super.addListener(listener);
         listener.sendAllWindowProperties(this, inputSlot);
     }

@@ -36,7 +36,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear", 41, 60);
 	    
 	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 60, this.getGuiTop() + 190, 20, 20, "Tool Handle", 61, 60);
-	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon", 61, 60);
+	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon", 0, 80);
 	    private int buttonPressed;
 	    private final ContainerForgeWeapon container;
 
@@ -44,28 +44,34 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    {
 	    	super(new ContainerForgeWeapon(inventoryIn, inventoryIn.player.getEntityWorld(), inventoryIn.player));
 	        this.container = container;
-	        this.drawButtons();
 	    }
 	    
-	    public void drawButtons() {
-	        this.addButton(daggerButton);
-	        this.addButton(kabutowariButton);
-	        this.addButton(talwarButton);
-	        this.addButton(rapierButton);
-	        this.addButton(maceButton);
-	        this.addButton(cleaverButton);
-	        this.addButton(staffButton);
-	        this.addButton(longswordButton);
-	        this.addButton(kodachiButton);
-	        this.addButton(battleaxeButton);
-	        this.addButton(zweihanderButton);
-	        this.addButton(nodachiButton);
-	        this.addButton(sabreButton);
-	        this.addButton(makhairaButton);
-	        this.addButton(spearButton);
+	    public void drawButtons(int mouseX, int mouseY, float partialTicks) {
+	    	if(this.buttonList.size() <= 0) {
+	    		this.buttonList.add(daggerButton);
+	        	this.buttonList.add(kabutowariButton);
+	        	this.buttonList.add(talwarButton);
+	        	this.buttonList.add(rapierButton);
+	        	this.buttonList.add(maceButton);
+	        	this.buttonList.add(cleaverButton);
+	        	this.buttonList.add(staffButton);
+	        	this.buttonList.add(longswordButton);
+	        	this.buttonList.add(kodachiButton);
+	        	this.buttonList.add(battleaxeButton);
+	        	this.buttonList.add(zweihanderButton);
+	        	this.buttonList.add(nodachiButton);
+	        	this.buttonList.add(sabreButton);
+	        	this.buttonList.add(makhairaButton);
+	        	this.buttonList.add(spearButton);
 	        
-	        this.addButton(forgeButton);
-	        this.addButton(toolrodButton);
+	        	this.buttonList.add(forgeButton);
+	        	this.buttonList.add(toolrodButton);
+	    	}
+	    	
+	        for (int k = 0; k < this.buttonList.size(); ++k)
+	        {
+	            (this.buttonList.get(k)).drawButton(this.mc, mouseX, mouseY, partialTicks);
+	        }
 	    }
 	    
 	    public void updateScreen(){
@@ -97,10 +103,10 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    
 	    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	    {
-	        super.mouseClicked(mouseX, mouseY, mouseButton);
+	    	super.mouseClicked(mouseX, mouseY, mouseButton);
 	    }
 	    
-	    
+	    @Override
 	    public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	    {
 	        this.drawDefaultBackground();
@@ -118,7 +124,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        int i = (this.width - this.xSize) / 2;
 	        int j = (this.height - this.ySize) / 2;
 	        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-	        this.drawButtons();
+	        
+	        this.drawButtons(mouseX, mouseY, partialTicks);
 	    }
 	    
 	    public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

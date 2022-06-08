@@ -12,7 +12,7 @@ item.ingot_crystallite.name=Crystallite Ingot
 item.ingot_dusksteel.name=Dusksteel Ingot
 
 item.nugget_tin.name=Tin Nugget
-item.nugget_kobold.name=Kobold Nugget
+item.nugget_kobold.name=Kobold Steel Nugget
 item.nugget_copper.name=Copper Nugget
 item.nugget_silver.name=Silver Nugget
 item.nugget_bronze.name=Bronze Nugget
@@ -252,7 +252,7 @@ item.spear_dusksteel.name=Dusksteel Spear
 
 item.stone_forge_hammer.name=Stone Forge Hammer
 item.iron_forge_hammer.name=Iron Forge Hammer
-item.kobold_forge_hammer.name=Kobold Forge Hammer
+item.kobold_forge_hammer.name=Kobold Steel Forge Hammer
 item.copper_forge_hammer.name=Copper Forge Hammer
 item.silver_forge_hammer.name=Silver Forge Hammer
 item.bronze_forge_hammer.name=Bronze Forge Hammer
@@ -290,7 +290,10 @@ item.hot_tool_rod.hot.name=Hot Weapon Handle(Stage 1)
 item.hot_tool_rod_2.cool.name=Cool Weapon Handle(Finished)
 item.hot_tool_rod_2.warm.name=Warm Weapon Handle(Finished)
 item.hot_tool_rod_2.hot.name=Hot Weapon Handle(Finished)
-item.long_weapon_handle.cool.name=Long Weapon Handle
+item.long_tool_rod.cool.name=Cool Long Weapon Handle
+item.long_tool_rod.warm.name=Warm Long Weapon Handle
+item.long_tool_rod.hot.name=Hot Long Weapon Handle
+item.long_weapon_handle.name=Wooden Long Weapon Handle
 
 item.dagger_head.name=Wooden Dagger Head
 item.dagger_hot_tool_head.cool.name=Cool Dagger Head(Stage 1)
@@ -566,14 +569,15 @@ tile.ore_crystallite.name=Crystallite Ore
 tile.cobble_feldspar.name=Cobbled Feldspar
 tile.rock_feldspar.name=Feldspar
 tile.block_brick_diorite.name=Diorite Bricks
-tile.block_brick_gravel.name=Gravel Bricks
-tile.block_powder_gravel.name=Gravel Clay Powder
+tile.block_brick_granite.name=Gravel Bricks
+tile.block_powder_granite.name=Gravel Clay Powder
 tile.block_powder_diorite.name=Diorite Clay Powder
 tile.block_clay_diorite.name=Diorite Clay
 tile.block_clay_granite.name=Granite Clay
 tile.alloy_furnace.name=Alloy Furnace
 tile.forge.name=Forge
 tile.advanced_forge.name=Advanced Forge
+tile.jaw_crusher.name=Jaw Crusher
 
 
 item.shadow.name=Shadow
@@ -594,6 +598,7 @@ container.alloy_furnace=Alloy Furnace
 container.forge=Forge
 container.forge2=Advanced Forge
 container.forgeWeapon=Anvil Forging
+container.jaw_crusher=Jaw Crusher
 
 
 enchantment.refined=Refined

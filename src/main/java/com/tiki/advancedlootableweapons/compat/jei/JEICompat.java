@@ -6,10 +6,14 @@ import com.tiki.advancedlootableweapons.compat.jei.alloyFurnace.AlloyFurnaceReci
 import com.tiki.advancedlootableweapons.compat.jei.alloyFurnace.AlloyFurnaceRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingRecipeMaker;
+import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeCategory;
+import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeMaker;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.GuiForgeWeapon;
+import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher;
+import com.tiki.advancedlootableweapons.inventory.JawCrusher.GuiJawCrusher;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -21,6 +25,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.util.text.translation.I18n;
 
+@SuppressWarnings("deprecation")
 @JEIPlugin
 public class JEICompat implements IModPlugin{
 
@@ -31,6 +36,7 @@ public class JEICompat implements IModPlugin{
 		
 		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui));
 		registry.addRecipeCategories(new AnvilForgingRecipeCategory(gui));
+		registry.addRecipeCategories(new JawCrusherRecipeCategory(gui));
 	}
 	
 	@Override
@@ -41,11 +47,15 @@ public class JEICompat implements IModPlugin{
 		
 		registry.addRecipes(AlloyFurnaceRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.ALLOYFURNACE);
 		registry.addRecipeClickArea(GuiAlloyFurnace.class, 58, 37, 14, 14, RecipeCategories.ALLOYFURNACE);
-		recipeTransfer.addRecipeTransferHandler(ContainerAlloyFurnace.class, RecipeCategories.ALLOYFURNACE, 0, 1, 3, 36);
+		recipeTransfer.addRecipeTransferHandler(ContainerAlloyFurnace.class, RecipeCategories.ALLOYFURNACE, 0, 3, 3, 36);
 		
 		registry.addRecipes(AnvilForgingRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.ANVILFORGING);
 		registry.addRecipeClickArea(GuiForgeWeapon.class, 80, 43, 21, 15, RecipeCategories.ANVILFORGING);
 		recipeTransfer.addRecipeTransferHandler(ContainerForgeWeapon.class, RecipeCategories.ANVILFORGING, 0, 2, 2, 36);
+		
+		registry.addRecipes(JawCrusherRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.JAWCRUSHER);
+		registry.addRecipeClickArea(GuiJawCrusher.class, 75, 43, 27, 13, RecipeCategories.JAWCRUSHER);
+		recipeTransfer.addRecipeTransferHandler(ContainerJawCrusher.class, RecipeCategories.JAWCRUSHER, 0, 2, 2, 36);
 	}
 	
 	public static String translateToLocal(String key) {

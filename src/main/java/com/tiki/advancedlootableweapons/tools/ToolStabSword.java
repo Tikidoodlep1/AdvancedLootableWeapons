@@ -29,7 +29,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -151,9 +150,9 @@ public class ToolStabSword extends Item implements IHasModel{
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.getToolMaterialName() + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}
 		
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
@@ -170,25 +169,6 @@ public class ToolStabSword extends Item implements IHasModel{
 	public static UUID getAttackSpeedModifierUUID() {
 		return ATTACK_SPEED_MODIFIER;
 	}
-	
-//	@Override
-//	protected RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
-//		float f = playerIn.rotationPitch;
-//        float f1 = playerIn.rotationYaw;
-//        double d0 = playerIn.posX;
-//        double d1 = playerIn.posY + (double)playerIn.getEyeHeight();
-//        double d2 = playerIn.posZ;
-//        Vec3d vec3d = new Vec3d(d0, d1, d2);
-//        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
-//        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
-//        float f4 = -MathHelper.cos(-f * 0.017453292F);
-//        float f5 = MathHelper.sin(-f * 0.017453292F);
-//        float f6 = f3 * f4;
-//        float f7 = f2 * f4;
-//        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
-//        Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
-//        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
-//	}
 	
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
@@ -210,21 +190,22 @@ public class ToolStabSword extends Item implements IHasModel{
         
 		AxisAlignedBB axis = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
 		
-		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
-		EntityLivingBase ent = null;
+//		EntityLivingBase ent = null;
+//		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
+		EntityLivingBase ent = world.findNearestEntityWithinAABB(EntityLivingBase.class, axis, entityLiving);
 		
-		double distClosest = Double.MAX_VALUE;
-		Vec3d playerVec = entityLiving.getPositionVector();
-		for(EntityLivingBase e : entList) {
-			if(!e.equals(entityLiving)) {
-				double dist = e.getPositionVector().distanceTo(playerVec);
-				
-				if(dist < this.getReach() && dist < distClosest) {
-					ent = e;
-					distClosest = dist;
-				}
-			}
-		}
+//		double distClosest = Double.MAX_VALUE;
+//		Vec3d playerVec = entityLiving.getPositionVector();
+//		for(EntityLivingBase e : entList) {
+//			if(!e.equals(entityLiving)) {
+//				double dist = e.getPositionVector().distanceTo(playerVec);
+//				
+//				if(dist < this.getReach() && dist < distClosest) {
+//					ent = e;
+//					distClosest = dist;
+//				}
+//			}
+//		}
 		
 		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
 		
