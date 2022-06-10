@@ -1,11 +1,11 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
@@ -31,25 +31,25 @@ public class ForgeWeaponRecipes {
 	private static final HashMap<String, Item> sabreMaterials = Maps.<String, Item>newHashMap();
 	private static final HashMap<String, Item> makhairaMaterials = Maps.<String, Item>newHashMap();
 	private static final HashMap<String, Item> spearMaterials = Maps.<String, Item>newHashMap();
-	private static final Multimap<ItemStack, ItemStack> toolRodJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> daggerJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> kabutowariJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> rapierJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> talwarJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> cleaverJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> maceJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> staffJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> longswordJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> kodachiJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> battleaxeJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> zweihanderJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> nodachiJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> sabreJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> makhairaJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> spearJeiMap = ArrayListMultimap.create();
-	private static final Multimap<ItemStack, ItemStack> toolHeadJeiMap = ArrayListMultimap.create();
+	private static final List<ItemStack> toolRodJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> daggerJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> kabutowariJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> rapierJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> talwarJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> cleaverJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> maceJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> staffJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> longswordJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> kodachiJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> battleaxeJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> zweihanderJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> nodachiJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> sabreJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> makhairaJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> spearJeiMap = new ArrayList<ItemStack>(1);
+	private static final List<ItemStack> toolHeadJeiMap = new ArrayList<ItemStack>(1);
 	private static final Table<Item, Item, HashMap<String, Item>> recipes = HashBasedTable.<Item, Item, HashMap<String, Item>>create();
-	private static final Table<Integer, ItemStack, Multimap<ItemStack, ItemStack>> jeiRecipes = HashBasedTable.<Integer, ItemStack, Multimap<ItemStack, ItemStack>>create();
+	private static final Table<ItemStack, ItemStack, List<ItemStack>> jeiRecipes = HashBasedTable.<ItemStack, ItemStack, List<ItemStack>>create();
 	private static final Map<Item, Integer> expValues = Maps.<Item, Integer>newHashMap();
 	public static final ForgeWeaponRecipes INSTANCE = new ForgeWeaponRecipes();
 	
@@ -74,19 +74,19 @@ public class ForgeWeaponRecipes {
 	}
 	
 	private void registerJeiHotToolHeadRecipes() {
-		toolHeadJeiMap.put(ItemStack.EMPTY, new ItemStack(ItemInit.HOT_TOOL_HEAD));
-		jeiRecipes.put(0, new ItemStack(Items.IRON_INGOT), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_KOBOLD), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_COPPER), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_SILVER), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_BRONZE), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_PLATINUM), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_STEEL), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_FROST_STEEL), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_OBSIDIAN), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_CRYSTALLITE), toolHeadJeiMap);
-		jeiRecipes.put(0, new ItemStack(ItemInit.INGOT_DUSKSTEEL), toolHeadJeiMap);
+		toolHeadJeiMap.add(new ItemStack(ItemInit.HOT_TOOL_HEAD));
+		jeiRecipes.put(new ItemStack(Items.IRON_INGOT), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_KOBOLD), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_COPPER), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_SILVER), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_BRONZE), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_PLATINUM), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_STEEL), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_FROST_STEEL), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_OBSIDIAN), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_CRYSTALLITE), ItemStack.EMPTY, toolHeadJeiMap);
+		jeiRecipes.put(new ItemStack(ItemInit.INGOT_DUSKSTEEL), ItemStack.EMPTY, toolHeadJeiMap);
 	}
 	
 	public ItemStack getItemResult(String material, Item input1, Item input2) {
@@ -95,7 +95,6 @@ public class ForgeWeaponRecipes {
 		}
 		
 		final HashMap<String, Item> recipe = recipes.get(input1, input2);
-		System.out.println(input1.toString() + ", " + input2.toString());
 		if(recipe != null) {
 			return new ItemStack(recipe.get(material));
 		}
@@ -138,7 +137,7 @@ public class ForgeWeaponRecipes {
 		return ForgeWeaponRecipes.recipes;
 	}
 	
-	public Table<Integer, ItemStack, Multimap<ItemStack, ItemStack>> getJeiCraftingList(){
+	public Table<ItemStack, ItemStack, List<ItemStack>> getJeiCraftingList(){
 		return ForgeWeaponRecipes.jeiRecipes;
 	}
 	
@@ -166,11 +165,9 @@ public class ForgeWeaponRecipes {
 			daggerMaterials.put("Dusksteel", ItemInit.DAGGER_DUSKSTEEL);
 			recipes.put(input1, input2, daggerMaterials);
 			for(Item stack : daggerMaterials.values()) {
-				daggerJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				daggerJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i,new ItemStack(input1), daggerJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), daggerJeiMap);
 			
 			expValues.put(ItemInit.DAGGER_IRON, exp);
 			expValues.put(ItemInit.DAGGER_KOBOLD, exp+1);
@@ -200,11 +197,9 @@ public class ForgeWeaponRecipes {
 			kabutowariMaterials.put("Dusksteel", ItemInit.KABUTOWARI_DUSKSTEEL);
 			recipes.put(input1, input2, kabutowariMaterials);
 			for(Item stack : kabutowariMaterials.values()) {
-				kabutowariJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				kabutowariJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), kabutowariJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), kabutowariJeiMap);
 			
 			expValues.put(ItemInit.KABUTOWARI_IRON, exp);
 			expValues.put(ItemInit.KABUTOWARI_KOBOLD, exp+1);
@@ -234,11 +229,9 @@ public class ForgeWeaponRecipes {
 			rapierMaterials.put("Dusksteel", ItemInit.RAPIER_DUSKSTEEL);
 			recipes.put(input1, input2, rapierMaterials);
 			for(Item stack : rapierMaterials.values()) {
-				rapierJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				rapierJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), rapierJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), rapierJeiMap);
 			
 			expValues.put(ItemInit.RAPIER_IRON, exp);
 			expValues.put(ItemInit.RAPIER_KOBOLD, exp+1);
@@ -268,11 +261,9 @@ public class ForgeWeaponRecipes {
 			talwarMaterials.put("Dusksteel", ItemInit.TALWAR_DUSKSTEEL);
 			recipes.put(input1, input2, talwarMaterials);
 			for(Item stack : talwarMaterials.values()) {
-				talwarJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				talwarJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), talwarJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), talwarJeiMap);
 			
 			expValues.put(ItemInit.TALWAR_IRON, exp);
 			expValues.put(ItemInit.TALWAR_KOBOLD, exp+1);
@@ -302,11 +293,10 @@ public class ForgeWeaponRecipes {
 			cleaverMaterials.put("Dusksteel", ItemInit.CLEAVER_DUSKSTEEL);
 			recipes.put(input1, input2, cleaverMaterials);
 			for(Item stack : cleaverMaterials.values()) {
-				cleaverJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				cleaverJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), cleaverJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), cleaverJeiMap);
+			
 			expValues.put(ItemInit.CLEAVER_IRON, exp);
 			expValues.put(ItemInit.CLEAVER_KOBOLD, exp+1);
 			expValues.put(ItemInit.CLEAVER_COPPER, exp+1);
@@ -335,11 +325,9 @@ public class ForgeWeaponRecipes {
 			maceMaterials.put("Dusksteel", ItemInit.MACE_DUSKSTEEL);
 			recipes.put(input1, input2, maceMaterials);
 			for(Item stack : maceMaterials.values()) {
-				maceJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				maceJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), maceJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), maceJeiMap);
 			
 			expValues.put(ItemInit.MACE_IRON, exp);
 			expValues.put(ItemInit.MACE_KOBOLD, exp+1);
@@ -369,11 +357,9 @@ public class ForgeWeaponRecipes {
 			staffMaterials.put("Dusksteel", ItemInit.STAFF_DUSKSTEEL);
 			recipes.put(input1, input2, staffMaterials);
 			for(Item stack : staffMaterials.values()) {
-				staffJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				staffJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), staffJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), staffJeiMap);
 			
 			expValues.put(ItemInit.STAFF_IRON, exp);
 			expValues.put(ItemInit.STAFF_KOBOLD, exp+1);
@@ -403,11 +389,9 @@ public class ForgeWeaponRecipes {
 			longswordMaterials.put("Dusksteel", ItemInit.LONGSWORD_DUSKSTEEL);
 			recipes.put(input1, input2, longswordMaterials);
 			for(Item stack : longswordMaterials.values()) {
-				longswordJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				longswordJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), longswordJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), longswordJeiMap);
 			
 			expValues.put(ItemInit.LONGSWORD_IRON, exp);
 			expValues.put(ItemInit.LONGSWORD_KOBOLD, exp+1);
@@ -437,11 +421,9 @@ public class ForgeWeaponRecipes {
 			kodachiMaterials.put("Dusksteel", ItemInit.KODACHI_DUSKSTEEL);
 			recipes.put(input1, input2, kodachiMaterials);
 			for(Item stack : kodachiMaterials.values()) {
-				kodachiJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				kodachiJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), kodachiJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), kodachiJeiMap);
 			
 			expValues.put(ItemInit.KODACHI_IRON, exp);
 			expValues.put(ItemInit.KODACHI_KOBOLD, exp+1);
@@ -471,11 +453,9 @@ public class ForgeWeaponRecipes {
 			battleaxeMaterials.put("Dusksteel", ItemInit.BATTLEAXE_DUSKSTEEL);
 			recipes.put(input1, input2, battleaxeMaterials);
 			for(Item stack : battleaxeMaterials.values()) {
-				battleaxeJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				battleaxeJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), battleaxeJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), battleaxeJeiMap);
 			
 			expValues.put(ItemInit.BATTLEAXE_IRON, exp);
 			expValues.put(ItemInit.BATTLEAXE_KOBOLD, exp+1);
@@ -505,11 +485,9 @@ public class ForgeWeaponRecipes {
 			zweihanderMaterials.put("Dusksteel", ItemInit.ZWEIHANDER_DUSKSTEEL);
 			recipes.put(input1, input2, zweihanderMaterials);
 			for(Item stack : zweihanderMaterials.values()) {
-				zweihanderJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				zweihanderJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), zweihanderJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), zweihanderJeiMap);
 			
 			expValues.put(ItemInit.ZWEIHANDER_IRON, exp);
 			expValues.put(ItemInit.ZWEIHANDER_KOBOLD, exp+1);
@@ -539,11 +517,9 @@ public class ForgeWeaponRecipes {
 			nodachiMaterials.put("Dusksteel", ItemInit.NODACHI_DUSKSTEEL);
 			recipes.put(input1, input2, nodachiMaterials);
 			for(Item stack : nodachiMaterials.values()) {
-				nodachiJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				nodachiJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), nodachiJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1),new ItemStack(input2),  nodachiJeiMap);
 			
 			expValues.put(ItemInit.NODACHI_IRON, exp);
 			expValues.put(ItemInit.NODACHI_KOBOLD, exp+1);
@@ -573,11 +549,9 @@ public class ForgeWeaponRecipes {
 			sabreMaterials.put("Dusksteel", ItemInit.SABRE_DUSKSTEEL);
 			recipes.put(input1, input2, sabreMaterials);
 			for(Item stack : sabreMaterials.values()) {
-				sabreJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				sabreJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), sabreJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), sabreJeiMap);
 			
 			expValues.put(ItemInit.SABRE_IRON, exp);
 			expValues.put(ItemInit.SABRE_KOBOLD, exp+1);
@@ -607,11 +581,9 @@ public class ForgeWeaponRecipes {
 			makhairaMaterials.put("Dusksteel", ItemInit.MAKHAIRA_DUSKSTEEL);
 			recipes.put(input1, input2, makhairaMaterials);
 			for(Item stack : makhairaMaterials.values()) {
-				makhairaJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				makhairaJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), makhairaJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), makhairaJeiMap);
 			
 			expValues.put(ItemInit.MAKHAIRA_IRON, exp);
 			expValues.put(ItemInit.MAKHAIRA_KOBOLD, exp+1);
@@ -641,11 +613,9 @@ public class ForgeWeaponRecipes {
 			spearMaterials.put("Dusksteel", ItemInit.SPEAR_DUSKSTEEL);
 			recipes.put(input1, input2, spearMaterials);
 			for(Item stack : spearMaterials.values()) {
-				spearJeiMap.put(new ItemStack(input2), new ItemStack(stack));
+				spearJeiMap.add(new ItemStack(stack));
 			}
-			for(int i = 0; i < 13; i++) {
-				jeiRecipes.put(i, new ItemStack(input1), spearJeiMap);
-			}
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), spearJeiMap);
 			
 			expValues.put(ItemInit.SPEAR_IRON, exp);
 			expValues.put(ItemInit.SPEAR_KOBOLD, exp+1);
@@ -663,8 +633,8 @@ public class ForgeWeaponRecipes {
 		case "handle":
 			toolRodMats.put("ToolRod", ItemInit.LONG_TOOL_ROD);
 			recipes.put(input1, input2, toolRodMats);
-			toolRodJeiMap.put(new ItemStack(input2), new ItemStack(ItemInit.LONG_TOOL_ROD));
-			jeiRecipes.put(0, new ItemStack(input1), toolRodJeiMap);
+			toolRodJeiMap.add(new ItemStack(ItemInit.LONG_TOOL_ROD));
+			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), toolRodJeiMap);
 			expValues.put(ItemInit.LONG_TOOL_ROD, exp);
 			break;
 		}

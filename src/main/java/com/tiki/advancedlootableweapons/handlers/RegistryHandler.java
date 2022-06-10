@@ -7,7 +7,6 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.init.EntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
 import com.tiki.advancedlootableweapons.world.WorldGenCustomOres;
 
 import net.minecraft.block.Block;
@@ -35,7 +34,6 @@ public class RegistryHandler {
 		if(ConfigHandler.ENABLE_ARMORS == true) {
 			ItemInit.enableArmors();
 		}
-		ItemInit.enableWeapons();
 		
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
 		ItemInit.createRecipes(); //I like this face lol \'_'/

@@ -1,6 +1,5 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
-import com.google.common.collect.Table;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
 

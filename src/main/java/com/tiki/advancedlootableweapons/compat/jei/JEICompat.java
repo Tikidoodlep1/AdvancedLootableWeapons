@@ -20,7 +20,6 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
-import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.util.text.translation.I18n;
@@ -41,7 +40,6 @@ public class JEICompat implements IModPlugin{
 	
 	@Override
 	public void register(IModRegistry registry) {
-		final IIngredientRegistry ingredientRegistry = registry.getIngredientRegistry();
 		final IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 		IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 		

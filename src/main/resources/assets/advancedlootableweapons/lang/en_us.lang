@@ -7,7 +7,7 @@ item.ingot_platinum.name=Platinum Ingot
 item.ingot_steel.name=Steel Ingot
 item.ingot_shadow_platinum.name=Shadow Platinum Ingot
 item.ingot_frost_steel.name=Frost Steel Ingot
-item.ingot_obsidian.name=Obsidian Ingot
+item.ingot_obsidian.name=Refined Obsidian Ingot
 item.ingot_crystallite.name=Crystallite Ingot
 item.ingot_dusksteel.name=Dusksteel Ingot
 
@@ -20,7 +20,7 @@ item.nugget_platinum.name=Platinum Nugget
 item.nugget_steel.name=Steel Nugget
 item.nugget_shadow_platinum.name=Shadow Platinum Nugget
 item.nugget_frost_steel.name=Frost Steel Nugget
-item.nugget_obsidian.name=Obsidian Nugget
+item.nugget_obsidian.name=Refined Obsidian Nugget
 item.nugget_crystallite.name=Crystallite Nugget
 item.nugget_dusksteel.name=Dusksteel Nugget
 
@@ -35,7 +35,7 @@ item.dagger_platinum.name=Platinum Dagger
 item.dagger_steel.name=Steel Dagger
 item.dagger_shadow_platinum.name=Shadow Platinum Dagger
 item.dagger_frost_steel.name=Frost Steel Dagger
-item.dagger_obsidian.name=Obsidian Dagger
+item.dagger_obsidian.name=Refined Obsidian Dagger
 item.dagger_crystallite.name=Crystallite Dagger
 item.dagger_dusksteel.name=Dusksteel Dagger
 
@@ -50,7 +50,7 @@ item.kabutowari_platinum.name=Platinum Kabutowari
 item.kabutowari_steel.name=Steel Kabutowari
 item.kabutowari_shadow_platinum.name=Shadow Platinum Kabutowari
 item.kabutowari_frost_steel.name=Frost Steel Kabutowari
-item.kabutowari_obsidian.name=Obsidian Kabutowari
+item.kabutowari_obsidian.name=Refined Obsidian Kabutowari
 item.kabutowari_crystallite.name=Crystallite Kabutowari
 item.kabutowari_dusksteel.name=Dusksteel Kabutowari
 
@@ -65,7 +65,7 @@ item.rapier_platinum.name=Platinum Rapier
 item.rapier_steel.name=Steel Rapier
 item.rapier_shadow_platinum.name=Shadow Platinum Rapier
 item.rapier_frost_steel.name=Frost Steel Rapier
-item.rapier_obsidian.name=Obsidian Rapier
+item.rapier_obsidian.name=Refined Obsidian Rapier
 item.rapier_crystallite.name=Crystallite Rapier
 item.rapier_dusksteel.name=Dusksteel Rapier
 
@@ -80,7 +80,7 @@ item.talwar_platinum.name=Platinum Talwar
 item.talwar_steel.name=Steel Talwar
 item.talwar_shadow_platinum.name=Shadow Platinum Talwar
 item.talwar_frost_steel.name=Frost Steel Talwar
-item.talwar_obsidian.name=Obsidian Talwar
+item.talwar_obsidian.name=Refined Obsidian Talwar
 item.talwar_crystallite.name=Crystallite Talwar
 item.talwar_dusksteel.name=Dusksteel Talwar
 
@@ -95,7 +95,7 @@ item.cleaver_platinum.name=Platinum Cleaver
 item.cleaver_steel.name=Steel Cleaver
 item.cleaver_shadow_platinum.name=Shadow Platinum Cleaver
 item.cleaver_frost_steel.name=Frost Steel Cleaver
-item.cleaver_obsidian.name=Obsidian Cleaver
+item.cleaver_obsidian.name=Refined Obsidian Cleaver
 item.cleaver_crystallite.name=Crystallite Cleaver
 item.cleaver_dusksteel.name=Dusksteel Cleaver
 
@@ -110,7 +110,7 @@ item.mace_platinum.name=Platinum Mace
 item.mace_steel.name=Steel Mace
 item.mace_shadow_platinum.name=Shadow Platinum Mace
 item.mace_frost_steel.name=Frost Steel Mace
-item.mace_obsidian.name=Obsidian Mace
+item.mace_obsidian.name=Refined Obsidian Mace
 item.mace_crystallite.name=Crystallite Mace
 item.mace_dusksteel.name=Dusksteel Mace
 
@@ -125,7 +125,7 @@ item.staff_platinum.name=Platinum Staff
 item.staff_steel.name=Steel Staff
 item.staff_shadow_platinum.name=Shadow Platinum Staff
 item.staff_frost_steel.name=Frost Steel Staff
-item.staff_obsidian.name=Obsidian Staff
+item.staff_obsidian.name=Refined Obsidian Staff
 item.staff_crystallite.name=Crystallite Staff
 item.staff_dusksteel.name=Dusksteel Staff
 
@@ -140,7 +140,7 @@ item.longsword_platinum.name=Platinum Longsword
 item.longsword_steel.name=Steel Longsword
 item.longsword_shadow_platinum.name=Shadow Platinum Longsword
 item.longsword_frost_steel.name=Frost Steel Longsword
-item.longsword_obsidian.name=Obsidian Longsword
+item.longsword_obsidian.name=Refined Obsidian Longsword
 item.longsword_crystallite.name=Crystallite Longsword
 item.longsword_dusksteel.name=Dusksteel Longsword
 
@@ -155,7 +155,7 @@ item.kodachi_platinum.name=Platinum Kodachi
 item.kodachi_steel.name=Steel Kodachi
 item.kodachi_shadow_platinum.name=Shadow Platinum Kodachi
 item.kodachi_frost_steel.name=Frost Steel Kodachi
-item.kodachi_obsidian.name=Obsidian Kodachi
+item.kodachi_obsidian.name=Refined Obsidian Kodachi
 item.kodachi_crystallite.name=Crystallite Kodachi
 item.kodachi_dusksteel.name=Dusksteel Kodachi
 
@@ -170,7 +170,7 @@ item.battleaxe_platinum.name=Platinum Battleaxe
 item.battleaxe_steel.name=Steel Battleaxe
 item.battleaxe_shadow_platinum.name=Shadow Platinum Battleaxe
 item.battleaxe_frost_steel.name=Frost Steel Battleaxe
-item.battleaxe_obsidian.name=Obsidian Battleaxe
+item.battleaxe_obsidian.name=Refined Obsidian Battleaxe
 item.battleaxe_crystallite.name=Crystallite Battleaxe
 item.battleaxe_dusksteel.name=Dusksteel Battleaxe
 
@@ -185,7 +185,7 @@ item.zweihander_platinum.name=Platinum Zweihander
 item.zweihander_steel.name=Steel Zweihander
 item.zweihander_shadow_platinum.name=Shadow Platinum Zweihander
 item.zweihander_frost_steel.name=Frost Steel Zweihander
-item.zweihander_obsidian.name=Obsidian Zweihander
+item.zweihander_obsidian.name=Refined Obsidian Zweihander
 item.zweihander_crystallite.name=Crystallite Zweihander
 item.zweihander_dusksteel.name=Dusksteel Zweihander
 
@@ -200,7 +200,7 @@ item.nodachi_platinum.name=Platinum Nodachi
 item.nodachi_steel.name=Steel Nodachi
 item.nodachi_shadow_platinum.name=Shadow Platinum Nodachi
 item.nodachi_frost_steel.name=Frost Steel Nodachi
-item.nodachi_obsidian.name=Obsidian Nodachi
+item.nodachi_obsidian.name=Refined Obsidian Nodachi
 item.nodachi_crystallite.name=Crystallite Nodachi
 item.nodachi_dusksteel.name=Dusksteel Nodachi
 
@@ -215,7 +215,7 @@ item.sabre_platinum.name=Platinum Sabre
 item.sabre_steel.name=Steel Sabre
 item.sabre_shadow_platinum.name=Shadow Platinum Sabre
 item.sabre_frost_steel.name=Frost Steel Sabre
-item.sabre_obsidian.name=Obsidian Sabre
+item.sabre_obsidian.name=Refined Obsidian Sabre
 item.sabre_crystallite.name=Crystallite Sabre
 item.sabre_dusksteel.name=Dusksteel Sabre
 
@@ -230,7 +230,7 @@ item.makhaira_platinum.name=Platinum Makhaira
 item.makhaira_steel.name=Steel Makhaira
 item.makhaira_shadow_platinum.name=Shadow Platinum Makhaira
 item.makhaira_frost_steel.name=Frost Steel Makhaira
-item.makhaira_obsidian.name=Obsidian Makhaira
+item.makhaira_obsidian.name=Refined Obsidian Makhaira
 item.makhaira_crystallite.name=Crystallite Makhaira
 item.makhaira_dusksteel.name=Dusksteel Makhaira
 
@@ -245,7 +245,7 @@ item.spear_platinum.name=Platinum Spear
 item.spear_steel.name=Steel Spear
 item.spear_shadow_platinum.name=Shadow Platinum Spear
 item.spear_frost_steel.name=Frost Steel Spear
-item.spear_obsidian.name=Obsidian Spear
+item.spear_obsidian.name=Refined Obsidian Spear
 item.spear_crystallite.name=Crystallite Spear
 item.spear_dusksteel.name=Dusksteel Spear
 
@@ -260,7 +260,7 @@ item.platinum_forge_hammer.name=Platinum Forge Hammer
 item.steel_forge_hammer.name=Steel Forge Hammer
 item.shadow_platinum_forge_hammer.name=Shadow Platinum Forge Hammer
 item.frost_steel_forge_hammer.name=Frost Steel Forge Hammer
-item.obsidian_forge_hammer.name=Obsidian Forge Hammer
+item.obsidian_forge_hammer.name=Refined Obsidian Forge Hammer
 item.crystallite_forge_hammer.name=Crystallite Forge Hammer
 item.dusksteel_forge_hammer.name=Dusksteel Forge Hammer
 
@@ -275,7 +275,7 @@ item.platinum_sharpening_stone.name=Platinum Sharpening Stone
 item.steel_sharpening_stone.name=Steel Sharpening Stone
 item.shadow_platinum_sharpening_stone.name=Shadow Platinum Sharpening Stone
 item.frost_steel_sharpening_stone.name=Frost Steel Sharpening Stone
-item.obsidian_sharpening_stone.name=Obsidian Sharpening Stone
+item.obsidian_sharpening_stone.name=Refined Obsidian Sharpening Stone
 item.crystallite_sharpening_stone.name=Crystallite Sharpening Stone
 item.dusksteel_sharpening_stone.name=Dusksteel Sharpening Stone
 
@@ -303,7 +303,7 @@ item.dagger_hot_tool_head_2.cool.name=Cool Dagger Head(Finished)
 item.dagger_hot_tool_head_2.warm.name=Warm Dagger Head(Finished)
 item.dagger_hot_tool_head_2.hot.name=Hot Dagger Head(Finished)
 
-item.kabutowari_head=Wooden Kabutowari Head
+item.kabutowari_head.name=Wooden Kabutowari Head
 item.kabutowari_hot_tool_head.cool.name=Cool Kabutowari Head(Stage 1)
 item.kabutowari_hot_tool_head.warm.name=Warm Kabutowari Head(Stage 1)
 item.kabutowari_hot_tool_head.hot.name=Hot Kabutowari Head(Stage 1)
@@ -494,7 +494,7 @@ item.helmet_platinum.name=Platinum Helmet
 item.helmet_steel.name=Steel Helmet
 item.helmet_shadow_platinum.name=Shadow Platinum Helmet
 item.helmet_frost_steel.name=Frost Steel Helmet
-item.helmet_obsidian.name=Obsidian Helmet
+item.helmet_obsidian.name=Refined Obsidian Helmet
 item.helmet_crystallite.name=Crystallite Helmet
 item.helmet_dusksteel.name=Dusksteel Helmet
 
@@ -511,7 +511,7 @@ item.chestplate_platinum.name=Platinum Chestplate
 item.chestplate_steel.name=Steel Chestplate
 item.chestplate_shadow_platinum.name=Shadow Platinum Chestplate
 item.chestplate_frost_steel.name=Frost Steel Chestplate
-item.chestplate_obsidian.name=Obsidian Chestplate
+item.chestplate_obsidian.name=Refined Obsidian Chestplate
 item.chestplate_crystallite.name=Crystallite Chestplate
 item.chestplate_dusksteel.name=Dusksteel Chestplate
 
@@ -528,7 +528,7 @@ item.leggings_platinum.name=Platinum Leggings
 item.leggings_steel.name=Steel Leggings
 item.leggings_shadow_platinum.name=Shadow Platinum Leggings
 item.leggings_frost_steel.name=Frost Steel Leggings
-item.leggings_obsidian.name=Obsidian Leggings
+item.leggings_obsidian.name=Refined Obsidian Leggings
 item.leggings_crystallite.name=Crystallite Leggings
 item.leggings_dusksteel.name=Dusksteel Leggings
 
@@ -545,7 +545,7 @@ item.boots_platinum.name=Platinum Boots
 item.boots_steel.name=Steel Boots
 item.boots_shadow_platinum.name=Shadow Platinum Boots
 item.boots_frost_steel.name=Frost Steel Boots
-item.boots_obsidian.name=Obsidian Boots
+item.boots_obsidian.name=Refined Obsidian Boots
 item.boots_crystallite.name=Crystallite Boots
 item.boots_dusksteel.name=Dusksteel Boots
 
@@ -559,6 +559,7 @@ tile.block_platinum.name=Platinum Block
 tile.block_steel.name=Steel Block
 tile.block_shadow_platinum.name=Shadow Platinum Block
 tile.block_frost_steel.name=Frost Steel Block
+tile.block_obsidian_steel.name=Refined Obsidian Block
 tile.block_crystallite.name=Crystallite Block
 tile.block_dusksteel.name=Dusksteel Block
 tile.ore_copper.name=Copper Ore
@@ -569,14 +570,15 @@ tile.ore_crystallite.name=Crystallite Ore
 tile.cobble_feldspar.name=Cobbled Feldspar
 tile.rock_feldspar.name=Feldspar
 tile.block_brick_diorite.name=Diorite Bricks
-tile.block_brick_granite.name=Gravel Bricks
-tile.block_powder_granite.name=Gravel Clay Powder
+tile.block_brick_granite.name=Granite Bricks
+tile.block_powder_granite.name=Granite Clay Powder
 tile.block_powder_diorite.name=Diorite Clay Powder
 tile.block_clay_diorite.name=Diorite Clay
 tile.block_clay_granite.name=Granite Clay
 tile.alloy_furnace.name=Alloy Furnace
 tile.forge.name=Forge
 tile.advanced_forge.name=Advanced Forge
+tile.advanced_forge_1.name=Advanced Forge
 tile.jaw_crusher.name=Jaw Crusher
 
 

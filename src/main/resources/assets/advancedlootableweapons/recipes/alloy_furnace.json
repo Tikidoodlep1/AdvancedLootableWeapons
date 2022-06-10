@@ -3,21 +3,25 @@
 
 	"pattern":
 	[
-		"III",
-		"I I",
-		"SSS"
+		"CCC",
+		"C C",
+		"ISI"
 	],
 
 	"key":
 	{
 		"I":
 		{
-			"item": "minecraft:iron_ingot"
+			"item": "advancedlootableweapons:block_clay_granite"
 		},
 		"S":
 		{ 
-			"item": "minecraft:stone_slab",
+			"item": "minecraft:stone",
 			"data": 0
+		},
+		"C":
+		{
+			"item": "advancedlootableweapons:clay_granite"
 		}
 	},
 

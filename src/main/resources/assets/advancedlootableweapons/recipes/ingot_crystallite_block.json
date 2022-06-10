@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+    {
+		"item": "advancedlootableweapons:block_crystallite"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:ingot_crystallite",
+    "count": 9
+  }
+}

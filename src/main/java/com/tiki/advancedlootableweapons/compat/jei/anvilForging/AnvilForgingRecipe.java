@@ -48,7 +48,7 @@ public class AnvilForgingRecipe implements IRecipeWrapper{
 		if(exp > 0){
 			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience", exp);
 			FontRenderer renderer = minecraft.fontRenderer;
-			renderer.drawString(expString, recipeWidth - 30, 16, Color.GRAY.getRGB());
+			renderer.drawString(expString, recipeWidth - 30, 48, Color.GRAY.getRGB());
 		}
 	}
 }

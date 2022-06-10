@@ -13,7 +13,8 @@ public class OreDictionaryCompat {
 		OreDictionary.registerOre("ingotBronze", ItemInit.INGOT_BRONZE);
 		OreDictionary.registerOre("ingotPlatinum", ItemInit.INGOT_PLATINUM);
 		OreDictionary.registerOre("ingotSteel", ItemInit.INGOT_STEEL);
-		OreDictionary.registerOre("ingotObsidian", ItemInit.INGOT_OBSIDIAN);
+		OreDictionary.registerOre("ingotRefinedObsidian", ItemInit.INGOT_OBSIDIAN);
+		OreDictionary.registerOre("ingotTin", ItemInit.INGOT_TIN);
 		
 		OreDictionary.registerOre("oreCopper", BlockInit.ore_copper);
 		OreDictionary.registerOre("oreSilver", BlockInit.ore_silver);
@@ -31,7 +32,8 @@ public class OreDictionaryCompat {
 		OreDictionary.registerOre("nuggetBronze", ItemInit.NUGGET_BRONZE);
 		OreDictionary.registerOre("nuggetPlatinum", ItemInit.NUGGET_PLATINUM);
 		OreDictionary.registerOre("nuggetSteel", ItemInit.NUGGET_STEEL);
-		OreDictionary.registerOre("nuggetObsidian", ItemInit.NUGGET_OBSIDIAN);
+		OreDictionary.registerOre("nuggetRefinedObsidian", ItemInit.NUGGET_OBSIDIAN);
+		OreDictionary.registerOre("nuggetTin", ItemInit.NUGGET_TIN);
 		
 		OreDictionary.registerOre("shardObsidian", ItemInit.SHARD_OBSIDIAN);
 	}

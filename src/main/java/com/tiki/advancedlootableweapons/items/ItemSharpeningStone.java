@@ -50,7 +50,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,@Nonnull EnumHand handIn) {
 		
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
-		BlockPos pos = new BlockPos((int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 		
 		if(!worldIn.isRemote) {
 			playerIn.openGui(Alw.instance, ModInfo.GUI_SHARPENING_STONE, worldIn, handIn.ordinal(), -1, -1);
@@ -63,13 +62,11 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 	public static class SharpeningStone implements IInteractionObject
     {
         private final World world;
-        private final BlockPos position;
         private ItemSharpeningStone stone;
 
         public SharpeningStone(World worldIn, BlockPos pos, ItemSharpeningStone stone)
         {
             this.world = worldIn;
-            this.position = pos;
             this.stone = stone;
         }
 

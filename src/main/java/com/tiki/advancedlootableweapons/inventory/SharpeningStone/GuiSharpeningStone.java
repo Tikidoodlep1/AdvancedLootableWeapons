@@ -27,13 +27,11 @@ public class GuiSharpeningStone extends GuiContainer implements IContainerListen
 	
 		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/sharpening_stone.png");
 	    private final ContainerSharpeningStone stone;
-	    private final InventoryPlayer playerInventory;
 	    public ItemSharpeningStone item;
 
 	    public GuiSharpeningStone(InventoryPlayer inventoryIn, World worldIn)
 	    {
 	        super(new ContainerSharpeningStone(inventoryIn, worldIn, inventoryIn.player));
-	        this.playerInventory = inventoryIn;
 	        this.stone = (ContainerSharpeningStone)this.inventorySlots;
 	        if(item instanceof ItemSharpeningStone) {
 	        	this.item = (ItemSharpeningStone)item;
