@@ -265,19 +265,19 @@ item.crystallite_forge_hammer.name=Crystallite Forge Hammer
 item.dusksteel_forge_hammer.name=Dusksteel Forge Hammer
 
 
-item.stone_sharpening_stone.name=Cobble Sharpening Stone
-item.iron_sharpening_stone.name=Iron Sharpening Stone
-item.kobold_sharpening_stone.name=Kobold Steel Sharpening Stone
-item.copper_sharpening_stone.name=Copper Sharpening Stone
-item.silver_sharpening_stone.name=Silver Sharpening Stone
-item.bronze_sharpening_stone.name=Bronze Sharpening Stone
-item.platinum_sharpening_stone.name=Platinum Sharpening Stone
-item.steel_sharpening_stone.name=Steel Sharpening Stone
-item.shadow_platinum_sharpening_stone.name=Shadow Platinum Sharpening Stone
-item.frost_steel_sharpening_stone.name=Frost Steel Sharpening Stone
-item.obsidian_sharpening_stone.name=Refined Obsidian Sharpening Stone
-item.crystallite_sharpening_stone.name=Crystallite Sharpening Stone
-item.dusksteel_sharpening_stone.name=Dusksteel Sharpening Stone
+item.stone_sharpening_stone.name=Stone Whetstone
+item.iron_sharpening_stone.name=Iron Whetstone
+item.kobold_sharpening_stone.name=Kobold Steel Whetstone
+item.copper_sharpening_stone.name=Copper Whetstone
+item.silver_sharpening_stone.name=Silver Whetstone
+item.bronze_sharpening_stone.name=Bronze Whetstone
+item.platinum_sharpening_stone.name=Platinum Whetstone
+item.steel_sharpening_stone.name=Steel Whetstone
+item.shadow_platinum_sharpening_stone.name=Shadow Platinum Whetstone
+item.frost_steel_sharpening_stone.name=Frost Steel Whetstone
+item.obsidian_sharpening_stone.name=Refined Obsidian Whetstone
+item.crystallite_sharpening_stone.name=Crystallite Whetstone
+item.dusksteel_sharpening_stone.name=Dusksteel Whetstone
 
 
 item.hot_tool_head.cool.name=Cool Tool Head

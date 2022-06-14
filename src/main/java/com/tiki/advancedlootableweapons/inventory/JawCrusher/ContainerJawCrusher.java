@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.inventory.JawCrusher;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityJawCrusher;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,7 +24,7 @@ private final TileEntityJawCrusher tileentity;
 		
 		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 0, 54, 43) {
 			public boolean isItemValid(ItemStack stack) {
-				if(stack.getItem() == Item.getItemFromBlock(Blocks.STONE) && (stack.getItemDamage() == 1 || stack.getItemDamage() == 3)) {
+				if(stack.getItem() == Item.getItemFromBlock(BlockInit.rock_feldspar) || (stack.getItem() == Item.getItemFromBlock(Blocks.STONE) && (stack.getItemDamage() == 1 || stack.getItemDamage() == 3))) {
 					return true;
 				}
 				return false;
@@ -85,7 +86,7 @@ private final TileEntityJawCrusher tileentity;
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
             
-            if (index == 0)
+            if (index == 0 || index == 1)
             {
                 if (!this.mergeItemStack(itemstack1, 1, 38, true))
                 {

@@ -578,6 +578,7 @@ tile.block_clay_granite.name=Granite Clay
 tile.alloy_furnace.name=Alloy Furnace
 tile.forge.name=Forge
 tile.advanced_forge.name=Advanced Forge
+tile.advanced_forge_1.name=Advanced Forge
 tile.jaw_crusher.name=Jaw Crusher
 
 

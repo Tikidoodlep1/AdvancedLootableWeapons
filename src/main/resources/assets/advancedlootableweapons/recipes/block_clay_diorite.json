@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SS",
+		"SS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:clay_diorite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_clay_diorite",
+		"count": 1
+	}
+}
