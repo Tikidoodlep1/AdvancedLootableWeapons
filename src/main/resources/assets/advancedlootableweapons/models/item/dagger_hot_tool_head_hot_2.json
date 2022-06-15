@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "advancedlootableweapons:items/dagger_hot_tool_head_hot_2"
+    }
+}
