@@ -31,7 +31,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		if(mainTE == null) {
 			BlockPos mainBlock = BlockForge2Placeholder.getMainPos(world, pos, world.getBlockState(pos));
 			TileEntityForge2 newMainTE = null;
-			if(world.getTileEntity(pos) != null) {
+			if(world.getTileEntity(mainBlock) != null) {
 				newMainTE = TileEntityForge2.class.cast(world.getTileEntity(mainBlock));
 			}
 			setMainTE(newMainTE);
@@ -293,7 +293,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 			return getMainTE(this.getWorld(), this.getPos()).getField(id);
 		}
 	}
-
+	
 	public void setField(int id, int value) 
 	{
 		if(mainTE == this) {
