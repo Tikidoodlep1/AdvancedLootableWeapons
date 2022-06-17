@@ -143,6 +143,7 @@ public class ConfigHandler {
 	public static boolean HOSTILE_MOBS_DROP_SHADOW = true;
 	public static boolean BOSS_DROPS_SHADOW = true;
 	public static boolean ONLY_BOSS_DROPS_SHADOW = false;
+	public static boolean NON_VANILLA_DROPS_SHADOW = true;
 	
 	public static boolean VILLAGER_DROP_SHADOW = true;
 	public static boolean PARROT_DROP_SHADOW = true;
@@ -343,8 +344,8 @@ public class ConfigHandler {
 		USE_IMAGINARY_RESOURCES = config.getBoolean("Use Imaginary Resources", category, true, "Use the custom made resources Kobold Steel, Shadow Platinum, Frost Steel, Crystallite, Dusksteel. (True/False)");
 		
 		
-		category = "GLOBAL DROPS";
-		config.addCustomCategoryComment(category, "You can modify which vanilla mobs drop shadows, blood, etc... NOTE: Turning individual mobs to false will override any general category they're in. Ex. if \"Zombie - Shadow\" is false, but \"Hostile Mobs - Shadow\" is true, the zombie will NOT drop the shadow item.");
+		category = "GLOBAL DROPS - GENERAL MODIFICATION";
+		config.addCustomCategoryComment(category, "You can modify which vanilla mobs drop shadows, blood, etc...");
 		SHADOW_DROP_RATE = config.getFloat("Shadow Drop Rate", category, 0.05F, 0.01F, 1.0F, "The drop rate for the shadow item in percentage, 0.05 = 5%");
 		LAND_MOBS_DROP_SHADOW = config.getBoolean("Land Mobs - Shadow", category, true, "Should land mobs drop the shadow item? (True/False)");
 		WATER_MOBS_DROP_SHADOW = config.getBoolean("Water Mobs - Shadow", category, false, "Should water mobs drop the shadow item? (True/False)");
@@ -354,7 +355,11 @@ public class ConfigHandler {
 		HOSTILE_MOBS_DROP_SHADOW = config.getBoolean("Hostile Mobs - Shadow", category, true, "Should hostile mobs drop the shadow item? (True/False)");
 		BOSS_DROPS_SHADOW = config.getBoolean("Bosses - Shadow", category, true, "Should the witch drop the shadow item? (True/False)");
 		ONLY_BOSS_DROPS_SHADOW = config.getBoolean("Only Bosses Drop Shadows", category, false, "Should \"boss\" mobs be the only ones to drop shadows? (True/False)");
+		NON_VANILLA_DROPS_SHADOW = config.getBoolean("Non-Vanilla Mobs - Shadow", category, true, "Should any non-vanilla mobs drop shadows? This does NOT take into account if the mob is passive, flying, water, etc. (True/False)");
+
 		
+		category = "GLOBAL DROPS - INDIVIDUAL MODIFICATION";
+		config.addCustomCategoryComment(category, "You can modify whether you want individual mobs to drop the shadow items. NOTE: The overarching categories in \"GLOBAL DROPS - GENERAL MODIFICATION\" are used to determine each group, but these values will override any individual mob in each enabled group, Ex. If \"Hostile Mobs - Shadow\" is TRUE, but \"Skeleton - Shadow\" is FALSE, the skeleton will NOT drop the shadow item.");
 		WITCH_DROP_SHADOW = config.getBoolean("Witch - Shadow", category, true, "Should the witch drop the shadow item. (True/False)");
 		VEX_DROP_SHADOW = config.getBoolean("Vex - Shadow", category, true, "Should the vex drop the shadow item. (True/False)");
 		EVOKER_DROP_SHADOW = config.getBoolean("Evoker - Shadow", category, true, "Should the evoker drop the shadow item. (True/False)");

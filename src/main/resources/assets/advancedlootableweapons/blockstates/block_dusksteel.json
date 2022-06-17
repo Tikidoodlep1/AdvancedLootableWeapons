@@ -2,12 +2,12 @@
     "variants": 
     {
         "phase=0": { "model": "advancedlootableweapons:block_dusksteel_0" },
-        "phase=1": { "model": "advancedlootableweapons:block_dusksteel_1" },
+        "phase=1": { "model": "advancedlootableweapons:block_dusksteel_7" },
         "phase=2": { "model": "advancedlootableweapons:block_dusksteel_1" },
         "phase=3": { "model": "advancedlootableweapons:block_dusksteel_2" },
         "phase=4": { "model": "advancedlootableweapons:block_dusksteel_3" },
         "phase=5": { "model": "advancedlootableweapons:block_dusksteel_4" },
         "phase=6": { "model": "advancedlootableweapons:block_dusksteel_5" },
-        "phase=7": { "model": "advancedlootableweapons:block_dusksteel_5" }
+        "phase=7": { "model": "advancedlootableweapons:block_dusksteel_6" }
     }
 }
