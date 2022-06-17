@@ -1,0 +1,12 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "particle": "advancedlootableweapons:blocks/alloy_furnace_front",
+        "up": "advancedlootableweapons:blocks/alloy_furnace_top",
+        "down": "advancedlootableweapons:blocks/alloy_furnace_top",
+        "north": "advancedlootableweapons:blocks/alloy_furnace_front",
+        "east": "advancedlootableweapons:blocks/alloy_furnace_side",
+        "south": "advancedlootableweapons:blocks/alloy_furnace_side",
+        "west": "advancedlootableweapons:blocks/alloy_furnace_side"
+    }
+}

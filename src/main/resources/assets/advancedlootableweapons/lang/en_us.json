@@ -1,7 +1,6 @@
 {
 "item.advancedlootableweapons.ingot_tin": "Tin Ingot",
 "item.advancedlootableweapons.ingot_kobold": "Kobold Steel Ingot",
-"item.advancedlootableweapons.ingot_copper": "Copper Ingot",
 "item.advancedlootableweapons.ingot_silver": "Silver Ingot",
 "item.advancedlootableweapons.ingot_bronze": "Bronze Ingot",
 "item.advancedlootableweapons.ingot_platinum": "Platinum Ingot",
@@ -14,7 +13,6 @@
 
 "item.advancedlootableweapons.nugget_tin": "Tin Nugget",
 "item.advancedlootableweapons.nugget_kobold": "Kobold Steel Nugget",
-"item.advancedlootableweapons.nugget_copper": "Copper Nugget",
 "item.advancedlootableweapons.nugget_silver": "Silver Nugget",
 "item.advancedlootableweapons.nugget_bronze": "Bronze Nugget",
 "item.advancedlootableweapons.nugget_platinum": "Platinum Nugget",
@@ -553,7 +551,6 @@
 
 "tile.advancedlootableweapons.block_tin": "Tin Block",
 "tile.advancedlootableweapons.block_kobold": "Kobold Steel Block",
-"tile.advancedlootableweapons.block_copper": "Copper Block",
 "tile.advancedlootableweapons.block_silver": "Silver Block",
 "tile.advancedlootableweapons.block_bronze": "Bronze Block",
 "tile.advancedlootableweapons.block_platinum": "Platinum Block",
@@ -563,7 +560,6 @@
 "tile.advancedlootableweapons.block_obsidian_steel": "Refined Obsidian Block",
 "tile.advancedlootableweapons.block_crystallite": "Crystallite Block",
 "tile.advancedlootableweapons.block_dusksteel": "Dusksteel Block",
-"tile.advancedlootableweapons.ore_copper": "Copper Ore",
 "tile.advancedlootableweapons.ore_silver": "Silver Ore",
 "tile.advancedlootableweapons.ore_tin": "Tin Ore",
 "tile.advancedlootableweapons.ore_platinum": "Platinum Ore",
