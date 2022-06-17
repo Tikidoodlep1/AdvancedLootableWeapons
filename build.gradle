@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "0.81-1.12.2"
+version = "0.82-1.12.2"
 group = "com.tiki.advancedlootableweapons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "advancedlootableweapons"
 
@@ -45,7 +45,7 @@ repositories {
   maven {
     // location of a maven mirror for JEI files, as a fallback
     name = "ModMaven"
-    url = "https://modmaven.k-4u.nl"
+    url = "https://modmaven.dev"
   }
 }
 

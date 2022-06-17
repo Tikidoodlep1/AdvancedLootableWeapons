@@ -3,11 +3,11 @@
   "modid": "advancedlootableweapons",
   "name": "Advanced Lootable Weapons",
   "description": "This aim of this mod is to create extremely diverse weapons without losing the ability to play both vanilla and modded.",
-  "version": "0.81-1.12.2",
+  "version": "0.82-1.12.2",
   "mcversion": "1.12",
   "url": "https://advanced-lootable-weapons.fandom.com/wiki/Advanced_Lootable_Weapons_Wiki",
   "updateUrl": "",
-  "authorList": ["Tiki", "Azurren", "DinoSoup", "Ravioli's Gale", "Destroyer"],
+  "authorList": ["Tiki", "DinoSoup", "Destroyer"],
   "credits": "Programming: Tiki
   Textures: DinoSoup & Destroyer",
   "logoFile": "",

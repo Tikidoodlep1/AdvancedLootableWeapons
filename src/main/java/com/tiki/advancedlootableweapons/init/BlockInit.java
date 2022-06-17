@@ -33,7 +33,7 @@ public class BlockInit {
 	public static final Block block_copper = new BlockBase("block_copper", Material.IRON).setHardness(3.5F).setResistance(8.0F);
 	public static final Block block_silver = new BlockBase("block_silver", Material.IRON).setHardness(4.0F).setResistance(9.0F);
 	public static final Block block_shadow_platinum = new BlockBase("block_shadow_platinum", Material.IRON).setHardness(5.0F).setResistance(7.0F);
-	public static final Block block_obsidian = new BlockBase("block_obsidian_steel", Material.IRON).setHardness(5.5F).setResistance(16.0F);
+	public static final Block block_obsidian = new BlockBase("block_obsidian_steel", Material.IRON).setHardness(5.5F).setResistance(100.0F);
 	
 	
 	//Rocks & Clays

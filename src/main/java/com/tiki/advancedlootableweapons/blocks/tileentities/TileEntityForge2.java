@@ -104,7 +104,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		if(mainTE == this) {
 			return (ItemStack)this.inventory.get(index);
 		}else {
-			return (ItemStack)getMainTE(this.getWorld(), this.getPos()).inventory.get(index);
+			return getMainTE(this.getWorld(), this.getPos()).inventory.get(index);
 		}
 	}
 	

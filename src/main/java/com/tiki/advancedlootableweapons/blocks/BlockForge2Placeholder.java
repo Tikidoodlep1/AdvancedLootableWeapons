@@ -82,15 +82,15 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	public IBlockState getStateFromMeta(int meta) 
 	{
 		if(meta > 3 && meta < 8) {
-			EnumFacing facing = EnumFacing.getFront(meta-4);
+			EnumFacing facing = EnumFacing.getHorizontal(meta-4);
 			if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
 			return this.getDefaultState().withProperty(FACING, facing).withProperty(LEFT, true);
 		}else if(meta > 7) {
-			EnumFacing facing = EnumFacing.getFront(meta-8);
+			EnumFacing facing = EnumFacing.getHorizontal(meta-8);
 			if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
 			return this.getDefaultState().withProperty(FACING, facing).withProperty(RIGHT, true);
 		}
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.getHorizontal(meta);
 		if(facing.getAxis() == EnumFacing.Axis.Y) facing = EnumFacing.NORTH;
 		return this.getDefaultState().withProperty(FACING, facing);
 	}
@@ -98,8 +98,8 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	@Override
 	public int getMetaFromState(IBlockState state) 
 	{
-		int facing = ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
-		if(state.getValue(LEFT) && state.getValue(RIGHT)) {
+		int facing = state.getValue(FACING).getHorizontalIndex();
+		if(!state.getValue(LEFT) && !state.getValue(RIGHT)) {
 			return facing;
 		}else if(state.getValue(RIGHT)) {
 			return 8 + facing;
@@ -109,17 +109,17 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 		return facing;
 	}
 	
-	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
-	{
-		return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-	}
-	
-	@Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) 
-	{
-		return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
-	}
+//	@Override
+//	public IBlockState withRotation(IBlockState state, Rotation rot)
+//	{
+//		return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+//	}
+//	
+//	@Override
+//	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) 
+//	{
+//		return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+//	}
 	
 	public static void setState(boolean active, World worldIn, BlockPos pos) 
 	{
@@ -199,7 +199,18 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 		boolean right = state.getValue(RIGHT);
 		EnumFacing facing = (EnumFacing)state.getValue(FACING);
 		if(right) {
-			BlockPos rightOffset = pos.offset(facing.rotateY());
+			BlockPos rightOffset = pos.offset(facing.rotateY()); //-311, 76, 185
+			/*
+[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:203]: BlockPos{x=-312, y=77, z=184}
+[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:204]: BlockPos{x=-312, y=77, z=185}
+[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:205]: BlockPos{x=-312, y=76, z=184}
+[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:206]: BlockPos{x=-312, y=76, z=185}
+			 */
+			System.out.println(rightOffset.toString());
+			System.out.println(rightOffset.offset(facing).toString());
+			System.out.println(rightOffset.offset(EnumFacing.DOWN).toString());
+			System.out.println(rightOffset.offset(facing).offset(EnumFacing.DOWN).toString());
+			
 			if(worldIn.getBlockState(rightOffset).getBlock() == BlockInit.forge2) {
 				locateMain = rightOffset;
 			}else if(worldIn.getBlockState(rightOffset.offset(facing)).getBlock() == BlockInit.forge2) {
@@ -211,6 +222,11 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 			}
 		}else if(left) {
 			BlockPos leftOffset = pos.offset(facing.rotateYCCW());
+			System.out.println(leftOffset.toString());
+			System.out.println(leftOffset.offset(facing).toString());
+			System.out.println(leftOffset.offset(EnumFacing.DOWN).toString());
+			System.out.println(leftOffset.offset(facing).offset(EnumFacing.DOWN).toString());
+			
 			if(worldIn.getBlockState(leftOffset).getBlock() == BlockInit.forge2) {
 				locateMain = leftOffset;
 			}else if(worldIn.getBlockState(leftOffset.offset(facing)).getBlock() == BlockInit.forge2) {
