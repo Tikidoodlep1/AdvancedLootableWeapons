@@ -1,0 +1,13 @@
+{
+	"type": "advancedlootableweapons:husk_mod",
+	"conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:entities/husk"
+        }
+	],
+	"prop1": "advancedlootableweapons:shadow"
+}

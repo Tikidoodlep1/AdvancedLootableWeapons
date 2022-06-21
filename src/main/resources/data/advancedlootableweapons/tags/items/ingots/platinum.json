@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:ingot_platinum",
+		{
+			"id": "advancedlootableweapons:ingot_platinum",
+			"required": false
+		}
+	]
+}

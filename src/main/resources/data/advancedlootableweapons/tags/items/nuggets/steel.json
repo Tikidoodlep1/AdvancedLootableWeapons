@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:nugget_steel",
+		{
+			"id": "advancedlootableweapons:nugget_steel",
+			"required": false
+		}
+	]
+}

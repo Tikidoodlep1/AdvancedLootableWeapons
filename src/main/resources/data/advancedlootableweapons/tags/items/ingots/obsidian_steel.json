@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:ingot_obsidian_steel",
+		{
+			"id": "advancedlootableweapons:ingot_obsidian_steel",
+			"required": false
+		}
+	]
+}

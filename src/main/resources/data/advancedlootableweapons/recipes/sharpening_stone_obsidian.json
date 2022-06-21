@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"  F",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotRefinedObsidian"
+		},
+		"F":
+		{
+			"item": "minecraft:flint"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:obsidian_sharpening_stone",
+		"count": 1
+	}
+}

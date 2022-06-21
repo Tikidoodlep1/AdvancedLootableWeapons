@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"group": "ingot_platinum",
+	"ingredient":
+	{
+		"item": "advancedlootableweapons:raw_platinum"
+	},
+	"result": "advancedlootableweapons:ingot_platinum",
+	"experience": 1.0,
+	"cookingtime": 100
+}

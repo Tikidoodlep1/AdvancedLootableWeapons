@@ -1,0 +1,15 @@
+{
+	"replace": false,
+	"values": [
+		"#advancedlootableweapons:nuggets/bronze",
+		"#advancedlootableweapons:nuggets/obsidian_steel",
+		"#advancedlootableweapons:nuggets/platinum",
+		"#advancedlootableweapons:nuggets/silver",
+		"#advancedlootableweapons:nuggets/steel",
+		"#advancedlootableweapons:nuggets/tin",
+		{
+			"id": "advancedlootableweapons:nuggets",
+			"required": false
+		}
+	]
+}

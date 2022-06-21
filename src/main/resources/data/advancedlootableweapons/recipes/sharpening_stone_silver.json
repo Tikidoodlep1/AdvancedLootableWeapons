@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"  F",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"type": "forge:ore_dict",
+			"ore": "ingotSilver"
+		},
+		"F":
+		{
+			"item": "minecraft:flint"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:silver_sharpening_stone",
+		"count": 1
+	}
+}

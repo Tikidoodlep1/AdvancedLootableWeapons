@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:block_stone_ore_silver",
+		"advancedlootableweapons:block_deepslate_ore_silver",
+		{
+			"id": "advancedlootableweapons:ore_silver",
+			"required": false
+		}
+	]
+}

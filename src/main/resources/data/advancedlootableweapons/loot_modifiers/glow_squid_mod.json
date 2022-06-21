@@ -1,0 +1,13 @@
+{
+	"type": "advancedlootableweapons:glow_squid_mod",
+	"conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:entities/glow_squid"
+        }
+	],
+	"prop1": "advancedlootableweapons:shadow"
+}

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_shadow_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:boots_shadow_platinum",
+		"count": 1
+	}
+}

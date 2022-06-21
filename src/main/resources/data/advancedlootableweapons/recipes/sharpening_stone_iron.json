@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"  F",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		"F":
+		{
+			"item": "minecraft:flint"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:iron_sharpening_stone",
+		"count": 1
+	}
+}

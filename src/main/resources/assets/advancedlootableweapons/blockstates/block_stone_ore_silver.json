@@ -1,0 +1,6 @@
+{
+    "variants":
+    {
+        "": { "model": "advancedlootableweapons:block/block_stone_ore_silver" }
+    }
+}

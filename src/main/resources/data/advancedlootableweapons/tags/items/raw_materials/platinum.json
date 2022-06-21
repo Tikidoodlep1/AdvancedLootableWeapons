@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:raw_platinum",
+		{
+			"id": "advancedlootableweapons:raw_platinum",
+			"required": false
+		}
+	]
+}

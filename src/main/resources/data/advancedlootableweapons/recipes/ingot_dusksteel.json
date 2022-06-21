@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"NNN",
+		"NNN",
+		"NNN"
+	],
+
+	"key":
+	{
+		"N":
+		{
+			"item": "advancedlootableweapons:nugget_dusksteel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_dusksteel",
+		"count": 1
+	}
+}

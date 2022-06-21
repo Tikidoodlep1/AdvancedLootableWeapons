@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"III",
+		"III",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "advancedlootableweapons:ingot_silver"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_silver",
+		"count": 1
+	}
+}

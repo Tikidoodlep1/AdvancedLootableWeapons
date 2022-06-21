@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"I I",
+		"ICC",
+		"ICI"
+	],
+
+	"key":
+	{
+		"C":
+		{
+			"item": "minecraft:cobblestone"
+		},
+		"I":
+		{ 
+			"item": "minecraft:iron_ingot"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:jaw_crusher",
+		"count": 1
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:powder_granite",
+		{
+			"id": "advancedlootableweapons:powder_granite",
+			"required": false
+		}
+	]
+}

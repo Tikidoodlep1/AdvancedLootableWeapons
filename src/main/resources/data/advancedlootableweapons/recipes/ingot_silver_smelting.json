@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"group": "ingot_silver",
+	"ingredient":
+	{
+		"item": "advancedlootableweapons:raw_silver"
+	},
+	"result": "advancedlootableweapons:ingot_silver",
+	"experience": 1.0,
+	"cookingtime": 100
+}

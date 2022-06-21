@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"III",
+		"ISI",
+		" S "
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"I":
+		{ 
+			"item": "minecraft:copper_ingot"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:copper_forge_hammer",
+		"count": 1
+	}
+}

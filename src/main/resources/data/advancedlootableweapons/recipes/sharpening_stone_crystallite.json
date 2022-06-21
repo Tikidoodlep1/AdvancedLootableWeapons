@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"  F",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "advancedlootableweapons:ingot_crystallite"
+		},
+		"F":
+		{
+			"item": "minecraft:flint"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:crystallite_sharpening_stone",
+		"count": 1
+	}
+}

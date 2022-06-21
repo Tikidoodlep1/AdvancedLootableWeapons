@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:block_stone_ore_platinum",
+		"advancedlootableweapons:block_deepslate_ore_platinum",
+		{
+			"id": "advancedlootableweapons:ore_platinum",
+			"required": false
+		}
+	]
+}

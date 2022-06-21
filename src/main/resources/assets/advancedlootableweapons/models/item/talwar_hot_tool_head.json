@@ -4,8 +4,20 @@
         "layer0": "advancedlootableweapons:items/talwar_hot_tool_head_hot"
     },
     "overrides": [
-        { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/talwar_hot_tool_head_hot" },
-        { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/talwar_hot_tool_head_warm" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/talwar_hot_tool_head_cool" }
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 0 
+        	}, 
+        	"model": "advancedlootableweapons:item/talwar_hot_tool_head_hot" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 1 
+        	}, 
+        	"model": "advancedlootableweapons:item/talwar_hot_tool_head_warm" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 2 
+        	}, 
+        	"model": "advancedlootableweapons:item/talwar_hot_tool_head_cool" }
     ]
 }

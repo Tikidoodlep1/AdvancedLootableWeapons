@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"group": "brick_diorite",
+	"ingredient":
+	{
+		"item": "advancedlootableweapons:clay_diorite"
+	},
+	"result": "advancedlootableweapons:brick_diorite",
+	"experience": 1.0,
+	"cookingtime": 100
+}

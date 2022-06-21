@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"W",
+		"S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "minecraft:stick"
+		},
+		"W":
+		{ 
+			"item": "advancedlootableweapons:mace_head"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:mace_wood",
+		"count": 1
+	}
+}

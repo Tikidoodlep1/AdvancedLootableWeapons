@@ -4,8 +4,20 @@
         "layer0": "advancedlootableweapons:items/nodachi_hot_tool_head_hot_4"
     },
     "overrides": [
-        { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/nodachi_hot_tool_head_hot_4" },
-        { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/nodachi_hot_tool_head_warm_4" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/nodachi_hot_tool_head_cool_4" }
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 0 
+        	}, 
+        	"model": "advancedlootableweapons:item/nodachi_hot_tool_head_hot_4" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 1 
+        	}, 
+        	"model": "advancedlootableweapons:item/nodachi_hot_tool_head_warm_4" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 2 
+        	}, 
+        	"model": "advancedlootableweapons:item/nodachi_hot_tool_head_cool_4" }
     ]
 }

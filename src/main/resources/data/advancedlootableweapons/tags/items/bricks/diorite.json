@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:brick_diorite",
+		{
+			"id": "advancedlootableweapons:brick_diorite",
+			"required": false
+		}
+	]
+}

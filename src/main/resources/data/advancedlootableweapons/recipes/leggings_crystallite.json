@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SSS",
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_crystallite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:leggings_crystallite",
+		"count": 1
+	}
+}

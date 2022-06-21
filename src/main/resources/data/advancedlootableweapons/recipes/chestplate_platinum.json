@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"SSS",
+		"SSS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:chestplate_platinum",
+		"count": 1
+	}
+}

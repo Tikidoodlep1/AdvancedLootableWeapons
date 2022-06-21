@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SSS",
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:leggings_platinum",
+		"count": 1
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SSS",
+		"S S",
+		"S S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:ingot_obsidian"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:leggings_obsidian",
+		"count": 1
+	}
+}

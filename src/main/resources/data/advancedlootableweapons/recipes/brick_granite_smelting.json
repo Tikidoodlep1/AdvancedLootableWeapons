@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"group": "brick_granite",
+	"ingredient":
+	{
+		"item": "advancedlootableweapons:clay_granite"
+	},
+	"result": "advancedlootableweapons:brick_granite",
+	"experience": 1.0,
+	"cookingtime": 100
+}

@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SFS",
+		"FSF",
+		"SFS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:powder_granite"
+		},
+		"F":
+		{
+			"item": "advancedlootableweapons:powder_feldspar"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_powder_granite",
+		"count": 1
+	}
+}

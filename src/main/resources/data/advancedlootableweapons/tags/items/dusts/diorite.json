@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"advancedlootableweapons:powder_diorite",
+		{
+			"id": "advancedlootableweapons:powder_diorite",
+			"required": false
+		}
+	]
+}

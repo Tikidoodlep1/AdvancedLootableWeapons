@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"SSS",
+		"SSS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "minecraft:copper_ingot"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:chestplate_copper",
+		"count": 1
+	}
+}

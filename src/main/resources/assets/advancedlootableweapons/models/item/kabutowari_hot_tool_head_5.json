@@ -4,8 +4,20 @@
         "layer0": "advancedlootableweapons:items/kabutowari_hot_tool_head_hot_5"
     },
     "overrides": [
-        { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_hot_5" },
-        { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_warm_5" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_cool_5" }
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 0 
+        	}, 
+        	"model": "advancedlootableweapons:item/kabutowari_hot_tool_head_hot_5" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 1 
+        	}, 
+        	"model": "advancedlootableweapons:item/kabutowari_hot_tool_head_warm_5" },
+        { 
+        	"predicate": { 
+        		"advancedlootableweapons:heat": 2 
+        	}, 
+        	"model": "advancedlootableweapons:item/kabutowari_hot_tool_head_cool_5" }
     ]
 }
