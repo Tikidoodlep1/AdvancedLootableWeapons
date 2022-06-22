@@ -38,7 +38,7 @@ public class AlloyFurnaceRecipes
 		//Alloys
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 2), new ItemStack(BlockInit.rock_feldspar), new ItemStack(ItemInit.INGOT_KOBOLD, 4), 2.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.NUGGET_TIN), new ItemStack(ItemInit.INGOT_COPPER), new ItemStack(ItemInit.INGOT_BRONZE, 1), 4.0F);
-		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_TIN), new ItemStack(ItemInit.INGOT_COPPER, 9), new ItemStack(ItemInit.INGOT_BRONZE, 1), 20.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_TIN), new ItemStack(ItemInit.INGOT_COPPER, 9), new ItemStack(ItemInit.INGOT_BRONZE, 9), 20.0F);
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
 		addAlloyingRecipe(new ItemStack(Items.IRON_INGOT, 4), new ItemStack(Items.COAL, 1, 1), new ItemStack(ItemInit.INGOT_STEEL, 4), 5.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SILVER), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_FROST_STEEL), 8.0F);
