@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.init;
 import java.util.function.Supplier;
 
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockDusksteel;
 import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
 
@@ -82,7 +83,8 @@ public class BlockInit {
 			.strength(5.0F).destroyTime(5.0F).explosionResistance(11.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)), CreativeTabs.BLOCK_TAB);
 	
 	//Functionals
-	
+	public static final RegistryObject<Block> BLOCK_ALLOY_FURNACE = registerBlock("block_alloy_furnace", () -> new BlockAlloyFurnace(BlockBehaviour.Properties.of(Material.STONE)
+			.strength(3.5F).destroyTime(3.5F).explosionResistance(9.5F).requiresCorrectToolForDrops().sound(SoundType.STONE)), CreativeTabs.BLOCK_TAB);
 	
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
 		RegistryObject<T> toReturn = BLOCKS.register(name, block);

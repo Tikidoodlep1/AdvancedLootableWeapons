@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "advancedlootableweapons:block_rock_feldspar",
+    "advancedlootableweapons:block_cobbled_feldspar",
+    "advancedlootableweapons:block_clay_granite",
+    "advancedlootableweapons:block_clay_diorite",
+    "advancedlootableweapons:block_brick_granite",
+    "advancedlootableweapons:block_brick_diorite",
+    
+    "advancedlootableweapons:block_stone_ore_tin",
+    "advancedlootableweapons:block_deepslate_ore_tin",
+    
+    "advancedlootableweapons:block_alloy_furnace"
+  ]
+}

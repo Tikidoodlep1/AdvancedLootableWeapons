@@ -1,9 +1,14 @@
 package com.tiki.advancedlootableweapons;
 
 import com.mojang.logging.LogUtils;
+import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
+import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.GuiInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
@@ -35,19 +40,22 @@ public class Alw
         ItemInit.register(eventBus);
         BlockInit.register(eventBus);
         
+        BlockEntityInit.register(eventBus);
+        GuiInit.register(eventBus);
+        
+        
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
-        //LOGGER.info("HELLO FROM PREINIT");
-        //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    	
     }
     
     
     private void clientSetup(final FMLClientSetupEvent event) {
+    	MenuScreens.register(GuiInit.ALLOY_FURNACE_CONTAINER.get(), AlloyFurnaceScreen::new);
     	event.enqueueWork(new Runnable() {
 
 			@Override
@@ -57,7 +65,10 @@ public class Alw
 				for(Item i : map.keySet()) {
 					ItemProperties.register(i, new ResourceLocation(ModInfo.ID, "heat"), map.get(i));
 				}
+				
+				
 			}
+			
     	});
     }
 }

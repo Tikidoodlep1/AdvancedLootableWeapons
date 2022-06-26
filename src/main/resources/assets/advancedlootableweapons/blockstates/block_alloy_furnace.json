@@ -1,0 +1,13 @@
+{
+    "variants": 
+    {
+        "lit=false,facing=north": { "model": "advancedlootableweapons:block/block_alloy_furnace" },
+        "lit=false,facing=east": { "model": "advancedlootableweapons:block/block_alloy_furnace", "y": 90 },
+        "lit=false,facing=south": { "model": "advancedlootableweapons:block/block_alloy_furnace", "y": 180 },
+        "lit=false,facing=west": { "model": "advancedlootableweapons:block/block_alloy_furnace", "y": 270 },
+        "lit=true,facing=north": { "model": "advancedlootableweapons:block/block_alloy_furnace_lit" },
+        "lit=true,facing=east": { "model": "advancedlootableweapons:block/block_alloy_furnace_lit", "y": 90 },
+        "lit=true,facing=south": { "model": "advancedlootableweapons:block/block_alloy_furnace_lit", "y": 180 },
+        "lit=true,facing=west": { "model": "advancedlootableweapons:block/block_alloy_furnace_lit", "y":270  }
+    }
+}
