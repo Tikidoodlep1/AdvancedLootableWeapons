@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_crystallite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_helmet_crystallite",
+		"count": 1
+	}
+}

@@ -101,7 +101,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			case "zweihander":
 				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.76F;
+				this.reach = 5.32F;
 				break;
 			case "nodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
@@ -120,7 +120,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		}
 	}
 	
-	public void generateNameAndModifiers(ItemStack stack, double addedDamage) {
+	public void generateNameAndModifiers(ItemStack stack, double addedDamage, String matName) {
 		float randDamage;
 		double totalDamage;
 		this.rand = randGen.nextBoolean();
@@ -134,9 +134,9 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}
 		
 		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();

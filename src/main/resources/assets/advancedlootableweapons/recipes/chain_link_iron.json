@@ -1,0 +1,25 @@
+{
+	"type": "advancedlootableweapons:chain_link_shapeless",
+	"group": "advancedlootableweapons:chain_link",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		}
+	],
+	"Material": "Iron",
+	"result": 
+	{
+		"item": "advancedlootableweapons:chain_link_iron",
+		"count": 1
+	}
+}

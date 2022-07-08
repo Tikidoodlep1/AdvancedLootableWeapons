@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_copper"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_boots_copper",
+		"count": 1
+	}
+}

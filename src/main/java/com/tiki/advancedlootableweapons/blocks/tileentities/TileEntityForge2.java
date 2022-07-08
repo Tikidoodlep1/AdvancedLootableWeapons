@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.blocks.tileentities;
 
 
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
+import com.tiki.advancedlootableweapons.handlers.HotMetalHelper;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -221,21 +222,21 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		if(this.canSmelt[0]) {
 			ItemStack stack = (ItemStack)this.inventory.get(0);
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - 3);
+				stack.setItemDamage(stack.getItemDamage() - HotMetalHelper.getHeatGainLoss(stack.getTagCompound().getString("Material"), HotMetalHelper.ADVANCED_FORGE_TEMP, stack.getItemDamage()));
 				this.heat1 = stack.getItemDamage();
 			}
 		}
 		if(this.canSmelt[1]) {
 			ItemStack stack1 = (ItemStack)this.inventory.get(1);
 			if(stack1.getItemDamage() > 0) {
-				stack1.setItemDamage(stack1.getItemDamage() - 3);
+				stack1.setItemDamage(stack1.getItemDamage() - HotMetalHelper.getHeatGainLoss(stack1.getTagCompound().getString("Material"), HotMetalHelper.ADVANCED_FORGE_TEMP, stack1.getItemDamage()));
 				this.heat2 = stack1.getItemDamage();
 			}
 		}
 		if(this.canSmelt[2]) {
 			ItemStack stack2 = (ItemStack)this.inventory.get(2);
 			if(stack2.getItemDamage() > 0) {
-				stack2.setItemDamage(stack2.getItemDamage() - 3);
+				stack2.setItemDamage(stack2.getItemDamage() - HotMetalHelper.getHeatGainLoss(stack2.getTagCompound().getString("Material"), HotMetalHelper.ADVANCED_FORGE_TEMP, stack2.getItemDamage()));
 				this.heat3 = stack2.getItemDamage();
 			}
 		}

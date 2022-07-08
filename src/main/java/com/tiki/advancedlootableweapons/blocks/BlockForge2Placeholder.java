@@ -27,8 +27,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
@@ -199,17 +197,7 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 		boolean right = state.getValue(RIGHT);
 		EnumFacing facing = (EnumFacing)state.getValue(FACING);
 		if(right) {
-			BlockPos rightOffset = pos.offset(facing.rotateY()); //-311, 76, 185
-			/*
-[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:203]: BlockPos{x=-312, y=77, z=184}
-[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:204]: BlockPos{x=-312, y=77, z=185}
-[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:205]: BlockPos{x=-312, y=76, z=184}
-[09:37:14] [Server thread/INFO] [STDOUT]: [com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder:getMainPos:206]: BlockPos{x=-312, y=76, z=185}
-			 */
-			System.out.println(rightOffset.toString());
-			System.out.println(rightOffset.offset(facing).toString());
-			System.out.println(rightOffset.offset(EnumFacing.DOWN).toString());
-			System.out.println(rightOffset.offset(facing).offset(EnumFacing.DOWN).toString());
+			BlockPos rightOffset = pos.offset(facing.rotateY());
 			
 			if(worldIn.getBlockState(rightOffset).getBlock() == BlockInit.forge2) {
 				locateMain = rightOffset;
@@ -222,10 +210,6 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 			}
 		}else if(left) {
 			BlockPos leftOffset = pos.offset(facing.rotateYCCW());
-			System.out.println(leftOffset.toString());
-			System.out.println(leftOffset.offset(facing).toString());
-			System.out.println(leftOffset.offset(EnumFacing.DOWN).toString());
-			System.out.println(leftOffset.offset(facing).offset(EnumFacing.DOWN).toString());
 			
 			if(worldIn.getBlockState(leftOffset).getBlock() == BlockInit.forge2) {
 				locateMain = leftOffset;

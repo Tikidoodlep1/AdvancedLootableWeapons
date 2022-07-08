@@ -28,9 +28,6 @@ public class RegistryHandler {
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
-		if(ConfigHandler.USE_IMAGINARY_RESOURCES == true) {
-			ItemInit.createImaginaries();
-		}
 		if(ConfigHandler.ENABLE_ARMORS == true) {
 			ItemInit.enableArmors();
 		}

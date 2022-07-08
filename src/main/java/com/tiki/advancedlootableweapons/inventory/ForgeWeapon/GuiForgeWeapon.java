@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 import java.io.IOException;
 
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -34,16 +35,20 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    private final GuiWeaponButton sabreButton = new GuiWeaponButton(12, 30, 160, 20, 20, "Sabre", 0, 60);
 	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, "Makhaira", 21, 60);
 	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear", 41, 60);
+	    private final GuiWeaponButton chainButton = new GuiWeaponButton(15, 60, 190, 20, 20, "Chain", 21, 80);
+	    private final GuiWeaponButton plateButton = new GuiWeaponButton(16, 90, 190, 20, 20, "Plate", 41, 80);
 	    
-	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 60, this.getGuiTop() + 190, 20, 20, "Tool Handle", 61, 60);
-	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, this.getGuiTop() + 190, 20, 20, "Forge Weapon", 0, 80);
+	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 30, 190, 20, 20, "Tool Handle", 61, 60);
+	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, 220, 20, 20, "Forge Weapon", 0, 80);
 	    private int buttonPressed;
 	    private final ContainerForgeWeapon container;
-
+	    private final InventoryPlayer player;
+	    
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, ContainerForgeWeapon container)
 	    {
 	    	super(new ContainerForgeWeapon(inventoryIn, inventoryIn.player.getEntityWorld(), inventoryIn.player));
 	        this.container = container;
+	        this.player = inventoryIn;
 	    }
 	    
 	    public void drawButtons(int mouseX, int mouseY, float partialTicks) {
@@ -63,6 +68,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        	this.buttonList.add(sabreButton);
 	        	this.buttonList.add(makhairaButton);
 	        	this.buttonList.add(spearButton);
+	        	this.buttonList.add(chainButton);
+	        	this.buttonList.add(plateButton);
 	        
 	        	this.buttonList.add(forgeButton);
 	        	this.buttonList.add(toolrodButton);
@@ -93,13 +100,12 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    @Override
 	    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	    {
-	        GlStateManager.disableLighting();
-	        GlStateManager.disableBlend();
-	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 62, 3, 4210752);
-
-	        GlStateManager.enableLighting();
+//	        GlStateManager.disableLighting();
+//	        GlStateManager.disableBlend();
+	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 62, 5, 4210752);
+	        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+//	        GlStateManager.enableLighting();
 	    }
-	    
 	    
 	    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	    {

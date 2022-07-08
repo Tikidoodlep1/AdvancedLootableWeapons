@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_steel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_leggings_steel",
+		"count": 1
+	}
+}

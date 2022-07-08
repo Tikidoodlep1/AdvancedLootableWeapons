@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"C C"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_shadow_platinum"
+		},
+		"C":
+		{
+			"item": "advancedlootableweapons:chain_link_shadow_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_helmet_shadow_platinum",
+		"count": 1
+	}
+}

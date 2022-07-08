@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import com.tiki.advancedlootableweapons.handlers.HotMetalHelper;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -126,15 +127,11 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	
 	public boolean canSmelt() 
 	{
-		if(((ItemStack)this.inventory.get(0)).isEmpty()) return false;
-		else 
+		ItemStack result = (ItemStack)this.inventory.get(0);
+		if(result.isEmpty()) return false;
+		else
 		{
-			ItemStack result = (ItemStack)this.inventory.get(0);
-			if(result.isEmpty()) return false;
-			else
-			{
-				return true;
-			}
+			return true;
 		}
 	}
 	
@@ -142,7 +139,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		if(this.canSmelt()) {
 			ItemStack stack = (ItemStack)this.inventory.get(0);
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - 2);
+				stack.setItemDamage(stack.getItemDamage() - HotMetalHelper.getHeatGainLoss(stack.getTagCompound().getString("Material"), HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()));
 				this.heat = stack.getItemDamage();
 			}
 		}

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_kobold"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_boots_kobold",
+		"count": 1
+	}
+}

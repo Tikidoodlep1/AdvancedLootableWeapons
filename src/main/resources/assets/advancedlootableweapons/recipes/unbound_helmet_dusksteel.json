@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"C C"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_dusksteel"
+		},
+		"C":
+		{
+			"item": "advancedlootableweapons:chain_link_dusksteel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_helmet_dusksteel",
+		"count": 1
+	}
+}

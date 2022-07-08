@@ -30,6 +30,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_SABRES = true;
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
+	public static boolean ENABLE_ARMOR_FORGING = true;
 	public static boolean OVERRIDE_VANILLA_ARMORS = true;
 	
 	public static float GLOBAL_DAGGER_BASE_DAMAGE = 2.0F;
@@ -79,8 +80,9 @@ public class ConfigHandler {
 	public static int GLOBAL_SABRE_CRAFTING_EXP = 4;
 	public static int GLOBAL_MAKHAIRA_CRAFTING_EXP = 3;
 	public static int GLOBAL_SPEAR_CRAFTING_EXP = 3;
-	public static int GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = 4;
-	
+	public static int GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = 2;
+	public static int GLOBAL_CHAIN_LINK_CRAFTING_EXP = 2;
+	public static int GLOBAL_ARMOR_PLATE_CRAFTING_EXP = 4;
 	
 	public static boolean USE_ARMOR_WEIGHT = true;
 	public static boolean USE_ARMOR_BONUS_HEALTH = true;
@@ -261,13 +263,16 @@ public class ConfigHandler {
 		GLOBAL_MAKHAIRA_CRAFTING_EXP = config.getInt("Global Makhaira Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable Makhairas\" is true. This modifies the exp you get from crafting makhairas.");
 		GLOBAL_SPEAR_CRAFTING_EXP = config.getInt("Global Spear Crafting Exp", category, 3, 0, 100, "Will only work if \"Enable Spears\" is true. This modifies the exp you get from crafting spears.");
 		GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = config.getInt("Global Long Weapon Handle Crafting Exp", category, 4, 0, 100, "This modifies the exp you get from crafting long weapon handles.");
-		
+		GLOBAL_CHAIN_LINK_CRAFTING_EXP = config.getInt("Global Chain Link Crafting Exp", category, 2, 0, 100, "This modifies the exp you get from crafting chain links.");
+		GLOBAL_ARMOR_PLATE_CRAFTING_EXP = config.getInt("Global Armor Plate Crafting Exp", category, 4, 0, 100, "This modifies the exp you get from crafting armor plates.");
+
 		//**********************************GENERAL MODIFICATION**********************************
 		category = "GENERAL MODIFICATION";
 		config.addCustomCategoryComment(category, "General modifications such as enabling or disabling certain items. || WARNING: DISABLING ITEMS WILL MAKE THEM VANISH IF THEY EXISTED IN ANY WORLD THAT IS LOADED.");
 		USE_CUSTOM_WEAPON_REACH = config.getBoolean("Use Custom Weapon Reach", category, true, "Use the custom set weapon reach. Disabling this will make things like spears have the same reach as things like daggers. (True/False)");
 		
 		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. (True/False)");
+		ENABLE_ARMOR_FORGING = config.getBoolean("Enable Armor Forging", category, true, "Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)");
 		OVERRIDE_VANILLA_ARMORS = config.getBoolean("Override Vanilla Armors", category, true, "Should vanilla armors be given tiers, weights, bonus health, and bonus damage. (True/False)");
 		ENABLE_DAGGERS = config.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = config.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");

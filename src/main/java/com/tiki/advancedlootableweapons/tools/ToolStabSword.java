@@ -132,7 +132,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		}
 	}
 	
-	public void generateNameAndModifiers(ItemStack stack, double addedDamage) {
+	public void generateNameAndModifiers(ItemStack stack, double addedDamage, String matName) {
 		float randDamage;
 		double totalDamage;
 		this.rand = randGen.nextBoolean();
@@ -150,9 +150,9 @@ public class ToolStabSword extends Item implements IHasModel{
 		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + matName + " " + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
 		}
 		
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);

@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_bronze"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_leggings_bronze",
+		"count": 1
+	}
+}

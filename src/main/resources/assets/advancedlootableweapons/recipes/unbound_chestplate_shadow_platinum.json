@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"C C",
+		"LCL",
+		"LLL"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_shadow_platinum"
+		},
+		"C":
+		{
+			"item": "advancedlootableweapons:chain_link_shadow_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chestplate_shadow_platinum",
+		"count": 1
+	}
+}

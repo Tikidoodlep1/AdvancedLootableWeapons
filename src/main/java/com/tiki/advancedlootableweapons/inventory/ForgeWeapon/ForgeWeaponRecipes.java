@@ -1,75 +1,396 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+import com.google.common.collect.Table.Cell;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ForgeWeaponRecipes {
-
-	private static final HashMap<String, Item> toolRodMats = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> daggerMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> kabutowariMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> rapierMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> talwarMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> cleaverMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> maceMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> staffMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> longswordMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> kodachiMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> battleaxeMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> zweihanderMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> nodachiMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> sabreMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> makhairaMaterials = Maps.<String, Item>newHashMap();
-	private static final HashMap<String, Item> spearMaterials = Maps.<String, Item>newHashMap();
-	private static final List<ItemStack> toolRodJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> daggerJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> kabutowariJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> rapierJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> talwarJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> cleaverJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> maceJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> staffJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> longswordJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> kodachiJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> battleaxeJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> zweihanderJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> nodachiJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> sabreJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> makhairaJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> spearJeiMap = new ArrayList<ItemStack>(1);
-	private static final List<ItemStack> toolHeadJeiMap = new ArrayList<ItemStack>(1);
-	private static final Table<Item, Item, HashMap<String, Item>> recipes = HashBasedTable.<Item, Item, HashMap<String, Item>>create();
-	private static final Table<ItemStack, ItemStack, List<ItemStack>> jeiRecipes = HashBasedTable.<ItemStack, ItemStack, List<ItemStack>>create();
-	private static final Map<Item, Integer> expValues = Maps.<Item, Integer>newHashMap();
+	
+	private final List<ItemStack> toolHeadJeiMap = new ArrayList<ItemStack>(13);
+	private final Table<List<Item>, List<Item>, Item> armorRecipes = HashBasedTable.<List<Item>, List<Item>, Item>create();
+	private final Table<Item, Item, HashMap<String, Item>> recipes = HashBasedTable.<Item, Item, HashMap<String, Item>>create();
+	private final Table<ItemStack, ItemStack, List<ItemStack>> jeiRecipes = HashBasedTable.<ItemStack, ItemStack, List<ItemStack>>create();
+	private final Map<Item, Integer> expValues = new HashMap<Item, Integer>();
 	public static final ForgeWeaponRecipes INSTANCE = new ForgeWeaponRecipes();
 	
 	public ForgeWeaponRecipes() {
-		registerNewRecipe(ItemInit.DAGGER_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "dagger", ConfigHandler.GLOBAL_DAGGER_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5, ItemInit.HOT_TOOL_ROD_2, "kabutowari", ConfigHandler.GLOBAL_KABUTOWARI_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.RAPIER_HOT_TOOL_HEAD_4, ItemInit.HOT_TOOL_ROD_2, "rapier", ConfigHandler.GLOBAL_RAPIER_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.TALWAR_HOT_TOOL_HEAD_3, ItemInit.HOT_TOOL_ROD_2, "talwar", ConfigHandler.GLOBAL_TALWAR_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.CLEAVER_HOT_TOOL_HEAD, ItemInit.HOT_TOOL_ROD_2, "cleaver", ConfigHandler.GLOBAL_CLEAVER_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.MACE_HOT_TOOL_HEAD_3, ItemInit.HOT_TOOL_ROD_2, "mace", ConfigHandler.GLOBAL_MACE_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.STAFF_HOT_TOOL_HEAD_5, ItemInit.LONG_TOOL_ROD, "staff", ConfigHandler.GLOBAL_STAFF_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4, ItemInit.HOT_TOOL_ROD_2, "longsword", ConfigHandler.GLOBAL_LONGSWORD_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.KODACHI_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "kodachi", ConfigHandler.GLOBAL_KODACHI_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5, ItemInit.LONG_TOOL_ROD, "battleaxe", ConfigHandler.GLOBAL_BATTLEAXE_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5, ItemInit.LONG_TOOL_ROD, "zweihander", ConfigHandler.GLOBAL_ZWEIHANDER_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.NODACHI_HOT_TOOL_HEAD_4, ItemInit.HOT_TOOL_ROD_2, "nodachi", ConfigHandler.GLOBAL_NODACHI_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.SABRE_HOT_TOOL_HEAD_4, ItemInit.HOT_TOOL_ROD_2, "sabre", ConfigHandler.GLOBAL_SABRE_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3, ItemInit.HOT_TOOL_ROD_2, "makhaira", ConfigHandler.GLOBAL_MAKHAIRA_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.SPEAR_HOT_TOOL_HEAD_2, ItemInit.LONG_TOOL_ROD, "spear", ConfigHandler.GLOBAL_SPEAR_CRAFTING_EXP);
-		registerNewRecipe(ItemInit.HOT_TOOL_ROD_2, ItemInit.HOT_TOOL_ROD_2, "handle", ConfigHandler.GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP);
+		registerNewRecipe(ItemInit.DAGGER_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "dagger", ConfigHandler.GLOBAL_DAGGER_CRAFTING_EXP,
+				new Item[] {ItemInit.DAGGER_IRON, ItemInit.DAGGER_KOBOLD, ItemInit.DAGGER_COPPER, ItemInit.DAGGER_SILVER, ItemInit.DAGGER_BRONZE, ItemInit.DAGGER_PLATINUM,
+				ItemInit.DAGGER_STEEL, ItemInit.DAGGER_SHADOW_PLATINUM, ItemInit.DAGGER_FROST_STEEL, ItemInit.DAGGER_OBSIDIAN, ItemInit.DAGGER_CRYSTALLITE, ItemInit.DAGGER_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5, ItemInit.HOT_TOOL_ROD_2, "kabutowari", ConfigHandler.GLOBAL_KABUTOWARI_CRAFTING_EXP,
+				new Item[] {ItemInit.KABUTOWARI_IRON, ItemInit.KABUTOWARI_KOBOLD, ItemInit.KABUTOWARI_COPPER, ItemInit.KABUTOWARI_SILVER, ItemInit.KABUTOWARI_BRONZE, ItemInit.KABUTOWARI_PLATINUM,
+				ItemInit.KABUTOWARI_STEEL, ItemInit.KABUTOWARI_SHADOW_PLATINUM, ItemInit.KABUTOWARI_FROST_STEEL, ItemInit.KABUTOWARI_OBSIDIAN, ItemInit.KABUTOWARI_CRYSTALLITE, ItemInit.KABUTOWARI_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.RAPIER_HOT_TOOL_HEAD_4, ItemInit.HOT_TOOL_ROD_2, "rapier", ConfigHandler.GLOBAL_RAPIER_CRAFTING_EXP,
+				new Item[] {ItemInit.RAPIER_IRON, ItemInit.RAPIER_KOBOLD, ItemInit.RAPIER_COPPER, ItemInit.RAPIER_SILVER, ItemInit.RAPIER_BRONZE, ItemInit.RAPIER_PLATINUM,
+				ItemInit.RAPIER_STEEL, ItemInit.RAPIER_SHADOW_PLATINUM, ItemInit.RAPIER_FROST_STEEL, ItemInit.RAPIER_OBSIDIAN, ItemInit.RAPIER_CRYSTALLITE, ItemInit.RAPIER_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.TALWAR_HOT_TOOL_HEAD_3, ItemInit.HOT_TOOL_ROD_2, "talwar", ConfigHandler.GLOBAL_TALWAR_CRAFTING_EXP,
+				new Item[] {ItemInit.TALWAR_IRON, ItemInit.TALWAR_KOBOLD, ItemInit.TALWAR_COPPER, ItemInit.TALWAR_SILVER, ItemInit.TALWAR_BRONZE, ItemInit.TALWAR_PLATINUM,
+				ItemInit.TALWAR_STEEL, ItemInit.TALWAR_SHADOW_PLATINUM, ItemInit.TALWAR_FROST_STEEL, ItemInit.TALWAR_OBSIDIAN, ItemInit.TALWAR_CRYSTALLITE, ItemInit.TALWAR_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.CLEAVER_HOT_TOOL_HEAD, ItemInit.HOT_TOOL_ROD_2, "cleaver", ConfigHandler.GLOBAL_CLEAVER_CRAFTING_EXP,
+				new Item[] {ItemInit.CLEAVER_IRON, ItemInit.CLEAVER_KOBOLD, ItemInit.CLEAVER_COPPER, ItemInit.CLEAVER_SILVER, ItemInit.CLEAVER_BRONZE, ItemInit.CLEAVER_PLATINUM,
+				ItemInit.CLEAVER_STEEL, ItemInit.CLEAVER_SHADOW_PLATINUM, ItemInit.CLEAVER_FROST_STEEL, ItemInit.CLEAVER_OBSIDIAN, ItemInit.CLEAVER_CRYSTALLITE, ItemInit.CLEAVER_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.MACE_HOT_TOOL_HEAD_3, ItemInit.HOT_TOOL_ROD_2, "mace", ConfigHandler.GLOBAL_MACE_CRAFTING_EXP,
+				new Item[] {ItemInit.MACE_IRON, ItemInit.MACE_KOBOLD, ItemInit.MACE_COPPER, ItemInit.MACE_SILVER, ItemInit.MACE_BRONZE, ItemInit.MACE_PLATINUM,
+				ItemInit.MACE_STEEL, ItemInit.MACE_SHADOW_PLATINUM, ItemInit.MACE_FROST_STEEL, ItemInit.MACE_OBSIDIAN, ItemInit.MACE_CRYSTALLITE, ItemInit.MACE_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.MACE_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "mace", ConfigHandler.GLOBAL_MACE_CRAFTING_EXP,
+				new Item[] {ItemInit.MACE_IRON, ItemInit.MACE_KOBOLD, ItemInit.MACE_COPPER, ItemInit.MACE_SILVER, ItemInit.MACE_BRONZE, ItemInit.MACE_PLATINUM,
+				ItemInit.MACE_STEEL, ItemInit.MACE_SHADOW_PLATINUM, ItemInit.MACE_FROST_STEEL, ItemInit.MACE_OBSIDIAN, ItemInit.MACE_CRYSTALLITE, ItemInit.MACE_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.STAFF_HOT_TOOL_HEAD_2, ItemInit.LONG_TOOL_ROD, "staff", ConfigHandler.GLOBAL_STAFF_CRAFTING_EXP,
+				new Item[] {ItemInit.STAFF_IRON, ItemInit.STAFF_KOBOLD, ItemInit.STAFF_COPPER, ItemInit.STAFF_SILVER, ItemInit.STAFF_BRONZE, ItemInit.STAFF_PLATINUM,
+				ItemInit.STAFF_STEEL, ItemInit.STAFF_SHADOW_PLATINUM, ItemInit.STAFF_FROST_STEEL, ItemInit.STAFF_OBSIDIAN, ItemInit.STAFF_CRYSTALLITE, ItemInit.STAFF_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.LONGSWORD_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "longsword", ConfigHandler.GLOBAL_LONGSWORD_CRAFTING_EXP,
+				new Item[] {ItemInit.LONGSWORD_IRON, ItemInit.LONGSWORD_KOBOLD, ItemInit.LONGSWORD_COPPER, ItemInit.LONGSWORD_SILVER, ItemInit.LONGSWORD_BRONZE, ItemInit.LONGSWORD_PLATINUM,
+				ItemInit.LONGSWORD_STEEL, ItemInit.LONGSWORD_SHADOW_PLATINUM, ItemInit.LONGSWORD_FROST_STEEL, ItemInit.LONGSWORD_OBSIDIAN, ItemInit.LONGSWORD_CRYSTALLITE, ItemInit.LONGSWORD_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2, ItemInit.LONG_TOOL_ROD, "battleaxe", ConfigHandler.GLOBAL_BATTLEAXE_CRAFTING_EXP,
+				new Item[] {ItemInit.BATTLEAXE_IRON, ItemInit.BATTLEAXE_KOBOLD, ItemInit.BATTLEAXE_COPPER, ItemInit.BATTLEAXE_SILVER, ItemInit.BATTLEAXE_BRONZE, ItemInit.BATTLEAXE_PLATINUM,
+				ItemInit.BATTLEAXE_STEEL, ItemInit.BATTLEAXE_SHADOW_PLATINUM, ItemInit.BATTLEAXE_FROST_STEEL, ItemInit.BATTLEAXE_OBSIDIAN, ItemInit.BATTLEAXE_CRYSTALLITE, ItemInit.BATTLEAXE_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "zweihander", ConfigHandler.GLOBAL_ZWEIHANDER_CRAFTING_EXP,
+				new Item[] {ItemInit.ZWEIHANDER_IRON, ItemInit.ZWEIHANDER_KOBOLD, ItemInit.ZWEIHANDER_COPPER, ItemInit.ZWEIHANDER_SILVER, ItemInit.ZWEIHANDER_BRONZE, ItemInit.ZWEIHANDER_PLATINUM,
+				ItemInit.ZWEIHANDER_STEEL, ItemInit.ZWEIHANDER_SHADOW_PLATINUM, ItemInit.ZWEIHANDER_FROST_STEEL, ItemInit.ZWEIHANDER_OBSIDIAN, ItemInit.ZWEIHANDER_CRYSTALLITE, ItemInit.ZWEIHANDER_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.KODACHI_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "kodachi", ConfigHandler.GLOBAL_KODACHI_CRAFTING_EXP,
+				new Item[] {ItemInit.KODACHI_IRON, ItemInit.KODACHI_KOBOLD, ItemInit.KODACHI_COPPER, ItemInit.KODACHI_SILVER, ItemInit.KODACHI_BRONZE, ItemInit.KODACHI_PLATINUM,
+				ItemInit.KODACHI_STEEL, ItemInit.KODACHI_SHADOW_PLATINUM, ItemInit.KODACHI_FROST_STEEL, ItemInit.KODACHI_OBSIDIAN, ItemInit.KODACHI_CRYSTALLITE, ItemInit.KODACHI_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.NODACHI_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "nodachi", ConfigHandler.GLOBAL_NODACHI_CRAFTING_EXP,
+				new Item[] {ItemInit.NODACHI_IRON, ItemInit.NODACHI_KOBOLD, ItemInit.NODACHI_COPPER, ItemInit.NODACHI_SILVER, ItemInit.NODACHI_BRONZE, ItemInit.NODACHI_PLATINUM,
+				ItemInit.NODACHI_STEEL, ItemInit.NODACHI_SHADOW_PLATINUM, ItemInit.NODACHI_FROST_STEEL, ItemInit.NODACHI_OBSIDIAN, ItemInit.NODACHI_CRYSTALLITE, ItemInit.NODACHI_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.SABRE_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "sabre", ConfigHandler.GLOBAL_SABRE_CRAFTING_EXP,
+				new Item[] {ItemInit.SABRE_IRON, ItemInit.SABRE_KOBOLD, ItemInit.SABRE_COPPER, ItemInit.SABRE_SILVER, ItemInit.SABRE_BRONZE, ItemInit.SABRE_PLATINUM,
+				ItemInit.SABRE_STEEL, ItemInit.SABRE_SHADOW_PLATINUM, ItemInit.SABRE_FROST_STEEL, ItemInit.SABRE_OBSIDIAN, ItemInit.SABRE_CRYSTALLITE, ItemInit.SABRE_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_2, ItemInit.HOT_TOOL_ROD_2, "makhaira", ConfigHandler.GLOBAL_MAKHAIRA_CRAFTING_EXP,
+				new Item[] {ItemInit.MAKHAIRA_IRON, ItemInit.MAKHAIRA_KOBOLD, ItemInit.MAKHAIRA_COPPER, ItemInit.MAKHAIRA_SILVER, ItemInit.MAKHAIRA_BRONZE, ItemInit.MAKHAIRA_PLATINUM,
+				ItemInit.MAKHAIRA_STEEL, ItemInit.MAKHAIRA_SHADOW_PLATINUM, ItemInit.MAKHAIRA_FROST_STEEL, ItemInit.MAKHAIRA_OBSIDIAN, ItemInit.MAKHAIRA_CRYSTALLITE, ItemInit.MAKHAIRA_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.SPEAR_HOT_TOOL_HEAD_2, ItemInit.LONG_TOOL_ROD, "spear", ConfigHandler.GLOBAL_SPEAR_CRAFTING_EXP,
+				new Item[] {ItemInit.SPEAR_IRON, ItemInit.SPEAR_KOBOLD, ItemInit.SPEAR_COPPER, ItemInit.SPEAR_SILVER, ItemInit.SPEAR_BRONZE, ItemInit.SPEAR_PLATINUM,
+				ItemInit.SPEAR_STEEL, ItemInit.SPEAR_SHADOW_PLATINUM, ItemInit.SPEAR_FROST_STEEL, ItemInit.SPEAR_OBSIDIAN, ItemInit.SPEAR_CRYSTALLITE, ItemInit.SPEAR_DUSKSTEEL});
+		
+		registerNewRecipe(ItemInit.HOT_TOOL_ROD_2, ItemInit.HOT_TOOL_ROD_2, "handle", ConfigHandler.GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP,
+				new Item[] {ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD,
+				ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD, ItemInit.LONG_TOOL_ROD});
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_IRON}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_IRON);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_IRON}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_IRON);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_IRON}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_IRON);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_IRON}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_IRON);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_GOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_GOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_GOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_GOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_GOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_GOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_GOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_GOLD);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_DIAMOND}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_DIAMOND);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_DIAMOND}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_DIAMOND);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_DIAMOND}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_DIAMOND);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_DIAMOND}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_DIAMOND);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_KOBOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_KOBOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_KOBOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_KOBOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_KOBOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_KOBOLD);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_KOBOLD}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_KOBOLD);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_COPPER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_COPPER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_COPPER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_COPPER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_COPPER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_COPPER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_COPPER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_COPPER);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_SILVER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_SILVER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_SILVER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_SILVER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_SILVER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_SILVER);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_SILVER}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_SILVER);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_BRONZE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_BRONZE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_BRONZE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_BRONZE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_BRONZE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_BRONZE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_BRONZE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_BRONZE);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_PLATINUM);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_STEEL);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_SHADOW_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_SHADOW_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_SHADOW_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_SHADOW_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_SHADOW_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_SHADOW_PLATINUM);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_SHADOW_PLATINUM}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_SHADOW_PLATINUM);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_FROST_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_FROST_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_FROST_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_FROST_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_FROST_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_FROST_STEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_FROST_STEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_FROST_STEEL);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_OBSIDIAN}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_OBSIDIAN);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_OBSIDIAN}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_OBSIDIAN);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_OBSIDIAN}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_OBSIDIAN);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_OBSIDIAN}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_OBSIDIAN);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_CRYSTALLITE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_CRYSTALLITE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_CRYSTALLITE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_CRYSTALLITE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_CRYSTALLITE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_CRYSTALLITE);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_CRYSTALLITE}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_CRYSTALLITE);
+		
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_HELMET_DUSKSTEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.HELMET_DUSKSTEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_CHESTPLATE_DUSKSTEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.CHESTPLATE_DUSKSTEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_LEGGINGS_DUSKSTEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.LEGGINGS_DUSKSTEEL);
+		registerNewRecipeListedInputs(new Item[] {ItemInit.UNBOUND_BOOTS_DUSKSTEEL}, new Item[] {ItemInit.LEATHER_BINDING, ItemInit.CHAIN_BINDING_IRON, 
+				ItemInit.CHAIN_BINDING_KOBOLD, ItemInit.CHAIN_BINDING_GOLD, ItemInit.CHAIN_BINDING_COPPER, ItemInit.CHAIN_BINDING_SILVER, 
+				ItemInit.CHAIN_BINDING_BRONZE, ItemInit.CHAIN_BINDING_PLATINUM, ItemInit.CHAIN_BINDING_STEEL, ItemInit.CHAIN_BINDING_SHADOW_PLATINUM,
+				ItemInit.CHAIN_BINDING_FROST_STEEL, ItemInit.CHAIN_BINDING_OBSIDIAN, ItemInit.CHAIN_BINDING_CRYSTALLITE, ItemInit.CHAIN_BINDING_DUSKSTEEL},
+				"armor", 0, ItemInit.BOOTS_DUSKSTEEL);
 		registerJeiHotToolHeadRecipes();
 	}
 	
@@ -98,25 +419,25 @@ public class ForgeWeaponRecipes {
 		if(recipe != null) {
 			return new ItemStack(recipe.get(material));
 		}
-//		for(Item stack1 : recipe.rowKeySet()) {
-//			if(input1 instanceof ItemHotToolHead && input1 == stack1) {
-//				String mat = material;
-//				for(Item stack2 : recipe.columnKeySet()) {
-//					if(input2 == stack2) {
-//						if(recipe.contains(stack1, stack2)) {
-//							final Map<String, Item> recipeMap = recipe.get(stack1, stack2);
-//							for(String type : recipeMap.keySet()) {
-//								if(mat.equalsIgnoreCase(type)) {
-//									return new ItemStack(recipeMap.get(type));
-//								}
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
 		
 		return ItemStack.EMPTY;
+	}
+	
+	public ItemStack getArmorBindingResult(Item input1, Item input2) {
+		if(!(input1 instanceof ItemUnboundArmor)) {
+			return ItemStack.EMPTY;
+		}
+		
+		ItemStack result = ItemStack.EMPTY;
+		Set<Cell<List<Item>, List<Item>, Item>> cellSet = armorRecipes.cellSet();
+		for(Cell<List<Item>, List<Item>, Item> c : cellSet) {
+			if(c.getRowKey().contains(input1) && c.getColumnKey().contains(input2)) {
+				result = new ItemStack(armorRecipes.get(c.getRowKey(), c.getColumnKey()));
+				break;
+			}
+		}
+		
+		return result;
 	}
 	
 	public int getExpValue(ItemStack stack) {
@@ -130,513 +451,63 @@ public class ForgeWeaponRecipes {
 	}
 	
 	public Map<Item, Integer> getExpValues(){
-		return ForgeWeaponRecipes.expValues;
+		return INSTANCE.expValues;
 	}
 	
 	public Table<Item, Item, HashMap<String, Item>> getDualCraftingList(){
-		return ForgeWeaponRecipes.recipes;
+		return INSTANCE.recipes;
 	}
 	
 	public Table<ItemStack, ItemStack, List<ItemStack>> getJeiCraftingList(){
-		return ForgeWeaponRecipes.jeiRecipes;
+		return INSTANCE.jeiRecipes;
 	}
 	
-	private Table<Item, Item, HashMap<String, Item>> registerNewRecipe(Item input1, Item input2, String output, int exp){
+	public Table<List<Item>, List<Item>, Item> getArmorCraftingList() {
+		return INSTANCE.armorRecipes;
+	}
+	
+	public Table<List<Item>, List<Item>, Item> registerNewRecipeListedInputs(Item[] input1, Item[] input2, String type, int exp, Item output) {
+		armorRecipes.put(Arrays.asList(input1), Arrays.asList(input2), output);
+		return armorRecipes;
+	}
+	
+	public Table<Item, Item, HashMap<String, Item>> registerNewRecipe(Item input1, Item input2, String type, int exp, String[] mats, Item[] items){
 		if(!(recipes.contains(input1, input2))) {
-			coverMaterials(input1, input2, output, exp);
+			coverMaterials(input1, input2, type, exp, mats, items);
 		}
 		return recipes;
 	}
 	
-	private void coverMaterials(Item input1, Item input2, String type, int exp) {
-		switch(type) {
-		case "dagger":
-			daggerMaterials.put("Iron", ItemInit.DAGGER_IRON);
-			daggerMaterials.put("Kobold", ItemInit.DAGGER_KOBOLD);
-			daggerMaterials.put("Copper", ItemInit.DAGGER_COPPER);
-			daggerMaterials.put("Silver", ItemInit.DAGGER_SILVER);
-			daggerMaterials.put("Bronze", ItemInit.DAGGER_BRONZE);
-			daggerMaterials.put("Platinum", ItemInit.DAGGER_PLATINUM);
-			daggerMaterials.put("Steel", ItemInit.DAGGER_STEEL);
-			daggerMaterials.put("Shadow Platinum", ItemInit.DAGGER_SHADOW_PLATINUM);
-			daggerMaterials.put("Frost Steel", ItemInit.DAGGER_FROST_STEEL);
-			daggerMaterials.put("Obsidian", ItemInit.DAGGER_OBSIDIAN);
-			daggerMaterials.put("Crystallite", ItemInit.DAGGER_CRYSTALLITE);
-			daggerMaterials.put("Dusksteel", ItemInit.DAGGER_DUSKSTEEL);
-			recipes.put(input1, input2, daggerMaterials);
-			for(Item stack : daggerMaterials.values()) {
-				daggerJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), daggerJeiMap);
+	public Table<Item, Item, HashMap<String, Item>> registerNewRecipe(Item input1, Item input2, String type, int exp, Item[] items){
+		if(!(recipes.contains(input1, input2))) {
+			coverMaterials(input1, input2, type, exp, null, items);
+		}
+		return recipes;
+	}
+	
+	private void coverMaterials(Item input1, Item input2, String type, int exp, @Nullable String[] mats, Item[] items) {
+		HashMap<String, Item> matMap = new HashMap<String, Item>();
+		List<ItemStack> jeiMap = new ArrayList<ItemStack>(13);
+		String[] defaultMats = {"Iron", "Kobold", "Copper", "Silver", "Bronze", "Platinum", "Steel", "Shadow Platinum", "Frost Steel", "Obsidian", "Crystallite", "Dusksteel"};
+		if(mats == null && items.length == defaultMats.length) {
 			
-			expValues.put(ItemInit.DAGGER_IRON, exp);
-			expValues.put(ItemInit.DAGGER_KOBOLD, exp+1);
-			expValues.put(ItemInit.DAGGER_COPPER, exp+1);
-			expValues.put(ItemInit.DAGGER_SILVER, exp+2);
-			expValues.put(ItemInit.DAGGER_BRONZE, exp+2);
-			expValues.put(ItemInit.DAGGER_PLATINUM, exp+3);
-			expValues.put(ItemInit.DAGGER_STEEL, exp+3);
-			expValues.put(ItemInit.DAGGER_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.DAGGER_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.DAGGER_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.DAGGER_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.DAGGER_DUSKSTEEL, exp+6);
-			break;
-		case "kabutowari":
-			kabutowariMaterials.put("Iron", ItemInit.KABUTOWARI_IRON);
-			kabutowariMaterials.put("Kobold", ItemInit.KABUTOWARI_KOBOLD);
-			kabutowariMaterials.put("Copper", ItemInit.KABUTOWARI_COPPER);
-			kabutowariMaterials.put("Silver", ItemInit.KABUTOWARI_SILVER);
-			kabutowariMaterials.put("Bronze", ItemInit.KABUTOWARI_BRONZE);
-			kabutowariMaterials.put("Platinum", ItemInit.KABUTOWARI_PLATINUM);
-			kabutowariMaterials.put("Steel", ItemInit.KABUTOWARI_STEEL);
-			kabutowariMaterials.put("Shadow Platinum", ItemInit.KABUTOWARI_SHADOW_PLATINUM);
-			kabutowariMaterials.put("Frost Steel", ItemInit.KABUTOWARI_FROST_STEEL);
-			kabutowariMaterials.put("Obsidian", ItemInit.KABUTOWARI_OBSIDIAN);
-			kabutowariMaterials.put("Crystallite", ItemInit.KABUTOWARI_CRYSTALLITE);
-			kabutowariMaterials.put("Dusksteel", ItemInit.KABUTOWARI_DUSKSTEEL);
-			recipes.put(input1, input2, kabutowariMaterials);
-			for(Item stack : kabutowariMaterials.values()) {
-				kabutowariJeiMap.add(new ItemStack(stack));
+			for(int i = 0; i < items.length; i++) {
+				matMap.put(defaultMats[i], items[i]);
 			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), kabutowariJeiMap);
+		}else if(mats != null) {
 			
-			expValues.put(ItemInit.KABUTOWARI_IRON, exp);
-			expValues.put(ItemInit.KABUTOWARI_KOBOLD, exp+1);
-			expValues.put(ItemInit.KABUTOWARI_COPPER, exp+1);
-			expValues.put(ItemInit.KABUTOWARI_SILVER, exp+2);
-			expValues.put(ItemInit.KABUTOWARI_BRONZE, exp+2);
-			expValues.put(ItemInit.KABUTOWARI_PLATINUM, exp+3);
-			expValues.put(ItemInit.KABUTOWARI_STEEL, exp+3);
-			expValues.put(ItemInit.KABUTOWARI_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.KABUTOWARI_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.KABUTOWARI_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.KABUTOWARI_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.KABUTOWARI_DUSKSTEEL, exp+6);
-			break;
-		case "rapier":
-			rapierMaterials.put("Iron", ItemInit.RAPIER_IRON);
-			rapierMaterials.put("Kobold", ItemInit.RAPIER_KOBOLD);
-			rapierMaterials.put("Copper", ItemInit.RAPIER_COPPER);
-			rapierMaterials.put("Silver", ItemInit.RAPIER_SILVER);
-			rapierMaterials.put("Bronze", ItemInit.RAPIER_BRONZE);
-			rapierMaterials.put("Platinum", ItemInit.RAPIER_PLATINUM);
-			rapierMaterials.put("Steel", ItemInit.RAPIER_STEEL);
-			rapierMaterials.put("Shadow Platinum", ItemInit.RAPIER_SHADOW_PLATINUM);
-			rapierMaterials.put("Frost Steel", ItemInit.RAPIER_FROST_STEEL);
-			rapierMaterials.put("Obsidian", ItemInit.RAPIER_OBSIDIAN);
-			rapierMaterials.put("Crystallite", ItemInit.RAPIER_CRYSTALLITE);
-			rapierMaterials.put("Dusksteel", ItemInit.RAPIER_DUSKSTEEL);
-			recipes.put(input1, input2, rapierMaterials);
-			for(Item stack : rapierMaterials.values()) {
-				rapierJeiMap.add(new ItemStack(stack));
+			for(int i = 0; i < mats.length; i++) {
+				matMap.put(mats[i], items[i]);
 			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), rapierJeiMap);
-			
-			expValues.put(ItemInit.RAPIER_IRON, exp);
-			expValues.put(ItemInit.RAPIER_KOBOLD, exp+1);
-			expValues.put(ItemInit.RAPIER_COPPER, exp+1);
-			expValues.put(ItemInit.RAPIER_SILVER, exp+2);
-			expValues.put(ItemInit.RAPIER_BRONZE, exp+2);
-			expValues.put(ItemInit.RAPIER_PLATINUM, exp+3);
-			expValues.put(ItemInit.RAPIER_STEEL, exp+3);
-			expValues.put(ItemInit.RAPIER_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.RAPIER_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.RAPIER_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.RAPIER_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.RAPIER_DUSKSTEEL, exp+6);
-			break;
-		case "talwar":
-			talwarMaterials.put("Iron", ItemInit.TALWAR_IRON);
-			talwarMaterials.put("Kobold", ItemInit.TALWAR_KOBOLD);
-			talwarMaterials.put("Copper", ItemInit.TALWAR_COPPER);
-			talwarMaterials.put("Silver", ItemInit.TALWAR_SILVER);
-			talwarMaterials.put("Bronze", ItemInit.TALWAR_BRONZE);
-			talwarMaterials.put("Platinum", ItemInit.TALWAR_PLATINUM);
-			talwarMaterials.put("Steel", ItemInit.TALWAR_STEEL);
-			talwarMaterials.put("Shadow Platinum", ItemInit.TALWAR_SHADOW_PLATINUM);
-			talwarMaterials.put("Frost Steel", ItemInit.TALWAR_FROST_STEEL);
-			talwarMaterials.put("Obsidian", ItemInit.TALWAR_OBSIDIAN);
-			talwarMaterials.put("Crystallite", ItemInit.TALWAR_CRYSTALLITE);
-			talwarMaterials.put("Dusksteel", ItemInit.TALWAR_DUSKSTEEL);
-			recipes.put(input1, input2, talwarMaterials);
-			for(Item stack : talwarMaterials.values()) {
-				talwarJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), talwarJeiMap);
-			
-			expValues.put(ItemInit.TALWAR_IRON, exp);
-			expValues.put(ItemInit.TALWAR_KOBOLD, exp+1);
-			expValues.put(ItemInit.TALWAR_COPPER, exp+1);
-			expValues.put(ItemInit.TALWAR_SILVER, exp+2);
-			expValues.put(ItemInit.TALWAR_BRONZE, exp+2);
-			expValues.put(ItemInit.TALWAR_PLATINUM, exp+3);
-			expValues.put(ItemInit.TALWAR_STEEL, exp+3);
-			expValues.put(ItemInit.TALWAR_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.TALWAR_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.TALWAR_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.TALWAR_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.TALWAR_DUSKSTEEL, exp+6);
-			break;
-		case "cleaver":
-			cleaverMaterials.put("Iron", ItemInit.CLEAVER_IRON);
-			cleaverMaterials.put("Kobold", ItemInit.CLEAVER_KOBOLD);
-			cleaverMaterials.put("Copper", ItemInit.CLEAVER_COPPER);
-			cleaverMaterials.put("Silver", ItemInit.CLEAVER_SILVER);
-			cleaverMaterials.put("Bronze", ItemInit.CLEAVER_BRONZE);
-			cleaverMaterials.put("Platinum", ItemInit.CLEAVER_PLATINUM);
-			cleaverMaterials.put("Steel", ItemInit.CLEAVER_STEEL);
-			cleaverMaterials.put("Shadow Platinum", ItemInit.CLEAVER_SHADOW_PLATINUM);
-			cleaverMaterials.put("Frost Steel", ItemInit.CLEAVER_FROST_STEEL);
-			cleaverMaterials.put("Obsidian", ItemInit.CLEAVER_OBSIDIAN);
-			cleaverMaterials.put("Crystallite", ItemInit.CLEAVER_CRYSTALLITE);
-			cleaverMaterials.put("Dusksteel", ItemInit.CLEAVER_DUSKSTEEL);
-			recipes.put(input1, input2, cleaverMaterials);
-			for(Item stack : cleaverMaterials.values()) {
-				cleaverJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), cleaverJeiMap);
-			
-			expValues.put(ItemInit.CLEAVER_IRON, exp);
-			expValues.put(ItemInit.CLEAVER_KOBOLD, exp+1);
-			expValues.put(ItemInit.CLEAVER_COPPER, exp+1);
-			expValues.put(ItemInit.CLEAVER_SILVER, exp+2);
-			expValues.put(ItemInit.CLEAVER_BRONZE, exp+2);
-			expValues.put(ItemInit.CLEAVER_PLATINUM, exp+3);
-			expValues.put(ItemInit.CLEAVER_STEEL, exp+3);
-			expValues.put(ItemInit.CLEAVER_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.CLEAVER_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.CLEAVER_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.CLEAVER_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.CLEAVER_DUSKSTEEL, exp+6);
-			break;
-		case "mace":
-			maceMaterials.put("Iron", ItemInit.MACE_IRON);
-			maceMaterials.put("Kobold", ItemInit.MACE_KOBOLD);
-			maceMaterials.put("Copper", ItemInit.MACE_COPPER);
-			maceMaterials.put("Silver", ItemInit.MACE_SILVER);
-			maceMaterials.put("Bronze", ItemInit.MACE_BRONZE);
-			maceMaterials.put("Platinum", ItemInit.MACE_PLATINUM);
-			maceMaterials.put("Steel", ItemInit.MACE_STEEL);
-			maceMaterials.put("Shadow Platinum", ItemInit.MACE_SHADOW_PLATINUM);
-			maceMaterials.put("Frost Steel", ItemInit.MACE_FROST_STEEL);
-			maceMaterials.put("Obsidian", ItemInit.MACE_OBSIDIAN);
-			maceMaterials.put("Crystallite", ItemInit.MACE_CRYSTALLITE);
-			maceMaterials.put("Dusksteel", ItemInit.MACE_DUSKSTEEL);
-			recipes.put(input1, input2, maceMaterials);
-			for(Item stack : maceMaterials.values()) {
-				maceJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), maceJeiMap);
-			
-			expValues.put(ItemInit.MACE_IRON, exp);
-			expValues.put(ItemInit.MACE_KOBOLD, exp+1);
-			expValues.put(ItemInit.MACE_COPPER, exp+1);
-			expValues.put(ItemInit.MACE_SILVER, exp+2);
-			expValues.put(ItemInit.MACE_BRONZE, exp+2);
-			expValues.put(ItemInit.MACE_PLATINUM, exp+3);
-			expValues.put(ItemInit.MACE_STEEL, exp+3);
-			expValues.put(ItemInit.MACE_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.MACE_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.MACE_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.MACE_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.MACE_DUSKSTEEL, exp+6);
-			break;
-		case "staff":
-			staffMaterials.put("Iron", ItemInit.STAFF_IRON);
-			staffMaterials.put("Kobold", ItemInit.STAFF_KOBOLD);
-			staffMaterials.put("Copper", ItemInit.STAFF_COPPER);
-			staffMaterials.put("Silver", ItemInit.STAFF_SILVER);
-			staffMaterials.put("Bronze", ItemInit.STAFF_BRONZE);
-			staffMaterials.put("Platinum", ItemInit.STAFF_PLATINUM);
-			staffMaterials.put("Steel", ItemInit.STAFF_STEEL);
-			staffMaterials.put("Shadow Platinum", ItemInit.STAFF_SHADOW_PLATINUM);
-			staffMaterials.put("Frost Steel", ItemInit.STAFF_FROST_STEEL);
-			staffMaterials.put("Obsidian", ItemInit.STAFF_OBSIDIAN);
-			staffMaterials.put("Crystallite", ItemInit.STAFF_CRYSTALLITE);
-			staffMaterials.put("Dusksteel", ItemInit.STAFF_DUSKSTEEL);
-			recipes.put(input1, input2, staffMaterials);
-			for(Item stack : staffMaterials.values()) {
-				staffJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), staffJeiMap);
-			
-			expValues.put(ItemInit.STAFF_IRON, exp);
-			expValues.put(ItemInit.STAFF_KOBOLD, exp+1);
-			expValues.put(ItemInit.STAFF_COPPER, exp+1);
-			expValues.put(ItemInit.STAFF_SILVER, exp+2);
-			expValues.put(ItemInit.STAFF_BRONZE, exp+2);
-			expValues.put(ItemInit.STAFF_PLATINUM, exp+3);
-			expValues.put(ItemInit.STAFF_STEEL, exp+3);
-			expValues.put(ItemInit.STAFF_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.STAFF_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.STAFF_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.STAFF_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.STAFF_DUSKSTEEL, exp+6);
-			break;
-		case "longsword":
-			longswordMaterials.put("Iron", ItemInit.LONGSWORD_IRON);
-			longswordMaterials.put("Kobold", ItemInit.LONGSWORD_KOBOLD);
-			longswordMaterials.put("Copper", ItemInit.LONGSWORD_COPPER);
-			longswordMaterials.put("Silver", ItemInit.LONGSWORD_SILVER);
-			longswordMaterials.put("Bronze", ItemInit.LONGSWORD_BRONZE);
-			longswordMaterials.put("Platinum", ItemInit.LONGSWORD_PLATINUM);
-			longswordMaterials.put("Steel", ItemInit.LONGSWORD_STEEL);
-			longswordMaterials.put("Shadow Platinum", ItemInit.LONGSWORD_SHADOW_PLATINUM);
-			longswordMaterials.put("Frost Steel", ItemInit.LONGSWORD_FROST_STEEL);
-			longswordMaterials.put("Obsidian", ItemInit.LONGSWORD_OBSIDIAN);
-			longswordMaterials.put("Crystallite", ItemInit.LONGSWORD_CRYSTALLITE);
-			longswordMaterials.put("Dusksteel", ItemInit.LONGSWORD_DUSKSTEEL);
-			recipes.put(input1, input2, longswordMaterials);
-			for(Item stack : longswordMaterials.values()) {
-				longswordJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), longswordJeiMap);
-			
-			expValues.put(ItemInit.LONGSWORD_IRON, exp);
-			expValues.put(ItemInit.LONGSWORD_KOBOLD, exp+1);
-			expValues.put(ItemInit.LONGSWORD_COPPER, exp+1);
-			expValues.put(ItemInit.LONGSWORD_SILVER, exp+2);
-			expValues.put(ItemInit.LONGSWORD_BRONZE, exp+2);
-			expValues.put(ItemInit.LONGSWORD_PLATINUM, exp+3);
-			expValues.put(ItemInit.LONGSWORD_STEEL, exp+3);
-			expValues.put(ItemInit.LONGSWORD_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.LONGSWORD_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.LONGSWORD_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.LONGSWORD_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.LONGSWORD_DUSKSTEEL, exp+6);
-			break;
-		case "kodachi":
-			kodachiMaterials.put("Iron", ItemInit.KODACHI_IRON);
-			kodachiMaterials.put("Kobold", ItemInit.KODACHI_KOBOLD);
-			kodachiMaterials.put("Copper", ItemInit.KODACHI_COPPER);
-			kodachiMaterials.put("Silver", ItemInit.KODACHI_SILVER);
-			kodachiMaterials.put("Bronze", ItemInit.KODACHI_BRONZE);
-			kodachiMaterials.put("Platinum", ItemInit.KODACHI_PLATINUM);
-			kodachiMaterials.put("Steel", ItemInit.KODACHI_STEEL);
-			kodachiMaterials.put("Shadow Platinum", ItemInit.KODACHI_SHADOW_PLATINUM);
-			kodachiMaterials.put("Frost Steel", ItemInit.KODACHI_FROST_STEEL);
-			kodachiMaterials.put("Obsidian", ItemInit.KODACHI_OBSIDIAN);
-			kodachiMaterials.put("Crystallite", ItemInit.KODACHI_CRYSTALLITE);
-			kodachiMaterials.put("Dusksteel", ItemInit.KODACHI_DUSKSTEEL);
-			recipes.put(input1, input2, kodachiMaterials);
-			for(Item stack : kodachiMaterials.values()) {
-				kodachiJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), kodachiJeiMap);
-			
-			expValues.put(ItemInit.KODACHI_IRON, exp);
-			expValues.put(ItemInit.KODACHI_KOBOLD, exp+1);
-			expValues.put(ItemInit.KODACHI_COPPER, exp+1);
-			expValues.put(ItemInit.KODACHI_SILVER, exp+2);
-			expValues.put(ItemInit.KODACHI_BRONZE, exp+2);
-			expValues.put(ItemInit.KODACHI_PLATINUM, exp+3);
-			expValues.put(ItemInit.KODACHI_STEEL, exp+3);
-			expValues.put(ItemInit.KODACHI_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.KODACHI_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.KODACHI_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.KODACHI_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.KODACHI_DUSKSTEEL, exp+6);
-			break;
-		case "battleaxe":
-			battleaxeMaterials.put("Iron", ItemInit.BATTLEAXE_IRON);
-			battleaxeMaterials.put("Kobold", ItemInit.BATTLEAXE_KOBOLD);
-			battleaxeMaterials.put("Copper", ItemInit.BATTLEAXE_COPPER);
-			battleaxeMaterials.put("Silver", ItemInit.BATTLEAXE_SILVER);
-			battleaxeMaterials.put("Bronze", ItemInit.BATTLEAXE_BRONZE);
-			battleaxeMaterials.put("Platinum", ItemInit.BATTLEAXE_PLATINUM);
-			battleaxeMaterials.put("Steel", ItemInit.BATTLEAXE_STEEL);
-			battleaxeMaterials.put("Shadow Platinum", ItemInit.BATTLEAXE_SHADOW_PLATINUM);
-			battleaxeMaterials.put("Frost Steel", ItemInit.BATTLEAXE_FROST_STEEL);
-			battleaxeMaterials.put("Obsidian", ItemInit.BATTLEAXE_OBSIDIAN);
-			battleaxeMaterials.put("Crystallite", ItemInit.BATTLEAXE_CRYSTALLITE);
-			battleaxeMaterials.put("Dusksteel", ItemInit.BATTLEAXE_DUSKSTEEL);
-			recipes.put(input1, input2, battleaxeMaterials);
-			for(Item stack : battleaxeMaterials.values()) {
-				battleaxeJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), battleaxeJeiMap);
-			
-			expValues.put(ItemInit.BATTLEAXE_IRON, exp);
-			expValues.put(ItemInit.BATTLEAXE_KOBOLD, exp+1);
-			expValues.put(ItemInit.BATTLEAXE_COPPER, exp+1);
-			expValues.put(ItemInit.BATTLEAXE_SILVER, exp+2);
-			expValues.put(ItemInit.BATTLEAXE_BRONZE, exp+2);
-			expValues.put(ItemInit.BATTLEAXE_PLATINUM, exp+3);
-			expValues.put(ItemInit.BATTLEAXE_STEEL, exp+3);
-			expValues.put(ItemInit.BATTLEAXE_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.BATTLEAXE_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.BATTLEAXE_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.BATTLEAXE_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.BATTLEAXE_DUSKSTEEL, exp+6);
-			break;
-		case "zweihander":
-			zweihanderMaterials.put("Iron", ItemInit.ZWEIHANDER_IRON);
-			zweihanderMaterials.put("Kobold", ItemInit.ZWEIHANDER_KOBOLD);
-			zweihanderMaterials.put("Copper", ItemInit.ZWEIHANDER_COPPER);
-			zweihanderMaterials.put("Silver", ItemInit.ZWEIHANDER_SILVER);
-			zweihanderMaterials.put("Bronze", ItemInit.ZWEIHANDER_BRONZE);
-			zweihanderMaterials.put("Platinum", ItemInit.ZWEIHANDER_PLATINUM);
-			zweihanderMaterials.put("Steel", ItemInit.ZWEIHANDER_STEEL);
-			zweihanderMaterials.put("Shadow Platinum", ItemInit.ZWEIHANDER_SHADOW_PLATINUM);
-			zweihanderMaterials.put("Frost Steel", ItemInit.ZWEIHANDER_FROST_STEEL);
-			zweihanderMaterials.put("Obsidian", ItemInit.ZWEIHANDER_OBSIDIAN);
-			zweihanderMaterials.put("Crystallite", ItemInit.ZWEIHANDER_CRYSTALLITE);
-			zweihanderMaterials.put("Dusksteel", ItemInit.ZWEIHANDER_DUSKSTEEL);
-			recipes.put(input1, input2, zweihanderMaterials);
-			for(Item stack : zweihanderMaterials.values()) {
-				zweihanderJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), zweihanderJeiMap);
-			
-			expValues.put(ItemInit.ZWEIHANDER_IRON, exp);
-			expValues.put(ItemInit.ZWEIHANDER_KOBOLD, exp+1);
-			expValues.put(ItemInit.ZWEIHANDER_COPPER, exp+1);
-			expValues.put(ItemInit.ZWEIHANDER_SILVER, exp+2);
-			expValues.put(ItemInit.ZWEIHANDER_BRONZE, exp+2);
-			expValues.put(ItemInit.ZWEIHANDER_PLATINUM, exp+3);
-			expValues.put(ItemInit.ZWEIHANDER_STEEL, exp+3);
-			expValues.put(ItemInit.ZWEIHANDER_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.ZWEIHANDER_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.ZWEIHANDER_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.ZWEIHANDER_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.ZWEIHANDER_DUSKSTEEL, exp+6);
-			break;
-		case "nodachi":
-			nodachiMaterials.put("Iron", ItemInit.NODACHI_IRON);
-			nodachiMaterials.put("Kobold", ItemInit.NODACHI_KOBOLD);
-			nodachiMaterials.put("Copper", ItemInit.NODACHI_COPPER);
-			nodachiMaterials.put("Silver", ItemInit.NODACHI_SILVER);
-			nodachiMaterials.put("Bronze", ItemInit.NODACHI_BRONZE);
-			nodachiMaterials.put("Platinum", ItemInit.NODACHI_PLATINUM);
-			nodachiMaterials.put("Steel", ItemInit.NODACHI_STEEL);
-			nodachiMaterials.put("Shadow Platinum", ItemInit.NODACHI_SHADOW_PLATINUM);
-			nodachiMaterials.put("Frost Steel", ItemInit.NODACHI_FROST_STEEL);
-			nodachiMaterials.put("Obsidian", ItemInit.NODACHI_OBSIDIAN);
-			nodachiMaterials.put("Crystallite", ItemInit.NODACHI_CRYSTALLITE);
-			nodachiMaterials.put("Dusksteel", ItemInit.NODACHI_DUSKSTEEL);
-			recipes.put(input1, input2, nodachiMaterials);
-			for(Item stack : nodachiMaterials.values()) {
-				nodachiJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1),new ItemStack(input2),  nodachiJeiMap);
-			
-			expValues.put(ItemInit.NODACHI_IRON, exp);
-			expValues.put(ItemInit.NODACHI_KOBOLD, exp+1);
-			expValues.put(ItemInit.NODACHI_COPPER, exp+1);
-			expValues.put(ItemInit.NODACHI_SILVER, exp+2);
-			expValues.put(ItemInit.NODACHI_BRONZE, exp+2);
-			expValues.put(ItemInit.NODACHI_PLATINUM, exp+3);
-			expValues.put(ItemInit.NODACHI_STEEL, exp+3);
-			expValues.put(ItemInit.NODACHI_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.NODACHI_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.NODACHI_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.NODACHI_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.NODACHI_DUSKSTEEL, exp+6);
-			break;
-		case "sabre":
-			sabreMaterials.put("Iron", ItemInit.SABRE_IRON);
-			sabreMaterials.put("Kobold", ItemInit.SABRE_KOBOLD);
-			sabreMaterials.put("Copper", ItemInit.SABRE_COPPER);
-			sabreMaterials.put("Silver", ItemInit.SABRE_SILVER);
-			sabreMaterials.put("Bronze", ItemInit.SABRE_BRONZE);
-			sabreMaterials.put("Platinum", ItemInit.SABRE_PLATINUM);
-			sabreMaterials.put("Steel", ItemInit.SABRE_STEEL);
-			sabreMaterials.put("Shadow Platinum", ItemInit.SABRE_SHADOW_PLATINUM);
-			sabreMaterials.put("Frost Steel", ItemInit.SABRE_FROST_STEEL);
-			sabreMaterials.put("Obsidian", ItemInit.SABRE_OBSIDIAN);
-			sabreMaterials.put("Crystallite", ItemInit.SABRE_CRYSTALLITE);
-			sabreMaterials.put("Dusksteel", ItemInit.SABRE_DUSKSTEEL);
-			recipes.put(input1, input2, sabreMaterials);
-			for(Item stack : sabreMaterials.values()) {
-				sabreJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), sabreJeiMap);
-			
-			expValues.put(ItemInit.SABRE_IRON, exp);
-			expValues.put(ItemInit.SABRE_KOBOLD, exp+1);
-			expValues.put(ItemInit.SABRE_COPPER, exp+1);
-			expValues.put(ItemInit.SABRE_SILVER, exp+2);
-			expValues.put(ItemInit.SABRE_BRONZE, exp+2);
-			expValues.put(ItemInit.SABRE_PLATINUM, exp+3);
-			expValues.put(ItemInit.SABRE_STEEL, exp+3);
-			expValues.put(ItemInit.SABRE_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.SABRE_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.SABRE_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.SABRE_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.SABRE_DUSKSTEEL, exp+6);
-			break;
-		case "makhaira":
-			makhairaMaterials.put("Iron", ItemInit.MAKHAIRA_IRON);
-			makhairaMaterials.put("Kobold", ItemInit.MAKHAIRA_KOBOLD);
-			makhairaMaterials.put("Copper", ItemInit.MAKHAIRA_COPPER);
-			makhairaMaterials.put("Silver", ItemInit.MAKHAIRA_SILVER);
-			makhairaMaterials.put("Bronze", ItemInit.MAKHAIRA_BRONZE);
-			makhairaMaterials.put("Platinum", ItemInit.MAKHAIRA_PLATINUM);
-			makhairaMaterials.put("Steel", ItemInit.MAKHAIRA_STEEL);
-			makhairaMaterials.put("Shadow Platinum", ItemInit.MAKHAIRA_SHADOW_PLATINUM);
-			makhairaMaterials.put("Frost Steel", ItemInit.MAKHAIRA_FROST_STEEL);
-			makhairaMaterials.put("Obsidian", ItemInit.MAKHAIRA_OBSIDIAN);
-			makhairaMaterials.put("Crystallite", ItemInit.MAKHAIRA_CRYSTALLITE);
-			makhairaMaterials.put("Dusksteel", ItemInit.MAKHAIRA_DUSKSTEEL);
-			recipes.put(input1, input2, makhairaMaterials);
-			for(Item stack : makhairaMaterials.values()) {
-				makhairaJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), makhairaJeiMap);
-			
-			expValues.put(ItemInit.MAKHAIRA_IRON, exp);
-			expValues.put(ItemInit.MAKHAIRA_KOBOLD, exp+1);
-			expValues.put(ItemInit.MAKHAIRA_COPPER, exp+1);
-			expValues.put(ItemInit.MAKHAIRA_SILVER, exp+2);
-			expValues.put(ItemInit.MAKHAIRA_BRONZE, exp+2);
-			expValues.put(ItemInit.MAKHAIRA_PLATINUM, exp+3);
-			expValues.put(ItemInit.MAKHAIRA_STEEL, exp+3);
-			expValues.put(ItemInit.MAKHAIRA_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.MAKHAIRA_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.MAKHAIRA_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.MAKHAIRA_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.MAKHAIRA_DUSKSTEEL, exp+6);
-			break;
-		case "spear":
-			spearMaterials.put("Iron", ItemInit.SPEAR_IRON);
-			spearMaterials.put("Kobold", ItemInit.SPEAR_KOBOLD);
-			spearMaterials.put("Copper", ItemInit.SPEAR_COPPER);
-			spearMaterials.put("Silver", ItemInit.SPEAR_SILVER);
-			spearMaterials.put("Bronze", ItemInit.SPEAR_BRONZE);
-			spearMaterials.put("Platinum", ItemInit.SPEAR_PLATINUM);
-			spearMaterials.put("Steel", ItemInit.SPEAR_STEEL);
-			spearMaterials.put("Shadow Platinum", ItemInit.SPEAR_SHADOW_PLATINUM);
-			spearMaterials.put("Frost Steel", ItemInit.SPEAR_FROST_STEEL);
-			spearMaterials.put("Obsidian", ItemInit.SPEAR_OBSIDIAN);
-			spearMaterials.put("Crystallite", ItemInit.SPEAR_CRYSTALLITE);
-			spearMaterials.put("Dusksteel", ItemInit.SPEAR_DUSKSTEEL);
-			recipes.put(input1, input2, spearMaterials);
-			for(Item stack : spearMaterials.values()) {
-				spearJeiMap.add(new ItemStack(stack));
-			}
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), spearJeiMap);
-			
-			expValues.put(ItemInit.SPEAR_IRON, exp);
-			expValues.put(ItemInit.SPEAR_KOBOLD, exp+1);
-			expValues.put(ItemInit.SPEAR_COPPER, exp+1);
-			expValues.put(ItemInit.SPEAR_SILVER, exp+2);
-			expValues.put(ItemInit.SPEAR_BRONZE, exp+2);
-			expValues.put(ItemInit.SPEAR_PLATINUM, exp+3);
-			expValues.put(ItemInit.SPEAR_STEEL, exp+3);
-			expValues.put(ItemInit.SPEAR_SHADOW_PLATINUM, exp+4);
-			expValues.put(ItemInit.SPEAR_FROST_STEEL, exp+4);
-			expValues.put(ItemInit.SPEAR_OBSIDIAN, exp+5);
-			expValues.put(ItemInit.SPEAR_CRYSTALLITE, exp+5);
-			expValues.put(ItemInit.SPEAR_DUSKSTEEL, exp+6);
-			break;
-		case "handle":
-			toolRodMats.put("ToolRod", ItemInit.LONG_TOOL_ROD);
-			recipes.put(input1, input2, toolRodMats);
-			toolRodJeiMap.add(new ItemStack(ItemInit.LONG_TOOL_ROD));
-			jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), toolRodJeiMap);
-			expValues.put(ItemInit.LONG_TOOL_ROD, exp);
-			break;
+		}
+		recipes.put(input1, input2, matMap);
+		for(Item stack : matMap.values()) {
+			jeiMap.add(new ItemStack(stack));
+		}
+		jeiRecipes.put(new ItemStack(input1), new ItemStack(input2), jeiMap);
+		
+		for(int i = 0; i < items.length; i++) {
+			expValues.put(items[i], exp + i);
 		}
 	}
 }

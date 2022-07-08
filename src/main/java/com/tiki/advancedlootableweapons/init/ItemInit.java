@@ -6,9 +6,12 @@ import java.util.List;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.items.ItemArmorBinding;
+import com.tiki.advancedlootableweapons.items.ItemArmorPlate;
 import com.tiki.advancedlootableweapons.items.ItemBase;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
+import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
@@ -48,7 +51,7 @@ public class ItemInit {
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_sabre_head"), new ResourceLocation("sabre_head"), new ItemStack(SABRE_HEAD), new Object[] {" w", "w ", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_makhaira_head"), new ResourceLocation("makhaira_head"), new ItemStack(MAKHAIRA_HEAD), new Object[] {" w", "ww", "ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_spear_head"), new ResourceLocation("spear_head"), new ItemStack(SPEAR_HEAD), new Object[] {" w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
-		
+				
 		GameRegistry.addSmelting(BlockInit.cobble_feldspar, new ItemStack(BlockInit.rock_feldspar), 0.1F);
 		GameRegistry.addSmelting(BlockInit.ore_copper, new ItemStack(ItemInit.INGOT_COPPER), 1.0F);
 		GameRegistry.addSmelting(BlockInit.ore_tin, new ItemStack(ItemInit.INGOT_TIN), 1.0F);
@@ -99,6 +102,7 @@ public class ItemInit {
 	public static final Item CRYSTAL = new ItemBase("crystal");
 	public static final Item SHADOW = new ItemBase("shadow");
 	public static final Item SHADOW_BLOB = new ItemBase("shadow_blob");
+	public static final Item TANNED_LEATHER = new ItemBase("tanned_leather");
 	
 	public static final Item DAGGER_HEAD = new ItemBase("dagger_head");
 	public static final Item KABUTOWARI_HEAD = new ItemBase("kabutowari_head");
@@ -116,6 +120,77 @@ public class ItemInit {
 	public static final Item MAKHAIRA_HEAD = new ItemBase("makhaira_head");
 	public static final Item SPEAR_HEAD = new ItemBase("spear_head");
 	public static final Item LONG_WEAPON_HANDLE = new ItemBase("long_weapon_handle");
+	
+	public static final Item UNBOUND_HELMET_IRON = new ItemUnboundArmor("unbound_helmet_iron");
+	public static final Item UNBOUND_CHESTPLATE_IRON = new ItemUnboundArmor("unbound_chestplate_iron");
+	public static final Item UNBOUND_LEGGINGS_IRON = new ItemUnboundArmor("unbound_leggings_iron");
+	public static final Item UNBOUND_BOOTS_IRON = new ItemUnboundArmor("unbound_boots_iron");
+	
+	public static final Item UNBOUND_HELMET_GOLD = new ItemUnboundArmor("unbound_helmet_gold");
+	public static final Item UNBOUND_CHESTPLATE_GOLD = new ItemUnboundArmor("unbound_chestplate_gold");
+	public static final Item UNBOUND_LEGGINGS_GOLD = new ItemUnboundArmor("unbound_leggings_gold");
+	public static final Item UNBOUND_BOOTS_GOLD = new ItemUnboundArmor("unbound_boots_gold");
+	
+	public static final Item UNBOUND_HELMET_DIAMOND = new ItemUnboundArmor("unbound_helmet_diamond");
+	public static final Item UNBOUND_CHESTPLATE_DIAMOND = new ItemUnboundArmor("unbound_chestplate_diamond");
+	public static final Item UNBOUND_LEGGINGS_DIAMOND = new ItemUnboundArmor("unbound_leggings_diamond");
+	public static final Item UNBOUND_BOOTS_DIAMOND = new ItemUnboundArmor("unbound_boots_diamond");
+	
+	public static final Item UNBOUND_HELMET_KOBOLD = new ItemUnboundArmor("unbound_helmet_kobold");
+	public static final Item UNBOUND_CHESTPLATE_KOBOLD = new ItemUnboundArmor("unbound_chestplate_kobold");
+	public static final Item UNBOUND_LEGGINGS_KOBOLD = new ItemUnboundArmor("unbound_leggings_kobold");
+	public static final Item UNBOUND_BOOTS_KOBOLD = new ItemUnboundArmor("unbound_boots_kobold");
+	
+	public static final Item UNBOUND_HELMET_COPPER = new ItemUnboundArmor("unbound_helmet_copper");
+	public static final Item UNBOUND_CHESTPLATE_COPPER = new ItemUnboundArmor("unbound_chestplate_copper");
+	public static final Item UNBOUND_LEGGINGS_COPPER = new ItemUnboundArmor("unbound_leggings_copper");
+	public static final Item UNBOUND_BOOTS_COPPER = new ItemUnboundArmor("unbound_boots_copper");
+	
+	public static final Item UNBOUND_HELMET_SILVER = new ItemUnboundArmor("unbound_helmet_silver");
+	public static final Item UNBOUND_CHESTPLATE_SILVER = new ItemUnboundArmor("unbound_chestplate_silver");
+	public static final Item UNBOUND_LEGGINGS_SILVER = new ItemUnboundArmor("unbound_leggings_silver");
+	public static final Item UNBOUND_BOOTS_SILVER = new ItemUnboundArmor("unbound_boots_silver");
+	
+	public static final Item UNBOUND_HELMET_BRONZE = new ItemUnboundArmor("unbound_helmet_bronze");
+	public static final Item UNBOUND_CHESTPLATE_BRONZE = new ItemUnboundArmor("unbound_chestplate_bronze");
+	public static final Item UNBOUND_LEGGINGS_BRONZE = new ItemUnboundArmor("unbound_leggings_bronze");
+	public static final Item UNBOUND_BOOTS_BRONZE = new ItemUnboundArmor("unbound_boots_bronze");
+	
+	public static final Item UNBOUND_HELMET_PLATINUM = new ItemUnboundArmor("unbound_helmet_platinum");
+	public static final Item UNBOUND_CHESTPLATE_PLATINUM = new ItemUnboundArmor("unbound_chestplate_platinum");
+	public static final Item UNBOUND_LEGGINGS_PLATINUM = new ItemUnboundArmor("unbound_leggings_platinum");
+	public static final Item UNBOUND_BOOTS_PLATINUM = new ItemUnboundArmor("unbound_boots_platinum");
+	
+	public static final Item UNBOUND_HELMET_STEEL = new ItemUnboundArmor("unbound_helmet_steel");
+	public static final Item UNBOUND_CHESTPLATE_STEEL = new ItemUnboundArmor("unbound_chestplate_steel");
+	public static final Item UNBOUND_LEGGINGS_STEEL = new ItemUnboundArmor("unbound_leggings_steel");
+	public static final Item UNBOUND_BOOTS_STEEL = new ItemUnboundArmor("unbound_boots_steel");
+	
+	public static final Item UNBOUND_HELMET_SHADOW_PLATINUM = new ItemUnboundArmor("unbound_helmet_shadow_platinum");
+	public static final Item UNBOUND_CHESTPLATE_SHADOW_PLATINUM = new ItemUnboundArmor("unbound_chestplate_shadow_platinum");
+	public static final Item UNBOUND_LEGGINGS_SHADOW_PLATINUM = new ItemUnboundArmor("unbound_leggings_shadow_platinum");
+	public static final Item UNBOUND_BOOTS_SHADOW_PLATINUM = new ItemUnboundArmor("unbound_boots_shadow_platinum");
+	
+	public static final Item UNBOUND_HELMET_FROST_STEEL = new ItemUnboundArmor("unbound_helmet_frost_steel");
+	public static final Item UNBOUND_CHESTPLATE_FROST_STEEL = new ItemUnboundArmor("unbound_chestplate_frost_steel");
+	public static final Item UNBOUND_LEGGINGS_FROST_STEEL = new ItemUnboundArmor("unbound_leggings_frost_steel");
+	public static final Item UNBOUND_BOOTS_FROST_STEEL = new ItemUnboundArmor("unbound_boots_frost_steel");
+	
+	public static final Item UNBOUND_HELMET_OBSIDIAN = new ItemUnboundArmor("unbound_helmet_obsidian");
+	public static final Item UNBOUND_CHESTPLATE_OBSIDIAN = new ItemUnboundArmor("unbound_chestplate_obsidian");
+	public static final Item UNBOUND_LEGGINGS_OBSIDIAN = new ItemUnboundArmor("unbound_leggings_obsidian");
+	public static final Item UNBOUND_BOOTS_OBSIDIAN = new ItemUnboundArmor("unbound_boots_obsidian");
+	
+	public static final Item UNBOUND_HELMET_CRYSTALLITE = new ItemUnboundArmor("unbound_helmet_crystallite");
+	public static final Item UNBOUND_CHESTPLATE_CRYSTALLITE = new ItemUnboundArmor("unbound_chestplate_crystallite");
+	public static final Item UNBOUND_LEGGINGS_CRYSTALLITE = new ItemUnboundArmor("unbound_leggings_crystallite");
+	public static final Item UNBOUND_BOOTS_CRYSTALLITE = new ItemUnboundArmor("unbound_boots_crystallite");
+	
+	public static final Item UNBOUND_HELMET_DUSKSTEEL = new ItemUnboundArmor("unbound_helmet_dusksteel");
+	public static final Item UNBOUND_CHESTPLATE_DUSKSTEEL = new ItemUnboundArmor("unbound_chestplate_dusksteel");
+	public static final Item UNBOUND_LEGGINGS_DUSKSTEEL = new ItemUnboundArmor("unbound_leggings_dusksteel");
+	public static final Item UNBOUND_BOOTS_DUSKSTEEL = new ItemUnboundArmor("unbound_boots_dusksteel");
+	
 	
 	/*
 	 * Materials
@@ -137,29 +212,29 @@ public class ItemInit {
 	 */
 	
 	//Mats Declarations
-	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("mat_kobold", 1, ConfigHandler.KOBOLD_DURABILITY, 6.0F, ConfigHandler.KOBOLD_DAMAGE, 22);
+	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("mat_kobold", 1, ConfigHandler.KOBOLD_DURABILITY, 6.0F, ConfigHandler.KOBOLD_DAMAGE, 22).setRepairItem(new ItemStack(INGOT_KOBOLD));;
 	public static final ToolMaterial MAT_COPPER = EnumHelper.addToolMaterial("mat_copper", 2, ConfigHandler.COPPER_DURABILITY, 6.5F, ConfigHandler.COPPER_DAMAGE, 10).setRepairItem(new ItemStack(INGOT_COPPER));
 	public static final ToolMaterial MAT_SILVER = EnumHelper.addToolMaterial("mat_silver", 2, ConfigHandler.SILVER_DURABILITY, 7.0F, ConfigHandler.SILVER_DAMAGE, 24).setRepairItem(new ItemStack(INGOT_SILVER));
 	public static final ToolMaterial MAT_BRONZE = EnumHelper.addToolMaterial("mat_bronze", 2, ConfigHandler.BRONZE_DURABILITY, 6.5F, ConfigHandler.BRONZE_DAMAGE, 12).setRepairItem(new ItemStack(INGOT_BRONZE));
 	public static final ToolMaterial MAT_PLATINUM = EnumHelper.addToolMaterial("mat_platinum", 2, ConfigHandler.PLATINUM_DURABILITY, 10.0F, ConfigHandler.PLATINUM_DAMAGE, 26).setRepairItem(new ItemStack(INGOT_PLATINUM));
 	public static final ToolMaterial MAT_STEEL = EnumHelper.addToolMaterial("mat_steel", 2, ConfigHandler.STEEL_DURABILITY, 7.0F, ConfigHandler.STEEL_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_STEEL));
-    public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMaterial("mat_shadow_platinum", 3, ConfigHandler.SHADOW_PLATINUM_DURABILITY, 8.25F, ConfigHandler.SHADOW_PLATINUM_DAMAGE, 21);
-	public static final ToolMaterial MAT_FROST_STEEL = EnumHelper.addToolMaterial("mat_frost_steel", 3, ConfigHandler.FROST_STEEL_DURABILITY, 7.0F, ConfigHandler.FROST_STEEL_DAMAGE, 30);
+    public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMaterial("mat_shadow_platinum", 3, ConfigHandler.SHADOW_PLATINUM_DURABILITY, 8.25F, ConfigHandler.SHADOW_PLATINUM_DAMAGE, 21).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ToolMaterial MAT_FROST_STEEL = EnumHelper.addToolMaterial("mat_frost_steel", 3, ConfigHandler.FROST_STEEL_DURABILITY, 7.0F, ConfigHandler.FROST_STEEL_DAMAGE, 30).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
     public static final ToolMaterial MAT_OBSIDIAN = EnumHelper.addToolMaterial("mat_obsidian", 3, ConfigHandler.OBSIDIAN_DURABILITY, 7.5F, ConfigHandler.OBSIDIAN_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("mat_crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20);
-	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("mat_dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14);
+	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("mat_crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("mat_dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS);
+	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
 	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
 	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
 	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{5,9,12,5}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
 	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{7,13,17,8}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
 	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("amat_steel", ModInfo.ID + ":steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{7,13,16,7}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS);
-	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{4,7,9,4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS);
+	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{7,13,16,7}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{4,7,9,4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
 	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("amat_obsidian", ModInfo.ID + ":obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{5,10,13,6}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS);
-	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{5,8,11,5}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS);
+	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{5,10,13,6}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{5,8,11,5}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
 	
 	//Tools
@@ -413,109 +488,162 @@ public class ItemInit {
 	public static final Item SPEAR_CRYSTALLITE = new ToolSpear("spear_crystallite", MAT_CRYSTALLITE).setMaxStackSize(1);
 	public static final Item SPEAR_DUSKSTEEL = new ToolSpear("spear_dusksteel", MAT_DUSKSTEEL).setMaxStackSize(1);
 	
+	public static final Item CHAIN_LINK_IRON = new ItemBase("chain_link_iron");
+	public static final Item CHAIN_LINK_GOLD = new ItemBase("chain_link_gold");
+	public static final Item CHAIN_LINK_COPPER = new ItemBase("chain_link_copper");
+	public static final Item CHAIN_LINK_SILVER = new ItemBase("chain_link_silver");
+	public static final Item CHAIN_LINK_BRONZE = new ItemBase("chain_link_bronze");
+	public static final Item CHAIN_LINK_PLATINUM = new ItemBase("chain_link_platinum");
+	public static final Item CHAIN_LINK_STEEL = new ItemBase("chain_link_steel");
+	public static final Item CHAIN_LINK_OBSIDIAN = new ItemBase("chain_link_obsidian");
+	
+	public static final Item CHAIN_LINK_KOBOLD = new ItemBase("chain_link_kobold");
+	public static final Item CHAIN_LINK_SHADOW_PLATINUM = new ItemBase("chain_link_shadow_platinum");
+	public static final Item CHAIN_LINK_FROST_STEEL = new ItemBase("chain_link_frost_steel");
+	public static final Item CHAIN_LINK_CRYSTALLITE = new ItemBase("chain_link_crystallite");
+	public static final Item CHAIN_LINK_DUSKSTEEL = new ItemBase("chain_link_dusksteel");
+	
+	public static final Item ARMOR_PLATE_IRON = new ItemArmorPlate("armor_plate_iron");
+	public static final Item ARMOR_PLATE_GOLD = new ItemArmorPlate("armor_plate_gold");
+	public static final Item ARMOR_PLATE_DIAMOND = new ItemArmorPlate("armor_plate_diamond");
+	public static final Item ARMOR_PLATE_COPPER = new ItemArmorPlate("armor_plate_copper");
+	public static final Item ARMOR_PLATE_SILVER = new ItemArmorPlate("armor_plate_silver");
+	public static final Item ARMOR_PLATE_BRONZE = new ItemArmorPlate("armor_plate_bronze");
+	public static final Item ARMOR_PLATE_PLATINUM = new ItemArmorPlate("armor_plate_platinum");
+	public static final Item ARMOR_PLATE_STEEL = new ItemArmorPlate("armor_plate_steel");
+	public static final Item ARMOR_PLATE_OBSIDIAN = new ItemArmorPlate("armor_plate_obsidian");
+	
+	public static final Item ARMOR_PLATE_KOBOLD = new ItemArmorPlate("armor_plate_kobold");
+	public static final Item ARMOR_PLATE_SHADOW_PLATINUM = new ItemArmorPlate("armor_plate_shadow_platinum");
+	public static final Item ARMOR_PLATE_FROST_STEEL = new ItemArmorPlate("armor_plate_frost_steel");
+	public static final Item ARMOR_PLATE_CRYSTALLITE = new ItemArmorPlate("armor_plate_crystallite");
+	public static final Item ARMOR_PLATE_DUSKSTEEL = new ItemArmorPlate("armor_plate_dusksteel");
+	
+	public static final Item CHAIN_BINDING_IRON = new ItemArmorBinding("binding_chain_iron", ArmorMaterial.IRON.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_GOLD = new ItemArmorBinding("binding_chain_gold", ArmorMaterial.GOLD.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_COPPER = new ItemArmorBinding("binding_chain_copper", AMAT_COPPER.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_SILVER = new ItemArmorBinding("binding_chain_silver", AMAT_SILVER.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_BRONZE = new ItemArmorBinding("binding_chain_bronze", AMAT_BRONZE.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_PLATINUM = new ItemArmorBinding("binding_chain_platinum", AMAT_PLATINUM.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_STEEL = new ItemArmorBinding("binding_chain_steel", AMAT_STEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_OBSIDIAN = new ItemArmorBinding("binding_chain_obsidian", AMAT_OBSIDIAN.getDurability(EntityEquipmentSlot.CHEST)/4);
+	
+	public static final Item CHAIN_BINDING_KOBOLD = new ItemArmorBinding("binding_chain_kobold", AMAT_KOBOLD.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_SHADOW_PLATINUM = new ItemArmorBinding("binding_chain_shadow_platinum", AMAT_SHADOW_PLATINUM.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_FROST_STEEL = new ItemArmorBinding("binding_chain_frost_steel", AMAT_FROST_STEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_CRYSTALLITE = new ItemArmorBinding("binding_chain_crystallite", AMAT_CRYSTALLITE.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_DUSKSTEEL = new ItemArmorBinding("binding_chain_dusksteel", AMAT_DUSKSTEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
+	
+	public static final Item LEATHER_BINDING = new ItemArmorBinding("binding_leather", ArmorMaterial.LEATHER.getDurability(EntityEquipmentSlot.CHEST)/4);
+	
+	
 	//Sharpening Stones
 	public static final Item STONE_SHARPENING_STONE = new ItemSharpeningStone("stone_sharpening_stone", ToolMaterial.WOOD).setMaxStackSize(16);
 	public static final Item IRON_SHARPENING_STONE = new ItemSharpeningStone("iron_sharpening_stone", ToolMaterial.IRON).setMaxStackSize(16);
-	public static Item KOBOLD_SHARPENING_STONE;
+	public static final Item KOBOLD_SHARPENING_STONE = new ItemSharpeningStone("kobold_sharpening_stone", MAT_KOBOLD).setMaxStackSize(16);
 	public static final Item COPPER_SHARPENING_STONE = new ItemSharpeningStone("copper_sharpening_stone", MAT_COPPER).setMaxStackSize(16);
 	public static final Item SILVER_SHARPENING_STONE = new ItemSharpeningStone("silver_sharpening_stone", MAT_SILVER).setMaxStackSize(16);
 	public static final Item BRONZE_SHARPENING_STONE = new ItemSharpeningStone("bronze_sharpening_stone", MAT_BRONZE).setMaxStackSize(16);
 	public static final Item PLATINUM_SHARPENING_STONE = new ItemSharpeningStone("platinum_sharpening_stone", MAT_PLATINUM).setMaxStackSize(16);
 	public static final Item STEEL_SHARPENING_STONE = new ItemSharpeningStone("steel_sharpening_stone", MAT_STEEL).setMaxStackSize(16);
-	public static Item SHADOW_PLATINUM_SHARPENING_STONE;
-	public static Item FROST_STEEL_SHARPENING_STONE;
+	public static final Item SHADOW_PLATINUM_SHARPENING_STONE = new ItemSharpeningStone("shadow_platinum_sharpening_stone", MAT_SHADOW_PLATINUM).setMaxStackSize(16);
+	public static final Item FROST_STEEL_SHARPENING_STONE = new ItemSharpeningStone("frost_steel_sharpening_stone", MAT_FROST_STEEL).setMaxStackSize(16);
 	public static final Item OBISIDAN_SHARPENING_STONE = new ItemSharpeningStone("obsidian_sharpening_stone", MAT_OBSIDIAN).setMaxStackSize(16);
-	public static Item CRYSTALLITE_SHARPENING_STONE;
-	public static Item DUSKSTEEL_SHARPENING_STONE;
+	public static final Item CRYSTALLITE_SHARPENING_STONE = new ItemSharpeningStone("crystallite_sharpening_stone", MAT_CRYSTALLITE).setMaxStackSize(16);
+	public static final Item DUSKSTEEL_SHARPENING_STONE = new ItemSharpeningStone("dusksteel_sharpening_stone", MAT_DUSKSTEEL).setMaxStackSize(16);
 	
 	//Forge Hammers
 	public static final Item STONE_FORGE_HAMMER = new ToolForgeHammer("stone_forge_hammer", ToolMaterial.STONE).setMaxStackSize(1);
 	public static final Item IRON_FORGE_HAMMER = new ToolForgeHammer("iron_forge_hammer", ToolMaterial.IRON).setMaxStackSize(1);
-	public static Item KOBOLD_FORGE_HAMMER;
+	public static final Item KOBOLD_FORGE_HAMMER = new ToolForgeHammer("kobold_forge_hammer", MAT_KOBOLD).setMaxStackSize(1);
 	public static final Item COPPER_FORGE_HAMMER = new ToolForgeHammer("copper_forge_hammer", MAT_COPPER).setMaxStackSize(1);
 	public static final Item SILVER_FORGE_HAMMER = new ToolForgeHammer("silver_forge_hammer", MAT_SILVER).setMaxStackSize(1);
 	public static final Item BRONZE_FORGE_HAMMER = new ToolForgeHammer("bronze_forge_hammer", MAT_BRONZE).setMaxStackSize(1);
 	public static final Item PLATINUM_FORGE_HAMMER = new ToolForgeHammer("platinum_forge_hammer", MAT_PLATINUM).setMaxStackSize(1);
 	public static final Item STEEL_FORGE_HAMMER = new ToolForgeHammer("steel_forge_hammer", MAT_STEEL).setMaxStackSize(1);
-	public static Item SHADOW_PLATINUM_FORGE_HAMMER;
-	public static Item FROST_STEEL_FORGE_HAMMER;
+	public static final Item SHADOW_PLATINUM_FORGE_HAMMER = new ToolForgeHammer("shadow_platinum_forge_hammer", MAT_SHADOW_PLATINUM).setMaxStackSize(1);
+	public static final Item FROST_STEEL_FORGE_HAMMER = new ToolForgeHammer("frost_steel_forge_hammer", MAT_FROST_STEEL).setMaxStackSize(1);
 	public static final Item OBSIDIAN_FORGE_HAMMER = new ToolForgeHammer("obsidian_forge_hammer", MAT_OBSIDIAN).setMaxStackSize(1);
-	public static Item CRYSTALLITE_FORGE_HAMMER;
-	public static Item DUSKSTEEL_FORGE_HAMMER;
+	public static final Item CRYSTALLITE_FORGE_HAMMER = new ToolForgeHammer("crystallite_forge_hammer", MAT_CRYSTALLITE).setMaxStackSize(1);
+	public static final Item DUSKSTEEL_FORGE_HAMMER = new ToolForgeHammer("dusksteel_forge_hammer", MAT_DUSKSTEEL).setMaxStackSize(1);
 	
 	//Hot Tool Heads
-	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head");
+	//						 ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished)
+	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head", null, 0, false);
 	
-	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod");
-	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2");
-	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod");
+	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2", null, 2, true);
+	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod", (ItemHotToolHead)HOT_TOOL_ROD_2, 1, false);
+	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod", null, 3, true);
 	
-	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head");
-	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2");
+	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2", null, 2, true);
+	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head", (ItemHotToolHead)DAGGER_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head");
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2");
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3");
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4");
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5");
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5", null, 5, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_5, 4, false);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head");
-	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2");
-	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3");
+	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3", null, 3, true);
+	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head");
-	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2");
-	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3");
-	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4");
+	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4", null, 4, true);
+	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head");
+	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head", null, 2, true);
 	
-	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head");
-	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2");
-	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3");
+	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3", null, 3, true);
+	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head");
-	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2");
-	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3");
-	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4");
-	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5");
+	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5", null, 5, true);
+	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_5, 4, false);
+	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head");
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2");
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3");
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4");
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4", null, 4, true);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head");
-	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2");
+	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2", null, 2, true);
+	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head", (ItemHotToolHead)KODACHI_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head");
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2");
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3");
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4");
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5");
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5", null, 5, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_5, 4, false);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head");
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2");
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3");
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4");
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5");
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5", null, 5, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_5, 4, false);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head");
-	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2");
-	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3");
-	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4");
+	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4", null, 4, true);
+	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head");
-	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2");
-	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3");
-	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4");
+	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4", null, 4, true);
+	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_4, 3, false);
+	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head");
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2");
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3");
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3", null, 3, true);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_3, 2, false);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_2, 1, false);
 	
-	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head");
-	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2");
+	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2", null, 2, true);
+	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head", (ItemHotToolHead)SPEAR_HOT_TOOL_HEAD_2, 1, false);
+	
+	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true);
+	
 	
 	//Armor
 	public static Item HELMET_LEATHER;
@@ -616,32 +744,5 @@ public class ItemInit {
 			LEGGINGS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_leggings", ArmorMaterial.DIAMOND, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.00467681028D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 			BOOTS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_boots", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.FEET, 5.0D, -0.00160000512D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 		}
-	}
-	
-	public static void createImaginaries() {
-		
-		
-		MAT_KOBOLD.setRepairItem(new ItemStack(INGOT_KOBOLD));
-		MAT_SHADOW_PLATINUM.setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-		MAT_FROST_STEEL.setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-		MAT_CRYSTALLITE.setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-		MAT_DUSKSTEEL.setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
-		AMAT_KOBOLD.setRepairItem(new ItemStack(INGOT_KOBOLD));
-		AMAT_SHADOW_PLATINUM.setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-		AMAT_FROST_STEEL.setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-		AMAT_CRYSTALLITE.setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-		AMAT_DUSKSTEEL.setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
-		
-		KOBOLD_SHARPENING_STONE = new ItemSharpeningStone("kobold_sharpening_stone", MAT_KOBOLD).setMaxStackSize(16);
-		SHADOW_PLATINUM_SHARPENING_STONE = new ItemSharpeningStone("shadow_platinum_sharpening_stone", MAT_SHADOW_PLATINUM).setMaxStackSize(16);
-		FROST_STEEL_SHARPENING_STONE = new ItemSharpeningStone("frost_steel_sharpening_stone", MAT_FROST_STEEL).setMaxStackSize(16);
-		CRYSTALLITE_SHARPENING_STONE = new ItemSharpeningStone("crystallite_sharpening_stone", MAT_CRYSTALLITE).setMaxStackSize(16);
-		DUSKSTEEL_SHARPENING_STONE = new ItemSharpeningStone("dusksteel_sharpening_stone", MAT_DUSKSTEEL).setMaxStackSize(16);
-		
-		KOBOLD_FORGE_HAMMER = new ToolForgeHammer("kobold_forge_hammer", MAT_KOBOLD).setMaxStackSize(1);
-		SHADOW_PLATINUM_FORGE_HAMMER = new ToolForgeHammer("shadow_platinum_forge_hammer", MAT_SHADOW_PLATINUM).setMaxStackSize(1);
-		FROST_STEEL_FORGE_HAMMER = new ToolForgeHammer("frost_steel_forge_hammer", MAT_FROST_STEEL).setMaxStackSize(1);
-		CRYSTALLITE_FORGE_HAMMER = new ToolForgeHammer("crystallite_forge_hammer", MAT_CRYSTALLITE).setMaxStackSize(1);
-		DUSKSTEEL_FORGE_HAMMER = new ToolForgeHammer("dusksteel_forge_hammer", MAT_DUSKSTEEL).setMaxStackSize(1);
 	}
 }

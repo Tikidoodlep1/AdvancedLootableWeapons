@@ -9,6 +9,7 @@ import com.google.common.collect.Table.Cell;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
 
 import mezz.jei.api.IJeiHelpers;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
@@ -30,6 +31,14 @@ public class AnvilForgingRecipeMaker {
 				jeiRecipes.add(new AnvilForgingRecipe(NonNullList.from(ItemStack.EMPTY, row, col), outputList.get(j)));
 			}
 			
+		}
+		
+		for(Cell<List<Item>, List<Item>, Item> e : instance.getArmorCraftingList().cellSet()) {
+			List<Item> row = e.getRowKey();
+			List<Item> col = e.getColumnKey();
+			for(int i = 0; i < e.getRowKey().size(); i++) {
+				jeiRecipes.add(new AnvilForgingRecipe(NonNullList.from(ItemStack.EMPTY, new ItemStack(row.get(i)), new ItemStack(col.get(i))), new ItemStack(e.getValue())));
+			}
 		}
 		
 		return jeiRecipes;

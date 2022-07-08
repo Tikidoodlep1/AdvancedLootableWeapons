@@ -14,6 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -28,7 +29,9 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 	private double bonusMoveSpeed;
 	private double totalDamage;
 	private int tier;
-
+	private int maxDamage;
+	private String binding;
+	
 	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusDamage, double bonusMoveSpeed, int tier) {
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		setUnlocalizedName(name);
@@ -42,6 +45,8 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 		this.bonusMoveSpeed = bonusMoveSpeed;
 		this.totalDamage = this.bonusDamage;
 		this.tier = tier;
+		this.maxDamage = materialIn.getDurability(equipmentSlotIn);
+		this.binding = "No Binding";
 	}
 	
 	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusMoveSpeed, int tier) {
@@ -55,8 +60,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 		this.bonusHealth = bonusHealth * ConfigHandler.ARMOR_BONUS_HEALTH_MULTIPLIER;
 		this.bonusMoveSpeed = bonusMoveSpeed;
 		this.tier = tier;
+		this.maxDamage = materialIn.getDurability(equipmentSlotIn);
+		this.binding = "No Binding";
 	}
-
+	
 	@Override
 	public void registerModels() {
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");
@@ -112,9 +119,21 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel {
 		return this.bonusDamage;
 	}
 	
+	@Override
+	public Item setMaxDamage(int maxDamage) {
+		this.maxDamage = maxDamage;
+		return this;
+	}
+	
+	@Override
+	public int getMaxDamage() {
+		return this.maxDamage;
+	}
+	
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
+		tooltip.add(TextFormatting.BLUE + "Binding: " + TextFormatting.GRAY + this.binding);
 		tooltip.add(TextFormatting.BLUE + "Tier: " + TextFormatting.YELLOW + "" + TextFormatting.ITALIC + this.tier);
     }
 }

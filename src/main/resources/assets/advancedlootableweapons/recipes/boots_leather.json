@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"B B",
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:tanned_leather"
+		},
+		"B":
+		{ 
+			"item": "advancedlootableweapons:binding_leather"
+		}
+	},
+
+	"result":
+	{
+		"item": "minecraft:leather_boots",
+		"count": 1
+	}
+}

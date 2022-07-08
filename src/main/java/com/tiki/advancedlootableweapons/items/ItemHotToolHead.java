@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
+import com.tiki.advancedlootableweapons.handlers.HotMetalHelper;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,10 +25,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemHotToolHead extends Item implements IHasModel{
-	NBTTagCompound nbt = new NBTTagCompound();
+public class ItemHotToolHead extends Item implements IHasModel {
+	public final NBTTagCompound nbt = new NBTTagCompound();
+	public final ItemHotToolHead next;
+	public final int level;
+	public final boolean finished;
 	
-	public ItemHotToolHead(String name){
+	public ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished) {
+		this.next = next;
+		this.level = level;
+		this.finished = finished;
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(Alw.AlwToolHeadsTab);
@@ -54,7 +61,7 @@ public class ItemHotToolHead extends Item implements IHasModel{
 		});
 	}
 	
-	public String getMaterial(ItemStack toolHead) {
+	public static String getMaterial(ItemStack toolHead) {
 		NBTTagCompound tag = new NBTTagCompound();
 		tag = toolHead.getTagCompound();
 		if(toolHead.hasTagCompound() && tag.hasKey("Material")) {
@@ -67,17 +74,17 @@ public class ItemHotToolHead extends Item implements IHasModel{
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		nbt = stack.getTagCompound();
+		NBTTagCompound Stacknbt = stack.getTagCompound();
 		
-		if(stack.hasTagCompound() && nbt.hasKey("Material")) {
-			tooltip.add(TextFormatting.BLUE + nbt.getString("Material"));
+		if(stack.hasTagCompound() && Stacknbt.hasKey("Material")) {
+			tooltip.add(TextFormatting.BLUE + Stacknbt.getString("Material"));
 		}
 		
-		if(stack.hasTagCompound() && nbt.hasKey("addedDamage")) {
+		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDamage")) {
 			tooltip.add(TextFormatting.BLUE + "Forging Quality");
 			tooltip.add(TextFormatting.GRAY + "--------------------");
-			tooltip.add(TextFormatting.BLUE + "+" + nbt.getDouble("addedDamage") + " Damage");
-			tooltip.add(TextFormatting.BLUE + "+" + nbt.getInteger("addedDurability") + " Durability");
+			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getDouble("addedDamage") + " Damage");
+			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability") + " Durability");
 			tooltip.add(TextFormatting.GRAY + "--------------------");
 		}
     }
@@ -90,9 +97,12 @@ public class ItemHotToolHead extends Item implements IHasModel{
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
+		NBTTagCompound Stacknbt = stack.getTagCompound();
 		int damage = stack.getMetadata();
 		if(damage <= 5999) {
-			this.setDamage(stack, damage + 1);
+			this.setDamage(stack, (damage + HotMetalHelper.getHeatGainLoss(Stacknbt.getString("Material"), HotMetalHelper.ROOM_TEMP, this.getDamage(stack)))/2);
+		}else if(damage > 6000) {
+			this.setDamage(stack, 6000);
 		}
     }
 	
