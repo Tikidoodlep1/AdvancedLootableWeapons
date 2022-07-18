@@ -2,28 +2,37 @@ package com.tiki.advancedlootableweapons.blocks;
 
 import java.util.Random;
 
-import com.tiki.advancedlootableweapons.init.ItemInit;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
-public class BlockCrystalliteOre extends BlockAlwOre{
+public class BlockOreDropItem extends BlockAlwOre {
 
+	private final Item drop;
+	private final int maxCount;
+	private final int minCount;
 	
-	public BlockCrystalliteOre(String name) {
-		super(name);
+	public BlockOreDropItem(String name, Item drop, int min, int max, int harvestLevel) {
+		super(name, harvestLevel);
+		this.drop = drop;
+		if(min > max) {
+			this.maxCount = min;
+			this.minCount = max;
+		}else {
+			this.maxCount = max;
+			this.minCount = min;
+		}
 	}
 
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return ItemInit.CRYSTAL;
+        return this.drop;
     }
 	
 	@Override
     public int quantityDropped(Random random)
     {
-        return 1 + random.nextInt(3);
+        return minCount + random.nextInt(maxCount);
     }
 	
 	@Override

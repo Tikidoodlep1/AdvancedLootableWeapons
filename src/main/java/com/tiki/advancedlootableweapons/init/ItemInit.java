@@ -16,6 +16,7 @@ import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+import com.tiki.advancedlootableweapons.tools.ToolTanningKnife;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -102,7 +103,13 @@ public class ItemInit {
 	public static final Item CRYSTAL = new ItemBase("crystal");
 	public static final Item SHADOW = new ItemBase("shadow");
 	public static final Item SHADOW_BLOB = new ItemBase("shadow_blob");
-	public static final Item TANNED_LEATHER = new ItemBase("tanned_leather");
+	public static final Item UNTRIMMED_HIDE = new ItemBase("untrimmed_hide");
+	public static final Item TRIMMED_HIDE = new ItemBase("trimmed_hide");
+	public static final Item CURED_HIDE = new ItemBase("cured_hide");
+	public static final Item LIMED_HIDE = new ItemBase("limed_hide");
+	public static final Item DELIMED_HIDE = new ItemBase("delimed_hide");
+	public static final Item TANNING_KNIFE = new ToolTanningKnife("tanning_knife", ToolMaterial.IRON);
+	public static final Item RAW_SALT = new ItemBase("raw_salt");
 	
 	public static final Item DAGGER_HEAD = new ItemBase("dagger_head");
 	public static final Item KABUTOWARI_HEAD = new ItemBase("kabutowari_head");
@@ -227,14 +234,14 @@ public class ItemInit {
 	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
 	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
 	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{5,9,12,5}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{7,13,17,8}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
+	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
 	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("amat_steel", ModInfo.ID + ":steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{7,13,16,7}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{4,7,9,4}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
 	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("amat_obsidian", ModInfo.ID + ":obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{5,10,13,6}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{5,8,11,5}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
 	
 	//Tools
@@ -666,83 +673,83 @@ public class ItemInit {
 	public static Item LEGGINGS_DIAMOND;
 	public static Item BOOTS_DIAMOND;
 	
-	public static final Item HELMET_COPPER = new ArmorBonusesBase("helmet_copper", AMAT_COPPER, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
-	public static final Item CHESTPLATE_COPPER = new ArmorBonusesBase("chestplate_copper", AMAT_COPPER, 1, EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3).setMaxStackSize(1);
-	public static final Item LEGGINGS_COPPER = new ArmorBonusesBase("leggings_copper", AMAT_COPPER, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00941253012D, 3).setMaxStackSize(1);
-	public static final Item BOOTS_COPPER = new ArmorBonusesBase("boots_copper", AMAT_COPPER, 1, EntityEquipmentSlot.FEET, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
+	public static final Item HELMET_COPPER = new ArmorBonusesBase("helmet_copper", AMAT_COPPER, 1, 1.0D, 3, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
+	public static final Item CHESTPLATE_COPPER = new ArmorBonusesBase("chestplate_copper", AMAT_COPPER, 1, 1.0D, 3,  EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3).setMaxStackSize(1);
+	public static final Item LEGGINGS_COPPER = new ArmorBonusesBase("leggings_copper", AMAT_COPPER, 2, 1.0D, 3,  EntityEquipmentSlot.LEGS, 3.125D, -0.00941253012D, 3).setMaxStackSize(1);
+	public static final Item BOOTS_COPPER = new ArmorBonusesBase("boots_copper", AMAT_COPPER, 1, 1.0D, 3,  EntityEquipmentSlot.FEET, 2.5D, -0.00188214888D, 3).setMaxStackSize(1);
 	
-	public static final Item HELMET_SILVER = new ArmorBonusesBase("helmet_silver", AMAT_SILVER, 1, EntityEquipmentSlot.HEAD, 3.5D, -0.0022098285D, 4).setMaxStackSize(1);
-	public static final Item CHESTPLATE_SILVER = new ArmorBonusesBase("chestplate_silver", AMAT_SILVER, 1, EntityEquipmentSlot.CHEST, 4.125D, 2.063D, -0.0110491425D, 4).setMaxStackSize(1);
-	public static final Item LEGGINGS_SILVER = new ArmorBonusesBase("leggings_silver", AMAT_SILVER, 2, EntityEquipmentSlot.LEGS, 4.125D, -0.0110491425D, 4).setMaxStackSize(1);
-	public static final Item BOOTS_SILVER = new ArmorBonusesBase("boots_silver", AMAT_SILVER, 1, EntityEquipmentSlot.FEET, 3.5D, -0.0022098285D, 4).setMaxStackSize(1);
+	public static final Item HELMET_SILVER = new ArmorBonusesBase("helmet_silver", AMAT_SILVER, 1, 0.9583D, 4, EntityEquipmentSlot.HEAD, 3.5D, -0.0022098285D, 4).setMaxStackSize(1);
+	public static final Item CHESTPLATE_SILVER = new ArmorBonusesBase("chestplate_silver", AMAT_SILVER, 1, 0.9583D, 4, EntityEquipmentSlot.CHEST, 4.125D, 2.063D, -0.0110491425D, 4).setMaxStackSize(1);
+	public static final Item LEGGINGS_SILVER = new ArmorBonusesBase("leggings_silver", AMAT_SILVER, 2, 0.9583D, 4, EntityEquipmentSlot.LEGS, 4.125D, -0.0110491425D, 4).setMaxStackSize(1);
+	public static final Item BOOTS_SILVER = new ArmorBonusesBase("boots_silver", AMAT_SILVER, 1, 0.9583D, 4, EntityEquipmentSlot.FEET, 3.5D, -0.0022098285D, 4).setMaxStackSize(1);
 	
-	public static final Item HELMET_BRONZE = new ArmorBonusesBase("helmet_bronze", AMAT_BRONZE, 1, EntityEquipmentSlot.HEAD, 3.5D, -0.00403304862D, 4).setMaxStackSize(1);
-	public static final Item CHESTPLATE_BRONZE = new ArmorBonusesBase("chestplate_bronze", AMAT_BRONZE, 1, EntityEquipmentSlot.CHEST, 4.125D, 3.764D, -0.020168189538D, 4).setMaxStackSize(1);
-	public static final Item LEGGINGS_BRONZE = new ArmorBonusesBase("leggings_bronze", AMAT_BRONZE, 2, EntityEquipmentSlot.LEGS, 4.125D, -0.020168189538D, 4).setMaxStackSize(1);
-	public static final Item BOOTS_BRONZE = new ArmorBonusesBase("boots_bronze", AMAT_BRONZE, 1, EntityEquipmentSlot.FEET, 3.5D, -0.00403304862D, 4).setMaxStackSize(1);
+	public static final Item HELMET_BRONZE = new ArmorBonusesBase("helmet_bronze", AMAT_BRONZE, 1, 0.8709D, 4, EntityEquipmentSlot.HEAD, 3.5D, -0.00403304862D, 4).setMaxStackSize(1);
+	public static final Item CHESTPLATE_BRONZE = new ArmorBonusesBase("chestplate_bronze", AMAT_BRONZE, 1, 0.8709D, 4, EntityEquipmentSlot.CHEST, 4.125D, 3.764D, -0.020168189538D, 4).setMaxStackSize(1);
+	public static final Item LEGGINGS_BRONZE = new ArmorBonusesBase("leggings_bronze", AMAT_BRONZE, 2, 0.8709D, 4, EntityEquipmentSlot.LEGS, 4.125D, -0.020168189538D, 4).setMaxStackSize(1);
+	public static final Item BOOTS_BRONZE = new ArmorBonusesBase("boots_bronze", AMAT_BRONZE, 1, 0.8709D, 4, EntityEquipmentSlot.FEET, 3.5D, -0.00403304862D, 4).setMaxStackSize(1);
 	
-	public static final Item HELMET_PLATINUM = new ArmorBonusesBase("helmet_platinum", AMAT_PLATINUM, 1, EntityEquipmentSlot.HEAD, 4.5D, -0.00452412162D, 5).setMaxStackSize(1);
-	public static final Item CHESTPLATE_PLATINUM = new ArmorBonusesBase("chestplate_platinum", AMAT_PLATINUM, 1, EntityEquipmentSlot.CHEST, 5.125D, 5.067D, -0.02261882238D, 5).setMaxStackSize(1);
-	public static final Item LEGGINGS_PLATINUM = new ArmorBonusesBase("leggings_platinum", AMAT_PLATINUM, 2, EntityEquipmentSlot.LEGS, 5.125D, -0.02261882238D, 5).setMaxStackSize(1);
-	public static final Item BOOTS_PLATINUM = new ArmorBonusesBase("boots_platinum", AMAT_PLATINUM, 1, EntityEquipmentSlot.FEET, 4.5D, -0.00452412162D, 5).setMaxStackSize(1);
+	public static final Item HELMET_PLATINUM = new ArmorBonusesBase("helmet_platinum", AMAT_PLATINUM, 1, 0.8333D, 5, EntityEquipmentSlot.HEAD, 4.5D, -0.00452412162D, 5).setMaxStackSize(1);
+	public static final Item CHESTPLATE_PLATINUM = new ArmorBonusesBase("chestplate_platinum", AMAT_PLATINUM, 1, 0.8333D, 5, EntityEquipmentSlot.CHEST, 5.125D, 5.067D, -0.02261882238D, 5).setMaxStackSize(1);
+	public static final Item LEGGINGS_PLATINUM = new ArmorBonusesBase("leggings_platinum", AMAT_PLATINUM, 2, 0.8333D, 5, EntityEquipmentSlot.LEGS, 5.125D, -0.02261882238D, 5).setMaxStackSize(1);
+	public static final Item BOOTS_PLATINUM = new ArmorBonusesBase("boots_platinum", AMAT_PLATINUM, 1, 0.8333D, 5, EntityEquipmentSlot.FEET, 4.5D, -0.00452412162D, 5).setMaxStackSize(1);
 	
-	public static final Item HELMET_STEEL = new ArmorBonusesBase("helmet_steel", AMAT_STEEL, 1, EntityEquipmentSlot.HEAD, 4.5D, -0.0016741125D, 5).setMaxStackSize(1);
-	public static final Item CHESTPLATE_STEEL = new ArmorBonusesBase("chestplate_steel", AMAT_STEEL, 1, EntityEquipmentSlot.CHEST, 5.125D, 1.875D, -0.0083705625D, 5).setMaxStackSize(1);
-	public static final Item LEGGINGS_STEEL = new ArmorBonusesBase("leggings_steel", AMAT_STEEL, 2, EntityEquipmentSlot.LEGS, 5.125D, -0.0083705625D, 5).setMaxStackSize(1);
-	public static final Item BOOTS_STEEL = new ArmorBonusesBase("boots_steel", AMAT_STEEL, 1, EntityEquipmentSlot.FEET, 4.5D, -0.0016741125D, 5).setMaxStackSize(1);
+	public static final Item HELMET_STEEL = new ArmorBonusesBase("helmet_steel", AMAT_STEEL, 1, 0.9705D, 5, EntityEquipmentSlot.HEAD, 4.5D, -0.0016741125D, 5).setMaxStackSize(1);
+	public static final Item CHESTPLATE_STEEL = new ArmorBonusesBase("chestplate_steel", AMAT_STEEL, 1, 0.9705D, 5, EntityEquipmentSlot.CHEST, 5.125D, 1.875D, -0.0083705625D, 5).setMaxStackSize(1);
+	public static final Item LEGGINGS_STEEL = new ArmorBonusesBase("leggings_steel", AMAT_STEEL, 2, 0.9705D, 5, EntityEquipmentSlot.LEGS, 5.125D, -0.0083705625D, 5).setMaxStackSize(1);
+	public static final Item BOOTS_STEEL = new ArmorBonusesBase("boots_steel", AMAT_STEEL, 1, 0.9705D, 5, EntityEquipmentSlot.FEET, 4.5D, -0.0016741125D, 5).setMaxStackSize(1);
 	
-	public static final Item HELMET_OBSIDIAN = new ArmorBonusesBase("helmet_obsidian", AMAT_OBSIDIAN, 1, EntityEquipmentSlot.HEAD, 6.25D, -0.00117589662D, 7).setMaxStackSize(1);
-	public static final Item CHESTPLATE_OBSIDIAN = new ArmorBonusesBase("chestplate_obsidian", AMAT_OBSIDIAN, 1, EntityEquipmentSlot.CHEST, 7.0D, 2.194D, -0.00587769738D, 7).setMaxStackSize(1);
-	public static final Item LEGGINGS_OBSIDIAN = new ArmorBonusesBase("leggings_obsidian", AMAT_OBSIDIAN, 2, EntityEquipmentSlot.LEGS, 7.0D, -0.00587769738D, 7).setMaxStackSize(1);
-	public static final Item BOOTS_OBSIDIAN = new ArmorBonusesBase("boots_obsidian", AMAT_OBSIDIAN, 1, EntityEquipmentSlot.FEET, 6.25D, -0.00117589662D, 7).setMaxStackSize(1);
+	public static final Item HELMET_OBSIDIAN = new ArmorBonusesBase("helmet_obsidian", AMAT_OBSIDIAN, 1, 0.9705D, 7, EntityEquipmentSlot.HEAD, 6.25D, -0.00117589662D, 7).setMaxStackSize(1);
+	public static final Item CHESTPLATE_OBSIDIAN = new ArmorBonusesBase("chestplate_obsidian", AMAT_OBSIDIAN, 1, 0.9705D, 7, EntityEquipmentSlot.CHEST, 7.0D, 2.194D, -0.00587769738D, 7).setMaxStackSize(1);
+	public static final Item LEGGINGS_OBSIDIAN = new ArmorBonusesBase("leggings_obsidian", AMAT_OBSIDIAN, 2, 0.9705D, 7, EntityEquipmentSlot.LEGS, 7.0D, -0.00587769738D, 7).setMaxStackSize(1);
+	public static final Item BOOTS_OBSIDIAN = new ArmorBonusesBase("boots_obsidian", AMAT_OBSIDIAN, 1, 0.9705D, 7, EntityEquipmentSlot.FEET, 6.25D, -0.00117589662D, 7).setMaxStackSize(1);
 	
-	public static final Item HELMET_KOBOLD = new ArmorBonusesBase("helmet_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.HEAD, 2.5D, -0.00160000512D, 2).setMaxStackSize(1);
-	public static final Item CHESTPLATE_KOBOLD = new ArmorBonusesBase("chestplate_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.CHEST, 3.125D, 1.228D, -0.00767681028D, 2).setMaxStackSize(1);
-	public static final Item LEGGINGS_KOBOLD = new ArmorBonusesBase("leggings_kobold", AMAT_KOBOLD, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00767681028D, 2).setMaxStackSize(1);
-	public static final Item BOOTS_KOBOLD = new ArmorBonusesBase("boots_kobold", AMAT_KOBOLD, 1, EntityEquipmentSlot.FEET, 2.5D, -0.00160000512D, 2).setMaxStackSize(1);
+	public static final Item HELMET_KOBOLD = new ArmorBonusesBase("helmet_kobold", AMAT_KOBOLD, 1, 1.0D, 2, EntityEquipmentSlot.HEAD, 2.5D, -0.00160000512D, 2).setMaxStackSize(1);
+	public static final Item CHESTPLATE_KOBOLD = new ArmorBonusesBase("chestplate_kobold", AMAT_KOBOLD, 1, 1.0D, 2, EntityEquipmentSlot.CHEST, 3.125D, 1.228D, -0.00767681028D, 2).setMaxStackSize(1);
+	public static final Item LEGGINGS_KOBOLD = new ArmorBonusesBase("leggings_kobold", AMAT_KOBOLD, 2, 1.0D, 2, EntityEquipmentSlot.LEGS, 3.125D, -0.00767681028D, 2).setMaxStackSize(1);
+	public static final Item BOOTS_KOBOLD = new ArmorBonusesBase("boots_kobold", AMAT_KOBOLD, 1, 1.0D, 2, EntityEquipmentSlot.FEET, 2.5D, -0.00160000512D, 2).setMaxStackSize(1);
 	
-	public static final Item HELMET_SHADOW_PLATINUM = new ArmorBonusesBase("helmet_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.HEAD, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
-	public static final Item CHESTPLATE_SHADOW_PLATINUM = new ArmorBonusesBase("chestplate_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.CHEST, 5.75D, 5.042D, -0.01800630762D, 6).setMaxStackSize(1);
-	public static final Item LEGGINGS_SHADOW_PLATINUM = new ArmorBonusesBase("leggings_shadow_platinum", AMAT_SHADOW_PLATINUM, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.01800630762D, 6).setMaxStackSize(1);
-	public static final Item BOOTS_SHADOW_PLATINUM = new ArmorBonusesBase("boots_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, EntityEquipmentSlot.FEET, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
+	public static final Item HELMET_SHADOW_PLATINUM = new ArmorBonusesBase("helmet_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, 0.8372D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
+	public static final Item CHESTPLATE_SHADOW_PLATINUM = new ArmorBonusesBase("chestplate_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, 0.8372D, 6, EntityEquipmentSlot.CHEST, 5.75D, 5.042D, -0.01800630762D, 6).setMaxStackSize(1);
+	public static final Item LEGGINGS_SHADOW_PLATINUM = new ArmorBonusesBase("leggings_shadow_platinum", AMAT_SHADOW_PLATINUM, 2, 0.8372D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.01800630762D, 6).setMaxStackSize(1);
+	public static final Item BOOTS_SHADOW_PLATINUM = new ArmorBonusesBase("boots_shadow_platinum", AMAT_SHADOW_PLATINUM, 1, 0.8372D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00360090438D, 6).setMaxStackSize(1);
 	
-	public static final Item HELMET_FROST_STEEL = new ArmorBonusesBase("helmet_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.HEAD, 5.0D, -0.00200179212D, 6).setMaxStackSize(1);
-	public static final Item CHESTPLATE_FROST_STEEL = new ArmorBonusesBase("chestplate_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.CHEST, 5.75D, 2.802D, -0.01000717488D, 6).setMaxStackSize(1);
-	public static final Item LEGGINGS_FROST_STEEL = new ArmorBonusesBase("leggings_frost_steel", AMAT_FROST_STEEL, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.01000717488D, 6).setMaxStackSize(1);
-	public static final Item BOOTS_FROST_STEEL = new ArmorBonusesBase("boots_frost_steel", AMAT_FROST_STEEL, 1, EntityEquipmentSlot.FEET, 5.0D, -00.00200179212D, 6).setMaxStackSize(1);
+	public static final Item HELMET_FROST_STEEL = new ArmorBonusesBase("helmet_frost_steel", AMAT_FROST_STEEL, 1, 0.9062D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00200179212D, 6).setMaxStackSize(1);
+	public static final Item CHESTPLATE_FROST_STEEL = new ArmorBonusesBase("chestplate_frost_steel", AMAT_FROST_STEEL, 2, 0.9062D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.802D, -0.01000717488D, 6).setMaxStackSize(1);
+	public static final Item LEGGINGS_FROST_STEEL = new ArmorBonusesBase("leggings_frost_steel", AMAT_FROST_STEEL, 2, 0.9062D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.01000717488D, 6).setMaxStackSize(1);
+	public static final Item BOOTS_FROST_STEEL = new ArmorBonusesBase("boots_frost_steel", AMAT_FROST_STEEL, 1, 0.9062D, 6, EntityEquipmentSlot.FEET, 5.0D, -00.00200179212D, 6).setMaxStackSize(1);
 	
-	public static final Item HELMET_CRYSTALLITE = new ArmorBonusesBase("helmet_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.HEAD, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
-	public static final Item CHESTPLATE_CRYSTALLITE = new ArmorBonusesBase("chestplate_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.CHEST, 7.0D, 4.486D, -0.01201610988D, 7).setMaxStackSize(1);
-	public static final Item LEGGINGS_CRYSTALLITE = new ArmorBonusesBase("leggings_crystallite", AMAT_CRYSTALLITE, 2, EntityEquipmentSlot.LEGS, 7.0D, -0.01201610988D, 7).setMaxStackSize(1);
-	public static final Item BOOTS_CRYSTALLITE = new ArmorBonusesBase("boots_crystallite", AMAT_CRYSTALLITE, 1, EntityEquipmentSlot.FEET, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
+	public static final Item HELMET_CRYSTALLITE = new ArmorBonusesBase("helmet_crystallite", AMAT_CRYSTALLITE, 1, 0.8603D, 7, EntityEquipmentSlot.HEAD, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
+	public static final Item CHESTPLATE_CRYSTALLITE = new ArmorBonusesBase("chestplate_crystallite", AMAT_CRYSTALLITE, 1, 0.8603D, 7, EntityEquipmentSlot.CHEST, 7.0D, 4.486D, -0.01201610988D, 7).setMaxStackSize(1);
+	public static final Item LEGGINGS_CRYSTALLITE = new ArmorBonusesBase("leggings_crystallite", AMAT_CRYSTALLITE, 2, 0.8603D, 7, EntityEquipmentSlot.LEGS, 7.0D, -0.01201610988D, 7).setMaxStackSize(1);
+	public static final Item BOOTS_CRYSTALLITE = new ArmorBonusesBase("boots_crystallite", AMAT_CRYSTALLITE, 1, 0.8603D, 7, EntityEquipmentSlot.FEET, 6.25D, -0.00240357912D, 7).setMaxStackSize(1);
 	
-	public static final Item HELMET_DUSKSTEEL = new ArmorBonusesBase("helmet_dusksteel", AMAT_DUSKSTEEL, 1, EntityEquipmentSlot.HEAD, 7.25D, -0.00180089862D, 8).setMaxStackSize(1);
-	public static final Item CHESTPLATE_DUSKSTEEL = new ArmorBonusesBase("chestplate_dusksteel", AMAT_DUSKSTEEL, 1, EntityEquipmentSlot.CHEST, 7.75D, 5.042D, -0.00900270738D, 8).setMaxStackSize(1);
-	public static final Item LEGGINGS_DUSKSTEEL = new ArmorBonusesBase("leggings_dusksteel", AMAT_DUSKSTEEL, 2, EntityEquipmentSlot.LEGS, 7.75D, -0.00900270738D, 8).setMaxStackSize(1);
-	public static final Item BOOTS_DUSKSTEEL = new ArmorBonusesBase("boots_dusksteel", AMAT_DUSKSTEEL, 1, EntityEquipmentSlot.FEET, 7.25D, -0.00180089862D, 8).setMaxStackSize(1);
+	public static final Item HELMET_DUSKSTEEL = new ArmorBonusesBase("helmet_dusksteel", AMAT_DUSKSTEEL, 1, 0.8793D, 8, EntityEquipmentSlot.HEAD, 7.25D, -0.00180089862D, 8).setMaxStackSize(1);
+	public static final Item CHESTPLATE_DUSKSTEEL = new ArmorBonusesBase("chestplate_dusksteel", AMAT_DUSKSTEEL, 1, 0.8793D, 8, EntityEquipmentSlot.CHEST, 7.75D, 5.042D, -0.00900270738D, 8).setMaxStackSize(1);
+	public static final Item LEGGINGS_DUSKSTEEL = new ArmorBonusesBase("leggings_dusksteel", AMAT_DUSKSTEEL, 2, 0.8793D, 8, EntityEquipmentSlot.LEGS, 7.75D, -0.00900270738D, 8).setMaxStackSize(1);
+	public static final Item BOOTS_DUSKSTEEL = new ArmorBonusesBase("boots_dusksteel", AMAT_DUSKSTEEL, 1, 0.8793D, 6, EntityEquipmentSlot.FEET, 7.25D, -0.00180089862D, 8).setMaxStackSize(1);
 	
 	
 	public static void enableArmors() {
 		if(ConfigHandler.OVERRIDE_VANILLA_ARMORS) {
-			HELMET_LEATHER = new ArmorBonusesBase("minecraft:leather_helmet", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			CHESTPLATE_LEATHER = new ArmorBonusesBase("minecraft:leather_chestplate", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.CHEST, 1.125D, 0D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			LEGGINGS_LEATHER = new ArmorBonusesBase("minecraft:leather_leggings", ArmorMaterial.LEATHER, 2, EntityEquipmentSlot.LEGS, 1.125D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			BOOTS_LEATHER = new ArmorBonusesBase("minecraft:leather_boots", ArmorMaterial.LEATHER, 1, EntityEquipmentSlot.FEET, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			HELMET_LEATHER = new ArmorBonusesBase("minecraft:leather_helmet", ArmorMaterial.LEATHER, 1, 1.0D, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_LEATHER = new ArmorBonusesBase("minecraft:leather_chestplate", ArmorMaterial.LEATHER, 1, 1.0D, 1, EntityEquipmentSlot.CHEST, 1.125D, 0D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_LEATHER = new ArmorBonusesBase("minecraft:leather_leggings", ArmorMaterial.LEATHER, 2, 1.0D, 1, EntityEquipmentSlot.LEGS, 1.125D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_LEATHER = new ArmorBonusesBase("minecraft:leather_boots", ArmorMaterial.LEATHER, 1, 1.0D, 1, EntityEquipmentSlot.FEET, 0.5D, 0D, 1).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 			
-			HELMET_IRON = new ArmorBonusesBase("minecraft:iron_helmet", ArmorMaterial.IRON, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			CHESTPLATE_IRON = new ArmorBonusesBase("minecraft:iron_chestplate", ArmorMaterial.IRON, 1, EntityEquipmentSlot.CHEST, 2.125D, 1.875D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			LEGGINGS_IRON = new ArmorBonusesBase("minecraft:iron_leggings", ArmorMaterial.IRON, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			BOOTS_IRON = new ArmorBonusesBase("minecraft:iron_boots", ArmorMaterial.IRON, 1, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			HELMET_IRON = new ArmorBonusesBase("minecraft:iron_helmet", ArmorMaterial.IRON, 1, 1.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_IRON = new ArmorBonusesBase("minecraft:iron_chestplate", ArmorMaterial.IRON, 1, 1.0, 2, EntityEquipmentSlot.CHEST, 2.125D, 1.875D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_IRON = new ArmorBonusesBase("minecraft:iron_leggings", ArmorMaterial.IRON, 2, 1.0, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.0083705625D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_IRON = new ArmorBonusesBase("minecraft:iron_boots", ArmorMaterial.IRON, 1, 1.0, 2, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 			
-			HELMET_GOLD = new ArmorBonusesBase("minecraft:golden_helmet", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.HEAD, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			CHESTPLATE_GOLD = new ArmorBonusesBase("minecraft:golden_chestplate", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.CHEST, 2.125D, 4.113D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			LEGGINGS_GOLD = new ArmorBonusesBase("minecraft:golden_leggings", ArmorMaterial.GOLD, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			BOOTS_GOLD = new ArmorBonusesBase("minecraft:golden_boots", ArmorMaterial.GOLD, 1, EntityEquipmentSlot.FEET, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			HELMET_GOLD = new ArmorBonusesBase("minecraft:golden_helmet", ArmorMaterial.GOLD, 1, 1.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_GOLD = new ArmorBonusesBase("minecraft:golden_chestplate", ArmorMaterial.GOLD, 1, 1.0D, 2, EntityEquipmentSlot.CHEST, 2.125D, 4.113D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_GOLD = new ArmorBonusesBase("minecraft:golden_leggings", ArmorMaterial.GOLD, 2, 1.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_GOLD = new ArmorBonusesBase("minecraft:golden_boots", ArmorMaterial.GOLD, 1, 1.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.00816074, 2).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 			
-			HELMET_DIAMOND = new ArmorBonusesBase("minecraft:diamond_helmet", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.HEAD, 5.0D, -0.00160000512D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			CHESTPLATE_DIAMOND = new ArmorBonusesBase("minecraft:diamond_chestplate", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00467681028D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			LEGGINGS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_leggings", ArmorMaterial.DIAMOND, 2, EntityEquipmentSlot.LEGS, 5.75D, -0.00467681028D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
-			BOOTS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_boots", ArmorMaterial.DIAMOND, 1, EntityEquipmentSlot.FEET, 5.0D, -0.00160000512D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			HELMET_DIAMOND = new ArmorBonusesBase("minecraft:diamond_helmet", ArmorMaterial.DIAMOND, 1, 0.9375D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00160000512D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			CHESTPLATE_DIAMOND = new ArmorBonusesBase("minecraft:diamond_chestplate", ArmorMaterial.DIAMOND, 1, 0.9375D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00467681028D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			LEGGINGS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_leggings", ArmorMaterial.DIAMOND, 2, 0.9375D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00467681028D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
+			BOOTS_DIAMOND = new ArmorBonusesBase("minecraft:diamond_boots", ArmorMaterial.DIAMOND, 1, 0.9375D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00160000512D, 6).setMaxStackSize(1).setCreativeTab(CreativeTabs.COMBAT);
 		}
 	}
 }

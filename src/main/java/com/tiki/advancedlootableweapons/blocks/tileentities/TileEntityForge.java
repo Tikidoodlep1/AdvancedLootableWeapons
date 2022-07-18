@@ -19,6 +19,16 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	private String customName;
 	private int heat;
+	private double currentTemp = 1750D;
+	public static final int minTemp = 850;
+	public static final int maxTemp = 1750;
+	private int increaseFrames = 0;
+	
+	public void bellowsInteraction() {
+		if(this.currentTemp < maxTemp-500) {
+			this.increaseFrames = 600;
+		}
+	}
 
 	@Override
 	public String getName() {
@@ -94,6 +104,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		this.inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.inventory);
 		this.heat = compound.getInteger("Heat");
+		this.currentTemp = compound.getDouble("Temperature");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -103,6 +114,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	{
 		super.writeToNBT(compound);
 		compound.setInteger("Heat", (short)this.heat);
+		compound.setDouble("Temperature", this.currentTemp);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
@@ -116,9 +128,13 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	
 	public void update() 
 	{	
-		
 		if(!this.world.isRemote) {
-			
+			if(currentTemp > minTemp && increaseFrames <= 0) {
+				this.currentTemp -= 0.12D;
+			}else if(currentTemp < maxTemp && increaseFrames > 0) {
+				this.currentTemp += 0.24D;
+				this.increaseFrames--;
+			}
 			if(!(((ItemStack)this.inventory.get(0)).isEmpty() && canSmelt())) {
 				this.smeltItem();
 			}
@@ -138,8 +154,9 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	public void smeltItem() {
 		if(this.canSmelt()) {
 			ItemStack stack = (ItemStack)this.inventory.get(0);
+			String material = stack.getTagCompound() == null ? "Steel" : stack.getTagCompound().getString("Material");
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - HotMetalHelper.getHeatGainLoss(stack.getTagCompound().getString("Material"), HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()));
+				stack.setItemDamage(stack.getItemDamage() - HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()));
 				this.heat = stack.getItemDamage();
 			}
 		}
@@ -181,6 +198,8 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		{
 		case 0:
 			return this.heat;
+		case 1:
+			return (int)this.currentTemp;
 		default:
 			return 0;
 		}
@@ -193,12 +212,15 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		case 0:
 			this.heat = value;
 			break;
+		case 1:
+			this.currentTemp = value;
+			break;
 		}
 	}
 	
 	@Override
 	public int getFieldCount() {
-		return 1;
+		return 2;
 	}
 
 	@Override

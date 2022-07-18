@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ToolForgeHammer extends Item implements IHasModel{
+public class ToolForgeHammer extends Item implements IHasModel {
 	private float attackDamage;
 	
 	public ToolForgeHammer(String name, ToolMaterial material) {

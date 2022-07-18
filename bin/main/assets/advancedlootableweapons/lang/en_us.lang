@@ -595,12 +595,17 @@ item.clay_granite.name=Granite Clay
 item.powder_granite.name=Granite Powder
 
 
+fluid.milk_of_lime=Milk of Lime
+fluid.magnesium_lactate=Magnesium Lactate
+
+
 container.sharpeningStone=Sharpen Weapon
 container.alloy_furnace=Alloy Furnace
 container.forge=Forge
 container.forge2=Advanced Forge
 container.forgeWeapon=Anvil Forging
 container.jaw_crusher=Jaw Crusher
+container.tanning_rack=Tanning Rack
 
 
 enchantment.refined=Refined

@@ -17,7 +17,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import scala.actors.threadpool.Arrays;
 
 public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	
@@ -57,8 +56,6 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 				return ItemStack.EMPTY;
 			}
 		}
-		
-		System.out.println(material + ", " + Arrays.toString(mats));
 		
 		if(mats[0].equalsIgnoreCase(material)) {
 			return result;

@@ -5,6 +5,7 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurna
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityJawCrusher;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityTanningRack;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.Forge.ContainerForge;
@@ -17,6 +18,8 @@ import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher
 import com.tiki.advancedlootableweapons.inventory.JawCrusher.GuiJawCrusher;
 import com.tiki.advancedlootableweapons.inventory.SharpeningStone.ContainerSharpeningStone;
 import com.tiki.advancedlootableweapons.inventory.SharpeningStone.GuiSharpeningStone;
+import com.tiki.advancedlootableweapons.inventory.TanningRack.ContainerTanningRack;
+import com.tiki.advancedlootableweapons.inventory.TanningRack.GuiTanningRack;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -36,6 +39,7 @@ public class GuiHandler implements IGuiHandler
 		if(ID == ModInfo.GUI_FORGE_WEAPON) return containerForgeWeapons;
 		if(ID == ModInfo.GUI_FORGE_2) return new ContainerForge2(player.inventory, (TileEntityForge2)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == ModInfo.GUI_CRUSHER) return new ContainerJawCrusher(player.inventory, (TileEntityJawCrusher)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == ModInfo.GUI_TANNING_RACK) return new ContainerTanningRack(player.inventory, (TileEntityTanningRack)world.getTileEntity(new BlockPos(x,y,z)));
 		return null;
 	}
 	
@@ -48,6 +52,7 @@ public class GuiHandler implements IGuiHandler
 		if(ID == ModInfo.GUI_FORGE_WEAPON) return new GuiForgeWeapon(player.inventory, containerForgeWeapons);
 		if(ID == ModInfo.GUI_FORGE_2) return new GuiForge2(player.inventory, (TileEntityForge2)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == ModInfo.GUI_CRUSHER) return new GuiJawCrusher(player.inventory, (TileEntityJawCrusher)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == ModInfo.GUI_TANNING_RACK) return new GuiTanningRack(player.inventory, (TileEntityTanningRack)world.getTileEntity(new BlockPos(x,y,z)));
 		return null;
 	}
 }

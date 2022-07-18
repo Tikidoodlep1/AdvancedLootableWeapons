@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ContainerForge extends Container
 {
 	private final TileEntityForge tileentity;
+	private int temp = 0;
 	
 	public ContainerForge(InventoryPlayer player, TileEntityForge tileentity) 
 	{
@@ -53,6 +54,14 @@ public class ContainerForge extends Container
 	public void detectAndSendChanges() 
 	{
 		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = (IContainerListener)this.listeners.get(i);
+			
+			if(this.temp != this.tileentity.getField(1)) listener.sendWindowProperty(this, 1, this.tileentity.getField(1));
+		}
+		
+		this.temp = this.tileentity.getField(1);
 	}
 	
 	@Override

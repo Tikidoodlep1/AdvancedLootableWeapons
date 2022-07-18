@@ -12,7 +12,7 @@ import net.minecraft.item.ItemBlock;
 
 public class BlockAlwOre extends Block implements IHasModel{
 	
-	public BlockAlwOre(String name) 
+	public BlockAlwOre(String name, int harvestLevel) 
 	{
 		super(Material.ROCK);
 		setUnlocalizedName(name);

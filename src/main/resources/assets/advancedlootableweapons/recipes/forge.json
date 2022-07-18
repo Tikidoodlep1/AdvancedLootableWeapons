@@ -20,7 +20,8 @@
 		},
 		"S":
 		{ 
-			"item": "minecraft:cobblestone"
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
 		}
 	},
 

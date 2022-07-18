@@ -58,8 +58,6 @@ public class ContainerAlloyFurnace extends Container
 			public ItemStack onTake(EntityPlayer player, ItemStack stack) {
 				AlloyFurnaceRecipes recipes = AlloyFurnaceRecipes.getInstance();
 				float exp = recipes.getAlloyingExperience(stack);
-				System.out.println("Stack passed to getAlloyingExperience is: " + stack);
-				System.out.println("Alloying exp is: " + exp);
 				if(exp > 0) {
 					player.addExperience((int)exp * stack.getCount());
 				}

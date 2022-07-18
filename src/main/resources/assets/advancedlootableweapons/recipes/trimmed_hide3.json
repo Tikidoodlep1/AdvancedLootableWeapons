@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"KH"
+	],
+
+	"key":
+	{
+		"K":
+		{
+			"item": "advancedlootableweapons:tanning_knife",
+			"data": 32767
+		},
+		"H":
+		{ 
+			"item": "advancedlootableweapons:untrimmed_hide"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:trimmed_hide",
+		"count": 1
+	}
+}

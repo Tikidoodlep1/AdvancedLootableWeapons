@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+    {
+		"item": "minecraft:water_bucket"
+    },
+    {
+    	"item": "advancedlootableweapons:block_gypsum"
+    }
+  ],
+  "result": {
+  	"type": "item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+    	"FluidName": "milk_of_lime",
+    	"Amount": 1000
+    }
+  }
+}

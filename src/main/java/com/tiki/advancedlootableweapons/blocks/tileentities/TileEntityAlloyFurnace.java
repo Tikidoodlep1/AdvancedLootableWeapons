@@ -245,6 +245,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static int getItemBurnTime(ItemStack fuel) 
 	{
 		if(fuel.isEmpty()) return 0;

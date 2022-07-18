@@ -36,5 +36,6 @@ public class OreDictionaryCompat {
 		OreDictionary.registerOre("nuggetTin", ItemInit.NUGGET_TIN);
 		
 		OreDictionary.registerOre("shardObsidian", ItemInit.SHARD_OBSIDIAN);
+		OreDictionary.registerOre("dustSalt", ItemInit.RAW_SALT);
 	}
 }

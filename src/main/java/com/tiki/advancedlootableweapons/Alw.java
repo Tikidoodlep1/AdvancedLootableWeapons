@@ -16,6 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -52,6 +53,10 @@ public class Alw {
 	public static final CreativeTabs AlwTab = new AlwCreativeTab("alwcreativetab");
 	public static final CreativeTabs AlwBlocksTab = new AlwBlocksCreativeTab("alwblockscreativetab");
 	public static final CreativeTabs AlwToolHeadsTab = new AlwToolHeadsCreativeTab("alwtoolheadscreativetab");
+	
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 	
 	@SidedProxy(clientSide = ModInfo.CLIENTPROXY, serverSide = ModInfo.COMMONPROXY)
 	public static CommonProxy proxy;

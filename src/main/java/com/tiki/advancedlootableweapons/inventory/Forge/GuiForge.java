@@ -38,6 +38,7 @@ public class GuiForge extends GuiContainer
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+        this.drawHoveringForgeTempText(mouseX, mouseY);
         GlStateManager.disableLighting();
         GlStateManager.disableBlend();
     }
@@ -50,13 +51,18 @@ public class GuiForge extends GuiContainer
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		
 		int k = this.getBurnLeftScaled();
-		this.drawTexturedModalRect(this.guiLeft + 24, this.guiTop - 4 + 8 + k, 176, k , 19, 66);
-		//this.drawTexturedModalRect(176, this.guiTop + 4 + 66 - k, 176, 66 - k , 19, 66);
+		this.drawTexturedModalRect(this.guiLeft + 24, this.guiTop + 69 - k, 176, 65 - k, 18, k);
+	}
+	
+	public void drawHoveringForgeTempText(int mouseX, int mouseY) {
+		if(mouseX > this.guiLeft + 24 && mouseX < this.guiLeft + 43 && mouseY > this.guiTop + 4 && mouseY < this.guiTop + 70) {
+			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(1)-32)*5/9) + "°C", mouseX, mouseY);
+		}
 	}
 	
 	private int getBurnLeftScaled()
 	{
-		return (int)(this.tileentity.getField(0) * 0.011);
+		return (int)(this.tileentity.getField(1) * 0.035);
 	}
 	
 	public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

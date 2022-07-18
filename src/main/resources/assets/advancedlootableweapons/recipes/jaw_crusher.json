@@ -12,11 +12,13 @@
 	{
 		"C":
 		{
-			"item": "minecraft:cobblestone"
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
 		},
 		"I":
 		{ 
-			"item": "minecraft:iron_ingot"
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
 		}
 	},
 

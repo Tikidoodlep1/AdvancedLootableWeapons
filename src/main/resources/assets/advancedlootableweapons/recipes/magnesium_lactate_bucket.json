@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+    {
+		"item": "minecraft:milk_bucket"
+    },
+    {
+    	"item": "advancedlootableweapons:block_dolomite"
+    }
+  ],
+  "result": {
+  	"type": "item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+    	"FluidName": "magnesium_lactate",
+    	"Amount": 1000
+    }
+  }
+}

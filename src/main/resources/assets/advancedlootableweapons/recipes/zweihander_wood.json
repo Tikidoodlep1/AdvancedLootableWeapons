@@ -11,7 +11,8 @@
 	{
 		"S":
 		{
-			"item": "advancedlootableweapons:long_weapon_handle"
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
 		},
 		"W":
 		{ 

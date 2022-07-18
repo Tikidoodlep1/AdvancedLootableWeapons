@@ -23,8 +23,6 @@ public class GuiForge2 extends GuiContainer
 		super(new ContainerForge2(player, tileentity));
 		this.player = player;
 		this.tileentity = tileentity;
-		this.xSize = 190;
-		this.ySize = 171;
 	}
 	
 	@Override
@@ -40,6 +38,7 @@ public class GuiForge2 extends GuiContainer
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+        this.drawHoveringForgeTempText(mouseX, mouseY);
         GlStateManager.disableLighting();
         GlStateManager.disableBlend();
     }
@@ -52,26 +51,18 @@ public class GuiForge2 extends GuiContainer
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		
 		int k = this.getBurnLeftScaled();
-		int l = this.getBurnMidScaled();
-		int m = this.getBurnRightScaled();
-		this.drawTexturedModalRect(this.guiLeft + 8, this.guiTop + 12 + k, 190, k , 19, 66);
-		this.drawTexturedModalRect(this.guiLeft + 70, this.guiTop + 12 + l, 190, l, 19, 66);
-		this.drawTexturedModalRect(this.guiLeft + 132, this.guiTop + 12 + m, 190, m, 19, 66);
+		this.drawTexturedModalRect(this.guiLeft + 24, this.guiTop + 69 - k, 176, 65 - k, 18, k);
+	}
+	
+	public void drawHoveringForgeTempText(int mouseX, int mouseY) {
+		if(mouseX > this.guiLeft + 24 && mouseX < this.guiLeft + 43 && mouseY > this.guiTop + 4 && mouseY < this.guiTop + 70) {
+			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(3)-32)*5/9) + "°C", mouseX, mouseY);
+		}
 	}
 	
 	private int getBurnLeftScaled()
 	{
-		return (int)(this.tileentity.getField(0) * 0.011);
-	}
-	
-	private int getBurnMidScaled()
-	{
-		return (int)(this.tileentity.getField(1) * 0.011);
-	}
-	
-	private int getBurnRightScaled()
-	{
-		return (int)(this.tileentity.getField(2) * 0.011);
+		return (int)(this.tileentity.getField(3) * 0.028);
 	}
 	
 	public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

@@ -1,6 +1,20 @@
 package com.tiki.advancedlootableweapons.handlers;
 
 public class HotMetalHelper {
+	
+	public static final int IRON_TC = 94;
+	public static final int GOLD_TC = 327;
+	public static final int COPPER_TC = 413;
+	public static final int SILVER_TC = 403;
+	public static final int BRONZE_TC = 26;
+	public static final int PLATINUM_TC = 72;
+	public static final int STEEL_TC = 59;
+	public static final int OBSIDIAN_STEEL_TC = 52;
+	public static final int KOBOLD_TC = 183;
+	public static final int SHADOW_PLATINUM_TC = 124;
+	public static final int FROST_STEEL_TC = 158;
+	public static final int CRYSTALLITE_TC = 284;
+	public static final int DUSKSTEEL_TC = 27;
 
 	public static final int IRON_MP = 1811;
 	public static final int GOLD_MP = 1337;
@@ -16,20 +30,6 @@ public class HotMetalHelper {
 	public static final int CRYSTALLITE_MP = 2864;
 	public static final int DUSKSTEEL_MP = 1582;
 	
-	public static final int IRON_TC = 94;
-	public static final int GOLD_TC = 327;
-	public static final int COPPER_TC = 413;
-	public static final int SILVER_TC = 403;
-	public static final int BRONZE_TC = 26;
-	public static final int PLATINUM_TC = 72;
-	public static final int STEEL_TC = 59;
-	public static final int OBSIDIAN_STEEL_TC = 12;
-	public static final int KOBOLD_TC = 22;
-	public static final int SHADOW_PLATINUM_TC = 24;
-	public static final int FROST_STEEL_TC = 158;
-	public static final int CRYSTALLITE_TC = 395;
-	public static final int DUSKSTEEL_TC = 27;
-	
 	public static final int IRON_SH = 460;
 	public static final int GOLD_SH = 129;
 	public static final int COPPER_SH = 376;
@@ -41,7 +41,7 @@ public class HotMetalHelper {
 	public static final int KOBOLD_SH = 284;
 	public static final int SHADOW_PLATINUM_SH = 627;
 	public static final int FROST_STEEL_SH = 318;
-	public static final int CRYSTALLITE_SH = 521;
+	public static final int CRYSTALLITE_SH = 882;
 	public static final int DUSKSTEEL_SH = 402;
 	
 	public static final double IRON_IW = 1.13;
@@ -55,7 +55,7 @@ public class HotMetalHelper {
 	public static final double KOBOLD_IW = 1.22;
 	public static final double SHADOW_PLATINUM_IW = 2.52;
 	public static final double FROST_STEEL_IW = 1.40;
-	public static final double CRYSTALLITE_IW = 1.68;
+	public static final double CRYSTALLITE_IW = 2.28;
 	public static final double DUSKSTEEL_IW = 1.26;
 	
 	public static final double AREA_CONST = 2.4D;
@@ -153,8 +153,8 @@ public class HotMetalHelper {
 			break;
 		}
 		int damage = currentDamage == 0 ? 1 : currentDamage;
-		int tempDiff = temp > (MP/(6000/damage)) ? temp - (MP/(6000/damage)) : (MP/(6000/damage)) - temp;
+		int tempDiff = temp > (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) ? temp - (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) : (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) - temp;
 		
-		return (int) Math.max( ((TC * AREA_CONST * tempDiff)/ DIST_CONST)/(IW * SH  * tempDiff) , 1);
+		return (int) Math.max(Math.ceil(Math.sqrt( ((TC * AREA_CONST) * (tempDiff/ DIST_CONST) / (IW * SH * damage)) )), 1);
 	}
 }

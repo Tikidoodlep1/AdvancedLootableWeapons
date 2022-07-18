@@ -1,0 +1,10 @@
+{
+	"forge_marker": 1,
+    "variants": 
+    {
+        "facing=north": { "model": "advancedlootableweapons:bellows_birch", "y": 90 },
+        "facing=east": { "model": "advancedlootableweapons:bellows_birch", "y": 180 },
+        "facing=south": { "model": "advancedlootableweapons:bellows_birch", "y": 270 },
+        "facing=west": { "model": "advancedlootableweapons:bellows_birch" }
+    }
+}

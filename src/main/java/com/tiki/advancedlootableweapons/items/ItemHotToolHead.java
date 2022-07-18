@@ -97,10 +97,10 @@ public class ItemHotToolHead extends Item implements IHasModel {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-		NBTTagCompound Stacknbt = stack.getTagCompound();
 		int damage = stack.getMetadata();
+		String material = stack.getTagCompound() == null ? "Steel" : stack.getTagCompound().getString("Material");
 		if(damage <= 5999) {
-			this.setDamage(stack, (damage + HotMetalHelper.getHeatGainLoss(Stacknbt.getString("Material"), HotMetalHelper.ROOM_TEMP, this.getDamage(stack)))/2);
+			this.setDamage(stack, (damage + HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.ROOM_TEMP, this.getDamage(stack))));
 		}else if(damage > 6000) {
 			this.setDamage(stack, 6000);
 		}
@@ -124,10 +124,19 @@ public class ItemHotToolHead extends Item implements IHasModel {
     {
         if (this.isInCreativeTab(tab))
         {
-        	
-        	items.add(new ItemStack(this, 1, 6000));
-        	items.add(new ItemStack(this, 1, 3000));
-        	items.add(new ItemStack(this, 1, 0));
+        	NBTTagCompound defaultTag = new NBTTagCompound();
+        	defaultTag.setString("Material", "Steel");
+        	defaultTag.setDouble("addedDamage", 0.0D);
+        	defaultTag.setInteger("addedDurability", 0);
+        	ItemStack stack6000 = new ItemStack(this, 1, 6000);
+        	stack6000.setTagCompound(defaultTag);
+        	ItemStack stack3000 = new ItemStack(this, 1, 3000);
+        	stack3000.setTagCompound(defaultTag);
+        	ItemStack stack0 = new ItemStack(this, 1, 0);
+        	stack0.setTagCompound(defaultTag);
+        	items.add(stack6000);
+        	items.add(stack3000);
+        	items.add(stack0);
         }
     }
 	

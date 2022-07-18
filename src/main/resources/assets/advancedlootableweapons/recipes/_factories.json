@@ -1,5 +1,6 @@
 {
 	"recipes": {
-		"chain_link_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessChainLinkRecipe$Factory"
+		"chain_link_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessChainLinkRecipe$Factory",
+		"use_dur_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory"
 	}
 }

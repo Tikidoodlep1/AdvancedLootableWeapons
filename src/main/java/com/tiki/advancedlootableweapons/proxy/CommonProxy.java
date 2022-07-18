@@ -14,8 +14,10 @@ import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockObsidian;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -43,6 +45,19 @@ public class CommonProxy {
 	
 	public void onEntityDrops(LivingDropsEvent event) {
 		Random rand = new Random();
+		boolean containsLeather = false;
+		int leatherCount = 0;
+		for(EntityItem e : event.getDrops()) {
+			if(e.getItem().getItem() == Items.LEATHER) {
+				leatherCount = e.getItem().getCount();
+				containsLeather = true;
+				event.getDrops().remove(e);
+				break;
+			}
+		}
+		if(containsLeather) {
+			event.getEntity().entityDropItem(new ItemStack(ItemInit.UNTRIMMED_HIDE, (leatherCount*2)+rand.nextInt(event.getLootingLevel() + 1)), 0.25F);
+		}
 		if((rand.nextInt(100) + 1) <= (ConfigHandler.SHADOW_DROP_RATE*100) && GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass())) {
 			Entity entity = event.getEntity();
 			if(event.getLootingLevel() > 0) {

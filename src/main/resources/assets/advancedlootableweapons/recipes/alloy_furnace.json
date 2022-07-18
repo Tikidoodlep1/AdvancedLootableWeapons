@@ -4,24 +4,24 @@
 	"pattern":
 	[
 		"CCC",
-		"C C",
-		"ISI"
+		"CIC",
+		"SSS"
 	],
 
 	"key":
 	{
-		"I":
+		"C":
 		{
-			"item": "advancedlootableweapons:block_clay_granite"
+			"item": "advancedlootableweapons:block_brick_granite"
 		},
 		"S":
 		{ 
 			"item": "minecraft:stone",
 			"data": 0
 		},
-		"C":
+		"I":
 		{
-			"item": "advancedlootableweapons:brick_granite"
+			"item": "advancedlootableweapons:clay_granite"
 		}
 	},
 

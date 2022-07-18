@@ -32,6 +32,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_ARMORS = true;
 	public static boolean ENABLE_ARMOR_FORGING = true;
 	public static boolean OVERRIDE_VANILLA_ARMORS = true;
+	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
 	
 	public static float GLOBAL_DAGGER_BASE_DAMAGE = 2.0F;
 	public static float GLOBAL_KABUTOWARI_BASE_DAMAGE = 2.25F;
@@ -85,7 +86,7 @@ public class ConfigHandler {
 	public static int GLOBAL_ARMOR_PLATE_CRAFTING_EXP = 4;
 	
 	public static boolean USE_ARMOR_WEIGHT = true;
-	public static boolean USE_ARMOR_BONUS_HEALTH = true;
+	public static boolean USE_ARMOR_BONUS_HEALTH = false;
 	public static boolean USE_ARMOR_BONUS_DAMAGE = true;
 	public static float ARMOR_BONUS_HEALTH_MULTIPLIER = 1.0F;
 	public static float ARMOR_BONUS_DAMAGE_MULTIPLIER = 1.0F;
@@ -206,7 +207,7 @@ public class ConfigHandler {
 		category = "ARMOR MODIFICATION";
 		config.addCustomCategoryComment(category, "Armor modifications such as chestplates giving extra damage, armor slowing, etc");
 		USE_ARMOR_WEIGHT = config.getBoolean("Use Armor Weight", category, true, "If enabled, armor will slow you down proportionate to it's real-world weight. (True/False)");
-		USE_ARMOR_BONUS_HEALTH = config.getBoolean("Use Armor Bonus Health", category, true, "If enabled, armor will give you bonus health when worn. (True/False)");
+		USE_ARMOR_BONUS_HEALTH = config.getBoolean("Use Armor Bonus Health", category, false, "If enabled, armor will give you bonus health when worn. (True/False)");
 		USE_ARMOR_BONUS_DAMAGE = config.getBoolean("Use Armor Bonus Damage", category, true, "If enabled, chestplates will make you deal extra damage equivalent to the real-world weight with the armor tier factored in. (True/False)");
 		
 		ARMOR_BONUS_HEALTH_MULTIPLIER = config.getFloat("Armor Bonus Health Multiplier", category, 1.0F, 0.1F, 10.0F, "Only works if \"Use Armor Bonus Health\" is enabled. A multiplier for the bonus health given by armor.");
@@ -274,6 +275,7 @@ public class ConfigHandler {
 		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. (True/False)");
 		ENABLE_ARMOR_FORGING = config.getBoolean("Enable Armor Forging", category, true, "Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)");
 		OVERRIDE_VANILLA_ARMORS = config.getBoolean("Override Vanilla Armors", category, true, "Should vanilla armors be given tiers, weights, bonus health, and bonus damage. (True/False)");
+		ENABLE_ADVANCED_LEATHER_TANNING = config.getBoolean("Enable Advanced Leather Tanning", category, false, "Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)");
 		ENABLE_DAGGERS = config.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = config.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");
 		ENABLE_RAPIERS = config.getBoolean("Enable Rapiers", category, true, "Enable or disable rapiers in-game. (True/False)");

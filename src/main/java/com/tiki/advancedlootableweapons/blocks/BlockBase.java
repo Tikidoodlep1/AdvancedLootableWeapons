@@ -27,6 +27,6 @@ public class BlockBase extends Block implements IHasModel
 	public void registerModels() 
 	{
 		Alw.proxy.registerModel(Item.getItemFromBlock(this), 0);
-	}	
+	}
 
 }

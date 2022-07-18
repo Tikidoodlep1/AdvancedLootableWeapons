@@ -15,12 +15,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ContainerForge2 extends Container
 {
 	private final TileEntityForge2 tileentity;
+	private int temp = 0;
 	
 	public ContainerForge2(InventoryPlayer player, TileEntityForge2 tileEntityForge2) 
 	{
 		this.tileentity = tileEntityForge2;
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 38, 40) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 36) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
@@ -29,7 +30,7 @@ public class ContainerForge2 extends Container
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 100, 40) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 81, 36) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
@@ -38,7 +39,7 @@ public class ContainerForge2 extends Container
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 162, 40) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 110, 36) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
@@ -71,6 +72,14 @@ public class ContainerForge2 extends Container
 	public void detectAndSendChanges() 
 	{
 		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = (IContainerListener)this.listeners.get(i);
+			
+			if(this.temp != this.tileentity.getField(3)) listener.sendWindowProperty(this, 3, this.tileentity.getField(3));
+		}
+		
+		this.temp = this.tileentity.getField(3);
 	}
 	
 	@Override
