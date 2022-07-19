@@ -49,7 +49,12 @@ minecraft {
             workingDirectory project.file('run/client')
             jvmArg '-Dterminal.ansi=true'
 
+            property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
+
+            args '--username', 'Dev'
+
+            property 'mixin.env.remapRefMap', 'true'
         }
 
         server {
@@ -64,11 +69,11 @@ minecraft {
             jvmArg '-Dterminal.ansi=true'
 
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'darkagesexpedition', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'advancedlootableweapons', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             ideaModule project.name + ".datagen"
 
             mods {
-                darkagesexpedition {
+                advancedlootableweapons {
                     source sourceSets.main
                     source sourceSets.datagen
                 }
@@ -88,12 +93,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "examplemod",
-                "Specification-Vendor"    : "examplemodsareus",
+                "Specification-Title"     : "advancedlootableweapons",
+                "Specification-Vendor"    : "tiki, destroyer, and flamingsharky",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "examplemodsareus",
+                "Implementation-Vendor"   : "tiki, destroyer, and flamingsharky",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

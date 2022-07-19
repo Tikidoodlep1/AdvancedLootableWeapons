@@ -40,6 +40,6 @@ This aim of this mod is to create extremely diverse weapons without losing the a
 [[dependencies.advancedlootableweapons]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2)"
+    versionRange="[1.18.2]"
     ordering="NONE"
     side="BOTH"
