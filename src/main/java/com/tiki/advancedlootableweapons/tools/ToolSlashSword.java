@@ -14,7 +14,9 @@ import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -120,6 +122,10 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		}
 	}
 	
+	public String getWeaponType() {
+		return this.type;
+	}
+	
 	public void generateNameAndModifiers(ItemStack stack, double addedDamage, String matName) {
 		float randDamage;
 		double totalDamage;
@@ -153,62 +159,17 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return ATTACK_SPEED_MODIFIER;
 	}
 	
-//	@Override
-//	protected RayTraceResult rayTrace(World worldIn, EntityPlayer playerIn, boolean useLiquids) {
-//		float f = playerIn.rotationPitch;
-//        float f1 = playerIn.rotationYaw;
-//        double d0 = playerIn.posX;
-//        double d1 = playerIn.posY + (double)playerIn.getEyeHeight();
-//        double d2 = playerIn.posZ;
-//        Vec3d vec3d = new Vec3d(d0, d1, d2);
-//        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
-//        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
-//        float f4 = -MathHelper.cos(-f * 0.017453292F);
-//        float f5 = MathHelper.sin(-f * 0.017453292F);
-//        float f6 = f3 * f4;
-//        float f7 = f2 * f4;
-//        double d3 = playerIn.getEntityAttribute(EntityPlayer.REACH_DISTANCE).getAttributeValue() + this.getReach();
-//        Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
-//        return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
-//	}
-	
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		World world = entityLiving.getEntityWorld();
 		float reach = this.getReach();
-		float f = entityLiving.rotationPitch;
-        float f1 = entityLiving.rotationYaw;
-        double d0 = entityLiving.posX;
-        double d1 = entityLiving.posY + (double)entityLiving.getEyeHeight();
-        double d2 = entityLiving.posZ;
-        Vec3d vec3d = new Vec3d(d0, d1, d2);
-        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
-        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
-        float f4 = -MathHelper.cos(-f * 0.017453292F);
-        float f5 = MathHelper.sin(-f * 0.017453292F);
-        float f6 = f3 * f4;
-        float f7 = f2 * f4;
-        Vec3d vec3d1 = vec3d.addVector((double)f6 * reach, (double)f5 * reach, (double)f7 * reach);
-        
-		AxisAlignedBB axis = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
 		
-//		List<EntityLivingBase> entList = world.getEntitiesWithinAABB(EntityLivingBase.class, axis, EntitySelectors.NOT_SPECTATING);
-//		EntityLivingBase ent = null;
-		EntityLivingBase ent = world.findNearestEntityWithinAABB(EntityLivingBase.class, axis, entityLiving);
-		
-//		double distClosest = Double.MAX_VALUE;
-//		for(EntityLivingBase e : entList) {
-//			if(!e.equals(entityLiving)) {
-//				double dist = e.getPositionVector().distanceTo(entityLiving.getPositionVector());
-//				
-//				if(dist < this.getReach() && dist < distClosest) {
-//					ent = e;
-//					distClosest = dist;
-//				}
-//			}
-//		}
-		
-		RayTraceResult trace = world.rayTraceBlocks(vec3d, vec3d1, false, true, false);
+		RayTraceResult trace = entityLiving.rayTrace(reach, Minecraft.getMinecraft().getRenderPartialTicks());
+		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()));
+		Entity ent = null;
+		if(ents.size() > 0) {
+			ent = ents.get(0);
+		}
 		if(ent != null) {
 			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
 				if(entityLiving instanceof EntityPlayer) {

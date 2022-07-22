@@ -34,21 +34,21 @@ public class ConfigHandler {
 	public static boolean OVERRIDE_VANILLA_ARMORS = true;
 	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
 	
-	public static float GLOBAL_DAGGER_BASE_DAMAGE = 2.0F;
-	public static float GLOBAL_KABUTOWARI_BASE_DAMAGE = 2.25F;
-	public static float GLOBAL_RAPIER_BASE_DAMAGE = 1.5F;
-	public static float GLOBAL_TALWAR_BASE_DAMAGE = 3.5F;
-	public static float GLOBAL_CLEAVER_BASE_DAMAGE = 5.5F;
-	public static float GLOBAL_MACE_BASE_DAMAGE = 2.75F;
-	public static float GLOBAL_STAFF_BASE_DAMAGE = 3.0F;
-	public static float GLOBAL_SPEAR_BASE_DAMAGE = 3.5F;
-	public static float GLOBAL_LONGSWORD_BASE_DAMAGE = 3.5F;
-	public static float GLOBAL_KODACHI_BASE_DAMAGE = 1.75F;
-	public static float GLOBAL_BATTLEAXE_BASE_DAMAGE = 5.0F;
-	public static float GLOBAL_ZWEIHANDER_BASE_DAMAGE = 4.75F;
-	public static float GLOBAL_NODACHI_BASE_DAMAGE = 4.65F;
-	public static float GLOBAL_SABRE_BASE_DAMAGE = 2.75F;
-	public static float GLOBAL_MAKHAIRA_BASE_DAMAGE = 3.0F;
+	public static float GLOBAL_DAGGER_BASE_DAMAGE = 3.0F;
+	public static float GLOBAL_KABUTOWARI_BASE_DAMAGE = 3.25F;
+	public static float GLOBAL_RAPIER_BASE_DAMAGE = 2.5F;
+	public static float GLOBAL_TALWAR_BASE_DAMAGE = 4.5F;
+	public static float GLOBAL_CLEAVER_BASE_DAMAGE = 6.5F;
+	public static float GLOBAL_MACE_BASE_DAMAGE = 3.75F;
+	public static float GLOBAL_STAFF_BASE_DAMAGE = 4.0F;
+	public static float GLOBAL_SPEAR_BASE_DAMAGE = 4.5F;
+	public static float GLOBAL_LONGSWORD_BASE_DAMAGE = 4.5F;
+	public static float GLOBAL_KODACHI_BASE_DAMAGE = 2.75F;
+	public static float GLOBAL_BATTLEAXE_BASE_DAMAGE = 6.0F;
+	public static float GLOBAL_ZWEIHANDER_BASE_DAMAGE = 5.75F;
+	public static float GLOBAL_NODACHI_BASE_DAMAGE = 5.65F;
+	public static float GLOBAL_SABRE_BASE_DAMAGE = 3.75F;
+	public static float GLOBAL_MAKHAIRA_BASE_DAMAGE = 4.0F;
 	
 	public static float GLOBAL_DAGGER_ATTACK_SPEED = 3.2F;
 	public static float GLOBAL_KABUTOWARI_ATTACK_SPEED = 2.4F;
@@ -269,7 +269,7 @@ public class ConfigHandler {
 
 		//**********************************GENERAL MODIFICATION**********************************
 		category = "GENERAL MODIFICATION";
-		config.addCustomCategoryComment(category, "General modifications such as enabling or disabling certain items. || WARNING: DISABLING ITEMS WILL MAKE THEM VANISH IF THEY EXISTED IN ANY WORLD THAT IS LOADED.");
+		config.addCustomCategoryComment(category, "General modifications such as enabling or disabling certain crafting recipes/items.");
 		USE_CUSTOM_WEAPON_REACH = config.getBoolean("Use Custom Weapon Reach", category, true, "Use the custom set weapon reach. Disabling this will make things like spears have the same reach as things like daggers. (True/False)");
 		
 		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. (True/False)");

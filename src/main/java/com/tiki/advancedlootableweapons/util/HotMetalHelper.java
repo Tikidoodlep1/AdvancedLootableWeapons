@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.handlers;
+package com.tiki.advancedlootableweapons.util;
 
 public class HotMetalHelper {
 	

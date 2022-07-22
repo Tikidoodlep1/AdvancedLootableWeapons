@@ -12,6 +12,7 @@ import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+import com.tiki.advancedlootableweapons.util.WeaponLevels;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -99,7 +100,7 @@ public class ContainerForgeWeapon extends Container {
         				return true;
         			}
         		}
-        		if(stack.getItem() instanceof ItemHotToolHead || ingotMap.containsKey(stack.getItem())) {
+        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ingotMap.containsKey(stack.getItem())) {
         			return true;
         		}else {
             		return false;
@@ -125,7 +126,7 @@ public class ContainerForgeWeapon extends Container {
         				return true;
         			}
         		}
-        		if(stack.getItem() instanceof ItemHotToolHead || ingotMap.containsKey(stack.getItem())) {
+        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemArmorBinding || ingotMap.containsKey(stack.getItem())) {
         			return true;
         		}
         		return false;
@@ -238,6 +239,7 @@ public class ContainerForgeWeapon extends Container {
 				if(input1.getItem() instanceof ItemUnboundArmor && input2.getItem() instanceof ItemArmorBinding) {
 					ItemStack result = recipes.getArmorBindingResult(input1.getItem(), input2.getItem());
 					if(result.getItem() instanceof ArmorBonusesBase) {
+						((ArmorBonusesBase)result.getItem()).setBinding(((ItemArmorBinding)input2.getItem()).getBindingName());
 						((ArmorBonusesBase)result.getItem()).setMaxDamage(((ItemArmorBinding)input2.getItem()).getExtraDur());
 					}
 					
@@ -331,14 +333,15 @@ public class ContainerForgeWeapon extends Container {
 					NBTTagCompound input1Tag = input1.getTagCompound();
 					if(weaponEnum.needsAdditionalIngot()) {
 						boolean isOreIngot = false;
-						for(int id : OreDictionary.getOreIDs(input2)) {
-							if(OreDictionary.getOreName(id).contains("ingot")) {
-								isOreIngot = true;
-								break;
+						if(input2 != ItemStack.EMPTY && input2 != null) {
+							for(int id : OreDictionary.getOreIDs(input2)) {
+								if(OreDictionary.getOreName(id).contains("ingot")) {
+									isOreIngot = true;
+									break;
+								}
 							}
 						}
 						if(isOreIngot) {
-							
 							if(input1Tag.getString("Material").equals(getItemString(input2, true))) {
 								if(weaponEnum == WeaponLevels.ARMOR_PLATE) {
 									result = WeaponLevels.getArmorPlateByMaterial(input1Tag.getString("Material")).getStack();
@@ -374,9 +377,7 @@ public class ContainerForgeWeapon extends Container {
 		NBTTagCompound outputTag = new NBTTagCompound();
 		double input1Heat = checkHeat(input1);
 		double input2Heat = checkHeat(input2);
-		
-		System.out.println("heat 1: " + input1Heat + "heat 2: " + input2Heat);
-				
+						
 		outputTag.setString("Material", input1Tag.getString("Material"));
 		if(input2Tag != null) {
 			outputTag.setInteger("addedDurability", input1Tag.getInteger("addedDurability") + input2Tag.getInteger("addedDurability") + ((int)((input1Heat + input2Heat) * 100)));
@@ -386,7 +387,6 @@ public class ContainerForgeWeapon extends Container {
 			outputTag.setDouble("addedDamage", input1Tag.getDouble("addedDamage") + input1Heat );
 		}
 		
-		System.out.println("Added Dur: " + outputTag.getInteger("addedDurability") + ", added Damage: " + outputTag.getInteger("addedDamage"));
 		to.setTagCompound(outputTag);
 	}
 	

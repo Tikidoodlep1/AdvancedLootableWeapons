@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
+package com.tiki.advancedlootableweapons.util;
 
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;

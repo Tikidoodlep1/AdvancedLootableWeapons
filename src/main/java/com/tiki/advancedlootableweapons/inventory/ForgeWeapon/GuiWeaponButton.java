@@ -38,7 +38,6 @@ public class GuiWeaponButton extends GuiButton{
     }
 	
 	private void createTimer() {
-		System.out.println("Creating new timer");
 		Timer t = new Timer("buttonCD");
 		t.schedule(new TimerTask() {
 			@Override

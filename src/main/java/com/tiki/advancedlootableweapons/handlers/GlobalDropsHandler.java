@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.tiki.advancedlootableweapons.entity.MobType;
+import com.tiki.advancedlootableweapons.util.MobType;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;

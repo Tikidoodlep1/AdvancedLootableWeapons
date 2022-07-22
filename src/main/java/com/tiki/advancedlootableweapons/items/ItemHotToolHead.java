@@ -7,8 +7,8 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
-import com.tiki.advancedlootableweapons.handlers.HotMetalHelper;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -59,6 +59,16 @@ public class ItemHotToolHead extends Item implements IHasModel {
 		        }
 			}
 		});
+	}
+	
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		String name = super.getItemStackDisplayName(stack);
+		NBTTagCompound tag = stack.getTagCompound();
+		if(tag != null && tag.hasKey("Material")) {
+			name.replaceFirst(" ", " " + tag.getString("Material") + " ");
+		}
+		return name;
 	}
 	
 	public static String getMaterial(ItemStack toolHead) {

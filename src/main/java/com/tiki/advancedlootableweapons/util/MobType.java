@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.entity;
+package com.tiki.advancedlootableweapons.util;
 
 public enum MobType {
 	LAND(0),

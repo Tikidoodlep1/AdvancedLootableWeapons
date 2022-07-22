@@ -8,19 +8,27 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
+import com.tiki.advancedlootableweapons.entity.EntitySpear;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+import com.tiki.advancedlootableweapons.util.ArmorTypes;
+import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
@@ -36,13 +44,14 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 	private int maxDamage;
 	private String binding;
 	private final ArmorProperties properties;
+	private final ArmorTypes armorMakeup;
 	
-	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, double absorbRatio, int maxAbsorb, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusDamage, double bonusMoveSpeed, int tier) {
-		this(name, materialIn, renderIndexIn, absorbRatio, maxAbsorb, equipmentSlotIn, bonusHealth, bonusMoveSpeed, tier);
+	public ArmorBonusesBase(String name, ArmorTypes armorMakeup, ArmorMaterial materialIn, int renderIndexIn, double absorbRatio, int maxAbsorb, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusDamage, double bonusMoveSpeed, int tier) {
+		this(name, armorMakeup, materialIn, renderIndexIn, absorbRatio, maxAbsorb, equipmentSlotIn, bonusHealth, bonusMoveSpeed, tier);
 		this.bonusDamage = bonusDamage * ConfigHandler.ARMOR_BONUS_DAMAGE_MULTIPLIER;
 	}
 	
-	public ArmorBonusesBase(String name, ArmorMaterial materialIn, int renderIndexIn, double absorbRatio, int maxAbsorb, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusMoveSpeed, int tier) {
+	public ArmorBonusesBase(String name, ArmorTypes armorMakeup, ArmorMaterial materialIn, int renderIndexIn, double absorbRatio, int maxAbsorb, EntityEquipmentSlot equipmentSlotIn, double bonusHealth, double bonusMoveSpeed, int tier) {
 		super(materialIn, renderIndexIn, equipmentSlotIn);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -55,11 +64,16 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		this.tier = tier;
 		this.maxDamage = materialIn.getDurability(equipmentSlotIn);
 		this.binding = "No Binding";
-		if(equipmentSlotIn == EntityEquipmentSlot.CHEST || equipmentSlotIn == EntityEquipmentSlot.LEGS) {
-			properties = new ArmorProperties(2, absorbRatio, maxAbsorb);
-		}else {
-			properties = new ArmorProperties(1, absorbRatio, maxAbsorb);
-		}
+		this.armorMakeup = armorMakeup;
+		this.properties = new ArmorProperties(1, absorbRatio, maxAbsorb);
+	}
+	
+	public void setBinding(String binding) {
+		this.binding = binding;
+	}
+	
+	public String getBinding() {
+		return this.binding;
 	}
 	
 	@Override
@@ -113,6 +127,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
         return multimap;
     }
 	
+	public ArmorTypes getArmorType() {
+		return this.armorMakeup;
+	}
+	
 	public double getBonusAttackDamage() {
 		return this.bonusDamage;
 	}
@@ -121,6 +139,11 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 	public Item setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
 		return this;
+	}
+	
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return this.maxDamage;
 	}
 	
 	@Override
@@ -137,7 +160,131 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 	
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-		return properties;
+		Random rand = new Random();
+		ArmorProperties propCopy = new ArmorProperties(properties.Priority, properties.AbsorbRatio, properties.AbsorbMax);
+		
+		if(armor.getItem() instanceof ArmorBonusesBase) {
+			ArmorTypes makeup = ((ArmorBonusesBase)armor.getItem()).armorMakeup;
+			Entity ent = source.getTrueSource();
+			EntityLivingBase attacker = null;
+			if(ent instanceof EntityLivingBase) {
+				attacker = (EntityLivingBase)ent;
+			}
+			//System.out.println("Attacker: " + attacker.getClass().getCanonicalName() + ", Mainhand: " + attacker.getHeldItem(EnumHand.MAIN_HAND));
+			System.out.println("Armor makeup: " + makeup);
+			if(makeup == ArmorTypes.SOFT) {
+				propCopy.Priority = 2;
+			}else if(makeup == ArmorTypes.CHAIN) {
+				if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
+					System.out.println("Attacker's mainhand item is a ToolStabSword");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses chain armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getChainEffect();
+							System.out.println("Chain Effectiveness: " + we.getChainEffect());
+						}
+					}
+				}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
+					System.out.println("Attacker's mainhand item is a ToolSlashSword");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses chain armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getChainEffect();
+							System.out.println("Chain Effectiveness: " + we.getChainEffect());
+						}
+					}
+				}else if(source.getImmediateSource() instanceof EntityArrow) {
+					System.out.println("Attacker used an arrow");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses chain armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getChainEffect();
+							System.out.println("Chain Effectiveness: " + we.getChainEffect());
+						}
+					}
+				}else if(source.getImmediateSource() instanceof EntitySpear) {
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses chain armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getChainEffect();
+							System.out.println("Chain Effectiveness: " + we.getChainEffect());
+						}
+					}
+				}
+			}else if(makeup == ArmorTypes.PLATE) {
+				if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
+					System.out.println("Attacker's mainhand item is a ToolStabSword");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses plate armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getPlateEffect();
+							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
+						}
+					}
+				}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
+					System.out.println("Attacker's mainhand item is a ToolSlashSword");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses plate armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getPlateEffect();
+							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
+						}
+					}
+				}else if(source.getImmediateSource() instanceof EntityArrow) {
+					System.out.println("Attacker used an arrow");
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses plate armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getPlateEffect();
+							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
+						}
+					}
+				}else if(source.getImmediateSource() instanceof EntitySpear) {
+					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+					if(we != null) {
+						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
+							propCopy.AbsorbRatio = 0;
+							propCopy.Armor -= 1;
+							System.out.println("Damage bypasses plate armor!");
+						}else {
+							propCopy.AbsorbRatio *= we.getPlateEffect();
+							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
+						}
+					}
+				}
+			}
+		}
+		System.out.println(damage);
+		
+		return propCopy;
 	}
 	
 	@Override

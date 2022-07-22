@@ -1,22 +1,39 @@
 {
-	"type": "advancedlootableweapons:chain_link_shapeless",
+	"type": "minecraft:crafting_shapeless",
 	"group": "advancedlootableweapons:chain_link",
 	"ingredients":
 	[
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Crystallite",
+				"addedDamage": 0.0,
+				"addedDurability": 0
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Crystallite",
+				"addedDamage": 0.0,
+				"addedDurability": 0
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Crystallite",
+				"addedDamage": 0.0,
+				"addedDurability": 0
+			}
 		}
 	],
-	"Material": "Crystallite",
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_crystallite",

@@ -1,22 +1,39 @@
 {
-	"type": "advancedlootableweapons:chain_link_shapeless",
+	"type": "minecraft:crafting_shapeless",
 	"group": "advancedlootableweapons:chain_link",
 	"ingredients":
 	[
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Dusksteel",
+				"addedDamage": 32767,
+				"addedDurability": 32767
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Dusksteel",
+				"addedDamage": 32767,
+				"addedDurability": 32767
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Dusksteel",
+				"addedDamage": 32767,
+				"addedDurability": 32767
+			}
 		}
 	],
-	"Material": "Dusksteel",
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_dusksteel",

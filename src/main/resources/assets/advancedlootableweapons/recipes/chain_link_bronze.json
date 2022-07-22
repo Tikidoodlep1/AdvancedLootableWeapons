@@ -1,22 +1,33 @@
 {
-	"type": "advancedlootableweapons:chain_link_shapeless",
+	"type": "minecraft:crafting_shapeless",
 	"group": "advancedlootableweapons:chain_link",
 	"ingredients":
 	[
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Bronze"
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Bronze"
+			}
 		},
 		{
+			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767
+			"data": 32767,
+			"nbt": {
+				"Material": "Bronze"
+			}
 		}
 	],
-	"Material": "Bronze",
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_bronze",

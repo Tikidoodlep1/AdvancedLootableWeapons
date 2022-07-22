@@ -13,11 +13,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemArmorBinding extends ItemBase {
 
+	private final String name;
 	private final int extraDur;
 	
 	public ItemArmorBinding(String name, int extraDur) {
 		super(name);
+		this.name = name;
 		this.extraDur = extraDur;
+	}
+	
+	public String getBindingName() {
+		return this.name;
 	}
 	
 	public int getExtraDur() {

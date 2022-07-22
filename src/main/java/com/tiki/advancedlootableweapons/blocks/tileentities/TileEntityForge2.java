@@ -2,8 +2,8 @@ package com.tiki.advancedlootableweapons.blocks.tileentities;
 
 
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
-import com.tiki.advancedlootableweapons.handlers.HotMetalHelper;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -50,7 +50,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	
 	public void bellowsInteraction(IBlockAccess world, BlockPos pos) {
 		if(mainTE == this) {
-				this.increaseFrames = 600;
+				this.increaseFrames = 60;
 			}else {
 				getMainTE(world, pos).bellowsInteraction(world, pos);
 			}
@@ -237,9 +237,9 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	{
 		if(mainTE == this && !this.world.isRemote) {
 			if(currentTemp > minTemp && this.increaseFrames <= 0) {
-				this.currentTemp -= 0.12D;
+				this.currentTemp -= 0.06D;
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
-				this.currentTemp += 0.24D;
+				this.currentTemp += 0.96D;
 				this.increaseFrames--;
 			}
 			this.smeltItem();

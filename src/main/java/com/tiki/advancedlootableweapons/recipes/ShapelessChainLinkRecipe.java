@@ -1,10 +1,13 @@
 package com.tiki.advancedlootableweapons.recipes;
 
+import java.util.Iterator;
+
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -13,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -20,10 +24,12 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	
+	private final NonNullList<Ingredient> inputs;
 	private final String material;
 	
 	ShapelessChainLinkRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, ItemStack result, String material) {
 		super(group, input, result);
+		this.inputs = input;
 		this.material = material;
 	}
 	
@@ -32,6 +38,40 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 		
 		return remainingItems;
+	}
+	
+	@Override
+	public boolean matches(InventoryCrafting inv, World world) {
+		NBTTagCompound nbt = new NBTTagCompound();
+		Iterator<Ingredient> iter = inputs.iterator();
+		for(int i = 0; i < inv.getSizeInventory(); i++) {
+			ItemStack input = inv.getStackInSlot(i);
+			if(!input.isEmpty()) {
+				if(iter.hasNext()) {
+					Ingredient ingred = iter.next();
+					boolean isMatch = false;
+					for(ItemStack is : ingred.getMatchingStacks()) {
+						if(is.getItem() == input.getItem()) {
+							isMatch = true;
+						}
+						if(!isMatch) {
+							return false;
+						}
+					}
+					nbt = input.getTagCompound();
+					if(input.hasTagCompound() && nbt.hasKey("Material")) {
+						if(!nbt.getString("Material").equalsIgnoreCase(this.material)) {
+							return false;
+						}
+					}else {
+						return false;
+					}
+				}else {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	@Override
@@ -52,6 +92,9 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 		}
 		
 		for(int i = 1; i < mats.length; i++) {
+			if(mats[i] == null) {
+				return ItemStack.EMPTY;
+			}
 			if(!mats[i].equalsIgnoreCase(mats[i-1])) {
 				return ItemStack.EMPTY;
 			}
