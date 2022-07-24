@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"L L",
+		"LLL",
+		"LLL"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_diamond"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chestplate_diamond",
+		"count": 1
+	}
+}

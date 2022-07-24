@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"LLL",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_frost_steel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chain_helmet_frost_steel",
+		"count": 1
+	}
+}

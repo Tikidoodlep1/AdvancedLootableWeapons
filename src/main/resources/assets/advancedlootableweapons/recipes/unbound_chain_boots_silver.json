@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_silver"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chain_boots_silver",
+		"count": 1
+	}
+}

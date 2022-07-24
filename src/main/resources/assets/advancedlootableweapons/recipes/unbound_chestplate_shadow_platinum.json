@@ -3,8 +3,8 @@
 
 	"pattern":
 	[
-		"C C",
-		"LCL",
+		"L L",
+		"LLL",
 		"LLL"
 	],
 
@@ -13,10 +13,6 @@
 		"L":
 		{
 			"item": "advancedlootableweapons:armor_plate_shadow_platinum"
-		},
-		"C":
-		{
-			"item": "advancedlootableweapons:chain_link_shadow_platinum"
 		}
 	},
 

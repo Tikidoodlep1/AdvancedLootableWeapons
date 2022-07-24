@@ -27,6 +27,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
@@ -68,11 +69,20 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		this.properties = new ArmorProperties(1, absorbRatio, maxAbsorb);
 	}
 	
-	public void setBinding(String binding) {
-		this.binding = binding;
+	public void setBinding(String binding, ItemStack stack) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(!stack.hasTagCompound()) {
+			tag = new NBTTagCompound();
+		}
+		tag.setString("Binding", binding);
+		stack.setTagCompound(tag);
 	}
 	
-	public String getBinding() {
+	public String getBinding(ItemStack stack) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(stack.hasTagCompound() && tag.hasKey("Binding")) {
+			return tag.getString("Binding");
+		}
 		return this.binding;
 	}
 	
@@ -135,19 +145,22 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		return this.bonusDamage;
 	}
 	
-	@Override
-	public Item setMaxDamage(int maxDamage) {
-		this.maxDamage = maxDamage;
+	public Item setMaximumDamage(int maxDamage, ItemStack stack) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(!stack.hasTagCompound()) {
+			tag = new NBTTagCompound();
+		}
+		tag.setInteger("MaxDamage", this.maxDamage + maxDamage);
+		stack.setTagCompound(tag);
 		return this;
 	}
 	
 	@Override
 	public int getMaxDamage(ItemStack stack) {
-		return this.maxDamage;
-	}
-	
-	@Override
-	public int getMaxDamage() {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(stack.hasTagCompound() && tag.hasKey("MaxDamage")) {
+			return tag.getInteger("MaxDamage");
+		}
 		return this.maxDamage;
 	}
 	
@@ -155,7 +168,7 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
 		tooltip.add(TextFormatting.BLUE + "Tier: " + TextFormatting.YELLOW + "" + TextFormatting.ITALIC + this.tier);
-		tooltip.add(TextFormatting.BLUE + "Binding: " + TextFormatting.GRAY + this.binding);
+		tooltip.add(TextFormatting.BLUE + "Binding: " + TextFormatting.GRAY + this.getBinding(stack));
     }
 	
 	@Override
@@ -164,9 +177,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		ArmorProperties propCopy = new ArmorProperties(properties.Priority, properties.AbsorbRatio, properties.AbsorbMax);
 		
 		if(armor.getItem() instanceof ArmorBonusesBase) {
-			ArmorTypes makeup = ((ArmorBonusesBase)armor.getItem()).armorMakeup;
+			ArmorTypes makeup = ((ArmorBonusesBase)armor.getItem()).getArmorType();
 			Entity ent = source.getTrueSource();
 			EntityLivingBase attacker = null;
+			WeaponEffectiveness we = null;
 			if(ent instanceof EntityLivingBase) {
 				attacker = (EntityLivingBase)ent;
 			}
@@ -174,111 +188,29 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 			System.out.println("Armor makeup: " + makeup);
 			if(makeup == ArmorTypes.SOFT) {
 				propCopy.Priority = 2;
-			}else if(makeup == ArmorTypes.CHAIN) {
-				if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
-					System.out.println("Attacker's mainhand item is a ToolStabSword");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses chain armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getChainEffect();
-							System.out.println("Chain Effectiveness: " + we.getChainEffect());
-						}
-					}
-				}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
-					System.out.println("Attacker's mainhand item is a ToolSlashSword");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses chain armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getChainEffect();
-							System.out.println("Chain Effectiveness: " + we.getChainEffect());
-						}
-					}
-				}else if(source.getImmediateSource() instanceof EntityArrow) {
-					System.out.println("Attacker used an arrow");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses chain armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getChainEffect();
-							System.out.println("Chain Effectiveness: " + we.getChainEffect());
-						}
-					}
-				}else if(source.getImmediateSource() instanceof EntitySpear) {
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getChainPenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses chain armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getChainEffect();
-							System.out.println("Chain Effectiveness: " + we.getChainEffect());
-						}
-					}
-				}
-			}else if(makeup == ArmorTypes.PLATE) {
-				if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
-					System.out.println("Attacker's mainhand item is a ToolStabSword");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses plate armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getPlateEffect();
-							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
-						}
-					}
-				}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
-					System.out.println("Attacker's mainhand item is a ToolSlashSword");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses plate armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getPlateEffect();
-							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
-						}
-					}
-				}else if(source.getImmediateSource() instanceof EntityArrow) {
-					System.out.println("Attacker used an arrow");
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses plate armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getPlateEffect();
-							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
-						}
-					}
-				}else if(source.getImmediateSource() instanceof EntitySpear) {
-					WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
-					if(we != null) {
-						if((rand.nextInt(100)+1) < we.getPlatePenChance()) {
-							propCopy.AbsorbRatio = 0;
-							propCopy.Armor -= 1;
-							System.out.println("Damage bypasses plate armor!");
-						}else {
-							propCopy.AbsorbRatio *= we.getPlateEffect();
-							System.out.println("Chain Effectiveness: " + we.getPlateEffect());
-						}
-					}
+			}
+			
+			if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
+				System.out.println("Attacker's mainhand item is a ToolStabSword");
+				we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+			}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
+				System.out.println("Attacker's mainhand item is a ToolSlashSword");
+				we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
+			}else if(source.getImmediateSource() instanceof EntityArrow) {
+				System.out.println("Attacker used an arrow");
+				we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
+			}else if(source.getImmediateSource() instanceof EntitySpear) {
+				we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+			}
+			
+			if(we != null) {
+				if((rand.nextInt(100)+1) < we.getPenChanceByArmorType(makeup)) {
+					propCopy.AbsorbRatio = 0;
+					propCopy.Armor -= 1;
+					System.out.println("Damage bypasses armor!");
+				}else {
+					propCopy.AbsorbRatio *= we.getEffectByArmorType(makeup);
+					System.out.println("Effectiveness: " + we.getEffectByArmorType(makeup));
 				}
 			}
 		}

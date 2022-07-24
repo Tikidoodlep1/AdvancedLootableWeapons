@@ -4,18 +4,14 @@
 	"pattern":
 	[
 		"LLL",
-		"C C"
+		"L L"
 	],
 
 	"key":
 	{
 		"L":
 		{
-			"item": "advancedlootableweapons:chain_link_shadow_platinum"
-		},
-		"C":
-		{
-			"item": "advancedlootableweapons:chain_link_shadow_platinum"
+			"item": "advancedlootableweapons:armor_plate_shadow_platinum"
 		}
 	},
 

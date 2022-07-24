@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemArmorBinding;
+import com.tiki.advancedlootableweapons.items.ItemArmorPlate;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
@@ -80,6 +81,8 @@ public class ContainerForgeWeapon extends Container {
         oreDictMap.put(OreDictionary.getOres("ingotPlatinum"), "Platinum");
         oreDictMap.put(OreDictionary.getOres("ingotSteel"), "Steel");
         ingotMap.put(Items.IRON_INGOT, "Iron");
+        ingotMap.put(Items.GOLD_INGOT, "Gold");
+        ingotMap.put(Items.DIAMOND, "Diamond");
         ingotMap.put(ItemInit.INGOT_KOBOLD, "Kobold");
         ingotMap.put(ItemInit.INGOT_COPPER, "Copper");
         ingotMap.put(ItemInit.INGOT_SILVER, "Silver");
@@ -100,7 +103,7 @@ public class ContainerForgeWeapon extends Container {
         				return true;
         			}
         		}
-        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ingotMap.containsKey(stack.getItem())) {
+        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || stack.getItem() instanceof ItemArmorPlate || ingotMap.containsKey(stack.getItem())) {
         			return true;
         		}else {
             		return false;
@@ -235,12 +238,19 @@ public class ContainerForgeWeapon extends Container {
 		if(outputSlot == ItemStack.EMPTY) {
 			if(this.buttonPressed == HAMMER_BUTTON) {
 				
-				//We're binding armor here
-				if(input1.getItem() instanceof ItemUnboundArmor && input2.getItem() instanceof ItemArmorBinding) {
+				//We're binding armor or making diamond studded armor plates here
+				if((input1.getItem() instanceof ItemUnboundArmor && input2.getItem() instanceof ItemArmorBinding) || (input1.getItem() instanceof ItemArmorPlate && input2 != ItemStack.EMPTY)) {
 					ItemStack result = recipes.getArmorBindingResult(input1.getItem(), input2.getItem());
 					if(result.getItem() instanceof ArmorBonusesBase) {
-						((ArmorBonusesBase)result.getItem()).setBinding(((ItemArmorBinding)input2.getItem()).getBindingName());
-						((ArmorBonusesBase)result.getItem()).setMaxDamage(((ItemArmorBinding)input2.getItem()).getExtraDur());
+						String bindingName = ((ItemArmorBinding)input2.getItem()).getBindingName();
+						bindingName = bindingName.substring(bindingName.lastIndexOf("_") + 1);
+						bindingName = bindingName.replace(bindingName.charAt(0), Character.toUpperCase(bindingName.charAt(0)));
+						((ArmorBonusesBase)result.getItem()).setBinding(bindingName.toString(), result);
+						((ArmorBonusesBase)result.getItem()).setMaximumDamage(((ItemArmorBinding)input2.getItem()).getExtraDur(), result);
+					}
+					
+					if(result.getItem() instanceof ItemArmorPlate) {
+						setNbtValues(input1, input2, result);
 					}
 					
 					takeResourcesAndSetOutput(result, false, true);
@@ -260,35 +270,32 @@ public class ContainerForgeWeapon extends Container {
 				}
 				
 				//Here we're making a weapon or long tool rod
-				if(input1.getItem() instanceof ItemHotToolHead) {
+				if(input1.getItem() instanceof ItemHotToolHead && input2.getItem() instanceof ItemHotToolHead) {
 					ItemHotToolHead slot1 = ((ItemHotToolHead)input1.getItem());
-					
-					if(input2.getItem() instanceof ItemHotToolHead) {
 					ItemHotToolHead slot2 = ((ItemHotToolHead)input2.getItem());
 					NBTTagCompound input1Tag = input1.getTagCompound();
 					NBTTagCompound input2Tag = input2.getTagCompound();
 					
 					boolean matsMatch = input1Tag.getString("Material").contentEquals(input2Tag.getString("Material"));
-						if(slot1.finished && slot2.finished && matsMatch) {
-							ItemStack result = recipes.getItemResult(input1Tag.getString("Material"), slot1, slot2);
-							if(result.getItem() instanceof ToolStabSword) {
-								((ToolStabSword)result.getItem()).setMaximumDamage(result, result.getMaxDamage() + input1Tag.getInteger("addedDurability") + input2Tag.getInteger("addedDurability"));
-								((ToolStabSword)result.getItem()).generateNameAndModifiers(result, input1Tag.getDouble("addedDamage") + input2Tag.getDouble("addedDamage"), input1Tag.getString("Material"));
-								
-								damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
-							}else if(result.getItem() instanceof ToolSlashSword) {
-								((ToolSlashSword)result.getItem()).setMaximumDamage(result, result.getMaxDamage() + input1Tag.getInteger("addedDurability") + input2Tag.getInteger("addedDurability"));
-								((ToolSlashSword)result.getItem()).generateNameAndModifiers(result, input1Tag.getDouble("addedDamage") + input2Tag.getDouble("addedDamage"), input1Tag.getString("Material"));
-								
-								damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
-							}else if (result.getItem() == ItemInit.LONG_TOOL_ROD) {
-								result.setItemDamage(input1.getItemDamage() + 2300 > 6000 ? 6000 : input1.getItemDamage() + 2300);
-								setNbtValues(input1, input2, result);
-							}
+					if(slot1.finished && slot2.finished && matsMatch) {
+						ItemStack result = recipes.getItemResult(input1Tag.getString("Material"), slot1, slot2);
+						if(result.getItem() instanceof ToolStabSword) {
+							((ToolStabSword)result.getItem()).setMaximumDamage(result, result.getMaxDamage() + input1Tag.getInteger("addedDurability") + input2Tag.getInteger("addedDurability"));
+							((ToolStabSword)result.getItem()).generateNameAndModifiers(result, input1Tag.getDouble("addedDamage") + input2Tag.getDouble("addedDamage"), input1Tag.getString("Material"));
 							
-							takeResourcesAndSetOutput(result, true, true);
-							return true;
+							damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
+						}else if(result.getItem() instanceof ToolSlashSword) {
+							((ToolSlashSword)result.getItem()).setMaximumDamage(result, result.getMaxDamage() + input1Tag.getInteger("addedDurability") + input2Tag.getInteger("addedDurability"));
+							((ToolSlashSword)result.getItem()).generateNameAndModifiers(result, input1Tag.getDouble("addedDamage") + input2Tag.getDouble("addedDamage"), input1Tag.getString("Material"));
+							
+							damageItem(1, player.inventory.getStackInSlot(toolForgeHammer));
+						}else if (result.getItem() == ItemInit.LONG_TOOL_ROD) {
+							result.setItemDamage(input1.getItemDamage() + 2300 > 6000 ? 6000 : input1.getItemDamage() + 2300);
+							setNbtValues(input1, input2, result);
 						}
+						
+						takeResourcesAndSetOutput(result, true, true);
+						return true;
 					}
 				}
 				
@@ -345,9 +352,10 @@ public class ContainerForgeWeapon extends Container {
 							if(input1Tag.getString("Material").equals(getItemString(input2, true))) {
 								if(weaponEnum == WeaponLevels.ARMOR_PLATE) {
 									result = WeaponLevels.getArmorPlateByMaterial(input1Tag.getString("Material")).getStack();
+								}else {
+									result.setItemDamage(input1.getItemDamage() + 2300 > 6000 ? 6000 : input1.getItemDamage() + 2300);
 								}
 								
-								result.setItemDamage(input1.getItemDamage() + 2300 > 6000 ? 6000 : input1.getItemDamage() + 2300);
 								if(result != ItemStack.EMPTY) {
 									setNbtValues(input1, input2, result);
 									

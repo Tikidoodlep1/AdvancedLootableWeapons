@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:leather_strip"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:binding_leather",
+		"count": 1
+	}
+}

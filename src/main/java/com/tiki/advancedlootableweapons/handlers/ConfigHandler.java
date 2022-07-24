@@ -31,7 +31,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
 	public static boolean ENABLE_ARMOR_FORGING = true;
-	public static boolean OVERRIDE_VANILLA_ARMORS = true;
+	public static boolean DISABLE_VANILLA_ARMORS = true;
 	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
 	
 	public static float GLOBAL_DAGGER_BASE_DAMAGE = 3.0F;
@@ -272,9 +272,9 @@ public class ConfigHandler {
 		config.addCustomCategoryComment(category, "General modifications such as enabling or disabling certain crafting recipes/items.");
 		USE_CUSTOM_WEAPON_REACH = config.getBoolean("Use Custom Weapon Reach", category, true, "Use the custom set weapon reach. Disabling this will make things like spears have the same reach as things like daggers. (True/False)");
 		
-		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. (True/False)");
+		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. If this is disabled, \"Enable Armor Forging\" will also be disabled by default. (True/False)");
 		ENABLE_ARMOR_FORGING = config.getBoolean("Enable Armor Forging", category, true, "Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)");
-		OVERRIDE_VANILLA_ARMORS = config.getBoolean("Override Vanilla Armors", category, true, "Should vanilla armors be given tiers, weights, bonus health, and bonus damage. (True/False)");
+		DISABLE_VANILLA_ARMORS = config.getBoolean("Disable Vanilla Armors", category, true, "Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)");
 		ENABLE_ADVANCED_LEATHER_TANNING = config.getBoolean("Enable Advanced Leather Tanning", category, false, "Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)");
 		ENABLE_DAGGERS = config.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = config.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");

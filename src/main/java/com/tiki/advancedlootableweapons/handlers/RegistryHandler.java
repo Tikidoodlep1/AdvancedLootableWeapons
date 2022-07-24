@@ -32,11 +32,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RegistryHandler {
 	
 	@SubscribeEvent
-	public static void onItemRegister(RegistryEvent.Register<Item> event) {
-		if(ConfigHandler.ENABLE_ARMORS == true) {
-			ItemInit.enableArmors();
-		}
-		
+	public static void onItemRegister(RegistryEvent.Register<Item> event) {		
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
 		ItemInit.createRecipes(); //I like this face lol \'_'/
 	}
@@ -86,6 +82,7 @@ public class RegistryHandler {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Alw.instance, new GuiHandler());
 		OreDictionaryCompat.registerOres();
 		SoundHandler.registerSounds();
+		ItemInit.checkConfigOptions();
 		GlobalDropsHandler.registerDrops();
 		DrumRecipes.initDrumRecipes();
 	}

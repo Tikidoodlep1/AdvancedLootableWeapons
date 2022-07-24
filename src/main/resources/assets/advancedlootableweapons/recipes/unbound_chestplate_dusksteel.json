@@ -5,7 +5,7 @@
 	[
 		"L L",
 		"LLL",
-		"CCC"
+		"LLL"
 	],
 
 	"key":
@@ -13,10 +13,6 @@
 		"L":
 		{
 			"item": "advancedlootableweapons:armor_plate_dusksteel"
-		},
-		"C":
-		{
-			"item": "advancedlootableweapons:chain_link_dusksteel"
 		}
 	},
 
