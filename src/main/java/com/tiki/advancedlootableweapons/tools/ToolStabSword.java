@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
@@ -18,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -33,9 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -53,7 +48,6 @@ public class ToolStabSword extends Item implements IHasModel{
 	private static String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
 	private static String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
 	private Random randGen = new Random();
-	protected NBTTagCompound nbt = new NBTTagCompound();
 	
 	public ToolStabSword(String name, ToolMaterial material, String type) {
 		setUnlocalizedName(name);
@@ -67,7 +61,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		this.maxStackSize = 1;
 		this.bonusDamage = 0;
 		this.getAttributes(type, material);
-		this.nbt.setInteger("maxDurability", nbt.getInteger("maxDurability"));
+		this.setMaxDamage(material.getMaxUses());
 	}
 	
 	@Override
@@ -75,7 +69,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		NBTTagCompound tag = new NBTTagCompound();
 		tag = stack.getTagCompound();
 		int durability;
-		if(tag == null || this.nbt == null) {
+		if(tag == null) {
 			return this.material.getMaxUses();
 		}else {
 			durability = tag.getInteger("maxDurability");
@@ -84,7 +78,12 @@ public class ToolStabSword extends Item implements IHasModel{
 	}
 	
 	public void setMaximumDamage(ItemStack stack, int maxDamage) {
-		NBTTagCompound newNBT = new NBTTagCompound();
+		NBTTagCompound newNBT;
+		if(stack.hasTagCompound()) {
+			newNBT = stack.getTagCompound();
+		}else {
+			newNBT = new NBTTagCompound();
+		}
 		newNBT.setInteger("maxDurability", maxDamage);
 		stack.setTagCompound(newNBT);
 	}
@@ -94,42 +93,42 @@ public class ToolStabSword extends Item implements IHasModel{
 			case "dagger":
 				this.attackSpeed = ConfigHandler.GLOBAL_DAGGER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_DAGGER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.21F;
+				this.reach = 3.21F;
 				break;
 			case "kabutowari":
 				this.attackSpeed = ConfigHandler.GLOBAL_KABUTOWARI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KABUTOWARI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.39F;
+				this.reach = 3.39F;
 				break;
 			case "rapier":
 				this.attackSpeed = ConfigHandler.GLOBAL_RAPIER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_RAPIER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.29F;
+				this.reach = 4.29F;
 				break;
 			case "talwar":
 				this.attackSpeed = ConfigHandler.GLOBAL_TALWAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_TALWAR_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.0F;
+				this.reach = 4.0F;
 				break;
 			case "cleaver":
 				this.attackSpeed = ConfigHandler.GLOBAL_CLEAVER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_CLEAVER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.28F;
+				this.reach = 3.28F;
 				break;
 			case "mace":
 				this.attackSpeed = ConfigHandler.GLOBAL_MACE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MACE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.75F;
+				this.reach = 3.75F;
 				break;
 			case "staff":
 				this.attackSpeed = ConfigHandler.GLOBAL_STAFF_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_STAFF_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.28F;
+				this.reach = 5.28F;
 				break;
 			case "spear":
 				this.attackSpeed = ConfigHandler.GLOBAL_SPEAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SPEAR_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 6.74F;
+				this.reach = 5.74F;
 				break;
 		}
 	}
@@ -160,7 +159,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
 		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
-			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
+			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0), EntityEquipmentSlot.MAINHAND);
 		}
 	}
 	
@@ -178,7 +177,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		float reach = this.getReach();
 		
 		RayTraceResult trace = entityLiving.rayTrace(reach, Minecraft.getMinecraft().getRenderPartialTicks());
-		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()));
+		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()).shrink(0.9));
 		Entity ent = null;
 		if(ents.size() > 0) {
 			ent = ents.get(0);
@@ -202,12 +201,6 @@ public class ToolStabSword extends Item implements IHasModel{
 	public String getWeaponType() {
 		return this.type;
 	}
-	
-	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-		//tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4.0) + " Attack Speed");
-    }
 	
 	@Override
 	public void registerModels() {
@@ -285,7 +278,7 @@ public class ToolStabSword extends Item implements IHasModel{
         {
         	multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0));
-            multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0));
+            multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0));
         }
         
         return multimap;

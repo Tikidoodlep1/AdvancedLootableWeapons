@@ -730,6 +730,23 @@ item.chain_boots_crystallite.name=Crystallite Chain Boots
 item.chain_boots_dusksteel.name=Dusksteel Chain Boots
 
 
+item.leather_helmet.name=Leather Helmet
+item.plate_iron_helmet.name=Iron Plate Helmet
+item.plate_golden_helmet.name=Gold Plate Helmet
+item.plate_diamond_helmet.name=Diamond Studded Leather Helmet
+item.plate_helmet_kobold.name=Kobold Steel Plate Helmet
+item.plate_helmet_copper.name=Copper Plate Helmet
+item.plate_helmet_silver.name=Silver Plate Helmet
+item.plate_helmet_bronze.name=Bronze Plate Helmet
+item.plate_helmet_platinum.name=Platinum Plate Helmet
+item.plate_helmet_steel.name=Steel Plate Helmet
+item.plate_helmet_shadow_platinum.name=Shadow Platinum Plate Helmet
+item.plate_helmet_frost_steel.name=Frost Steel Plate Helmet
+item.plate_helmet_obsidian.name=Refined Obsidian Plate Helmet
+item.plate_helmet_crystallite.name=Crystallite Plate Helmet
+item.plate_helmet_dusksteel.name=Dusksteel Plate Helmet
+
+
 item.leather_chestplate.name=Leather Chestplate
 item.plate_iron_chestplate.name=Iron Plate Chestplate
 item.plate_golden_chestplate.name=Gold Plate Chestplate

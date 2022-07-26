@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
@@ -15,7 +13,6 @@ import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,9 +24,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -47,7 +42,6 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	private String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
 	private String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
 	private Random randGen = new Random();
-	private NBTTagCompound nbt = new NBTTagCompound();
 	
 	public ToolSlashSword(String name, ToolMaterial material, String type) {
 		super(material);
@@ -70,7 +64,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		NBTTagCompound tag = new NBTTagCompound();
 		tag = stack.getTagCompound();
 		int durability;
-		if(tag == null || this.nbt == null) {
+		if(tag == null) {
 			return this.material.getMaxUses();
 		}else {
 			durability = tag.getInteger("maxDurability");
@@ -79,8 +73,14 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	}
 	
 	public void setMaximumDamage(ItemStack stack, int maxDamage) {
-		this.nbt.setInteger("maxDurability", maxDamage);
-		stack.setTagCompound(this.nbt);
+		NBTTagCompound newNBT;
+		if(stack.hasTagCompound()) {
+			newNBT = stack.getTagCompound();
+		}else {
+			newNBT = new NBTTagCompound();
+		}
+		newNBT.setInteger("maxDurability", maxDamage);
+		stack.setTagCompound(newNBT);
 	}
 	
 	private void getAttributes(String type, ToolMaterial material) {
@@ -88,37 +88,37 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			case "longsword":
 				this.attackSpeed = ConfigHandler.GLOBAL_LONGSWORD_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.14F;
+				this.reach = 4.14F;
 				break;
 			case "kodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_KODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.49F;
+				this.reach = 3.49F;
 				break;
 			case "battleaxe":
 				this.attackSpeed = ConfigHandler.GLOBAL_BATTLEAXE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.20F;
+				this.reach = 4.32F;
 				break;
 			case "zweihander":
 				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.32F;
+				this.reach = 4.25F;
 				break;
 			case "nodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_NODACHI_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 5.66F;
+				this.reach = 4.66F;
 				break;
 			case "sabre":
 				this.attackSpeed = ConfigHandler.GLOBAL_SABRE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SABRE_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.92F;
+				this.reach = 3.92F;
 				break;
 			case "makhaira":
 				this.attackSpeed = ConfigHandler.GLOBAL_MAKHAIRA_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MAKHAIRA_BASE_DAMAGE + material.getAttackDamage();
-				this.reach = 4.56F;
+				this.reach = 3.56F;
 		}
 	}
 	
@@ -151,7 +151,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
 		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
-			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
+			stack.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0), EntityEquipmentSlot.MAINHAND);
 		}
 	}
 	
@@ -165,7 +165,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		float reach = this.getReach();
 		
 		RayTraceResult trace = entityLiving.rayTrace(reach, Minecraft.getMinecraft().getRenderPartialTicks());
-		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()));
+		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()).shrink(0.9));
 		Entity ent = null;
 		if(ents.size() > 0) {
 			ent = ents.get(0);
@@ -186,12 +186,6 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return false;
 	}
 	
-	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-    {
-		//tooltip.add(TextFormatting.GRAY + "" + (this.attackSpeed + 4) + " Attack Speed");
-    }
-
 	@Override
 	public void registerModels() {
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");
@@ -205,7 +199,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
         {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0));
-            multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 5.0D, 0));
+            multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0));
         }
         
         return multimap;
