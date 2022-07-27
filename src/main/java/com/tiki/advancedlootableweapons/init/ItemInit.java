@@ -12,6 +12,7 @@ import com.tiki.advancedlootableweapons.items.ItemBase;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
+import com.tiki.advancedlootableweapons.recipes.RemoveRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
@@ -26,8 +27,8 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -40,106 +41,181 @@ public class ItemInit {
 	public static final List<Item> items = new ArrayList<Item>();	
 	
 	public static void checkConfigOptions() {
-		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>) ForgeRegistries.RECIPES;
-		
+		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
 		if(ConfigHandler.DISABLE_VANILLA_ARMORS) {
-			recipes.remove(new ResourceLocation("minecraft", "leather_helmet"));
-			recipes.remove(new ResourceLocation("minecraft", "leather_chestplate"));
-			recipes.remove(new ResourceLocation("minecraft", "leather_leggings"));
-			recipes.remove(new ResourceLocation("minecraft", "leather_boots"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_helmet"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_chestplate"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_leggings"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_boots"));
 			
-			recipes.remove(new ResourceLocation("minecraft", "iron_helmet"));
-			recipes.remove(new ResourceLocation("minecraft", "iron_chestplate"));
-			recipes.remove(new ResourceLocation("minecraft", "iron_leggings"));
-			recipes.remove(new ResourceLocation("minecraft", "iron_boots"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "iron_helmet"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "iron_chestplate"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "iron_leggings"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "iron_boots"));
 			
-			recipes.remove(new ResourceLocation("minecraft", "gold_helmet"));
-			recipes.remove(new ResourceLocation("minecraft", "gold_chestplate"));
-			recipes.remove(new ResourceLocation("minecraft", "gold_leggings"));
-			recipes.remove(new ResourceLocation("minecraft", "gold_boots"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "golden_helmet"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "golden_chestplate"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "golden_leggings"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "golden_boots"));
 			
-			recipes.remove(new ResourceLocation("minecraft", "diamond_helmet"));
-			recipes.remove(new ResourceLocation("minecraft", "diamond_chestplate"));
-			recipes.remove(new ResourceLocation("minecraft", "diamond_leggings"));
-			recipes.remove(new ResourceLocation("minecraft", "diamond_boots"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "diamond_helmet"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "diamond_chestplate"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "diamond_leggings"));
+			removeRecipe(recipes, new ResourceLocation("minecraft", "diamond_boots"));
 		}
 		
 		if(!ConfigHandler.ENABLE_ARMORS) {
 			ConfigHandler.ENABLE_ARMOR_FORGING = false;
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_bronze"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_bronze"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_bronze"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_bronze"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_copper"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_copper"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_copper"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_copper"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_crystallite"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_crystallite"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_crystallite"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_crystallite"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_diamond"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_diamond"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_diamond"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_diamond"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_dusksteel"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_dusksteel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_dusksteel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_dusksteel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_frost_steel"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_frost_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_frost_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_frost_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_gold"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_gold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_gold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_gold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_iron"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_iron"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_iron"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_iron"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_kobold"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_kobold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_kobold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_kobold"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_obsidian"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_obsidian"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_obsidian"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_obsidian"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_platinum"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_shadow_platinum"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_shadow_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_shadow_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_shadow_platinum"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_silver"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_silver"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_silver"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_silver"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_helmet_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_chestplate_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_leggings_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chain_boots_steel"));
 			
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_helmet_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_chestplate_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_leggings_steel"));
-			recipes.remove(new ResourceLocation(ModInfo.ID, "unbound_boots_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_bronze"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_bronze"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_copper"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_copper"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_crystallite"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_crystallite"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_diamond"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_diamond"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_dusksteel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_dusksteel"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_frost_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_frost_steel"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_gold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_gold"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_iron"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_iron"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_kobold"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_kobold"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_obsidian"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_obsidian"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_platinum"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_shadow_platinum"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_shadow_platinum"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_silver"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_silver"));
+			
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_helmet_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_chestplate_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_steel"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_steel"));
 		}
 	}
 	
-	//Recipes with meta
+	public static void removeRecipe(IForgeRegistryModifiable<IRecipe> registry, ResourceLocation recipeLoc) {
+		IRecipe recipe = (IRecipe)registry.getValue(recipeLoc);
+		registry.remove(recipeLoc);
+		if(recipe != null) {
+			registry.register(RemoveRecipe.from(recipe));
+		}
+	}
+	
 	public static void createRecipes() {
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_dagger_head"), new ResourceLocation("dagger_head"), new ItemStack(DAGGER_HEAD), new Object[] {" w", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_kabutowari_head"), new ResourceLocation("kabutowari_head"), new ItemStack(KABUTOWARI_HEAD), new Object[] {"w  ", "w w", " w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
@@ -156,7 +232,53 @@ public class ItemInit {
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_sabre_head"), new ResourceLocation("sabre_head"), new ItemStack(SABRE_HEAD), new Object[] {" w", "w ", "w ", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_makhaira_head"), new ResourceLocation("makhaira_head"), new ItemStack(MAKHAIRA_HEAD), new Object[] {" w", "ww", "ww", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_spear_head"), new ResourceLocation("spear_head"), new ItemStack(SPEAR_HEAD), new Object[] {" w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
-				
+		
+		if(ConfigHandler.ENABLE_ARMORS && !ConfigHandler.ENABLE_ARMOR_FORGING) {
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_kobold"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_copper"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_silver"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_bronze"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_shadow_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_frost_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_crystallite"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_dusksteel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_kobold"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_copper"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_silver"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_bronze"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_shadow_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_frost_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_crystallite"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_dusksteel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_kobold"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_copper"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_silver"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_bronze"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_shadow_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_frost_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_crystallite"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_dusksteel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_kobold"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_copper"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_silver"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_bronze"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_platinum"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_steel"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_shadow_platinum"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_frost_steel"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_crystallite"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_dusksteel"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+		}
+		
 		GameRegistry.addSmelting(BlockInit.cobble_feldspar, new ItemStack(BlockInit.rock_feldspar), 0.1F);
 		GameRegistry.addSmelting(BlockInit.ore_copper, new ItemStack(ItemInit.INGOT_COPPER), 1.0F);
 		GameRegistry.addSmelting(BlockInit.ore_tin, new ItemStack(ItemInit.INGOT_TIN), 1.0F);

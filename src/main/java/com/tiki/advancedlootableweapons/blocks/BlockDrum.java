@@ -6,7 +6,6 @@ import java.util.Random;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,6 +26,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -58,6 +59,26 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 		return BlockFaceShape.BOWL;
 	}
 	
+	@Override
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		TileEntity te = worldIn.getTileEntity(pos);
+		if(te instanceof TileEntityDrum) {
+			TileEntityDrum drum = (TileEntityDrum)te;
+			Fluid fluid = drum.getTank().getFluid().getFluid();
+			int fluidAmount = drum.getTank().getFluidAmount();
+			double f = pos.getY() + (10.0F) / 16.0F;
+			
+	        if (!worldIn.isRemote && fluidAmount > 0 && entityIn.getEntityBoundingBox().minY <= (double)f)
+	        {
+	        	if(fluid.getTemperature() <= FluidRegistry.WATER.getTemperature()+50 && entityIn.isBurning()) {
+	        		entityIn.extinguish();
+	        	}else if(fluid.getTemperature() >= 950) {
+	        		entityIn.setFire(5);
+	        	}
+	        }
+		}
+	}
+	;
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);

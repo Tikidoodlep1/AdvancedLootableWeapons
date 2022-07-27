@@ -82,9 +82,9 @@ public class RegistryHandler {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Alw.instance, new GuiHandler());
 		OreDictionaryCompat.registerOres();
 		SoundHandler.registerSounds();
-		ItemInit.checkConfigOptions();
 		GlobalDropsHandler.registerDrops();
 		DrumRecipes.initDrumRecipes();
+		ItemInit.checkConfigOptions();
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)
