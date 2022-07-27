@@ -1,0 +1,9 @@
+{
+	"type": "advancedlootableweapons:shadow_mod_all",
+	"conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+	],
+	"prop1": "advancedlootableweapons:shadow"
+}

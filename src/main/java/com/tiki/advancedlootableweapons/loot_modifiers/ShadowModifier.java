@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -25,7 +27,7 @@ public class ShadowModifier extends LootModifier {
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-		Random rand = context.getRandom();
+		Random rand = context.getRandom();		
 		if(rand.nextInt(0, 101) >= 0) {
 			generatedLoot.add(new ItemStack(prop1));
 		}

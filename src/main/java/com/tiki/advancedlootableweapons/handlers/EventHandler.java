@@ -1,7 +1,5 @@
 package com.tiki.advancedlootableweapons.handlers;
 
-import net.minecraft.core.Registry;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,7 +9,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import javax.annotation.Nonnull;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
 
 @Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler {
