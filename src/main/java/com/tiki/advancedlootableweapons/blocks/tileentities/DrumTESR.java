@@ -7,7 +7,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
 
+@SideOnly(Side.CLIENT)
 public class DrumTESR extends FastTESR<TileEntityDrum>{
 
 	@Override

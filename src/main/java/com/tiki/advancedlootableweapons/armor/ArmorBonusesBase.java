@@ -184,8 +184,6 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 			if(ent instanceof EntityLivingBase) {
 				attacker = (EntityLivingBase)ent;
 			}
-			//System.out.println("Attacker: " + attacker.getClass().getCanonicalName() + ", Mainhand: " + attacker.getHeldItem(EnumHand.MAIN_HAND));
-			System.out.println("Armor makeup: " + makeup);
 			if(makeup == ArmorTypes.SOFT) {
 				propCopy.Priority = 2;
 			}
@@ -206,15 +204,12 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 			if(we != null) {
 				if((rand.nextInt(100)+1) < we.getPenChanceByArmorType(makeup)) {
 					propCopy.AbsorbRatio = 0;
-					propCopy.Armor -= 1;
-					System.out.println("Damage bypasses armor!");
+					propCopy.Armor = propCopy.Armor - 3 < 0 ? 0 : propCopy.Armor - 3;
 				}else {
 					propCopy.AbsorbRatio *= we.getEffectByArmorType(makeup);
-					System.out.println("Effectiveness: " + we.getEffectByArmorType(makeup));
 				}
 			}
 		}
-		System.out.println(damage);
 		
 		return propCopy;
 	}

@@ -23,7 +23,7 @@ public class TileEntityJawCrusher extends TileEntity implements ITickable, IInve
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	
-	public Item crushContents() {
+	public boolean crushContents() {
 		ItemStack slot0 = getStackInSlot(0);
 		Item result = null;
 		if(slot0.getItem() == Item.getItemFromBlock(BlockInit.rock_feldspar)) {
@@ -33,20 +33,21 @@ public class TileEntityJawCrusher extends TileEntity implements ITickable, IInve
 				result = ItemInit.POWDER_GRANITE;
 			}else if(slot0.getItemDamage() == 3){
 				result = ItemInit.POWDER_DIORITE;
+			}else {
+				return false;
 			}
 		}
-		
 		
 		if(getStackInSlot(1).getItem() == result) {
 			setInventorySlotContents(1, new ItemStack(result, getStackInSlot(1).getCount() + 1));
 			decrStackSize(0, 1);
 		}else if((getStackInSlot(1).getItem() != Items.AIR || getStackInSlot(1) != ItemStack.EMPTY)) {
-			return result;
+			return false;
 		}else if (result != null){
 			setInventorySlotContents(1, new ItemStack(result));
 			decrStackSize(0, 1);
 		}
-		return result;
+		return true;
 	}
 	
 	@Override

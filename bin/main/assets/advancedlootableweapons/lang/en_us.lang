@@ -886,3 +886,9 @@ attribute.name.generic.bonusAttackDamage=Bonus Attack Damage
 itemGroup.alwcreativetab=Advanced Lootable Weapons
 itemGroup.alwblockscreativetab=Advanced Lootable Weapons Blocks
 itemGroup.alwtoolheadscreativetab=ALW Hot Weapon Heads
+
+
+item.shadow.drop=Shadows Condensing
+item.sharpening_stone.use=Fine Ginding of Metal
+tile.jaw_crusher.use=Crunching Rocks
+tile.bellows.use=Air Puff

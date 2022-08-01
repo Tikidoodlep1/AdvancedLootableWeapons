@@ -11,8 +11,10 @@ import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -204,6 +206,13 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
         
         return multimap;
     }
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
+		tooltip.add(TextFormatting.GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance());
+		tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance());
+	}
 	
 	public float getAttackDamage(){
 		float x = this.attackDamage;

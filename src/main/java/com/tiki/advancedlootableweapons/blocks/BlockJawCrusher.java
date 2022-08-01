@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityJawCrusher;
+import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -17,6 +18,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,12 +26,14 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -97,13 +101,15 @@ public class BlockJawCrusher extends BlockBase implements ITileEntityProvider {
 			if(playerIn.isSneaking() && worldIn.getTileEntity(pos) instanceof TileEntityJawCrusher) {
 				TileEntityJawCrusher crusher = ((TileEntityJawCrusher)worldIn.getTileEntity(pos));
 				if(crusher.getStackInSlot(0) != ItemStack.EMPTY && crusher.getStackInSlot(0).getItem() != Items.AIR) {
-					crusher.crushContents();
+					if(crusher.crushContents()) {
+						SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.JAW_CRUSHER, SoundCategory.BLOCKS, pos.getX(), pos.getY(), pos.getZ(), 3.0F, 1.0F);
+						playerIn.getServer().addScheduledTask(() -> {soundPacket.processPacket(Minecraft.getMinecraft().getConnection());});
+					}
 				}
 			}else {
 				playerIn.openGui(Alw.instance, ModInfo.GUI_CRUSHER, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			}
 		}
-		
 		return true;
 	}
 	

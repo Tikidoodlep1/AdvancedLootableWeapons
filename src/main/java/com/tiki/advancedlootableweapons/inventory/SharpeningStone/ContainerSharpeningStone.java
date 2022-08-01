@@ -18,6 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +31,6 @@ public class ContainerSharpeningStone extends Container{
     private final IInventory inputSlot;
     private final World world;
 
-    private ItemSharpeningStone activeStone;
     int enchLevel;
     Map<Enchantment, Integer> data;
     
@@ -45,45 +45,21 @@ public class ContainerSharpeningStone extends Container{
         this.outputSlot = new InventoryCraftResult();
         this.inputSlot = new InventoryBasic("Sharpening Stone", true, 1);
         this.world = worldIn;
-        for(ItemStack i : player.inventory.mainInventory) {
-        	if(i.getItem() instanceof ItemSharpeningStone) {
-        		activeStone = (ItemSharpeningStone)i.getItem();
-        		break;
-        	}
-        }
-        if(this.activeStone == null) {
-        	player.closeScreen();
-        }
         
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 43){
         	public boolean isItemValid(ItemStack stack)
             {
-        		String check = stack.getItem().getUnlocalizedName().substring(stack.getItem().getUnlocalizedName().indexOf('_') + 1);
-        		for(ItemStack i : player.inventory.mainInventory) {
-                	if(i.getItem() instanceof ItemSharpeningStone) {
-                		ItemSharpeningStone stone = (ItemSharpeningStone)i.getItem();
-                		String tempMatPath = stone.getMaterial();
-                		if(tempMatPath.substring(tempMatPath.indexOf('_') + 1).toLowerCase().equalsIgnoreCase(check)) {
-                			activeStone = (ItemSharpeningStone)i.getItem();
-                			break;
-                		}
-                	}
-                }
-        		String check2 = activeStone.getUnlocalizedName().substring(activeStone.getUnlocalizedName().indexOf('.') + 1, activeStone.getUnlocalizedName().indexOf('_'));
-        		if(check.equalsIgnoreCase("shadow")) {
-        			check = "shadow_platinum";
-        		}else if(check.equalsIgnoreCase("frost")) {
-        			check = "frost_steel";
+        		if(!(playerInventory.getCurrentItem().getItem() instanceof ItemSharpeningStone)) {
+        			return false;
         		}
-        		if(check2.equalsIgnoreCase("shadow")) {
-        			check2 = "shadow_platinum";
-        		}else if(check2.equalsIgnoreCase("frost")) {
-        			check2 = "frost_steel";
-        		}
-        		
-        		//System.out.println("check 1 is: " + check + ", check 2 is: " + check2);
-        		
-            	if(check.equalsIgnoreCase(check2) && (stack.getItem() instanceof ToolStabSword || stack.getItem() instanceof ToolSlashSword)) {
+        		ItemSharpeningStone stone = (ItemSharpeningStone)playerInventory.getCurrentItem().getItem();
+        		ToolMaterial stackMat = null;	
+            	if(stack.getItem() instanceof ToolStabSword) {
+            		stackMat = ((ToolStabSword)stack.getItem()).getToolMaterial();
+            	}else if(stack.getItem() instanceof ToolSlashSword) {
+            		stackMat = ((ToolSlashSword)stack.getItem()).getToolMaterial();
+            	}
+            	if(stackMat == stone.getToolMaterial() || (stone.getToolMaterial() == ToolMaterial.STONE && stackMat == ToolMaterial.WOOD)) {
             			if(EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, stack) < 6){
             				ItemStack copyStack = stack.copy();
             				enchLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, copyStack);
@@ -98,10 +74,6 @@ public class ContainerSharpeningStone extends Container{
             				}
             				outputSlot.setInventorySlotContents(1, copyStack);
             			}
-            			if(player.inventory.getSlotFor(new ItemStack(activeStone)) == -1) {
-            				player.addItemStackToInventory(stack);
-            				player.closeScreen();
-            	        }
             		return true;
             	}else {
             		return false;
@@ -109,7 +81,7 @@ public class ContainerSharpeningStone extends Container{
             }
         	
         	public ItemStack onTake(EntityPlayer player, ItemStack stack) {
-        		ContainerSharpeningStone.this.outputSlot.setInventorySlotContents(1, ItemStack.EMPTY);
+        		outputSlot.setInventorySlotContents(1, ItemStack.EMPTY);
         		return stack;
         	}
         });
@@ -136,7 +108,7 @@ public class ContainerSharpeningStone extends Container{
 	                stack.addEnchantment(EnchantmentInit.REFINED, 1);
 				}
 				
-                thePlayer.inventory.getStackInSlot(thePlayer.inventory.getSlotFor(new ItemStack(activeStone))).shrink(1);
+                playerInventory.getCurrentItem().shrink(1);
                 
                 thePlayer.playSound(SoundHandler.SHARPENING_STONE, 1.0f, 1.0f);
                 
@@ -163,16 +135,16 @@ public class ContainerSharpeningStone extends Container{
     {
         super.onCraftMatrixChanged(inventoryIn);
 
-        if (inventoryIn == this.inputSlot)
-        {
-        	outputSlot.setInventorySlotContents(1, ContainerSharpeningStone.this.inputSlot.getStackInSlot(0));
-        	if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, outputSlot.getStackInSlot(1)) >= 1)
-			{
-				EnchantmentHelper.setEnchantments(data, outputSlot.getStackInSlot(1));
-			}else {
-				outputSlot.getStackInSlot(1).addEnchantment(EnchantmentInit.REFINED, 1);
-			}
-        }
+//        if (inventoryIn == this.inputSlot)
+//        {
+//        	outputSlot.setInventorySlotContents(1, ContainerSharpeningStone.this.inputSlot.getStackInSlot(0));
+//        	if (EnchantmentHelper.getEnchantmentLevel(EnchantmentInit.REFINED, outputSlot.getStackInSlot(1)) >= 1)
+//			{
+//				EnchantmentHelper.setEnchantments(data, outputSlot.getStackInSlot(1));
+//			}else {
+//				outputSlot.getStackInSlot(1).addEnchantment(EnchantmentInit.REFINED, 1);
+//			}
+//        }
     }
     
     public void addListener(IContainerListener listener)

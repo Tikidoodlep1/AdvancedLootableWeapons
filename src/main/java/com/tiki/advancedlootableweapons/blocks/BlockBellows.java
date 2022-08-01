@@ -4,6 +4,8 @@ import java.util.Random;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import com.tiki.advancedlootableweapons.handlers.SoundHandler;
+
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +24,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -32,7 +35,6 @@ public class BlockBellows extends BlockBase {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;	
 	public static final AxisAlignedBB BELLOWS_AABB_NS = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 0.4D, 1.0D);
 	public static final AxisAlignedBB BELLOWS_AABB_EW = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 0.4D, 0.75D);
-	private int cooldown;
 	
 	public BlockBellows(String name) {
 		super(name, Material.WOOD);
@@ -41,6 +43,7 @@ public class BlockBellows extends BlockBase {
 		this.setHarvestLevel("axe", 1);
 		this.fullBlock = false;
 		this.translucent = true;
+		this.needsRandomTick = true;
 	}
 	
 	@Override
@@ -92,26 +95,18 @@ public class BlockBellows extends BlockBase {
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return new ItemStack(this);
-	}
-	
-	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		if(this.cooldown > 0) {
-			this.cooldown--;
-		}
-		super.updateTick(worldIn, pos, state, rand);
-	}
+	}	
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(!worldIn.isRemote) {
+		worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 3.0F, 1.0F);
+		
+		if(!worldIn.isRemote) {			
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
 			if(te instanceof TileEntityForge) {
 				((TileEntityForge)te).bellowsInteraction();
-				this.cooldown = 60;
 			}else if(te instanceof TileEntityForge2) {
 				((TileEntityForge2)te).bellowsInteraction(worldIn, pos);
-				this.cooldown = 60;
 			}
 		}
 		return true;

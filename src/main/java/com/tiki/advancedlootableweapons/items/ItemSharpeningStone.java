@@ -41,6 +41,10 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 		ItemInit.items.add(this);
 	}
 	
+	public ToolMaterial getToolMaterial() {
+		return this.material;
+	}
+	
 	@Override
 	public void registerModels() {
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");

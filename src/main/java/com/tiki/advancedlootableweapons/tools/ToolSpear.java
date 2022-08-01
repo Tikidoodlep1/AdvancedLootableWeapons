@@ -1,9 +1,12 @@
 package com.tiki.advancedlootableweapons.tools;
 
+import java.util.List;
 import java.util.Random;
 
 import com.tiki.advancedlootableweapons.entity.EntitySpear;
+import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDurability;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,12 +23,21 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class ToolSpear extends ToolStabSword {
 	
 	public ToolSpear(String name, ToolMaterial material) {
 		super(name, material, "spear");
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+		tooltip.add(TextFormatting.LIGHT_PURPLE + "Chance to pierce Chain armor when thrown: " + we.getChainPenChance());
+		tooltip.add(TextFormatting.AQUA + "Chance to pierce Plate armor when thrown: " + we.getPlatePenChance());
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 	
 	public EnumAction getItemUseAction(ItemStack stack)

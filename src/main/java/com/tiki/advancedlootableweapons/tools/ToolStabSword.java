@@ -11,11 +11,13 @@ import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -285,6 +287,13 @@ public class ToolStabSword extends Item implements IHasModel{
     }
 	
 	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
+		tooltip.add(TextFormatting.GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance());
+		tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance());
+	}
+	
+	@Override
 	public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
 		return false;
 	}
@@ -314,7 +323,7 @@ public class ToolStabSword extends Item implements IHasModel{
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
     {
-        return enchantment.type.canEnchantItem(Items.DIAMOND_SWORD);
+        return enchantment.type.canEnchantItem(Items.IRON_SWORD);
     }
 	
 	public String getToolMaterialName()

@@ -69,7 +69,6 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		
 		if(this.activeRecipe == null && DrumRecipes.getAcceptedFluids().contains(this.getTank().getFluid().getFluid()) && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
 			DrumRecipes recipe = DrumRecipes.getMatchingRecipe(this.getTank().getFluid().getFluid(), this.inventory.get(INPUT_SLOT), this.inventory.get(ADDITIVE_SLOT), false);
-			System.out.println("RECIPE IS " + recipe);
 			if(recipe != null) {
 				this.activeRecipe = recipe;
 			}else {

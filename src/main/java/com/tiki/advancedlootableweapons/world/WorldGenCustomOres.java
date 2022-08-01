@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-public class WorldGenCustomOres implements IWorldGenerator{
+public class WorldGenCustomOres implements IWorldGenerator {
 
 	private WorldGenerator ore_copper, ore_silver, ore_platinum, ore_crystallite, ore_tin, ore_salt, rock_feldspar, rock_gypsum, rock_dolomite;
 	
