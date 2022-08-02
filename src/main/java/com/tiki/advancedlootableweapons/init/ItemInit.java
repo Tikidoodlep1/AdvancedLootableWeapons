@@ -5,9 +5,12 @@ import java.util.Map;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.items.weapons.SlashSword;
+import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -75,7 +78,9 @@ public class ItemInit {
 	public static final RegistryObject<Item> MAKHAIRA_HEAD = ITEMS.register("makhaira_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> SPEAR_HEAD = ITEMS.register("spear_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> LONG_WEAPON_HANDLE = ITEMS.register("long_weapon_handle", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
-
+	
+	public static final RegistryObject<Item> LONGSWORD_WOOD = ITEMS.register("longsword_wood", () -> new SlashSword(Tiers.WOOD, WeaponAttributes.LONGSWORD, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	
 	public static final RegistryObject<Item> HOT_TOOL_HEAD = ITEMS.register("hot_tool_head", () -> new ItemHotToolHead(new Item.Properties().tab(CreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
 	
 	public static final RegistryObject<Item> HOT_TOOL_ROD = ITEMS.register("hot_tool_rod", () -> new ItemHotToolHead(new Item.Properties().tab(CreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());

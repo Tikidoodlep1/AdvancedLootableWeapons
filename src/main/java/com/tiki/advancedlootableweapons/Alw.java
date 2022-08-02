@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons;
 
-import com.mojang.logging.LogUtils;
-import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
+import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
+import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.GuiInit;
@@ -13,22 +13,23 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import java.util.Map;
-
-import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ModInfo.ID)
 public class Alw
 {
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    //private static final Logger LOGGER = LogUtils.getLogger();
 
     public Alw()
     {
@@ -36,13 +37,17 @@ public class Alw
         // Register the setup method for modloading
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
-        
+                
         ItemInit.register(eventBus);
         BlockInit.register(eventBus);
         
         BlockEntityInit.register(eventBus);
         GuiInit.register(eventBus);
         
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigHandler.SPEC, "ALW Config-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfigHandler.SPEC, "ALW Config-common.toml");
+        
+        ForgeMod.enableMilkFluid();
         
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

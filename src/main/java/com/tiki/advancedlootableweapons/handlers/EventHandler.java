@@ -1,7 +1,10 @@
 package com.tiki.advancedlootableweapons.handlers;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -20,5 +23,10 @@ public class EventHandler {
 		for(GlobalLootModifierSerializer<?> s : GlobalDropHandler.dropList) {
 			registry.register(s);
 		}
+	}
+	
+	@SubscribeEvent
+	public static void registerEntityAttributeModifiers(final EntityAttributeModificationEvent event) {
+		event.add(EntityType.PLAYER, ForgeMod.REACH_DISTANCE.get());
 	}
 }
