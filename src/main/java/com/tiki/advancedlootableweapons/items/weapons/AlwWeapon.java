@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -22,18 +23,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.common.util.Lazy;
 
-public class SlashSword extends TieredItem implements Vanishable {
+public class AlwWeapon extends TieredItem implements Vanishable {
     private final double attackDamage;
     public final WeaponAttributes attributes;
-    //private final Tier tier;
     private final Lazy<Multimap<Attribute, AttributeModifier>> defaultModifiers;
-
-    public SlashSword(Tier pTier, WeaponAttributes attributes, Item.Properties pProperties) {
+    
+    public AlwWeapon(Tier pTier, WeaponAttributes attributes, Item.Properties pProperties) {
         super(pTier, pProperties);
-        //this.tier = pTier;
         this.attributes = attributes;
         this.attackDamage = attributes.getBaseDamage() + pTier.getAttackDamageBonus();
         this.defaultModifiers = Lazy.of(() -> {
@@ -41,26 +42,14 @@ public class SlashSword extends TieredItem implements Vanishable {
         	builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attributes.getBaseAttackSpeed(), AttributeModifier.Operation.ADDITION));
             if(ForgeMod.REACH_DISTANCE.isPresent()) {
-            	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(AttributeModifiers.ATK_RNG_UUID, "Weapon modifier", attributes.getReach() - 0, AttributeModifier.Operation.ADDITION));
+            	builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(AttributeModifiers.BLOCK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
+            }
+            if(ForgeMod.ATTACK_RANGE.isPresent()) {
+            	builder.put(ForgeMod.ATTACK_RANGE.get(), new AttributeModifier(AttributeModifiers.ATTACK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
             }
             return builder.build();
         });
     }
-    
-//    @Override
-//    public int getMaxDamage(ItemStack stack) {
-//    	CompoundTag tag = stack.getOrCreateTag();
-//    	if(tag.contains("maxDurability")) {
-//    		return this.tier.getUses() + tag.getInt("maxDurability");
-//    	}
-//    	return this.tier.getUses();
-//    }
-//    
-//    public void setMaximumDamage(ItemStack stack, int additionalDur) {
-//    	CompoundTag tag = stack.getOrCreateTag();
-//    	tag.putInt("maxDurability", additionalDur);
-//    	stack.setTag(tag);
-//    }
     
     public double getAttackDamage() {
         return this.attackDamage;
@@ -143,7 +132,20 @@ public class SlashSword extends TieredItem implements Vanishable {
     }
     
     @Override
+    public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
+    	if(this.attributes.getReach() > 0) {
+    		return target.getBoundingBox().inflate(this.attributes.getReach()/2, 0.25, this.attributes.getReach()/2);
+    	}else {
+    		return target.getBoundingBox().inflate(1-this.attributes.getReach(), 0.25, 1-this.attributes.getReach());
+    	}
+    }
+    
+    @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+    	if(attributes.shouldSlash()) {
+    		return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
+    	}else {
+    		return toolAction == ToolActions.SWORD_DIG;
+    	}
     }
 }

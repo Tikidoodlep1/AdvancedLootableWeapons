@@ -1,5 +1,7 @@
 package com.tiki.advancedlootableweapons.handlers;
 
+import com.tiki.advancedlootableweapons.init.ItemInit;
+
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 
@@ -7,21 +9,21 @@ public enum EnumMaterialType {
 	
 	WOOD(Tiers.WOOD, "Wood"),
 	STONE(Tiers.STONE, "Stone"),
-	KOBOLD_STEEL(null, "Kobold Steel"),
+	KOBOLD_STEEL(ItemInit.MAT_KOBOLD, "Kobold Steel"),
 	GOLD(Tiers.GOLD, "Gold"),
-	COPPER(null, "Copper"),
-	SILVER(null, "Silver"),
+	COPPER(ItemInit.MAT_COPPER, "Copper"),
+	SILVER(ItemInit.MAT_SILVER, "Silver"),
 	IRON(Tiers.IRON, "Iron"),
-	BRONZE(null, "Bronze"),
-	PLATINUM(null, "Platinum"),
-	STEEL(null, "Steel"),
+	BRONZE(ItemInit.MAT_BRONZE, "Bronze"),
+	PLATINUM(ItemInit.MAT_PLATINUM, "Platinum"),
+	STEEL(ItemInit.MAT_STEEL, "Steel"),
 	DIAMOND(Tiers.DIAMOND, "Diamond"),
-	SHADOW_PLATINUM(null, "Shadow Platinum"),
-	FROST_STEEL(null, "Frost Steel"),
-	OBSIDIAN(null, "Obsidian"),
+	SHADOW_PLATINUM(ItemInit.MAT_SHADOW_PLATINUM, "Shadow Platinum"),
+	FROST_STEEL(ItemInit.MAT_FROST_STEEL, "Frost Steel"),
+	OBSIDIAN(ItemInit.MAT_OBSIDIAN, "Obsidian"),
 	NETHERITE(Tiers.NETHERITE, "Netherite"),
-	CRYSTALLITE(null, "Crystallite"),
-	DUSKSTEEL(null, "Dusksteel"),
+	CRYSTALLITE(ItemInit.MAT_CRYSTALLITE, "Crystallite"),
+	DUSKSTEEL(ItemInit.MAT_DUSKSTEEL, "Dusksteel"),
 	NULL_MAT(null, "null");
 
 	private final Tier mat;

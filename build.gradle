@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-version = '0.8-1.18.2'
+version = '1.0.0-1.18.2'
 group = 'com.tiki.advancedlootableweapons' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'advancedlootableweapons'
 

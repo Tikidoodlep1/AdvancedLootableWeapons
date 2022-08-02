@@ -132,7 +132,7 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.ConfigValue<Float> CRYSTALLITE_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.ConfigValue<Float> DUSKSTEEL_ARMOR_HARDNESS;
 	
-	public static ForgeConfigSpec.ConfigValue<Float> SHADOW_DROP_RATE;
+	public static ForgeConfigSpec.ConfigValue<Integer> SHADOW_DROP_RATE;
 	public static ForgeConfigSpec.ConfigValue<Boolean> LAND_MOBS_DROP_SHADOW;
 	public static ForgeConfigSpec.ConfigValue<Boolean> AIR_MOBS_DROP_SHADOW;
 	public static ForgeConfigSpec.ConfigValue<Boolean> WATER_MOBS_DROP_SHADOW;
@@ -142,56 +142,6 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.ConfigValue<Boolean> BOSS_DROPS_SHADOW;
 	public static ForgeConfigSpec.ConfigValue<Boolean> ONLY_BOSS_DROPS_SHADOW;
 	public static ForgeConfigSpec.ConfigValue<Boolean> NON_VANILLA_DROPS_SHADOW;
-	
-	public static ForgeConfigSpec.ConfigValue<Boolean> VILLAGER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> PARROT_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> LLAMA_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> POLARBEAR_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> RABBIT_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> HORSE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> IRONGOLEM_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> OCELOT_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SNOWMAN_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> MOOSHROOM_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> WOLF_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SQUID_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> CHICKEN_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SHEEP_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> COW_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> PIG_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> BAT_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> GUARDIAN_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> WITHER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> PIGZOMBIE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> GIANTZOMBIE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ILLUSIONILLAGER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> MULE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> DONKEY_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ZOMBIEHORSE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SKELETONHORSE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ZOMBIEVILLAGER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> WITHERSKELETON_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ELDERGUARDIAN_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ZOMBIE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> HUSK_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SKELETON_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> STRAY_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> BLAZE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> CREEPER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> GHAST_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> MAGMACUBE_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SILVERFISH_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SLIME_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SPIDER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> CAVESPIDER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> WITCH_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> VEX_DROP_SHADOW ;
-	public static ForgeConfigSpec.ConfigValue<Boolean> EVOKER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> VINDICATOR_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> SHULKER_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> DRAGON_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENDERMAN_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENDERMITE_DROP_SHADOW;
 	
 	static {
 		BUILDER.push("Advanced Lootable Weapons Config");
@@ -219,6 +169,53 @@ public class CommonConfigHandler {
 		ENABLE_ARMOR_FORGING = BUILDER.comment("Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)").define("Enable Armor Forging", true);
 		DISABLE_VANILLA_ARMORS = BUILDER.comment("Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)").define("Disable Vanilla Armors", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
+		
+		BUILDER.comment("MATERIAL MODIFICATION");
+		KOBOLD_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F, Float.class);
+		COPPER_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of copper.").defineInRange("Copper Base Damage", 3.5F, 0F, 100F, Float.class);
+		SILVER_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of silver.").defineInRange("Silver Base Damage", 4F, 0F, 100F, Float.class);
+		BRONZE_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of bronze.").defineInRange("Bronze Base Damage", 4.25F, 0F, 100F, Float.class);
+		PLATINUM_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of platinum.").defineInRange("Platinum Base Damage", 4.75F, 0F, 100F, Float.class);
+		STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of steel.").defineInRange("Steel Base Damage", 5.5F, 0F, 100F, Float.class);
+		SHADOW_PLATINUM_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of shadow platinum.").defineInRange("Shadow Platinum Base Damage", 5.75F, 0F, 100F, Float.class);
+		FROST_STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of frost steel.").defineInRange("Frost Steel Base Damage", 6.0F, 0F, 100F, Float.class);
+		OBSIDIAN_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of obsidian.").defineInRange("Obsidian Base Damage", 6.25F, 0F, 100F, Float.class);
+		CRYSTALLITE_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of crystallite.").defineInRange("Crystallite Base Damage", 6.75F, 0F, 100F, Float.class);
+		DUSKSTEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of dusksteel.").defineInRange("Dusksteel Damage", 7.5F, 0F, 100F, Float.class);
+		KOBOLD_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of kobold steel have.").defineInRange("Kobold Steel Base Durability", 203, 0, 1000, Integer.class);
+		COPPER_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of copper have.").defineInRange("Copper Base Durability", 256, 0, 1000, Integer.class);
+		SILVER_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of silver have.").defineInRange("Silver Base Durability", 277, 0, 1000, Integer.class);
+		BRONZE_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of bronze have.").defineInRange("Bronze Base Durability", 330, 0, 1000, Integer.class);
+		PLATINUM_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of platinum have.").defineInRange("Platinum Base Durability", 212, 0, 1000, Integer.class);
+		STEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of steel have.").defineInRange("Steel Base Durability", 416, 0, 1000, Integer.class);
+		SHADOW_PLATINUM_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of shadow platinum have.").defineInRange("Shadow Platinum Base Durability", 461, 0, 1000, Integer.class);
+		FROST_STEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of frost steel have.").defineInRange("Frost Steel Base Durability", 507, 0, 1000, Integer.class);
+		OBSIDIAN_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of obsidian have.").defineInRange("Obsidian Base Durability", 598, 0, 1000, Integer.class);
+		CRYSTALLITE_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of crystallite have.").defineInRange("Crystallite Base Durability", 627, 0, 1000, Integer.class);
+		DUSKSTEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of dusksteel have.").defineInRange("Dusksteel Base Durability", 812, 0, 1000, Integer.class);
+		
+		KOBOLD_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of kobold steel have.").defineInRange("Kobold Steel Base Armor Durability", 20, 0, 1000, Integer.class);
+		COPPER_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of copper have.").defineInRange("Copper Base Armor Durability", 25, 0, 1000, Integer.class);
+		SILVER_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of silver have.").defineInRange("Silver Base Armor Durability", 27, 0, 1000, Integer.class);
+		BRONZE_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of bronze have.").defineInRange("Bronze Base Armor Durability", 32, 0, 1000, Integer.class);
+		PLATINUM_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of platinum have.").defineInRange("Platinum Base Armor Durability", 20, 0, 1000, Integer.class);
+		STEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of steel have.").defineInRange("Steel Base Armor Durability", 38, 0, 1000, Integer.class);
+		SHADOW_PLATINUM_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of shadow platinum have.").defineInRange("Shadow Platinum Base Armor Durability", 44, 0, 1000, Integer.class);
+		FROST_STEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of frost steel have.").defineInRange("Frost Steel Base Armor Durability", 49, 0, 1000, Integer.class);
+		OBSIDIAN_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of obsidian have.").defineInRange("Obsidian Base Armor Durability", 57, 0, 1000, Integer.class);
+		CRYSTALLITE_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of crystallite have.").defineInRange("Crystallite Base Armor Durability", 60, 0, 1000, Integer.class);
+		DUSKSTEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of dusksteel have.").defineInRange("Dusksteel Base Armor Durability", 78, 0, 1000, Integer.class);
+		KOBOLD_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of kobold steel.").defineInRange("Kobold Steel Armor Toughness", 1.25F, 0F, 100F, Float.class);
+		COPPER_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of copper.").defineInRange("Copper Armor Toughness", 1.56F, 0F, 100F, Float.class);
+		SILVER_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of silver.").defineInRange("Silver Armor Toughness", 1.69F, 0F, 100F, Float.class);
+		BRONZE_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of bronze.").defineInRange("Bronze Armor Toughness", 2.0F, 0F, 100F, Float.class);
+		PLATINUM_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of platinum.").defineInRange("Platinum Armor Toughness", 1.25F, 0F, 100F, Float.class);
+		STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of steel.").defineInRange("Steel Armor Toughness", 2.5F, 0F, 100F, Float.class);
+		SHADOW_PLATINUM_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of shadow platinum.").defineInRange("Shadow Platinum Armor Toughness", 2.75F, 0F, 100F, Float.class);
+		FROST_STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of frost steel.").defineInRange("Frost Steel Armor Toughness", 3.06F, 0F, 100F, Float.class);
+		OBSIDIAN_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of obsidian.").defineInRange("Obsidian Armor Toughness", 3.56F, 0F, 100F, Float.class);
+		CRYSTALLITE_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of crystallite.").defineInRange("Crystallite Armor Toughness", 3.75F, 0F, 100F, Float.class);
+		DUSKSTEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of dusksteel.").defineInRange("Dusksteel Armor Toughness", 4.88F, 0F, 100F, Float.class);
 		
 		BUILDER.comment("WEAPON MODIFICATION");
 		GLOBAL_DAGGER_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Daggers\" is true. This modifies the damage of all types of daggers, regardless of material.").defineInRange("Global Dagger Base Damage", 1.5F, 0.0F, 100.0F, Float.class);
@@ -271,6 +268,25 @@ public class CommonConfigHandler {
 		GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting long weapon handles.").defineInRange("Global Long Weapon Handle Crafting Exp", 4, 0, 100, Integer.class);
 		GLOBAL_CHAIN_LINK_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting chain links.").defineInRange("Global Chain Link Crafting Exp", 2, 0, 100, Integer.class);
 		GLOBAL_ARMOR_PLATE_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting armor plates.").defineInRange("Global Armor Plate Crafting Exp", 4, 0, 100, Integer.class);
+		
+		BUILDER.comment("ARMOR MODIFICATION");
+		USE_ARMOR_WEIGHT = BUILDER.comment("If enabled, armor will slow you down proportionate to it's real-world weight. (True/False)").define("Use Armor Weight", true);
+		USE_ARMOR_BONUS_HEALTH = BUILDER.comment("If enabled, armor will give you bonus health when worn. (True/False)").define("Use Armor Bonus Health", false);
+		USE_ARMOR_BONUS_DAMAGE = BUILDER.comment("If enabled, chestplates will make you deal extra damage equivalent to the real-world weight with the armor tier factored in. (True/False)").define("Use Armor Bonus Damage", true);
+		ARMOR_BONUS_HEALTH_MULTIPLIER = BUILDER.comment("Only works if \"Use Armor Bonus Health\" is enabled. A multiplier for the bonus health given by armor.").defineInRange("Armor Bonus Health Multiplier", 1.0F, 0.0F, 10.0F, Float.class);
+		ARMOR_BONUS_DAMAGE_MULTIPLIER = BUILDER.comment("Only works if \"Use Armor Bonus Damage\" is enabled. A multiplier for the bonus damage given by chestplates.").defineInRange("Armor Bonus Damage Multiplier", 1.0F, 0.0F, 10.0F, Float.class);
+		
+		BUILDER.comment("GENERAL SHADOW DROP MODIFICATION");
+		SHADOW_DROP_RATE = BUILDER.comment("The drop rate for the shadow item in percentage, 5 = 5%").defineInRange("Shadow Drop Rate (Percent)", 5, 0, 100, Integer.class);
+		LAND_MOBS_DROP_SHADOW = BUILDER.comment("Should land mobs drop the shadow item? (True/False)").define("Land Mobs - Shadow", true);
+		AIR_MOBS_DROP_SHADOW = BUILDER.comment("Should air mobs drop the shadow item? (True/False)").define("Air Mobs - Shadow", false);
+		WATER_MOBS_DROP_SHADOW = BUILDER.comment("Should water mobs drop the shadow item? (True/False)").define("Water Mobs - Shadow", false);
+		PEACEFUL_MOBS_DROP_SHADOW = BUILDER.comment("Should passive mobs drop the shadow item? (True/False)").define("Passive Mobs - Shadow", false);
+		NEUTRAL_MOBS_DROP_SHADOW = BUILDER.comment("Should neutral mobs drop the shadow item? (True/False)").define("Neutral Mobs - Shadow", false);
+		HOSTILE_MOBS_DROP_SHADOW = BUILDER.comment("Should hostile mobs drop the shadow item? (True/False)").define("Hostile Mobs - Shadow", true);
+		BOSS_DROPS_SHADOW = BUILDER.comment("Should bosses drop the shadow item? (True/False)").define("Bosses - Shadow", true);
+		ONLY_BOSS_DROPS_SHADOW = BUILDER.comment("Should \"boss\" mobs be the only ones to drop shadows? (True/False)").define("Only Bosses Drop Shadows", false);
+		NON_VANILLA_DROPS_SHADOW = BUILDER.comment("Should any non-vanilla mobs drop shadows? This does NOT take into account if the mob is passive, flying, water, etc. (True/False)").define("Non-Vanilla Mobs - Shadow", true);
 		
 		BUILDER.pop();
 		SPEC = BUILDER.build();

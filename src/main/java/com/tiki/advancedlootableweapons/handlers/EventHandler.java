@@ -28,5 +28,6 @@ public class EventHandler {
 	@SubscribeEvent
 	public static void registerEntityAttributeModifiers(final EntityAttributeModificationEvent event) {
 		event.add(EntityType.PLAYER, ForgeMod.REACH_DISTANCE.get());
+		event.add(EntityType.PLAYER, ForgeMod.ATTACK_RANGE.get());
 	}
 }
