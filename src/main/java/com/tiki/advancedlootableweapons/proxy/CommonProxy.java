@@ -52,7 +52,7 @@ public class CommonProxy {
 		boolean containsLeather = false;
 		int leatherCount = 0;
 		for(EntityItem e : event.getDrops()) {
-			if(e.getItem().getItem() == Items.LEATHER) {
+			if(e.getItem().getItem() == Items.LEATHER || e.getItem().getItem() == Items.RABBIT_HIDE) {
 				leatherCount = e.getItem().getCount();
 				containsLeather = true;
 				event.getDrops().remove(e);
@@ -60,7 +60,7 @@ public class CommonProxy {
 			}
 		}
 		if(containsLeather) {
-			event.getEntity().entityDropItem(new ItemStack(ItemInit.UNTRIMMED_HIDE, (leatherCount*2)+rand.nextInt(event.getLootingLevel() + 1)), 0.25F);
+			event.getEntity().entityDropItem(new ItemStack(ItemInit.UNTRIMMED_HIDE, (int)(leatherCount*1.25)+rand.nextInt(event.getLootingLevel() + 1)), 0.25F);
 		}
 		if((rand.nextInt(100) + 1) <= (ConfigHandler.SHADOW_DROP_RATE*100) && GlobalDropsHandler.getEntityMap().get(event.getEntity().getClass())) {
 			Entity entity = event.getEntity();
