@@ -3,7 +3,7 @@
     {
         "normal":
         {
-            "model": "advancedlootableweapons:block_brick_diorite"
+        	"model": "advancedlootableweapons:block_brick_diorite"
         }
     }
 }

@@ -8,12 +8,8 @@ import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.GlobalDropsHandler;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
-import com.tiki.advancedlootableweapons.init.EntityInit;
-import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
-import com.tiki.advancedlootableweapons.world.WorldGenCustomOres;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockObsidian;
 import net.minecraft.entity.Entity;
@@ -27,11 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@EventBusSubscriber
 public class CommonProxy {
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	
@@ -41,14 +33,7 @@ public class CommonProxy {
 	
 	public void registerCustomMeshesAndStateStuff() {}
 	
-	public void preInitRegistries(FMLPreInitializationEvent event)
-	{
-		FluidInit.registerFluids();
-		EntityInit.registerEntities();
-		ConfigHandler.registerConfig(event);
-		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
-		registerEntityRenders();
-	}
+	public void registerTESRs() {}
 	
 	public void onBlockAttemptBreak(LeftClickBlock event){		
 		BlockPos blockPos = event.getPos();

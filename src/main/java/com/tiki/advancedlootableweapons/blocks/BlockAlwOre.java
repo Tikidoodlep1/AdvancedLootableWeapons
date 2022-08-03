@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class BlockAlwOre extends Block implements IHasModel{
+public class BlockAlwOre extends Block implements IHasModel {
 	
 	public BlockAlwOre(String name, int harvestLevel) 
 	{

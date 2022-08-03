@@ -119,7 +119,7 @@ public class ConfigHandler {
 	public static int SILVER_ARMOR_DURABILITY = 27;
 	public static int BRONZE_ARMOR_DURABILITY = 32;
 	public static int PLATINUM_ARMOR_DURABILITY = 20;
-	public static int STEEL_ARMOR_DURABILITY = 40;
+	public static int STEEL_ARMOR_DURABILITY = 38;
 	public static int SHADOW_PLATINUM_ARMOR_DURABILITY = 44;
 	public static int FROST_STEEL_ARMOR_DURABILITY = 49;
 	public static int OBSIDIAN_ARMOR_DURABILITY = 57;
@@ -295,17 +295,17 @@ public class ConfigHandler {
 		//**********************************MATERIAL MODIFICATION**********************************
 		category = "WEAPON MATERIAL MODIFICATION";
 		config.addCustomCategoryComment(category, "Modifications to the materials of all weapons such as durability and damage");
-		KOBOLD_DAMAGE = config.getFloat("Kobold Steel Damage", category, 3.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of kobold steel.");
-		COPPER_DAMAGE = config.getFloat("Copper Damage", category, 4.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of copper.");
-		SILVER_DAMAGE = config.getFloat("Silver Damage", category, 4.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of silver.");
-		BRONZE_DAMAGE = config.getFloat("Bronze Damage", category, 4.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of bronze.");
-		PLATINUM_DAMAGE = config.getFloat("Platinum Damage", category, 5.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of platinum.");
-		STEEL_DAMAGE = config.getFloat("Steel Damage", category, 6.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of steel.");
-		SHADOW_PLATINUM_DAMAGE = config.getFloat("Shadow Platinum Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of shadow platinum.");
-		FROST_STEEL_DAMAGE = config.getFloat("Frost Steel Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of frost steel.");
-		OBSIDIAN_DAMAGE = config.getFloat("Obsidian Damage", category, 6.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of obsidian.");
-		CRYSTALLITE_DAMAGE = config.getFloat("Crystallite Damage", category, 7.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of crystallite.");
-		DUSKSTEEL_DAMAGE = config.getFloat("Dusksteel Damage", category, 8.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of dusksteel.");
+		KOBOLD_DAMAGE = config.getFloat("Kobold Steel Base Damage", category, 3.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of kobold steel.");
+		COPPER_DAMAGE = config.getFloat("Copper Base Damage", category, 4.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of copper.");
+		SILVER_DAMAGE = config.getFloat("Silver Base Damage", category, 4.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of silver.");
+		BRONZE_DAMAGE = config.getFloat("Bronze Base Damage", category, 4.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of bronze.");
+		PLATINUM_DAMAGE = config.getFloat("Platinum Base Damage", category, 5.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of platinum.");
+		STEEL_DAMAGE = config.getFloat("Steel Base Damage", category, 6.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of steel.");
+		SHADOW_PLATINUM_DAMAGE = config.getFloat("Shadow Platinum Base Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of shadow platinum.");
+		FROST_STEEL_DAMAGE = config.getFloat("Frost Steel Base Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of frost steel.");
+		OBSIDIAN_DAMAGE = config.getFloat("Obsidian Base Damage", category, 6.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of obsidian.");
+		CRYSTALLITE_DAMAGE = config.getFloat("Crystallite Base Damage", category, 7.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of crystallite.");
+		DUSKSTEEL_DAMAGE = config.getFloat("Dusksteel Base Damage", category, 8.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of dusksteel.");
 		
 		KOBOLD_DURABILITY = config.getInt("Kobold Steel Base Durability", category, 203, 0, 1000, "Use to change the durability that the weapons made of kobold steel have.");
 		COPPER_DURABILITY = config.getInt("Copper Base Durability", category, 256, 0, 1000, "Use to change the durability that the weapons made of copper have.");
@@ -326,7 +326,7 @@ public class ConfigHandler {
 		SILVER_ARMOR_DURABILITY = config.getInt("Silver Base Armor Durability", category, 27, 0, 1000, "Use to change the durability that the armors made of silver have.");
 		BRONZE_ARMOR_DURABILITY = config.getInt("Bronze Base Armor Durability", category, 32, 0, 1000, "Use to change the durability that the armors made of bronze have.");
 		PLATINUM_ARMOR_DURABILITY = config.getInt("Platinum Base Armor Durability", category, 20, 0, 1000, "Use to change the durability that the armors made of platinum have.");
-		STEEL_ARMOR_DURABILITY = config.getInt("Steel Base Armor Durability", category, 40, 0, 1000, "Use to change the durability that the armors made of steel have.");
+		STEEL_ARMOR_DURABILITY = config.getInt("Steel Base Armor Durability", category, 38, 0, 1000, "Use to change the durability that the armors made of steel have.");
 		SHADOW_PLATINUM_ARMOR_DURABILITY = config.getInt("Shadow Platinum Base Armor Durability", category, 44, 0, 1000, "Use to change the durability that the armors made of shadow platinum have.");
 		FROST_STEEL_ARMOR_DURABILITY = config.getInt("Frost Steel Base Armor Durability", category, 49, 0, 1000, "Use to change the durability that the armors made of frost steel have.");
 		OBSIDIAN_ARMOR_DURABILITY = config.getInt("Obsidian Base Armor Durability", category, 57, 0, 1000, "Use to change the durability that the armors made of obsidian have.");

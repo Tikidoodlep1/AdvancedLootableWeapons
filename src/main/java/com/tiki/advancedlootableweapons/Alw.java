@@ -63,7 +63,7 @@ public class Alw {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-		proxy.preInitRegistries(event);
+		RegistryHandler.preInitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(instance);
 	}
 	

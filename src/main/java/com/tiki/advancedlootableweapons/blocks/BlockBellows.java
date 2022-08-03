@@ -43,7 +43,6 @@ public class BlockBellows extends BlockBase {
 		this.setHarvestLevel("axe", 1);
 		this.fullBlock = false;
 		this.translucent = true;
-		this.needsRandomTick = true;
 	}
 	
 	@Override
