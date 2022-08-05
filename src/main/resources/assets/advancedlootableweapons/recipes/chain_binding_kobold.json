@@ -1,6 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
-
+	"group": "advancedlootableweapons:armor_bindings",
 	"pattern":
 	[
 		"SS"
@@ -10,13 +10,13 @@
 	{
 		"S":
 		{
-			"item": "advancedlootableweapons:chain_link_bronze"
+			"item": "advancedlootableweapons:chain_link_kobold"
 		}
 	},
 
 	"result":
 	{
-		"item": "advancedlootableweapons:binding_chain_bronze",
+		"item": "advancedlootableweapons:binding_chain_kobold",
 		"count": 1
 	}
 }

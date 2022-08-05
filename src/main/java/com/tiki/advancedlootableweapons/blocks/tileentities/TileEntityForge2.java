@@ -237,10 +237,12 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	{
 		if(mainTE == this && !this.world.isRemote) {
 			if(currentTemp > minTemp && this.increaseFrames <= 0) {
-				this.currentTemp -= 0.06D;
+				this.currentTemp -= 0.025D;
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
 				this.currentTemp += 0.96D;
 				this.increaseFrames--;
+			}else {
+				this.increaseFrames = 0;
 			}
 			this.smeltItem();
 		}

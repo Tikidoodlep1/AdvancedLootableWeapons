@@ -129,10 +129,12 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	{	
 		if(!this.world.isRemote) {
 			if(currentTemp > minTemp && increaseFrames <= 0) {
-				this.currentTemp -= 0.06D;
+				this.currentTemp -= 0.025D;
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
 				this.currentTemp += 0.96D;
 				this.increaseFrames--;
+			}else {
+				this.increaseFrames = 0;
 			}
 			if(!(((ItemStack)this.inventory.get(0)).isEmpty() && canSmelt())) {
 				this.smeltItem();

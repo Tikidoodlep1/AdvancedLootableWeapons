@@ -56,13 +56,13 @@ public class GuiForge extends GuiContainer
 	
 	public void drawHoveringForgeTempText(int mouseX, int mouseY) {
 		if(mouseX > this.guiLeft + 24 && mouseX < this.guiLeft + 43 && mouseY > this.guiTop + 4 && mouseY < this.guiTop + 70) {
-			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(1)-32)*5/9) + "°C", mouseX, mouseY);
+			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(1)-32)*5/9) + " Celcius", mouseX, mouseY);
 		}
 	}
 	
 	private int getBurnLeftScaled()
 	{
-		return (int)(this.tileentity.getField(1) * 0.035);
+		return (int)(this.tileentity.getField(1) * 0.037);
 	}
 	
 	public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

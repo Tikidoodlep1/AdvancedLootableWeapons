@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:bellows",
+	"pattern":
+	[
+		" WW",
+		"WLL",
+		"WWW"
+	],
+
+	"key":
+	{
+		"W":
+		{
+			"item": "minecraft:planks",
+			"data": 4
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:bellows_acacia",
+		"count": 1
+	}
+}

@@ -6,14 +6,19 @@ import com.tiki.advancedlootableweapons.compat.jei.alloyFurnace.AlloyFurnaceReci
 import com.tiki.advancedlootableweapons.compat.jei.alloyFurnace.AlloyFurnaceRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingRecipeMaker;
+import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeCategory;
+import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeMaker;
+import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeMaker;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.GuiForgeWeapon;
 import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher;
 import com.tiki.advancedlootableweapons.inventory.JawCrusher.GuiJawCrusher;
+import com.tiki.advancedlootableweapons.inventory.TanningRack.ContainerTanningRack;
+import com.tiki.advancedlootableweapons.inventory.TanningRack.GuiTanningRack;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
@@ -33,9 +38,7 @@ public class JEICompat implements IModPlugin{
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 		final IGuiHelper gui = helpers.getGuiHelper();
 		
-		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui));
-		registry.addRecipeCategories(new AnvilForgingRecipeCategory(gui));
-		registry.addRecipeCategories(new JawCrusherRecipeCategory(gui));
+		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui), new AnvilForgingRecipeCategory(gui), new JawCrusherRecipeCategory(gui), new DrumRecipeCategory(gui));
 	}
 	
 	@Override
@@ -54,6 +57,12 @@ public class JEICompat implements IModPlugin{
 		registry.addRecipes(JawCrusherRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.JAWCRUSHER);
 		registry.addRecipeClickArea(GuiJawCrusher.class, 75, 43, 27, 13, RecipeCategories.JAWCRUSHER);
 		recipeTransfer.addRecipeTransferHandler(ContainerJawCrusher.class, RecipeCategories.JAWCRUSHER, 0, 2, 2, 36);
+		
+		registry.addRecipes(DrumRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.DRUM);
+		
+		registry.addRecipes(TanningRackRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.TANNINGRACK);
+		registry.addRecipeClickArea(GuiTanningRack.class, 74, 27, 24, 28, RecipeCategories.TANNINGRACK);
+		recipeTransfer.addRecipeTransferHandler(ContainerTanningRack.class, RecipeCategories.TANNINGRACK, 0, 2, 2, 36);
 	}
 	
 	public static String translateToLocal(String key) {
