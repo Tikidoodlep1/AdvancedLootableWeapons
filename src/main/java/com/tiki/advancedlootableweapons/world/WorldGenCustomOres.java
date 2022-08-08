@@ -21,10 +21,9 @@ public class WorldGenCustomOres implements IWorldGenerator {
 
 	private WorldGenerator ore_copper, ore_silver, ore_platinum, ore_crystallite, ore_tin, ore_salt, rock_feldspar, rock_gypsum, rock_dolomite;
 	
-	@SuppressWarnings("unchecked")
 	public WorldGenCustomOres(){
 		rock_feldspar = new WorldGenMinable(BlockInit.rock_feldspar.getDefaultState(), 15, BlockMatcher.forBlock(Blocks.STONE));
-		rock_gypsum = new WorldGenMinable(BlockInit.gypsum.getDefaultState(), 12, Predicates.or(BlockMatcher.forBlock(Blocks.STONE), BlockMatcher.forBlock(Blocks.SANDSTONE), BlockMaterialMatcher.forMaterial(Material.WATER)));
+		rock_gypsum = new WorldGenMinable(BlockInit.gypsum.getDefaultState(), 12, Predicates.or(BlockMatcher.forBlock(Blocks.STONE), BlockMatcher.forBlock(Blocks.SANDSTONE)));
 		rock_dolomite = new WorldGenMinable(BlockInit.dolomite.getDefaultState(), 16, Predicates.or(BlockMatcher.forBlock(Blocks.STONE), BlockMatcher.forBlock(Blocks.SANDSTONE)));
 		ore_tin = new WorldGenMinable(BlockInit.ore_tin.getDefaultState(), 7, BlockMatcher.forBlock(Blocks.STONE));
 		ore_copper = new WorldGenMinable(BlockInit.ore_copper.getDefaultState(), 7, BlockMatcher.forBlock(Blocks.STONE));

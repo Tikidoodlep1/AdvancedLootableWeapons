@@ -45,7 +45,7 @@ public class AlloyFurnaceRecipes
 		addAlloyingRecipe(new ItemStack(ItemInit.SHADOW_BLOB), new ItemStack(ItemInit.INGOT_PLATINUM), new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM), 8.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.SHARD_OBSIDIAN), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_OBSIDIAN), 9.0F);
 		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.CRYSTAL, 4), new ItemStack(ItemInit.INGOT_CRYSTALLITE, 2), 10.0F);
-		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM, 4), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
+		addAlloyingRecipe(new ItemStack(ItemInit.INGOT_SHADOW_PLATINUM, 3), new ItemStack(ItemInit.INGOT_STEEL), new ItemStack(ItemInit.INGOT_DUSKSTEEL), 12.0F);
 	}
 	
 	public int getInputCount(ItemStack stack) {
