@@ -17,32 +17,41 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public enum ArmorAttributes implements ArmorMaterial {
 
-    KOBOLD("kobold", new int[]{1, 3, 4, 2}, 22, SoundEvents.ARMOR_EQUIP_LEATHER, 1.25F, 0.0F, () -> {
-        return Ingredient.of(Items.IRON_INGOT);
-    });
+    KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get(),22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_KOBOLD.get());
+    }),
+    COPPER("copper", new int[]{2, 3, 4, 2}, CommonConfigHandler.COPPER_ARMOR_DURABILITY.get(),10, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.COPPER_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(Items.COPPER_INGOT);
+    }),
+    SILVER("silver", new int[]{3, 5, 7, 3}, CommonConfigHandler.SILVER_ARMOR_DURABILITY.get(), 24, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.SILVER_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_SILVER.get());
+    }),
+    BRONZE("bronze", new int[]{5, 9, 12, 5}, CommonConfigHandler.BRONZE_ARMOR_DURABILITY.get(), 12, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.BRONZE_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_BRONZE.get());
+    }),
+    PLATINUM("platinum", new int[]{7, 13, 17, 8}, CommonConfigHandler.PLATINUM_DAMAGE.get(), 26, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.PLATINUM_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_PLATINUM.get());
+    })
+    ;
 
     private static final float HELMET_DURABILITY_OFFSET = 0.75F;
     private static final float CHEST_DURABILITY_OFFSET = 1F;
     private static final float LEGGINGS_DURABILITY_OFFSET = 0.9F;
     private static final float BOOTS_DURABILITY_OFFSET = 0.7F;
 
-    private static final float[] HEALTH_PER_SLOT = new float[]{
-            CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get() * HELMET_DURABILITY_OFFSET,
-            CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get() * CHEST_DURABILITY_OFFSET,
-            CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get() * LEGGINGS_DURABILITY_OFFSET,
-            CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get() * BOOTS_DURABILITY_OFFSET};
-
     private final String name;
     private final int[] slotProtections;
+    private final float[] healthPerSlot;
     private final int enchantmentValue;
     private final SoundEvent sound;
     private final float toughness;
     private final float knockbackResistance;
     private final LazyLoadedValue<Ingredient> repairIngredient;
 
-    ArmorAttributes(String name, int[] damageReductionAmount, int enchantability, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
+    ArmorAttributes(String name, int[] damageReductionAmount, float healthPerSlot, int enchantability, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
         this.name = name;
         this.slotProtections = damageReductionAmount;
+        this.healthPerSlot = new float[] {healthPerSlot * HELMET_DURABILITY_OFFSET, healthPerSlot * CHEST_DURABILITY_OFFSET, healthPerSlot * LEGGINGS_DURABILITY_OFFSET, healthPerSlot * BOOTS_DURABILITY_OFFSET};
         this.enchantmentValue = enchantability;
         this.sound = sound;
         this.toughness = toughness;
@@ -70,7 +79,7 @@ public enum ArmorAttributes implements ArmorMaterial {
 
     @Override
     public int getDurabilityForSlot(EquipmentSlot type) {
-        return (int) HEALTH_PER_SLOT[type.getIndex()];
+        return (int) this.healthPerSlot[type.getIndex()];
     }
 
     @Override
