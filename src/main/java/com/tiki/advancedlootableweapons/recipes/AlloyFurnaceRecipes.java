@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.recipes;
+package com.tiki.advancedlootableweapons.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,31 +7,37 @@ import javax.annotation.Nonnull;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class AlloyFurnaceRecipes {
 
 	public static int getRecipeBurnTime() {
 		return 200;
 	}
-
-//	public static final Map<Map<ItemStack, ItemStack>, ItemStack> recipeList = new HashMap<Map<ItemStack, ItemStack>, ItemStack>();
-//	public static final Map<Item, Float> expList = new HashMap<Item, Float>();
-	public static final List<Recipe<Integer>> recipes = new ArrayList<Recipe<Integer>>(15);
+	
+	public static final List<Recipe<Integer>> recipes = new ArrayList<Recipe<Integer>>(11);
 	public static final AlloyFurnaceRecipes INSTANCE = new AlloyFurnaceRecipes().initRecipes();
 	public static boolean hasDefaultRecipes = false;
 	
 	public void addDefaultRecipes(Level level) {
 		IItemHandlerModifiable handler = new ItemStackHandler();
 		List<SmeltingRecipe> recipes = level.getRecipeManager().getRecipesFor(RecipeType.SMELTING, new RecipeWrapper(handler), level);
+		ResourceLocation key = ForgeRegistries.RECIPE_SERIALIZERS.getKey(RecipeSerializer.BLASTING_RECIPE);
+		if(ForgeRegistries.RECIPE_SERIALIZERS.containsKey(key)) {
+			
+		}
+		
 		for(SmeltingRecipe e : recipes) {
 			e.getIngredients().forEach((i) -> {
 				for(ItemStack stack : i.getItems())
@@ -43,7 +49,7 @@ public class AlloyFurnaceRecipes {
 	}
 	
 	public AlloyFurnaceRecipes initRecipes() {		
-		addRecipe(Items.IRON_INGOT, 2, Item.byBlock(BlockInit.BLOCK_ROCK_FELDSPAR.get()), 1, ItemInit.INGOT_KOBOLD.get(), 4, 2.0F);
+		addRecipe(Items.IRON_INGOT, 2, BlockInit.BLOCK_ROCK_FELDSPAR.get().asItem(), 1, ItemInit.INGOT_KOBOLD.get(), 4, 2.0F);
 		addRecipe(ItemInit.NUGGET_TIN.get(), 1, Items.COPPER_INGOT, 1, ItemInit.INGOT_BRONZE.get(), 1, 4.0F);
 		addRecipe(ItemInit.INGOT_TIN.get(), 1, Items.COPPER_INGOT, 9, ItemInit.INGOT_BRONZE.get(), 9, 20.0F);
 		addRecipe(Items.IRON_INGOT, 4, Items.COAL, 1, ItemInit.INGOT_STEEL.get(), 4, 5.0F);
@@ -71,9 +77,5 @@ public class AlloyFurnaceRecipes {
 			}
 		}
 		return null;
-	}
-	
-	public static int getRecipeBurnTime(Item recipeOutput) {
-		return 200;
 	}
 }

@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"item": "advancedlootableweapons:crystal"
+		},
+		{
+			"tag": "advancedlootableweapons:ingot_steel"
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_tin",
+		"count": 2
+	}
+}

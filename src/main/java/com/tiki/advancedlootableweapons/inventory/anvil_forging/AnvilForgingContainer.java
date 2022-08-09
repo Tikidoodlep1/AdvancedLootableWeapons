@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
+package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import com.tiki.advancedlootableweapons.blocks.te.AlloyFurnaceEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -18,17 +18,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class AlloyFurnaceContainer extends AbstractContainerMenu {
+public class AnvilForgingContainer extends AbstractContainerMenu {
 
 	private final AlloyFurnaceEntity entity;
 	private final Level level;
 	private final ContainerData data;
 	
-	public AlloyFurnaceContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
+	public AnvilForgingContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
 		this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
 	}
 	
-	public AlloyFurnaceContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+	public AnvilForgingContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
 		super(GuiInit.ALLOY_FURNACE_CONTAINER.get(), id);
 		checkContainerSize(inv, 4);
 		this.entity = ((AlloyFurnaceEntity) entity);
@@ -57,18 +57,20 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
 		int maxProgress = data.get(AlloyFurnaceEntity.DATA_COOKING_TOTAL_TIME);
 		int progressArrowSize = 26;
 		
-		return maxProgress != 0 && progress != 0 ? (progress / maxProgress) * progressArrowSize : 0;
+		return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
 	}
 	
 	public int getLitTime() {
 		double time = data.get(AlloyFurnaceEntity.DATA_LIT_TIME);
+//		int fireSize = 14;
 		double totalTime = this.entity.getMaxBurnDuration();
 		double percent = 0;
 		if(totalTime != 0) {
 			percent = time/totalTime;
+			System.out.println("Time: " + time + ", Total Time: " + totalTime + ", Percent: " + (percent * 100));
 		}
 		
-		return ((int)(percent * 100)/15);
+		return totalTime != 0 ? ((int)(percent * 100)/7) : 0;
 	}
 	
 	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

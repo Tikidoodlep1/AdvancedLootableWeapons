@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.recipes;
+package com.tiki.advancedlootableweapons.recipes;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,7 +25,6 @@ public class Recipe<T extends Comparable<?>> {
 	}
 	
 	public boolean recipeInputsMatch(ItemStack... inputs) {
-		//System.out.println("Lenghs: " + this.inputs.size() + " - " + inputs.length);
 		if(inputs.length != this.inputs.size()) {
 			return false;
 		}
