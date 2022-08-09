@@ -29,10 +29,27 @@ public enum ArmorAttributes implements ArmorMaterial {
     BRONZE("bronze", new int[]{5, 9, 12, 5}, CommonConfigHandler.BRONZE_ARMOR_DURABILITY.get(), 12, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.BRONZE_ARMOR_HARDNESS.get(), 0.0F, () -> {
         return Ingredient.of(ItemInit.INGOT_BRONZE.get());
     }),
-    PLATINUM("platinum", new int[]{7, 13, 17, 8}, CommonConfigHandler.PLATINUM_DAMAGE.get(), 26, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.PLATINUM_ARMOR_HARDNESS.get(), 0.0F, () -> {
+    PLATINUM("platinum", new int[]{7, 13, 17, 8}, CommonConfigHandler.PLATINUM_ARMOR_DURABILITY.get(), 26, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.PLATINUM_ARMOR_HARDNESS.get(), 0.0F, () -> {
         return Ingredient.of(ItemInit.INGOT_PLATINUM.get());
-    })
-    ;
+    }),
+    STEEL("steel", new int[]{3, 5, 6, 3}, CommonConfigHandler.STEEL_ARMOR_DURABILITY.get(), 18, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.STEEL_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_STEEL.get());
+    }),
+    SHADOW_PLATINUM("shadow_platinum", new int[]{7, 13, 16, 7}, CommonConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY.get(), 21, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_SHADOW_PLATINUM.get());
+    }),
+    FROST_STEEL("frost_steel", new int[]{4, 7, 9, 4}, CommonConfigHandler.FROST_STEEL_ARMOR_DURABILITY.get(), 30, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.FROST_STEEL_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_FROST_STEEL.get());
+    }),
+    OBSIDIAN_STEEL("obsidian_steel", new int[]{3, 5, 6, 3}, CommonConfigHandler.OBSIDIAN_ARMOR_DURABILITY.get(), 18, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.OBSIDIAN_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_OBSIDIAN.get());
+    }),
+    CRYSTALLITE("crystallite", new int[]{5, 10, 13, 6}, CommonConfigHandler.CRYSTALLITE_ARMOR_DURABILITY.get(), 20, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.CRYSTALLITE_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_CRYSTALLITE.get());
+    }),
+    DUSK_STEEL("dusk_steel", new int[] {5, 8, 11, 5}, CommonConfigHandler.DUSKSTEEL_ARMOR_DURABILITY.get(), 14, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.DUSKSTEEL_ARMOR_HARDNESS.get(), 0.0F, () -> {
+        return Ingredient.of(ItemInit.INGOT_DUSKSTEEL.get());
+    });
 
     private static final float HELMET_DURABILITY_OFFSET = 0.75F;
     private static final float CHEST_DURABILITY_OFFSET = 1F;
