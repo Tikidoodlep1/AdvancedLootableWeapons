@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.armor;
+package com.tiki.advancedlootableweapons.items.armor;
 
 public enum ArmorTypes {
 	STUDDED,

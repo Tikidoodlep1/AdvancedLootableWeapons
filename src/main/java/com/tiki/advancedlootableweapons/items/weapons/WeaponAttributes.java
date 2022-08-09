@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.items.weapons;
 
-import com.tiki.advancedlootableweapons.armor.ArmorTypes;
+import com.tiki.advancedlootableweapons.items.armor.ArmorTypes;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 
 public enum WeaponAttributes {
