@@ -240,7 +240,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 	        
 	        if (entity.isLit()) {
 	        	entity.dataAccess.set(DATA_COOKING_PROGRESS, ++entity.cookingProgress);
-	        	System.out.println("PROGRESS: " + entity.dataAccess.get(DATA_COOKING_PROGRESS));
+	        	//System.out.println("PROGRESS: " + entity.dataAccess.get(DATA_COOKING_PROGRESS));
 	            if(entity.dataAccess.get(DATA_COOKING_PROGRESS) >= entity.dataAccess.get(DATA_COOKING_TOTAL_TIME)) {
 	            	entity.dataAccess.set(DATA_COOKING_PROGRESS, 0);
 	            	SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());

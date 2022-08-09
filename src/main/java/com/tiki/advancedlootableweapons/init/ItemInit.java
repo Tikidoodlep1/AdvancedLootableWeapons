@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
+import com.tiki.advancedlootableweapons.items.ItemForgeHammer;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
@@ -92,6 +93,20 @@ public class ItemInit {
 	public static final RegistryObject<Item> CRYSTAL = ITEMS.register("crystal", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	
+	public static final RegistryObject<Item> FORGE_HAMMER_STONE = ITEMS.register("forge_hammer_stone", () -> new ItemForgeHammer(Tiers.STONE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_IRON = ITEMS.register("forge_hammer_iron", () -> new ItemForgeHammer(Tiers.IRON, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_KOBOLD = ITEMS.register("forge_hammer_kobold", () -> new ItemForgeHammer(MAT_KOBOLD, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_COPPER = ITEMS.register("forge_hammer_copper", () -> new ItemForgeHammer(MAT_COPPER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_SILVER = ITEMS.register("forge_hammer_silver", () -> new ItemForgeHammer(MAT_SILVER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_BRONZE = ITEMS.register("forge_hammer_bronze", () -> new ItemForgeHammer(MAT_BRONZE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_PLATINUM = ITEMS.register("forge_hammer_platinum", () -> new ItemForgeHammer(MAT_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_STEEL = ITEMS.register("forge_hammer_steel", () -> new ItemForgeHammer(MAT_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_SHADOW_PLATINUM = ITEMS.register("forge_hammer_shadow_platinum", () -> new ItemForgeHammer(MAT_SHADOW_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_FROST_STEEL = ITEMS.register("forge_hammer_frost_steel", () -> new ItemForgeHammer(MAT_FROST_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_OBSIDIAN = ITEMS.register("forge_hammer_obsidian", () -> new ItemForgeHammer(MAT_OBSIDIAN, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_CRYSTALLITE = ITEMS.register("forge_hammer_crystallite", () -> new ItemForgeHammer(MAT_CRYSTALLITE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FORGE_HAMMER_DUSKSTEEL = ITEMS.register("forge_hammer_dusksteel", () -> new ItemForgeHammer(MAT_DUSKSTEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	
 	public static final RegistryObject<Item> DAGGER_HEAD = ITEMS.register("dagger_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> KABUTOWARI_HEAD = ITEMS.register("kabutowari_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));

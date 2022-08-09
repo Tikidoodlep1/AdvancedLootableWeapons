@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.handlers;
+package com.tiki.advancedlootableweapons.events;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +14,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import javax.annotation.Nonnull;
 
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.handlers.GlobalDropHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 
 @Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
