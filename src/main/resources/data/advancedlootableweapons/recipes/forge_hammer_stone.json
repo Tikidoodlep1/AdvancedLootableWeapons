@@ -12,13 +12,11 @@
 	{
 		"S":
 		{
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"tag": "forge:rods/wooden"
 		},
 		"I":
 		{ 
-			"type": "forge:ore_dict",
-			"ore": "cobblestone"
+			"tag": "forge:cobblestone"
 		}
 	},
 

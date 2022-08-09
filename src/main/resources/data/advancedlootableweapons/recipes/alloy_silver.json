@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"tag": "advancedlootableweapons:raw_silver"
+		},
+		{
+			"tag": "advancedlootableweapons:raw_silver"
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_silver",
+		"count": 2
+	}
+}

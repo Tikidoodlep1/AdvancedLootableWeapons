@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"item": "advancedlootableweapons:congealed_shadow"
+		},
+		{
+			"tag": "advancedlootableweapons:ingot_platinum"
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_shadow_platinum",
+		"count": 1
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"tag": "advancedlootableweapons:raw_materials/platinum"
+		},
+		{
+			"tag": "advancedlootableweapons:raw_materials/platinum"
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_platinum",
+		"count": 2
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"item": "advancedlootableweapons:block_rock_feldspar"
+		},
+		{
+			"tag": "minecraft:iron_ingot",
+			"count": 2
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_kobold",
+		"count": 4
+	}
+}

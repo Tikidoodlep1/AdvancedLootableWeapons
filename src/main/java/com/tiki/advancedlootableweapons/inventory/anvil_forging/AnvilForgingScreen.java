@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
+package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,10 +10,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceContainer> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(ModInfo.ID, "textures/gui/alloy_furnace.png");
+public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingContainer> {
+	private static final ResourceLocation TEXTURE = new ResourceLocation(ModInfo.ID, "textures/gui/forge_weapon.png");
 
-	public AlloyFurnaceScreen(AlloyFurnaceContainer container, Inventory inv, Component name) {
+	public AnvilForgingScreen(AnvilForgingContainer container, Inventory inv, Component name) {
 		super(container, inv, name);
 	}
 

@@ -12,13 +12,11 @@
 	{
 		"S":
 		{
-			"type": "forge:ore_dict",
-			"ore": "stickWood"
+			"tag": "minecraft:stick"
 		},
 		"I":
 		{ 
-			"type": "forge:ore_dict",
-			"ore": "ingotIron"
+			"tag": "minecraft:iron_ingot"
 		}
 	},
 

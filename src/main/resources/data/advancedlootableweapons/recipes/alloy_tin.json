@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"ingredients": [
+		{
+			"tag": "advancedlootableweapons:raw_tin"
+		},
+		{
+			"tag": "advancedlootableweapons:raw_tin"
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:ingot_tin",
+		"count": 2
+	}
+}

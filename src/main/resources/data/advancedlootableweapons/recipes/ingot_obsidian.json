@@ -12,13 +12,13 @@
 	{
 		"N":
 		{
-			"item": "advancedlootableweapons:nugget_obsidian"
+			"item": "advancedlootableweapons:nugget_obsidian_steel"
 		}
 	},
 
 	"result":
 	{
-		"item": "advancedlootableweapons:ingot_obsidian",
+		"item": "advancedlootableweapons:ingot_obsidian_steel",
 		"count": 1
 	}
 }

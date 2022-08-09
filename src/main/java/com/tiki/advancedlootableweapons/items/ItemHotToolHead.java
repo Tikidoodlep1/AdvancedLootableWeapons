@@ -20,14 +20,32 @@ import net.minecraft.world.level.Level;
 
 public class ItemHotToolHead extends Item {
 	private final CompoundTag nbt = new CompoundTag();
+	private final ItemHotToolHead next;
+	private final int level;
+	private final boolean finished;
 	
-	public ItemHotToolHead(Properties prop) {
+	public ItemHotToolHead(@Nullable ItemHotToolHead next, int level, boolean finished, Properties prop) {
 		super(prop);
+		this.next = next;
+		this.level = level;
+		this.finished = finished;
 		nbt.putString("material", "null");
 		nbt.putDouble("addedDamage", 0.0D);
 		nbt.putInt("addedDurability", 0);
 	}
 	
+	public ItemHotToolHead getNextToolHead() {
+		return this.next;
+	}
+	
+	public int getLevel() {
+		return this.level;
+	}
+	
+	public boolean isFinished() {
+		return this.finished;
+	}
+
 	public void setMaterial(Tier mat) {
 		nbt.putString("material", EnumMaterialType.getMaterialNameF(mat));
 	}
