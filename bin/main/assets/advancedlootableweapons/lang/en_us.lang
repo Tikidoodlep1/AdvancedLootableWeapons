@@ -664,7 +664,7 @@ item.unbound_plate_boots_dusksteel.name=Unbound Dusksteel Boots
 
 item.leather_helmet.name=Leather Helmet
 item.chain_iron_helmet.name=Iron Chain Helmet
-item.chain_golden_helmet.name=Gold Chain Helmet
+item.chain_golden_helmet.name=Golden Chain Helmet
 item.chain_diamond_helmet.name=Diamond Studded Leather Helmet
 item.chain_helmet_kobold.name=Kobold Steel Chain Helmet
 item.chain_helmet_copper.name=Copper Chain Helmet
@@ -681,7 +681,7 @@ item.chain_helmet_dusksteel.name=Dusksteel Chain Helmet
 
 item.leather_chestplate.name=Leather Chestplate
 item.chain_iron_chestplate.name=Iron Chain Chestplate
-item.chain_golden_chestplate.name=Gold Chain Chestplate
+item.chain_golden_chestplate.name=Golden Chain Chestplate
 item.chain_diamond_chestplate.name=Diamond Studded Leather Chestplate
 item.chain_chestplate_kobold.name=Kobold Steel Chain Chestplate
 item.chain_chestplate_copper.name=Copper Chain Chestplate
@@ -698,7 +698,7 @@ item.chain_chestplate_dusksteel.name=Dusksteel Chain Chestplate
 
 item.leather_leggings.name=Leather Leggings
 item.chain_iron_leggings.name=Iron Chain Leggings
-item.chain_golden_leggings.name=Gold Chain Leggings
+item.chain_golden_leggings.name=Golden Chain Leggings
 item.chain_diamond_leggings.name=Diamond Studded Leather Leggings
 item.chain_leggings_kobold.name=Kobold Steel Chain Leggings
 item.chain_leggings_copper.name=Copper Chain Leggings
@@ -715,7 +715,7 @@ item.chain_leggings_dusksteel.name=Dusksteel Chain Leggings
 
 item.leather_boots.name=Leather Boots
 item.chain_iron_boots.name=Iron Chain Boots
-item.chain_golden_boots.name=Gold Chain Boots
+item.chain_golden_boots.name=Golden Chain Boots
 item.chain_diamond_boots.name=Diamond Studded Leather Boots
 item.chain_boots_kobold.name=Kobold Steel Chain Boots
 item.chain_boots_copper.name=Copper Chain Boots
@@ -732,8 +732,8 @@ item.chain_boots_dusksteel.name=Dusksteel Chain Boots
 
 item.leather_helmet.name=Leather Helmet
 item.plate_iron_helmet.name=Iron Plate Helmet
-item.plate_golden_helmet.name=Gold Plate Helmet
-item.plate_diamond_helmet.name=Diamond Studded Leather Helmet
+item.plate_golden_helmet.name=Golden Plate Helmet
+item.plate_diamond_helmet.name=Diamond Studded Steel Helmet
 item.plate_helmet_kobold.name=Kobold Steel Plate Helmet
 item.plate_helmet_copper.name=Copper Plate Helmet
 item.plate_helmet_silver.name=Silver Plate Helmet
@@ -749,8 +749,8 @@ item.plate_helmet_dusksteel.name=Dusksteel Plate Helmet
 
 item.leather_chestplate.name=Leather Chestplate
 item.plate_iron_chestplate.name=Iron Plate Chestplate
-item.plate_golden_chestplate.name=Gold Plate Chestplate
-item.plate_diamond_chestplate.name=Diamond Studded Steel Plate Chestplate
+item.plate_golden_chestplate.name=Golden Plate Chestplate
+item.plate_diamond_chestplate.name=Diamond Studded Steel Chestplate
 item.plate_chestplate_kobold.name=Kobold Steel Plate Chestplate
 item.plate_chestplate_copper.name=Copper Plate Chestplate
 item.plate_chestplate_silver.name=Silver Plate Chestplate
@@ -766,8 +766,8 @@ item.plate_chestplate_dusksteel.name=Dusksteel Plate Chestplate
 
 item.leather_leggings.name=Leather Leggings
 item.plate_iron_leggings.name=Iron Plate Leggings
-item.plate_golden_leggings.name=Gold Plate Leggings
-item.plate_diamond_leggings.name=Diamond Studded Steel Plate Leggings
+item.plate_golden_leggings.name=Golden Plate Leggings
+item.plate_diamond_leggings.name=Diamond Studded Steel Leggings
 item.plate_leggings_kobold.name=Kobold Steel Plate Leggings
 item.plate_leggings_copper.name=Copper Plate Leggings
 item.plate_leggings_silver.name=Silver Plate Leggings
@@ -783,8 +783,8 @@ item.plate_leggings_dusksteel.name=Dusksteel Plate Leggings
 
 item.leather_boots.name=Leather Boots
 item.plate_iron_boots.name=Iron Plate Boots
-item.plate_golden_boots.name=Gold Plate Boots
-item.plate_diamond_boots.name=Diamond Studded Steel Plate Boots
+item.plate_golden_boots.name=Golden Plate Boots
+item.plate_diamond_boots.name=Diamond Studded Steel Boots
 item.plate_boots_kobold.name=Kobold Steel Plate Boots
 item.plate_boots_copper.name=Copper Plate Boots
 item.plate_boots_silver.name=Silver Plate Boots
