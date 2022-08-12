@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import org.lwjgl.input.Keyboard;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
@@ -17,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -287,10 +290,25 @@ public class ToolStabSword extends Item implements IHasModel{
     }
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
-		tooltip.add(TextFormatting.GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance());
-		tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance());
+		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
+		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
+			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
+			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
+			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
+			int plateEffect = (int)Math.ceil(((we.getPlateEffect()*100)/6)-9);
+			tooltip.add(TextFormatting.RED + "Effectiveness against Studded armor: " + studdedEffect);
+			tooltip.add(TextFormatting.DARK_RED + "Chance to pierce Studded armor: " + we.getStuddedPenChance() + "%");
+			tooltip.add("");
+			tooltip.add(TextFormatting.GREEN + "Effectiveness against Chain armor: " + chainEffect);
+			tooltip.add(TextFormatting.DARK_GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance() + "%");
+			tooltip.add("");
+			tooltip.add(TextFormatting.AQUA + "Effectiveness against Plate armor: " + plateEffect);
+			tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance() + "%");
+		}else {
+			tooltip.add(TextFormatting.GRAY + "Hold " + sneak.getDisplayName() + " for Effectiveness Information");
+		}
 	}
 	
 	@Override

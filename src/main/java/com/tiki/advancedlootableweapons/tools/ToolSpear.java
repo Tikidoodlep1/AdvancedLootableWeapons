@@ -3,9 +3,13 @@ package com.tiki.advancedlootableweapons.tools;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import com.tiki.advancedlootableweapons.entity.EntitySpear;
 import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDurability;
@@ -25,6 +29,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ToolSpear extends ToolStabSword {
 	
@@ -33,11 +39,16 @@ public class ToolSpear extends ToolStabSword {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
-		tooltip.add(TextFormatting.LIGHT_PURPLE + "Chance to pierce Chain armor when thrown: " + we.getChainPenChance());
-		tooltip.add(TextFormatting.AQUA + "Chance to pierce Plate armor when thrown: " + we.getPlatePenChance());
+		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
+			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+			tooltip.add("");
+			tooltip.add(TextFormatting.LIGHT_PURPLE + "Chance to pierce Chain armor when thrown: " + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + "Chance to pierce Plate armor when thrown: " + we.getPlatePenChance() + "%");
+		}
 	}
 	
 	public EnumAction getItemUseAction(ItemStack stack)

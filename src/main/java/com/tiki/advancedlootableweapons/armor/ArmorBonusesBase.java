@@ -189,20 +189,21 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 			}
 			
 			if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolStabSword) {
-				System.out.println("Attacker's mainhand item is a ToolStabSword");
+				//System.out.println("Attacker's mainhand item is a ToolStabSword");
 				we = WeaponEffectiveness.getWeaponEffectiveness(((ToolStabSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
 			}else if(attacker != null && attacker.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ToolSlashSword) {
-				System.out.println("Attacker's mainhand item is a ToolSlashSword");
+				//System.out.println("Attacker's mainhand item is a ToolSlashSword");
 				we = WeaponEffectiveness.getWeaponEffectiveness(((ToolSlashSword)attacker.getHeldItem(EnumHand.MAIN_HAND).getItem()).getWeaponType());
 			}else if(source.getImmediateSource() instanceof EntityArrow) {
-				System.out.println("Attacker used an arrow");
-				we = WeaponEffectiveness.getWeaponEffectiveness("arrow");
+				//System.out.println("Attacker used an arrow");
+				we = WeaponEffectiveness.ARROW;
 			}else if(source.getImmediateSource() instanceof EntitySpear) {
-				we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
+				we = WeaponEffectiveness.THROWN_SPEAR;
 			}
 			
 			if(we != null) {
-				if((rand.nextInt(100)+1) < we.getPenChanceByArmorType(makeup)) {
+				int penChance = makeup == ArmorTypes.SOFT ? we.getPenChanceByArmorType(makeup) * 2 : we.getPenChanceByArmorType(makeup);
+				if((rand.nextInt(100)+1) < penChance) {
 					propCopy.AbsorbRatio = 0;
 					propCopy.Armor = propCopy.Armor - 3 < 0 ? 0 : propCopy.Armor - 3;
 				}else {

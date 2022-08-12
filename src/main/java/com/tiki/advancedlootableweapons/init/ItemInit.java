@@ -1051,10 +1051,10 @@ public class ItemInit {
 	public static final Item PLATE_LEGGINGS_GOLD = new ArmorBonusesBase("plate_golden_leggings", ArmorTypes.PLATE, ArmorMaterial.GOLD, 2, 0.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2);
 	public static final Item PLATE_BOOTS_GOLD = new ArmorBonusesBase("plate_golden_boots", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.00816074D, 2);
 	
-	public static final Item HELMET_DIAMOND = new ArmorBonusesBase("plate_diamond_helmet", ArmorTypes.PLATE, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00247411506D, 6);
-	public static final Item CHESTPLATE_DIAMOND = new ArmorBonusesBase("plate_diamond_chestplate", ArmorTypes.PLATE, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00652368639D, 6);
-	public static final Item LEGGINGS_DIAMOND = new ArmorBonusesBase("plate_diamond_leggings", ArmorTypes.PLATE, AMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00652368639D, 6);
-	public static final Item BOOTS_DIAMOND = new ArmorBonusesBase("plate_diamond_boots", ArmorTypes.PLATE, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00247411506D, 6);
+	public static final Item HELMET_DIAMOND = new ArmorBonusesBase("plate_diamond_helmet", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00247411506D, 6);
+	public static final Item CHESTPLATE_DIAMOND = new ArmorBonusesBase("plate_diamond_chestplate", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00652368639D, 6);
+	public static final Item LEGGINGS_DIAMOND = new ArmorBonusesBase("plate_diamond_leggings", ArmorTypes.STUDDED, AMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00652368639D, 6);
+	public static final Item BOOTS_DIAMOND = new ArmorBonusesBase("plate_diamond_boots", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00247411506D, 6);
 	
 	public static final Item PLATE_HELMET_COPPER = new ArmorBonusesBase("plate_helmet_copper", ArmorTypes.PLATE, AMAT_COPPER, 1, 0.0D, 3, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3);
 	public static final Item PLATE_CHESTPLATE_COPPER = new ArmorBonusesBase("plate_chestplate_copper", ArmorTypes.PLATE, AMAT_COPPER, 1, 0.0D, 3,  EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3);

@@ -1,24 +1,26 @@
 package com.tiki.advancedlootableweapons.util;
 
+import java.util.Random;
+
 public enum WeaponEffectiveness {
 
-	DAGER("dagger", 0.95, 40, 0.9, 20, 0.85, 15),
-	KABUTOWARI("kabutowari", 0.95, 20, 0.85, 35, 0.8, 28),
-	RAPIER("rapier", 1.0, 80, 0.85, 40, 0.8, 35),
-	TALWAR("talwar", 0.95, 30, 0.9, 6, 0.85, 2),
-	CLEAVER("cleaver", 0.9, 45, 1.0, 0, 0.95, 0),
-	MACE("mace", 0.8, 1, 0.95, 0, 1.0, 0),
-	STAFF("staff", 0.85, 0, 0.95, 0, 0.95, 0),
-	SPEAR("spear", 1.0, 70, 0.85, 20, 0.75, 5),
-	LONGSWORD("longsword", 0.95, 25, 0.9, 10, 0.85, 4),
-	KODACHI("kodachi", 1.0, 45, 0.8, 20, 0.7, 25),
-	NODACHI("nodachi", 0.95, 25, 0.9, 2, 0.85, 4),
-	SABRE("sabre", 0.95, 35, 0.8, 7, 0.8, 3),
-	MAKHAIRA("makhaira", 1.0, 25, 0.95, 2, 0.9, 4),
-	BATTLEAXE("battleaxe", 1.0, 30, 1.0, 0, 0.95, 0),
-	ZWEIHANDER("zweihander", 1.0, 20, 0.95, 1, 0.95, 3),
-	ARROW("arrow", 0.95, 25, 0.75, 25, 0.6, 20),
-	THROWN_SPEAR("thrown_spear", 0.95, 60, 0.75, 23, 0.7, 16);
+	DAGER("dagger", 0.8, 15, 0.9, 20, 0.85, 15),
+	KABUTOWARI("kabutowari", 0.85, 20, 0.85, 35, 0.8, 28),
+	RAPIER("rapier", 0.75, 25, 0.85, 40, 0.8, 35),
+	TALWAR("talwar", 0.85, 2, 0.9, 6, 0.85, 2),
+	CLEAVER("cleaver", 0.9, 2, 1.0, 4, 0.95, 3),
+	MACE("mace", 0.9, 0, 0.85, 0, 1.0, 0),
+	STAFF("staff", 0.85, 0, 0.75, 0, 0.95, 0),
+	SPEAR("spear", 0.7, 3, 0.85, 20, 0.75, 5),
+	LONGSWORD("longsword", 0.8, 4, 0.9, 10, 0.85, 4),
+	KODACHI("kodachi", 0.75, 28, 0.8, 20, 0.7, 25),
+	NODACHI("nodachi", 0.8, 2, 0.9, 2, 0.85, 4),
+	SABRE("sabre", 0.8, 5, 0.85, 7, 0.8, 3),
+	MAKHAIRA("makhaira", 0.8, 1, 0.95, 2, 0.9, 4),
+	BATTLEAXE("battleaxe", 0.9, 0, 1.0, 0, 0.95, 0),
+	ZWEIHANDER("zweihander", 0.75, 20, 0.85, 1, 0.8, 3),
+	ARROW("arrow", 0.65, 15, 0.75, 25, 0.7, 15),
+	THROWN_SPEAR("thrown_spear", 0.65, 15, 0.75, 23, 0.7, 16);
 	
 	private final String type;
 	private final double studdedEffectiveness;
@@ -45,6 +47,11 @@ public enum WeaponEffectiveness {
 			}
 		}
 		return null;
+	}
+	
+	public static boolean studdedArmorChipWeapon() {
+		Random rand = new Random();
+		return rand.nextDouble() <= 0.35;
 	}
 	
 	public double getEffectByArmorType(ArmorTypes make) {

@@ -98,7 +98,7 @@ public class BlockBellows extends BlockBase {
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 3.0F, 1.0F);
+		worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
 		
 		if(!worldIn.isRemote) {			
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
