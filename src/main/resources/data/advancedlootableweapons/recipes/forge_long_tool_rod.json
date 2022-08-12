@@ -1,0 +1,28 @@
+{
+	"type": "advancedlootableweapons:anvil_forging_combine",
+	"transferNBT": true,
+	"ingredients": [
+		{
+			"type": "forge:partial_nbt",
+			"item": "advancedlootableweapons:hot_tool_head",
+			"data": 32767,
+			"nbt": { 
+				"material": "Copper"
+			}
+		},
+		{
+			"type": "forge:partial_nbt",
+			"item": "advancedlootableweapons:hot_tool_head",
+			"data": 32767,
+			"nbt": { 
+				"material": "Copper"
+			}
+		}
+	],
+
+	"result":
+	{
+		"item": "advancedlootableweapons:long_tool_rod",
+		"count": 1
+	}
+}

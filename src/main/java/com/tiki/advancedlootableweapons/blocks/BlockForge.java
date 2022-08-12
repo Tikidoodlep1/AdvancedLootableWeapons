@@ -1,11 +1,16 @@
 package com.tiki.advancedlootableweapons.blocks;
 
-import com.tiki.advancedlootableweapons.blocks.te.AlloyFurnaceBlockEntity;
+import java.util.Random;
+
+import com.tiki.advancedlootableweapons.blocks.te.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,19 +27,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 
-public class BlockAlloyFurnace extends BaseEntityBlock {
+public class BlockForge extends BaseEntityBlock {
 	
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-	public static final BooleanProperty LIT = BlockStateProperties.LIT;
-
-	public BlockAlloyFurnace(Properties prop) {
+	
+	public BlockForge(Properties prop) {
 		super(prop);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 	
 	@Override
@@ -55,7 +58,21 @@ public class BlockAlloyFurnace extends BaseEntityBlock {
     
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LIT);
+        builder.add(FACING);
+    }
+    
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRandom) {
+    	double d0 = pPos.getX() + 0.5D + pRandom.nextDouble() * 4.0D / 16.0D;
+    	double d1 = pPos.getY() + pRandom.nextDouble() * 6.0D / 16.0D;
+    	double d2 = pPos.getX() + 0.5D;
+    	double d3 = pRandom.nextDouble() * 0.6D - 0.3D;
+    	
+    	if(pRandom.nextDouble() < 0.1D) {
+    		pLevel.playLocalSound(pPos.getX()+0.5D, pPos.getY()+0.5D, pPos.getZ()+0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+    	}
+    	pLevel.addParticle(ParticleTypes.SMALL_FLAME, d0, d1 + 0.75D, d2 + d3, 0.0D, 0.0D, 0.0D);
+		pLevel.addParticle(ParticleTypes.SMOKE, d0, d1 + 0.75D, d2 + d3, 0.0D, 0.0D, 0.0D);
     }
     
     @Override
@@ -65,17 +82,17 @@ public class BlockAlloyFurnace extends BaseEntityBlock {
     
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new AlloyFurnaceBlockEntity(pos, state);
+		return new ForgeBlockEntity(pos, state);
 	}
 	
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if(!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
-			if(entity instanceof AlloyFurnaceBlockEntity) {
-				NetworkHooks.openGui(((ServerPlayer)player), (AlloyFurnaceBlockEntity)entity, pos);
+			if(entity instanceof ForgeBlockEntity forge) {
+				NetworkHooks.openGui(((ServerPlayer)player), forge, pos);
 			}else {
-				throw new IllegalStateException("Alloy Furnace Container Provider is Missing!");
+				throw new IllegalStateException("Forge Container Provider is Missing!");
 			}
 		}
 		return InteractionResult.sidedSuccess(world.isClientSide());
@@ -83,6 +100,6 @@ public class BlockAlloyFurnace extends BaseEntityBlock {
 	
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, BlockEntityInit.ALLOY_FURNACE_TE.get(), AlloyFurnaceBlockEntity::tick);
+		return createTickerHelper(type, BlockEntityInit.FORGE_TE.get(), ForgeBlockEntity::tick);
 	}
 }

@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
+import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +19,7 @@ public class GuiInit {
 	
 	public static final RegistryObject<MenuType<AlloyFurnaceContainer>> ALLOY_FURNACE_CONTAINER = registerMenuType(AlloyFurnaceContainer::new, "alloy_furnace_container");
 	
+	public static final RegistryObject<MenuType<ForgeContainer>> FORGE_CONTAINER = registerMenuType(ForgeContainer::new, "forge_container");
 	
 	
 	private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
