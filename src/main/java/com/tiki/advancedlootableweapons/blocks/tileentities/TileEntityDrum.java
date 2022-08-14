@@ -52,22 +52,25 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 			if(DrumRecipes.getAcceptedInputs().contains(activeStack.getItem()) && this.inventory.get(INPUT_SLOT) == ItemStack.EMPTY) {
 				this.inventory.set(INPUT_SLOT, activeStack);
 				playerIn.setHeldItem(hand, ItemStack.EMPTY);
+				this.onChanged();
 			}
 		}else {
 			if(this.inventory.get(OUTPUT_SLOT) != ItemStack.EMPTY) {
 				if(playerIn.addItemStackToInventory(this.inventory.get(OUTPUT_SLOT))) {
 					this.inventory.set(OUTPUT_SLOT, ItemStack.EMPTY);
+					this.onChanged();
 				}
 			}else if(this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
 				if(playerIn.addItemStackToInventory(this.inventory.get(INPUT_SLOT))) {
 					this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 					this.progress = 0;
 					this.activeRecipe = null;
+					this.onChanged();
 				}
 			}
 		}
 		
-		if(this.activeRecipe == null && DrumRecipes.getAcceptedFluids().contains(this.getTank().getFluid().getFluid()) && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
+		if(this.activeRecipe == null && this.getTank().getFluid() != null && DrumRecipes.getAcceptedFluids().contains(this.getTank().getFluid().getFluid()) && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
 			DrumRecipes recipe = DrumRecipes.getMatchingRecipe(this.getTank().getFluid().getFluid(), this.inventory.get(INPUT_SLOT), this.inventory.get(ADDITIVE_SLOT), false);
 			if(recipe != null) {
 				this.activeRecipe = recipe;
@@ -89,7 +92,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	
 	@Override
 	public boolean hasFastRenderer() {
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -130,7 +133,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return (ItemStack)this.inventory.get(index);
+		return this.inventory.get(index);
 	}
 
 	@Override
@@ -162,7 +165,8 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	public NBTTagCompound getUpdateTag() {
 		NBTTagCompound compound = super.getUpdateTag();
 		NBTTagCompound fluidTag = this.getTank().writeToNBT(new NBTTagCompound());
-//		compound.setTag("Fluid", fluidTag);
+		ItemStackHelper.saveAllItems(compound, this.inventory);
+		
 		if(fluidTag.hasKey("FluidName")) {
 			compound.setString("FluidName", fluidTag.getString("FluidName"));
 		}
@@ -180,6 +184,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		if(tag.hasKey("Fluid")) {
 			this.getTank().readFromNBT(tag.getCompoundTag("Fluid"));
 		}
+		ItemStackHelper.loadAllItems(tag, this.inventory);
 		super.handleUpdateTag(tag);
 	}
 	
@@ -193,7 +198,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), this.getUpdateTag());
 	}
 	
-	public void onFluidChanged() {		
+	public void onChanged() {		
 		onDataPacket(Minecraft.getMinecraft().getConnection().getNetworkManager(), getUpdatePacket());
 	}
 	

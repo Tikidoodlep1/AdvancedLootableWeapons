@@ -23,6 +23,7 @@ import com.tiki.advancedlootableweapons.blocks.fluids.BlockAlwFluid;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class BlockInit {
 	public static final List<Block> blocks = new ArrayList<Block>();
@@ -82,4 +83,6 @@ public class BlockInit {
 	//Fluids
 	public static final Block milk_of_lime = new BlockAlwFluid("milk_of_lime", FluidInit.MILK_OF_LIME, Material.WATER, MapColor.WHITE_STAINED_HARDENED_CLAY);
 	public static final Block magnesium_lactate = new BlockAlwFluid("magnesium_lactate", FluidInit.MAGNESIUM_LACTATE, Material.WATER, MapColor.WHITE_STAINED_HARDENED_CLAY);
+	public static final Block water_block_display = new BlockAlwFluid("water_display", FluidRegistry.WATER, Material.WATER, MapColor.WATER);
+	public static final Block lava_block_display = new BlockAlwFluid("lava_display", FluidRegistry.LAVA, Material.LAVA, MapColor.RED_STAINED_HARDENED_CLAY);
 }

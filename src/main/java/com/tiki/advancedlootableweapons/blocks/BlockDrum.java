@@ -28,6 +28,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -64,15 +65,15 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 		TileEntity te = worldIn.getTileEntity(pos);
 		if(te instanceof TileEntityDrum) {
 			TileEntityDrum drum = (TileEntityDrum)te;
-			Fluid fluid = drum.getTank().getFluid().getFluid();
-			int fluidAmount = drum.getTank().getFluidAmount();
+			FluidStack fluid = drum.getTank().getFluid();
+			int fluidAmount = fluid == null ? 0 : drum.getTank().getFluidAmount();
 			double f = pos.getY() + (10.0F) / 16.0F;
 			
 	        if (!worldIn.isRemote && fluidAmount > 0 && entityIn.getEntityBoundingBox().minY <= (double)f)
 	        {
-	        	if(fluid.getTemperature() <= FluidRegistry.WATER.getTemperature()+50 && entityIn.isBurning()) {
+	        	if(fluid.getFluid().getTemperature() <= FluidRegistry.WATER.getTemperature()+50 && entityIn.isBurning()) {
 	        		entityIn.extinguish();
-	        	}else if(fluid.getTemperature() >= 950) {
+	        	}else if(fluid.getFluid().getTemperature() >= 950) {
 	        		entityIn.setFire(5);
 	        	}
 	        }
@@ -134,7 +135,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 				if(activeStack.getItem() instanceof ItemBucket || activeStack.getItem() instanceof UniversalBucket || activeStack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, facing)) {
 					FluidUtil.interactWithFluidHandler(playerIn, hand, drum);
 					worldIn.notifyBlockUpdate(pos, state, state, 2);
-					drum.onFluidChanged();
+					drum.onChanged();
 					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING ) {
 						drum.FluidInteraction(worldIn, pos, playerIn, hand);
 					}
