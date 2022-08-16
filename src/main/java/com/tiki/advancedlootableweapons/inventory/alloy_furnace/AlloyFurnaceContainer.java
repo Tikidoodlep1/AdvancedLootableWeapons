@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
 
-import com.tiki.advancedlootableweapons.blocks.te.AlloyFurnaceBlockEntity;
+import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.GuiInit;
 

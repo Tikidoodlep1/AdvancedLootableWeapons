@@ -30,26 +30,26 @@ public class ItemInit {
 	//Mats
 	public static final ForgeTier MAT_KOBOLD = new ForgeTier(1, CommonConfigHandler.KOBOLD_DURABILITY.get(), 6.0F, CommonConfigHandler.KOBOLD_DAMAGE.get(), 22,
 			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_KOBOLD.get()));
-	public static final ForgeTier MAT_COPPER = new ForgeTier(2, CommonConfigHandler.COPPER_DURABILITY.get(), 6.0F, CommonConfigHandler.COPPER_DAMAGE.get(), 22,
+	public static final ForgeTier MAT_COPPER = new ForgeTier(1, CommonConfigHandler.COPPER_DURABILITY.get(), 6.0F, CommonConfigHandler.COPPER_DAMAGE.get(), 22,
 			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Items.COPPER_INGOT));
-	public static final ForgeTier MAT_SILVER = new ForgeTier(2, CommonConfigHandler.SILVER_DURABILITY.get(), 7.0F, CommonConfigHandler.SILVER_DAMAGE.get(), 24,
+	public static final ForgeTier MAT_SILVER = new ForgeTier(1, CommonConfigHandler.SILVER_DURABILITY.get(), 7.0F, CommonConfigHandler.SILVER_DAMAGE.get(), 24,
 			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_SILVER.get()));
 	public static final ForgeTier MAT_BRONZE = new ForgeTier(2, CommonConfigHandler.BRONZE_DURABILITY.get(), 6.5F, CommonConfigHandler.BRONZE_DAMAGE.get(), 12,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_BRONZE.get()));
+			BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(ItemInit.INGOT_BRONZE.get()));
 	public static final ForgeTier MAT_PLATINUM = new ForgeTier(2, CommonConfigHandler.PLATINUM_DURABILITY.get(), 10.0F, CommonConfigHandler.PLATINUM_DAMAGE.get(), 26,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_PLATINUM.get()));
+			BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(ItemInit.INGOT_PLATINUM.get()));
 	public static final ForgeTier MAT_STEEL = new ForgeTier(2, CommonConfigHandler.STEEL_DURABILITY.get(), 7.0F, CommonConfigHandler.STEEL_DAMAGE.get(), 18,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_STEEL.get()));
+			BlockTags.NEEDS_IRON_TOOL, () -> Ingredient.of(ItemInit.INGOT_STEEL.get()));
 	public static final ForgeTier MAT_SHADOW_PLATINUM = new ForgeTier(3, CommonConfigHandler.SHADOW_PLATINUM_DURABILITY.get(), 8.25F, CommonConfigHandler.SHADOW_PLATINUM_DAMAGE.get(), 21,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_SHADOW_PLATINUM.get()));
+			BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.INGOT_SHADOW_PLATINUM.get()));
 	public static final ForgeTier MAT_FROST_STEEL = new ForgeTier(3, CommonConfigHandler.FROST_STEEL_DURABILITY.get(), 7.0F, CommonConfigHandler.FROST_STEEL_DAMAGE.get(), 30,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_FROST_STEEL.get()));
+			BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.INGOT_FROST_STEEL.get()));
 	public static final ForgeTier MAT_OBSIDIAN = new ForgeTier(3, CommonConfigHandler.OBSIDIAN_DURABILITY.get(), 7.5F, CommonConfigHandler.OBSIDIAN_DAMAGE.get(), 18,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_OBSIDIAN.get()));
-	public static final ForgeTier MAT_CRYSTALLITE = new ForgeTier(3, CommonConfigHandler.CRYSTALLITE_DURABILITY.get(), 7.5F, CommonConfigHandler.CRYSTALLITE_DAMAGE.get(), 20,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_CRYSTALLITE.get()));
-	public static final ForgeTier MAT_DUSKSTEEL = new ForgeTier(3, CommonConfigHandler.DUSKSTEEL_DURABILITY.get(), 8.5F, CommonConfigHandler.DUSKSTEEL_DAMAGE.get(), 14,
-			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_DUSKSTEEL.get()));
+			BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.INGOT_OBSIDIAN.get()));
+	public static final ForgeTier MAT_CRYSTALLITE = new ForgeTier(4, CommonConfigHandler.CRYSTALLITE_DURABILITY.get(), 7.5F, CommonConfigHandler.CRYSTALLITE_DAMAGE.get(), 20,
+			BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.INGOT_CRYSTALLITE.get()));
+	public static final ForgeTier MAT_DUSKSTEEL = new ForgeTier(4, CommonConfigHandler.DUSKSTEEL_DURABILITY.get(), 8.5F, CommonConfigHandler.DUSKSTEEL_DAMAGE.get(), 14,
+			BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.INGOT_DUSKSTEEL.get()));
 	
 	
 	public static final RegistryObject<Item> INGOT_TIN = ITEMS.register("ingot_tin", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
@@ -67,7 +67,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> RAW_SILVER = ITEMS.register("raw_silver", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> RAW_PLATINUM = ITEMS.register("raw_platinum", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-
+	
 	public static final RegistryObject<Item> SHARD_OBSIDIAN = ITEMS.register("shard_obsidian", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> NUGGET_TIN = ITEMS.register("nugget_tin", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> NUGGET_KOBOLD = ITEMS.register("nugget_kobold", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
@@ -81,7 +81,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> NUGGET_OBSIDIAN = ITEMS.register("nugget_obsidian_steel", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> NUGGET_CRYSTALLITE = ITEMS.register("nugget_crystallite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> NUGGET_DUSKSTEEL = ITEMS.register("nugget_dusksteel", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-
+	
 	public static final RegistryObject<Item> POWDER_FELDSPAR = ITEMS.register("powder_feldspar", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> POWDER_GRANITE = ITEMS.register("powder_granite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> POWDER_DIORITE = ITEMS.register("powder_diorite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
@@ -89,7 +89,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> CLAY_DIORITE = ITEMS.register("clay_diorite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> BRICK_GRANITE = ITEMS.register("brick_granite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> BRICK_DIORITE = ITEMS.register("brick_diorite", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-
+	
 	public static final RegistryObject<Item> CRYSTAL = ITEMS.register("crystal", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));

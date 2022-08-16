@@ -1,0 +1,12 @@
+{
+	"type": "advancedlootableweapons:crushing",
+	"input": {
+		"item": "advancedlootableweapons:block_rock_feldspar"
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:powder_feldspar",
+		"count": 4
+	}
+}

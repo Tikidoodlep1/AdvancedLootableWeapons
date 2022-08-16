@@ -1,6 +1,6 @@
-package com.tiki.advancedlootableweapons.inventory.forge;
+package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.GuiInit;
 
@@ -8,9 +8,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,40 +16,34 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ForgeContainer extends AbstractContainerMenu {
+public class JawCrusherContainer extends AbstractContainerMenu {
 	
-	private final ForgeBlockEntity entity;
+	private final JawCrusherBlockEntity entity;
 	private final Level level;
-	private final ContainerData data;
 	
-	public ForgeContainer(int id, Inventory inv, FriendlyByteBuf buf) {
-		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(3));
+	public JawCrusherContainer(int id, Inventory inv, FriendlyByteBuf buf) {
+		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()));
 	}
 	
-	public ForgeContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(GuiInit.FORGE_CONTAINER.get(), id);
-		checkContainerSize(inv, 1);
-		this.entity = ((ForgeBlockEntity) entity);
+	public JawCrusherContainer(int id, Inventory inv, BlockEntity entity) {
+		super(GuiInit.JAW_CRUSHER_CONTAINER.get(), id);
+		checkContainerSize(inv, 2);
+		this.entity = ((JawCrusherBlockEntity) entity);
 		this.level = inv.player.level;
-		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 		
 		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
 			this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
+			this.addSlot(new SlotItemHandler(handler, 1, 81, 56));
 		});
 		
-		addDataSlots(data);
-	}
-	
-	public int getContainerTemp() {
-		return data.get(0);
 	}
 	
 	@Override
 	public boolean stillValid(Player pPlayer) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_FORGE.get());
+		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_JAW_CRUSHER.get());
 	}
 	
 	private void addPlayerInv(Inventory playerInventory) {
@@ -84,7 +76,7 @@ public class ForgeContainer extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

@@ -27,6 +27,8 @@
     "advancedlootableweapons:block_deepslate_ore_tin",
     "advancedlootableweapons:block_deepslate_ore_crystallite",
     
-    "advancedlootableweapons:block_alloy_furnace"
+    "advancedlootableweapons:block_alloy_furnace",
+    "advancedlootableweapons:block_basic_forge",
+    "advancedlootableweapons:block_jaw_crusher"
   ]
 }

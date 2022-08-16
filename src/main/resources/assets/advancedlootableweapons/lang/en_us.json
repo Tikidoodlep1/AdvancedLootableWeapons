@@ -573,10 +573,10 @@
 "block.advancedlootableweapons.block_clay_diorite": "Diorite Clay",
 "block.advancedlootableweapons.block_clay_granite": "Granite Clay",
 "block.advancedlootableweapons.alloy_furnace": "Alloy Furnace",
-"block.advancedlootableweapons.forge": "Forge",
+"block.advancedlootableweapons.block_basic_forge": "Basic Forge",
 "block.advancedlootableweapons.advanced_forge": "Advanced Forge",
 "block.advancedlootableweapons.advanced_forge_1": "Advanced Forge",
-"block.advancedlootableweapons.jaw_crusher": "Jaw Crusher",
+"block.advancedlootableweapons.block_jaw_crusher": "Jaw Crusher",
 
 
 "item.advancedlootableweapons.shadow": "Shadow",

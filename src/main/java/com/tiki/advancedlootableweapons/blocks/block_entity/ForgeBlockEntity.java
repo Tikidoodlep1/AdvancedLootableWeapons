@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.te;
+package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

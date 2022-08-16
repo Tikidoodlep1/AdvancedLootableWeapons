@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.blocks;
 
 import java.util.Random;
 
-import com.tiki.advancedlootableweapons.blocks.te.ForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 
 import net.minecraft.core.BlockPos;

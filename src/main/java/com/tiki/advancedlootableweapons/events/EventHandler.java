@@ -16,6 +16,7 @@ import javax.annotation.Nonnull;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.handlers.GlobalDropHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
+import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 
 @Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler {
@@ -38,5 +39,6 @@ public class EventHandler {
 	@SubscribeEvent
 	public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> event) {
 		Registry.register(Registry.RECIPE_TYPE, AlloyFurnaceRecipe.Type.ID, AlloyFurnaceRecipe.Type.INSTANCE);
+		Registry.register(Registry.RECIPE_TYPE, AnvilForgingRecipe.Type.ID, AnvilForgingRecipe.Type.INSTANCE);
 	}
 }

@@ -1,5 +1,8 @@
 package com.tiki.advancedlootableweapons.recipes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonArray;
@@ -14,6 +17,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -25,12 +29,13 @@ import net.minecraft.world.level.block.Blocks;
 
 public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 
+	public static final List<Item> ACCEPTED_TOP_INPUTS = new ArrayList<Item>();
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final NonNullList<Ingredient> inputs;
 	private final boolean useNbt;
 	
-	public AnvilForgingRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> inputs, boolean useNbt) {
+	public AnvilForgingRecipe(final ResourceLocation id, final ItemStack output, final NonNullList<Ingredient> inputs, final boolean useNbt) {
 		this.id = id;
 		this.output = output;
 		this.inputs = inputs;
@@ -38,7 +43,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 	}
 	
 	@Override
-	public boolean matches(SimpleContainer pContainer, Level pLevel) {
+	public boolean matches(final SimpleContainer pContainer, final Level pLevel) {
 		for(int i = 0; i < inputs.size(); i++) {
 			if(!inputs.get(i).test(pContainer.getItem(i))) {
 				return false;
@@ -48,7 +53,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 	}
 	
 	@Override
-	public ItemStack assemble(SimpleContainer pContainer) {
+	public ItemStack assemble(final SimpleContainer pContainer) {
 		ItemStack result = getResultItem();
 		CompoundTag tag = result.getOrCreateTag();
 		ItemStack stack1 = pContainer.getItem(0);
@@ -94,7 +99,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 	}
 	
 	@Override
-	public boolean canCraftInDimensions(int pWidth, int pHeight) {
+	public boolean canCraftInDimensions(final int pWidth, final int pHeight) {
 		return true;
 	}
 
@@ -135,7 +140,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 		public static final ResourceLocation ID = new ResourceLocation(ModInfo.ID, Type.ID);
 		
 		@Override
-		public RecipeSerializer<?> setRegistryName(ResourceLocation name) {
+		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
 			return INSTANCE;
 		}
 		
@@ -151,7 +156,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 		}
 		
 		@Override
-		public AnvilForgingRecipe fromJson(ResourceLocation pRecipeId, JsonObject json) {
+		public AnvilForgingRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
 			boolean useNbt = GsonHelper.convertToBoolean(json, "transferNBT");
 			JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
 			NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
@@ -163,7 +168,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 		}
 		
 		@Override
-		public AnvilForgingRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+		public AnvilForgingRecipe fromNetwork(final ResourceLocation pRecipeId, final FriendlyByteBuf pBuffer) {
 			boolean useNbt = pBuffer.readBoolean();
 			NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
 			for(int i = 0; i < inputs.size(); i++) {
@@ -174,7 +179,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 		}
 		
 		@Override
-		public void toNetwork(FriendlyByteBuf pBuffer, AnvilForgingRecipe pRecipe) {
+		public void toNetwork(final FriendlyByteBuf pBuffer, final AnvilForgingRecipe pRecipe) {
 			pBuffer.writeBoolean(pRecipe.useNbt);
 			pBuffer.writeInt(pRecipe.getIngredients().size());
 			for(Ingredient i : pRecipe.getIngredients()) {

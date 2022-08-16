@@ -2,12 +2,10 @@ package com.tiki.advancedlootableweapons.recipes;
 
 import javax.annotation.Nullable;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -20,26 +18,27 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 
-public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
+public class JawCrusherRecipe implements Recipe<SimpleContainer> {
 
 	private final ResourceLocation id;
 	private final ItemStack output;
-	private final NonNullList<Ingredient> inputs;
+	private final Ingredient input;
+	private final int maxCount;
 	
-	public AlloyFurnaceRecipe(final ResourceLocation id, final ItemStack output, final NonNullList<Ingredient> inputs) {
+	public JawCrusherRecipe(final ResourceLocation id, final ItemStack output, final int maxCount, final Ingredient input) {
 		this.id = id;
 		this.output = output;
-		this.inputs = inputs;
+		this.maxCount = maxCount;
+		this.input = input;
+	}
+	
+	public int getMaxItemCount() {
+		return this.maxCount;
 	}
 	
 	@Override
 	public boolean matches(final SimpleContainer pContainer, final Level pLevel) {
-		for(int i = 0; i < inputs.size(); i++) {
-			if(!inputs.get(i).test(pContainer.getItem(i))) {
-				return false;
-			}
-		}
-		return true;
+		return input.test(pContainer.getItem(0));
 	}
 	
 	@Override
@@ -74,16 +73,16 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(BlockInit.BLOCK_ALLOY_FURNACE.get().asItem());
+		return new ItemStack(BlockInit.BLOCK_JAW_CRUSHER.get().asItem());
 	}
 	
-	public static class Type implements RecipeType<AlloyFurnaceRecipe> {
+	public static class Type implements RecipeType<JawCrusherRecipe> {
 		private Type() {}
 		public static final Type INSTANCE = new Type();
-		public static final String ID = "alloy_furnace";
+		public static final String ID = "crushing";
 	}
 	
-	public static class Serializer implements RecipeSerializer<AlloyFurnaceRecipe> {
+	public static class Serializer implements RecipeSerializer<JawCrusherRecipe> {
 		
 		public static final Serializer INSTANCE = new Serializer();
 		public static final ResourceLocation ID = new ResourceLocation(ModInfo.ID, Type.ID);
@@ -105,33 +104,26 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
 		}
 		
 		@Override
-		public AlloyFurnaceRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
-			JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
-			NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
-			for(int i = 0; i < inputs.size(); i++) {
-				inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
-			}
+		public JawCrusherRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
+			Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
 			ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-			return new AlloyFurnaceRecipe(pRecipeId, output, inputs);
+			int maxCount = GsonHelper.getAsInt(json, "maxCount");
+			return new JawCrusherRecipe(pRecipeId, output, maxCount, input);
 		}
-
+		
 		@Override
-		public AlloyFurnaceRecipe fromNetwork(final ResourceLocation pRecipeId, final FriendlyByteBuf pBuffer) {
-			NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
-			for(int i = 0; i < inputs.size(); i++) {
-				inputs.set(i, Ingredient.fromNetwork(pBuffer));
-			}
+		public JawCrusherRecipe fromNetwork(final ResourceLocation pRecipeId, final FriendlyByteBuf pBuffer) {
+			Ingredient input = Ingredient.fromNetwork(pBuffer);
 			ItemStack output = pBuffer.readItem();
-			return new AlloyFurnaceRecipe(pRecipeId, output, inputs);
+			int maxCount = pBuffer.readInt();
+			return new JawCrusherRecipe(pRecipeId, output, maxCount, input);
 		}
-
+		
 		@Override
-		public void toNetwork(final FriendlyByteBuf pBuffer, final AlloyFurnaceRecipe pRecipe) {
-			pBuffer.writeInt(pRecipe.getIngredients().size());
-			for(Ingredient i : pRecipe.getIngredients()) {
-				i.toNetwork(pBuffer);
-			}
+		public void toNetwork(final FriendlyByteBuf pBuffer, final JawCrusherRecipe pRecipe) {
+			pRecipe.input.toNetwork(pBuffer);
 			pBuffer.writeItemStack(pRecipe.getResultItem(), true);
+			pBuffer.writeInt(pRecipe.maxCount);
 		}
 		
 		@SuppressWarnings("unchecked")

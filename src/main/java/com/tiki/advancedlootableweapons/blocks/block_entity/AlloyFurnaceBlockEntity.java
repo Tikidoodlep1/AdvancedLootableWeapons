@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.te;
+package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import java.util.Optional;
 
@@ -252,7 +252,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 	        		if(match.isPresent()) {
 	        			entity.itemHandler.extractItem(SLOT_INPUT_1, 1, false);
 	        			entity.itemHandler.extractItem(SLOT_INPUT_2, 1, false);
-	        			entity.itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + 1));
+	        			entity.itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + match.get().getResultItem().getCount()));
 	        		}
 	                flag1 = true;
 	            }

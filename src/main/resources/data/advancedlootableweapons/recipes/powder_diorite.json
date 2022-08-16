@@ -1,0 +1,12 @@
+{
+	"type": "advancedlootableweapons:crushing",
+	"input": {
+		"item": "minecraft:diorite"
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:powder_diorite",
+		"count": 4
+	}
+}

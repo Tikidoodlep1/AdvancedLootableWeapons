@@ -1,71 +1,93 @@
-package com.tiki.advancedlootableweapons.inventory.forge;
+package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
-import com.tiki.advancedlootableweapons.init.BlockInit;
+import java.util.Optional;
+
 import com.tiki.advancedlootableweapons.init.GuiInit;
-
+import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.world.level.block.Blocks;
 
-public class ForgeContainer extends AbstractContainerMenu {
-	
-	private final ForgeBlockEntity entity;
+public class AnvilForgingContainer extends AbstractContainerMenu {
+
+	private final BlockPos pos;
 	private final Level level;
-	private final ContainerData data;
+	protected final Container invSlots = new SimpleContainer(3) {
+		public void setChanged() {
+			this.setChanged();
+			AnvilForgingContainer.this.slotsChanged(invSlots);
+		};
+	};
 	
-	public ForgeContainer(int id, Inventory inv, FriendlyByteBuf buf) {
-		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(3));
+	public AnvilForgingContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
+		this(id, inv, extraData.readBlockPos());
 	}
 	
-	public ForgeContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(GuiInit.FORGE_CONTAINER.get(), id);
-		checkContainerSize(inv, 1);
-		this.entity = ((ForgeBlockEntity) entity);
+	public AnvilForgingContainer(int id, Inventory inv, BlockPos pos) {
+		super(GuiInit.ANVIL_FORGING_CONTAINER.get(), id);
+		checkContainerSize(inv, 3);
 		this.level = inv.player.level;
-		this.data = data;
+		this.pos = pos;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 		
-		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-			this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
+		this.addSlot(new Slot(this.invSlots, 0, 56, 33) {
+			@Override
+			public int getMaxStackSize() {
+				return 1;
+			}
 		});
 		
-		addDataSlots(data);
-	}
-	
-	public int getContainerTemp() {
-		return data.get(0);
+		this.addSlot(new Slot(this.invSlots, 1, 56, 56) {
+			@Override
+			public int getMaxStackSize() {
+				return 1;
+			}
+		});
+		
+		this.addSlot(new Slot(this.invSlots, 2, 114, 43) {
+			@Override
+			public boolean mayPickup(Player pPlayer) {
+				return false;
+			}
+			@Override
+			public int getMaxStackSize() {
+				return 1;
+			}
+		});
+		
 	}
 	
 	@Override
-	public boolean stillValid(Player pPlayer) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_FORGE.get());
-	}
-	
-	private void addPlayerInv(Inventory playerInventory) {
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 9; j++) {
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+	public void slotsChanged(Container pContainer) {
+		SimpleContainer inv = new SimpleContainer(this.invSlots.getContainerSize());
+		for(int i = 0; i < this.invSlots.getContainerSize(); i++) {
+			inv.setItem(i, this.invSlots.getItem(i));
+		}
+		
+		Optional<AnvilForgingRecipe> match = level.getRecipeManager().getRecipeFor(AnvilForgingRecipe.Type.INSTANCE, inv, level);
+		if(match.isPresent() && canMakeRecipe()) {
+			this.invSlots.setItem(0, ItemStack.EMPTY);
+			if(match.get().getIngredients().size() >= 2) {
+				this.invSlots.setItem(1, ItemStack.EMPTY);
 			}
+			this.invSlots.setItem(1, match.get().assemble(inv));
 		}
+		super.slotsChanged(pContainer);
 	}
 	
-	private void addPlayerHotbar(Inventory playerInventory) {
-		for(int i = 0; i < 9; i++) {
-			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-		}
+	private boolean canMakeRecipe() {
+		return this.invSlots.getItem(2) == ItemStack.EMPTY;
 	}
 	
 	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -84,7 +106,7 @@ public class ForgeContainer extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -118,4 +140,24 @@ public class ForgeContainer extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
+	
+	@Override
+	public boolean stillValid(Player player) {
+		ContainerLevelAccess access = ContainerLevelAccess.create(level, pos);
+		return stillValid(access, player, Blocks.ANVIL) || stillValid(access, player, Blocks.CHIPPED_ANVIL) || stillValid(access, player, Blocks.DAMAGED_ANVIL);
+	}
+	
+	private void addPlayerInv(Inventory playerInventory) {
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 9; j++) {
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+			}
+		}
+	}
+	
+	private void addPlayerHotbar(Inventory playerInventory) {
+		for(int i = 0; i < 9; i++) {
+			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+		}
+	}
 }
