@@ -22,10 +22,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "unused"})
 public class ItemInit {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.ID);
-	public static final Map<Item, ItemPropertyFunction> toolHeadMap = new HashMap<Item, ItemPropertyFunction>();
+	public static final Map<Item, ItemPropertyFunction> toolHeadMap = new HashMap<>();
 	
 	//Mats
 	public static final ForgeTier MAT_KOBOLD = new ForgeTier(1, CommonConfigHandler.KOBOLD_DURABILITY.get(), 6.0F, CommonConfigHandler.KOBOLD_DAMAGE.get(), 22,
@@ -50,8 +50,7 @@ public class ItemInit {
 			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_CRYSTALLITE.get()));
 	public static final ForgeTier MAT_DUSKSTEEL = new ForgeTier(3, CommonConfigHandler.DUSKSTEEL_DURABILITY.get(), 8.5F, CommonConfigHandler.DUSKSTEEL_DAMAGE.get(), 14,
 			BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.INGOT_DUSKSTEEL.get()));
-	
-	
+
 	public static final RegistryObject<Item> INGOT_TIN = ITEMS.register("ingot_tin", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> INGOT_KOBOLD = ITEMS.register("ingot_kobold", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> INGOT_SILVER = ITEMS.register("ingot_silver", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
@@ -124,8 +123,7 @@ public class ItemInit {
 	public static final RegistryObject<Item> MAKHAIRA_HEAD = ITEMS.register("makhaira_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> SPEAR_HEAD = ITEMS.register("spear_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> LONG_WEAPON_HANDLE = ITEMS.register("long_weapon_handle", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
-	
-	
+
 	public static final RegistryObject<Item> DAGGER_WOOD = ITEMS.register("dagger_wood", () -> new AlwWeapon(Tiers.WOOD, WeaponAttributes.DAGGER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> DAGGER_IRON = ITEMS.register("dagger_iron", () -> new AlwWeapon(Tiers.IRON, WeaponAttributes.DAGGER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> DAGGER_KOBOLD = ITEMS.register("dagger_kobold", () -> new AlwWeapon(MAT_KOBOLD, WeaponAttributes.DAGGER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));

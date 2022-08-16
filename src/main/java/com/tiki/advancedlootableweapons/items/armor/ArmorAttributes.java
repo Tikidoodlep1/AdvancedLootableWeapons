@@ -17,10 +17,10 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public enum ArmorAttributes implements ArmorMaterial {
 
-    KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get(),22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS.get(), 0.0F, () -> {
+    KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY.get(), 22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS.get(), 0.0F, () -> {
         return Ingredient.of(ItemInit.INGOT_KOBOLD.get());
     }),
-    COPPER("copper", new int[]{2, 3, 4, 2}, CommonConfigHandler.COPPER_ARMOR_DURABILITY.get(),10, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.COPPER_ARMOR_HARDNESS.get(), 0.0F, () -> {
+    COPPER("copper", new int[]{2, 3, 4, 2}, CommonConfigHandler.COPPER_ARMOR_DURABILITY.get(), 10, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.COPPER_ARMOR_HARDNESS.get(), 0.0F, () -> {
         return Ingredient.of(Items.COPPER_INGOT);
     }),
     SILVER("silver", new int[]{3, 5, 7, 3}, CommonConfigHandler.SILVER_ARMOR_DURABILITY.get(), 24, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.SILVER_ARMOR_HARDNESS.get(), 0.0F, () -> {
