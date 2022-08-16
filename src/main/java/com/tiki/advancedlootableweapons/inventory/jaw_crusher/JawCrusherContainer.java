@@ -1,6 +1,6 @@
-package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
+package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
+import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.GuiInit;
 
@@ -8,9 +8,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,57 +16,48 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class AlloyFurnaceContainer extends AbstractContainerMenu {
-
-	private final AlloyFurnaceBlockEntity entity;
-	private final Level level;
-	private final ContainerData data;
+public class JawCrusherContainer extends AbstractContainerMenu {
 	
-	public AlloyFurnaceContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-		this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+	private final JawCrusherBlockEntity entity;
+	private final Level level;
+	
+	public JawCrusherContainer(int id, Inventory inv, FriendlyByteBuf buf) {
+		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()));
 	}
 	
-	public AlloyFurnaceContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(GuiInit.ALLOY_FURNACE_CONTAINER.get(), id);
-		checkContainerSize(inv, 4);
-		this.entity = ((AlloyFurnaceBlockEntity) entity);
+	public JawCrusherContainer(int id, Inventory inv, BlockEntity entity) {
+		super(GuiInit.JAW_CRUSHER_CONTAINER.get(), id);
+		checkContainerSize(inv, 2);
+		this.entity = ((JawCrusherBlockEntity) entity);
 		this.level = inv.player.level;
-		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 		
 		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-			this.addSlot(new SlotItemHandler(handler, 0, 45, 17));
-			this.addSlot(new SlotItemHandler(handler, 1, 68, 17));
-			this.addSlot(new SlotItemHandler(handler, 2, 57, 54));
-			this.addSlot(new SlotItemHandler(handler, 3, 116, 36));
+			this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
+			this.addSlot(new SlotItemHandler(handler, 1, 81, 56));
 		});
 		
-		addDataSlots(data);
 	}
 	
-	public boolean isCrafting() {
-		return data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS) > 0;
+	@Override
+	public boolean stillValid(Player pPlayer) {
+		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_JAW_CRUSHER.get());
 	}
 	
-	public int getScaledProgress() {
-		int progress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS);
-		int maxProgress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_TOTAL_TIME);
-		int progressArrowSize = 26;
-		
-		return maxProgress != 0 && progress != 0 ? (progress / maxProgress) * progressArrowSize : 0;
-	}
-	
-	public int getLitTime() {
-		double time = data.get(AlloyFurnaceBlockEntity.DATA_LIT_TIME);
-		double totalTime = this.entity.getMaxBurnDuration();
-		double percent = 0;
-		if(totalTime != 0) {
-			percent = time/totalTime;
+	private void addPlayerInv(Inventory playerInventory) {
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 9; j++) {
+				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+			}
 		}
-		
-		return ((int)(percent * 100)/15);
+	}
+	
+	private void addPlayerHotbar(Inventory playerInventory) {
+		for(int i = 0; i < 9; i++) {
+			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+		}
 	}
 	
 	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -87,7 +76,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -121,23 +110,4 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
-	
-	@Override
-	public boolean stillValid(Player player) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, BlockInit.BLOCK_ALLOY_FURNACE.get());
-	}
-	
-	private void addPlayerInv(Inventory playerInventory) {
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 9; j++) {
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-			}
-		}
-	}
-	
-	private void addPlayerHotbar(Inventory playerInventory) {
-		for(int i = 0; i < 9; i++) {
-			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-		}
-	}
 }

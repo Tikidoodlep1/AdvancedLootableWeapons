@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.tags.BlockTags;
@@ -53,6 +54,16 @@ public class AlwWeapon extends TieredItem implements Vanishable {
     
     public double getAttackDamage() {
         return this.attackDamage;
+    }
+    
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+    	int maxDur = super.getMaxDamage(stack);
+    	CompoundTag tag = stack.getTag();
+    	if(tag != null && tag.contains("addedDurability")) {
+    		maxDur += tag.getInt("addedDurability");
+    	}
+    	return maxDur;
     }
     
     @Override

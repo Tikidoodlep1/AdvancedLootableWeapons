@@ -1,0 +1,12 @@
+{
+	"type": "advancedlootableweapons:crushing",
+	"input": {
+		"item": "minecraft:granite"
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:powder_granite",
+		"count": 4
+	}
+}

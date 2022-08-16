@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.te;
+package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import java.util.Optional;
 
@@ -35,7 +35,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
+public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider {
 	public static final int SLOT_INPUT_1 = 0;
 	public static final int SLOT_INPUT_2 = 1;
 	public static final int SLOT_FUEL = 2;
@@ -57,13 +57,13 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 	   public int get(int data) {
 	      switch(data) {
 	      case 0:
-	         return AlloyFurnaceEntity.this.litTime;
+	         return AlloyFurnaceBlockEntity.this.litTime;
 	      case 1:
-	         return AlloyFurnaceEntity.this.litDuration;
+	         return AlloyFurnaceBlockEntity.this.litDuration;
 	      case 2:
-	         return AlloyFurnaceEntity.this.cookingProgress;
+	         return AlloyFurnaceBlockEntity.this.cookingProgress;
 	      case 3:
-	         return AlloyFurnaceEntity.this.cookingTotalTime;
+	         return AlloyFurnaceBlockEntity.this.cookingTotalTime;
 	      default:
 	         return 0;
 	      }
@@ -72,16 +72,16 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 	   public void set(int data, int val) {
 	      switch(data) {
 	      case 0:
-	    	  AlloyFurnaceEntity.this.litTime = val;
+	    	  AlloyFurnaceBlockEntity.this.litTime = val;
 	         break;
 	      case 1:
-	     	 AlloyFurnaceEntity.this.litDuration = val;
+	     	 AlloyFurnaceBlockEntity.this.litDuration = val;
 	         break;
 	      case 2:
-	     	 AlloyFurnaceEntity.this.cookingProgress = val;
+	     	 AlloyFurnaceBlockEntity.this.cookingProgress = val;
 	         break;
 	      case 3:
-	     	 AlloyFurnaceEntity.this.cookingTotalTime = val;
+	     	 AlloyFurnaceBlockEntity.this.cookingTotalTime = val;
 	      }
 	   }
 
@@ -101,7 +101,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 
 	private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 	
-	public AlloyFurnaceEntity(BlockPos pos, BlockState state) {
+	public AlloyFurnaceBlockEntity(BlockPos pos, BlockState state) {
 		super(BlockEntityInit.ALLOY_FURNACE_TE.get(), pos, state);
 	}
 
@@ -170,7 +170,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 		}
 	}
 	
-	public static void tick(Level world, BlockPos pos, BlockState state, AlloyFurnaceEntity entity) {
+	public static void tick(Level world, BlockPos pos, BlockState state, AlloyFurnaceBlockEntity entity) {
 //		ItemStack input1 = entity.itemHandler.getStackInSlot(SLOT_INPUT_1);
 //	    ItemStack input2 = entity.itemHandler.getStackInSlot(SLOT_INPUT_2);
 //	    Recipe<Integer> recipe = AlloyFurnaceRecipes.INSTANCE.getRecipe(input1, input2);
@@ -192,7 +192,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 		}
 	}
 	
-	private static boolean hasRecipe(AlloyFurnaceEntity entity) {
+	private static boolean hasRecipe(AlloyFurnaceBlockEntity entity) {
 		Level level = entity.level;
 		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
 		for(int i = 0; i < entity.itemHandler.getSlots(); i++) {
@@ -204,7 +204,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 		return match.isPresent() && canMakeRecipe(entity, match.get().getResultItem());
 	}
 	
-	private static void smeltItem(AlloyFurnaceEntity entity, Level level, BlockState state, BlockPos pos) {		
+	private static void smeltItem(AlloyFurnaceBlockEntity entity, Level level, BlockState state, BlockPos pos) {		
 		boolean flag = entity.isLit();
 	    boolean flag1 = false;
 	    if (entity.isLit()) {
@@ -252,7 +252,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 	        		if(match.isPresent()) {
 	        			entity.itemHandler.extractItem(SLOT_INPUT_1, 1, false);
 	        			entity.itemHandler.extractItem(SLOT_INPUT_2, 1, false);
-	        			entity.itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + 1));
+	        			entity.itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + match.get().getResultItem().getCount()));
 	        		}
 	                flag1 = true;
 	            }
@@ -286,7 +286,7 @@ public class AlloyFurnaceEntity extends BlockEntity implements MenuProvider {
 //		itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(recipe.getOutput().getItem(), itemHandler.getStackInSlot(SLOT_RESULT).getCount() + recipe.getOutput().getCount()));
 //	}
 	
-	private static boolean canMakeRecipe(AlloyFurnaceEntity entity, ItemStack stack) {
+	private static boolean canMakeRecipe(AlloyFurnaceBlockEntity entity, ItemStack stack) {
 		return entity.itemHandler.getStackInSlot(SLOT_RESULT) == ItemStack.EMPTY || (entity.itemHandler.getStackInSlot(SLOT_RESULT).getItem() == stack.getItem() && entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + stack.getCount() < entity.itemHandler.getStackInSlot(SLOT_RESULT).getMaxStackSize());
 	}
 	

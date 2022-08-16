@@ -1,0 +1,10 @@
+{
+	"forge_marker": 1,
+    "variants": 
+    {
+        "facing=north": { "model": "advancedlootableweapons:block/block_jaw_crusher" },
+        "facing=east": { "model": "advancedlootableweapons:block/block_jaw_crusher", "y": 90 },
+        "facing=south": { "model": "advancedlootableweapons:block/block_jaw_crusher", "y": 180 },
+        "facing=west": { "model": "advancedlootableweapons:block/block_jaw_crusher", "y": 270 }
+    }
+}

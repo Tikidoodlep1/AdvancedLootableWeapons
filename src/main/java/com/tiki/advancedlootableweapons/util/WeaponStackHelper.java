@@ -1,8 +1,9 @@
-package com.tiki.advancedlootableweapons.items.weapons;
+package com.tiki.advancedlootableweapons.util;
 
 import java.util.Random;
 
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
+import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.TextComponent;

@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockDusksteel;
+import com.tiki.advancedlootableweapons.blocks.BlockForge;
+import com.tiki.advancedlootableweapons.blocks.BlockJawCrusher;
 import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
 
 import net.minecraft.world.item.BlockItem;
@@ -85,6 +87,10 @@ public class BlockInit {
 	//Functionals
 	public static final RegistryObject<Block> BLOCK_ALLOY_FURNACE = registerBlock("block_alloy_furnace", () -> new BlockAlloyFurnace(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.5F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), CreativeTabs.BLOCK_TAB);
+	public static final RegistryObject<Block> BLOCK_FORGE = registerBlock("block_basic_forge", () -> new BlockForge(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().sound(SoundType.STONE).dynamicShape()), CreativeTabs.BLOCK_TAB);
+	public static final RegistryObject<Block> BLOCK_JAW_CRUSHER = registerBlock("block_jaw_crusher", () -> new BlockJawCrusher(BlockBehaviour.Properties.of(Material.METAL)
+			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().sound(SoundType.METAL).dynamicShape()), CreativeTabs.BLOCK_TAB);
 	
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
 		RegistryObject<T> toReturn = BLOCKS.register(name, block);
