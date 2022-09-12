@@ -298,13 +298,13 @@ public class ToolStabSword extends Item implements IHasModel{
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
 			int plateEffect = (int)Math.ceil(((we.getPlateEffect()*100)/6)-9);
-			tooltip.add(TextFormatting.RED + "Effectiveness against Studded armor: " + studdedEffect);
+			tooltip.add(TextFormatting.RED + "Effectiveness against Studded armor: " + studdedEffect + "/8");
 			tooltip.add(TextFormatting.DARK_RED + "Chance to pierce Studded armor: " + we.getStuddedPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.GREEN + "Effectiveness against Chain armor: " + chainEffect);
+			tooltip.add(TextFormatting.GREEN + "Effectiveness against Chain armor: " + chainEffect + "/8");
 			tooltip.add(TextFormatting.DARK_GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.AQUA + "Effectiveness against Plate armor: " + plateEffect);
+			tooltip.add(TextFormatting.AQUA + "Effectiveness against Plate armor: " + plateEffect + "/8");
 			tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance() + "%");
 		}else {
 			tooltip.add(TextFormatting.GRAY + "Hold " + sneak.getDisplayName() + " for Effectiveness Information");

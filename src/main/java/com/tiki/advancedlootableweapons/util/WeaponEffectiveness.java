@@ -20,7 +20,7 @@ public enum WeaponEffectiveness {
 	BATTLEAXE("battleaxe", 0.9, 0, 1.0, 0, 0.95, 0),
 	ZWEIHANDER("zweihander", 0.75, 20, 0.85, 1, 0.8, 3),
 	ARROW("arrow", 0.65, 15, 0.75, 25, 0.7, 15),
-	THROWN_SPEAR("thrown_spear", 0.65, 15, 0.75, 23, 0.7, 16);
+	THROWN_SPEAR("thrown_spear", 0.7, 15, 0.85, 23, 0.75, 16);
 	
 	private final String type;
 	private final double studdedEffectiveness;
