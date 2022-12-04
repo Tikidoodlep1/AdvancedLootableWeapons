@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "advancedlootableweapons:items/unbound_plate_leggings_frost_steel"
+	}
+}

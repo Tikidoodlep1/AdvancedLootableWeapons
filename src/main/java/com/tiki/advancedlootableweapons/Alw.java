@@ -4,14 +4,19 @@ import java.io.File;
 import java.util.UUID;
 
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
+import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwToolHeadsCreativeTab;
 import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;

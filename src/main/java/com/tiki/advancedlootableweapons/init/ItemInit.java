@@ -356,6 +356,11 @@ public class ItemInit {
 	public static final Item SPEAR_HEAD = new ItemBase("spear_head");
 	public static final Item LONG_WEAPON_HANDLE = new ItemBase("long_weapon_handle");
 	
+	public static final Item UNBOUND_HELMET_LEATHER = new ItemUnboundArmor("unbound_helmet_leather");
+	public static final Item UNBOUND_CHESTPLATE_LEATHER = new ItemUnboundArmor("unbound_chestplate_leather");
+	public static final Item UNBOUND_LEGGINGS_LEATHER = new ItemUnboundArmor("unbound_leggings_leather");
+	public static final Item UNBOUND_BOOTS_LEATHER = new ItemUnboundArmor("unbound_boots_leather");
+	
 	public static final Item UNBOUND_CHAIN_HELMET_IRON = new ItemUnboundArmor("unbound_chain_helmet_iron");
 	public static final Item UNBOUND_CHAIN_CHESTPLATE_IRON = new ItemUnboundArmor("unbound_chain_chestplate_iron");
 	public static final Item UNBOUND_CHAIN_LEGGINGS_IRON = new ItemUnboundArmor("unbound_chain_leggings_iron");
@@ -366,10 +371,10 @@ public class ItemInit {
 	public static final Item UNBOUND_CHAIN_LEGGINGS_GOLD = new ItemUnboundArmor("unbound_chain_leggings_gold");
 	public static final Item UNBOUND_CHAIN_BOOTS_GOLD = new ItemUnboundArmor("unbound_chain_boots_gold");
 	
-	public static final Item UNBOUND_CHAIN_HELMET_DIAMOND = new ItemUnboundArmor("unbound_chain_helmet_diamond");
-	public static final Item UNBOUND_CHAIN_CHESTPLATE_DIAMOND = new ItemUnboundArmor("unbound_chain_chestplate_diamond");
-	public static final Item UNBOUND_CHAIN_LEGGINGS_DIAMOND = new ItemUnboundArmor("unbound_chain_leggings_diamond");
-	public static final Item UNBOUND_CHAIN_BOOTS_DIAMOND = new ItemUnboundArmor("unbound_chain_boots_diamond");
+	public static final Item UNBOUND_CHAIN_HELMET_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_leather_helmet");
+	public static final Item UNBOUND_CHAIN_CHESTPLATE_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_leather_chestplate");
+	public static final Item UNBOUND_CHAIN_LEGGINGS_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_leather_leggings");
+	public static final Item UNBOUND_CHAIN_BOOTS_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_leather_boots");
 	
 	public static final Item UNBOUND_CHAIN_HELMET_KOBOLD = new ItemUnboundArmor("unbound_chain_helmet_kobold");
 	public static final Item UNBOUND_CHAIN_CHESTPLATE_KOBOLD = new ItemUnboundArmor("unbound_chain_chestplate_kobold");
@@ -436,10 +441,10 @@ public class ItemInit {
 	public static final Item UNBOUND_PLATE_LEGGINGS_GOLD = new ItemUnboundArmor("unbound_plate_leggings_gold");
 	public static final Item UNBOUND_PLATE_BOOTS_GOLD = new ItemUnboundArmor("unbound_plate_boots_gold");
 	
-	public static final Item UNBOUND_PLATE_HELMET_DIAMOND = new ItemUnboundArmor("unbound_plate_helmet_diamond");
-	public static final Item UNBOUND_PLATE_CHESTPLATE_DIAMOND = new ItemUnboundArmor("unbound_plate_chestplate_diamond");
-	public static final Item UNBOUND_PLATE_LEGGINGS_DIAMOND = new ItemUnboundArmor("unbound_plate_leggings_diamond");
-	public static final Item UNBOUND_PLATE_BOOTS_DIAMOND = new ItemUnboundArmor("unbound_plate_boots_diamond");
+	public static final Item UNBOUND_PLATE_HELMET_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_steel_helmet");
+	public static final Item UNBOUND_PLATE_CHESTPLATE_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_steel_chestplate");
+	public static final Item UNBOUND_PLATE_LEGGINGS_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_steel_leggings");
+	public static final Item UNBOUND_PLATE_BOOTS_DIAMOND = new ItemUnboundArmor("unbound_diamond_studded_steel_boots");
 	
 	public static final Item UNBOUND_PLATE_HELMET_KOBOLD = new ItemUnboundArmor("unbound_plate_helmet_kobold");
 	public static final Item UNBOUND_PLATE_CHESTPLATE_KOBOLD = new ItemUnboundArmor("unbound_plate_chestplate_kobold");
@@ -529,22 +534,22 @@ public class ItemInit {
 	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("mat_crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
 	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("mat_dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("camat_iron", ModInfo.ID + ":chain_iron", ArmorMaterial.IRON.getDurability(EntityEquipmentSlot.CHEST), new int[] {ArmorMaterial.IRON.getDamageReductionAmount(EntityEquipmentSlot.HEAD), ArmorMaterial.IRON.getDamageReductionAmount(EntityEquipmentSlot.CHEST), ArmorMaterial.IRON.getDamageReductionAmount(EntityEquipmentSlot.LEGS), ArmorMaterial.IRON.getDamageReductionAmount(EntityEquipmentSlot.FEET)}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ArmorMaterial.IRON.getToughness()).setRepairItem(new ItemStack(Items.IRON_INGOT));
-	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("camat_gold", ModInfo.ID + ":chain_gold", ArmorMaterial.GOLD.getDurability(EntityEquipmentSlot.CHEST), new int[] {ArmorMaterial.GOLD.getDamageReductionAmount(EntityEquipmentSlot.HEAD), ArmorMaterial.GOLD.getDamageReductionAmount(EntityEquipmentSlot.CHEST), ArmorMaterial.GOLD.getDamageReductionAmount(EntityEquipmentSlot.LEGS), ArmorMaterial.GOLD.getDamageReductionAmount(EntityEquipmentSlot.FEET)}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ArmorMaterial.GOLD.getToughness()).setRepairItem(new ItemStack(Items.GOLD_INGOT));
-	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("camat_diamond", ModInfo.ID + ":chain_diamond", ArmorMaterial.DIAMOND.getDurability(EntityEquipmentSlot.CHEST), new int[] {2,6,8,3}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F).setRepairItem(new ItemStack(Items.LEATHER));
+	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("camat_iron", ModInfo.ID + ":chain_iron", 13, new int[] {2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(Items.IRON_INGOT));
+	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("camat_gold", ModInfo.ID + ":chain_gold", 5, new int[] {1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F).setRepairItem(new ItemStack(Items.GOLD_INGOT));
+	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("camat_diamond", ModInfo.ID + ":diamond_studded_leather", 5 + 6, new int[] {2,6,8,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(Items.LEATHER));
 	public static final ArmorMaterial CAMAT_KOBOLD = EnumHelper.addArmorMaterial("camat_kobold", ModInfo.ID + ":chain_kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("camat_copper", ModInfo.ID + ":chain_copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("camat_silver", ModInfo.ID + ":chain_silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
+	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("camat_copper", ModInfo.ID + ":chain_copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("camat_silver", ModInfo.ID + ":chain_silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
 	public static final ArmorMaterial CAMAT_BRONZE = EnumHelper.addArmorMaterial("camat_bronze", ModInfo.ID + ":chain_bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
 	public static final ArmorMaterial CAMAT_PLATINUM = EnumHelper.addArmorMaterial("camat_platinum", ModInfo.ID + ":chain_platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
 	public static final ArmorMaterial CAMAT_STEEL = EnumHelper.addArmorMaterial("camat_steel", ModInfo.ID + ":chain_steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
 	public static final ArmorMaterial CAMAT_FROST_STEEL = EnumHelper.addArmorMaterial("camat_frost_steel", ModInfo.ID + ":chain_frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
 	public static final ArmorMaterial CAMAT_OBSIDIAN = EnumHelper.addArmorMaterial("camat_obsidian", ModInfo.ID + ":chain_obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
 	public static final ArmorMaterial CAMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("camat_crystallite", ModInfo.ID + ":chain_crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("camat_dusksteel", ModInfo.ID + ":chain_dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("camat_dusksteel", ModInfo.ID + ":chain_dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("amat_diamond", ModInfo.ID + ":diamond", ArmorMaterial.DIAMOND.getDurability(EntityEquipmentSlot.CHEST), new int[] {3,6,8,3}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_STEEL));
+	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("amat_diamond", ModInfo.ID + ":diamond_studded_steel", ConfigHandler.STEEL_ARMOR_DURABILITY + 8, new int[] {3,6,8,3}, 19, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_STEEL));
 	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
 	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
 	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
@@ -966,25 +971,25 @@ public class ItemInit {
 	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true);
 	
 	//Armor
-	public static final Item HELMET_LEATHER = new ArmorBonusesBase("leather_helmet", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1);
-	public static final Item CHESTPLATE_LEATHER = new ArmorBonusesBase("leather_chestplate", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.CHEST, 1.125D, 0D, 0D, 1);
-	public static final Item LEGGINGS_LEATHER = new ArmorBonusesBase("leather_leggings", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 2, 0.0D, 1, EntityEquipmentSlot.LEGS, 1.125D, 0D, 1);
-	public static final Item BOOTS_LEATHER = new ArmorBonusesBase("leather_boots", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.FEET, 0.5D, 0D, 1);
+	public static final Item HELMET_LEATHER = new ArmorBonusesBase("helmet_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1);
+	public static final Item CHESTPLATE_LEATHER = new ArmorBonusesBase("chestplate_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.CHEST, 1.125D, 0D, 0D, 1);
+	public static final Item LEGGINGS_LEATHER = new ArmorBonusesBase("leggings_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 2, 0.0D, 1, EntityEquipmentSlot.LEGS, 1.125D, 0D, 1);
+	public static final Item BOOTS_LEATHER = new ArmorBonusesBase("boots_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.FEET, 0.5D, 0D, 1);
 	
-	public static final Item CHAIN_HELMET_IRON = new ArmorBonusesBase("chain_iron_helmet", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.001255584375D, 2);
-	public static final Item CHAIN_CHESTPLATE_IRON = new ArmorBonusesBase("chain_iron_chestplate", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0, 2, EntityEquipmentSlot.CHEST, 2.125D, 1.406D, -0.006277921875D, 2);
-	public static final Item CHAIN_LEGGINGS_IRON = new ArmorBonusesBase("chain_iron_leggings", ArmorTypes.CHAIN, CAMAT_IRON, 2, 0.0, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.006277921875D, 2);
-	public static final Item CHAIN_BOOTS_IRON = new ArmorBonusesBase("chain_iron_boots", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0, 2, EntityEquipmentSlot.FEET, 1.5D, -0.001255584375D, 2);
+	public static final Item CHAIN_HELMET_IRON = new ArmorBonusesBase("chain_helmet_iron", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.001255584375D, 2);
+	public static final Item CHAIN_CHESTPLATE_IRON = new ArmorBonusesBase("chain_chestplate_iron", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0, 2, EntityEquipmentSlot.CHEST, 2.125D, 1.406D, -0.006277921875D, 2);
+	public static final Item CHAIN_LEGGINGS_IRON = new ArmorBonusesBase("chain_leggings_iron", ArmorTypes.CHAIN, CAMAT_IRON, 2, 0.0, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.006277921875D, 2);
+	public static final Item CHAIN_BOOTS_IRON = new ArmorBonusesBase("chain_boots_iron", ArmorTypes.CHAIN, CAMAT_IRON, 1, 0.0, 2, EntityEquipmentSlot.FEET, 1.5D, -0.001255584375D, 2);
 	
-	public static final Item CHAIN_HELMET_GOLD = new ArmorBonusesBase("chain_golden_helmet", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.6120555D, 2);
-	public static final Item CHAIN_CHESTPLATE_GOLD = new ArmorBonusesBase("chain_golden_chestplate", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.CHEST, 2.125D, 3.084D, -0.01224111D, 2);
-	public static final Item CHAIN_LEGGINGS_GOLD = new ArmorBonusesBase("chain_golden_leggings", ArmorTypes.CHAIN, CAMAT_GOLD, 2, 0.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01224111D, 2);
-	public static final Item CHAIN_BOOTS_GOLD = new ArmorBonusesBase("chain_golden_boots", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.6120555D, 2);
+	public static final Item CHAIN_HELMET_GOLD = new ArmorBonusesBase("chain_helmet_golden", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.006120555D, 2);
+	public static final Item CHAIN_CHESTPLATE_GOLD = new ArmorBonusesBase("chain_chestplate_golden", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.CHEST, 2.125D, 3.084D, -0.01224111D, 2);
+	public static final Item CHAIN_LEGGINGS_GOLD = new ArmorBonusesBase("chain_leggings_golden", ArmorTypes.CHAIN, CAMAT_GOLD, 2, 0.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01224111D, 2);
+	public static final Item CHAIN_BOOTS_GOLD = new ArmorBonusesBase("chain_boots_golden", ArmorTypes.CHAIN, CAMAT_GOLD, 1, 0.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.006120555D, 2);
 	
-	public static final Item STUDDED_HELMET_DIAMOND = new ArmorBonusesBase("diamond_studded_leather_helmet", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00185558629D, 6);
-	public static final Item STUDDED_CHESTPLATE_DIAMOND = new ArmorBonusesBase("diamond_studded_leather_chestplate", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 1.546D, -0.00489276479D, 6);
-	public static final Item STUDDED_LEGGINGS_DIAMOND = new ArmorBonusesBase("diamond_studded_leather_leggings", ArmorTypes.STUDDED, CAMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00489276479D, 6);
-	public static final Item STUDDED_BOOTS_DIAMOND = new ArmorBonusesBase("diamond_studded_leather_boots", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00185558629D, 6);
+	public static final Item DIAMOND_STUDDED_LEATHER_HELMET = new ArmorBonusesBase("diamond_studded_leather_helmet", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00185558629D, 6);
+	public static final Item DIAMOND_STUDDED_LEATHER_CHESTPLATE = new ArmorBonusesBase("diamond_studded_leather_chestplate", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 1.546D, -0.00489276479D, 6);
+	public static final Item DIAMOND_STUDDED_LEATHER_LEGGINGS = new ArmorBonusesBase("diamond_studded_leather_leggings", ArmorTypes.STUDDED, CAMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00489276479D, 6);
+	public static final Item DIAMOND_STUDDED_LEATHER_BOOTS = new ArmorBonusesBase("diamond_studded_leather_boots", ArmorTypes.STUDDED, CAMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00185558629D, 6);
 	
 	public static final Item CHAIN_HELMET_COPPER = new ArmorBonusesBase("chain_helmet_copper", ArmorTypes.CHAIN, CAMAT_COPPER, 1, 0.0D, 3, EntityEquipmentSlot.HEAD, 2.5D, -0.00141161166D, 3);
 	public static final Item CHAIN_CHESTPLATE_COPPER = new ArmorBonusesBase("chain_chestplate_copper", ArmorTypes.CHAIN, CAMAT_COPPER, 1, 0.0D, 3,  EntityEquipmentSlot.CHEST, 3.125D, 1.129D, -0.00705939759D, 3);
@@ -1041,20 +1046,20 @@ public class ItemInit {
 	public static final Item CHAIN_LEGGINGS_DUSKSTEEL = new ArmorBonusesBase("chain_leggings_dusksteel", ArmorTypes.CHAIN, CAMAT_DUSKSTEEL, 2, 0.1207D, 8, EntityEquipmentSlot.LEGS, 7.75D, -0.006752030535D, 8);
 	public static final Item CHAIN_BOOTS_DUSKSTEEL = new ArmorBonusesBase("chain_boots_dusksteel", ArmorTypes.CHAIN, CAMAT_DUSKSTEEL, 1, 0.1207D, 6, EntityEquipmentSlot.FEET, 7.25D, -0.001350673965D, 8);
 	
-	public static final Item PLATE_HELMET_IRON = new ArmorBonusesBase("plate_iron_helmet", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2);
-	public static final Item PLATE_CHESTPLATE_IRON = new ArmorBonusesBase("plate_iron_chestplate", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0, 2, EntityEquipmentSlot.CHEST, 2.125D, 1.875D, -0.0083705625D, 2);
-	public static final Item PLATE_LEGGINGS_IRON = new ArmorBonusesBase("plate_iron_leggings", ArmorTypes.PLATE, ArmorMaterial.IRON, 2, 0.0, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.0083705625D, 2);
-	public static final Item PLATE_BOOTS_IRON = new ArmorBonusesBase("plate_iron_boots", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0, 2, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2);
+	public static final Item PLATE_HELMET_IRON = new ArmorBonusesBase("plate_helmet_iron", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.0016741125D, 2);
+	public static final Item PLATE_CHESTPLATE_IRON = new ArmorBonusesBase("plate_chestplate_iron", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0, 2, EntityEquipmentSlot.CHEST, 2.125D, 1.875D, -0.0083705625D, 2);
+	public static final Item PLATE_LEGGINGS_IRON = new ArmorBonusesBase("plate_leggings_iron", ArmorTypes.PLATE, ArmorMaterial.IRON, 2, 0.0, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.0083705625D, 2);
+	public static final Item PLATE_BOOTS_IRON = new ArmorBonusesBase("plate_boots_iron", ArmorTypes.PLATE, ArmorMaterial.IRON, 1, 0.0, 2, EntityEquipmentSlot.FEET, 1.5D, -0.0016741125D, 2);
 	
-	public static final Item PLATE_HELMET_GOLD = new ArmorBonusesBase("plate_golden_helmet", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.00816074D, 2);
-	public static final Item PLATE_CHESTPLATE_GOLD = new ArmorBonusesBase("plate_golden_chestplate", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.CHEST, 2.125D, 4.113D, -0.01632148D, 2);
-	public static final Item PLATE_LEGGINGS_GOLD = new ArmorBonusesBase("plate_golden_leggings", ArmorTypes.PLATE, ArmorMaterial.GOLD, 2, 0.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2);
-	public static final Item PLATE_BOOTS_GOLD = new ArmorBonusesBase("plate_golden_boots", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.00816074D, 2);
+	public static final Item PLATE_HELMET_GOLD = new ArmorBonusesBase("plate_helmet_golden", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.HEAD, 1.5D, -0.00816074D, 2);
+	public static final Item PLATE_CHESTPLATE_GOLD = new ArmorBonusesBase("plate_chestplate_golden", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.CHEST, 2.125D, 4.113D, -0.01632148D, 2);
+	public static final Item PLATE_LEGGINGS_GOLD = new ArmorBonusesBase("plate_leggings_golden", ArmorTypes.PLATE, ArmorMaterial.GOLD, 2, 0.0D, 2, EntityEquipmentSlot.LEGS, 2.125D, -0.01632148D, 2);
+	public static final Item PLATE_BOOTS_GOLD = new ArmorBonusesBase("plate_boots_golden", ArmorTypes.PLATE, ArmorMaterial.GOLD, 1, 0.0D, 2, EntityEquipmentSlot.FEET, 1.5D, -0.00816074D, 2);
 	
-	public static final Item HELMET_DIAMOND = new ArmorBonusesBase("plate_diamond_helmet", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00247411506D, 6);
-	public static final Item CHESTPLATE_DIAMOND = new ArmorBonusesBase("plate_diamond_chestplate", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00652368639D, 6);
-	public static final Item LEGGINGS_DIAMOND = new ArmorBonusesBase("plate_diamond_leggings", ArmorTypes.STUDDED, AMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00652368639D, 6);
-	public static final Item BOOTS_DIAMOND = new ArmorBonusesBase("plate_diamond_boots", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00247411506D, 6);
+	public static final Item HELMET_DIAMOND = new ArmorBonusesBase("diamond_studded_steel_helmet", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.HEAD, 5.0D, -0.00247411506D, 6);
+	public static final Item CHESTPLATE_DIAMOND = new ArmorBonusesBase("diamond_studded_steel_chestplate", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.CHEST, 5.75D, 2.062D, -0.00652368639D, 6);
+	public static final Item LEGGINGS_DIAMOND = new ArmorBonusesBase("diamond_studded_steel_leggings", ArmorTypes.STUDDED, AMAT_DIAMOND, 2, 0.0625D, 6, EntityEquipmentSlot.LEGS, 5.75D, -0.00652368639D, 6);
+	public static final Item BOOTS_DIAMOND = new ArmorBonusesBase("diamond_studded_steel_boots", ArmorTypes.STUDDED, AMAT_DIAMOND, 1, 0.0625D, 6, EntityEquipmentSlot.FEET, 5.0D, -0.00247411506D, 6);
 	
 	public static final Item PLATE_HELMET_COPPER = new ArmorBonusesBase("plate_helmet_copper", ArmorTypes.PLATE, AMAT_COPPER, 1, 0.0D, 3, EntityEquipmentSlot.HEAD, 2.5D, -0.00188214888D, 3);
 	public static final Item PLATE_CHESTPLATE_COPPER = new ArmorBonusesBase("plate_chestplate_copper", ArmorTypes.PLATE, AMAT_COPPER, 1, 0.0D, 3,  EntityEquipmentSlot.CHEST, 3.125D, 1.506D, -0.00941253012D, 3);

@@ -1,6 +1,9 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
+import java.awt.Color;
 import java.io.IOException;
+
+import org.lwjgl.opengl.GL11;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
@@ -17,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
+public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 		
 		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon.png");
 	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, "Dagger", 0, 0);
@@ -78,6 +81,12 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	        for (int k = 0; k < this.buttonList.size(); ++k)
 	        {
 	            (this.buttonList.get(k)).drawButton(this.mc, mouseX, mouseY, partialTicks);
+	            
+	            //int width = (mc.fontRenderer.getStringWidth(this.buttonList.get(k).displayString) + this.buttonList.get(k).getButtonWidth()) / 2;
+//	            GL11.glPushMatrix();
+//	            GL11.glScalef(0.8f, 0.8f, 0.8f);
+	        	//this.buttonList.get(k).drawCenteredString(mc.fontRenderer, this.buttonList.get(k).displayString, (int)((this.buttonList.get(k).x - width) ), (int)((this.buttonList.get(k).y - 8) ), Color.DARK_GRAY.getRGB());
+//	        	GL11.glPopMatrix();
 	        }
 	    }
 	    
@@ -100,11 +109,11 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    @Override
 	    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	    {
-//	        GlStateManager.disableLighting();
-//	        GlStateManager.disableBlend();
+	        GlStateManager.disableLighting();
+	        GlStateManager.disableBlend();
 	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 62, 5, 4210752);
 	        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-//	        GlStateManager.enableLighting();
+	        GlStateManager.enableLighting();
 	    }
 	    
 	    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
@@ -117,7 +126,19 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener{
 	    {
 	        this.drawDefaultBackground();
 	        super.drawScreen(mouseX, mouseY, partialTicks);
+	        
+	        for (int k = 0; k < this.buttonList.size(); ++k)
+	        {
+	            GL11.glPushMatrix();
+	            GL11.glScalef(0.55f, 0.55f, 0.55f);
+	            GlStateManager.disableLighting();
+	        	this.buttonList.get(k).drawCenteredString(mc.fontRenderer, this.buttonList.get(k).displayString, (int)((this.buttonList.get(k).x + (this.buttonList.get(k).getButtonWidth() / 2)) / 0.55), (int)((this.buttonList.get(k).y - 7) / 0.55), Color.WHITE.getRGB());
+	        	GlStateManager.enableLighting();
+	        	GL11.glPopMatrix();
+	        }
+	        
 	        this.renderHoveredToolTip(mouseX, mouseY);
+	        
 	        GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
 	    }

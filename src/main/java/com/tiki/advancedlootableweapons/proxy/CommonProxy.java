@@ -25,6 +25,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 
 public class CommonProxy {
+	
+	public void addColoredItemRenderer() {}
+	
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	
 	public void registerModel(Item item, int metadata) {}

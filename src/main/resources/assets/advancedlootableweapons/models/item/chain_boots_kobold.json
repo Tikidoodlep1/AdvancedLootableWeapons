@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/boots_kobold"
+		"layer0": "advancedlootableweapons:items/chain_boots_kobold"
 	}
 }

@@ -32,7 +32,7 @@ public class GuiWeaponButton extends GuiButton{
 		if(this.cooldown == 0 && this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) {
 			this.cooldown = 1;
 			this.createTimer();
-			return this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+			return true;
 		}
         return false;
     }
@@ -44,7 +44,7 @@ public class GuiWeaponButton extends GuiButton{
 			public void run() {
 				cooldown = 0;
 			}
-		}, 100);
+		}, 500);
 	}
 	
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)

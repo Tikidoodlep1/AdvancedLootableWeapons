@@ -534,6 +534,9 @@ item.binding_chain_crystallite.name=Crystallite Chain Binding
 item.binding_chain_dusksteel.name=Dusksteel Chain Binding
 
 
+item.unbound_helmet_leather.name=Unbound Leather Helmet
+item.unbound_diamond_studded_leather_helmet.name=Unbound Diamond Studded Leather Helmet
+item.unbound_diamond_studded_steel_helmet.name=Unbound Diamond Studded Steel Helmet
 item.unbound_chain_helmet_iron.name=Unbound Iron Chain Helmet
 item.unbound_chain_helmet_gold.name=Unbound Golden Chain Helmet
 item.unbound_chain_helmet_diamond.name=Unbound Diamond Studded Leather Helmet
@@ -550,6 +553,9 @@ item.unbound_chain_helmet_crystallite.name=Unbound Crystallite Chain Helmet
 item.unbound_chain_helmet_dusksteel.name=Unbound Dusksteel Chain Helmet
 
 
+item.unbound_chestplate_leather.name=Unbound Leather Chestplate
+item.unbound_diamond_studded_leather_chestplate.name=Unbound Diamond Studded Leather Chestplate
+item.unbound_diamond_studded_steel_chestplate.name=Unbound Diamond Studded Steel Chestplate
 item.unbound_chain_chestplate_iron.name=Unbound Iron Chain Chestplate
 item.unbound_chain_chestplate_gold.name=Unbound Golden Chain Chestplate
 item.unbound_chain_chestplate_diamond.name=Unbound Diamond Studded Leather Chestplate
@@ -566,6 +572,9 @@ item.unbound_chain_chestplate_crystallite.name=Unbound Crystallite Chain Chestpl
 item.unbound_chain_chestplate_dusksteel.name=Unbound Dusksteel Chain Chestplate
 
 
+item.unbound_leggings_leather.name=Unbound Leather Leggings
+item.unbound_diamond_studded_leather_leggings.name=Unbound Diamond Studded Leather Leggings
+item.unbound_diamond_studded_steel_leggings.name=Unbound Diamond Studded Steel Leggings
 item.unbound_chain_leggings_iron.name=Unbound Iron Chain Leggings
 item.unbound_chain_leggings_gold.name=Unbound Golden Chain Leggings
 item.unbound_chain_leggings_diamond.name=Unbound Diamond Studded Leather Leggings
@@ -582,6 +591,9 @@ item.unbound_chain_leggings_crystallite.name=Unbound Crystallite Chain Leggings
 item.unbound_chain_leggings_dusksteel.name=Unbound Dusksteel Chain Leggings
 
 
+item.unbound_boots_leather.name=Unbound Leather Boots
+item.unbound_diamond_studded_leather_boots.name=Unbound Diamond Studded Leather Boots
+item.unbound_diamond_studded_steel_boots.name=Unbound Diamond Studded Steel Boots
 item.unbound_chain_boots_iron.name=Unbound Iron Chain Boots
 item.unbound_chain_boots_gold.name=Unbound Golden Chain Boots
 item.unbound_chain_boots_diamond.name=Unbound Diamond Studded Leather Boots
@@ -662,9 +674,9 @@ item.unbound_plate_boots_crystallite.name=Unbound Crystallite Boots
 item.unbound_plate_boots_dusksteel.name=Unbound Dusksteel Boots
 
 
-item.leather_helmet.name=Leather Helmet
-item.chain_iron_helmet.name=Iron Chain Helmet
-item.chain_golden_helmet.name=Golden Chain Helmet
+item.helmet_leather.name=Leather Helmet
+item.chain_helmet_iron.name=Iron Chain Helmet
+item.chain_helmet_golden.name=Golden Chain Helmet
 item.diamond_studded_leather_helmet.name=Diamond Studded Leather Helmet
 item.chain_helmet_kobold.name=Kobold Steel Chain Helmet
 item.chain_helmet_copper.name=Copper Chain Helmet
@@ -679,9 +691,9 @@ item.chain_helmet_crystallite.name=Crystallite Chain Helmet
 item.chain_helmet_dusksteel.name=Dusksteel Chain Helmet
 
 
-item.leather_chestplate.name=Leather Chestplate
-item.chain_iron_chestplate.name=Iron Chain Chestplate
-item.chain_golden_chestplate.name=Golden Chain Chestplate
+item.chestplate_leather.name=Leather Chestplate
+item.chain_chestplate_iron.name=Iron Chain Chestplate
+item.chain_chestplate_golden.name=Golden Chain Chestplate
 item.diamond_studded_leather_chestplate.name=Diamond Studded Leather Chestplate
 item.chain_chestplate_kobold.name=Kobold Steel Chain Chestplate
 item.chain_chestplate_copper.name=Copper Chain Chestplate
@@ -696,9 +708,9 @@ item.chain_chestplate_crystallite.name=Crystallite Chain Chestplate
 item.chain_chestplate_dusksteel.name=Dusksteel Chain Chestplate
 
 
-item.leather_leggings.name=Leather Leggings
-item.chain_iron_leggings.name=Iron Chain Leggings
-item.chain_golden_leggings.name=Golden Chain Leggings
+item.leggings_leather.name=Leather Leggings
+item.chain_leggings_iron.name=Iron Chain Leggings
+item.chain_leggings_golden.name=Golden Chain Leggings
 item.diamond_studded_leather_leggings.name=Diamond Studded Leather Leggings
 item.chain_leggings_kobold.name=Kobold Steel Chain Leggings
 item.chain_leggings_copper.name=Copper Chain Leggings
@@ -713,9 +725,9 @@ item.chain_leggings_crystallite.name=Crystallite Chain Leggings
 item.chain_leggings_dusksteel.name=Dusksteel Chain Leggings
 
 
-item.leather_boots.name=Leather Boots
-item.chain_iron_boots.name=Iron Chain Boots
-item.chain_golden_boots.name=Golden Chain Boots
+item.boots_leather.name=Leather Boots
+item.chain_boots_iron.name=Iron Chain Boots
+item.chain_boots_golden.name=Golden Chain Boots
 item.diamond_studded_leather_boots.name=Diamond Studded Leather Boots
 item.chain_boots_kobold.name=Kobold Steel Chain Boots
 item.chain_boots_copper.name=Copper Chain Boots
@@ -730,10 +742,9 @@ item.chain_boots_crystallite.name=Crystallite Chain Boots
 item.chain_boots_dusksteel.name=Dusksteel Chain Boots
 
 
-item.leather_helmet.name=Leather Helmet
-item.plate_iron_helmet.name=Iron Plate Helmet
-item.plate_golden_helmet.name=Golden Plate Helmet
-item.plate_diamond_helmet.name=Diamond Studded Steel Helmet
+item.plate_helmet_iron.name=Iron Plate Helmet
+item.plate_helmet_golden.name=Golden Plate Helmet
+item.diamond_studded_steel_helmet.name=Diamond Studded Steel Helmet
 item.plate_helmet_kobold.name=Kobold Steel Plate Helmet
 item.plate_helmet_copper.name=Copper Plate Helmet
 item.plate_helmet_silver.name=Silver Plate Helmet
@@ -747,10 +758,9 @@ item.plate_helmet_crystallite.name=Crystallite Plate Helmet
 item.plate_helmet_dusksteel.name=Dusksteel Plate Helmet
 
 
-item.leather_chestplate.name=Leather Chestplate
-item.plate_iron_chestplate.name=Iron Plate Chestplate
-item.plate_golden_chestplate.name=Golden Plate Chestplate
-item.plate_diamond_chestplate.name=Diamond Studded Steel Chestplate
+item.plate_chestplate_iron.name=Iron Plate Chestplate
+item.plate_chestplate_golden.name=Golden Plate Chestplate
+item.diamond_studded_steel_chestplate.name=Diamond Studded Steel Chestplate
 item.plate_chestplate_kobold.name=Kobold Steel Plate Chestplate
 item.plate_chestplate_copper.name=Copper Plate Chestplate
 item.plate_chestplate_silver.name=Silver Plate Chestplate
@@ -764,10 +774,9 @@ item.plate_chestplate_crystallite.name=Crystallite Plate Chestplate
 item.plate_chestplate_dusksteel.name=Dusksteel Plate Chestplate
 
 
-item.leather_leggings.name=Leather Leggings
-item.plate_iron_leggings.name=Iron Plate Leggings
-item.plate_golden_leggings.name=Golden Plate Leggings
-item.plate_diamond_leggings.name=Diamond Studded Steel Leggings
+item.plate_leggings_iron.name=Iron Plate Leggings
+item.plate_leggings_golden.name=Golden Plate Leggings
+item.diamond_studded_steel_leggings.name=Diamond Studded Steel Leggings
 item.plate_leggings_kobold.name=Kobold Steel Plate Leggings
 item.plate_leggings_copper.name=Copper Plate Leggings
 item.plate_leggings_silver.name=Silver Plate Leggings
@@ -781,10 +790,9 @@ item.plate_leggings_crystallite.name=Crystallite Plate Leggings
 item.plate_leggings_dusksteel.name=Dusksteel Plate Leggings
 
 
-item.leather_boots.name=Leather Boots
-item.plate_iron_boots.name=Iron Plate Boots
-item.plate_golden_boots.name=Golden Plate Boots
-item.plate_diamond_boots.name=Diamond Studded Steel Boots
+item.plate_bootsiron.name=Iron Plate Boots
+item.plate_boots_golden.name=Golden Plate Boots
+item.diamond_studded_steel_boots.name=Diamond Studded Steel Boots
 item.plate_boots_kobold.name=Kobold Steel Plate Boots
 item.plate_boots_copper.name=Copper Plate Boots
 item.plate_boots_silver.name=Silver Plate Boots

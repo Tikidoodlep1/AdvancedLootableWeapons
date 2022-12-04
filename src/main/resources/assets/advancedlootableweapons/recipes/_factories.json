@@ -1,6 +1,8 @@
 {
 	"recipes": {
 		"chain_link_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessChainLinkRecipe$Factory",
-		"use_dur_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory"
+		"use_dur_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory",
+		"dye_armor": "com.tiki.advancedlootableweapons.recipes.ArmorDyesRecipe$Factory",
+		"bind_armor": "com.tiki.advancedlootableweapons.recipes.ArmorBindingRecipe$Factory"
 	}
 }

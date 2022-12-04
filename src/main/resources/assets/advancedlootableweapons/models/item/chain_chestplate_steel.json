@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/chestplate_steel"
+		"layer0": "advancedlootableweapons:items/chain_chestplate_steel"
 	}
 }

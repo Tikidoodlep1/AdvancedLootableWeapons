@@ -1,6 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
-
+	"group": "advancedlootableweapons:unbound_helmets",
 	"pattern":
 	[
 		"LLL",
@@ -17,7 +17,7 @@
 
 	"result":
 	{
-		"item": "advancedlootableweapons:unbound_plate_helmet_diamond",
+		"item": "advancedlootableweapons:unbound_diamond_studded_steel_helmet",
 		"count": 1
 	}
 }

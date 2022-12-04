@@ -37,7 +37,6 @@ public class RegistryHandler {
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-		System.out.println("[Advanced Lootable Weapons] Calling BlockRegistryEvent!");
 		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
 		TileEntityHandler.registerTileEntities();
 		Alw.proxy.registerCustomMeshesAndStateStuff();
@@ -82,6 +81,7 @@ public class RegistryHandler {
 		SoundHandler.registerSounds();
 		GlobalDropsHandler.registerDrops();
 		DrumRecipes.initDrumRecipes();
+		Alw.proxy.addColoredItemRenderer();
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)

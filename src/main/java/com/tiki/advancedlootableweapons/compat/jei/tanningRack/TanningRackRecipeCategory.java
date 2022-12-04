@@ -17,7 +17,7 @@ public class TanningRackRecipeCategory extends AbstractTanningRackRecipeCategory
 	public TanningRackRecipeCategory(IGuiHelper helper) {
 		super(helper);
 		background = helper.createDrawable(TEXTURES, 48, 24, 134 - 48, 57 - 24);
-		name = "Jaw Crusher";
+		name = "Tanning Rack";
 	}
 	
 	@Override

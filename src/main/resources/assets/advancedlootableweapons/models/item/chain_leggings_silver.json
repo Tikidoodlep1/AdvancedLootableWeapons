@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/leggings_silver"
+		"layer0": "advancedlootableweapons:items/chain_leggings_silver"
 	}
 }

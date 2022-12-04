@@ -229,4 +229,29 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 			stack.attemptDamageItem(damage, rand, null);
 		}
 	}
+	
+	@Override
+	public boolean hasColor(ItemStack stack) {
+		return super.hasColor(stack);
+	}
+	
+	@Override
+	public void setColor(ItemStack stack, int color) {
+		super.setColor(stack, color);
+	}
+	
+	@Override
+	public int getColor(ItemStack stack) {
+		return super.getColor(stack);
+	}
+	
+	@Override
+	public void removeColor(ItemStack stack) {
+		super.removeColor(stack);
+	}
+	
+	@Override
+	public boolean hasOverlay(ItemStack stack) {
+		return this.getArmorMaterial()  == ItemArmor.ArmorMaterial.LEATHER || this.getArmorMaterial()  == ItemInit.CAMAT_DIAMOND || getColor(stack) != 0x00FFFFFF;
+	}
 }

@@ -37,7 +37,8 @@ public class AnvilForgingRecipeMaker {
 			List<Item> row = e.getRowKey();
 			List<Item> col = e.getColumnKey();
 			for(int i = 0; i < e.getRowKey().size(); i++) {
-				jeiRecipes.add(new AnvilForgingRecipe(NonNullList.from(ItemStack.EMPTY, new ItemStack(row.get(i)), new ItemStack(col.get(i))), new ItemStack(e.getValue())));
+				NonNullList<ItemStack> list = NonNullList.from(ItemStack.EMPTY, new ItemStack(row.get(i)), new ItemStack(col.get(i)));
+				jeiRecipes.add(new AnvilForgingRecipe(list, new ItemStack(e.getValue())));
 			}
 		}
 		

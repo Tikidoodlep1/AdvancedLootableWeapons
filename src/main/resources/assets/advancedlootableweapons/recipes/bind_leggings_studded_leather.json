@@ -1,0 +1,20 @@
+{
+	"type": "advancedlootableweapons:bind_armor",
+	"group": "advancedlootableweapons:bind_armor",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:binding_leather",
+			"count": 1
+		},
+		{
+			"item": "advancedlootableweapons:unbound_diamond_studded_leather_leggings",
+			"count": 1
+		}
+	],
+	
+	"result": {
+		"item": "advancedlootableweapons:diamond_studded_leather_leggings",
+		"count": 1
+	}
+}

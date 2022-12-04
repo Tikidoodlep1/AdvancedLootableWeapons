@@ -10,6 +10,7 @@ import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeMaker;
+import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeMaker;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
@@ -38,7 +39,7 @@ public class JEICompat implements IModPlugin{
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 		final IGuiHelper gui = helpers.getGuiHelper();
 		
-		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui), new AnvilForgingRecipeCategory(gui), new JawCrusherRecipeCategory(gui), new DrumRecipeCategory(gui));
+		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui), new AnvilForgingRecipeCategory(gui), new JawCrusherRecipeCategory(gui), new DrumRecipeCategory(gui), new TanningRackRecipeCategory(gui));
 	}
 	
 	@Override
