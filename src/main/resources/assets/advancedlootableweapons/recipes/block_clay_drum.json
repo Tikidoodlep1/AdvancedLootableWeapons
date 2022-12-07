@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S S",
+		"SSS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:clay_diorite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:drum",
+		"count": 1
+	}
+}
