@@ -1,6 +1,11 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/makhaira_frost_steel"
+		"layer0": "advancedlootableweapons:items/makhaira_layer5",
+		"layer1": "advancedlootableweapons:items/makhaira_layer4",
+		"layer2": "advancedlootableweapons:items/makhaira_layer3",
+		"layer3": "advancedlootableweapons:items/makhaira_layer2",
+		"layer4": "advancedlootableweapons:items/makhaira_layer1"
 	}
+
 }

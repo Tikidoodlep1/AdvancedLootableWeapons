@@ -1,35 +1,32 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
-import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
-import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
+import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
+import com.tiki.advancedlootableweapons.recipes.AlloyingRecipe;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IInventory
 {
-	private AlloyFurnaceRecipes recipes = AlloyFurnaceRecipes.getInstance();
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	private String customName;
 	
@@ -37,6 +34,16 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	private int currentBurnTime;
 	private int cookTime;
 	private int totalCookTime = 400;
+	private IRecipe recipe = null;
+	public float recipeExp = 0;
+	private Container tempContainer = new Container() {
+		@Override
+		public boolean canInteractWith(EntityPlayer playerIn) {
+			return true;
+		}
+	};
+	
+	private InventoryCrafting inv = new InventoryCrafting(tempContainer, 3, 1);
 
 	@Override
 	public String getName() {
@@ -76,7 +83,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return (ItemStack)this.inventory.get(index);
+		return this.inventory.get(index);
 	}
 
 	@Override
@@ -89,6 +96,13 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 	
+	public void findNewRecipe() {
+		this.inv.setInventorySlotContents(0, this.getStackInSlot(0));
+		this.inv.setInventorySlotContents(1, this.getStackInSlot(1));
+		this.inv.setInventorySlotContents(2, this.getStackInSlot(3));
+		this.recipe = findMatchingRecipe(inv, this.getWorld());
+	}
+	
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		ItemStack itemstack = (ItemStack)this.inventory.get(index);
@@ -98,13 +112,30 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		if(stack.getCount() > this.getInventoryStackLimit()) {
 			stack.setCount(this.getInventoryStackLimit());
 		}
-		if(index == 0 && index + 1 == 1 & !flag) {
-			ItemStack stack1 = (ItemStack)this.inventory.get(index + 1);
-			this.totalCookTime = this.getCookTime(stack, stack1);
+		if( (index == 0 || index == 1) && !flag) {
+			ItemStack stack0 = (ItemStack)this.inventory.get(0);
+			ItemStack stack1 = (ItemStack)this.inventory.get(1);
+			this.totalCookTime = this.getCookTime(stack0, stack1);
 			this.cookTime = 0;
 			this.markDirty();
 		}
 	}
+	
+	@Nullable
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof AlloyingRecipe)
+            {
+            	if(irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
@@ -115,7 +146,8 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		this.burnTime = compound.getInteger("BurnTime");
 		this.cookTime = compound.getInteger("CookTime");
 		this.totalCookTime = compound.getInteger("CookTimeTotal");
-		this.currentBurnTime = getItemBurnTime((ItemStack)this.inventory.get(2));
+		this.currentBurnTime = ForgeEventFactory.getItemBurnTime(this.inventory.get(2));
+		this.findNewRecipe();
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -149,58 +181,52 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		return inventory.getField(0) > 0;
 	}
 	
-	public void update() 
-	{	
-		boolean flag = this.isBurning();
-		boolean flag1 = false;
+	public void update() {
+		boolean burningFlag = this.isBurning();
+		boolean dirty = false;
 		
 		if(this.isBurning()) {
 			--this.burnTime;
 		}
 		
 		if(!this.world.isRemote) {
-			ItemStack stack = (ItemStack)this.inventory.get(2);
+			ItemStack stack = this.inventory.get(2);
 			
-			if(this.isBurning() || !stack.isEmpty() && !((((ItemStack)this.inventory.get(0)).isEmpty()) || ((ItemStack)this.inventory.get(1)).isEmpty())) {
-				if(!this.isBurning() && this.canSmelt()) {
-					this.burnTime = getItemBurnTime(stack);
-					this.currentBurnTime = this.burnTime;
-					
-					if(this.isBurning()) {
-						flag1 = true;
-						
-						if(!stack.isEmpty()) {
-							Item item = stack.getItem();
-							stack.shrink(1);
-							
-							if(stack.isEmpty()) {
-								ItemStack item1 = item.getContainerItem(stack);
-								this.inventory.set(2, item1);
-							}
-						}
-					}
+			if(!this.isBurning() && this.recipe != null && !stack.isEmpty()) {
+				this.burnTime = ForgeEventFactory.getItemBurnTime(stack) <= 0 ? TileEntityFurnace.getItemBurnTime(stack) : ForgeEventFactory.getItemBurnTime(stack);
+				this.currentBurnTime = this.burnTime;
+				
+				stack.shrink(1);
+				if(stack.isEmpty() && stack.getItem().hasContainerItem(stack)) {
+					ItemStack item1 = stack.getItem().getContainerItem(stack);
+					this.setInventorySlotContents(2, item1);
 				}
-				if(this.isBurning() && this.canSmelt()) {
-					++this.cookTime;
-					
-					if(this.cookTime == this.totalCookTime) {
-						this.cookTime = 0;
-						this.totalCookTime = this.getCookTime((ItemStack)this.inventory.get(0), (ItemStack)this.inventory.get(1));
-						this.smeltItem();
-						flag1 = true;
-					}
-				}else if(this.inventory.get(0).isEmpty() || this.inventory.get(1).isEmpty()) {
+				dirty = true;
+			}
+			
+			ItemStack output = this.inventory.get(3);
+			
+			if(this.isBurning() && this.recipe != null && (output.isEmpty() || (output.getItem() == recipe.getCraftingResult(inv).getItem() && output.getCount() + recipe.getCraftingResult(inv).getCount() <= this.getInventoryStackLimit()) )) {
+				++this.cookTime;
+				
+				if(this.cookTime >= this.totalCookTime) {
 					this.cookTime = 0;
+					this.totalCookTime = this.getCookTime(this.inventory.get(0), this.inventory.get(1));
+					this.smeltItem();
+					dirty = true;
 				}
+			}else {
+				this.cookTime = 0;
 			}
 		}
 		
-		if(flag) {
-			if(this.getBlockType() instanceof BlockAlloyFurnace) {
-				 BlockAlloyFurnace.setState(true, this.getWorld(), pos);
-			}
-		}else if(!flag){
-			BlockAlloyFurnace.setState(false, this.getWorld(), pos);
+		if(this.isBurning() != burningFlag) {
+			dirty = true;
+			BlockAlloyFurnace.setState(this.isBurning(), this.getWorld(), pos);
+		}
+		
+		if(dirty) {
+			this.markDirty();
 		}
 	}
 	
@@ -208,76 +234,30 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		return 400;
 	}
 	
-	private boolean canSmelt() 
-	{
-		if(((ItemStack)this.inventory.get(0)).isEmpty() || ((ItemStack)this.inventory.get(1)).isEmpty()) return false;
-		else 
-		{
-			//make this account for the number of input items needed :)
-			ItemStack result = AlloyFurnaceRecipes.getInstance().getAlloyingResult((ItemStack)this.inventory.get(0), (ItemStack)this.inventory.get(1));
-			if(result.isEmpty()) return false;
-			else
-			{
-				ItemStack output = (ItemStack)this.inventory.get(3);
-				if(output.isEmpty()) return true;
-				if(!output.isItemEqual(result)) return false;
-				int res = output.getCount() + result.getCount();
-				return res <= getInventoryStackLimit() && res <= output.getMaxStackSize();
-			}
-		}
-	}
-	
 	public void smeltItem() {
-		if(this.canSmelt()) {
-			ItemStack input1 = (ItemStack)this.inventory.get(0);
-			ItemStack input2 = (ItemStack)this.inventory.get(1);
-			ItemStack result = AlloyFurnaceRecipes.getInstance().getAlloyingResult(input1, input2);
-			ItemStack output = (ItemStack)this.inventory.get(3);
-			
-			if(output.isEmpty()) {
-				this.inventory.set(3, result.copy());
-			}else if(output.getItem() == result.getItem()) {
-				output.grow(result.getCount());
-			}
-			
-			input1.shrink(recipes.getInputCount(input1));
-			input2.shrink(recipes.getInputCount(input2));
+		ItemStack result = recipe.getCraftingResult(inv);
+		ItemStack output = this.inventory.get(3);
+		NonNullList<ItemStack> remaining = recipe.getRemainingItems(inv);
+		this.recipeExp = ((AlloyingRecipe)recipe).getExp();
+		
+		this.setInventorySlotContents(0, remaining.get(0));
+		this.setInventorySlotContents(1, remaining.get(1));
+		
+		if(output.isEmpty()) {
+			this.setInventorySlotContents(3, result);
+		}else {
+			output.grow(result.getCount());
 		}
+		
+		this.findNewRecipe();
 	}
 	
-	@SuppressWarnings("deprecation")
-	public static int getItemBurnTime(ItemStack fuel) 
-	{
-		if(fuel.isEmpty()) return 0;
-		else 
-		{
-			Item item = fuel.getItem();
-
-			if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.AIR) 
-			{
-				Block block = Block.getBlockFromItem(item);
-
-				if (block == Blocks.WOODEN_SLAB) return 150;
-				if (block.getDefaultState().getMaterial() == Material.WOOD) return 300;
-				if (block == Blocks.COAL_BLOCK) return 16000;
-			}
-
-			if (item instanceof ItemTool && "WOOD".equals(((ItemTool)item).getToolMaterialName())) return 200;
-			if (item instanceof ItemSword && "WOOD".equals(((ItemSword)item).getToolMaterialName())) return 200;
-			if (item instanceof ItemHoe && "WOOD".equals(((ItemHoe)item).getMaterialName())) return 200;
-			if (item == Items.STICK) return 100;
-			if (item == Items.COAL) return 1600;
-			if (item == Items.LAVA_BUCKET) return 20000;
-			if (item == Item.getItemFromBlock(Blocks.SAPLING)) return 100;
-			if (item == Items.BLAZE_ROD) return 2400;
-
-			return GameRegistry.getFuelValue(fuel);
-		}
-	}
-		
 	public static boolean isItemFuel(ItemStack fuel)
 	{
-		return getItemBurnTime(fuel) > 0;
+		if(TileEntityFurnace.getItemBurnTime(fuel) > 0) {
+			return true;
+		}
+		return ForgeEventFactory.getItemBurnTime(fuel) > 0;
 	}
 	
 	public boolean isUsableByPlayer(EntityPlayer player) 
@@ -302,8 +282,10 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		if(index == 3) {
 			return false;
 		}else if(index != 2){
+			this.findNewRecipe();
 			return true;
 		}else {
+			this.findNewRecipe();
 			return isItemFuel(stack);
 		}
 	}

@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiAlloyFurnace extends GuiContainer
 {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/alloy_furnace.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/alloy_furnace_new.png");
 	private final InventoryPlayer player;
 	private final TileEntityAlloyFurnace tileentity;
 	
@@ -29,8 +29,8 @@ public class GuiAlloyFurnace extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
 	{
 		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 6, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(tileName, (this.xSize - this.fontRenderer.getStringWidth(tileName) - 8), 10, 4210752);
+		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 94, 4210752);
 	}
 	
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -51,12 +51,12 @@ public class GuiAlloyFurnace extends GuiContainer
 		
 		if(TileEntityAlloyFurnace.isBurning(tileentity))
 		{
-			int k = this.getBurnLeftScaled(13);
-			this.drawTexturedModalRect(this.guiLeft + 58, this.guiTop + 37 + 12 - k, 176, 12 - k, 14, k + 1);
+			int k = this.getBurnLeftScaled(14);
+			this.drawTexturedModalRect(this.guiLeft + 58, this.guiTop + 50 - k, 176, 13 - k, 14, k);
 		}
 		
-		int l = this.getCookProgressScaled(24);
-		this.drawTexturedModalRect(this.guiLeft + 79, this.guiTop + 36, 176, 14, l + 1, 16);
+		int l = this.getCookProgressScaled(61);
+		this.drawTexturedModalRect(this.guiLeft + 51, this.guiTop + 33, 176, 14, l + 1, 13);
 	}
 	
 	private int getBurnLeftScaled(int pixels)

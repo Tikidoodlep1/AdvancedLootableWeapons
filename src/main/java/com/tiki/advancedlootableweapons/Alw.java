@@ -3,6 +3,8 @@ package com.tiki.advancedlootableweapons;
 import java.io.File;
 import java.util.UUID;
 
+import org.apache.logging.log4j.Logger;
+
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
@@ -17,6 +19,8 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
@@ -58,6 +62,7 @@ public class Alw {
 	public static final CreativeTabs AlwTab = new AlwCreativeTab("alwcreativetab");
 	public static final CreativeTabs AlwBlocksTab = new AlwBlocksCreativeTab("alwblockscreativetab");
 	public static final CreativeTabs AlwToolHeadsTab = new AlwToolHeadsCreativeTab("alwtoolheadscreativetab");
+	public static Logger logger;
 	
 	static {
 		FluidRegistry.enableUniversalBucket();
@@ -68,6 +73,7 @@ public class Alw {
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+		logger = event.getModLog();
 		RegistryHandler.preInitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(instance);
 	}
@@ -89,17 +95,22 @@ public class Alw {
 	}
 	
 	@SubscribeEvent
-	public void onBlockAttemptBreak(LeftClickBlock event) {
+	public void onBlockAttemptBreak(final LeftClickBlock event) {
 		proxy.onBlockAttemptBreak(event);
 	}
 	
 	@SubscribeEvent
-	public void onLivingDrops(LivingDropsEvent event) {
+	public void onLivingDrops(final LivingDropsEvent event) {
 		proxy.onEntityDrops(event);
 	}
 	
 	@SubscribeEvent
-	public void onBlockDrops(HarvestDropsEvent event) {
+	public void onBlockDrops(final HarvestDropsEvent event) {
 		proxy.onBlockDrops(event);
+	}
+	
+	@SubscribeEvent
+	public void onModelBake(final ModelBakeEvent event) {
+		proxy.modelBake(event);
 	}
 }

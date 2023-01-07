@@ -1,15 +1,22 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -17,38 +24,57 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
 public class TileEntityJawCrusher extends TileEntity implements ITickable, IInventory {
 
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
+	private Random rand = new Random();
+	private final Container tempContainer = new Container() {
+		@Override
+		public boolean canInteractWith(EntityPlayer playerIn) {
+			return true;
+		}
+	};
 	
 	public boolean crushContents() {
-		ItemStack slot0 = getStackInSlot(0);
-		Item result = null;
-		if(slot0.getItem() == Item.getItemFromBlock(BlockInit.rock_feldspar)) {
-			result = ItemInit.POWDER_FELDSPAR;
-		}else {
-			if(slot0.getItemDamage() == 1) {
-				result = ItemInit.POWDER_GRANITE;
-			}else if(slot0.getItemDamage() == 3){
-				result = ItemInit.POWDER_DIORITE;
-			}else {
-				return false;
+		tempContainer.putStackInSlot(0, this.inventory.get(0));
+		tempContainer.putStackInSlot(1, this.inventory.get(1));
+		InventoryCrafting craft = new InventoryCrafting(tempContainer, 2, 1);
+		IRecipe recipe = findMatchingRecipe(craft, this.getWorld());
+		NonNullList<ItemStack> leftovers = recipe.getRemainingItems(craft);
+		if(recipe != null) {
+			ItemStack result = recipe.getCraftingResult(craft);
+			int count = result.getCount() + rand.nextInt(3) - 1;
+			result.setCount(count < 1 ? 1 : count);
+			if(result.getItem() == this.inventory.get(1).getItem() && this.inventory.get(1).getCount() + result.getCount() > this.getInventoryStackLimit()) {
+				for(int i = 0; i < this.inventory.size(); i++) {
+					this.inventory.set(i, leftovers.get(i));
+				}
+				this.setInventorySlotContents(1, result);
+				return true;
 			}
 		}
 		
-		if(getStackInSlot(1).getItem() == result) {
-			setInventorySlotContents(1, new ItemStack(result, getStackInSlot(1).getCount() + 1));
-			decrStackSize(0, 1);
-		}else if((getStackInSlot(1).getItem() != Items.AIR || getStackInSlot(1) != ItemStack.EMPTY)) {
-			return false;
-		}else if (result != null){
-			setInventorySlotContents(1, new ItemStack(result));
-			decrStackSize(0, 1);
-		}
-		return true;
+		return false;
 	}
+	
+	@Nullable
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof ShapelessOneSlotRecipes)
+            {
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.crusher && irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	@Override
 	public String getName() {

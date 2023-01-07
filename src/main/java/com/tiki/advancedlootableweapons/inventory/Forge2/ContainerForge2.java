@@ -21,7 +21,7 @@ public class ContainerForge2 extends Container
 	{
 		this.tileentity = tileEntityForge2;
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 36) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 47) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
@@ -30,7 +30,7 @@ public class ContainerForge2 extends Container
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 81, 36) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 81, 47) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;
@@ -39,7 +39,7 @@ public class ContainerForge2 extends Container
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 110, 36) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 110, 47) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;

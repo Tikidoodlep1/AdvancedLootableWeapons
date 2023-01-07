@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 		
-		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon.png");
+		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon_new.png");
 	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, "Dagger", 0, 0);
 	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 20, 20, "Kabutowari", 21, 0);
 	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 20, 20, "Talwar", 61, 0);
@@ -39,7 +39,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, "Makhaira", 21, 60);
 	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear", 41, 60);
 	    private final GuiWeaponButton chainButton = new GuiWeaponButton(15, 60, 190, 20, 20, "Chain", 21, 80);
-	    private final GuiWeaponButton plateButton = new GuiWeaponButton(16, 90, 190, 20, 20, "Plate", 41, 80);
+	    private final GuiWeaponButton plateButton = new GuiWeaponButton(16, 90, 190, 20, 20, "Armor Plate", 41, 80);
 	    
 	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 30, 190, 20, 20, "Tool Handle", 61, 60);
 	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, 220, 20, 20, "Forge Weapon", 0, 80);
@@ -54,43 +54,39 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	        this.player = inventoryIn;
 	    }
 	    
-	    public void drawButtons(int mouseX, int mouseY, float partialTicks) {
-	    	if(this.buttonList.size() <= 0) {
-	    		this.buttonList.add(daggerButton);
-	        	this.buttonList.add(kabutowariButton);
-	        	this.buttonList.add(talwarButton);
-	        	this.buttonList.add(rapierButton);
-	        	this.buttonList.add(maceButton);
-	        	this.buttonList.add(cleaverButton);
-	        	this.buttonList.add(staffButton);
-	        	this.buttonList.add(longswordButton);
-	        	this.buttonList.add(kodachiButton);
-	        	this.buttonList.add(battleaxeButton);
-	        	this.buttonList.add(zweihanderButton);
-	        	this.buttonList.add(nodachiButton);
-	        	this.buttonList.add(sabreButton);
-	        	this.buttonList.add(makhairaButton);
-	        	this.buttonList.add(spearButton);
-	        	this.buttonList.add(chainButton);
-	        	this.buttonList.add(plateButton);
-	        
-	        	this.buttonList.add(forgeButton);
-	        	this.buttonList.add(toolrodButton);
-	    	}
-	    	
+	    @Override
+	    public void initGui() {
+	    	super.initGui();
+	    	this.buttonList.add(daggerButton);
+        	this.buttonList.add(kabutowariButton);
+        	this.buttonList.add(talwarButton);
+        	this.buttonList.add(rapierButton);
+        	this.buttonList.add(maceButton);
+        	this.buttonList.add(cleaverButton);
+        	this.buttonList.add(staffButton);
+        	this.buttonList.add(longswordButton);
+        	this.buttonList.add(kodachiButton);
+        	this.buttonList.add(battleaxeButton);
+        	this.buttonList.add(zweihanderButton);
+        	this.buttonList.add(nodachiButton);
+        	this.buttonList.add(sabreButton);
+        	this.buttonList.add(makhairaButton);
+        	this.buttonList.add(spearButton);
+        	this.buttonList.add(chainButton);
+        	this.buttonList.add(plateButton);
+        
+        	this.buttonList.add(forgeButton);
+        	this.buttonList.add(toolrodButton);
+	    }
+	    
+	    public void drawButtons(int mouseX, int mouseY, float partialTicks) {	    	
 	        for (int k = 0; k < this.buttonList.size(); ++k)
 	        {
 	            (this.buttonList.get(k)).drawButton(this.mc, mouseX, mouseY, partialTicks);
-	            
-	            //int width = (mc.fontRenderer.getStringWidth(this.buttonList.get(k).displayString) + this.buttonList.get(k).getButtonWidth()) / 2;
-//	            GL11.glPushMatrix();
-//	            GL11.glScalef(0.8f, 0.8f, 0.8f);
-	        	//this.buttonList.get(k).drawCenteredString(mc.fontRenderer, this.buttonList.get(k).displayString, (int)((this.buttonList.get(k).x - width) ), (int)((this.buttonList.get(k).y - 8) ), Color.DARK_GRAY.getRGB());
-//	        	GL11.glPopMatrix();
 	        }
 	    }
 	    
-	    public void updateScreen(){
+	    public void updateScreen() {
 	    }
 	    
 	    public void setButtonPressed(int button) {
@@ -111,8 +107,8 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    {
 	        GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
-	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 62, 5, 4210752);
-	        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+	        this.fontRenderer.drawString(I18n.format("container.forgeWeapon"), 100, 10, 4210752);
+	        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 9, this.ySize - 93, 4210752);
 	        GlStateManager.enableLighting();
 	    }
 	    
@@ -123,29 +119,28 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    
 	    @Override
 	    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-	    {
+	    {	    	
 	        this.drawDefaultBackground();
 	        super.drawScreen(mouseX, mouseY, partialTicks);
 	        
+	        GlStateManager.disableLighting();
+	        GL11.glPushMatrix();
+            GL11.glScalef(0.55f, 0.55f, 0.55f);
 	        for (int k = 0; k < this.buttonList.size(); ++k)
 	        {
-	            GL11.glPushMatrix();
-	            GL11.glScalef(0.55f, 0.55f, 0.55f);
-	            GlStateManager.disableLighting();
 	        	this.buttonList.get(k).drawCenteredString(mc.fontRenderer, this.buttonList.get(k).displayString, (int)((this.buttonList.get(k).x + (this.buttonList.get(k).getButtonWidth() / 2)) / 0.55), (int)((this.buttonList.get(k).y - 7) / 0.55), Color.WHITE.getRGB());
-	        	GlStateManager.enableLighting();
-	        	GL11.glPopMatrix();
 	        }
+	        GL11.glPopMatrix();
 	        
 	        this.renderHoveredToolTip(mouseX, mouseY);
 	        
-	        GlStateManager.disableLighting();
+	        //GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
 	    }
 	    
 	    @Override
 	    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	    {
+	    {	    	
 	        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURES);
 	        int i = (this.width - this.xSize) / 2;
@@ -163,7 +158,6 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack)
 	    {
 	    }
-	    
 	    
 	    public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue)
 	    {

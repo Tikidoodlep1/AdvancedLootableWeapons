@@ -1,8 +1,11 @@
 package com.tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -29,19 +32,77 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
+import scala.actors.threadpool.Arrays;
 
 public class ItemInit {
 
-	public static final List<Item> items = new ArrayList<Item>();	
+	public static final List<Item> items = new ArrayList<Item>();
+	public static final HashSet<Item> generatedItems = new HashSet<Item>();
+	public static final Set<Item> acceptedForgeItems = new HashSet<Item>();
+	
+	public static void generateAcceptedForgeItems() {
+		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver"};
+		for(String ore : ores) {
+			NonNullList<ItemStack> stacks = OreDictionary.getOres(ore);
+			for(ItemStack s : stacks) {
+				System.out.println(ore + ": " + s.getItem().getRegistryName());
+				if(!s.isEmpty()) {
+					acceptedForgeItems.add(s.getItem());
+				}
+			}
+		}
+		acceptedForgeItems.add(INGOT_KOBOLD);
+		acceptedForgeItems.add(INGOT_CRYSTALLITE);
+		acceptedForgeItems.add(INGOT_DUSKSTEEL);
+		acceptedForgeItems.add(INGOT_FROST_STEEL);
+		acceptedForgeItems.add(INGOT_SHADOW_PLATINUM);
+	}
 	
 	public static void checkConfigOptions() {
+		
+		Alw.logger.info("Available tool materials are: " + Arrays.toString(ToolMaterial.values()));
 		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
+		
+		for(String s : ConfigHandler.EXTRA_MATERIALS) {			
+			try {
+				Alw.logger.info("Adding Extra Material " + s + ", Tool Material: " + ToolMaterial.valueOf(s));
+				if(ToolMaterial.valueOf(s) != null) {
+					generatedItems.add(new ToolStabSword("dagger_" + s.toLowerCase(), ToolMaterial.valueOf(s), "dagger").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("kabutowari_" + s.toLowerCase(), ToolMaterial.valueOf(s), "kabutowari").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("rapier_" + s.toLowerCase(), ToolMaterial.valueOf(s), "rapier").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("talwar_" + s.toLowerCase(), ToolMaterial.valueOf(s), "talwar").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("cleaver_" + s.toLowerCase(), ToolMaterial.valueOf(s), "cleaver").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("mace_" + s.toLowerCase(), ToolMaterial.valueOf(s), "mace").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("staff_" + s.toLowerCase(), ToolMaterial.valueOf(s), "staff").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("longsword_" + s.toLowerCase(), ToolMaterial.valueOf(s), "longsword").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("kodachi_" + s.toLowerCase(), ToolMaterial.valueOf(s), "kodachi").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("battleaxe_" + s.toLowerCase(), ToolMaterial.valueOf(s), "battleaxe").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("zweihander_" + s.toLowerCase(), ToolMaterial.valueOf(s), "zweihander").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("nodachi_" + s.toLowerCase(), ToolMaterial.valueOf(s), "nodachi").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("sabre_" + s.toLowerCase(), ToolMaterial.valueOf(s), "sabre").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("makhaira_" + s.toLowerCase(), ToolMaterial.valueOf(s), "makhaira").setMaxStackSize(1));
+					generatedItems.add(new ToolSpear("spear_" + s.toLowerCase(), ToolMaterial.valueOf(s)).setMaxStackSize(1));
+					
+					acceptedForgeItems.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
+				}
+			}catch (IllegalArgumentException e) {
+				Alw.logger.error("Tried to add extra material " + s + " which does not exist. Valid materials are: " + Arrays.toString(ToolMaterial.values()));
+			}
+		}
+		
+		if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "tanning_leather_simple"));
+		}else {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "tanning_leather_advanced"));
+		}
+		
 		if(ConfigHandler.DISABLE_VANILLA_ARMORS) {
 			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_helmet"));
 			removeRecipe(recipes, new ResourceLocation("minecraft", "leather_chestplate"));
@@ -321,8 +382,12 @@ public class ItemInit {
 	public static final Item POWDER_FELDSPAR = new ItemBase("powder_feldspar");
 	public static final Item POWDER_GRANITE = new ItemBase("powder_granite");
 	public static final Item POWDER_DIORITE = new ItemBase("powder_diorite");
+	public static final Item POWDER_CHARCOAL = new ItemBase("powder_charcoal");
 	public static final Item CLAY_GRANITE = new ItemBase("clay_granite");
 	public static final Item CLAY_DIORITE = new ItemBase("clay_diorite");
+	public static final Item CLAY_YAKI_IRE_MIX = new ItemBase("clay_yaki_ire_mix");
+	public static final Item CLAY_YAKI_IRE_SLIP = new ItemBase("clay_yaki_ire_slip");
+	
 	public static final Item BRICK_GRANITE = new ItemBase("brick_granite");
 	public static final Item BRICK_DIORITE = new ItemBase("brick_diorite");
 	

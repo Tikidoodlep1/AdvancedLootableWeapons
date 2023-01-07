@@ -9,17 +9,16 @@ import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.GlobalDropsHandler;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockObsidian;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
@@ -38,19 +37,23 @@ public class CommonProxy {
 	
 	public void registerTESRs() {}
 	
-	public void onBlockAttemptBreak(LeftClickBlock event){		
+	public void modelBake(final ModelBakeEvent event) {}
+	
+	public void registerCustomModelLoaders() {};
+	
+	public void onBlockAttemptBreak(final LeftClickBlock event){
 		BlockPos blockPos = event.getPos();
 		Block block = event.getWorld().getBlockState(blockPos).getBlock();
-		if(block == Blocks.ANVIL) {
+		if(ConfigHandler.VALID_ANVILS.contains(block.getRegistryName().toString())) {
 			EntityPlayer player = event.getEntityPlayer();
-			if(player.inventory.getCurrentItem().getItem() instanceof ToolForgeHammer) {
+			if(ConfigHandler.VALID_HAMMERS.contains(player.inventory.getCurrentItem().getItem().getRegistryName().toString())) {
 				player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), (int)player.posX, (int)player.posY, (int)player.posZ);
 				event.setCanceled(true);
 			}
 		}
 	}
 	
-	public void onEntityDrops(LivingDropsEvent event) {
+	public void onEntityDrops(final LivingDropsEvent event) {
 		Random rand = new Random();
 		boolean containsLeather = false;
 		int leatherCount = 0;
@@ -77,7 +80,7 @@ public class CommonProxy {
 		}
 	}
 
-	public void onBlockDrops(HarvestDropsEvent event) {
+	public void onBlockDrops(final HarvestDropsEvent event) {
 		Block block = event.getState().getBlock();
 		if(block instanceof BlockObsidian) {
 			if(event.isSilkTouching()) {

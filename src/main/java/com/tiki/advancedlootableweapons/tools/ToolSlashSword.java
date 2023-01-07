@@ -30,12 +30,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ToolSlashSword extends ItemSword implements IHasModel{
+public class ToolSlashSword extends ItemSword implements IHasModel {
 	
 	private float attackDamage;
 	private double attackSpeed;
@@ -62,6 +63,17 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		this.maxStackSize = 1;
 		this.bonusDamage = 0;
 		this.getAttributes(type, material);
+	}
+	
+	public void setColors(ItemStack stack, int[] colors) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(tag == null) {
+			tag = new NBTTagCompound();
+		}
+		
+		tag.setIntArray("colors", colors);
+		
+		stack.setTagCompound(tag);
 	}
 	
 	@Override
@@ -131,18 +143,18 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return this.type;
 	}
 	
-	public void generateNameAndModifiers(ItemStack stack, double addedDamage, String matName) {
+	public void generateNameAndModifiers(ItemStack stack, double addedDamage, int addedDurability, ItemStack material) {
 		float randDamage;
 		double totalDamage;
 		this.rand = randGen.nextBoolean();
-		NBTTagCompound tag = stack.getTagCompound();
-		NBTTagCompound newTag = new NBTTagCompound();
-		if(tag != null) {
-			if(tag.hasKey("maxDurability", 99)) {
-				newTag.setInteger("maxDurability", tag.getInteger("maxDurability"));
-			}
+		
+		this.setMaximumDamage(stack, addedDurability);
+		
+		String matName = material.getDisplayName();
+		int index = matName.indexOf("Ingot");
+		if(index != -1) {
+			matName = matName.substring(0, index - 1);
 		}
-		stack.setTagCompound(newTag);
 		
 		if(this.rand == true) {
 			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
@@ -193,7 +205,9 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	
 	@Override
 	public void registerModels() {
-		Alw.proxy.registerItemRenderer(this, 0, "inventory");
+		if(!ItemInit.generatedItems.contains(this)) {
+			Alw.proxy.registerItemRenderer(this, 0, "inventory");
+		}
 	}
 	
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
@@ -214,6 +228,8 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
+		KeyBinding run = Minecraft.getMinecraft().gameSettings.keyBindSprint;
+		
 		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
@@ -227,8 +243,19 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 			tooltip.add("");
 			tooltip.add(TextFormatting.AQUA + "Effectiveness against Plate armor: " + plateEffect + "/8");
 			tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance() + "%");
+		}else if(Keyboard.isKeyDown(run.getKeyCode())) {
+			NBTTagCompound tag = stack.getTagCompound();
+			if(tag != null && tag.hasKey("colors")) {
+				tooltip.add(TextFormatting.RED + "Colors: ");
+				tooltip.add(TextFormatting.LIGHT_PURPLE + "Bottom Outline: " + Integer.toHexString(tag.getIntArray("colors")[0]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + "Top Outline: " +  Integer.toHexString(tag.getIntArray("colors")[1]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + "Middle Lowlight: " +  Integer.toHexString(tag.getIntArray("colors")[2]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + "Middle Highlight: " +  Integer.toHexString(tag.getIntArray("colors")[3]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + "Shiny Highlight: " +  Integer.toHexString(tag.getIntArray("colors")[4]));
+			}
 		}else {
 			tooltip.add(TextFormatting.GRAY + "Hold " + sneak.getDisplayName() + " for Effectiveness Information");
+			tooltip.add(TextFormatting.GRAY + "Hold " + run.getDisplayName() + " for Color Information");
 		}
 	}
 	
@@ -290,9 +317,23 @@ public class ToolSlashSword extends ItemSword implements IHasModel{
 		return this.material;
 	}
 	
+	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		if(!ItemInit.generatedItems.contains(stack.getItem())) {
+			return super.getItemStackDisplayName(stack);
+		}
+		String material = String.valueOf(this.getToolMaterial().toString().toUpperCase().charAt(0));
+		String material2 = this.getToolMaterial().toString().toLowerCase().substring(1);
+		
+		String weaponType = String.valueOf(this.getWeaponType().toUpperCase().charAt(0));
+		String weaponType2 = this.getWeaponType().toLowerCase().substring(1);
+		
+		return new TextComponentTranslation("%s %s", material + material2, weaponType + weaponType2).getFormattedText();
+	}
+	
 	@SideOnly(Side.CLIENT)
     public boolean isFull3D()
     {
-        return true;
+        return false;
     }
 }

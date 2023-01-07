@@ -26,7 +26,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -136,11 +135,11 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 					FluidUtil.interactWithFluidHandler(playerIn, hand, drum);
 					worldIn.notifyBlockUpdate(pos, state, state, 2);
 					drum.onChanged();
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING ) {
+					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
 						drum.FluidInteraction(worldIn, pos, playerIn, hand);
 					}
 				}else {
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING ) {
+					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
 						drum.EntityInteraction(worldIn, pos, playerIn, hand);
 					}
 				}

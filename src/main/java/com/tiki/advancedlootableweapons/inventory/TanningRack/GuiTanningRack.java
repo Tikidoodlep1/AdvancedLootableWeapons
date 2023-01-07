@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiTanningRack extends GuiContainer
 {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/tanning_rack.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/tanning_rack_new.png");
 	private final InventoryPlayer player;
 	private final TileEntityTanningRack tileentity;
 	
@@ -49,13 +49,13 @@ public class GuiTanningRack extends GuiContainer
 		this.mc.getTextureManager().bindTexture(TEXTURES);
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		
-		int k = this.getBurnLeftScaled();
-		this.drawTexturedModalRect(this.guiLeft + 75, this.guiTop + 55 - k, 176, 28 - k, 24, k);
+		int k = this.getLeatherScaled();
+		this.drawTexturedModalRect(this.guiLeft + 76, this.guiTop + 55 - k, 176, 25 - k, 22, k);
 	}
 	
-	private int getBurnLeftScaled()
+	private int getLeatherScaled()
 	{
-		return (int)(this.tileentity.getField(0) * 0.024);
+		return (int)(this.tileentity.getField(0) * 0.0209);
 	}
 	
 	public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

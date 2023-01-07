@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiJawCrusher  extends GuiContainer {
 
-	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/jaw_crusher.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/jaw_crusher_new.png");
 	private final InventoryPlayer player;
 	private final TileEntityJawCrusher tileentity;
 	

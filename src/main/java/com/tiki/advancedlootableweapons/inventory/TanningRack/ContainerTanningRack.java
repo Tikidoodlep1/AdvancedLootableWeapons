@@ -1,15 +1,25 @@
 package com.tiki.advancedlootableweapons.inventory.TanningRack;
 
+import javax.annotation.Nullable;
+
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityTanningRack;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher;
+import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,16 +33,15 @@ public class ContainerTanningRack extends Container
 	{
 		this.tileentity = tileentity;
 		
-		this.addSlotToContainer(new Slot(tileentity, 0, 54, 34) {
+		this.addSlotToContainer(new Slot(tileentity, 0, 26, 34) {
 			public boolean isItemValid(ItemStack stack) {
-				if(stack.getItem() == itemToTan) {
-					return true;
-				}
-				return false;
+				InventoryCrafting inv = new InventoryCrafting(ContainerTanningRack.this, 1, 1);
+				inv.setInventorySlotContents(0, stack);
+				return ContainerTanningRack.this.findMatchingRecipe(inv, ContainerTanningRack.this.tileentity.getWorld()) != null;
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileentity, 1, 108, 34) {
+		this.addSlotToContainer(new Slot(tileentity, 1, 134, 34) {
 			public boolean isItemValid(ItemStack stack) {
 				return false;
 			}
@@ -71,6 +80,22 @@ public class ContainerTanningRack extends Container
 		
 		this.progress = this.tileentity.getField(0);
 	}
+	
+	@Nullable
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof ShapelessOneSlotRecipes)
+            {
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.tanning_rack && irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -1,13 +1,21 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import javax.annotation.Nullable;
+
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.TanningRack.ContainerTanningRack;
+import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -15,11 +23,20 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 
 public class TileEntityTanningRack extends TileEntity implements ITickable, IInventory {
-	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	private int progress = 0;
+	private final Container tempContainer = new Container() {
+		@Override
+		public boolean canInteractWith(EntityPlayer playerIn) {
+			return true;
+		}
+	};
+	private InventoryCrafting craft = new InventoryCrafting(tempContainer, 2, 1);
+	private IRecipe recipe = null;
 	
 	@Override
 	public String getName() {
@@ -84,6 +101,9 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 		if(index == 0 && !flag) {
 			this.markDirty();
 		}
+		
+		craft.setInventorySlotContents(index, stack);
+		recipe = findMatchingRecipe(craft, this.getWorld());
 	}
 	
 	@Override
@@ -116,20 +136,39 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 	public void update() 
 	{	
 		if(!this.world.isRemote) {
-			if(this.inventory.get(0).getItem() == ContainerTanningRack.itemToTan) {
+			if(this.recipe != null) {
 				++this.progress;
-				if(this.progress >= 1200) {
-					this.inventory.get(0).shrink(1);
-					if(this.inventory.get(1).getItem() == Items.LEATHER) {
-						this.inventory.get(1).setCount(this.inventory.get(1).getCount() + 1);
+				if(this.progress >= 1200 && (this.inventory.get(1).getItem() == recipe.getCraftingResult(craft).getItem() || this.inventory.get(1) == ItemStack.EMPTY) ) {					
+					NonNullList<ItemStack> leftovers = recipe.getRemainingItems(craft);
+					this.inventory.set(0, leftovers.get(0));
+					ItemStack result = recipe.getCraftingResult(craft);
+					if(this.inventory.get(1).getItem() == result.getItem()) {
+						this.inventory.get(1).setCount(this.inventory.get(1).getCount() + result.getCount());
 					}else if(this.inventory.get(1) == ItemStack.EMPTY) {
-						this.inventory.set(1, new ItemStack(Items.LEATHER));
+						this.inventory.set(1, result);
 					}
 					this.progress = 0;
+					this.recipe = findMatchingRecipe(craft, this.getWorld());
 				}
 			}
 		}
 	}
+	
+	@Nullable
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof ShapelessOneSlotRecipes)
+            {
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.tanning_rack && irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	public boolean isUsableByPlayer(EntityPlayer player) 
 	{

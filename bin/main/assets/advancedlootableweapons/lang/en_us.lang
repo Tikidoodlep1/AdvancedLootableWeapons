@@ -790,7 +790,7 @@ item.plate_leggings_crystallite.name=Crystallite Plate Leggings
 item.plate_leggings_dusksteel.name=Dusksteel Plate Leggings
 
 
-item.plate_bootsiron.name=Iron Plate Boots
+item.plate_boots_iron.name=Iron Plate Boots
 item.plate_boots_golden.name=Golden Plate Boots
 item.diamond_studded_steel_boots.name=Diamond Studded Steel Boots
 item.plate_boots_kobold.name=Kobold Steel Plate Boots
@@ -840,7 +840,7 @@ tile.advanced_forge.name=Advanced Forge
 tile.advanced_forge_1.name=Advanced Forge
 tile.jaw_crusher.name=Jaw Crusher
 tile.bellows_birch.name=Birch Bellows
-tile.bellows_oak.name=Oak Bellows
+tile.bellows.name=Wooden Bellows
 tile.bellows_jungle.name=Jungle Bellows
 tile.bellows_acacia.name=Acacia Bellows
 tile.bellows_dark_oak.name=Dark Oak Bellows

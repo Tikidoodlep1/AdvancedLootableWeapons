@@ -1,6 +1,38 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/zweihander_platinum"
+		"layer0": "advancedlootableweapons:items/zweihander_layer5",
+		"layer1": "advancedlootableweapons:items/zweihander_layer4",
+		"layer2": "advancedlootableweapons:items/zweihander_layer3",
+		"layer3": "advancedlootableweapons:items/zweihander_layer2",
+		"layer4": "advancedlootableweapons:items/zweihander_layer1"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, -90, 55],
+			"translation": [0, 9.25, 0],
+			"scale": [2, 2, 1]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-35, 90, 0],
+			"translation": [0, 9.5, 3],
+			"scale": [2, 2, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.45, 1.13],
+			"scale": [2, 2, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -25],
+			"translation": [1.13, 3.45, 1.13],
+			"scale": [2, 2, 1]
+		},
+		"gui": {
+			"scale": [1.5, 1.5, 1]
+		},
+		"fixed": {
+			"scale": [2, 2, 1]
+		}
 	}
 }

@@ -1,46 +1,56 @@
 package com.tiki.advancedlootableweapons.compat.jei.anvilForging;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Table;
-import com.google.common.collect.Table.Cell;
-import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ForgeWeaponRecipes;
+import com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 
 import mezz.jei.api.IJeiHelpers;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 
 public class AnvilForgingRecipeMaker {
 
-	public static List<AnvilForgingRecipe> getRecipes(IJeiHelpers helpers){
-		final ForgeWeaponRecipes instance = ForgeWeaponRecipes.INSTANCE;
-		final Table<ItemStack, ItemStack, List<ItemStack>> recipes = instance.getJeiCraftingList();
-		List<AnvilForgingRecipe> jeiRecipes = Lists.newArrayList();
-		Set<Cell<ItemStack, ItemStack, List<ItemStack>>> recipeEntrySet = recipes.cellSet();
-		List<ItemStack> outputList;
+	public static List<AnvilForgingRecipe> getRecipes(IJeiHelpers helpers) {
+		List<AnvilForgingRecipe> jeiRecipes = new ArrayList<AnvilForgingRecipe>(10);
 		
-		for(Cell<ItemStack, ItemStack, List<ItemStack>> cell : recipeEntrySet) {
-			ItemStack row = cell.getRowKey();
-			ItemStack col = cell.getColumnKey();
-			outputList = cell.getValue();
-			
-			for(int j = 0; j < outputList.size(); j++) {
-				jeiRecipes.add(new AnvilForgingRecipe(NonNullList.from(ItemStack.EMPTY, row, col), outputList.get(j)));
-			}
-			
-		}
-		
-		for(Cell<List<Item>, List<Item>, Item> e : instance.getArmorCraftingList().cellSet()) {
-			List<Item> row = e.getRowKey();
-			List<Item> col = e.getColumnKey();
-			for(int i = 0; i < e.getRowKey().size(); i++) {
-				NonNullList<ItemStack> list = NonNullList.from(ItemStack.EMPTY, new ItemStack(row.get(i)), new ItemStack(col.get(i)));
-				jeiRecipes.add(new AnvilForgingRecipe(list, new ItemStack(e.getValue())));
-			}
-		}
+		for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof ForgeToolHeadRecipe)
+            {
+            	ForgeToolHeadRecipe recipe = (ForgeToolHeadRecipe)irecipe;
+            	StringBuilder button = new StringBuilder(recipe.getButton());
+            	button.replace(0, 1, button.substring(0, 1).toUpperCase());
+            	int space = button.indexOf(" ");
+            	if(space != -1) {
+            		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
+            	}
+            	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
+            }
+            else if (irecipe instanceof ForgeToolRecipe)
+            {
+            	ForgeToolRecipe recipe = (ForgeToolRecipe)irecipe;
+            	StringBuilder button = new StringBuilder(recipe.getButton());
+            	button.replace(0, 1, button.substring(0, 1).toUpperCase());
+            	int space = button.indexOf(" ");
+            	if(space != -1) {
+            		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
+            	}
+            	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
+            }
+            else if (irecipe instanceof ForgeArmorPlateRecipe)
+            {
+            	ForgeArmorPlateRecipe recipe = (ForgeArmorPlateRecipe)irecipe;
+            	StringBuilder button = new StringBuilder(recipe.getButton());
+            	button.replace(0, 1, button.substring(0, 1).toUpperCase());
+            	int space = button.indexOf(" ");
+            	if(space != -1) {
+            		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
+            	}
+            	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
+            }
+        }
 		
 		return jeiRecipes;
 	}

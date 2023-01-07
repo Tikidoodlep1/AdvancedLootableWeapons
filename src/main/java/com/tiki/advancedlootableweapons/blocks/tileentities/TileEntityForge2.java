@@ -1,16 +1,22 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
 
+import java.util.Random;
+
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -25,12 +31,12 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	private String customName;
 	private int heat1, heat2, heat3;
-	private boolean[] canSmelt = new boolean[3];
 	private boolean isMain = false;
 	private double currentTemp = 2250D;
 	public static final int minTemp = 850;
 	public static final int maxTemp = 2250;
-	private int increaseFrames = 0;;
+	private int increaseFrames = 0;
+	private Random rand = new Random();
 
 	public TileEntityForge2 getMainTE(IBlockAccess world, BlockPos pos) {
 		if(mainTE == null) {
@@ -50,7 +56,13 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	
 	public void bellowsInteraction(IBlockAccess world, BlockPos pos) {
 		if(mainTE == this) {
-				this.increaseFrames = 60;
+			if(this.increaseFrames < 30) {
+				double d0 = (double)pos.getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+		        double d1 = (double)pos.getY() + 1.0D + rand.nextDouble() * 6.0D / 16.0D;
+		        double d2 = (double)pos.getZ() + 0.3D + rand.nextDouble()* 6.0D / 16.0D;
+				this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			}
+			this.increaseFrames = 60;
 			}else {
 				getMainTE(world, pos).bellowsInteraction(world, pos);
 			}
@@ -132,9 +144,6 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
 		if(mainTE == this) {
-			if(this.inventory.get(index).getCount() == count) {
-				canSmelt[index] = false;
-			}
 			return ItemStackHelper.getAndSplit(this.inventory, index, count);
 		}else {
 			return getMainTE(this.getWorld(), this.getPos()).decrStackSize(index, count);
@@ -144,7 +153,6 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 		if(mainTE == this) {
-			canSmelt[index] = false;
 			return ItemStackHelper.getAndRemove(this.inventory, index);
 		}else {
 			return getMainTE(this.getWorld(), this.getPos()).removeStackFromSlot(index);
@@ -161,7 +169,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 			if(stack.getCount() > this.getInventoryStackLimit()) {
 				stack.setCount(this.getInventoryStackLimit());
 			}
-			canSmelt[index] = true;
+			
 			if(!flag) {
 				switch(index) {
 				case 0:
@@ -249,28 +257,28 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	}
 	
 	public void smeltItem() {
-		if(this.canSmelt[0]) {
-			ItemStack stack = (ItemStack)this.inventory.get(0);
-			String material = stack.getTagCompound() == null ? "Steel" : stack.getTagCompound().getString("Material");
+		if(this.inventory.get(0) != ItemStack.EMPTY && this.inventory.get(0).getItem() instanceof ItemHotToolHead) {
+			ItemStack stack = this.inventory.get(0);
+			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack.getItemDamage()));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat1 = stack.getItemDamage();
 			}
 		}
-		if(this.canSmelt[1]) {
-			ItemStack stack1 = (ItemStack)this.inventory.get(1);
-			String material = stack1.getTagCompound() == null ? "Steel" : stack1.getTagCompound().getString("Material");
-			if(stack1.getItemDamage() > 0) {
-				stack1.setItemDamage(stack1.getItemDamage() - HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack1.getItemDamage()));
-				this.heat2 = stack1.getItemDamage();
+		if(this.inventory.get(1) != ItemStack.EMPTY && this.inventory.get(1).getItem() instanceof ItemHotToolHead) {
+			ItemStack stack = this.inventory.get(1);
+			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			if(stack.getItemDamage() > 0) {
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				this.heat2 = stack.getItemDamage();
 			}
 		}
-		if(this.canSmelt[2]) {
-			ItemStack stack2 = (ItemStack)this.inventory.get(2);
-			String material = stack2.getTagCompound() == null ? "Steel" : stack2.getTagCompound().getString("Material");
-			if(stack2.getItemDamage() > 0) {
-				stack2.setItemDamage(stack2.getItemDamage() - HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack2.getItemDamage()));
-				this.heat3 = stack2.getItemDamage();
+		if(this.inventory.get(2) != ItemStack.EMPTY && this.inventory.get(2).getItem() instanceof ItemHotToolHead) {
+			ItemStack stack = this.inventory.get(2);
+			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			if(stack.getItemDamage() > 0) {
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				this.heat3 = stack.getItemDamage();
 			}
 		}
 	}

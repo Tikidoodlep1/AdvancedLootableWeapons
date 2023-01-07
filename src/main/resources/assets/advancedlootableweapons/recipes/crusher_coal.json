@@ -1,0 +1,15 @@
+{
+	"type": "advancedlootableweapons:one_slot",
+	"group": "advancedlootableweapons:crusher",
+	"block": "advancedlootableweapons:jaw_crusher",
+	"ingredients": [
+    {
+		"item": "minecraft:coal",
+		"data": 32767
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:powder_charcoal",
+    "count": 1
+  }
+}

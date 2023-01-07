@@ -1,6 +1,9 @@
 package com.tiki.advancedlootableweapons.handlers;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
@@ -31,8 +34,13 @@ public class ConfigHandler {
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
 	public static boolean ENABLE_ARMOR_FORGING = true;
+	public static HashSet<String> VALID_ANVILS = new HashSet<String>();
+	public static HashSet<String> VALID_HAMMERS = new HashSet<String>();
+	public static HashSet<String> EXTRA_MATERIALS = new HashSet<String>();
 	public static boolean DISABLE_VANILLA_ARMORS = true;
 	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
+	public static float BELLOWS_EXHAUSTION = 0.1F;
+	public static float TOOL_HEAD_HEATING_MULTIPLIER = 1.0F;
 	
 	public static float GLOBAL_DAGGER_BASE_DAMAGE = 3.0F;
 	public static float GLOBAL_KABUTOWARI_BASE_DAMAGE = 3.25F;
@@ -291,6 +299,16 @@ public class ConfigHandler {
 		ENABLE_NODACHIS = config.getBoolean("Enable Nodachis", category, true, "Enable or disable nodachis in-game. (True/False)");
 		ENABLE_SABRES = config.getBoolean("Enable Sabres", category, true, "Enable or disable sabres in-game. (True/False)");
 		ENABLE_MAKHAIRAS = config.getBoolean("Enable Makhairas", category, true, "Enable or disable makhairas in-game. (True/False)");
+		TOOL_HEAD_HEATING_MULTIPLIER = config.getFloat("Tool Head Heating Multiplier", category, 1.0F, 0.1F, 10.0F, "A multiplier for how quickly hot tool heads and weapon parts will heat up in the forge. 1.0 is realistic.");
+		BELLOWS_EXHAUSTION = config.getFloat("Bellows Exhaustion", category, 0.1f, 0.0f, 10.0f, "The amount of exhaustion using a bellows gives the player.");
+		VALID_ANVILS.addAll(Arrays.stream(config.getStringList("Valid Anvil Blocks", category, new String[] {"minecraft:anvil"}, "Write any block ID to register it as a valid anvil to forge weapons on.")).collect(Collectors.toSet()));
+		VALID_HAMMERS.addAll(Arrays.stream(config.getStringList("Valid Hammer Items", category, new String[] {
+				"advancedlootableweapons:stone_forge_hammer", "advancedlootableweapons:iron_forge_hammer", "advancedlootableweapons:kobold_forge_hammer",
+				"advancedlootableweapons:copper_forge_hammer", "advancedlootableweapons:silver_forge_hammer", "advancedlootableweapons:bronze_forge_hammer",
+				"advancedlootableweapons:platinum_forge_hammer", "advancedlootableweapons:steel_forge_hammer", "advancedlootableweapons:shadow_platinum_forge_hammer",
+				"advancedlootableweapons:frost_steel_forge_hammer", "advancedlootableweapons:obsidian_forge_hammer", "advancedlootableweapons:crystallite_forge_hammer",
+				"advancedlootableweapons:dusksteel_forge_hammer"}, "Write any item ID to register it as a valid forge hammer to open the Anvil Forging GUI with.")).collect(Collectors.toSet()));
+		EXTRA_MATERIALS.addAll(Arrays.stream(config.getStringList("Extra Weapon Materials", category, new String[] {}, "Put tool materials here (Ex. DIAMOND for vanilla diamonds) to add a new craftable set of ALW weapons. The repair item will be used as the base item (Ex. Iron ingots for iron). Available tool materials will be logged to console on launch.")).collect(Collectors.toSet()));
 		
 		//**********************************MATERIAL MODIFICATION**********************************
 		category = "WEAPON MATERIAL MODIFICATION";

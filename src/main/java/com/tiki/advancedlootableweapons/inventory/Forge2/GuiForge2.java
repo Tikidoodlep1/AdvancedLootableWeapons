@@ -14,9 +14,14 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiForge2 extends GuiContainer
 {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_2.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_2_new.png");
 	private final InventoryPlayer player;
 	private final TileEntityForge2 tileentity;
+	private static final int slot1x = 51;
+	private static final int slot2x = 80;
+	private static final int slot3x = 109;
+	private static final int sloty = 47;
+	private static final int slotSize = 18;
 	
 	public GuiForge2(InventoryPlayer player, TileEntityForge2 tileentity) 
 	{
@@ -29,8 +34,8 @@ public class GuiForge2 extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
 	{
 		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 3, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 92, 4210752);
+		this.fontRenderer.drawStringWithShadow(tileName, ((this.xSize / 2) - this.fontRenderer.getStringWidth(tileName) / 2), 3, 0xFFFFFFFF);
+		this.fontRenderer.drawStringWithShadow(this.player.getDisplayName().getUnformattedText(), -22, this.ySize - 98, 0xFFFFFFFF);
 	}
 	
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
@@ -50,19 +55,22 @@ public class GuiForge2 extends GuiContainer
 		this.mc.getTextureManager().bindTexture(TEXTURES);
 		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 		
-		int k = this.getBurnLeftScaled();
-		this.drawTexturedModalRect(this.guiLeft + 24, this.guiTop + 69 - k, 176, 65 - k, 18, k);
+		int k = this.getSlotTempScaled();
+		this.drawTexturedModalRect(this.guiLeft + 50, this.guiTop + 64 - k, 176, 19 - k, 77, k);
 	}
 	
 	public void drawHoveringForgeTempText(int mouseX, int mouseY) {
-		if(mouseX > this.guiLeft + 24 && mouseX < this.guiLeft + 43 && mouseY > this.guiTop + 4 && mouseY < this.guiTop + 70) {
+		if(mouseX > this.guiLeft + 40 && mouseX < this.guiLeft + 138 && mouseY > this.guiTop + 40 && mouseY < this.guiTop + 65 && 
+				!(mouseX > this.guiLeft + slot1x && mouseX < this.guiLeft + slot1x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize) &&
+				!(mouseX > this.guiLeft + slot2x && mouseX < this.guiLeft + slot2x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize) &&
+				!(mouseX > this.guiLeft + slot3x && mouseX < this.guiLeft + slot3x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize)) {
 			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(3)-32)*5/9) + " Celcius", mouseX, mouseY);
 		}
 	}
 	
-	private int getBurnLeftScaled()
+	private int getSlotTempScaled()
 	{
-		return (int)(this.tileentity.getField(3) * 0.0285);
+		return (int)((this.tileentity.getField(3) - 850) * 0.0136);
 	}
 	
 	public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)

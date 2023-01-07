@@ -73,7 +73,7 @@ public class BlockInit {
 	public static final Block crusher = new BlockJawCrusher("jaw_crusher", Material.IRON).setHardness(2.5F).setResistance(7.0F);
 	public static final Block tanning_rack = new BlockTanningRack("tanning_rack").setHardness(1.3F);
 	public static final Block drum = new BlockDrum("drum").setHardness(2.0F).setResistance(5.5F);
-	public static final Block bellows_oak = new BlockBellows("bellows_oak").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows = new BlockBellows("bellows").setHardness(1.5F).setResistance(1.8F);
 	public static final Block bellows_birch = new BlockBellows("bellows_birch").setHardness(1.5F).setResistance(1.8F);
 	public static final Block bellows_spruce = new BlockBellows("bellows_spruce").setHardness(1.5F).setResistance(1.8F);
 	public static final Block bellows_jungle = new BlockBellows("bellows_jungle").setHardness(1.5F).setResistance(1.8F);

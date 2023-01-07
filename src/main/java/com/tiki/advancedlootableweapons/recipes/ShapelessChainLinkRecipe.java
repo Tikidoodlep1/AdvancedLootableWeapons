@@ -43,13 +43,14 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
 		NBTTagCompound nbt = new NBTTagCompound();
+		boolean isMatch = false;
 		Iterator<Ingredient> iter = inputs.iterator();
 		for(int i = 0; i < inv.getSizeInventory(); i++) {
 			ItemStack input = inv.getStackInSlot(i);
 			if(!input.isEmpty()) {
 				if(iter.hasNext()) {
 					Ingredient ingred = iter.next();
-					boolean isMatch = false;
+					
 					for(ItemStack is : ingred.getMatchingStacks()) {
 						if(is.getItem() == input.getItem()) {
 							isMatch = true;
@@ -71,7 +72,7 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 				}
 			}
 		}
-		return true;
+		return isMatch;
 	}
 	
 	@Override

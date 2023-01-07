@@ -7,6 +7,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import net.minecraft.client.Minecraft;
 
 public class AnvilForgingRecipeCategory extends AbstractAnvilForgingRecipeCategory<AnvilForgingRecipe> {
 	private final IDrawable background;
@@ -14,17 +15,22 @@ public class AnvilForgingRecipeCategory extends AbstractAnvilForgingRecipeCatego
 	
 	public AnvilForgingRecipeCategory(IGuiHelper helper) {
 		super(helper);
-		background = helper.createDrawable(TEXTURES, 51, 28, 87, 45);
+		background = helper.createDrawable(TEXTURES, 51, 18, 87, 55);
 		name = "Anvil Forging";
 	}
 	
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, AnvilForgingRecipe recipeWrapper, IIngredients ingredients) {
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
-		stacks.init(input1, true, 4, 4);
-		stacks.init(input2, true, 4, 24);
-		stacks.init(output, false, 62, 14);
+		stacks.init(input1, true, 4, 14);
+		stacks.init(input2, true, 4, 34);
+		stacks.init(output, false, 62, 24);
 		stacks.set(ingredients);
+	}
+	
+	@Override
+	public void drawExtras(Minecraft minecraft) {
+		super.drawExtras(minecraft);
 	}
 	
 	@Override

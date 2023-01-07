@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.tools.ToolSpear;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+import com.tiki.advancedlootableweapons.util.ColorUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -43,7 +44,7 @@ public class EntitySpear extends EntityArrow {
     private Block inTile;
     private int inData;
     private int ticksInAir;
-    private ItemStack arrowStack;
+    private ItemStack arrowStack = ItemStack.EMPTY;
     
     public static final DataParameter<ItemStack> ITEMSTACK = EntityDataManager.<ItemStack>createKey(EntitySpear.class, DataSerializers.ITEM_STACK);
     public static final DataParameter<Integer> MAX_DURABILITY = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
@@ -53,6 +54,7 @@ public class EntitySpear extends EntityArrow {
     public static final DataParameter<Float> REACH = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
     public static final DataParameter<String> CUSTOM_NAME = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
     public static final DataParameter<String> MATERIAL = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
+    public static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
     
     public EntitySpear(World worldIn, EntityLivingBase shooter, int spearDurability, int maxDurability, double attackDamage, float reach, double attackSpeed, ItemStack stack) {
     	this(worldIn, shooter);
@@ -63,6 +65,9 @@ public class EntitySpear extends EntityArrow {
     	this.setMaxDurabilityData(maxDurability);
     	this.setAttackSpeedData(attackSpeed);
     	this.setReachData(reach);
+    	if(this.getItemStack() != ItemStack.EMPTY) {
+			this.setColorData( (stack.hasTagCompound() ? stack.getTagCompound().getIntArray("colors")[2] : 0x77F700FF));
+		}
     }
     
 	public EntitySpear(World worldIn, EntityLivingBase shooter) {
@@ -95,7 +100,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(ITEMSTACK);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return ItemStack.EMPTY;
 		}
 	}
@@ -118,7 +123,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(MAX_DURABILITY);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return 0;
 		}
 	}
@@ -133,7 +138,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return (double)this.dataManager.get(DAMAGE);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return 0D;
 		}
 	}
@@ -146,7 +151,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return (double)this.dataManager.get(ATTACK_SPEED);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return 0D;
 		}
 	}
@@ -161,7 +166,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(DURABILITY);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return 0;
 		}
 	}
@@ -174,7 +179,7 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(REACH);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return 0F;
 		}
 	}
@@ -189,8 +194,21 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(CUSTOM_NAME);
 		}else {
-			System.out.print("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
 			return this.arrowStack.getDisplayName();
+		}
+	}
+	
+	private void setColorData(int color) {
+		this.dataManager.set(COLOR, color);
+	}
+	
+	public int getColorData() {
+		if(!this.dataManager.isEmpty()) {
+			return this.dataManager.get(COLOR);
+		}else {
+			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
+			return 0;
 		}
 	}
 	
@@ -205,6 +223,7 @@ public class EntitySpear extends EntityArrow {
 		this.dataManager.register(REACH, 4.0F);
 		this.dataManager.register(CUSTOM_NAME, "");
 		this.dataManager.register(MATERIAL, "");
+		this.dataManager.register(COLOR, 0x00000000);
 	}
 	
 	@Override
@@ -250,7 +269,7 @@ public class EntitySpear extends EntityArrow {
 			player.inventory.add(slot, stack);
 			ItemStack item = player.inventory.getStackInSlot(slot);
 			((ToolSpear)item.getItem()).setMaximumDamage(item, maxDurability);
-			//System.out.println("Spear Max Durability is: " + maxDurability);
+			((ToolSpear)item.getItem()).setColors(stack, ColorUtils.getColorPalateFromItemStack(stack));
 			newNBT = item.getTagCompound();
 			newNBT.setDouble("totalDamage", (double)this.getDamageData());
 			item.setItemDamage(this.getDurabilityData());
@@ -261,6 +280,8 @@ public class EntitySpear extends EntityArrow {
 			if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {
 				item.addAttributeModifier(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReachData() - 5.0D, 0), EntityEquipmentSlot.MAINHAND);
 			}
+			//Maybe don't need
+			item.setTagCompound(newNBT);
 		}
 	}
 	

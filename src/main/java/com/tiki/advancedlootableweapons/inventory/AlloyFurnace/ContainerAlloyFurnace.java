@@ -1,6 +1,5 @@
 package com.tiki.advancedlootableweapons.inventory.AlloyFurnace;
 
-import com.tiki.advancedlootableweapons.blocks.recipes.AlloyFurnaceRecipes;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerAlloyFurnace extends Container
 {
-	private AlloyFurnaceRecipes recipes = AlloyFurnaceRecipes.getInstance();
 	private final TileEntityAlloyFurnace tileentity;
 	private int cookTime, totalCookTime, burnTime, currentBurnTime;
 	
@@ -24,23 +22,25 @@ public class ContainerAlloyFurnace extends Container
 		
 		this.addSlotToContainer(new Slot(tileentity, 0, 45, 17) {
 			public boolean isItemValid(ItemStack stack) {
-				for(ItemStack rowStack : recipes.getDualSmeltingList().rowKeySet()) {
-					if(new ItemStack(rowStack.getItem()).isItemEqualIgnoreDurability(new ItemStack(stack.getItem()))) {
-						return true;
-					}
-				}
-				return false;
+				return !(stack.getItem().isDamageable());
+			}
+			
+			@Override
+			public void onSlotChanged() {
+				ContainerAlloyFurnace.this.tileentity.findNewRecipe();
+				super.onSlotChanged();
 			}
 		});
 		
 		this.addSlotToContainer(new Slot(tileentity, 1, 68, 17) {
 			public boolean isItemValid(ItemStack stack) {
-				for(ItemStack rowStack : recipes.getDualSmeltingList().rowKeySet()) {
-					if(new ItemStack(rowStack.getItem()).isItemEqualIgnoreDurability(new ItemStack(stack.getItem()))) {
-						return true;
-					}
-				}
-				return false;
+				return !(stack.getItem().isDamageable());
+			}
+			
+			@Override
+			public void onSlotChanged() {
+				ContainerAlloyFurnace.this.tileentity.findNewRecipe();
+				super.onSlotChanged();
 			}
 		});
 		
@@ -56,11 +56,8 @@ public class ContainerAlloyFurnace extends Container
 			}
 			
 			public ItemStack onTake(EntityPlayer player, ItemStack stack) {
-				AlloyFurnaceRecipes recipes = AlloyFurnaceRecipes.getInstance();
-				float exp = recipes.getAlloyingExperience(stack);
-				if(exp > 0) {
-					player.addExperience((int)exp * stack.getCount());
-				}
+				player.addExperience( (int)(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount()));
+				ContainerAlloyFurnace.this.tileentity.recipeExp = 0;
 				return stack;
 			}
 		});

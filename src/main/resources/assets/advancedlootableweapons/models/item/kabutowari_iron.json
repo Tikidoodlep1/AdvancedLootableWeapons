@@ -1,7 +1,11 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/kabutowari_iron"
+		"layer0": "advancedlootableweapons:items/kabutowari_layer5",
+		"layer1": "advancedlootableweapons:items/kabutowari_layer4",
+		"layer2": "advancedlootableweapons:items/kabutowari_layer3",
+		"layer3": "advancedlootableweapons:items/kabutowari_layer2",
+		"layer4": "advancedlootableweapons:items/kabutowari_layer1"
 	},
 
 	"display": {

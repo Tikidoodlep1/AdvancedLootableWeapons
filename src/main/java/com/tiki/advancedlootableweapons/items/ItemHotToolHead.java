@@ -71,13 +71,13 @@ public class ItemHotToolHead extends Item implements IHasModel {
 		return name;
 	}
 	
-	public static String getMaterial(ItemStack toolHead) {
+	public static ItemStack getMaterial(ItemStack toolHead) {
 		NBTTagCompound tag = new NBTTagCompound();
 		tag = toolHead.getTagCompound();
 		if(toolHead.hasTagCompound() && tag.hasKey("Material")) {
-			return tag.getString("Material");
+			return new ItemStack(tag.getCompoundTag("Material"));
 		}else {
-			return "Material not found";
+			return ItemStack.EMPTY;
 		}
 	}
 	
@@ -85,9 +85,10 @@ public class ItemHotToolHead extends Item implements IHasModel {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
 		NBTTagCompound Stacknbt = stack.getTagCompound();
+		ItemStack material = getMaterial(stack);
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("Material")) {
-			tooltip.add(TextFormatting.BLUE + Stacknbt.getString("Material"));
+			tooltip.add(TextFormatting.BLUE + material.getDisplayName());
 		}
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDamage")) {
@@ -108,7 +109,7 @@ public class ItemHotToolHead extends Item implements IHasModel {
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
 		int damage = stack.getMetadata();
-		String material = stack.getTagCompound() == null ? "Steel" : stack.getTagCompound().getString("Material");
+		Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
 		if(damage <= 5999) {
 			this.setDamage(stack, (damage + HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.ROOM_TEMP, this.getDamage(stack))));
 		}else if(damage > 6000) {

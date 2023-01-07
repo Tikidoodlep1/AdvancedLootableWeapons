@@ -1,0 +1,18 @@
+{
+	"type": "advancedlootableweapons:drum",
+	"group": "advancedlootableweapons:drum",
+	"input": {
+		"item": "advancedlootableweapons:trimmed_hide",
+		"count": 1
+	},
+	"fluid": "water",
+	"additive": {
+		"type": "forge:ore_dict",
+		"ore": "dustSalt"
+	},
+	"ticks": 500,
+	"result": {
+		"item": "advancedlootableweapons:cured_hide",
+		"count": 1
+	}
+}

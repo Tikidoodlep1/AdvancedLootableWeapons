@@ -48,7 +48,7 @@ public class RenderSpear extends RenderThrownItem<EntitySpear>{
 		case "mat_dusksteel":
 			return new ResourceLocation(ModInfo.ID + ":textures/entity/dusksteel_spear.png");
 		default:
-			return new ResourceLocation(ModInfo.ID + ":textures/entity/spear.png");
+			return new ResourceLocation(ModInfo.ID + ":textures/entity/extra_spear.png");
 		}
 	}
 }

@@ -1,16 +1,21 @@
 package com.tiki.advancedlootableweapons.inventory.JawCrusher;
 
+import javax.annotation.Nullable;
+
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityJawCrusher;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -22,16 +27,15 @@ private final TileEntityJawCrusher tileentity;
 	{
 		this.tileentity = tileEntityJawCrusher;
 		
-		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 0, 54, 43) {
+		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 0, 59, 17) {
 			public boolean isItemValid(ItemStack stack) {
-				if(stack.getItem() == Item.getItemFromBlock(BlockInit.rock_feldspar) || (stack.getItem() == Item.getItemFromBlock(Blocks.STONE) && (stack.getItemDamage() == 1 || stack.getItemDamage() == 3))) {
-					return true;
-				}
-				return false;
+				InventoryCrafting inv = new InventoryCrafting(ContainerJawCrusher.this, 1, 1);
+				inv.setInventorySlotContents(0, stack);
+				return ContainerJawCrusher.this.findMatchingRecipe(inv, ContainerJawCrusher.this.tileentity.getWorld()) != null;
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 1, 108, 43) {
+		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 1, 108, 45) {
 			public boolean isItemValid(ItemStack stack) {
 				return false;
 			}
@@ -50,6 +54,22 @@ private final TileEntityJawCrusher tileentity;
 			this.addSlotToContainer(new Slot(player, x, 8 + x * 18, 142));
 		}
 	}
+	
+	@Nullable
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof ShapelessOneSlotRecipes)
+            {
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.crusher && irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	@Override
 	public void addListener(IContainerListener listener){

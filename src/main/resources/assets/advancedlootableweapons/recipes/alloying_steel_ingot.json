@@ -1,0 +1,19 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"item": "minecraft:coal",
+		"data": 32767
+    },
+    {
+		"item": "minecraft:iron_ingot",
+		"count": 2
+    }
+  ],
+  "exp": 1.0,
+  "result": {
+    "item": "advancedlootableweapons:ingot_steel",
+    "count": 2
+  }
+}

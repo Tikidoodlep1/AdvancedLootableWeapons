@@ -1,0 +1,31 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	
+	"ingredients": [
+    {
+		"item": "minecraft:clay"
+    },
+    {
+		"item": "advancedlootableweapons:powder_granite",
+		"item": "advancedlootableweapons:powder_feldspar"
+    },
+    {
+		"item": "advancedlootableweapons:powder_charcoal"
+    },
+    {
+		"item": "advancedlootableweapons:powder_charcoal"
+    },
+    {
+    	"type": "item_nbt",
+    	"item": "forge:bucketFilled",
+    	"nbt": {
+    		"FluidName": "water",
+    		"Amount": 1000
+    	}
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:clay_yaki_ire_slip",
+    "count": 3
+  }
+}

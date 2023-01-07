@@ -26,7 +26,7 @@ public class AlloyFurnaceRecipeCategory extends AbstractAlloyFurnaceRecipeCatego
 		IGuiItemStackGroup stacks = recipeLayout.getItemStacks();
 		stacks.init(input1, true, 4, 4);
 		stacks.init(input2, true, 27, 4);
-		//stacks.init(input3, true, 57, 54);
+		stacks.init(input3, true, 16, 41);
 		stacks.init(output, false, 75, 23);
 		stacks.set(ingredients);
 	}

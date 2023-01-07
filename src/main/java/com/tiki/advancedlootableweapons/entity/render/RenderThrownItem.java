@@ -2,7 +2,10 @@ package com.tiki.advancedlootableweapons.entity.render;
 
 import org.lwjgl.opengl.GL11;
 
+import com.tiki.advancedlootableweapons.entity.EntitySpear;
+
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -30,8 +33,18 @@ public class RenderThrownItem<T extends Entity> extends Render<T>{
 	
 	@Override
 	public void doRender(T entity, double x, double y, double z, float yaw, float partialTicks) {
-		super.doRender(entity, x, y, z, yaw, partialTicks);
-		renderEntityModel(entity, x, y, z, yaw, partialTicks);
+		if(entity instanceof EntitySpear) {
+			GlStateManager.pushMatrix();
+			
+			int color = ((EntitySpear)entity).getColorData();
+			GL11.glColor4f( ((color >> 16) & 0xFF) / 255F, ((color >> 8) & 0xFF) / 255F, ((color) & 0xFF) / 255F, ((color >> 24) & 0xFF) / 255F);
+			super.doRender(entity, x, y, z, yaw, partialTicks);
+			renderEntityModel(entity, x, y, z, yaw, partialTicks);
+			GlStateManager.popMatrix();
+		}else {
+			super.doRender(entity, x, y, z, yaw, partialTicks);
+			renderEntityModel(entity, x, y, z, yaw, partialTicks);
+		}
 	}
 
 	@Override

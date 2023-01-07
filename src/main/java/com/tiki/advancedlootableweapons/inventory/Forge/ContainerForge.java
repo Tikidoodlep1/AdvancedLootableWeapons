@@ -21,7 +21,7 @@ public class ContainerForge extends Container
 	{
 		this.tileentity = tileentity;
 		
-		this.addSlotToContainer(new Slot(tileentity, 0, 81, 36) {
+		this.addSlotToContainer(new Slot(tileentity, 0, 80, 57) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
 					return true;

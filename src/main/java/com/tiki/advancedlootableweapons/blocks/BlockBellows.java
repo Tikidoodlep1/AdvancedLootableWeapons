@@ -1,9 +1,11 @@
 package com.tiki.advancedlootableweapons.blocks;
 
+import java.util.List;
 import java.util.Random;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 
 import net.minecraft.block.BlockHorizontal;
@@ -13,11 +15,13 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -43,6 +47,21 @@ public class BlockBellows extends BlockBase {
 		this.setHarvestLevel("axe", 1);
 		this.fullBlock = false;
 		this.translucent = true;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
+		super.addInformation(stack, player, tooltip, advanced);
+		
+		if(stack.hasTagCompound()) {
+			NBTTagCompound tag = stack.getTagCompound();
+			if(tag.hasKey("wood")) {
+				ItemStack wood = new ItemStack(tag.getCompoundTag("wood"));
+				if(!wood.isEmpty()) {
+					tooltip.add(wood.getDisplayName());
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -104,8 +123,10 @@ public class BlockBellows extends BlockBase {
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
 			if(te instanceof TileEntityForge) {
 				((TileEntityForge)te).bellowsInteraction();
+				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 			}else if(te instanceof TileEntityForge2) {
 				((TileEntityForge2)te).bellowsInteraction(worldIn, pos);
+				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 			}
 		}
 		return true;
@@ -179,5 +200,4 @@ public class BlockBellows extends BlockBase {
 	{
 		return ((EnumFacing)state.getValue(FACING)).getIndex();
 	}
-
 }

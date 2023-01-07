@@ -21,6 +21,5 @@ public class TileEntityHandler
 		GameRegistry.registerTileEntity(TileEntityJawCrusher.class, new ResourceLocation(ModInfo.ID + ":jaw_crusher"));
 		GameRegistry.registerTileEntity(TileEntityTanningRack.class, new ResourceLocation(ModInfo.ID + ":tanning_rack"));
 		GameRegistry.registerTileEntity(TileEntityDrum.class, new ResourceLocation(ModInfo.ID + ":drum"));
-
 	}
 }

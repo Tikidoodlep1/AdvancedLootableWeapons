@@ -1,7 +1,11 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/staff_steel"
+		"layer0": "advancedlootableweapons:items/staff_layer5",
+		"layer1": "advancedlootableweapons:items/staff_layer4",
+		"layer2": "advancedlootableweapons:items/staff_layer3",
+		"layer3": "advancedlootableweapons:items/staff_layer2",
+		"layer4": "advancedlootableweapons:items/staff_layer1"
 	},
 
 	"display": {

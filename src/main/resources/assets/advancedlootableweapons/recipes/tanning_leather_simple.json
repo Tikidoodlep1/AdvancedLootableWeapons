@@ -1,0 +1,14 @@
+{
+	"type": "advancedlootableweapons:one_slot",
+	"group": "advancedlootableweapons:tanning",
+	"block": "advancedlootableweapons:tanning_rack",
+	"ingredients": [
+    {
+		"item": "advancedlootableweapons:untrimmed_hide"
+    }
+  ],
+  "result": {
+    "item": "minecraft:leather",
+    "count": 1
+  }
+}

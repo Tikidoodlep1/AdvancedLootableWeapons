@@ -1,13 +1,21 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
-import com.tiki.advancedlootableweapons.blocks.recipes.DrumRecipes;
-import com.tiki.advancedlootableweapons.init.BlockInit;
+import java.util.Arrays;
 
+import javax.annotation.Nullable;
+
+import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -34,7 +42,14 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	private String customName;
 	private int progress = 0;
-	private DrumRecipes activeRecipe = null;
+	private DrumItemRecipe activeRecipe = null;
+	private Container tempContainer = new Container() {
+		@Override
+		public boolean canInteractWith(EntityPlayer playerIn) {
+			return false;
+		}
+	};
+	private InventoryCrafting craft = new InventoryCrafting(tempContainer, 3, 1);
 	
 	public void FluidInteraction(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand) {
 		if(this.getTank().getFluidAmount() <= 0) {
@@ -45,14 +60,17 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	public boolean EntityInteraction(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand) {
 		ItemStack activeStack = playerIn.getHeldItem(hand);
 		if(!playerIn.isSneaking() && activeStack != ItemStack.EMPTY) {
-			if(DrumRecipes.getAcceptedAdditives().contains(activeStack.getItem()) && !this.inventory.get(ADDITIVE_SLOT).isItemEqual(activeStack)) {
+			if(this.inventory.get(ADDITIVE_SLOT).isEmpty()) {
 				this.inventory.set(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
 				activeStack.shrink(1);
-			}
-			if(DrumRecipes.getAcceptedInputs().contains(activeStack.getItem()) && this.inventory.get(INPUT_SLOT) == ItemStack.EMPTY) {
+			}else if(this.inventory.get(INPUT_SLOT).isEmpty()) {
 				this.inventory.set(INPUT_SLOT, activeStack);
 				playerIn.setHeldItem(hand, ItemStack.EMPTY);
 				this.onChanged();
+			}
+			
+			for(int i = 0; i < 3; i++) {
+				craft.setInventorySlotContents(i, this.inventory.get(i));
 			}
 		}else {
 			if(this.inventory.get(OUTPUT_SLOT) != ItemStack.EMPTY) {
@@ -67,11 +85,34 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					this.activeRecipe = null;
 					this.onChanged();
 				}
+			}else if(this.inventory.get(ADDITIVE_SLOT) != ItemStack.EMPTY) {
+				if(playerIn.addItemStackToInventory(this.inventory.get(ADDITIVE_SLOT))) {
+					this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+					this.progress = 0;
+					this.activeRecipe = null;
+					this.onChanged();
+				}
+			}
+			for(int i = 0; i < 3; i++) {
+				craft.setInventorySlotContents(i, this.inventory.get(i));
 			}
 		}
 		
-		if(this.activeRecipe == null && this.getTank().getFluid() != null && DrumRecipes.getAcceptedFluids().contains(this.getTank().getFluid().getFluid()) && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
-			DrumRecipes recipe = DrumRecipes.getMatchingRecipe(this.getTank().getFluid().getFluid(), this.inventory.get(INPUT_SLOT), this.inventory.get(ADDITIVE_SLOT), false);
+		if(this.activeRecipe == null && this.getTank().getFluid() != null && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY && this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
+			DrumItemRecipe recipe = this.findMatchingRecipe(craft, this.getWorld());
+
+			if(recipe != null) {
+				System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
+				System.out.println("Ingredients:" );
+				for(Ingredient i : recipe.getIngredients()) {
+					System.out.println(Arrays.toString(i.getMatchingStacks()));
+				}
+				System.out.println("Result: " + recipe.getRecipeOutput());
+			}else {
+				System.out.println("Recipe is NULL!");
+			}
+			
+			
 			if(recipe != null) {
 				this.activeRecipe = recipe;
 			}else {
@@ -156,7 +197,6 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 			stack.setCount(this.getInventoryStackLimit());
 		}
 		if(!flag) {
-			//ItemStack stack1 = (ItemStack)this.inventory.get(index + 1);
 			this.markDirty();
 		}
 	}
@@ -198,7 +238,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), this.getUpdateTag());
 	}
 	
-	public void onChanged() {		
+	public void onChanged() {
 		onDataPacket(Minecraft.getMinecraft().getConnection().getNetworkManager(), getUpdatePacket());
 	}
 	
@@ -236,17 +276,19 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	{
 		if(!this.world.isRemote && this.activeRecipe != null) {
 			++this.progress;
-			if(this.progress >= this.activeRecipe.getRecipeTime()) {
+			
+			if(this.progress >= this.activeRecipe.getTime()) {
 				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
-					int outputCount = (64 - this.inventory.get(OUTPUT_SLOT).getCount()) / this.activeRecipe.getOutput().getCount();
-					int inputCount = this.inventory.get(INPUT_SLOT).getCount() / this.activeRecipe.getInput().getCount();
+					int activeInputCount = this.activeRecipe.getInputCount(craft);
+					int outputCount = (64 - this.inventory.get(OUTPUT_SLOT).getCount()) / this.activeRecipe.getCraftingResult(craft).getCount();
+					int inputCount = this.inventory.get(INPUT_SLOT).getCount() / activeInputCount;
 					int recipeCount = inputCount > outputCount ? outputCount : inputCount;
-					this.inventory.set(OUTPUT_SLOT, new ItemStack(this.activeRecipe.getOutput().getItem(), this.activeRecipe.getOutput().getCount() * recipeCount));
-					if(this.inventory.get(INPUT_SLOT).getCount() - (this.activeRecipe.getInput().getCount() * recipeCount) <= 0) {
+					this.inventory.set(OUTPUT_SLOT, new ItemStack(this.activeRecipe.getCraftingResult(craft).getItem(), this.activeRecipe.getCraftingResult(craft).getCount() * recipeCount));
+					if(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount) <= 0) {
 						this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
 					}else {
-						this.inventory.get(INPUT_SLOT).setCount(this.inventory.get(INPUT_SLOT).getCount() - (this.activeRecipe.getInput().getCount() * recipeCount));
+						this.inventory.get(INPUT_SLOT).setCount(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount));
 						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
 					}
 					this.activeRecipe = null;
@@ -271,6 +313,23 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		return true;
 	}
+	
+	@Nullable
+    private DrumItemRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    {
+        for (IRecipe irecipe : CraftingManager.REGISTRY)
+        {
+            if (irecipe instanceof DrumItemRecipe)
+            {
+            	System.out.println("Recipe Matches : " + irecipe.matches(craftMatrix, worldIn) + "Recipe fluid: " + ((DrumItemRecipe)irecipe).getFluid().getFluid().getName() + ", Tank Fluid: " + this.getTank().getFluid().getFluid().getName());
+            	if(((DrumItemRecipe)irecipe).getFluid().getFluid() == this.getTank().getFluid().getFluid() && irecipe.matches(craftMatrix, worldIn)) {
+            		return (DrumItemRecipe)irecipe;
+            	}
+            }
+        }
+
+        return null;
+    }
 	
 	public String getGuiID() {
 		return "advancedlootableweapons:drum";

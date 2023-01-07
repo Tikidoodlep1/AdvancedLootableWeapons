@@ -4,7 +4,7 @@ import java.util.Random;
 
 public enum WeaponEffectiveness {
 
-	DAGER("dagger", 0.8, 15, 0.9, 20, 0.85, 15),
+	DAGGER("dagger", 0.8, 15, 0.9, 20, 0.85, 15),
 	KABUTOWARI("kabutowari", 0.85, 20, 0.85, 35, 0.8, 28),
 	RAPIER("rapier", 0.75, 25, 0.85, 40, 0.8, 35),
 	TALWAR("talwar", 0.85, 2, 0.9, 6, 0.85, 2),
@@ -17,7 +17,7 @@ public enum WeaponEffectiveness {
 	NODACHI("nodachi", 0.8, 2, 0.9, 2, 0.85, 4),
 	SABRE("sabre", 0.8, 5, 0.85, 7, 0.8, 3),
 	MAKHAIRA("makhaira", 0.8, 1, 0.95, 2, 0.9, 4),
-	BATTLEAXE("battleaxe", 0.9, 0, 1.0, 0, 0.95, 0),
+	BATTLEAXE("battleaxe", 0.9, 3, 1.0, 1, 0.95, 0),
 	ZWEIHANDER("zweihander", 0.75, 20, 0.85, 1, 0.8, 3),
 	ARROW("arrow", 0.65, 15, 0.75, 25, 0.7, 15),
 	THROWN_SPEAR("thrown_spear", 0.7, 15, 0.85, 23, 0.75, 16);
