@@ -1,0 +1,11 @@
+{	
+	"type": "advancedlootableweapons:quenching",
+	
+	"input": {
+		"item": "advancedlootableweapons:makhaira_hot_tool_head_3",
+		"data": 32767
+	},
+	"fluid": "water",
+	"ticks": 50,
+	"clay": true
+}

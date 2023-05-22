@@ -45,6 +45,7 @@ public class ItemInit {
 
 	public static final List<Item> items = new ArrayList<Item>();
 	public static final HashSet<Item> generatedItems = new HashSet<Item>();
+	public static final HashSet<Item> weaponItems = new HashSet<Item>();
 	public static final Set<Item> acceptedForgeItems = new HashSet<Item>();
 	
 	public static void generateAcceptedForgeItems() {
@@ -52,7 +53,6 @@ public class ItemInit {
 		for(String ore : ores) {
 			NonNullList<ItemStack> stacks = OreDictionary.getOres(ore);
 			for(ItemStack s : stacks) {
-				System.out.println(ore + ": " + s.getItem().getRegistryName());
 				if(!s.isEmpty()) {
 					acceptedForgeItems.add(s.getItem());
 				}
@@ -67,12 +67,11 @@ public class ItemInit {
 	
 	public static void checkConfigOptions() {
 		
-		Alw.logger.info("Available tool materials are: " + Arrays.toString(ToolMaterial.values()));
 		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
 		
 		for(String s : ConfigHandler.EXTRA_MATERIALS) {			
 			try {
-				Alw.logger.info("Adding Extra Material " + s + ", Tool Material: " + ToolMaterial.valueOf(s));
+				//Alw.logger.info("Adding Extra Material " + s + ", Tool Material: " + ToolMaterial.valueOf(s));
 				if(ToolMaterial.valueOf(s) != null) {
 					generatedItems.add(new ToolStabSword("dagger_" + s.toLowerCase(), ToolMaterial.valueOf(s), "dagger").setMaxStackSize(1));
 					generatedItems.add(new ToolStabSword("kabutowari_" + s.toLowerCase(), ToolMaterial.valueOf(s), "kabutowari").setMaxStackSize(1));
@@ -93,7 +92,7 @@ public class ItemInit {
 					acceptedForgeItems.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
 				}
 			}catch (IllegalArgumentException e) {
-				Alw.logger.error("Tried to add extra material " + s + " which does not exist. Valid materials are: " + Arrays.toString(ToolMaterial.values()));
+				//Alw.logger.error("Tried to add extra material " + s + " which does not exist. Valid materials are: " + Arrays.toString(ToolMaterial.values()));
 			}
 		}
 		
@@ -385,8 +384,8 @@ public class ItemInit {
 	public static final Item POWDER_CHARCOAL = new ItemBase("powder_charcoal");
 	public static final Item CLAY_GRANITE = new ItemBase("clay_granite");
 	public static final Item CLAY_DIORITE = new ItemBase("clay_diorite");
-	public static final Item CLAY_YAKI_IRE_MIX = new ItemBase("clay_yaki_ire_mix");
-	public static final Item CLAY_YAKI_IRE_SLIP = new ItemBase("clay_yaki_ire_slip");
+	public static final Item CLAY_YAKI_IRE_MIX = new ItemBase("clay_quenching_mix");
+	public static final Item CLAY_YAKI_IRE_SLIP = new ItemBase("clay_quenching_slip");
 	
 	public static final Item BRICK_GRANITE = new ItemBase("brick_granite");
 	public static final Item BRICK_DIORITE = new ItemBase("brick_diorite");
@@ -960,80 +959,80 @@ public class ItemInit {
 	
 	//Hot Tool Heads
 	//						 ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished)
-	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head", null, 0, false);
+	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head", null, 0, false, false);
 	
-	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2", null, 2, true);
-	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod", (ItemHotToolHead)HOT_TOOL_ROD_2, 1, false);
-	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod", null, 3, true);
+	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2", null, 2, true, false);
+	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod", (ItemHotToolHead)HOT_TOOL_ROD_2, 1, false, false);
+	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod", null, 3, true, false);
 	
-	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2", null, 2, true);
-	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head", (ItemHotToolHead)DAGGER_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2", null, 2, true, true);
+	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head", (ItemHotToolHead)DAGGER_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5", null, 5, true);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_5, 4, false);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5", null, 5, true, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_5, 4, false, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3", null, 3, true);
-	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3", null, 3, true, true);
+	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4", null, 4, true);
-	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4", null, 4, true, true);
+	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head", null, 2, true);
+	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head", null, 2, true, true);
 	
-	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3", null, 3, true);
-	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3", null, 3, true, true);
+	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5", null, 5, true);
-	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_5, 4, false);
-	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5", null, 5, true, true);
+	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_5, 4, false, true);
+	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4", null, 4, true);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4", null, 4, true, true);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2", null, 2, true);
-	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head", (ItemHotToolHead)KODACHI_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2", null, 2, true, true);
+	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head", (ItemHotToolHead)KODACHI_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5", null, 5, true);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_5, 4, false);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5", null, 5, true, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_5, 4, false, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5", null, 5, true);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_5, 4, false);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5", null, 5, true, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_5, 4, false, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4", null, 4, true);
-	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4", null, 4, true, true);
+	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4", null, 4, true);
-	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_4, 3, false);
-	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4", null, 4, true, true);
+	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_4, 3, false, true);
+	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3", null, 3, true);
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_3, 2, false);
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3", null, 3, true, true);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_3, 2, false, true);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2", null, 2, true);
-	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head", (ItemHotToolHead)SPEAR_HOT_TOOL_HEAD_2, 1, false);
+	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2", null, 2, true, true);
+	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head", (ItemHotToolHead)SPEAR_HOT_TOOL_HEAD_2, 1, false, true);
 	
-	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true);
+	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true, false);
 	
 	//Armor
 	public static final Item HELMET_LEATHER = new ArmorBonusesBase("helmet_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1);

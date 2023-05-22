@@ -1,10 +1,17 @@
 package com.tiki.advancedlootableweapons.proxy;
 
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.Arrays;
+
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.DrumTESR;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.RenderHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import com.tiki.advancedlootableweapons.util.ColorUtils;
@@ -12,18 +19,45 @@ import com.tiki.advancedlootableweapons.util.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import scala.actors.threadpool.Arrays;
 
 public class ClientProxy extends CommonProxy {
+	
+	Item[] weapons = ItemInit.items.stream().filter(new Predicate<Item>() {
+		@Override
+		public boolean test(Item t) {
+			if(t instanceof ToolStabSword) {
+				return ((ToolStabSword)t).getToolMaterial() != ToolMaterial.WOOD;
+			}else if(t instanceof ToolSlashSword) {
+				return ((ToolSlashSword)t).getToolMaterial() != ToolMaterial.WOOD;
+			}
+			return false;
+		}
+	}).collect(Collectors.toList()).toArray(new Item[0]);
+	
+	Item[] toolHeads = ItemInit.items.stream().filter(new Predicate<Item>() {
+		@Override
+		public boolean test(Item t) {
+			if(t instanceof ItemHotToolHead && ((ItemHotToolHead)t).finished && ((ItemHotToolHead)t).isMain) {
+				return true;
+			}
+			return false;
+		}
+	}).collect(Collectors.toList()).toArray(new Item[0]);
 	
 	@Override
 	public void addColoredItemRenderer() {
@@ -101,22 +135,7 @@ public class ClientProxy extends CommonProxy {
 				return colorArray[tintIndex];
 			}
 			
-		}, ItemInit.DAGGER_IRON, ItemInit.DAGGER_KOBOLD, ItemInit.DAGGER_COPPER, ItemInit.DAGGER_SILVER, ItemInit.DAGGER_BRONZE, ItemInit.DAGGER_PLATINUM, ItemInit.DAGGER_STEEL, ItemInit.DAGGER_SHADOW_PLATINUM, ItemInit.DAGGER_FROST_STEEL, ItemInit.DAGGER_OBSIDIAN, ItemInit.DAGGER_CRYSTALLITE, ItemInit.DAGGER_DUSKSTEEL,
-				ItemInit.KABUTOWARI_IRON, ItemInit.KABUTOWARI_KOBOLD, ItemInit.KABUTOWARI_COPPER, ItemInit.KABUTOWARI_SILVER, ItemInit.KABUTOWARI_BRONZE, ItemInit.KABUTOWARI_PLATINUM, ItemInit.KABUTOWARI_STEEL, ItemInit.KABUTOWARI_SHADOW_PLATINUM, ItemInit.KABUTOWARI_FROST_STEEL, ItemInit.KABUTOWARI_OBSIDIAN, ItemInit.KABUTOWARI_CRYSTALLITE, ItemInit.KABUTOWARI_DUSKSTEEL,
-				ItemInit.TALWAR_IRON, ItemInit.TALWAR_KOBOLD, ItemInit.TALWAR_COPPER, ItemInit.TALWAR_SILVER, ItemInit.TALWAR_BRONZE, ItemInit.TALWAR_PLATINUM, ItemInit.TALWAR_STEEL, ItemInit.TALWAR_SHADOW_PLATINUM, ItemInit.TALWAR_FROST_STEEL, ItemInit.TALWAR_OBSIDIAN, ItemInit.TALWAR_CRYSTALLITE, ItemInit.TALWAR_DUSKSTEEL,
-				ItemInit.RAPIER_IRON, ItemInit.RAPIER_KOBOLD, ItemInit.RAPIER_COPPER, ItemInit.RAPIER_SILVER, ItemInit.RAPIER_BRONZE, ItemInit.RAPIER_PLATINUM, ItemInit.RAPIER_STEEL, ItemInit.RAPIER_SHADOW_PLATINUM, ItemInit.RAPIER_FROST_STEEL, ItemInit.RAPIER_OBSIDIAN, ItemInit.RAPIER_CRYSTALLITE, ItemInit.RAPIER_DUSKSTEEL,
-				ItemInit.CLEAVER_IRON, ItemInit.CLEAVER_KOBOLD, ItemInit.CLEAVER_COPPER, ItemInit.CLEAVER_SILVER, ItemInit.CLEAVER_BRONZE, ItemInit.CLEAVER_PLATINUM, ItemInit.CLEAVER_STEEL, ItemInit.CLEAVER_SHADOW_PLATINUM, ItemInit.CLEAVER_FROST_STEEL, ItemInit.CLEAVER_OBSIDIAN, ItemInit.CLEAVER_CRYSTALLITE, ItemInit.CLEAVER_DUSKSTEEL,
-				ItemInit.MACE_IRON, ItemInit.MACE_KOBOLD, ItemInit.MACE_COPPER, ItemInit.MACE_SILVER, ItemInit.MACE_BRONZE, ItemInit.MACE_PLATINUM, ItemInit.MACE_STEEL, ItemInit.MACE_SHADOW_PLATINUM, ItemInit.MACE_FROST_STEEL, ItemInit.MACE_OBSIDIAN, ItemInit.MACE_CRYSTALLITE, ItemInit.MACE_DUSKSTEEL,
-				ItemInit.STAFF_IRON, ItemInit.STAFF_KOBOLD, ItemInit.STAFF_COPPER, ItemInit.STAFF_SILVER, ItemInit.STAFF_BRONZE, ItemInit.STAFF_PLATINUM, ItemInit.STAFF_STEEL, ItemInit.STAFF_SHADOW_PLATINUM, ItemInit.STAFF_FROST_STEEL, ItemInit.STAFF_OBSIDIAN, ItemInit.STAFF_CRYSTALLITE, ItemInit.STAFF_DUSKSTEEL,
-				ItemInit.LONGSWORD_IRON, ItemInit.LONGSWORD_KOBOLD, ItemInit.LONGSWORD_COPPER, ItemInit.LONGSWORD_SILVER, ItemInit.LONGSWORD_BRONZE, ItemInit.LONGSWORD_PLATINUM, ItemInit.LONGSWORD_STEEL, ItemInit.LONGSWORD_SHADOW_PLATINUM, ItemInit.LONGSWORD_FROST_STEEL, ItemInit.LONGSWORD_OBSIDIAN, ItemInit.LONGSWORD_CRYSTALLITE, ItemInit.LONGSWORD_DUSKSTEEL,
-				ItemInit.KODACHI_IRON, ItemInit.KODACHI_KOBOLD, ItemInit.KODACHI_COPPER, ItemInit.KODACHI_SILVER, ItemInit.KODACHI_BRONZE, ItemInit.KODACHI_PLATINUM, ItemInit.KODACHI_STEEL, ItemInit.KODACHI_SHADOW_PLATINUM, ItemInit.KODACHI_FROST_STEEL, ItemInit.KODACHI_OBSIDIAN, ItemInit.KODACHI_CRYSTALLITE, ItemInit.KODACHI_DUSKSTEEL,
-				ItemInit.NODACHI_IRON, ItemInit.NODACHI_KOBOLD, ItemInit.NODACHI_COPPER, ItemInit.NODACHI_SILVER, ItemInit.NODACHI_BRONZE, ItemInit.NODACHI_PLATINUM, ItemInit.NODACHI_STEEL, ItemInit.NODACHI_SHADOW_PLATINUM, ItemInit.NODACHI_FROST_STEEL, ItemInit.NODACHI_OBSIDIAN, ItemInit.NODACHI_CRYSTALLITE, ItemInit.NODACHI_DUSKSTEEL,
-				ItemInit.BATTLEAXE_IRON, ItemInit.BATTLEAXE_KOBOLD, ItemInit.BATTLEAXE_COPPER, ItemInit.BATTLEAXE_SILVER, ItemInit.BATTLEAXE_BRONZE, ItemInit.BATTLEAXE_PLATINUM, ItemInit.BATTLEAXE_STEEL, ItemInit.BATTLEAXE_SHADOW_PLATINUM, ItemInit.BATTLEAXE_FROST_STEEL, ItemInit.BATTLEAXE_OBSIDIAN, ItemInit.BATTLEAXE_CRYSTALLITE, ItemInit.BATTLEAXE_DUSKSTEEL,
-				ItemInit.ZWEIHANDER_IRON, ItemInit.ZWEIHANDER_KOBOLD, ItemInit.ZWEIHANDER_COPPER, ItemInit.ZWEIHANDER_SILVER, ItemInit.ZWEIHANDER_BRONZE, ItemInit.ZWEIHANDER_PLATINUM, ItemInit.ZWEIHANDER_STEEL, ItemInit.ZWEIHANDER_SHADOW_PLATINUM, ItemInit.ZWEIHANDER_FROST_STEEL, ItemInit.ZWEIHANDER_OBSIDIAN, ItemInit.ZWEIHANDER_CRYSTALLITE, ItemInit.ZWEIHANDER_DUSKSTEEL,
-				ItemInit.SABRE_IRON, ItemInit.SABRE_KOBOLD, ItemInit.SABRE_COPPER, ItemInit.SABRE_SILVER, ItemInit.SABRE_BRONZE, ItemInit.SABRE_PLATINUM, ItemInit.SABRE_STEEL, ItemInit.SABRE_SHADOW_PLATINUM, ItemInit.SABRE_FROST_STEEL, ItemInit.SABRE_OBSIDIAN, ItemInit.SABRE_CRYSTALLITE, ItemInit.SABRE_DUSKSTEEL,
-				ItemInit.MAKHAIRA_IRON, ItemInit.MAKHAIRA_KOBOLD, ItemInit.MAKHAIRA_COPPER, ItemInit.MAKHAIRA_SILVER, ItemInit.MAKHAIRA_BRONZE, ItemInit.MAKHAIRA_PLATINUM, ItemInit.MAKHAIRA_STEEL, ItemInit.MAKHAIRA_SHADOW_PLATINUM, ItemInit.MAKHAIRA_FROST_STEEL, ItemInit.MAKHAIRA_OBSIDIAN, ItemInit.MAKHAIRA_CRYSTALLITE, ItemInit.MAKHAIRA_DUSKSTEEL,
-				ItemInit.SPEAR_IRON, ItemInit.SPEAR_KOBOLD, ItemInit.SPEAR_COPPER, ItemInit.SPEAR_SILVER, ItemInit.SPEAR_BRONZE, ItemInit.SPEAR_PLATINUM, ItemInit.SPEAR_STEEL, ItemInit.SPEAR_SHADOW_PLATINUM, ItemInit.SPEAR_FROST_STEEL, ItemInit.SPEAR_OBSIDIAN, ItemInit.SPEAR_CRYSTALLITE, ItemInit.SPEAR_DUSKSTEEL
-				);
+		}, weapons);
 		
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 
@@ -184,11 +203,14 @@ public class ClientProxy extends CommonProxy {
 			}
 			
 		}, ItemInit.generatedItems.toArray(new Item[0]) );
+	
+	
 	}
 	
 	@Override
 	public void registerCustomModelLoaders() {
-		//ModelLoaderRegistry.registerLoader(ModelWeapon.Loader.INSTANCE);
+//		ModelLoaderRegistry.registerLoader(HotWeaponModelHandler.Loader.INSTANCE);
+//		ModelLoader.registerItemVariants(item, names);
 		ItemInit.generatedItems.forEach((item) -> ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(getGenericWeaponResourceLocation(item), "inventory")));
 	}
 	
@@ -219,6 +241,15 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTESRs() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDrum.class, new DrumTESR());
+	}
+	
+	public void onTooltip(ItemTooltipEvent event) {
+		if(!(event.getItemStack().getItem() instanceof ToolForgeHammer) && ConfigHandler.VALID_HAMMERS.contains(event.getItemStack().getItem().getRegistryName().toString())) {
+			event.getToolTip().add(TextFormatting.BLUE + I18n.format("alw.forge_hammer.tooltip"));
+			event.getToolTip().add(TextFormatting.LIGHT_PURPLE + "" + TextFormatting.ITALIC + I18n.format("alw.forge_hammer.config_marker.name"));
+		}else if(event.getItemStack().getItem() != Item.getItemFromBlock(Blocks.ANVIL) && ConfigHandler.VALID_ANVILS.contains(event.getItemStack().getItem().getRegistryName().toString())) {
+			event.getToolTip().add(TextFormatting.LIGHT_PURPLE + "" + TextFormatting.ITALIC + I18n.format("alw.anvil.config_marker.name"));
+		}
 	}
 	
 	private ResourceLocation getGenericWeaponResourceLocation(Item item) {

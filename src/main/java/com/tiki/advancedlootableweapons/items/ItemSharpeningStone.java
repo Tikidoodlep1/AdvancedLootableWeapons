@@ -22,6 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -79,7 +80,6 @@ public class ItemSharpeningStone extends Item implements IHasModel{
             return "sharpening_stone";
         }
 
-
         public boolean hasCustomName()
         {
             return false;
@@ -88,7 +88,7 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 
         public ITextComponent getDisplayName()
         {
-            return new TextComponentTranslation(stone.getUnlocalizedName() + ".name", new Object[0]);
+            return new TextComponentTranslation(stone.getUnlocalizedName() + ".name");
         }
 
         public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
@@ -105,7 +105,7 @@ public class ItemSharpeningStone extends Item implements IHasModel{
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add("Right-click with this item to sharpen your weapons!");
+		tooltip.add(TextFormatting.DARK_PURPLE + new TextComponentTranslation("alw.sharpening_stone.tooltip").getFormattedText());
     }
 
 	public String getMaterial() {

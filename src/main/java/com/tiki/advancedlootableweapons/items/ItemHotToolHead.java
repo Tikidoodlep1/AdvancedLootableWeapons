@@ -10,6 +10,7 @@ import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -20,21 +21,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHotToolHead extends Item implements IHasModel {
-	public final NBTTagCompound nbt = new NBTTagCompound();
 	public final ItemHotToolHead next;
 	public final int level;
 	public final boolean finished;
+	public final boolean isMain;
 	
-	public ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished) {
+	public ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished, boolean isMain) {
 		this.next = next;
 		this.level = level;
 		this.finished = finished;
+		this.isMain = isMain;
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(Alw.AlwToolHeadsTab);
@@ -49,7 +52,12 @@ public class ItemHotToolHead extends Item implements IHasModel {
 
 			@Override
 			public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn) {
+				NBTTagCompound tag = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
 				int i = stack.getMetadata();
+				if(tag.hasKey("clay") && tag.getBoolean("clay")) {
+					return 3;
+				}
+				
 		        if(i <= 2999) {
 		        	return 0;
 		        }else if(i >= 2999 && i <= 4999) {
@@ -67,6 +75,9 @@ public class ItemHotToolHead extends Item implements IHasModel {
 		NBTTagCompound tag = stack.getTagCompound();
 		if(tag != null && tag.hasKey("Material")) {
 			name.replaceFirst(" ", " " + tag.getString("Material") + " ");
+		}
+		if(stack.hasTagCompound() && tag.hasKey("clay") && tag.getBoolean("clay")) {
+			name = I18n.format("alw.clay_cover.name").concat(" ").concat(name);
 		}
 		return name;
 	}
@@ -88,14 +99,19 @@ public class ItemHotToolHead extends Item implements IHasModel {
 		ItemStack material = getMaterial(stack);
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("Material")) {
-			tooltip.add(TextFormatting.BLUE + material.getDisplayName());
+			tooltip.add(TextFormatting.DARK_AQUA + material.getDisplayName());
+		}
+		
+		if(stack.hasTagCompound() && this.isMain) {
+			boolean quenched = Stacknbt.getBoolean("quenched");
+			tooltip.add(quenched ? TextFormatting.BLUE + new TextComponentTranslation("alw.tool_head.quenched.name").getFormattedText() : TextFormatting.RED + new TextComponentTranslation("alw.tool_head.unquenched.name").getFormattedText());
 		}
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDamage")) {
-			tooltip.add(TextFormatting.BLUE + "Forging Quality");
+			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forging_quality.name").getFormattedText());
 			tooltip.add(TextFormatting.GRAY + "--------------------");
-			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getDouble("addedDamage") + " Damage");
-			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability") + " Durability");
+			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getDouble("addedDamage") + new TextComponentTranslation("alw.damage_tooltip.name").getFormattedText());
+			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability") + new TextComponentTranslation("alw.dur_tooltip.name").getFormattedText());
 			tooltip.add(TextFormatting.GRAY + "--------------------");
 		}
     }
@@ -136,7 +152,7 @@ public class ItemHotToolHead extends Item implements IHasModel {
         if (this.isInCreativeTab(tab))
         {
         	NBTTagCompound defaultTag = new NBTTagCompound();
-        	defaultTag.setString("Material", "Steel");
+        	defaultTag.setTag("Material", new ItemStack(ItemInit.INGOT_STEEL).serializeNBT());
         	defaultTag.setDouble("addedDamage", 0.0D);
         	defaultTag.setInteger("addedDurability", 0);
         	ItemStack stack6000 = new ItemStack(this, 1, 6000);

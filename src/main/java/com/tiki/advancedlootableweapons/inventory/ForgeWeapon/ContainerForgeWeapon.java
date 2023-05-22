@@ -41,7 +41,7 @@ public class ContainerForgeWeapon extends Container {
     private EntityPlayer player;
     public static final int TOOL_ROD_BUTTON = 98;
     public static final int HAMMER_BUTTON = 99;
-    private IRecipe recipe = null;
+    protected IRecipe recipe = null;
     private InventoryCrafting invCraft = new InventoryCrafting(this, 3, 1);
     
     @SideOnly(Side.CLIENT)
@@ -177,17 +177,16 @@ public class ContainerForgeWeapon extends Container {
 		}
 		recipe = this.findMatchingRecipe(this.invCraft, this.world);
 		
-		if(recipe != null) {
-			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
-			System.out.println("Ingredients:" );
-			for(Ingredient i : recipe.getIngredients()) {
-				System.out.println(Arrays.toString(i.getMatchingStacks()));
-			}
-			System.out.println("Result: " + recipe.getRecipeOutput());
-		}else {
-			System.out.println("Recipe is NULL!");
-		}
-		
+//		if(recipe != null) {
+//			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
+//			System.out.println("Ingredients:" );
+//			for(Ingredient i : recipe.getIngredients()) {
+//				System.out.println(Arrays.toString(i.getMatchingStacks()));
+//			}
+//			System.out.println("Result: " + recipe.getRecipeOutput());
+//		}else {
+//			System.out.println("Recipe is NULL!");
+//		}
 		
 		ItemStack outputSlot = this.inputSlot.getStackInSlot(2);
 		if(recipe != null && outputSlot == ItemStack.EMPTY && this.getCanCraft(this.player)) {
@@ -315,8 +314,6 @@ public class ContainerForgeWeapon extends Container {
     {
         super.onCraftMatrixChanged(inventoryIn);
     }
-    
-    
     
     public void addListener(IContainerListener listener)
     {

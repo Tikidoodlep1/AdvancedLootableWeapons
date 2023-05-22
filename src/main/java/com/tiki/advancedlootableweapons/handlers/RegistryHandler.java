@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
@@ -39,6 +40,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import scala.actors.threadpool.Arrays;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -156,5 +158,6 @@ public class RegistryHandler {
 	
 	public static void serverRegistries(FMLServerStartingEvent event)
 	{
+		Alw.proxy.registerCommands(event);
 	}
 }

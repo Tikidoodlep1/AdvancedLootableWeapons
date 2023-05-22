@@ -26,11 +26,11 @@ public class GuiTanningRack extends GuiContainer
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 6, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(tileName, (this.xSize / 2) - (this.fontRenderer.getStringWidth(tileName) / 2), 10, 4210752);
+		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 9, this.ySize - 97, 4210752);
 	}
 	
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)

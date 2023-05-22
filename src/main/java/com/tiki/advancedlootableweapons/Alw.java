@@ -19,10 +19,12 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -35,6 +37,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import scala.actors.threadpool.Arrays;
 
 //@Mod.EventBusSubscriber
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER)
@@ -112,5 +115,10 @@ public class Alw {
 	@SubscribeEvent
 	public void onModelBake(final ModelBakeEvent event) {
 		proxy.modelBake(event);
+	}
+	
+	@SubscribeEvent
+	public void onTooltipEvent(final ItemTooltipEvent event) {
+		proxy.onTooltip(event);
 	}
 }

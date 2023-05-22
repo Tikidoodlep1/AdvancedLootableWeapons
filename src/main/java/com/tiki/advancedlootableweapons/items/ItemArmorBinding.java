@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,7 +34,7 @@ public class ItemArmorBinding extends ItemBase {
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add(TextFormatting.BLUE + "Extra Durability: " + this.extraDur);
+		tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.armor_binding.bonus_dur.name").getFormattedText() + this.extraDur);
     }
 
 }

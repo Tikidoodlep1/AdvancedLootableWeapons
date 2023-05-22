@@ -27,6 +27,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -46,13 +47,12 @@ public class ToolSpear extends ToolStabSword {
 		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
 			tooltip.add("");
-			tooltip.add(TextFormatting.LIGHT_PURPLE + "Chance to pierce Chain armor when thrown: " + we.getChainPenChance() + "%");
-			tooltip.add(TextFormatting.AQUA + "Chance to pierce Plate armor when thrown: " + we.getPlatePenChance() + "%");
+			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.pierce.thrown_spear").getFormattedText() + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.pierce.thrown_spear").getFormattedText() + we.getPlatePenChance() + "%");
 		}
 	}
 	
-	public EnumAction getItemUseAction(ItemStack stack)
-    {
+	public EnumAction getItemUseAction(ItemStack stack) {
         return EnumAction.BOW;
     }
 	

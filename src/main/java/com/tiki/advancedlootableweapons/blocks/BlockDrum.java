@@ -6,6 +6,10 @@ import java.util.Random;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -78,7 +82,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	        }
 		}
 	}
-	;
+	
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState) {
 		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
@@ -124,8 +128,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
 	{
-		if(!worldIn.isRemote)
-		{
+		if(!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
 			TileEntity te = worldIn.getTileEntity(pos);
 			ItemStack activeStack = playerIn.getHeldItem(hand);
 			
@@ -135,19 +138,21 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 					FluidUtil.interactWithFluidHandler(playerIn, hand, drum);
 					worldIn.notifyBlockUpdate(pos, state, state, 2);
 					drum.onChanged();
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
+					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
 						drum.FluidInteraction(worldIn, pos, playerIn, hand);
 					}
+					return true;
 				}else {
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
+					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
 						drum.EntityInteraction(worldIn, pos, playerIn, hand);
+						return true;
 					}
 				}
 			}
 			
 		}
 		
-		return true;
+		return false;
 	}
 	
 	@Override

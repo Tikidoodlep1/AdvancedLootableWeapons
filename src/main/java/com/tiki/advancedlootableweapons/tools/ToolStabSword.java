@@ -1,6 +1,5 @@
 package com.tiki.advancedlootableweapons.tools;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -12,6 +11,7 @@ import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
@@ -30,16 +30,23 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -52,8 +59,8 @@ public class ToolStabSword extends Item implements IHasModel{
 	private boolean rand;
 	protected double addedDamage;
 	private String type;
-	private static String[] randName1 = new String[] {"Repuslor", "Balmung", "Gram", "Arondight", "Caladbolg", "Chandrahas", "Colada", "Mors", "Durendal", "Ecke", "Hauteclere", "Mimung", "Naegling", "Tizona", "Tyrfing", "Zulfiqar"};
-	private static String[] randName2 = new String[] {"Lucent", "Lambent", "Dark", "Dusk", "Aphotic", "Radiant", "Scintillant", "Vacuous", "Nixing", "Abnegating", "Collector of Heads,", "Triumphant"};
+	private String[] randName1 = new String[] {"alw.weapon_name.repulsor.name", "alw.weapon_name.balmung.name", "alw.weapon_name.gram.name", "alw.weapon_name.arondight.name", "alw.weapon_name.caladbolg.name", "alw.weapon_name.chandrahas.name", "alw.weapon_name.colada.name", "alw.weapon_name.mors.name", "alw.weapon_name.durendal.name", "alw.weapon_name.ecke.name", "alw.weapon_name.hauteclere.name", "alw.weapon_name.mimung.name", "alw.weapon_name.naegling.name", "alw.weapon_name.tizona.name", "alw.weapon_name.tyrfing.name", "alw.weapon_name.zulfiqar.name"};
+	private String[] randName2 = new String[] {"alw.weapon_modifier.lucent.name", "alw.weapon_modifier.lambent.name", "alw.weapon_modifier.dark.name", "alw.weapon_modifier.dusk.name", "alw.weapon_modifier.aphotic.name", "alw.weapon_modifier.radiant.name", "alw.weapon_modifier.scintillant.name", "alw.weapon_modifier.vacuous.name", "alw.weapon_modifier.nixing.name", "alw.weapon_modifier.abnegating.name", "alw.weapon_modifier.collector_of_heads.name", "alw.weapon_modifier.triumphant.name"};
 	private Random randGen = new Random();
 	
 	public ToolStabSword(String name, ToolMaterial material, String type) {
@@ -62,6 +69,7 @@ public class ToolStabSword extends Item implements IHasModel{
 		setCreativeTab(Alw.AlwTab);
 		
 		ItemInit.items.add(this);
+		ItemInit.weaponItems.add(this);
 		
 		this.material = material;
 		this.type = type;
@@ -104,6 +112,24 @@ public class ToolStabSword extends Item implements IHasModel{
 		}
 		newNBT.setInteger("maxDurability", maxDamage);
 		stack.setTagCompound(newNBT);
+	}
+	
+	public void setUnquenched(ItemStack stack) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(!stack.hasTagCompound()) {
+			tag = new NBTTagCompound();
+		}
+		tag.setBoolean("quenched", false);
+		stack.setTagCompound(tag);
+	}
+	
+	public void setQuenched(ItemStack stack) {
+		NBTTagCompound tag = stack.getTagCompound();
+		if(!stack.hasTagCompound()) {
+			tag = new NBTTagCompound();
+		}
+		tag.setBoolean("quenched", true);
+		stack.setTagCompound(tag);
 	}
 	
 	private void getAttributes(String type, ToolMaterial material) {
@@ -155,15 +181,9 @@ public class ToolStabSword extends Item implements IHasModel{
 		float randDamage;
 		double totalDamage;
 		this.rand = randGen.nextBoolean();
-//		NBTTagCompound tag = stack.getTagCompound();
-//		NBTTagCompound newTag = new NBTTagCompound();
-//		if(tag != null) {
-//			if(tag.hasKey("maxDurability", 99)) {
-//				newTag.setInteger("maxDurability", tag.getInteger("maxDurability"));
-//			}
-//		}
-//		stack.setTagCompound(newTag);
+		
 		this.setMaximumDamage(stack, addedDurability);
+		this.setUnquenched(stack);
 		
 		String matName = material.getDisplayName();
 		int index = matName.indexOf("Ingot");
@@ -172,9 +192,9 @@ public class ToolStabSword extends Item implements IHasModel{
 		}
 		
 		if(this.rand == true) {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName2[randGen.nextInt(12)] + " " +  randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(new TextComponentTranslation(randName2[randGen.nextInt(12)]).getFormattedText() + " " +  new TextComponentTranslation(randName1[randGen.nextInt(16)]).getFormattedText() + " (" + this.getItemStackDisplayName(stack) + ")");
 		}else {
-			stack.setStackDisplayName(TextFormatting.AQUA + randName1[randGen.nextInt(16)] + " (" + matName + " "  + this.type.substring(0, 1).toUpperCase() + this.type.substring(1) + ")");
+			stack.setStackDisplayName(new TextComponentTranslation(randName1[randGen.nextInt(16)]).getFormattedText() + " (" + this.getItemStackDisplayName(stack) + ")");
 		}
 		
 		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
@@ -272,7 +292,6 @@ public class ToolStabSword extends Item implements IHasModel{
     {
         return blockIn.getBlock() == Blocks.WEB;
     }
-
 	
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
@@ -321,27 +340,27 @@ public class ToolStabSword extends Item implements IHasModel{
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
 			int plateEffect = (int)Math.ceil(((we.getPlateEffect()*100)/6)-9);
-			tooltip.add(TextFormatting.RED + "Effectiveness against Studded armor: " + studdedEffect + "/8");
-			tooltip.add(TextFormatting.DARK_RED + "Chance to pierce Studded armor: " + we.getStuddedPenChance() + "%");
+			tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.effectiveness.studded.level").getFormattedText() + studdedEffect + "/8");
+			tooltip.add(TextFormatting.DARK_RED + new TextComponentTranslation("alw.effectiveness.studded.pierce").getFormattedText() + we.getStuddedPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.GREEN + "Effectiveness against Chain armor: " + chainEffect + "/8");
-			tooltip.add(TextFormatting.DARK_GREEN + "Chance to pierce Chain armor: " + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("alw.effectiveness.chain.level").getFormattedText() + chainEffect + "/8");
+			tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("alw.effectiveness.chain.pierce").getFormattedText() + we.getChainPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.AQUA + "Effectiveness against Plate armor: " + plateEffect + "/8");
-			tooltip.add(TextFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + we.getPlatePenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.level").getFormattedText() + plateEffect + "/8");
+			tooltip.add(TextFormatting.DARK_BLUE + new TextComponentTranslation("alw.effectiveness.plate.pierce").getFormattedText() + we.getPlatePenChance() + "%");
 		}else if(Keyboard.isKeyDown(run.getKeyCode())) {
 			NBTTagCompound tag = stack.getTagCompound();
 			if(tag != null && tag.hasKey("colors")) {
-				tooltip.add(TextFormatting.RED + "Colors: ");
-				tooltip.add(TextFormatting.LIGHT_PURPLE + "Bottom Outline: " + Integer.toHexString(tag.getIntArray("colors")[0]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + "Top Outline: " +  Integer.toHexString(tag.getIntArray("colors")[1]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + "Middle Lowlight: " +  Integer.toHexString(tag.getIntArray("colors")[2]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + "Middle Highlight: " +  Integer.toHexString(tag.getIntArray("colors")[3]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + "Shiny Highlight: " +  Integer.toHexString(tag.getIntArray("colors")[4]));
+				tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.colors.title").getFormattedText());
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.bot_outline").getFormattedText() + Integer.toHexString(tag.getIntArray("colors")[0]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.top_outline").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[1]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_lowlight").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[2]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_highlight").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[3]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.shine").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[4]));
 			}
 		}else {
-			tooltip.add(TextFormatting.GRAY + "Hold " + sneak.getDisplayName() + " for Effectiveness Information");
-			tooltip.add(TextFormatting.GRAY + "Hold " + run.getDisplayName() + " for Color Information");
+			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + run.getDisplayName() + new TextComponentTranslation("alw.colors.info.name").getFormattedText());
 		}
 	}
 	

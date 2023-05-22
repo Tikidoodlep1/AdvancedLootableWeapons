@@ -2,21 +2,25 @@ package com.tiki.advancedlootableweapons.compat.jei.drum;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.compat.jei.RecipeCategories;
+import com.tiki.advancedlootableweapons.init.BlockInit;
+
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 
 public class DrumRecipeCategory extends AbstractDrumRecipeCategory<DrumRecipe> {
 
 	private final IDrawable background;
 	private final String name;
+	private final IGuiHelper helper;
 	
 	public DrumRecipeCategory(IGuiHelper helper) {
 		super(helper);
+		this.helper = helper;
 		background = helper.createDrawable(TEXTURES, 4, 4, 104, 64);
 		name = "Drum";
 	}
@@ -37,10 +41,10 @@ public class DrumRecipeCategory extends AbstractDrumRecipeCategory<DrumRecipe> {
 		return background;
 	}
 	
-//	@Override
-//	public IDrawable getIcon() {
-//		return ;
-//	}
+	@Override
+	public IDrawable getIcon() {
+		return helper.createDrawableIngredient(new ItemStack(BlockInit.drum));
+	}
 	
 	@Override
 	public String getTitle() {

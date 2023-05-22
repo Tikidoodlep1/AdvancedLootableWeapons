@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumItemRecipe;
+import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 
 import mezz.jei.api.IJeiHelpers;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
@@ -39,7 +43,35 @@ public class DrumRecipeMaker {
     			drumList.add(new ItemStack(BlockInit.drum));
     			stackList.add(drumList);
     			
-    			recipes.add(new DrumRecipe(stackList, irecipe.getRecipeOutput(), ((DrumItemRecipe)irecipe).getTime()));
+    			recipes.add(new DrumRecipe(stackList, irecipe.getRecipeOutput(), ((DrumItemRecipe)irecipe).getTime(), false));
+            }
+            else if(irecipe instanceof DrumQuenchingRecipe)
+            {
+            	List<List<ItemStack>> stackList = new ArrayList<List<ItemStack>>(5);
+    			NonNullList<Ingredient> ingrs = irecipe.getIngredients();
+    			for(Ingredient i : ingrs) {
+    				List<ItemStack> items = new ArrayList<ItemStack>();
+    				for(ItemStack s : i.getMatchingStacks()) {
+    					if(s.getItem() instanceof ItemHotToolHead) {
+    						NBTTagCompound tag = s.hasTagCompound() ? s.getTagCompound() : new NBTTagCompound();
+    						tag.setBoolean("clay", true);
+    						s.setTagCompound(tag);
+    						items.add(s);
+    					}
+    				}
+    				stackList.add(items);
+    			}
+    			List<ItemStack> addList = new ArrayList<ItemStack>();
+    			addList.add(ItemStack.EMPTY);
+    			stackList.add(addList);
+    			List<ItemStack> bucketList = new ArrayList<ItemStack>();
+    			bucketList.add(FluidUtil.getFilledBucket(new FluidStack(((DrumQuenchingRecipe)irecipe).getFluid(), 1000)));
+    			stackList.add(bucketList);
+    			List<ItemStack> drumList = new ArrayList<ItemStack>();
+    			drumList.add(new ItemStack(BlockInit.drum));
+    			stackList.add(drumList);
+    			
+    			recipes.add(new DrumRecipe(stackList, irecipe.getRecipeOutput(), ((DrumQuenchingRecipe)irecipe).getTime(), true));
             }
         }
 		

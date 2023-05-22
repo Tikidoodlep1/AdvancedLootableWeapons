@@ -30,8 +30,8 @@ public class GuiJawCrusher  extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
 	{
 		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawString(tileName, (this.xSize / 2 - this.fontRenderer.getStringWidth(tileName) / 2) + 3, 6, 4210752);
-		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRenderer.drawString(tileName, this.xSize - this.fontRenderer.getStringWidth(tileName) - 8, 9, 4210752);
+		this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 9, this.ySize - 97, 4210752);
 	}
 	
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)

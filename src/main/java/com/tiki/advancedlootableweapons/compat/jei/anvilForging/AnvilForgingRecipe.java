@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tiki.advancedlootableweapons.compat.jei.JEICompat;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
+import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -16,6 +19,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 
 public class AnvilForgingRecipe implements IRecipeWrapper {
@@ -29,7 +33,15 @@ public class AnvilForgingRecipe implements IRecipeWrapper {
 		for(int i = 0; i < this.inputs.size(); i++) {
 			this.inputs.set(i, inputs.get(i));
 		}
-		this.output = output;
+		ItemStack out = output.copy();
+		if(ConfigHandler.ENABLE_QUENCHING && output.getItem() instanceof ToolSlashSword || output.getItem() instanceof ToolStabSword) {
+			for(ItemStack stack : inputs.get(0).getMatchingStacks()) {
+				NBTTagCompound tag = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+				tag.setBoolean("quenched", true);
+				stack.setTagCompound(tag);
+			}
+		}
+		this.output = out;
 		this.exp = exp;
 		this.buttonName = buttonName;
 	}
@@ -54,12 +66,18 @@ public class AnvilForgingRecipe implements IRecipeWrapper {
 		float stringWidth = renderer.getStringWidth("Button: " + this.buttonName) * 0.8F;
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(0.8F, 0.8F, 0.8F);
-		renderer.drawString("Button: " + this.buttonName, (recipeWidth / 2) - (int)(stringWidth / 2), 2, Color.DARK_GRAY.getRGB());
+		renderer.drawString("Button: " + this.buttonName, (recipeWidth / 2) - (int)(stringWidth / 2), 2, Color.GRAY.getRGB());
 		GlStateManager.popMatrix();
 		
 		if(exp > 0){
-			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience", exp);
+			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience") + exp;
 			renderer.drawString(expString, recipeWidth - 26, 48, Color.GRAY.getRGB());
 		}
+		
+		/*
+		if(ConfigHandler.ENABLE_QUENCHING && this.output.getItem() instanceof ToolSlashSword || this.getoutput().getItem() instanceof ToolStabSword) {
+			renderer.drawString("Weapon head must be Quenched!", (recipeWidth / 2) - (renderer.getStringWidth("Weapon head must be Quenched!") / 2), recipeHeight - 9, Color.GRAY.getRGB());
+		}
+		*/
 	}
 }

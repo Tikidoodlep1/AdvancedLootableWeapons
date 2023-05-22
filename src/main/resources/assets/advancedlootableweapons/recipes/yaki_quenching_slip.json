@@ -16,7 +16,7 @@
 		"item": "advancedlootableweapons:powder_charcoal"
     },
     {
-    	"type": "item_nbt",
+    	"type": "minecraft:item_nbt",
     	"item": "forge:bucketFilled",
     	"nbt": {
     		"FluidName": "water",
@@ -25,7 +25,7 @@
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:clay_yaki_ire_slip",
+    "item": "advancedlootableweapons:clay_quenching_slip",
     "count": 3
   }
 }

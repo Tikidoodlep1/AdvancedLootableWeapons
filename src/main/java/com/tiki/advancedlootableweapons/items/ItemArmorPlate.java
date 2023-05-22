@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,9 +25,9 @@ public class ItemArmorPlate extends ItemBase {
 		NBTTagCompound Stacknbt = stack.getTagCompound();
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDurability")) {
-			tooltip.add(TextFormatting.BLUE + "Forging Quality");
+			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forging_quality.name").getFormattedText());
 			tooltip.add(TextFormatting.GRAY + "--------------------");
-			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability")/4 + " Durability");
+			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability")/4 + new TextComponentTranslation("alw.dur_tooltip.name").getFormattedText());
 			tooltip.add(TextFormatting.GRAY + "--------------------");
 		}
     }

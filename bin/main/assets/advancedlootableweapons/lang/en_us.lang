@@ -860,6 +860,9 @@ item.powder_diorite.name=Diorite Powder
 item.brick_granite.name=Granite Brick
 item.clay_granite.name=Granite Clay
 item.powder_granite.name=Granite Powder
+item.powder_charcoal.name=Charcoal Powder
+item.clay_quenching_mix.name=Clay Quenching Mix
+item.clay_quenching_slip.name=Clay Quenching Slip
 item.raw_salt.name=Raw Salt
 item.tanning_knife.name=Tanning Knife
 item.untrimmed_hide.name=Untrimmed Hide
@@ -876,7 +879,7 @@ fluid.milk_of_lime=Milk of Lime
 fluid.magnesium_lactate=Magnesium Lactate
 
 
-container.sharpeningStone=Sharpen Weapon
+container.sharpening_stone=Whetstone
 container.alloy_furnace=Alloy Furnace
 container.forge=Forge
 container.forge2=Advanced Forge
@@ -888,6 +891,9 @@ container.tanning_rack=Tanning Rack
 enchantment.refined=Refined
 
 
+alw.command.materials.use=/materials - Shows all available tool materials for creating custom ALW weapon sets
+
+
 attribute.name.generic.bonusAttackDamage=Bonus Attack Damage
 
 
@@ -896,7 +902,90 @@ itemGroup.alwblockscreativetab=Advanced Lootable Weapons Blocks
 itemGroup.alwtoolheadscreativetab=ALW Hot Weapon Heads
 
 
-item.shadow.drop=Shadows Condensing
-item.sharpening_stone.use=Fine Ginding of Metal
-tile.jaw_crusher.use=Crunching Rocks
-tile.bellows.use=Air Puff
+sound.shadow.drop=Shadows Condensing
+sound.sharpening_stone.use=Fine Ginding of Metal
+sound.jaw_crusher.use=Crunching Rocks
+sound.bellows.use=Air Puff
+sound.quench=Evaporating Water
+
+
+alw.weapon.dagger.name=Dagger
+alw.weapon.kabutowari.name=Kabutowrai
+alw.weapon.talwar.name=Talwar
+alw.weapon.rapier.name=Rapier
+alw.weapon.mace.name=Mace
+alw.weapon.cleaver.name=Cleaver
+alw.weapon.staff.name=Staff
+alw.weapon.longsword.name=Longsword
+alw.weapon.kodachi.name=Kodachi
+alw.weapon.nodachi.name=Nodachi
+alw.weapon.battleaxe.name=Battleaxe
+alw.weapon.zweihander.name=Zweihander
+alw.weapon.sabre.name=Sabre
+alw.weapon.makhaira.name=Makhaira
+alw.weapon.spear.name=Spear
+alw.weapon.chain_ring.name=Chain Ring
+alw.weapon.armor_plate.name=Armor Plate
+alw.button.tool_handle.name=Tool Handle
+alw.button.forge_weapon.name=Forge Weapon
+
+alw.weapon_name.repulsor.name=Repulsor
+alw.weapon_name.balmung.name=Balmung
+alw.weapon_name.gram.name=Gram
+alw.weapon_name.arondight.name=Arondight
+alw.weapon_name.caladbolg.name=Caladbolg
+alw.weapon_name.chandrahas.name=Chandrahas
+alw.weapon_name.colada.name=Colada
+alw.weapon_name.mors.name=Mors
+alw.weapon_name.durendal.name=Durendal
+alw.weapon_name.ecke.name=Ecke
+alw.weapon_name.hauteclere.name=Hauteclere
+alw.weapon_name.mimung.name=Mimung
+alw.weapon_name.naegling.name=Naegling
+alw.weapon_name.tizona.name=Tizona
+alw.weapon_name.tyrfing.name=Tyrfing
+alw.weapon_name.zulfiqar.name=Zulfiqar
+
+alw.weapon_modifier.lucent.name=Lucent
+alw.weapon_modifier.lambent.name=Lambent
+alw.weapon_modifier.dark.name=Dark
+alw.weapon_modifier.dusk.name=Dusk
+alw.weapon_modifier.aphotic.name=Aphotic
+alw.weapon_modifier.radiant.name=Radiant
+alw.weapon_modifier.scintillant.name=Scintillant
+alw.weapon_modifier.vacuous.name=Vacuous
+alw.weapon_modifier.nixing.name=Nixing
+alw.weapon_modifier.abnegating.name=Abnegating
+alw.weapon_modifier.collector_of_heads.name=Collector of Heads,
+alw.weapon_modifier.triumphant.name=Triumphant
+
+alw.effectiveness.studded.level=Effectiveness against Studded armor:
+alw.effectiveness.studded.pierce=Chance to pierce Studded armor:
+alw.effectiveness.chain.level=Effectiveness against Chain armor:
+alw.effectiveness.chain.pierce=Chance to pierce Chain armor:
+alw.effectiveness.chain.thrown_spear=Chance to pierce Chain armor when thrown:
+alw.effectiveness.plate.level=Effectiveness against Plate armor:
+alw.effectiveness.plate.pierce=Chance to pierce Plate armor:
+alw.effectiveness.plate.thrown_spear=Chance to pierce Plate armor when thrown:
+alw.colors.title=Colors:
+alw.colors.bot_outline=Bottom Outline:
+alw.colors.top_outline=Top Outline:
+alw.colors.mid_lowlight=Middle Lowlight:
+alw.colors.mid_highlight=Middle Highlight:
+alw.colors.shine=Shine:
+alw.hold=Hold
+alw.effectiveness.info.name=for Effectiveness Information
+alw.colors.info.name=for Color Information
+
+alw.damage_tooltip.name= Damage
+alw.dur_tooltip.name= Durability
+alw.forging_quality.name=Forging Quality:
+alw.clay.info=Clay blocks can be obtained by placing the respective clay powder block into water in the world.
+alw.clay_cover.name=Clay Covered
+alw.tool_head.quenched.name=Quenched
+alw.tool_head.unquenched.name=Unquenched
+alw.sharpening_stone.tooltip=Right click with this to sharpen your weapons!
+alw.forge_hammer.tooltip=Hit an anvil with me to start forging weapons!
+alw.forge_hammer.config_marker.name=This item has been marked as a valid forge hammer via the Advanced Lootable Weapons config.
+alw.anvil.config_marker.name=This item has been marked as a valid anvil via the Advanced Lootable Weapons config.
+alw.armor_binding.bonus_dur.name=Bonus Durability

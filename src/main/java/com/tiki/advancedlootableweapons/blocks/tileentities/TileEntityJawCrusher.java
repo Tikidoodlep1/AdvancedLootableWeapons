@@ -9,14 +9,13 @@ import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -31,27 +30,41 @@ public class TileEntityJawCrusher extends TileEntity implements ITickable, IInve
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	private Random rand = new Random();
-	private final Container tempContainer = new Container() {
-		@Override
-		public boolean canInteractWith(EntityPlayer playerIn) {
-			return true;
-		}
-	};
 	
 	public boolean crushContents() {
-		tempContainer.putStackInSlot(0, this.inventory.get(0));
-		tempContainer.putStackInSlot(1, this.inventory.get(1));
-		InventoryCrafting craft = new InventoryCrafting(tempContainer, 2, 1);
-		IRecipe recipe = findMatchingRecipe(craft, this.getWorld());
-		NonNullList<ItemStack> leftovers = recipe.getRemainingItems(craft);
+		ShapelessOneSlotRecipes recipe = findMatchingRecipe(this.inventory, this.getWorld());
 		if(recipe != null) {
-			ItemStack result = recipe.getCraftingResult(craft);
+			NonNullList<ItemStack> leftovers = recipe.getRemainingItems(this.inventory);
+			ItemStack result = recipe.getCraftingResult(this.inventory);
 			int count = result.getCount() + rand.nextInt(3) - 1;
+			int cost = 0;
 			result.setCount(count < 1 ? 1 : count);
-			if(result.getItem() == this.inventory.get(1).getItem() && this.inventory.get(1).getCount() + result.getCount() > this.getInventoryStackLimit()) {
-				for(int i = 0; i < this.inventory.size(); i++) {
-					this.inventory.set(i, leftovers.get(i));
+			if((result.getItem() == this.inventory.get(1).getItem() && this.inventory.get(1).getCount() + result.getCount() < this.getInventoryStackLimit()) || this.inventory.get(1) == ItemStack.EMPTY) {
+				for(Ingredient i : recipe.getIngredients()) {
+					for(ItemStack stack : i.getMatchingStacks()) {
+						if(this.inventory.get(0).getItem() == stack.getItem()) {
+							cost = stack.getCount();
+							break;
+						}
+					}
 				}
+				
+				for(int i = 0; i < this.inventory.size(); i++) {
+					if(i == 1) {
+						continue;
+					}
+					
+					if(i == 0 && this.inventory.get(i).getCount() > cost) {
+						this.inventory.get(i).setCount(this.inventory.get(i).getCount() - cost);
+					}else {
+						this.setInventorySlotContents(i, leftovers.get(i));
+					}
+				}
+				
+				if(this.inventory.get(1).getItem() == result.getItem()) {
+					result.setCount(result.getCount() + this.inventory.get(1).getCount());
+				}
+				
 				this.setInventorySlotContents(1, result);
 				return true;
 			}
@@ -61,14 +74,14 @@ public class TileEntityJawCrusher extends TileEntity implements ITickable, IInve
 	}
 	
 	@Nullable
-    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    private ShapelessOneSlotRecipes findMatchingRecipe(NonNullList<ItemStack> craftMatrix, World worldIn)
     {
         for (IRecipe irecipe : CraftingManager.REGISTRY)
         {
             if (irecipe instanceof ShapelessOneSlotRecipes)
             {
-            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.crusher && irecipe.matches(craftMatrix, worldIn)) {
-            		return irecipe;
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.crusher && ((ShapelessOneSlotRecipes)irecipe).matches(craftMatrix, worldIn)) {
+            		return (ShapelessOneSlotRecipes)irecipe;
             	}
             }
         }

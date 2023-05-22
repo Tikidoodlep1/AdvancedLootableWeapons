@@ -8,6 +8,7 @@ import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,10 +44,10 @@ public class ContainerSharpeningStone extends Container{
 	public ContainerSharpeningStone(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
     {
         this.outputSlot = new InventoryCraftResult();
-        this.inputSlot = new InventoryBasic("Sharpening Stone", true, 1);
+        this.inputSlot = new InventoryBasic(I18n.format("container.sharpening_stone"), true, 1);
         this.world = worldIn;
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 43){
+        this.addSlotToContainer(new Slot(this.inputSlot, 0, 45, 19){
         	public boolean isItemValid(ItemStack stack)
             {
         		if(!(playerInventory.getCurrentItem().getItem() instanceof ItemSharpeningStone)) {
@@ -86,7 +87,7 @@ public class ContainerSharpeningStone extends Container{
         	}
         });
         
-        this.addSlotToContainer(new Slot(this.outputSlot, 1, 114, 43)
+        this.addSlotToContainer(new Slot(this.outputSlot, 1, 112, 46)
         {
             public boolean isItemValid(ItemStack stack)
             {

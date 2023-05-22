@@ -1,7 +1,5 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
-import java.util.Random;
-
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -14,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -30,15 +27,8 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	public static final int minTemp = 850;
 	public static final int maxTemp = 1750;
 	private int increaseFrames = 0;
-	private Random rand = new Random();
 	
 	public void bellowsInteraction() {
-		if(this.increaseFrames < 30) {
-			double d0 = (double)pos.getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-	        double d1 = (double)pos.getY() + 1.0D + rand.nextDouble() * 6.0D / 16.0D;
-	        double d2 = (double)pos.getZ() + 0.3D + rand.nextDouble()* 6.0D / 16.0D;
-			this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-		}
 		this.increaseFrames = 60;
 	}
 	
@@ -138,13 +128,13 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		return 64;
 	}
 	
-	public void update() 
-	{	
+	public void update()
+	{
 		if(!this.world.isRemote) {
 			if(currentTemp > minTemp && increaseFrames <= 0) {
-				this.currentTemp -= 0.025D;
+				this.currentTemp -= 0.01875D;
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
-				this.currentTemp += 0.96D;
+				this.currentTemp += 1.078D;
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;

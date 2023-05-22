@@ -102,7 +102,7 @@ public class BlockJawCrusher extends BlockBase implements ITileEntityProvider {
 				TileEntityJawCrusher crusher = ((TileEntityJawCrusher)worldIn.getTileEntity(pos));
 				if(crusher.getStackInSlot(0) != ItemStack.EMPTY && crusher.getStackInSlot(0).getItem() != Items.AIR) {
 					if(crusher.crushContents()) {
-						SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.JAW_CRUSHER, SoundCategory.BLOCKS, pos.getX(), pos.getY(), pos.getZ(), 3.0F, 1.0F);
+						SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.JAW_CRUSHER, SoundCategory.BLOCKS, pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F);
 						playerIn.getServer().addScheduledTask(() -> {soundPacket.processPacket(Minecraft.getMinecraft().getConnection());});
 					}
 				}

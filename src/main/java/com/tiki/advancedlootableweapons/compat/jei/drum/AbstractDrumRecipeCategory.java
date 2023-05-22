@@ -15,6 +15,7 @@ public abstract class AbstractDrumRecipeCategory<T extends IRecipeWrapper> imple
 	protected static final int liquid = 2;
 	protected static final int drum = 3;
 	protected static final int output = 4;
+	protected static final int fire = 5;
 	
 
 	public AbstractDrumRecipeCategory(IGuiHelper helper) {

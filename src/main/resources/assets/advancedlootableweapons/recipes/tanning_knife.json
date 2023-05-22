@@ -3,8 +3,8 @@
 
 	"pattern":
 	[
-		" I",
-		"S"
+		"I ",
+		" S"
 	],
 
 	"key":
@@ -12,7 +12,7 @@
 		"I":
 		{
 			"type": "forge:ore_dict",
-			"ore": "ingotIron"
+			"ore": "cobblestone"
 		},
 		"S":
 		{

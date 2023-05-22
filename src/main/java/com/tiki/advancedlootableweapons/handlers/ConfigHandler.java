@@ -39,6 +39,8 @@ public class ConfigHandler {
 	public static HashSet<String> EXTRA_MATERIALS = new HashSet<String>();
 	public static boolean DISABLE_VANILLA_ARMORS = true;
 	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
+	public static boolean ENABLE_QUENCHING = true;
+	public static boolean ENABLE_REGIONAL_QUENCHING = true;
 	public static float BELLOWS_EXHAUSTION = 0.1F;
 	public static float TOOL_HEAD_HEATING_MULTIPLIER = 1.0F;
 	
@@ -283,7 +285,9 @@ public class ConfigHandler {
 		ENABLE_ARMORS = config.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. If this is disabled, \"Enable Armor Forging\" will also be disabled by default. (True/False)");
 		ENABLE_ARMOR_FORGING = config.getBoolean("Enable Armor Forging", category, true, "Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)");
 		DISABLE_VANILLA_ARMORS = config.getBoolean("Disable Vanilla Armors", category, true, "Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)");
-		ENABLE_ADVANCED_LEATHER_TANNING = config.getBoolean("Enable Advanced Leather Tanning", category, true, "Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)");
+		ENABLE_ADVANCED_LEATHER_TANNING = config.getBoolean("Enable Advanced Leather Tanning", category, true, "Enable the advanced leather tanning process. This entails needing some way to transfer fluids. (True/False)");
+		ENABLE_QUENCHING = config.getBoolean("Enable Quenching", category, true, "Enable or Disable quenching of weapons. (True/False)");
+		ENABLE_REGIONAL_QUENCHING = config.getBoolean("Enable Regional Quenching", category, true, "Enable or Disable regional quenching techniques. Ex. Should the Kabutowari use clay tempering and the longsword traditional water quenching? (True/False)");
 		ENABLE_DAGGERS = config.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = config.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");
 		ENABLE_RAPIERS = config.getBoolean("Enable Rapiers", category, true, "Enable or disable rapiers in-game. (True/False)");

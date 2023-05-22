@@ -1,8 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
 
-import java.util.Random;
-
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
@@ -16,7 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +33,6 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	public static final int minTemp = 850;
 	public static final int maxTemp = 2250;
 	private int increaseFrames = 0;
-	private Random rand = new Random();
 
 	public TileEntityForge2 getMainTE(IBlockAccess world, BlockPos pos) {
 		if(mainTE == null) {
@@ -56,12 +52,6 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	
 	public void bellowsInteraction(IBlockAccess world, BlockPos pos) {
 		if(mainTE == this) {
-			if(this.increaseFrames < 30) {
-				double d0 = (double)pos.getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-		        double d1 = (double)pos.getY() + 1.0D + rand.nextDouble() * 6.0D / 16.0D;
-		        double d2 = (double)pos.getZ() + 0.3D + rand.nextDouble()* 6.0D / 16.0D;
-				this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-			}
 			this.increaseFrames = 60;
 			}else {
 				getMainTE(world, pos).bellowsInteraction(world, pos);
@@ -241,13 +231,13 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		return 64;
 	}
 	
-	public void update() 
+	public void update()
 	{
 		if(mainTE == this && !this.world.isRemote) {
 			if(currentTemp > minTemp && this.increaseFrames <= 0) {
-				this.currentTemp -= 0.025D;
+				this.currentTemp -= 0.01875D;
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
-				this.currentTemp += 0.96D;
+				this.currentTemp += 1.078D;
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;

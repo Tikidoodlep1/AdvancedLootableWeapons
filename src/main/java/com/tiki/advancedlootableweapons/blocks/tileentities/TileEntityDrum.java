@@ -1,13 +1,20 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
-import java.util.Arrays;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.handlers.SoundHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.recipes.DrumItemRecipe;
+import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
@@ -15,13 +22,17 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketParticles;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -42,7 +53,9 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	private String customName;
 	private int progress = 0;
-	private DrumItemRecipe activeRecipe = null;
+	private boolean canQuench = false;
+	private IRecipe activeRecipe = null;
+	private Random rand = new Random();
 	private Container tempContainer = new Container() {
 		@Override
 		public boolean canInteractWith(EntityPlayer playerIn) {
@@ -59,8 +72,9 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	
 	public boolean EntityInteraction(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand) {
 		ItemStack activeStack = playerIn.getHeldItem(hand);
+		
 		if(!playerIn.isSneaking() && activeStack != ItemStack.EMPTY) {
-			if(this.inventory.get(ADDITIVE_SLOT).isEmpty()) {
+			if(this.inventory.get(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof ItemHotToolHead)) {
 				this.inventory.set(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
 				activeStack.shrink(1);
 			}else if(this.inventory.get(INPUT_SLOT).isEmpty()) {
@@ -93,24 +107,16 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					this.onChanged();
 				}
 			}
+			
+			this.canQuench = worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
+			
 			for(int i = 0; i < 3; i++) {
 				craft.setInventorySlotContents(i, this.inventory.get(i));
 			}
 		}
 		
 		if(this.activeRecipe == null && this.getTank().getFluid() != null && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY && this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
-			DrumItemRecipe recipe = this.findMatchingRecipe(craft, this.getWorld());
-
-			if(recipe != null) {
-				System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
-				System.out.println("Ingredients:" );
-				for(Ingredient i : recipe.getIngredients()) {
-					System.out.println(Arrays.toString(i.getMatchingStacks()));
-				}
-				System.out.println("Result: " + recipe.getRecipeOutput());
-			}else {
-				System.out.println("Recipe is NULL!");
-			}
+			IRecipe recipe = this.findMatchingRecipe(craft, this.getWorld());
 			
 			
 			if(recipe != null) {
@@ -275,11 +281,26 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	public void update()
 	{
 		if(!this.world.isRemote && this.activeRecipe != null) {
-			++this.progress;
+			if(this.activeRecipe instanceof DrumQuenchingRecipe && this.canQuench) {
+				++this.progress;
+				NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
+				if(this.progress % 2 == 0) {
+					SPacketParticles particlePacket = new SPacketParticles(EnumParticleTypes.SPIT, false, this.pos.getX() + 0.5f + (rand.nextFloat() - 0.5f), this.pos.getY() + 0.85f + (rand.nextFloat() - 0.5f), this.pos.getZ() + 0.5f + (rand.nextFloat() - 0.5f), 0f, 0.0f, 0f, 0.01f, 1);
+					Minecraft.getMinecraft().addScheduledTask(() -> particlePacket.processPacket(clientHandler));
+				}
+				if(progress == 6) {
+					SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.QUENCH, SoundCategory.BLOCKS, this.getPos().getX() + 0.5, this.getPos().getY(), this.getPos().getZ() + 0.5, 1.0f, 1.0f);
+					Minecraft.getMinecraft().addScheduledTask(() -> soundPacket.processPacket(clientHandler));
+				}
+			}else if(!this.canQuench) {
+				this.canQuench = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
+			}else {
+				++this.progress;
+			}
 			
-			if(this.progress >= this.activeRecipe.getTime()) {
+			if(this.activeRecipe instanceof DrumItemRecipe && this.progress >= ((DrumItemRecipe)this.activeRecipe).getTime()) {
 				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
-					int activeInputCount = this.activeRecipe.getInputCount(craft);
+					int activeInputCount = ((DrumItemRecipe)this.activeRecipe).getInputCount(craft);
 					int outputCount = (64 - this.inventory.get(OUTPUT_SLOT).getCount()) / this.activeRecipe.getCraftingResult(craft).getCount();
 					int inputCount = this.inventory.get(INPUT_SLOT).getCount() / activeInputCount;
 					int recipeCount = inputCount > outputCount ? outputCount : inputCount;
@@ -291,6 +312,13 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 						this.inventory.get(INPUT_SLOT).setCount(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount));
 						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
 					}
+					this.activeRecipe = null;
+					this.progress = 0;
+				}
+			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && this.progress >= ((DrumQuenchingRecipe)this.activeRecipe).getTime()) {
+				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY && this.canQuench) {
+					this.inventory.set(OUTPUT_SLOT, this.activeRecipe.getCraftingResult(craft));
+					this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 					this.activeRecipe = null;
 					this.progress = 0;
 				}
@@ -315,15 +343,18 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	}
 	
 	@Nullable
-    private DrumItemRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
-    {
-        for (IRecipe irecipe : CraftingManager.REGISTRY)
-        {
-            if (irecipe instanceof DrumItemRecipe)
-            {
-            	System.out.println("Recipe Matches : " + irecipe.matches(craftMatrix, worldIn) + "Recipe fluid: " + ((DrumItemRecipe)irecipe).getFluid().getFluid().getName() + ", Tank Fluid: " + this.getTank().getFluid().getFluid().getName());
+    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn) {
+        for (IRecipe irecipe : CraftingManager.REGISTRY) {
+            if (irecipe instanceof DrumItemRecipe) {
+            	//System.out.println("Recipe Matches : " + irecipe.matches(craftMatrix, worldIn) + ", Recipe fluid: " + ((DrumItemRecipe)irecipe).getFluid().getFluid().getName() + ", Tank Fluid: " + this.getTank().getFluid().getFluid().getName());
             	if(((DrumItemRecipe)irecipe).getFluid().getFluid() == this.getTank().getFluid().getFluid() && irecipe.matches(craftMatrix, worldIn)) {
-            		return (DrumItemRecipe)irecipe;
+            		return irecipe;
+            	}
+            }else if (irecipe instanceof DrumQuenchingRecipe && ConfigHandler.ENABLE_QUENCHING) {
+            	//System.out.println("Quenching Recipe Matches : " + irecipe.matches(craftMatrix, worldIn) + ", Recipe fluid: " + ((DrumQuenchingRecipe)irecipe).getFluid().getFluid().getName() + ", Tank Fluid: " + this.getTank().getFluid().getFluid().getName());
+            	if(((DrumQuenchingRecipe)irecipe).getFluid().getFluid() == this.getTank().getFluid().getFluid() && irecipe.matches(craftMatrix, worldIn)) {
+            		this.canQuench = worldIn.getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
+            		return irecipe;
             	}
             }
         }

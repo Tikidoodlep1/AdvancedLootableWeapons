@@ -17,6 +17,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -65,6 +66,6 @@ public class ToolForgeHammer extends Item implements IHasModel {
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add(TextFormatting.BLUE + "Hit an anvil with me to start forging weapons!");
+		tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forge_hammer.tooltip").getFormattedText());
     }
 }

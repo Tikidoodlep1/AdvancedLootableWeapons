@@ -188,8 +188,8 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 	}
 	
 	private ItemStack getModifiedOutput() {
-		System.out.println("Material Registry Name: " + this.material.getItem().getRegistryName());
-		System.out.println("Forge Registry Contains " + (ModInfo.ID + ":armor_plate_" + material.getItem().getRegistryName().getResourcePath()) + ": " + (ForgeRegistries.ITEMS.containsKey(new ResourceLocation(ModInfo.ID + ":armor_plate_" + material.getItem().getRegistryName().getResourcePath()))) );
+//		System.out.println("Material Registry Name: " + this.material.getItem().getRegistryName());
+//		System.out.println("Forge Registry Contains " + (ModInfo.ID + ":armor_plate_" + material.getItem().getRegistryName().getResourcePath()) + ": " + (ForgeRegistries.ITEMS.containsKey(new ResourceLocation(ModInfo.ID + ":armor_plate_" + material.getItem().getRegistryName().getResourcePath()))) );
 		if(material != null && material.getItem().getRegistryName().getResourceDomain().equals("advancedlootableweapons") || material.getItem() == Items.IRON_INGOT) {
 			if(material.getItem() == ItemInit.INGOT_BRONZE) {
 				return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModInfo.ID + ":armor_plate_bronze")));

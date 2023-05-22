@@ -35,7 +35,7 @@ private final TileEntityJawCrusher tileentity;
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 1, 108, 45) {
+		this.addSlotToContainer(new Slot(tileEntityJawCrusher, 1, 107, 45) {
 			public boolean isItemValid(ItemStack stack) {
 				return false;
 			}
@@ -108,7 +108,7 @@ private final TileEntityJawCrusher tileentity;
             
             if (index == 0 || index == 1)
             {
-                if (!this.mergeItemStack(itemstack1, 1, 38, true))
+                if (!this.mergeItemStack(itemstack1, 2, 38, true))
                 {
                     return ItemStack.EMPTY;
                 }
@@ -121,7 +121,7 @@ private final TileEntityJawCrusher tileentity;
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 1, 38, false))
+            else if (!this.mergeItemStack(itemstack1, 2, 38, false))
             {
                 return ItemStack.EMPTY;
             }

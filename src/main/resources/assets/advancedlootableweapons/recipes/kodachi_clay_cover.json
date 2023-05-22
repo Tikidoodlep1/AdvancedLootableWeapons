@@ -1,0 +1,21 @@
+{
+	"type": "advancedlootableweapons:clay_cover",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:kodachi_hot_tool_head_2",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:clay_quenching_mix"
+		},
+		{
+			"item": "advancedlootableweapons:clay_quenching_slip"
+		}
+	],
+  
+  	"result": {
+    	"item": "advancedlootableweapons:kodachi_hot_tool_head_2",
+    	"data": 0
+  	}
+}

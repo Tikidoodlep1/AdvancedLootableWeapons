@@ -1,0 +1,11 @@
+{	
+	"type": "advancedlootableweapons:quenching",
+	
+	"input": {
+		"item": "advancedlootableweapons:cleaver_hot_tool_head",
+		"data": 32767
+	},
+	"fluid": "water",
+	"ticks": 50,
+	"clay": false
+}

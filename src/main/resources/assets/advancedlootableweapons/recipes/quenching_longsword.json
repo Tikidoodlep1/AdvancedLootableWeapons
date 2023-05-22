@@ -1,0 +1,11 @@
+{	
+	"type": "advancedlootableweapons:quenching",
+	
+	"input": {
+		"item": "advancedlootableweapons:longsword_hot_tool_head_4",
+		"data": 32767
+	},
+	"fluid": "water",
+	"ticks": 50,
+	"clay": false
+}

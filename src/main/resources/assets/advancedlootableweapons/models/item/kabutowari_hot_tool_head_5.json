@@ -6,6 +6,7 @@
     "overrides": [
         { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_hot_5" },
         { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_warm_5" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_cool_5" }
+        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/kabutowari_hot_tool_head_cool_5" },
+        { "predicate": { "damage": 3 }, "model": "advancedlootableweapons:item/kabutowari_clay_covered" }
     ]
 }

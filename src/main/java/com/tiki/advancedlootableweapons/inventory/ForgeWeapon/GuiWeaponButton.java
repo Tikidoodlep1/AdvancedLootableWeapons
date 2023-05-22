@@ -48,7 +48,7 @@ public class GuiWeaponButton extends GuiButton{
 	}
 	
 	private void createTimer() {
-		Timer t = new Timer("buttonCD");
+		Timer t = new Timer("ALWCoolDowns");
 		t.schedule(new TimerTask() {
 			@Override
 			public void run() {

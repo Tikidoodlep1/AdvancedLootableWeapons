@@ -6,6 +6,7 @@
     "overrides": [
         { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/makhaira_hot_tool_head_hot_3" },
         { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/makhaira_hot_tool_head_warm_3" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/makhaira_hot_tool_head_cool_3" }
+        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/makhaira_hot_tool_head_cool_3" },
+        { "predicate": { "damage": 3 }, "model": "advancedlootableweapons:item/makhaira_clay_covered" }
     ]
 }

@@ -25,9 +25,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiSharpeningStone extends GuiContainer implements IContainerListener{
 	
-		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/sharpening_stone.png");
+		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/sharpening_stone_new.png");
 	    private final ContainerSharpeningStone stone;
 	    public ItemSharpeningStone item;
+	    private double t = 0;
 
 	    public GuiSharpeningStone(InventoryPlayer inventoryIn, World worldIn)
 	    {
@@ -40,39 +41,31 @@ public class GuiSharpeningStone extends GuiContainer implements IContainerListen
 	        }
 	    }
 
-
 	    public void initGui()
 	    {
 	        super.initGui();
-	        Keyboard.enableRepeatEvents(true);
 	        this.inventorySlots.removeListener(this);
 	        this.inventorySlots.addListener(this);
 	    }
 
-
 	    public void onGuiClosed()
 	    {
 	        super.onGuiClosed();
-	        Keyboard.enableRepeatEvents(false);
 	        this.inventorySlots.removeListener(this);
 	    }
-
 
 	    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	    {
 	        GlStateManager.disableLighting();
 	        GlStateManager.disableBlend();
-	        this.fontRenderer.drawString(I18n.format("container.sharpeningStone"), 50, 3, 4210752);
-
+	        this.fontRenderer.drawString(I18n.format("container.sharpening_stone"), (this.xSize / 2) - (this.fontRenderer.getStringWidth(I18n.format("container.sharpening_stone")) / 2), 3, 4210752);
 	        GlStateManager.enableLighting();
 	    }
-
 
 	    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
 	    {
 	        super.mouseClicked(mouseX, mouseY, mouseButton);
 	    }
-
 
 	    public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	    {
@@ -83,7 +76,6 @@ public class GuiSharpeningStone extends GuiContainer implements IContainerListen
 	        GlStateManager.disableBlend();
 	    }
 
-
 	    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	    {
 	        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -92,25 +84,25 @@ public class GuiSharpeningStone extends GuiContainer implements IContainerListen
 	        int i = (this.width - this.xSize) / 2;
 	        int j = (this.height - this.ySize) / 2;
 	        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-	        this.drawTexturedModalRect(i + 59, j + 20, 0, this.ySize + (this.stone.getSlot(0).getHasStack() ? 0 : 16), 110, 16);
-
-	        if (this.stone.getSlot(0).getHasStack() && !this.stone.getSlot(2).getHasStack())
-	        {
-	            this.drawTexturedModalRect(i + 99, j + 45, this.xSize, 0, 28, 21);
+	        
+	        if(this.stone.getSlot(0).getHasStack() && t >= 0.0) {
+	        	int w = (int)(89 * Math.pow(t, 2));
+		        this.drawTexturedModalRect(this.guiLeft + 75, this.guiTop + 10, 0, 166, w, 30);
+	        }
+	        t += partialTicks / 10;
+	        if(t > 1.2) {
+	        	t = -0.9;
 	        }
 	    }
-
 
 	    public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)
 	    {
 	        this.sendSlotContents(containerToSend, 0, containerToSend.getSlot(0).getStack());
 	    }
 
-
 	    public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack)
 	    {
 	    }
-
 
 	    public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue)
 	    {

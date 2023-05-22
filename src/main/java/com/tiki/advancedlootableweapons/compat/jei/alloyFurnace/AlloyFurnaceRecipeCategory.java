@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.compat.jei.alloyFurnace;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.compat.jei.RecipeCategories;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -9,16 +10,20 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class AlloyFurnaceRecipeCategory extends AbstractAlloyFurnaceRecipeCategory<AlloyFurnaceRecipe>{
 
 	private final IDrawable background;
 	private final String name;
+	private final IGuiHelper helper;
 	
 	public AlloyFurnaceRecipeCategory(IGuiHelper helper) {
 		super(helper);
+		this.helper = helper;
 		background = helper.createDrawable(TEXTURES, 40, 12, 97, 63);
-		name = "Alloy Furnace";
+		name = new TextComponentTranslation("tile.alloy_furnace.name").getFormattedText();
 	}
 	
 	@Override
@@ -29,6 +34,11 @@ public class AlloyFurnaceRecipeCategory extends AbstractAlloyFurnaceRecipeCatego
 		stacks.init(input3, true, 16, 41);
 		stacks.init(output, false, 75, 23);
 		stacks.set(ingredients);
+	}
+	
+	@Override
+	public IDrawable getIcon() {
+		return helper.createDrawableIngredient(new ItemStack(BlockInit.alloy_furnace));
 	}
 
 	@Override

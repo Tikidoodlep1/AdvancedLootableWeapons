@@ -2,6 +2,8 @@ package com.tiki.advancedlootableweapons.blocks;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
@@ -26,6 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
@@ -117,17 +120,30 @@ public class BlockBellows extends BlockBase {
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
-		
-		if(!worldIn.isRemote) {			
+		if(!worldIn.isRemote) {
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
 			if(te instanceof TileEntityForge) {
-				((TileEntityForge)te).bellowsInteraction();
+				((TileEntityForge)te).bellowsInteraction();				
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 			}else if(te instanceof TileEntityForge2) {
-				((TileEntityForge2)te).bellowsInteraction(worldIn, pos);
+				((TileEntityForge2)te).bellowsInteraction(worldIn, pos);								
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 			}
+		}else {
+			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
+			Timer t = new Timer("ALWCoolDowns");
+			t.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					Random rand = new Random();
+					double d0 = pos.offset(state.getValue(FACING)).getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+			        double d1 = pos.offset(state.getValue(FACING)).getY() + 0.8D + rand.nextDouble() * 6.0D / 16.0D;
+			        double d2 = pos.offset(state.getValue(FACING)).getZ() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + (rand.nextDouble() / 2), d1, d2, 0.0D, 0.0D, 0.0D);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+				}
+			}, 500);
+			
 		}
 		return true;
 	}

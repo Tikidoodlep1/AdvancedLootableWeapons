@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
@@ -146,7 +147,13 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		if(this.inputs.get(0) != Ingredient.EMPTY) {
 			for(ItemStack stack : this.inputs.get(0).getMatchingStacks()) {
 				if(input1.getItem() == stack.getItem()) {
-					match1 = true;
+					if(ConfigHandler.ENABLE_QUENCHING) {
+						if(input1.hasTagCompound() && input1.getTagCompound().getBoolean("quenched")) {
+							match1 = true;
+						}
+					}else {
+						match1 = true;
+					}
 					break;
 				}
 			}
@@ -198,7 +205,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		System.out.println("Match1: " + match1 + ", Match2: " + match2 + ", matsMatch: " + matsMatch);
+		//System.out.println("Match1: " + match1 + ", Match2: " + match2 + ", matsMatch: " + matsMatch);
 		return match1 && match2 && matsMatch;
 	}
 	
@@ -209,7 +216,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		NBTTagCompound input1Tag = input1.getTagCompound();
 		NBTTagCompound input2Tag = input2.getTagCompound();
 		this.setMaterial(input1, input2);
-		System.out.println("Material: " + this.material);
+		//System.out.println("Material: " + this.material);
 		ItemStack result = this.getModifiedOutput();
 		double addedDamage = 0D;
 		int addedDur = 0;

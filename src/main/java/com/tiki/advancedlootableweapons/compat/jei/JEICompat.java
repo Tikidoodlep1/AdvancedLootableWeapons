@@ -15,7 +15,6 @@ import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeMa
 import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeMaker;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
@@ -33,12 +32,10 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.util.text.TextComponentTranslation;
 
-@SuppressWarnings("deprecation")
 @JEIPlugin
 public class JEICompat implements IModPlugin{
 
@@ -47,7 +44,12 @@ public class JEICompat implements IModPlugin{
 		final IJeiHelpers helpers = registry.getJeiHelpers();
 		final IGuiHelper gui = helpers.getGuiHelper();
 		
-		registry.addRecipeCategories(new AlloyFurnaceRecipeCategory(gui), new AnvilForgingRecipeCategory(gui), new JawCrusherRecipeCategory(gui), new DrumRecipeCategory(gui), new TanningRackRecipeCategory(gui));
+		registry.addRecipeCategories(
+				new AlloyFurnaceRecipeCategory(gui), 
+				new AnvilForgingRecipeCategory(gui), 
+				new JawCrusherRecipeCategory(gui), 
+				new DrumRecipeCategory(gui), 
+				new TanningRackRecipeCategory(gui));
 	}
 	
 	@Override
@@ -55,7 +57,7 @@ public class JEICompat implements IModPlugin{
 		final IJeiHelpers jeiHelpers = registry.getJeiHelpers();
 		final IRecipeTransferRegistry recipeTransfer = registry.getRecipeTransferRegistry();
 		//final IIngredientRegistry ingredientRegistry = registry.getIngredientRegistry();
-				
+		
 		registry.addRecipes(AlloyFurnaceRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.ALLOYFURNACE);
 		registry.addRecipeClickArea(GuiAlloyFurnace.class, 58, 37, 14, 14, RecipeCategories.ALLOYFURNACE);
 		recipeTransfer.addRecipeTransferHandler(ContainerAlloyFurnace.class, RecipeCategories.ALLOYFURNACE, 0, 3, 3, 36);
@@ -78,14 +80,16 @@ public class JEICompat implements IModPlugin{
 		infoList.add(new ItemStack(BlockInit.clay_diorite));
 		infoList.add(new ItemStack(BlockInit.clay_granite));
 		registry.addIngredientInfo(infoList, VanillaTypes.ITEM, "alw.clay.info");
+		
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.alloy_furnace), RecipeCategories.ALLOYFURNACE);
+		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL), RecipeCategories.ANVILFORGING);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.crusher), RecipeCategories.JAWCRUSHER);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.drum), RecipeCategories.DRUM);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.tanning_rack), RecipeCategories.TANNINGRACK);
 	}
 	
 	public static String translateToLocal(String key) {
-		if(I18n.canTranslate(key)) {
-			return I18n.translateToLocal(key);
-		}else {
-			return I18n.translateToFallback(key);
-		}
+		return new TextComponentTranslation(key).getFormattedText();
 	}
 	
 	public static String translateToLocalFormatted(String key, Object... format) {

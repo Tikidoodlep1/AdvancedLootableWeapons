@@ -2,9 +2,11 @@ package com.tiki.advancedlootableweapons.proxy;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Arrays;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.GlobalDropsHandler;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
@@ -20,8 +22,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CommonProxy {
 	
@@ -40,6 +44,12 @@ public class CommonProxy {
 	public void modelBake(final ModelBakeEvent event) {}
 	
 	public void registerCustomModelLoaders() {};
+	
+	public void onTooltip(ItemTooltipEvent event) {}
+	
+	public void registerCommands(final FMLServerStartingEvent e) {
+		e.registerServerCommand(new SeeToolMatsCommand());
+	}
 	
 	public void onBlockAttemptBreak(final LeftClickBlock event){
 		BlockPos blockPos = event.getPos();
@@ -96,4 +106,5 @@ public class CommonProxy {
 			drops.add(new ItemStack(ItemInit.SHARD_OBSIDIAN, count));
 		}
 	}
+	
 }

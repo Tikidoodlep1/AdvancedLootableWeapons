@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -23,35 +23,38 @@ import net.minecraft.util.ResourceLocation;
 public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 		
 		private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon_new.png");
-	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, "Dagger", 0, 0);
-	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 20, 20, "Kabutowari", 21, 0);
-	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 20, 20, "Talwar", 61, 0);
-	    private final GuiWeaponButton rapierButton = new GuiWeaponButton(3, 30, 70, 20, 20, "Rapier", 41, 0);
-	    private final GuiWeaponButton maceButton = new GuiWeaponButton(4, 60, 70, 20, 20, "Mace", 0, 20);
-	    private final GuiWeaponButton cleaverButton = new GuiWeaponButton(5, 90, 70, 20, 20, "Cleaver", 21, 20);
-	    private final GuiWeaponButton staffButton = new GuiWeaponButton(6, 30, 100, 20, 20, "Staff", 41, 20);
-	    private final GuiWeaponButton longswordButton = new GuiWeaponButton(7, 60, 100, 20, 20, "Longsword", 61, 20);
-	    private final GuiWeaponButton kodachiButton = new GuiWeaponButton(8, 90, 100, 20, 20, "Kodachi", 0, 40);
-	    private final GuiWeaponButton battleaxeButton = new GuiWeaponButton(9, 30, 130, 20, 20, "Battleaxe", 21, 40);
-	    private final GuiWeaponButton zweihanderButton = new GuiWeaponButton(10, 60, 130, 20, 20, "Zweihander", 41, 40);
-	    private final GuiWeaponButton nodachiButton = new GuiWeaponButton(11, 90, 130, 20, 20, "Nodachi", 61, 40);
-	    private final GuiWeaponButton sabreButton = new GuiWeaponButton(12, 30, 160, 20, 20, "Sabre", 0, 60);
-	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, "Makhaira", 21, 60);
-	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, "Spear", 41, 60);
-	    private final GuiWeaponButton chainButton = new GuiWeaponButton(15, 60, 190, 20, 20, "Chain", 21, 80);
-	    private final GuiWeaponButton plateButton = new GuiWeaponButton(16, 90, 190, 20, 20, "Armor Plate", 41, 80);
+	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 20, 20, I18n.format("alw.weapon.dagger.name"), 0, 0);
+	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 20, 20, I18n.format("alw.weapon.kabutowari.name"), 21, 0);
+	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 20, 20, I18n.format("alw.weapon.talwar.name"), 61, 0);
+	    private final GuiWeaponButton rapierButton = new GuiWeaponButton(3, 30, 70, 20, 20, I18n.format("alw.weapon.rapier.name"), 41, 0);
+	    private final GuiWeaponButton maceButton = new GuiWeaponButton(4, 60, 70, 20, 20, I18n.format("alw.weapon.mace.name"), 0, 20);
+	    private final GuiWeaponButton cleaverButton = new GuiWeaponButton(5, 90, 70, 20, 20, I18n.format("alw.weapon.cleaver.name"), 21, 20);
+	    private final GuiWeaponButton staffButton = new GuiWeaponButton(6, 30, 100, 20, 20, I18n.format("alw.weapon.staff.name"), 41, 20);
+	    private final GuiWeaponButton longswordButton = new GuiWeaponButton(7, 60, 100, 20, 20, I18n.format("alw.weapon.longsword.name"), 61, 20);
+	    private final GuiWeaponButton kodachiButton = new GuiWeaponButton(8, 90, 100, 20, 20, I18n.format("alw.weapon.kodachi.name"), 0, 40);
+	    private final GuiWeaponButton battleaxeButton = new GuiWeaponButton(9, 30, 130, 20, 20, I18n.format("alw.weapon.battleaxe.name"), 21, 40);
+	    private final GuiWeaponButton zweihanderButton = new GuiWeaponButton(10, 60, 130, 20, 20, I18n.format("alw.weapon.zweihander.name"), 41, 40);
+	    private final GuiWeaponButton nodachiButton = new GuiWeaponButton(11, 90, 130, 20, 20, I18n.format("alw.weapon.nodachi.name"), 61, 40);
+	    private final GuiWeaponButton sabreButton = new GuiWeaponButton(12, 30, 160, 20, 20, I18n.format("alw.weapon.sabre.name"), 0, 60);
+	    private final GuiWeaponButton makhairaButton = new GuiWeaponButton(13, 60, 160, 20, 20, I18n.format("alw.weapon.makhaira.name"), 21, 60);
+	    private final GuiWeaponButton spearButton = new GuiWeaponButton(14, 90, 160, 20, 20, I18n.format("alw.weapon.spear.name"), 41, 60);
+	    private final GuiWeaponButton chainButton = new GuiWeaponButton(15, 60, 190, 20, 20, I18n.format("alw.weapon.chain_ring.name"), 21, 80);
+	    private final GuiWeaponButton plateButton = new GuiWeaponButton(16, 90, 190, 20, 20, I18n.format("alw.weapon.armor_plate.name"), 41, 80);
 	    
-	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 30, 190, 20, 20, "Tool Handle", 61, 60);
-	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, 220, 20, 20, "Forge Weapon", 0, 80);
+	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 30, 190, 20, 20, I18n.format("alw.button.tool_handle.name"), 61, 60);
+	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, 220, 20, 20, I18n.format("alw.button.forge_weapon.name"), 0, 80);
 	    private int buttonPressed;
-	    private final ContainerForgeWeapon container;
+	    private Container container;
 	    private final InventoryPlayer player;
 	    
-	    public GuiForgeWeapon(InventoryPlayer inventoryIn, ContainerForgeWeapon container)
+	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container)
 	    {
 	    	super(new ContainerForgeWeapon(inventoryIn, inventoryIn.player.getEntityWorld(), inventoryIn.player));
 	        this.container = container;
 	        this.player = inventoryIn;
+//	        if(this.player.player.openContainer instanceof ContainerForgeWeapon) {
+//	        	this.player.player.openContainer.addListener(this);
+//	        }
 	    }
 	    
 	    @Override
@@ -134,7 +137,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	        
 	        this.renderHoveredToolTip(mouseX, mouseY);
 	        
-	        //GlStateManager.disableLighting();
+	        GlStateManager.enableLighting();
 	        GlStateManager.disableBlend();
 	    }
 	    
@@ -148,6 +151,10 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 	        
 	        this.drawButtons(mouseX, mouseY, partialTicks);
+	        
+//	        if(ConfigHandler.ENABLE_QUENCHING && this.container.getInventory().get(0).hasTagCompound() && !this.container.getInventory().get(0).getTagCompound().getBoolean("quenched")) {
+//	        	this.drawHoveringText("Weapon head must be quenched!", this.guiLeft + 65, this.guiTop + 28);
+//	        }
 	    }
 	    
 	    public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList)
@@ -164,6 +171,14 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    }
 	    
 	    public void sendAllWindowProperties(Container containerIn, IInventory inventory)
-	    {
+	    {	    	
+//	    	this.container = containerIn;
+//	    	for(int i = 0; i < this.inv.size(); i++) {
+//	    		this.inv.set(i, inventory.getStackInSlot(i));
+//	    	}
+//	    	
+//	    	for(int k = 0; k < this.container.getInventory().size(); k++) {
+//	        	System.out.println("Slot " + k + ": " + this.container.getInventory().get(k).getDisplayName());
+//	        }
 	    }
 }
