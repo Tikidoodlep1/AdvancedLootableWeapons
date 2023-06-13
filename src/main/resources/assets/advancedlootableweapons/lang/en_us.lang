@@ -929,6 +929,7 @@ alw.weapon.armor_plate.name=Armor Plate
 alw.button.tool_handle.name=Tool Handle
 alw.button.forge_weapon.name=Forge Weapon
 
+
 alw.weapon_name.repulsor.name=Repulsor
 alw.weapon_name.balmung.name=Balmung
 alw.weapon_name.gram.name=Gram
@@ -946,6 +947,7 @@ alw.weapon_name.tizona.name=Tizona
 alw.weapon_name.tyrfing.name=Tyrfing
 alw.weapon_name.zulfiqar.name=Zulfiqar
 
+
 alw.weapon_modifier.lucent.name=Lucent
 alw.weapon_modifier.lambent.name=Lambent
 alw.weapon_modifier.dark.name=Dark
@@ -958,6 +960,7 @@ alw.weapon_modifier.nixing.name=Nixing
 alw.weapon_modifier.abnegating.name=Abnegating
 alw.weapon_modifier.collector_of_heads.name=Collector of Heads,
 alw.weapon_modifier.triumphant.name=Triumphant
+
 
 alw.effectiveness.studded.level=Effectiveness against Studded armor:
 alw.effectiveness.studded.pierce=Chance to pierce Studded armor:
@@ -976,6 +979,7 @@ alw.colors.shine=Shine:
 alw.hold=Hold
 alw.effectiveness.info.name=for Effectiveness Information
 alw.colors.info.name=for Color Information
+
 
 alw.damage_tooltip.name= Damage
 alw.dur_tooltip.name= Durability

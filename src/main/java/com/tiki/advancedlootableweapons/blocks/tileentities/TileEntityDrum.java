@@ -11,6 +11,7 @@ import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +40,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -108,7 +110,10 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 				}
 			}
 			
-			this.canQuench = worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
+			Block under = worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock();
+			Fluid f = FluidRegistry.lookupFluidForBlock(under);
+			boolean fluid = f != null && f.getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500;
+			this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || fluid;
 			
 			for(int i = 0; i < 3; i++) {
 				craft.setInventorySlotContents(i, this.inventory.get(i));
