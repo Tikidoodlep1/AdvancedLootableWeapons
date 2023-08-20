@@ -26,7 +26,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class TileEntityJawCrusher extends TileEntity implements ITickable, IInventory {
-
+	
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	private Random rand = new Random();

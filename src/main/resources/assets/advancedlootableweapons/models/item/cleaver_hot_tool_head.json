@@ -6,7 +6,6 @@
     "overrides": [
         { "predicate": { "damage": 0 }, "model": "advancedlootableweapons:item/cleaver_hot_tool_head_hot" },
         { "predicate": { "damage": 1 }, "model": "advancedlootableweapons:item/cleaver_hot_tool_head_warm" },
-        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/cleaver_hot_tool_head_cool" },
-        { "predicate": { "damage": 3 }, "model": "advancedlootableweapons:item/cleaver_clay_covered" }
+        { "predicate": { "damage": 2 }, "model": "advancedlootableweapons:item/cleaver_hot_tool_head_cool" }
     ]
 }

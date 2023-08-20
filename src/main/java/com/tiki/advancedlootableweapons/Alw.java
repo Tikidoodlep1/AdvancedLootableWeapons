@@ -6,21 +6,14 @@ import java.util.UUID;
 import org.apache.logging.log4j.Logger;
 
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
-import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwToolHeadsCreativeTab;
 import com.tiki.advancedlootableweapons.proxy.CommonProxy;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -37,10 +30,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import scala.actors.threadpool.Arrays;
 
 //@Mod.EventBusSubscriber
-@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER)
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER, dependencies = ModInfo.LOAD_AFTER)
 public class Alw {
 	@Instance
 	public static Alw instance;

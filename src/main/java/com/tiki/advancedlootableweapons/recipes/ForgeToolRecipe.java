@@ -1,5 +1,8 @@
 package com.tiki.advancedlootableweapons.recipes;
 
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +17,7 @@ import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -75,8 +79,22 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		if(material.getItem() != null && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath()))) {
-			return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath())));
+		if(material.getItem() != null) {
+			if(ForgeRegistries.ITEMS.containsKey(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath()))) {
+				return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath())));
+			}
+			
+			for(Entry<ToolMaterial, ItemStack> e : ItemInit.customRepairItems.entrySet()) {
+				if(e.getValue().getItem() == material.getItem() && e.getValue().getItemDamage() == material.getItemDamage()) {
+					return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + e.getKey().name().replace(':', '_'))));
+				}
+			}
+			
+			for(ToolMaterial mat : ToolMaterial.values()) {
+				if(mat.getRepairItemStack().getItem() == material.getItem() && mat.getRepairItemStack().getItemDamage() == material.getItemDamage()) {
+					return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + mat.name().replace(':', '_'))));
+				}
+			}
 		}
 		
 		return new ItemStack(ItemInit.CLAY_GRANITE).setStackDisplayName("ERROR IN RECIPE OUTPUT");

@@ -28,7 +28,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -150,7 +149,13 @@ public class ClientProxy extends CommonProxy {
 					Arrays.fill(colorArray, 0xFFFFFF);
 				
 					if(stack.getItem() instanceof ToolSlashSword) {
-						ItemStack repair = ((ToolSlashSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+						ItemStack repair;
+						if(ItemInit.customRepairItems.containsKey(((ToolSlashSword)stack.getItem()).getToolMaterial())) {
+							repair = ItemInit.customRepairItems.get(((ToolSlashSword)stack.getItem()).getToolMaterial());
+						}else {
+							repair = ((ToolSlashSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+						}
+						
 						if(repair.getItem() == Items.IRON_INGOT) {
 							colorArray[0] = 0xFF101010;
 							colorArray[1] = 0xFF424242;
@@ -174,7 +179,13 @@ public class ClientProxy extends CommonProxy {
 						}
 						((ToolSlashSword)stack.getItem()).setColors(stack, colorArray);
 					}else if(stack.getItem() instanceof ToolStabSword) {
-						ItemStack repair = ((ToolStabSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+						ItemStack repair;
+						if(ItemInit.customRepairItems.containsKey(((ToolStabSword)stack.getItem()).getToolMaterial())) {
+							repair = ItemInit.customRepairItems.get(((ToolStabSword)stack.getItem()).getToolMaterial());
+						}else {
+							repair = ((ToolStabSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+						}
+						
 						if(repair.getItem() == Items.IRON_INGOT) {
 							colorArray[0] = 0xFF101010;
 							colorArray[1] = 0xFF424242;

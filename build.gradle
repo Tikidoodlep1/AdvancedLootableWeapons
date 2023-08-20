@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 //Sound credit
 //Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=104894">Pixabay</a>
-version = "1.1.4-1.12.2"
+version = "1.2.0-1.12.2"
 group = "com.tiki.advancedlootableweapons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "advancedlootableweapons"
 
@@ -38,15 +38,19 @@ minecraft {
 }
 
 repositories {
-  maven {
-    // location of the maven that hosts JEI files
-    name = "Progwml6 maven"
-    url = "https://dvs1.progwml6.com/files/maven/"
-  }
+  //maven {
+  //  // location of the maven that hosts JEI files
+  //  name = "Progwml6 maven"
+  //  url = "https://dvs1.progwml6.com/files/maven/"
+  //}
   maven {
     // location of a maven mirror for JEI files, as a fallback
     name = "ModMaven"
-    url = "https://modmaven.k-4u.nl"
+    url = "https://modmaven.dev"
+  }
+  maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' 
   }
 }
 
@@ -55,6 +59,11 @@ dependencies {
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+    //deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
+    
+    //deobfCompile "software.bernie.geckolib:geckolib-forge-${mc_version}:${geckolib_version}"
+    
+    //runtime "software.bernie.geckolib:geckolib-forge-${mc_version}:${geckolib_version}"
 	
 	compile fileTree(dir: './libs', include: '*.jar')
 }

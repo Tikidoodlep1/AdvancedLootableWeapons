@@ -106,5 +106,4 @@ public class CommonProxy {
 			drops.add(new ItemStack(ItemInit.SHARD_OBSIDIAN, count));
 		}
 	}
-	
 }

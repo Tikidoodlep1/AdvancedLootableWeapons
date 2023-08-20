@@ -37,6 +37,7 @@ public class ConfigHandler {
 	public static HashSet<String> VALID_ANVILS = new HashSet<String>();
 	public static HashSet<String> VALID_HAMMERS = new HashSet<String>();
 	public static HashSet<String> EXTRA_MATERIALS = new HashSet<String>();
+	public static HashSet<String> EXTRA_MATERIAL_MOD_IDS = new HashSet<String>();
 	public static boolean DISABLE_VANILLA_ARMORS = true;
 	public static boolean ENABLE_ADVANCED_LEATHER_TANNING = false;
 	public static boolean ENABLE_QUENCHING = true;
@@ -312,7 +313,7 @@ public class ConfigHandler {
 				"advancedlootableweapons:platinum_forge_hammer", "advancedlootableweapons:steel_forge_hammer", "advancedlootableweapons:shadow_platinum_forge_hammer",
 				"advancedlootableweapons:frost_steel_forge_hammer", "advancedlootableweapons:obsidian_forge_hammer", "advancedlootableweapons:crystallite_forge_hammer",
 				"advancedlootableweapons:dusksteel_forge_hammer"}, "Write any item ID to register it as a valid forge hammer to open the Anvil Forging GUI with.")).collect(Collectors.toSet()));
-		EXTRA_MATERIALS.addAll(Arrays.stream(config.getStringList("Extra Weapon Materials", category, new String[] {}, "Put tool materials here (Ex. DIAMOND for vanilla diamonds) to add a new craftable set of ALW weapons. The repair item will be used as the base item (Ex. Iron ingots for iron). Available tool materials will be logged to console on launch.")).collect(Collectors.toSet()));
+		EXTRA_MATERIALS.addAll(Arrays.stream(config.getStringList("Extra Weapon Materials", category, new String[] {}, "Put tool materials here (Ex. DIAMOND for vanilla diamonds) to add a new craftable set of ALW weapons. The repair item will be used as the base item (Ex. Iron ingots for iron). If the tool material does not have a repair item (Crafts into granite clay), specify one using a comma as a delimiter. (Ex TF:CONSTANTAN,thermalfoundation:material#164 using # to specify item metadata) Available tool materials can be seen with /materials in game. NOTE: If you're haiving issues with the items crafting into air, try adding \"zz\" to the beginning of the ALW jar file.")).collect(Collectors.toSet()));
 		
 		//**********************************MATERIAL MODIFICATION**********************************
 		category = "WEAPON MATERIAL MODIFICATION";

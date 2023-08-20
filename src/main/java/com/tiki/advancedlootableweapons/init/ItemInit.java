@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +40,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
-import scala.actors.threadpool.Arrays;
 
 public class ItemInit {
 
@@ -47,6 +47,7 @@ public class ItemInit {
 	public static final HashSet<Item> generatedItems = new HashSet<Item>();
 	public static final HashSet<Item> weaponItems = new HashSet<Item>();
 	public static final Set<Item> acceptedForgeItems = new HashSet<Item>();
+	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
 	
 	public static void generateAcceptedForgeItems() {
 		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver"};
@@ -69,30 +70,55 @@ public class ItemInit {
 		
 		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
 		
-		for(String s : ConfigHandler.EXTRA_MATERIALS) {			
+		for(String s : ConfigHandler.EXTRA_MATERIALS) {
+			List<ToolMaterial> addedMats = new ArrayList<ToolMaterial>();
+			addedMats.add(ToolMaterial.WOOD);
+			addedMats.add(ToolMaterial.IRON);
+			addedMats.add(MAT_KOBOLD);
+			addedMats.add(MAT_COPPER);
+			addedMats.add(MAT_SILVER);
+			addedMats.add(MAT_BRONZE);
+			addedMats.add(MAT_PLATINUM);
+			addedMats.add(MAT_STEEL);
+			addedMats.add(MAT_SHADOW_PLATINUM);
+			addedMats.add(MAT_FROST_STEEL);
+			addedMats.add(MAT_OBSIDIAN);
+			addedMats.add(MAT_CRYSTALLITE);
+			addedMats.add(MAT_DUSKSTEEL);
+			if(s.contains(",")) {
+				if(s.contains("#")) {
+					customRepairItems.put(ToolMaterial.valueOf(s.substring(0, s.indexOf(','))), new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s.substring(s.indexOf(',') + 1, s.indexOf('#')))), 1, Integer.parseInt(s.substring(s.indexOf('#') + 1))));
+				}else {
+					customRepairItems.put(ToolMaterial.valueOf(s.substring(0, s.indexOf(','))), new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s.substring(s.indexOf(','))))));
+				}
+				s = s.substring(0, s.indexOf(','));
+			}
+			
 			try {
 				//Alw.logger.info("Adding Extra Material " + s + ", Tool Material: " + ToolMaterial.valueOf(s));
-				if(ToolMaterial.valueOf(s) != null) {
-					generatedItems.add(new ToolStabSword("dagger_" + s.toLowerCase(), ToolMaterial.valueOf(s), "dagger").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("kabutowari_" + s.toLowerCase(), ToolMaterial.valueOf(s), "kabutowari").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("rapier_" + s.toLowerCase(), ToolMaterial.valueOf(s), "rapier").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("talwar_" + s.toLowerCase(), ToolMaterial.valueOf(s), "talwar").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("cleaver_" + s.toLowerCase(), ToolMaterial.valueOf(s), "cleaver").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("mace_" + s.toLowerCase(), ToolMaterial.valueOf(s), "mace").setMaxStackSize(1));
-					generatedItems.add(new ToolStabSword("staff_" + s.toLowerCase(), ToolMaterial.valueOf(s), "staff").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("longsword_" + s.toLowerCase(), ToolMaterial.valueOf(s), "longsword").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("kodachi_" + s.toLowerCase(), ToolMaterial.valueOf(s), "kodachi").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("battleaxe_" + s.toLowerCase(), ToolMaterial.valueOf(s), "battleaxe").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("zweihander_" + s.toLowerCase(), ToolMaterial.valueOf(s), "zweihander").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("nodachi_" + s.toLowerCase(), ToolMaterial.valueOf(s), "nodachi").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("sabre_" + s.toLowerCase(), ToolMaterial.valueOf(s), "sabre").setMaxStackSize(1));
-					generatedItems.add(new ToolSlashSword("makhaira_" + s.toLowerCase(), ToolMaterial.valueOf(s), "makhaira").setMaxStackSize(1));
-					generatedItems.add(new ToolSpear("spear_" + s.toLowerCase(), ToolMaterial.valueOf(s)).setMaxStackSize(1));
+				if(ToolMaterial.valueOf(s) != null && !addedMats.contains(ToolMaterial.valueOf(s))) {
+					generatedItems.add(new ToolStabSword("dagger_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "dagger").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("kabutowari_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "kabutowari").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("rapier_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "rapier").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("talwar_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "talwar").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("cleaver_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "cleaver").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("mace_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "mace").setMaxStackSize(1));
+					generatedItems.add(new ToolStabSword("staff_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "staff").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("longsword_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "longsword").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("kodachi_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "kodachi").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("battleaxe_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "battleaxe").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("zweihander_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "zweihander").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("nodachi_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "nodachi").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("sabre_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "sabre").setMaxStackSize(1));
+					generatedItems.add(new ToolSlashSword("makhaira_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "makhaira").setMaxStackSize(1));
+					generatedItems.add(new ToolSpear("spear_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s)).setMaxStackSize(1));
 					
 					acceptedForgeItems.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
+					addedMats.add(ToolMaterial.valueOf(s));
 				}
 			}catch (IllegalArgumentException e) {
 				//Alw.logger.error("Tried to add extra material " + s + " which does not exist. Valid materials are: " + Arrays.toString(ToolMaterial.values()));
+				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist.");
 			}
 		}
 		
@@ -586,45 +612,45 @@ public class ItemInit {
 	 */
 	
 	//Mats Declarations
-	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("mat_kobold", 1, ConfigHandler.KOBOLD_DURABILITY, 6.0F, ConfigHandler.KOBOLD_DAMAGE, 22).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ToolMaterial MAT_COPPER = EnumHelper.addToolMaterial("mat_copper", 2, ConfigHandler.COPPER_DURABILITY, 6.5F, ConfigHandler.COPPER_DAMAGE, 10).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ToolMaterial MAT_SILVER = EnumHelper.addToolMaterial("mat_silver", 2, ConfigHandler.SILVER_DURABILITY, 7.0F, ConfigHandler.SILVER_DAMAGE, 24).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ToolMaterial MAT_BRONZE = EnumHelper.addToolMaterial("mat_bronze", 2, ConfigHandler.BRONZE_DURABILITY, 6.5F, ConfigHandler.BRONZE_DAMAGE, 12).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ToolMaterial MAT_PLATINUM = EnumHelper.addToolMaterial("mat_platinum", 2, ConfigHandler.PLATINUM_DURABILITY, 10.0F, ConfigHandler.PLATINUM_DAMAGE, 26).setRepairItem(new ItemStack(INGOT_PLATINUM));
-	public static final ToolMaterial MAT_STEEL = EnumHelper.addToolMaterial("mat_steel", 2, ConfigHandler.STEEL_DURABILITY, 7.0F, ConfigHandler.STEEL_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_STEEL));
-    public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMaterial("mat_shadow_platinum", 3, ConfigHandler.SHADOW_PLATINUM_DURABILITY, 8.25F, ConfigHandler.SHADOW_PLATINUM_DAMAGE, 21).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ToolMaterial MAT_FROST_STEEL = EnumHelper.addToolMaterial("mat_frost_steel", 3, ConfigHandler.FROST_STEEL_DURABILITY, 7.0F, ConfigHandler.FROST_STEEL_DAMAGE, 30).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-    public static final ToolMaterial MAT_OBSIDIAN = EnumHelper.addToolMaterial("mat_obsidian", 3, ConfigHandler.OBSIDIAN_DURABILITY, 7.5F, ConfigHandler.OBSIDIAN_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("mat_crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("mat_dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("alw:kobold", 1, ConfigHandler.KOBOLD_DURABILITY, 6.0F, ConfigHandler.KOBOLD_DAMAGE, 22).setRepairItem(new ItemStack(INGOT_KOBOLD));;
+	public static final ToolMaterial MAT_COPPER = EnumHelper.addToolMaterial("alw:copper", 2, ConfigHandler.COPPER_DURABILITY, 6.5F, ConfigHandler.COPPER_DAMAGE, 10).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ToolMaterial MAT_SILVER = EnumHelper.addToolMaterial("alw:silver", 2, ConfigHandler.SILVER_DURABILITY, 7.0F, ConfigHandler.SILVER_DAMAGE, 24).setRepairItem(new ItemStack(INGOT_SILVER));
+	public static final ToolMaterial MAT_BRONZE = EnumHelper.addToolMaterial("alw:bronze", 2, ConfigHandler.BRONZE_DURABILITY, 6.5F, ConfigHandler.BRONZE_DAMAGE, 12).setRepairItem(new ItemStack(INGOT_BRONZE));
+	public static final ToolMaterial MAT_PLATINUM = EnumHelper.addToolMaterial("alw:platinum", 2, ConfigHandler.PLATINUM_DURABILITY, 10.0F, ConfigHandler.PLATINUM_DAMAGE, 26).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	public static final ToolMaterial MAT_STEEL = EnumHelper.addToolMaterial("alw:steel", 2, ConfigHandler.STEEL_DURABILITY, 7.0F, ConfigHandler.STEEL_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_STEEL));
+    public static final ToolMaterial MAT_SHADOW_PLATINUM = EnumHelper.addToolMaterial("alw:shadow_platinum", 3, ConfigHandler.SHADOW_PLATINUM_DURABILITY, 8.25F, ConfigHandler.SHADOW_PLATINUM_DAMAGE, 21).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ToolMaterial MAT_FROST_STEEL = EnumHelper.addToolMaterial("alw:frost_steel", 3, ConfigHandler.FROST_STEEL_DURABILITY, 7.0F, ConfigHandler.FROST_STEEL_DAMAGE, 30).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+    public static final ToolMaterial MAT_OBSIDIAN = EnumHelper.addToolMaterial("alw:obsidian", 3, ConfigHandler.OBSIDIAN_DURABILITY, 7.5F, ConfigHandler.OBSIDIAN_DAMAGE, 18).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
+	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("alw:crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("alw:dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("camat_iron", ModInfo.ID + ":chain_iron", 13, new int[] {2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(Items.IRON_INGOT));
-	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("camat_gold", ModInfo.ID + ":chain_gold", 5, new int[] {1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F).setRepairItem(new ItemStack(Items.GOLD_INGOT));
-	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("camat_diamond", ModInfo.ID + ":diamond_studded_leather", 5 + 6, new int[] {2,6,8,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(Items.LEATHER));
-	public static final ArmorMaterial CAMAT_KOBOLD = EnumHelper.addArmorMaterial("camat_kobold", ModInfo.ID + ":chain_kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("camat_copper", ModInfo.ID + ":chain_copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("camat_silver", ModInfo.ID + ":chain_silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ArmorMaterial CAMAT_BRONZE = EnumHelper.addArmorMaterial("camat_bronze", ModInfo.ID + ":chain_bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ArmorMaterial CAMAT_PLATINUM = EnumHelper.addArmorMaterial("camat_platinum", ModInfo.ID + ":chain_platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
-	public static final ArmorMaterial CAMAT_STEEL = EnumHelper.addArmorMaterial("camat_steel", ModInfo.ID + ":chain_steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ArmorMaterial CAMAT_FROST_STEEL = EnumHelper.addArmorMaterial("camat_frost_steel", ModInfo.ID + ":chain_frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-	public static final ArmorMaterial CAMAT_OBSIDIAN = EnumHelper.addArmorMaterial("camat_obsidian", ModInfo.ID + ":chain_obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial CAMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("camat_crystallite", ModInfo.ID + ":chain_crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("camat_dusksteel", ModInfo.ID + ":chain_dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("alw:camat_iron", ModInfo.ID + ":chain_iron", 13, new int[] {2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(Items.IRON_INGOT));
+	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("alw:camat_gold", ModInfo.ID + ":chain_gold", 5, new int[] {1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F).setRepairItem(new ItemStack(Items.GOLD_INGOT));
+	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:camat_diamond", ModInfo.ID + ":diamond_studded_leather", 5 + 6, new int[] {2,6,8,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(Items.LEATHER));
+	public static final ArmorMaterial CAMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:camat_kobold", ModInfo.ID + ":chain_kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
+	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("alw:camat_copper", ModInfo.ID + ":chain_copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("alw:camat_silver", ModInfo.ID + ":chain_silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
+	public static final ArmorMaterial CAMAT_BRONZE = EnumHelper.addArmorMaterial("alw:camat_bronze", ModInfo.ID + ":chain_bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
+	public static final ArmorMaterial CAMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_platinum", ModInfo.ID + ":chain_platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	public static final ArmorMaterial CAMAT_STEEL = EnumHelper.addArmorMaterial("alw:camat_steel", ModInfo.ID + ":chain_steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
+	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ArmorMaterial CAMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:camat_frost_steel", ModInfo.ID + ":chain_frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+	public static final ArmorMaterial CAMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:camat_obsidian", ModInfo.ID + ":chain_obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
+	public static final ArmorMaterial CAMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:camat_crystallite", ModInfo.ID + ":chain_crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:camat_dusksteel", ModInfo.ID + ":chain_dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("amat_diamond", ModInfo.ID + ":diamond_studded_steel", ConfigHandler.STEEL_ARMOR_DURABILITY + 8, new int[] {3,6,8,3}, 19, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
-	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("amat_steel", ModInfo.ID + ":steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("amat_obsidian", ModInfo.ID + ":obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:amat_diamond", ModInfo.ID + ":diamond_studded_steel", ConfigHandler.STEEL_ARMOR_DURABILITY + 8, new int[] {3,6,8,3}, 19, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_STEEL));
+	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
+	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("alw:amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("alw:amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
+	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("alw:amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
+	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("alw:amat_steel", ModInfo.ID + ":steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
+	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:amat_obsidian", ModInfo.ID + ":obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
+	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
 	
 	//Tools

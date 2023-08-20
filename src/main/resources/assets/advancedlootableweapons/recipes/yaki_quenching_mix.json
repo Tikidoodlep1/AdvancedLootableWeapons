@@ -3,23 +3,34 @@
 	
 	"ingredients": [
     {
-		"item": "minecraft:clay"
+		"item": "minecraft:clay_ball"
     },
-    {
-		"item": "advancedlootableweapons:powder_granite",
-		"item": "advancedlootableweapons:powder_feldspar"
-    },
+    [
+    	{
+    		"item": "advancedlootableweapons:powder_granite"
+			
+    	},
+    	{
+    		"item": "advancedlootableweapons:powder_feldspar"
+    	}
+    ],
     {
 		"item": "advancedlootableweapons:powder_charcoal"
     },
-    {
-    	"type": "minecraft:item_nbt",
-    	"item": "forge:bucketFilled",
-    	"nbt": {
-    		"FluidName": "water",
-    		"Amount": 1000
+    [
+    	{
+    		"type": "minecraft:item_nbt",
+    		"item": "forge:bucketFilled",
+    		"nbt": {
+    			"FluidName": "water",
+    			"Amount": 1000
+    		}
+    	},
+    	{
+    		"item": "minecraft:water_bucket"
     	}
-    }
+    	
+    ]
   ],
   "result": {
     "item": "advancedlootableweapons:clay_quenching_mix",
