@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Kobold",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_kobold"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_kobold",

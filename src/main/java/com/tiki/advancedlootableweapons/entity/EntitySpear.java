@@ -23,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -105,8 +106,8 @@ public class EntitySpear extends EntityArrow {
 		}
 	}
 	
-	public void setMaterial(String mat) {
-		this.dataManager.set(MATERIAL, mat);
+	public void setMaterial(String toolMaterial) {
+		this.dataManager.set(MATERIAL, toolMaterial.toString());
 	}
 	
 	public String getMaterial() {

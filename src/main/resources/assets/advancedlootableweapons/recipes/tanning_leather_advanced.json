@@ -1,7 +1,7 @@
 {
 	"type": "advancedlootableweapons:one_slot",
 	"group": "advancedlootableweapons:tanning",
-	"block": "advancedlootableweapons:tanning_rack",
+	"block": "advancedlootableweapons:block_tanning_rack",
 	"ingredients": [
     {
 		"item": "advancedlootableweapons:delimed_hide"

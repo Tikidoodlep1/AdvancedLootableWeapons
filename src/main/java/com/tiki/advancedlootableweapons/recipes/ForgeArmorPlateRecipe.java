@@ -125,7 +125,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 				}
 			}
 		}
-		
+		//System.out.println(match1 + ", " + match2 + ", " + matsMatch);
 		return match1 && match2 && matsMatch;
 	}
 	

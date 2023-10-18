@@ -1,8 +1,6 @@
 package com.tiki.advancedlootableweapons.recipes;
 
 import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

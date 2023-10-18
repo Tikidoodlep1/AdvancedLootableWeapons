@@ -1,39 +1,25 @@
 {
-	"type": "minecraft:crafting_shapeless",
+	"type": "advancedlootableweapons:chain_link_shapeless",
 	"group": "advancedlootableweapons:chain_link",
 	"ingredients":
 	[
 		{
-			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767,
-			"nbt": {
-				"Material": "Frost Steel",
-				"addedDamage": 32767,
-				"addedDurability": 32767
-			}
+			"data": 32767
 		},
 		{
-			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767,
-			"nbt": {
-				"Material": "Frost Steel",
-				"addedDamage": 32767,
-				"addedDurability": 32767
-			}
+			"data": 32767
 		},
 		{
-			"type": "minecraft:item_nbt",
 			"item": "advancedlootableweapons:chain_ring",
-			"data": 32767,
-			"nbt": {
-				"Material": "Frost Steel",
-				"addedDamage": 32767,
-				"addedDurability": 32767
-			}
+			"data": 32767
 		}
 	],
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_frost_steel"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_frost_steel",

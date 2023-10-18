@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Steel",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_steel"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_steel",

@@ -1,0 +1,30 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"I I",
+		"ICC",
+		"ICI"
+	],
+
+	"key":
+	{
+		"C":
+		{
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		},
+		"I":
+		{ 
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_mill",
+		"count": 1
+	}
+}

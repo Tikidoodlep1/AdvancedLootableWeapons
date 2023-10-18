@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class AlloyingRecipe extends ShapelessOreRecipe {
@@ -54,20 +55,24 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 			return false;
 		}
 		
+		int matches = 0;
 		
-		for(int i = 0; i < this.input.size(); i++) {
-			boolean match = false;
-			Ingredient in = this.input.get(i);
-			for(ItemStack stack : in.getMatchingStacks()) {
-				if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() <= inv.getStackInSlot(i).getCount()) {
-					match = true;
+		inventory: for(int i = 0; i < inv.getSizeInventory(); i++) {
+//			if(i == 2) { Accounted for in TE
+//				continue; // Avoid fuel slot, shouldn't be taken into account
+//			}
+			for(Ingredient in : this.input) {
+				for(ItemStack stack : in.getMatchingStacks()) {
+					if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() <= inv.getStackInSlot(i).getCount()) {
+						matches++;
+						continue inventory;
+					}
 				}
 			}
-			if(!match) {
-				return false;
-			}
+			
 		}
-		return true;
+		
+		return matches == this.input.size();
 	}
 	
 	@Override
@@ -91,7 +96,22 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 			final String group = JsonUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = NonNullList.create();
 			for(final JsonElement element : JsonUtils.getJsonArray(json, "ingredients")) {
-				ingredients.add(CraftingHelper.getIngredient(element, context));
+				Ingredient ingr = CraftingHelper.getIngredient(element, context);
+				JsonObject ingrObj = element.getAsJsonObject();
+				if(ingrObj.has("ore") && ingrObj.has("count")) {
+					ItemStack[] is = ingr.getMatchingStacks();
+					for(int i = 0; i < is.length; i++) {
+						is[i].setCount(ingrObj.get("count").getAsInt());
+					}
+					ingredients.add(Ingredient.fromStacks(is));
+				}else if(ingrObj.has("item") && ingrObj.has("count")) {
+					String RL = ingrObj.get("item").getAsString();
+					ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(RL)), ingrObj.get("count").getAsInt());
+					ingredients.add(Ingredient.fromStacks(stack));
+				}else {
+					ingredients.add(ingr);
+				}
+				
 			}
 			
 			final float exp = JsonUtils.getFloat(json, "exp");

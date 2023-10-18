@@ -1,0 +1,19 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"item": "advancedlootableweapons:ingot_shadow_platinum",
+    	"count": 4
+    },
+    {
+		"type": "forge:ore_dict",
+		"ore": "ingotSteel"
+    }
+  ],
+  "exp": 1.9,
+  "result": {
+    "item": "advancedlootableweapons:ingot_dusksteel",
+    "count": 2
+  }
+}

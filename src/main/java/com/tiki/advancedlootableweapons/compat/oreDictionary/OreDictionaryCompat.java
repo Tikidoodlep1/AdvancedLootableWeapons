@@ -37,5 +37,21 @@ public class OreDictionaryCompat {
 		
 		OreDictionary.registerOre("shardObsidian", ItemInit.SHARD_OBSIDIAN);
 		OreDictionary.registerOre("dustSalt", ItemInit.RAW_SALT);
+		
+		OreDictionary.registerOre("armorBinding", ItemInit.LEATHER_BINDING);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_BRONZE);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_COPPER);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_CRYSTALLITE);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_DUSKSTEEL);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_FROST_STEEL);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_GOLD);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_IRON);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_KOBOLD);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_OBSIDIAN);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_PLATINUM);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_SHADOW_PLATINUM);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_SILVER);
+		OreDictionary.registerOre("armorBinding", ItemInit.CHAIN_BINDING_STEEL);
+		
 	}
 }

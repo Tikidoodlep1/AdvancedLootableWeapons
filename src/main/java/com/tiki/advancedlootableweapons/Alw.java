@@ -37,7 +37,11 @@ public class Alw {
 	@Instance
 	public static Alw instance;
 	
-	public static File config;
+	public static File ArmorConfig;
+	public static File WeaponConfig;
+	public static File MobConfig;
+	public static File ItemConfig;
+	public static File WorldConfig;
 	
 	public static final IAttribute MATERIAL = new RangedAttribute((IAttribute)null, "attribute.toolMaterial", 0.0D, 0.0D, 12.0D);
 	public static final UUID MATERIAL_MODIFIER = UUID.fromString("ac55927e-2f67-4b25-a284-a4c26f42d9aa");

@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Shadow Platinum",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_shadow_platinum"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_shadow_platinum",

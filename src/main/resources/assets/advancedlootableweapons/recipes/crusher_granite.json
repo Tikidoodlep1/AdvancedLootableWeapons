@@ -1,7 +1,7 @@
 {
 	"type": "advancedlootableweapons:one_slot",
 	"group": "advancedlootableweapons:crusher",
-	"block": "advancedlootableweapons:jaw_crusher",
+	"block": "advancedlootableweapons:block_mill",
 	"ingredients": [
     {
 		"item": "minecraft:stone",

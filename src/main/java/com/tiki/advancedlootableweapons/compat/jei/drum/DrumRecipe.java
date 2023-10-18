@@ -35,6 +35,9 @@ public class DrumRecipe implements IRecipeWrapper {
 		String ticks = "Ticks: " + this.ticks;
 		FontRenderer fr = minecraft.fontRenderer;
 		fr.drawString(ticks, recipeWidth - (fr.getStringWidth(ticks)), -2, Color.GRAY.getRGB());
+		fr.drawString("1", 37, 24, Color.DARK_GRAY.getRGB());
+		fr.drawString("2", 24, 20, Color.DARK_GRAY.getRGB());
+		fr.drawString("3", 48, 20, Color.DARK_GRAY.getRGB());
 		if(quench) {
 			fr.drawString("Fire-", recipeWidth - fr.getStringWidth("Required"), 6, Color.GRAY.getRGB());
 			fr.drawString("Required", recipeWidth - fr.getStringWidth("Required"), 14, Color.GRAY.getRGB());

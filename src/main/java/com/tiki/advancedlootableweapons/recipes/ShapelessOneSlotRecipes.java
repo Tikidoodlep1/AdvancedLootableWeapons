@@ -41,6 +41,16 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
         {
             ret.set(i, ForgeHooks.getContainerItem(inv.get(i)));
         }
+        
+        int j = 0;
+        for(ItemStack i : input.get(0).getMatchingStacks()) {
+			if(i.getItem() == inv.get(0).getItem() && i.getItemDamage() == inv.get(0).getItemDamage() && inv.get(0).getCount() >= i.getCount()) {
+				ItemStack keep = inv.get(0);
+				keep.setCount(keep.getCount() - i.getCount());
+				ret.set(j, keep);
+			}
+			j++;
+		}
         return ret;
 	}
 	
@@ -54,7 +64,7 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
 		}
 		
 		for(ItemStack i : input.get(0).getMatchingStacks()) {
-			if(i.getItem() == inv.getStackInSlot(0).getItem() && inv.getStackInSlot(0).getCount() >= i.getCount()) {
+			if(i.getItem() == inv.getStackInSlot(0).getItem() && i.getItemDamage() == inv.getStackInSlot(0).getItemDamage() && inv.getStackInSlot(0).getCount() >= i.getCount()) {
 				return true;
 			}
 		}
@@ -70,7 +80,7 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
 		}
 		
 		for(ItemStack i : input.get(0).getMatchingStacks()) {
-			if(i.getItem() == inv.get(0).getItem() && inv.get(0).getCount() >= i.getCount()) {
+			if(i.getItem() == inv.get(0).getItem() && i.getItemDamage() == inv.get(0).getItemDamage() && inv.get(0).getCount() >= i.getCount()) {
 				return true;
 			}
 		}

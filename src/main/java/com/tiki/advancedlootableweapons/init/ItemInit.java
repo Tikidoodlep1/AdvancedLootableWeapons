@@ -50,7 +50,7 @@ public class ItemInit {
 	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
 	
 	public static void generateAcceptedForgeItems() {
-		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver"};
+		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver", "ingotIron", "ingotGold"};
 		for(String ore : ores) {
 			NonNullList<ItemStack> stacks = OreDictionary.getOres(ore);
 			for(ItemStack s : stacks) {
@@ -624,33 +624,134 @@ public class ItemInit {
 	public static final ToolMaterial MAT_CRYSTALLITE = EnumHelper.addToolMaterial("alw:crystallite", 3, ConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, ConfigHandler.CRYSTALLITE_DAMAGE, 20).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
 	public static final ToolMaterial MAT_DUSKSTEEL = EnumHelper.addToolMaterial("alw:dusksteel", 3, ConfigHandler.DUSKSTEEL_DURABILITY, 8.5F, ConfigHandler.DUSKSTEEL_DAMAGE, 14).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
-	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("alw:camat_iron", ModInfo.ID + ":chain_iron", 13, new int[] {2, 5, 6, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(Items.IRON_INGOT));
-	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("alw:camat_gold", ModInfo.ID + ":chain_gold", 5, new int[] {1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F).setRepairItem(new ItemStack(Items.GOLD_INGOT));
-	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:camat_diamond", ModInfo.ID + ":diamond_studded_leather", 5 + 6, new int[] {2,6,8,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(Items.LEATHER));
-	public static final ArmorMaterial CAMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:camat_kobold", ModInfo.ID + ":chain_kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("alw:camat_copper", ModInfo.ID + ":chain_copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("alw:camat_silver", ModInfo.ID + ":chain_silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ArmorMaterial CAMAT_BRONZE = EnumHelper.addArmorMaterial("alw:camat_bronze", ModInfo.ID + ":chain_bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ArmorMaterial CAMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_platinum", ModInfo.ID + ":chain_platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
-	public static final ArmorMaterial CAMAT_STEEL = EnumHelper.addArmorMaterial("alw:camat_steel", ModInfo.ID + ":chain_steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ArmorMaterial CAMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:camat_frost_steel", ModInfo.ID + ":chain_frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-	public static final ArmorMaterial CAMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:camat_obsidian", ModInfo.ID + ":chain_obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial CAMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:camat_crystallite", ModInfo.ID + ":chain_crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:camat_dusksteel", ModInfo.ID + ":chain_dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial CAMAT_IRON = EnumHelper.addArmorMaterial("alw:camat_iron", ModInfo.ID + ":chain_iron", (int)(ConfigHandler.IRON_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.IRON_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.IRON_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.IRON_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.IRON_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.IRON_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.IRON_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.IRON_INGOT));
 	
-	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:amat_diamond", ModInfo.ID + ":diamond_studded_steel", ConfigHandler.STEEL_ARMOR_DURABILITY + 8, new int[] {3,6,8,3}, 19, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:amat_kobold", ModInfo.ID + ":kobold", ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[]{1,3,4,2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.KOBOLD_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("alw:amat_copper", ModInfo.ID + ":copper", ConfigHandler.COPPER_ARMOR_DURABILITY, new int[]{2,3,4,2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.COPPER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_COPPER));
-	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("alw:amat_silver", ModInfo.ID + ":silver", ConfigHandler.SILVER_ARMOR_DURABILITY, new int[]{3,5,7,3}, 24, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SILVER_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SILVER));
-	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("alw:amat_bronze", ModInfo.ID + ":bronze", ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
-	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_platinum", ModInfo.ID + ":platinum", ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 26, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
-	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("alw:amat_steel", ModInfo.ID + ":steel", ConfigHandler.STEEL_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_STEEL));
-	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_shadow_platinum", ModInfo.ID + ":shadow_platinum", ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[]{3,6,8,3}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.SHADOW_PLATINUM_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
-	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:amat_frost_steel", ModInfo.ID + ":frost_steel", ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 30, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.FROST_STEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
-	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:amat_obsidian", ModInfo.ID + ":obsidian", ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[]{3,5,6,3}, 18, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.OBSIDIAN_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
-	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:amat_crystallite", ModInfo.ID + ":crystallite", ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[]{3,6,8,3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.CRYSTALLITE_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
-	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:amat_dusksteel", ModInfo.ID + ":dusksteel", ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[]{3,6,8,3}, 14, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.DUSKSTEEL_ARMOR_HARDNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	public static final ArmorMaterial CAMAT_GOLD = EnumHelper.addArmorMaterial("alw:camat_gold", ModInfo.ID + ":chain_gold",  (int)(ConfigHandler.GOLD_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.GOLD_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.GOLD_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.GOLD_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.GOLD_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.GOLD_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.GOLD_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.GOLD_INGOT));
+	
+	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:camat_diamond", ModInfo.ID + ":diamond_studded_DIAMOND_STUDDED_LEATHER", (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(ItemInit.DIAMOND_STUDDED_LEATHER));
+	
+	public static final ArmorMaterial CAMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:camat_kobold", ModInfo.ID + ":chain_kobold", (int)(ConfigHandler.KOBOLD_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.KOBOLD_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.KOBOLD_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.KOBOLD_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.KOBOLD_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.KOBOLD_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.KOBOLD_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));
+	
+	public static final ArmorMaterial CAMAT_COPPER = EnumHelper.addArmorMaterial("alw:camat_copper", ModInfo.ID + ":chain_copper", (int)(ConfigHandler.COPPER_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.COPPER_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.COPPER_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.COPPER_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.COPPER_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.COPPER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.COPPER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_COPPER));
+	
+	public static final ArmorMaterial CAMAT_SILVER = EnumHelper.addArmorMaterial("alw:camat_silver", ModInfo.ID + ":chain_silver", (int)(ConfigHandler.SILVER_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.SILVER_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.SILVER_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.SILVER_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.SILVER_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.SILVER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.SILVER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_SILVER));
+	
+	public static final ArmorMaterial CAMAT_BRONZE = EnumHelper.addArmorMaterial("alw:camat_bronze", ModInfo.ID + ":chain_bronze", (int)(ConfigHandler.BRONZE_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.BRONZE_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.BRONZE_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.BRONZE_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.BRONZE_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.BRONZE_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, ConfigHandler.BRONZE_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
+	
+	public static final ArmorMaterial CAMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_platinum", ModInfo.ID + ":chain_platinum", (int)(ConfigHandler.PLATINUM_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.PLATINUM_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.PLATINUM_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.PLATINUM_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.PLATINUM_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.PLATINUM_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, ConfigHandler.PLATINUM_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	
+	public static final ArmorMaterial CAMAT_STEEL = EnumHelper.addArmorMaterial("alw:camat_steel", ModInfo.ID + ":chain_steel", (int)(ConfigHandler.STEEL_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.STEEL_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.STEEL_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.STEEL_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.STEEL_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.STEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.STEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_STEEL));
+	
+	public static final ArmorMaterial CAMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:camat_shadow_platinum", ModInfo.ID + ":chain_shadow_platinum", (int)(ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.SHADOW_PLATINUM_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.SHADOW_PLATINUM_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.SHADOW_PLATINUM_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.SHADOW_PLATINUM_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.SHADOW_PLATINUM_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.SHADOW_PLATINUM_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	
+	public static final ArmorMaterial CAMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:camat_frost_steel", ModInfo.ID + ":chain_frost_steel", (int)(ConfigHandler.FROST_STEEL_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.FROST_STEEL_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.FROST_STEEL_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.FROST_STEEL_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.FROST_STEEL_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.FROST_STEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.FROST_STEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+	
+	public static final ArmorMaterial CAMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:camat_obsidian", ModInfo.ID + ":chain_obsidian", (int)(ConfigHandler.OBSIDIAN_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.OBSIDIAN_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.OBSIDIAN_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.OBSIDIAN_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.OBSIDIAN_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.OBSIDIAN_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, ConfigHandler.OBSIDIAN_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
+	
+	public static final ArmorMaterial CAMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:camat_crystallite", ModInfo.ID + ":chain_crystallite", (int)(ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.CRYSTALLITE_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.CRYSTALLITE_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.CRYSTALLITE_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.CRYSTALLITE_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.CRYSTALLITE_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, ConfigHandler.CRYSTALLITE_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	
+	public static final ArmorMaterial CAMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:camat_dusksteel", ModInfo.ID + ":chain_dusksteel", (int)(ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+			new int[] {(int)(ConfigHandler.DUSKSTEEL_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DUSKSTEEL_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
+					(int)(ConfigHandler.DUSKSTEEL_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DUSKSTEEL_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
+			ConfigHandler.DUSKSTEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.DUSKSTEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
+	
+	public static final ArmorMaterial AMAT_LEATHER = EnumHelper.addArmorMaterial("alw:amat_leather", "Minecraft:leather", ConfigHandler.LEATHER_ARMOR_DURABILITY, new int[] {ConfigHandler.LEATHER_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.LEATHER_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.LEATHER_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.LEATHER_ARMOR_HELMET_REDUCTION}, ConfigHandler.LEATHER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 
+			ConfigHandler.LEATHER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.LEATHER));
+	
+	public static final ArmorMaterial AMAT_IRON = EnumHelper.addArmorMaterial("alw:amat_iron", "Minecraft:iron", ConfigHandler.IRON_ARMOR_DURABILITY, new int[] {ConfigHandler.IRON_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.IRON_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.IRON_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.IRON_ARMOR_HELMET_REDUCTION}, ConfigHandler.IRON_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.IRON_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.IRON_INGOT));
+	
+	public static final ArmorMaterial AMAT_GOLD = EnumHelper.addArmorMaterial("alw:amat_gold", "Minecraft:gold",ConfigHandler.GOLD_ARMOR_DURABILITY, new int[] {ConfigHandler.GOLD_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.GOLD_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.GOLD_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.GOLD_ARMOR_HELMET_REDUCTION}, ConfigHandler.GOLD_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 
+			ConfigHandler.GOLD_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.GOLD_INGOT));
+	
+	public static final ArmorMaterial AMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:amat_diamond", ModInfo.ID + ":diamond_studded_steel",ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_DURABILITY, new int[] {ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_HELMET_REDUCTION}, ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.DIAMOND_STUDDED_STEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_STEEL));
+	public static final ArmorMaterial AMAT_KOBOLD = EnumHelper.addArmorMaterial("alw:amat_kobold", ModInfo.ID + ":kobold",ConfigHandler.KOBOLD_ARMOR_DURABILITY, new int[] {ConfigHandler.KOBOLD_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.KOBOLD_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.KOBOLD_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.KOBOLD_ARMOR_HELMET_REDUCTION}, ConfigHandler.KOBOLD_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 
+			ConfigHandler.KOBOLD_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_KOBOLD));
+	
+	public static final ArmorMaterial AMAT_COPPER = EnumHelper.addArmorMaterial("alw:amat_copper", ModInfo.ID + ":copper",ConfigHandler.COPPER_ARMOR_DURABILITY, new int[] {ConfigHandler.COPPER_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.COPPER_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.COPPER_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.COPPER_ARMOR_HELMET_REDUCTION}, ConfigHandler.COPPER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.COPPER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_COPPER));
+	
+	public static final ArmorMaterial AMAT_SILVER = EnumHelper.addArmorMaterial("alw:amat_silver", ModInfo.ID + ":silver",ConfigHandler.SILVER_ARMOR_DURABILITY, new int[] {ConfigHandler.SILVER_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.SILVER_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.SILVER_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.SILVER_ARMOR_HELMET_REDUCTION}, ConfigHandler.SILVER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 
+			ConfigHandler.SILVER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_SILVER));
+	
+	public static final ArmorMaterial AMAT_BRONZE = EnumHelper.addArmorMaterial("alw:amat_bronze", ModInfo.ID + ":bronze",ConfigHandler.BRONZE_ARMOR_DURABILITY, new int[] {ConfigHandler.BRONZE_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.BRONZE_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.BRONZE_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.BRONZE_ARMOR_HELMET_REDUCTION}, ConfigHandler.BRONZE_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.BRONZE_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_BRONZE));
+	
+	public static final ArmorMaterial AMAT_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_platinum", ModInfo.ID + ":platinum",ConfigHandler.PLATINUM_ARMOR_DURABILITY, new int[] {ConfigHandler.PLATINUM_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.PLATINUM_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.PLATINUM_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.PLATINUM_ARMOR_HELMET_REDUCTION}, ConfigHandler.PLATINUM_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.PLATINUM_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_PLATINUM));
+	
+	public static final ArmorMaterial AMAT_STEEL = EnumHelper.addArmorMaterial("alw:amat_steel", ModInfo.ID + ":steel",ConfigHandler.STEEL_ARMOR_DURABILITY, new int[] {ConfigHandler.STEEL_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.STEEL_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.STEEL_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.STEEL_ARMOR_HELMET_REDUCTION}, ConfigHandler.STEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.STEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_STEEL));
+	
+	public static final ArmorMaterial AMAT_SHADOW_PLATINUM = EnumHelper.addArmorMaterial("alw:amat_shadow_platinum", ModInfo.ID + ":shadow_platinum",ConfigHandler.SHADOW_PLATINUM_ARMOR_DURABILITY, new int[] {ConfigHandler.SHADOW_PLATINUM_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.SHADOW_PLATINUM_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.SHADOW_PLATINUM_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.SHADOW_PLATINUM_ARMOR_HELMET_REDUCTION}, ConfigHandler.SHADOW_PLATINUM_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 
+			ConfigHandler.SHADOW_PLATINUM_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_SHADOW_PLATINUM));
+	
+	public static final ArmorMaterial AMAT_FROST_STEEL = EnumHelper.addArmorMaterial("alw:amat_frost_steel", ModInfo.ID + ":frost_steel",ConfigHandler.FROST_STEEL_ARMOR_DURABILITY, new int[] {ConfigHandler.FROST_STEEL_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.FROST_STEEL_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.FROST_STEEL_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.FROST_STEEL_ARMOR_HELMET_REDUCTION}, ConfigHandler.FROST_STEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 
+			ConfigHandler.FROST_STEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_FROST_STEEL));
+	
+	public static final ArmorMaterial AMAT_OBSIDIAN = EnumHelper.addArmorMaterial("alw:amat_obsidian", ModInfo.ID + ":obsidian",ConfigHandler.OBSIDIAN_ARMOR_DURABILITY, new int[] {ConfigHandler.OBSIDIAN_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.OBSIDIAN_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.OBSIDIAN_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.OBSIDIAN_ARMOR_HELMET_REDUCTION}, ConfigHandler.OBSIDIAN_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.OBSIDIAN_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_OBSIDIAN));
+	
+	public static final ArmorMaterial AMAT_CRYSTALLITE = EnumHelper.addArmorMaterial("alw:amat_crystallite", ModInfo.ID + ":crystallite",ConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, new int[] {ConfigHandler.CRYSTALLITE_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.CRYSTALLITE_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.CRYSTALLITE_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.CRYSTALLITE_ARMOR_HELMET_REDUCTION}, ConfigHandler.CRYSTALLITE_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 
+			ConfigHandler.CRYSTALLITE_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_CRYSTALLITE));
+	
+	public static final ArmorMaterial AMAT_DUSKSTEEL = EnumHelper.addArmorMaterial("alw:amat_dusksteel", ModInfo.ID + ":dusksteel",ConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, new int[] {ConfigHandler.DUSKSTEEL_ARMOR_BOOTS_REDUCTION, 
+			ConfigHandler.DUSKSTEEL_ARMOR_LEGGINGS_REDUCTION, ConfigHandler.DUSKSTEEL_ARMOR_CHESTPLATE_REDUCTION, ConfigHandler.DUSKSTEEL_ARMOR_HELMET_REDUCTION}, ConfigHandler.DUSKSTEEL_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 
+			ConfigHandler.DUSKSTEEL_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(INGOT_DUSKSTEEL));
 	
 	
 	//Tools
@@ -935,22 +1036,22 @@ public class ItemInit {
 	public static final Item ARMOR_PLATE_CRYSTALLITE = new ItemArmorPlate("armor_plate_crystallite");
 	public static final Item ARMOR_PLATE_DUSKSTEEL = new ItemArmorPlate("armor_plate_dusksteel");
 	
-	public static final Item CHAIN_BINDING_IRON = new ItemArmorBinding("binding_chain_iron", ArmorMaterial.IRON.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_GOLD = new ItemArmorBinding("binding_chain_gold", ArmorMaterial.GOLD.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_COPPER = new ItemArmorBinding("binding_chain_copper", AMAT_COPPER.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_SILVER = new ItemArmorBinding("binding_chain_silver", AMAT_SILVER.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_BRONZE = new ItemArmorBinding("binding_chain_bronze", AMAT_BRONZE.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_PLATINUM = new ItemArmorBinding("binding_chain_platinum", AMAT_PLATINUM.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_STEEL = new ItemArmorBinding("binding_chain_steel", AMAT_STEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_OBSIDIAN = new ItemArmorBinding("binding_chain_obsidian", AMAT_OBSIDIAN.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_IRON = new ItemArmorBinding("binding_chain_iron", ArmorMaterial.IRON);
+	public static final Item CHAIN_BINDING_GOLD = new ItemArmorBinding("binding_chain_gold", ArmorMaterial.GOLD);
+	public static final Item CHAIN_BINDING_COPPER = new ItemArmorBinding("binding_chain_copper", AMAT_COPPER);
+	public static final Item CHAIN_BINDING_SILVER = new ItemArmorBinding("binding_chain_silver", AMAT_SILVER);
+	public static final Item CHAIN_BINDING_BRONZE = new ItemArmorBinding("binding_chain_bronze", AMAT_BRONZE);
+	public static final Item CHAIN_BINDING_PLATINUM = new ItemArmorBinding("binding_chain_platinum", AMAT_PLATINUM);
+	public static final Item CHAIN_BINDING_STEEL = new ItemArmorBinding("binding_chain_steel", AMAT_STEEL);
+	public static final Item CHAIN_BINDING_OBSIDIAN = new ItemArmorBinding("binding_chain_obsidian", AMAT_OBSIDIAN);
 	
-	public static final Item CHAIN_BINDING_KOBOLD = new ItemArmorBinding("binding_chain_kobold", AMAT_KOBOLD.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_SHADOW_PLATINUM = new ItemArmorBinding("binding_chain_shadow_platinum", AMAT_SHADOW_PLATINUM.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_FROST_STEEL = new ItemArmorBinding("binding_chain_frost_steel", AMAT_FROST_STEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_CRYSTALLITE = new ItemArmorBinding("binding_chain_crystallite", AMAT_CRYSTALLITE.getDurability(EntityEquipmentSlot.CHEST)/4);
-	public static final Item CHAIN_BINDING_DUSKSTEEL = new ItemArmorBinding("binding_chain_dusksteel", AMAT_DUSKSTEEL.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item CHAIN_BINDING_KOBOLD = new ItemArmorBinding("binding_chain_kobold", AMAT_KOBOLD);
+	public static final Item CHAIN_BINDING_SHADOW_PLATINUM = new ItemArmorBinding("binding_chain_shadow_platinum", AMAT_SHADOW_PLATINUM);
+	public static final Item CHAIN_BINDING_FROST_STEEL = new ItemArmorBinding("binding_chain_frost_steel", AMAT_FROST_STEEL);
+	public static final Item CHAIN_BINDING_CRYSTALLITE = new ItemArmorBinding("binding_chain_crystallite", AMAT_CRYSTALLITE);
+	public static final Item CHAIN_BINDING_DUSKSTEEL = new ItemArmorBinding("binding_chain_dusksteel", AMAT_DUSKSTEEL);
 	
-	public static final Item LEATHER_BINDING = new ItemArmorBinding("binding_leather", ArmorMaterial.LEATHER.getDurability(EntityEquipmentSlot.CHEST)/4);
+	public static final Item LEATHER_BINDING = new ItemArmorBinding("binding_leather", ArmorMaterial.LEATHER);
 	
 	
 	//Sharpening Stones

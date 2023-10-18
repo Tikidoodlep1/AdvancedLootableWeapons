@@ -6,10 +6,6 @@ import java.util.Random;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
-import com.tiki.advancedlootableweapons.tools.ToolStabSword;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

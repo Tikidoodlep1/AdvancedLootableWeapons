@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.blocks.tileentities;
 import java.util.Random;
 
 import javax.annotation.Nullable;
+import javax.vecmath.Vector3f;
 
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.SoundHandler;
@@ -58,6 +59,13 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	private boolean canQuench = false;
 	private IRecipe activeRecipe = null;
 	private Random rand = new Random();
+	private Vector3f bubbleColumn1 = new Vector3f(0.0f, 1.0f, 0.0f);
+	private Vector3f bubbleColumn2 = new Vector3f(0.0f, 1.0f, 0.0f);
+	private float speedFactor1 = 0.02f;
+	private float speedFactor2 = 0.02f;
+	private float bubbleOffset1 = 0.0f;
+	private float bubbleOffset2 = 0.0f;
+	private boolean canBubble2 = true;
 	private Container tempContainer = new Container() {
 		@Override
 		public boolean canInteractWith(EntityPlayer playerIn) {
@@ -76,13 +84,13 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		ItemStack activeStack = playerIn.getHeldItem(hand);
 		
 		if(!playerIn.isSneaking() && activeStack != ItemStack.EMPTY) {
-			if(this.inventory.get(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof ItemHotToolHead)) {
-				this.inventory.set(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
-				activeStack.shrink(1);
-			}else if(this.inventory.get(INPUT_SLOT).isEmpty()) {
+			if(this.inventory.get(INPUT_SLOT).isEmpty()) {
 				this.inventory.set(INPUT_SLOT, activeStack);
 				playerIn.setHeldItem(hand, ItemStack.EMPTY);
 				this.onChanged();
+			}else if(this.inventory.get(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof ItemHotToolHead)) {
+				this.inventory.set(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
+				activeStack.shrink(1);
 			}
 			
 			for(int i = 0; i < 3; i++) {
@@ -297,10 +305,37 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.QUENCH, SoundCategory.BLOCKS, this.getPos().getX() + 0.5, this.getPos().getY(), this.getPos().getZ() + 0.5, 1.0f, 1.0f);
 					Minecraft.getMinecraft().addScheduledTask(() -> soundPacket.processPacket(clientHandler));
 				}
-			}else if(!this.canQuench) {
-				this.canQuench = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
-			}else {
+			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && !this.canQuench) {
+				Block under = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock();
+				this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || FluidRegistry.lookupFluidForBlock(under).getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500;
+			}else if(this.activeRecipe instanceof DrumItemRecipe) {
 				++this.progress;
+				NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
+				
+				if(((float)bubbleColumn1.getY() + bubbleOffset1) >= 1.0f) {
+					bubbleColumn1.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
+					bubbleOffset1 = 0.0f;
+					speedFactor1 = (rand.nextFloat() + 0.1f) / 50f;
+					//System.out.println("Bubble Column: " + "[" + bubbleColumn1.getX() + ", " + bubbleColumn1.getY() + bubbleOffset1 + ", " + bubbleColumn1.getZ() + "], speed: " + speedFactor1);
+				}
+				SPacketParticles particlePacket = new SPacketParticles(EnumParticleTypes.WATER_BUBBLE, false, this.pos.getX() + bubbleColumn1.getX(), this.pos.getY() + bubbleColumn1.getY() + bubbleOffset1, this.pos.getZ() + bubbleColumn1.getZ(), 0f, 0f, 0f, 0.001f, 1);
+				Minecraft.getMinecraft().addScheduledTask(() -> particlePacket.processPacket(clientHandler));
+				bubbleOffset1 += speedFactor1;
+				
+				if(canBubble2 && rand.nextFloat() >= 0.9) {
+					canBubble2 = false;
+				}
+				if(((float)bubbleColumn2.getY() + bubbleOffset2) >= 1.0) {
+					bubbleColumn2.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
+					bubbleOffset2 = 0.0f;
+					speedFactor2 = (rand.nextFloat() + 0.1f) / 50f;
+					canBubble2 = true;
+				}
+				if(!canBubble2) {
+					SPacketParticles particle2Packet = new SPacketParticles(EnumParticleTypes.WATER_BUBBLE, false, this.pos.getX() + bubbleColumn2.getX(), this.pos.getY() + bubbleColumn2.getY() + bubbleOffset2, this.pos.getZ() + bubbleColumn2.getZ(), 0f, 0f, 0f, 0.001f, 1);
+					Minecraft.getMinecraft().addScheduledTask(() -> particle2Packet.processPacket(clientHandler));
+					bubbleOffset2 += speedFactor2;
+				}
 			}
 			
 			if(this.activeRecipe instanceof DrumItemRecipe && this.progress >= ((DrumItemRecipe)this.activeRecipe).getTime()) {
@@ -310,6 +345,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					int inputCount = this.inventory.get(INPUT_SLOT).getCount() / activeInputCount;
 					int recipeCount = inputCount > outputCount ? outputCount : inputCount;
 					this.inventory.set(OUTPUT_SLOT, new ItemStack(this.activeRecipe.getCraftingResult(craft).getItem(), this.activeRecipe.getCraftingResult(craft).getCount() * recipeCount));
+					//System.out.println("SET OUTPUT SLOT TO " + this.inventory.get(OUTPUT_SLOT).getDisplayName() + "x" + this.inventory.get(OUTPUT_SLOT).getCount());
 					if(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount) <= 0) {
 						this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
@@ -319,6 +355,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					}
 					this.activeRecipe = null;
 					this.progress = 0;
+					this.onChanged();
 				}
 			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && this.progress >= ((DrumQuenchingRecipe)this.activeRecipe).getTime()) {
 				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY && this.canQuench) {
@@ -326,6 +363,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 					this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 					this.activeRecipe = null;
 					this.progress = 0;
+					this.onChanged();
 				}
 			}
 		}
@@ -358,7 +396,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
             }else if (irecipe instanceof DrumQuenchingRecipe && ConfigHandler.ENABLE_QUENCHING) {
             	//System.out.println("Quenching Recipe Matches : " + irecipe.matches(craftMatrix, worldIn) + ", Recipe fluid: " + ((DrumQuenchingRecipe)irecipe).getFluid().getFluid().getName() + ", Tank Fluid: " + this.getTank().getFluid().getFluid().getName());
             	if(((DrumQuenchingRecipe)irecipe).getFluid().getFluid() == this.getTank().getFluid().getFluid() && irecipe.matches(craftMatrix, worldIn)) {
-            		this.canQuench = worldIn.getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
+            		//this.canQuench = worldIn.getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock() == Blocks.FIRE;
             		return irecipe;
             	}
             }

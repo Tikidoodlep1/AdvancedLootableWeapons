@@ -263,27 +263,27 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
 			int plateEffect = (int)Math.ceil(((we.getPlateEffect()*100)/6)-9);
-			tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.effectiveness.studded.level").getFormattedText() + studdedEffect + "/8");
-			tooltip.add(TextFormatting.DARK_RED + new TextComponentTranslation("alw.effectiveness.studded.pierce").getFormattedText() + we.getStuddedPenChance() + "%");
+			tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.effectiveness.studded.level").getFormattedText() + " " + studdedEffect + "/8");
+			tooltip.add(TextFormatting.DARK_RED + new TextComponentTranslation("alw.effectiveness.studded.pierce").getFormattedText() + " " + we.getStuddedPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("alw.effectiveness.chain.level").getFormattedText() + chainEffect + "/8");
-			tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("alw.effectiveness.chain.pierce").getFormattedText() + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("alw.effectiveness.chain.level").getFormattedText() + " " + chainEffect + "/8");
+			tooltip.add(TextFormatting.DARK_GREEN + new TextComponentTranslation("alw.effectiveness.chain.pierce").getFormattedText() + " " + we.getChainPenChance() + "%");
 			tooltip.add("");
-			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.level").getFormattedText() + plateEffect + "/8");
-			tooltip.add(TextFormatting.DARK_BLUE + new TextComponentTranslation("alw.effectiveness.plate.pierce").getFormattedText() + we.getPlatePenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.level").getFormattedText() + " " + plateEffect + "/8");
+			tooltip.add(TextFormatting.DARK_BLUE + new TextComponentTranslation("alw.effectiveness.plate.pierce").getFormattedText() + " " + we.getPlatePenChance() + "%");
 		}else if(Keyboard.isKeyDown(run.getKeyCode())) {
 			NBTTagCompound tag = stack.getTagCompound();
 			if(tag != null && tag.hasKey("colors")) {
 				tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.colors.title").getFormattedText());
-				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.bot_outline").getFormattedText() + Integer.toHexString(tag.getIntArray("colors")[0]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.top_outline").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[1]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_lowlight").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[2]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_highlight").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[3]));
-				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.shine").getFormattedText() +  Integer.toHexString(tag.getIntArray("colors")[4]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.bot_outline").getFormattedText() + " " + Integer.toHexString(tag.getIntArray("colors")[0]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.top_outline").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[1]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_lowlight").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[2]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.mid_highlight").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[3]));
+				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.shine").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[4]));
 			}
 		}else {
-			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
-			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + run.getDisplayName() + new TextComponentTranslation("alw.colors.info.name").getFormattedText());
+			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + " " + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + run.getDisplayName() + " " + new TextComponentTranslation("alw.colors.info.name").getFormattedText());
 		}
 	}
 	

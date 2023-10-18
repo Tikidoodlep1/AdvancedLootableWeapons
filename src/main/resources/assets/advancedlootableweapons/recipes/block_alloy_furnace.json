@@ -1,0 +1,33 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"CCC",
+		"CIC",
+		"SSS"
+	],
+
+	"key":
+	{
+		"C":
+		{
+			"item": "advancedlootableweapons:block_brick_granite"
+		},
+		"S":
+		{ 
+			"item": "minecraft:stone",
+			"data": 0
+		},
+		"I":
+		{
+			"item": "advancedlootableweapons:clay_granite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_alloy_furnace",
+		"count": 1
+	}
+}

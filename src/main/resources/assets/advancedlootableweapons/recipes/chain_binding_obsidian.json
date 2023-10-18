@@ -1,19 +1,15 @@
 {
-	"type": "minecraft:crafting_shaped",
+	"type": "minecraft:crafting_shapeless",
 	"group": "advancedlootableweapons:armor_bindings",
-	"pattern":
+	"ingredients":
 	[
-		"SS"
-	],
-
-	"key":
-	{
-		"S":
+    	{
+			"item": "advancedlootableweapons:chain_link_obsidian"
+		},
 		{
 			"item": "advancedlootableweapons:chain_link_obsidian"
 		}
-	},
-
+  	],
 	"result":
 	{
 		"item": "advancedlootableweapons:binding_chain_obsidian",

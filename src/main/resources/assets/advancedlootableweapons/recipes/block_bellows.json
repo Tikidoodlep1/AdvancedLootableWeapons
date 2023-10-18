@@ -1,0 +1,25 @@
+{
+	"type": "advancedlootableweapons:anywood",
+	"group": "advancedlootableweapons:bellows",
+	"pattern":
+	[
+		" WW",
+		"WLL",
+		"WWW"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "minecraft:leather",
+			"count": 1
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_bellows",
+		"count": 1
+	}
+}

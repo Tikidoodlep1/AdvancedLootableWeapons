@@ -10,8 +10,8 @@ import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingReci
 import com.tiki.advancedlootableweapons.compat.jei.anvilForging.AnvilForgingRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.drum.DrumRecipeMaker;
-import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeCategory;
-import com.tiki.advancedlootableweapons.compat.jei.jawCrusher.JawCrusherRecipeMaker;
+import com.tiki.advancedlootableweapons.compat.jei.mill.MillRecipeCategory;
+import com.tiki.advancedlootableweapons.compat.jei.mill.MillRecipeMaker;
 import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeCategory;
 import com.tiki.advancedlootableweapons.compat.jei.tanningRack.TanningRackRecipeMaker;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -19,8 +19,8 @@ import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.ContainerAlloyFur
 import com.tiki.advancedlootableweapons.inventory.AlloyFurnace.GuiAlloyFurnace;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.ContainerForgeWeapon;
 import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.GuiForgeWeapon;
-import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher;
-import com.tiki.advancedlootableweapons.inventory.JawCrusher.GuiJawCrusher;
+import com.tiki.advancedlootableweapons.inventory.Mill.ContainerMill;
+import com.tiki.advancedlootableweapons.inventory.Mill.GuiMill;
 import com.tiki.advancedlootableweapons.inventory.TanningRack.ContainerTanningRack;
 import com.tiki.advancedlootableweapons.inventory.TanningRack.GuiTanningRack;
 
@@ -47,7 +47,7 @@ public class JEICompat implements IModPlugin{
 		registry.addRecipeCategories(
 				new AlloyFurnaceRecipeCategory(gui), 
 				new AnvilForgingRecipeCategory(gui), 
-				new JawCrusherRecipeCategory(gui), 
+				new MillRecipeCategory(gui), 
 				new DrumRecipeCategory(gui), 
 				new TanningRackRecipeCategory(gui));
 	}
@@ -66,9 +66,9 @@ public class JEICompat implements IModPlugin{
 		registry.addRecipeClickArea(GuiForgeWeapon.class, 80, 43, 21, 15, RecipeCategories.ANVILFORGING);
 		recipeTransfer.addRecipeTransferHandler(ContainerForgeWeapon.class, RecipeCategories.ANVILFORGING, 0, 2, 2, 36);
 		
-		registry.addRecipes(JawCrusherRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.JAWCRUSHER);
-		registry.addRecipeClickArea(GuiJawCrusher.class, 75, 43, 27, 13, RecipeCategories.JAWCRUSHER);
-		recipeTransfer.addRecipeTransferHandler(ContainerJawCrusher.class, RecipeCategories.JAWCRUSHER, 0, 2, 2, 36);
+		registry.addRecipes(MillRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.MILL);
+		registry.addRecipeClickArea(GuiMill.class, 75, 43, 27, 13, RecipeCategories.MILL);
+		recipeTransfer.addRecipeTransferHandler(ContainerMill.class, RecipeCategories.MILL, 0, 2, 2, 36);
 		
 		registry.addRecipes(DrumRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.DRUM);
 		
@@ -83,7 +83,7 @@ public class JEICompat implements IModPlugin{
 		
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.alloy_furnace), RecipeCategories.ALLOYFURNACE);
 		registry.addRecipeCatalyst(new ItemStack(Blocks.ANVIL), RecipeCategories.ANVILFORGING);
-		registry.addRecipeCatalyst(new ItemStack(BlockInit.crusher), RecipeCategories.JAWCRUSHER);
+		registry.addRecipeCatalyst(new ItemStack(BlockInit.mill), RecipeCategories.MILL);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.drum), RecipeCategories.DRUM);
 		registry.addRecipeCatalyst(new ItemStack(BlockInit.tanning_rack), RecipeCategories.TANNINGRACK);
 	}

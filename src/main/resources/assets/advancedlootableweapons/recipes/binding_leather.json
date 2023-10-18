@@ -1,19 +1,15 @@
 {
-	"type": "minecraft:crafting_shaped",
+	"type": "minecraft:crafting_shapeless",
 	"group": "advancedlootableweapons:armor_bindings",
-	"pattern":
+	"ingredients":
 	[
-		"SS"
-	],
-
-	"key":
-	{
-		"S":
+    	{
+			"item": "advancedlootableweapons:leather_strip"
+		},
 		{
 			"item": "advancedlootableweapons:leather_strip"
 		}
-	},
-
+  	],
 	"result":
 	{
 		"item": "advancedlootableweapons:binding_leather",

@@ -1,19 +1,24 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemArmorBinding;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
+import com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -26,8 +31,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.play.server.SPacketParticles;
+import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -42,6 +51,7 @@ public class ContainerForgeWeapon extends Container {
     public static final int TOOL_ROD_BUTTON = 98;
     public static final int HAMMER_BUTTON = 99;
     protected IRecipe recipe = null;
+    private final BlockPos pos;
     private InventoryCrafting invCraft = new InventoryCrafting(this, 3, 1);
     
     @SideOnly(Side.CLIENT)
@@ -53,6 +63,11 @@ public class ContainerForgeWeapon extends Container {
     
 	public ContainerForgeWeapon(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
     {
+		RayTraceResult tr = player.rayTrace(player.getAttributeMap().getAttributeInstanceByName("generic.reachDistance").getAttributeValue(), Minecraft.getMinecraft().getRenderPartialTicks());
+		this.pos = tr.getBlockPos();
+		
+		//System.out.println(this.pos + ", " + worldIn.getBlockState(this.pos).getBlock().getRegistryName());
+		
         this.inputSlot = new InventoryBasic("Forge Weapon", true, 3);
         if(player.getActiveItemStack().getItem() instanceof ToolForgeHammer) {
         	this.toolForgeHammer = player.inventory.currentItem;
@@ -162,7 +177,8 @@ public class ContainerForgeWeapon extends Container {
     {
 		this.buttonPressed = id;
 		
-		if(craftItem()) {
+		if(toolForgeHammer > -1 && craftItem()) {
+			playerIn.getFoodStats().addExhaustion(ConfigHandler.FORGING_EXHAUSTION);
 			this.buttonPressed = -1;
         	return true;
 		}else {
@@ -222,6 +238,37 @@ public class ContainerForgeWeapon extends Container {
 					this.giveExp(toolRecipe.getExp());
 					return true;
 				}
+			}else if(recipe instanceof ForgeArmorPlateRecipe) {
+				ForgeArmorPlateRecipe toolRecipe = ((ForgeArmorPlateRecipe)this.recipe);
+				if(getButtonIdFromName(toolRecipe.getButton()) == this.buttonPressed) {
+					ItemStack result = toolRecipe.getCraftingResult(this.invCraft);
+					
+					NonNullList<ItemStack> remaining = toolRecipe.getRemainingItems(this.invCraft);
+					for(int i = 0; i < remaining.size(); i++) {
+						this.inputSlot.setInventorySlotContents(i, remaining.get(i));
+					}
+					
+					this.inputSlot.setInventorySlotContents(2, result);
+					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					this.damageForgeHammer(1);
+					this.giveExp(toolRecipe.getExp());
+					return true;
+				}
+			}else if(recipe instanceof ForgeArmorBindingRecipe) {
+				ForgeArmorBindingRecipe bindingRecipe = ((ForgeArmorBindingRecipe)this.recipe);
+				if(getButtonIdFromName(bindingRecipe.getButton()) == this.buttonPressed) {
+					ItemStack result = bindingRecipe.getCraftingResult(this.invCraft);
+					
+					NonNullList<ItemStack> remaining = bindingRecipe.getRemainingItems(this.invCraft);
+					for(int i = 0; i < remaining.size(); i++) {
+						this.inputSlot.setInventorySlotContents(i, remaining.get(i));
+					}
+					
+					this.inputSlot.setInventorySlotContents(2, result);
+					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					this.damageForgeHammer(1);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -229,6 +276,10 @@ public class ContainerForgeWeapon extends Container {
 	
 	private void giveExp(int exp) {
 		this.player.addExperience(exp);
+		System.out.println("Giving " + exp + " from Forge Weapons");
+//		NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
+//		SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(this.world, this.player.posX, this.player.posY, this.player.posZ, exp));
+//		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
 	}
 	
 	private void damageForgeHammer(int amount) {
@@ -236,6 +287,7 @@ public class ContainerForgeWeapon extends Container {
 		if(forgeHammer.attemptDamageItem(amount, new Random(), null)) {
 			player.inventory.deleteStack(forgeHammer);
 			Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+			this.toolForgeHammer = -1;
 		}
 	}
 	
@@ -259,6 +311,12 @@ public class ContainerForgeWeapon extends Container {
             else if (irecipe instanceof ForgeArmorPlateRecipe)
             {
             	if( getButtonIdFromName(((ForgeArmorPlateRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+            else if (irecipe instanceof ForgeArmorBindingRecipe)
+            {
+            	if( getButtonIdFromName(((ForgeArmorBindingRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }
@@ -338,7 +396,11 @@ public class ContainerForgeWeapon extends Container {
     
     public boolean canInteractWith(EntityPlayer playerIn)
     {
-        return true;
+    	//System.out.println((playerIn.getDistanceSq(this.pos) <= 64.0D) + ", " + ConfigHandler.VALID_ANVILS.contains(playerIn.world.getBlockState(this.pos).getBlock().getRegistryName().toString()));
+    	if(playerIn.getDistanceSq(this.pos) <= 64.0D && ConfigHandler.VALID_ANVILS.contains(playerIn.world.getBlockState(this.pos).getBlock().getRegistryName().toString())) {
+    		return true;
+    	}
+        return false;
     }
     
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)

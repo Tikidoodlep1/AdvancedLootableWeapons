@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
@@ -97,6 +98,18 @@ public class AnvilForgingRecipeMaker {
             		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
             	}
             	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
+            }
+            else if (irecipe instanceof ForgeArmorBindingRecipe)
+            {
+            	ForgeArmorBindingRecipe recipe = (ForgeArmorBindingRecipe)irecipe;
+            	StringBuilder button = new StringBuilder(recipe.getButton());
+            	button.replace(0, 1, button.substring(0, 1).toUpperCase());
+            	int space = button.indexOf(" ");
+            	if(space != -1) {
+            		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
+            	}
+            	
+            	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), 0, button.toString()));
             }
         }
 		

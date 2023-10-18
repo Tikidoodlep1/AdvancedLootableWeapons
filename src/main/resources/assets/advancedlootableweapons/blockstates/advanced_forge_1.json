@@ -1,9 +1,0 @@
-{
-    "variants": 
-    {
-        "facing=north": { "model": "advancedlootableweapons:advanced_forge_1" },
-        "facing=east": { "model": "advancedlootableweapons:advanced_forge_1" },
-        "facing=south": { "model": "advancedlootableweapons:advanced_forge_1" },
-        "facing=west": { "model": "advancedlootableweapons:advanced_forge_1" }
-    }
-}

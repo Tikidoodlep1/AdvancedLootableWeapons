@@ -124,58 +124,67 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 		ItemStack input1 = inv.getStackInSlot(0);
 		ItemStack input2 = inv.getStackInSlot(1);
 		NBTTagCompound input1Tag = input1.getTagCompound();
-		
-		if(input1Tag == null) {
-			input1Tag = new NBTTagCompound();
-		}
-		
-		input1Tag.setDouble("addedDamage", 0.0);
-		input1Tag.setInteger("addedDurability", 0);
+		NBTTagCompound input2Tag = input2.getTagCompound();
+		NBTTagCompound resultTag = new NBTTagCompound();
 		
 		if(isAcceptedIngot(input1)) {
-			input1Tag.setTag("Material", input1.serializeNBT());
+			resultTag.setTag("Material", input1.serializeNBT());
 			result.setItemDamage(6000);
 		}else if(!input2.isEmpty() && isAcceptedIngot(input2)){
-			input1Tag.setTag("Material", input2.serializeNBT());
+			resultTag.setTag("Material", input2.serializeNBT());
 			result.setItemDamage(6000);
 		}
 		
 		if(input1.getItem() instanceof ItemHotToolHead) {
-			result.setItemDamage(input1.getItemDamage() + 3000 > 6000 ? 6000 : input1.getItemDamage() + 3000);
 			if(input1Tag.hasKey("addedDamage")) {
-				input1Tag.setDouble("addedDamage", input1Tag.getDouble("addedDamage") + checkHeat(input1));
+				resultTag.setDouble("addedDamage", input1Tag.getDouble("addedDamage") + checkHeat(input1));
 			}else {
-				input1Tag.setDouble("addedDamage", checkHeat(input1));
+				resultTag.setDouble("addedDamage", checkHeat(input1));
 			}
 			
 			if(input1Tag.hasKey("addedDurability")) {
-				input1Tag.setInteger("addedDurability", input1Tag.getInteger("addedDurability") + (int)(checkHeat(input1) * 100));
+				resultTag.setInteger("addedDurability", input1Tag.getInteger("addedDurability") + (int)(checkHeat(input1) * 100));
 			}else {
-				input1Tag.setInteger("addedDurability", (int)(checkHeat(input1) * 100));
+				resultTag.setInteger("addedDurability", (int)(checkHeat(input1) * 100));
 			}
 			
-		}
-		
-		if(!input2.isEmpty() && input2.getItem() instanceof ItemHotToolHead) {
-			if(!(input1.getItem() instanceof ItemHotToolHead)) {
-				result.setItemDamage(input1.getItemDamage() + 3000 > 6000 ? 6000 : input1.getItemDamage() + 3000);
-			}
-			
-			double heat2 = checkHeat(input2);
-			if(input1Tag.hasKey("addedDamage")) {
-				input1Tag.setDouble("addedDamage", input1Tag.getDouble("addedDamage") + heat2);
-			}else {
-				input1Tag.setDouble("addedDamage", heat2);
-			}
-			
-			if(input1Tag.hasKey("addedDurability")) {
-				input1Tag.setInteger("addedDurability", input1Tag.getInteger("addedDurability") + (int)(heat2 * 100));
-			}else {
-				input1Tag.setInteger("addedDurability", (int)(heat2 * 100));
+			if(input1Tag.hasKey("Material")) {
+				resultTag.setTag("Material", input1Tag.getTag("Material"));
 			}
 		}
 		
-		result.setTagCompound(input1Tag);
+		if(inputs.size() >= 2 && inputs.get(inputs.size() - 1) != Ingredient.EMPTY) {
+			if(input2.getItem() instanceof ItemHotToolHead) {
+				if(input2Tag.hasKey("addedDamage")) {
+					resultTag.setDouble("addedDamage", input2Tag.getDouble("addedDamage") + checkHeat(input2));
+				}else {
+					resultTag.setDouble("addedDamage", checkHeat(input2));
+				}
+				
+				if(input2Tag.hasKey("addedDurability")) {
+					resultTag.setInteger("addedDurability", input2Tag.getInteger("addedDurability") + (int)(checkHeat(input2) * 100));
+				}else {
+					resultTag.setInteger("addedDurability", (int)(checkHeat(input2) * 100));
+				}
+				
+				if(input2Tag.hasKey("Material")) {
+					resultTag.setTag("Material", input2Tag.getTag("Material"));
+				}
+			}
+		}
+		
+		int heat = 6000;
+		if(input1.getItem() instanceof ItemHotToolHead && input2.getItem() instanceof ItemHotToolHead) {
+			heat = (input1.getItemDamage() + input2.getItemDamage()) / 2;
+		}else if(input1.getItem() instanceof ItemHotToolHead) {
+			heat = input1.getItemDamage();
+		}else if(input2.getItem() instanceof ItemHotToolHead) {
+			heat = input2.getItemDamage();
+		}
+		
+		result.setItemDamage(heat + 3000 > 6000 ? 6000 : heat + 3000);
+		
+		result.setTagCompound(resultTag);
 		
 		return result;
 	}

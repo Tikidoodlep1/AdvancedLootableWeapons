@@ -17,6 +17,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
@@ -43,35 +44,40 @@ public class ArmorBindingRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
-		Iterator<Ingredient> iter = inputs.iterator();
-		boolean isMatch = false;
 		
-		for(int i = 0; i < inv.getSizeInventory(); i++) {
+		int matches = 0;
+		
+		inventory: for(int i = 0; i < inv.getSizeInventory(); i++) {
 			ItemStack input = inv.getStackInSlot(i);
 			if(!input.isEmpty()) {
-				if(iter.hasNext()) {
-					isMatch = false;
+				Iterator<Ingredient> iter = inputs.iterator();
+				while(iter.hasNext()) {
 					Ingredient ingred = iter.next();
 					for(ItemStack is : ingred.getMatchingStacks()) {
 						if(is.getItem() == input.getItem()) {
-							isMatch = true;
+							matches++;
+							continue inventory;
 						}
 					}
-					if(!isMatch) {
-						return false;
-					}
-				}else {
-					return false;
 				}
+				if(matches == inputs.size()) {
+					break inventory;
+				}
+				return false;
 			}
 		}
-		return isMatch;
+		
+		if(matches != inputs.size()) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
 		
-		((ArmorBonusesBase)result.getItem()).setBinding("Leather", result);
+		((ArmorBonusesBase)result.getItem()).setBinding(new TextComponentTranslation("item.binding_leather.name").getFormattedText(), result);
 		((ArmorBonusesBase)result.getItem()).setMaximumDamage(((ItemArmorBinding)ItemInit.LEATHER_BINDING).getExtraDur(), result);
 		
 		return result;

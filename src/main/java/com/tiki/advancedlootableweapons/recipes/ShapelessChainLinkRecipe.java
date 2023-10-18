@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -25,9 +26,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	
 	private final NonNullList<Ingredient> inputs;
-	private final String material;
+	private final Item material;
 	
-	ShapelessChainLinkRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, ItemStack result, String material) {
+	ShapelessChainLinkRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, ItemStack result, Item material) {
 		super(group, input, result);
 		this.inputs = input;
 		this.material = material;
@@ -42,42 +43,52 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
-		NBTTagCompound nbt = new NBTTagCompound();
-		boolean isMatch = false;
-		Iterator<Ingredient> iter = inputs.iterator();
-		for(int i = 0; i < inv.getSizeInventory(); i++) {
-			ItemStack input = inv.getStackInSlot(i);
-			if(!input.isEmpty()) {
-				if(iter.hasNext()) {
-					Ingredient ingred = iter.next();
-					
-					for(ItemStack is : ingred.getMatchingStacks()) {
-						if(is.getItem() == input.getItem()) {
-							isMatch = true;
-						}
-						if(!isMatch) {
-							return false;
+		int matches = 0;
+		
+		inventory: for(int i = 0; i < inv.getSizeInventory(); i++) {
+			//Found an item in the inventory
+			if(!inv.getStackInSlot(i).isEmpty()) {
+				Iterator<Ingredient> iter = inputs.iterator();
+				//Checking all input ingredients against found item
+				//System.out.println("Input item " + inv.getStackInSlot(i).getItem());
+				while(iter.hasNext()) {
+					Ingredient ingr = iter.next();
+					for(ItemStack is : ingr.getMatchingStacks()) {
+						//We have a match
+						if(is.getItem() == inv.getStackInSlot(i).getItem()) {
+							//System.out.println("Ingredient item " + is.getItem());
+							NBTTagCompound nbt = inv.getStackInSlot(i).getTagCompound();
+							if(nbt != null && nbt.hasKey("Material")) {
+								//System.out.println("Material: " + nbt.getCompoundTag("Material"));
+								if(new ItemStack(nbt.getCompoundTag("Material")).getItem() == this.material) {
+									matches++;
+									continue inventory;
+								}else {
+									return false;
+								}
+							}
 						}
 					}
-					nbt = input.getTagCompound();
-					if(input.hasTagCompound() && nbt.hasKey("Material")) {
-						if(!nbt.getString("Material").equalsIgnoreCase(this.material)) {
-							return false;
-						}
-					}else {
-						return false;
-					}
-				}else {
-					return false;
 				}
+				if(matches == inputs.size()) {
+					break inventory;
+				}
+				return false;
 			}
+			
+			
 		}
-		return isMatch;
+		
+		if(matches != inputs.size()) {
+			return false;
+		}
+
+		return true;
 	}
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		final String[] mats = new String[super.getIngredients().size()];
+		final Item[] mats = new Item[super.getIngredients().size()];
 		final ItemStack result = super.getCraftingResult(inv);
 		int j = 0;
 		
@@ -87,7 +98,7 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 			if(!input.isEmpty()) {
 				NBTTagCompound tag = input.getTagCompound();
 				if(tag != null && tag.hasKey("Material")) {
-					mats[j++] = tag.getString("Material");
+					mats[j++] = new ItemStack(tag.getCompoundTag("Material")).getItem();
 				}
 			}
 		}
@@ -95,17 +106,12 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 		for(int i = 1; i < mats.length; i++) {
 			if(mats[i] == null) {
 				return ItemStack.EMPTY;
-			}
-			if(!mats[i].equalsIgnoreCase(mats[i-1])) {
+			}else if(mats[i] != mats[i-1]) {
 				return ItemStack.EMPTY;
 			}
 		}
 		
-		if(mats[0].equalsIgnoreCase(material)) {
-			return result;
-		}else {
-			return ItemStack.EMPTY;
-		}
+		return result;
 	}
 	
 	@Override
@@ -126,7 +132,7 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 			if(ingredients.isEmpty()) {
 				throw new JsonParseException("No ingredients found");
 			}
-			final String material = JsonUtils.getString(json, "Material");
+			final Item material = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "material"), context).getItem();
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
 			return new ShapelessChainLinkRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result, material);

@@ -1,0 +1,22 @@
+{
+	"_comment": "Any ingredient can be replaced with \"slot\": \"binding\" to use oreDictionary for bindings.",
+	
+	"type": "advancedlootableweapons:forge_bind_armor",
+	"group": "advancedlootableweapons:bind_armor",
+	"button": "Forge Weapon",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:unbound_plate_leggings_shadow_platinum",
+			"count": 1
+		},
+		{
+			"slot": "binding"
+		}
+	],
+	
+	"result": {
+		"item": "advancedlootableweapons:plate_leggings_shadow_platinum",
+		"count": 1
+	}
+}

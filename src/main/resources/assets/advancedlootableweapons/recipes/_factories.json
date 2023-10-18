@@ -4,6 +4,7 @@
 		"use_dur_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory",
 		"dye_armor": "com.tiki.advancedlootableweapons.recipes.ArmorDyesRecipe$Factory",
 		"bind_armor": "com.tiki.advancedlootableweapons.recipes.ArmorBindingRecipe$Factory",
+		"forge_bind_armor": "com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe$Factory",
 		"anywood": "com.tiki.advancedlootableweapons.recipes.AnywoodBellowsRecipe$Factory",
 		"forge_tool_head": "com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe$Factory",
 		"forge_weapon": "com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe$Factory",

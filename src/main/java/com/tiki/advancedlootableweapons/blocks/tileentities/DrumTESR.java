@@ -41,6 +41,7 @@ public class DrumTESR extends TileEntitySpecialRenderer<TileEntityDrum> {
 			GlStateManager.enableLighting();
 			GlStateManager.popMatrix();
 		}
+		
 		if(!output.isEmpty()) {
 			GlStateManager.pushMatrix();
 			switch(facing) {

@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.DrumTESR;
+import com.tiki.advancedlootableweapons.blocks.tileentities.MillTESR;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityMill;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.RenderHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
@@ -60,10 +62,9 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void addColoredItemRenderer() {
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor()
-        {
-            public int colorMultiplier(ItemStack stack, int tintIndex)
-            {
+		
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+            public int colorMultiplier(ItemStack stack, int tintIndex) {
                 return tintIndex > 0 ? -1 : ((ItemArmor)stack.getItem()).getColor(stack);
             }
         }, ItemInit.HELMET_LEATHER, ItemInit.CHESTPLATE_LEATHER, ItemInit.LEGGINGS_LEATHER, ItemInit.BOOTS_LEATHER, 
@@ -252,6 +253,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerTESRs() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDrum.class, new DrumTESR());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMill.class, new MillTESR());
 	}
 	
 	public void onTooltip(ItemTooltipEvent event) {

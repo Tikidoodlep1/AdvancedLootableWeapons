@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -17,13 +19,13 @@ public class ItemArmorBinding extends ItemBase {
 	private final String name;
 	private final int extraDur;
 	
-	public ItemArmorBinding(String name, int extraDur) {
+	public ItemArmorBinding(String name, ArmorMaterial extraDur) {
 		super(name);
 		this.name = name;
-		this.extraDur = extraDur;
+		this.extraDur = extraDur.getDurability(EntityEquipmentSlot.CHEST)/4;
 	}
 	
-	public String getBindingName() {
+	public String getName() {
 		return this.name;
 	}
 	
@@ -34,7 +36,7 @@ public class ItemArmorBinding extends ItemBase {
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-		tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.armor_binding.bonus_dur.name").getFormattedText() + this.extraDur);
+		tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.armor_binding.bonus_dur.name").getFormattedText() + ": " + this.extraDur);
     }
 
 }

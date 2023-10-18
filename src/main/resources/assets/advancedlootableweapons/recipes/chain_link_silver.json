@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Silver",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_silver"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_silver",

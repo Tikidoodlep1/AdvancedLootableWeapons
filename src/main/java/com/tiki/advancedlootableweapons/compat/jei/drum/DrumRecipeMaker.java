@@ -12,7 +12,6 @@ import com.tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 
 import mezz.jei.api.IJeiHelpers;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;

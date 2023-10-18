@@ -1,0 +1,18 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"item": "advancedlootableweapons:rock_feldspar"
+    },
+    {
+		"item": "minecraft:iron_ingot",
+		"count": 2
+    }
+  ],
+  "exp": 0.9,
+  "result": {
+    "item": "advancedlootableweapons:ingot_kobold",
+    "count": 4
+  }
+}

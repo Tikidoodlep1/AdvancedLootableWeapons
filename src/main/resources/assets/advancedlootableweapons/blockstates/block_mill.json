@@ -1,0 +1,10 @@
+{
+	"forge_marker": 1,
+    "variants": 
+    {
+        "facing=north": { "model": "advancedlootableweapons:block_mill" },
+        "facing=east": { "model": "advancedlootableweapons:block_mill", "y": 90 },
+        "facing=south": { "model": "advancedlootableweapons:block_mill", "y": 180 },
+        "facing=west": { "model": "advancedlootableweapons:block_mill", "y": 270 }
+    }
+}

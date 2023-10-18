@@ -54,9 +54,9 @@ public class AlloyFurnaceRecipe implements IRecipeWrapper {
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		if(exp > 0){
-			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience", exp);
+			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience") + ": " + exp;
 			FontRenderer renderer = minecraft.fontRenderer;
-			renderer.drawString(expString, recipeWidth - 30, 48, Color.GRAY.getRGB());
+			renderer.drawString(expString, recipeWidth - renderer.getStringWidth(expString), 48, Color.GRAY.getRGB());
 		}
 	}
 }

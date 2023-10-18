@@ -5,7 +5,7 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurna
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityJawCrusher;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityMill;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityTanningRack;
 
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +18,7 @@ public class TileEntityHandler
 		GameRegistry.registerTileEntity(TileEntityAlloyFurnace.class, new ResourceLocation(ModInfo.ID + ":alloy_furnace"));
 		GameRegistry.registerTileEntity(TileEntityForge.class, new ResourceLocation(ModInfo.ID + ":forge"));
 		GameRegistry.registerTileEntity(TileEntityForge2.class, new ResourceLocation(ModInfo.ID + ":forge2"));
-		GameRegistry.registerTileEntity(TileEntityJawCrusher.class, new ResourceLocation(ModInfo.ID + ":jaw_crusher"));
+		GameRegistry.registerTileEntity(TileEntityMill.class, new ResourceLocation(ModInfo.ID + ":mill"));
 		GameRegistry.registerTileEntity(TileEntityTanningRack.class, new ResourceLocation(ModInfo.ID + ":tanning_rack"));
 		GameRegistry.registerTileEntity(TileEntityDrum.class, new ResourceLocation(ModInfo.ID + ":drum"));
 	}

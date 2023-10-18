@@ -4,11 +4,9 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.inventory.TanningRack.ContainerTanningRack;
 import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
@@ -20,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -102,8 +101,7 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 			this.markDirty();
 		}
 		
-		craft.setInventorySlotContents(index, stack);
-		recipe = findMatchingRecipe(craft, this.getWorld());
+		recipe = findMatchingRecipe(this.inventory, this.getWorld());
 	}
 	
 	@Override
@@ -113,6 +111,7 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 		this.inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.inventory);
 		this.progress = compound.getInteger("progress");
+		this.recipe = CraftingManager.REGISTRY.getObject(new ResourceLocation(compound.getString("recipe")));
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -123,6 +122,11 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 		super.writeToNBT(compound);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		compound.setInteger("progress", this.progress);
+		
+		if(this.recipe != null) {
+			compound.setString("recipe", this.recipe.getRegistryName().toString());
+		}
+		
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
@@ -138,8 +142,8 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 		if(!this.world.isRemote) {
 			if(this.recipe != null) {
 				++this.progress;
-				if(this.progress >= 1200 && (this.inventory.get(1).getItem() == recipe.getCraftingResult(craft).getItem() || this.inventory.get(1) == ItemStack.EMPTY) ) {					
-					NonNullList<ItemStack> leftovers = recipe.getRemainingItems(craft);
+				if(this.progress >= 1200 && (this.inventory.get(1).getItem() == recipe.getCraftingResult(craft).getItem() || this.inventory.get(1) == ItemStack.EMPTY) ) {
+					NonNullList<ItemStack> leftovers = ((ShapelessOneSlotRecipes)recipe).getRemainingItems(this.inventory);
 					this.inventory.set(0, leftovers.get(0));
 					ItemStack result = recipe.getCraftingResult(craft);
 					if(this.inventory.get(1).getItem() == result.getItem()) {
@@ -148,20 +152,23 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 						this.inventory.set(1, result);
 					}
 					this.progress = 0;
-					this.recipe = findMatchingRecipe(craft, this.getWorld());
+					this.recipe = findMatchingRecipe(this.inventory, this.getWorld());
 				}
+			}else {
+				this.progress = 0;
 			}
 		}
 	}
 	
 	@Nullable
-    private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)
+    private IRecipe findMatchingRecipe(NonNullList<ItemStack> craftMatrix, World worldIn)
     {
         for (IRecipe irecipe : CraftingManager.REGISTRY)
         {
             if (irecipe instanceof ShapelessOneSlotRecipes)
             {
-            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.tanning_rack && irecipe.matches(craftMatrix, worldIn)) {
+            	//System.out.println("matches: " + ((ShapelessOneSlotRecipes)irecipe).matches(craftMatrix, worldIn));
+            	if(((ShapelessOneSlotRecipes)irecipe).block == BlockInit.tanning_rack && ((ShapelessOneSlotRecipes)irecipe).matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }

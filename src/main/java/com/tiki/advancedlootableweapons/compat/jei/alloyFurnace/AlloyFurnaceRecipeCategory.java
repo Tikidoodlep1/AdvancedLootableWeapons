@@ -23,7 +23,7 @@ public class AlloyFurnaceRecipeCategory extends AbstractAlloyFurnaceRecipeCatego
 		super(helper);
 		this.helper = helper;
 		background = helper.createDrawable(TEXTURES, 40, 12, 97, 63);
-		name = new TextComponentTranslation("tile.alloy_furnace.name").getFormattedText();
+		name = new TextComponentTranslation("tile.block_alloy_furnace.name").getFormattedText();
 	}
 	
 	@Override

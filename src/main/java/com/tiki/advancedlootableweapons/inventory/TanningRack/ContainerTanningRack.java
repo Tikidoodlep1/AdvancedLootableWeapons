@@ -6,7 +6,7 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityTanningRac
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.inventory.JawCrusher.ContainerJawCrusher;
+import com.tiki.advancedlootableweapons.inventory.Mill.ContainerMill;
 import com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
 import net.minecraft.entity.player.EntityPlayer;

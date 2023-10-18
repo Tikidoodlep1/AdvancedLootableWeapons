@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Platinum",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_platinum"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_platinum",

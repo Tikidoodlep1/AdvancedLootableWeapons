@@ -16,7 +16,10 @@
 			"data": 32767
 		}
 	],
-	"Material": "Obsidian",
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_obsidian"
+	},
 	"result": 
 	{
 		"item": "advancedlootableweapons:chain_link_obsidian",

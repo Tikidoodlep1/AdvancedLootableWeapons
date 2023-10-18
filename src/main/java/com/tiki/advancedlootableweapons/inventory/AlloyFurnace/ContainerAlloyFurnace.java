@@ -2,12 +2,16 @@ package com.tiki.advancedlootableweapons.inventory.AlloyFurnace;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -56,7 +60,13 @@ public class ContainerAlloyFurnace extends Container
 			}
 			
 			public ItemStack onTake(EntityPlayer player, ItemStack stack) {
-				player.addExperience( (int)(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount()));
+//				ContainerAlloyFurnace.this.tileentity.sendExp( (int)Math.ceil(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount()));
+				int exp = (int)Math.ceil(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount());
+//				System.out.println("Giving " + exp + " from Alloy Furnace");
+//				NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
+//				SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(player.world, player.posX, player.posY, player.posZ, exp));
+//				Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
+				player.addExperience(exp);
 				ContainerAlloyFurnace.this.tileentity.recipeExp = 0;
 				return stack;
 			}

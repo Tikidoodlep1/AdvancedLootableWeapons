@@ -47,8 +47,8 @@ public class ToolSpear extends ToolStabSword {
 		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
 			tooltip.add("");
-			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.pierce.thrown_spear").getFormattedText() + we.getChainPenChance() + "%");
-			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.pierce.thrown_spear").getFormattedText() + we.getPlatePenChance() + "%");
+			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.pierce.thrown_spear").getFormattedText() + " " + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.pierce.thrown_spear").getFormattedText() + " " + we.getPlatePenChance() + "%");
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class ToolSpear extends ToolStabSword {
 				maxDur = (this.getMaxDamage(stack) - this.getToolMaterial().getMaxUses());
 			}
             EntitySpear entityspear = new EntitySpear(worldIn, playerIn, this.getDamage(stack), maxDur, totalDamage, this.getReach(), this.getAttackSpeed(), stack);
-            entityspear.setMaterial(this.getToolMaterialName());
+            entityspear.setMaterial(this.getToolMaterial().toString());
             entityspear.setArrowStack(this);
             entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             boolean flag1 = playerIn.capabilities.isCreativeMode;

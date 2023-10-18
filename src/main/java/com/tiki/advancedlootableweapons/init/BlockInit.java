@@ -14,7 +14,7 @@ import com.tiki.advancedlootableweapons.blocks.BlockForge;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
 import com.tiki.advancedlootableweapons.blocks.BlockGypsum;
-import com.tiki.advancedlootableweapons.blocks.BlockJawCrusher;
+import com.tiki.advancedlootableweapons.blocks.BlockMill;
 import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
 import com.tiki.advancedlootableweapons.blocks.BlockQuartzClay;
 import com.tiki.advancedlootableweapons.blocks.BlockTanningRack;
@@ -57,28 +57,30 @@ public class BlockInit {
 	
 	
 	//Ores
-	public static final Block ore_silver = new BlockAlwOre("ore_silver", 2).setHardness(1.6F).setResistance(3.0F);
-	public static final Block ore_copper = new BlockAlwOre("ore_copper", 2).setHardness(1.6F).setResistance(3.0F);
-	public static final Block ore_platinum = new BlockAlwOre("ore_platinum", 3).setHardness(1.7F).setResistance(3.0F);
-	public static final Block ore_crystallite = new BlockOreDropItem("ore_crystallite", ItemInit.CRYSTAL, 1, 3, 3).setHardness(1.8F).setResistance(3.5F);
-	public static final Block ore_tin = new BlockAlwOre("ore_tin", 2).setHardness(1.5F).setResistance(3.0F);
-	public static final Block ore_salt = new BlockOreDropItem("ore_salt", ItemInit.RAW_SALT, 2, 6, 1).setHardness(1.3F).setResistance(2.6F);
+	public static final Block ore_silver = new BlockAlwOre("block_ore_silver", 2).setHardness(1.6F).setResistance(3.0F);
+	public static final Block ore_copper = new BlockAlwOre("block_ore_copper", 2).setHardness(1.6F).setResistance(3.0F);
+	public static final Block ore_platinum = new BlockAlwOre("block_ore_platinum", 3).setHardness(1.7F).setResistance(3.0F);
+	public static final Block ore_crystallite = new BlockOreDropItem("block_ore_crystallite", ItemInit.CRYSTAL, 1, 3, 3).setHardness(1.8F).setResistance(3.5F);
+	public static final Block ore_tin = new BlockAlwOre("block_ore_tin", 2).setHardness(1.5F).setResistance(3.0F);
+	public static final Block ore_salt = new BlockOreDropItem("block_ore_salt", ItemInit.RAW_SALT, 2, 6, 1).setHardness(1.3F).setResistance(2.6F);
 	
 	
 	//Functionals
-	public static final Block alloy_furnace = new BlockAlloyFurnace("alloy_furnace").setHardness(2.7F).setResistance(5.0F);
-	public static final Block forge = new BlockForge("forge").setHardness(2.0F).setResistance(3.7F);
-	public static final Block forge2 = new BlockForge2("advanced_forge").setHardness(3.0F).setResistance(4.7F);
-	public static final Block forge2_1 = new BlockForge2Placeholder("advanced_forge_1").setHardness(3.0F).setResistance(4.7F);
-	public static final Block crusher = new BlockJawCrusher("jaw_crusher", Material.IRON).setHardness(2.5F).setResistance(7.0F);
-	public static final Block tanning_rack = new BlockTanningRack("tanning_rack").setHardness(1.3F);
-	public static final Block drum = new BlockDrum("drum").setHardness(2.0F).setResistance(5.5F);
-	public static final Block bellows = new BlockBellows("bellows").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_birch = new BlockBellows("bellows_birch").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_spruce = new BlockBellows("bellows_spruce").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_jungle = new BlockBellows("bellows_jungle").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_acacia = new BlockBellows("bellows_acacia").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_dark_oak = new BlockBellows("bellows_dark_oak").setHardness(1.5F).setResistance(1.8F);
+	public static final Block alloy_furnace = new BlockAlloyFurnace("block_alloy_furnace").setHardness(2.7F).setResistance(5.0F);
+	public static final Block forge = new BlockForge("block_forge").setHardness(2.0F).setResistance(3.7F);
+	public static final Block forge2 = new BlockForge2("block_advanced_forge").setHardness(3.0F).setResistance(4.7F);
+	public static final Block forge2_1 = new BlockForge2Placeholder("block_advanced_forge_1").setHardness(3.0F).setResistance(4.7F);
+	public static final Block mill = new BlockMill("block_mill", Material.IRON).setHardness(2.5F).setResistance(7.0F);
+	public static final Block tanning_rack = new BlockTanningRack("block_tanning_rack").setHardness(1.3F);
+	public static final Block drum = new BlockDrum("block_drum").setHardness(2.0F).setResistance(5.5F);
+	public static final Block bellows = new BlockBellows("block_bellows").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_birch = new BlockBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_spruce = new BlockBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_jungle = new BlockBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_acacia = new BlockBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_dark_oak = new BlockBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F);
+	
+	//public static final Block mill2 = new BlockMill2("mill2", Material.ROCK); Legacy model test
 	
 	//Fluids
 	public static final Block milk_of_lime = new BlockAlwFluid("milk_of_lime", FluidInit.MILK_OF_LIME, Material.WATER, MapColor.WHITE_STAINED_HARDENED_CLAY);

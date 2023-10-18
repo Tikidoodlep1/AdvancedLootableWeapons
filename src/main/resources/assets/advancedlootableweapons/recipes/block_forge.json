@@ -1,0 +1,33 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		" B ",
+		"BCB",
+		"BSB"
+	],
+
+	"key":
+	{
+		"C":
+		{
+			"item": "minecraft:coal_block"
+		},
+		"B":
+		{ 
+			"item": "advancedlootableweapons:brick_granite"
+		},
+		"S":
+		{ 
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_forge",
+		"count": 1
+	}
+}
