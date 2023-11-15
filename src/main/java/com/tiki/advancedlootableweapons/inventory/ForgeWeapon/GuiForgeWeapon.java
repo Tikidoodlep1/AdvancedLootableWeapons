@@ -6,9 +6,12 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.PacketHandler;
 import com.tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -48,12 +51,18 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private int buttonPressed;
 	    //private Container container;
 	    private final InventoryPlayer player;
+	    private final ForgingGuiRepresentation CUSTOM_TEXTURE;
 	    
-	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container)
+	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container, Block block)
 	    {
 	    	super(container);
 	        //this.container = container;
 	        this.player = inventoryIn;
+	        if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
+	        	CUSTOM_TEXTURE = ZenDynamicAlwResources.guiLists.get(block);
+	        }else {
+	        	CUSTOM_TEXTURE = null;
+	        }
 	    }
 	    
 	    @Override
@@ -146,7 +155,12 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	    {	    	
 	        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-	        Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURES);
+	        if(CUSTOM_TEXTURE == null) {
+	        	Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURES);
+	        }else {
+	        	Minecraft.getMinecraft().renderEngine.bindTexture(CUSTOM_TEXTURE.getTextureLocation());
+	        }
+	        
 	        int i = (this.width - this.xSize) / 2;
 	        int j = (this.height - this.ySize) / 2;
 	        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);

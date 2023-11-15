@@ -53,7 +53,7 @@ public class GuiHandler implements IGuiHandler
 		if(ID == ModInfo.GUI_SHARPENING_STONE) return new GuiSharpeningStone(player.inventory, world);
 		if(ID == ModInfo.GUI_ALLOY_FURNACE) return new GuiAlloyFurnace(player.inventory, (TileEntityAlloyFurnace)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == ModInfo.GUI_FORGE) return new GuiForge(player.inventory, (TileEntityForge)world.getTileEntity(new BlockPos(x,y,z)));
-		if(ID == ModInfo.GUI_FORGE_WEAPON) return new GuiForgeWeapon(player.inventory, new ContainerForgeWeapon(player.inventory, world));
+		if(ID == ModInfo.GUI_FORGE_WEAPON) return new GuiForgeWeapon(player.inventory, new ContainerForgeWeapon(player.inventory, world), world.getBlockState(new BlockPos(x,y,z)).getBlock());
 		if(ID == ModInfo.GUI_FORGE_2) return new GuiForge2(player.inventory, (TileEntityForge2)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == ModInfo.GUI_MILL) return new GuiMill(player.inventory, (TileEntityMill)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == ModInfo.GUI_TANNING_RACK) return new GuiTanningRack(player.inventory, (TileEntityTanningRack)world.getTileEntity(new BlockPos(x,y,z)));

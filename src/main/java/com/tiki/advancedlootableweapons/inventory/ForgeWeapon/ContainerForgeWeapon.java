@@ -1,9 +1,14 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.util.Random;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.lwjgl.util.Point;
+
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemArmorBinding;
@@ -15,6 +20,7 @@ import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -36,6 +42,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerForgeWeapon extends Container {
 	
+	private final ForgingGuiRepresentation CUSTOM_CONTAINER;
+	private final Point slot1;
+	private final Point slot2;
+	private final Point output;
     public final IInventory inputSlot;
     private int toolForgeHammer;
     private final World world;
@@ -61,7 +71,20 @@ public class ContainerForgeWeapon extends Container {
         this.player = playerInventory.player;
         this.world = worldIn;
         this.buttonPressed = -1;
-                
+        Block block = worldIn.getBlockState(pos).getBlock();
+        if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
+        	CUSTOM_CONTAINER = ZenDynamicAlwResources.guiLists.get(block);
+        	Point[] points = CUSTOM_CONTAINER.getSlots().toArray(new Point[0]);
+        	slot1 = points[0];
+        	slot2 = points[1];
+        	output = points[2];
+        }else {
+        	CUSTOM_CONTAINER = null;
+        	slot1 = new Point(56, 33);
+        	slot2 = new Point(56, 53);
+        	output = new Point(114, 43);
+        }
+        
         if(player.getActiveItemStack().getItem() instanceof ToolForgeHammer) {
         	this.toolForgeHammer = player.inventory.currentItem;
         }else {
@@ -76,7 +99,7 @@ public class ContainerForgeWeapon extends Container {
         	}
         }
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 33) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 0, slot1.getX(), slot1.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ItemInit.acceptedForgeItems.contains(stack.getItem())) {
@@ -97,7 +120,7 @@ public class ContainerForgeWeapon extends Container {
             }
         });
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 1, 56, 53) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 1, slot2.getX(), slot2.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemArmorBinding || ItemInit.acceptedForgeItems.contains(stack.getItem())) {// || ingotMap.containsKey(stack.getItem())) {
@@ -116,7 +139,7 @@ public class ContainerForgeWeapon extends Container {
             }
         });
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 2, 114, 43) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 2, output.getX(), output.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		return false;

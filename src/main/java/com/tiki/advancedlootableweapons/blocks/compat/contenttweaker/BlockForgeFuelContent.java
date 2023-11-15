@@ -41,6 +41,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -88,7 +89,12 @@ public class BlockForgeFuelContent extends BlockForgeContent implements IHasGene
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		if(this.getDefaultState().getValue(REQUIRES_IGNITION)) {
-			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forge_ignition.tooltip").getFormattedText());
+			StringBuilder items = new StringBuilder();
+			NonNullList<ItemStack> stacks = OreDictionary.getOres(ZenDynamicAlwResources.IGNITION_ORE);
+			for(ItemStack i : stacks) {
+				items.append(", " + i.getDisplayName());
+			}
+			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forge_ignition.tooltip").getFormattedText() + ": " + items.substring(2));
 		}
     }
 	

@@ -43,6 +43,7 @@ public class ZenDynamicAlwResources {
 
 	
 	public static final HashMap<Block, Set<Item>> fuelLists = new HashMap<Block, Set<Item>>();
+	public static final HashMap<Block, ForgingGuiRepresentation> guiLists = new HashMap<Block, ForgingGuiRepresentation>();
 	public static final String IGNITION_ORE = "ore:igniter";
 	public static final String IGNITION_UPGRADE_ORE = "ore:igniter_upgrade";
 	public static JsonObject FORGE_MODEL;
@@ -66,9 +67,28 @@ public class ZenDynamicAlwResources {
 	}
 	
 	@ZenMethod
+	public static boolean setGuiForAnvil(String block, CTResourceLocation texture, int[] inputs, int[] output) {
+		if(inputs.length != 4 || output.length != 2) {
+			Alw.logger.error("An instance of forging gui has been given an insufficient amount of slot coordinates, not creating GUI.");
+			return false;
+		}
+		
+		Block forge = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
+		if(forge == null) {
+			Alw.logger.error("Unable to set gui for block {" + block + "}. {" + block + "} is not in the Forge Block registry.");
+			return false;
+		}
+		
+		ForgingGuiRepresentation gui = new ForgingGuiRepresentation(texture.getInternal(), inputs, output);
+		guiLists.put(forge, gui);
+		return true;
+	}
+	
+	@ZenMethod
 	public static boolean setFuelListForBlock(IIngredient[] ingrs, String block) {
 		Block forge = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 		if(forge == null) {
+			Alw.logger.error("Unable to set fuel list for block {" + block + "}. {" + block + "} is not in the Forge Block registry.");
 			return false;
 		}
 		
