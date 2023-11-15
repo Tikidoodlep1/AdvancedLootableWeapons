@@ -1,0 +1,14 @@
+{
+	"type": "advancedlootableweapons:drum",
+	"group": "advancedlootableweapons:drum",
+	"input": {
+		"item": "advancedlootableweapons:cured_hide",
+		"count": 1
+	},
+	"fluid": "milk_of_lime",
+	"ticks": 500,
+	"result": {
+		"item": "advancedlootableweapons:limed_hide",
+		"count": 1
+	}
+}

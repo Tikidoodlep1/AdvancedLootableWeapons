@@ -1,0 +1,18 @@
+{
+	"type": "advancedlootableweapons:use_dur_shapeless",
+	"group": "advancedlootableweapons:chain_link",
+	"ingredients":
+	[
+    	{
+			"item": "advancedlootableweapons:tanning_knife",
+			"data": 32767
+		},
+		{ 
+			"item": "minecraft:leather"
+    	}
+  ],
+  "result": {
+    "item": "advancedlootableweapons:leather_strip",
+    "count": 4
+  }
+}

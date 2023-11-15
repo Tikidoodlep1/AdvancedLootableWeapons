@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:unbound_leggings",
+	"pattern":
+	[
+		"LLL",
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_frost_steel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chain_leggings_frost_steel",
+		"count": 1
+	}
+}

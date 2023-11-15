@@ -12,15 +12,23 @@ import net.minecraft.item.ItemBlock;
 
 public class BlockBase extends Block implements IHasModel
 {
-	public BlockBase(String name, Material material) 
+	public BlockBase(String name, Material material, String toolClass, int harvestLevel, boolean shouldRegister) 
 	{
 		super(material);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(Alw.AlwBlocksTab);
-		
-		BlockInit.blocks.add(this);
-		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
+		if(shouldRegister) {
+			setUnlocalizedName(name);
+			setRegistryName(name);
+			setCreativeTab(Alw.AlwBlocksTab);
+			this.setHarvestLevel(toolClass, harvestLevel);
+			
+			BlockInit.blocks.add(this);
+			ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
+		}
+	}
+	
+	public BlockBase(String name, Material material, String toolClass, int harvestLevel) 
+	{
+		this(name, material, toolClass, harvestLevel, true);
 	}
 
 	@Override

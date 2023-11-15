@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:sharpening_stones",
+	"pattern":
+	[
+		"  F",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "advancedlootableweapons:ingot_dusksteel"
+		},
+		"F":
+		{
+			"item": "minecraft:flint"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:dusksteel_sharpening_stone",
+		"count": 1
+	}
+}

@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
@@ -20,6 +21,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -32,19 +34,21 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockForge2Placeholder extends Block implements IHasModel {
 	
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool LEFT = PropertyBool.create("left");
 	public static final PropertyBool RIGHT = PropertyBool.create("right");
-	public BlockPos mainPos;
+	private BlockPos mainPos = null;
+	private Block mainBlock = null;
 
 	public BlockForge2Placeholder(String name) {
 		super(Material.ROCK);
 		setSoundType(SoundType.STONE);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(LEFT, false).withProperty(RIGHT, false));
-		this.setHarvestLevel("pickaxe", 2);
+		this.setHarvestLevel("pickaxe", 1);
 		this.useNeighborBrightness = true;
 		this.fullBlock = false;
 		this.translucent = true;
@@ -60,14 +64,19 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
-        return new ItemStack(Item.getItemFromBlock(BlockInit.forge2));
+		if(this.mainBlock == null) {
+			return new ItemStack(this.getMainBlock(world, pos, state));
+		}else {
+			return new ItemStack(this.mainBlock);
+		}
+        
     }
 	
 	@Override
 	@Deprecated
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
-        return new ItemStack(Item.getItemFromBlock(BlockInit.forge2));
+        return ItemStack.EMPTY;
     }
 	
 	@Override
@@ -162,7 +171,53 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	{
 		if(!worldIn.isRemote)
 		{
-			playerIn.openGui(Alw.instance, ModInfo.GUI_FORGE_2, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			this.mainBlock = getMainBlock(worldIn, pos, state);
+			
+			//System.out.println(this.mainBlock + ", " + this.mainPos);
+			
+			ItemStack mainHand = playerIn.getHeldItemMainhand();
+			if(this.mainBlock instanceof BlockForge2Fuel) {
+				
+				if(worldIn.getBlockState(this.mainPos).getValue(BlockForge2Fuel.REQUIRES_IGNITION) && !mainHand.isEmpty()) {
+					for(ItemStack stack : OreDictionary.getOres(ZenDynamicAlwResources.IGNITION_ORE)) {
+						if(stack.getItem() == mainHand.getItem()) {
+							TileEntity te = worldIn.getTileEntity(this.mainPos);
+							if(te instanceof TileEntityForge2) {
+								((TileEntityForge2)te).usedIgniterOnForge();
+							}
+							if(mainHand.getItem().isDamageable()) {
+								mainHand.damageItem(1, playerIn);
+							}else {
+								mainHand.setCount(mainHand.getCount() - 1);
+							}
+							return true;
+						}
+					}
+					
+					for(ItemStack stack : OreDictionary.getOres(ZenDynamicAlwResources.IGNITION_UPGRADE_ORE)) {
+						if(stack.getItem() == mainHand.getItem()) {
+							TileEntity te = worldIn.getTileEntity(this.mainPos);
+							if(te instanceof TileEntityForge2) {
+								((TileEntityForge2)te).setRequiresIgnition(false);
+							}
+							BlockForge2Fuel.setState(false, worldIn, this.mainPos);
+							if(mainHand.getItem().isDamageable()) {
+								mainHand.damageItem(1, playerIn);
+							}else {
+								mainHand.setCount(mainHand.getCount() - 1);
+							}
+							return true;
+						}
+					}
+				}
+			}
+			
+			if(this.mainBlock instanceof BlockForge2Fuel) {
+				playerIn.openGui(Alw.instance, ModInfo.GUI_FORGE_2_FUEL, worldIn, this.mainPos.getX(), this.mainPos.getY(), this.mainPos.getZ());
+			}else {
+				playerIn.openGui(Alw.instance, ModInfo.GUI_FORGE_2, worldIn, this.mainPos.getX(), this.mainPos.getY(), this.mainPos.getZ());
+			}
+			
 		}
 		
 		return true;
@@ -171,66 +226,128 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	@Override
 	protected ItemStack getSilkTouchDrop(IBlockState state)
     {
-        return ItemStack.EMPTY;
+		if(this.mainBlock == null) {
+			return ItemStack.EMPTY;
+		}else {
+			return new ItemStack(this.mainBlock);
+		}
     }
 	
 	@Override
 	public boolean hasTileEntity(IBlockState state) 
 	{
-		return true;
+		return false;
 	}
 	
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) 
-	{
-		return new TileEntityForge2();
-	}
-	
-	public static BlockPos getMainPos(IBlockAccess worldIn, BlockPos pos, IBlockState state) {
+	public BlockPos getMainPos(IBlockAccess worldIn, BlockPos pos, IBlockState state) {
 		BlockPos locateMain = BlockPos.ORIGIN;
-		if(worldIn.getBlockState(pos).getBlock() == BlockInit.forge2) {
+		if(worldIn.getBlockState(pos).getBlock() instanceof BlockForge2) {
 			return pos;
-		}else if(state.getBlock() != BlockInit.forge2_1) {
+		}else if(!(state.getBlock() instanceof BlockForge2Placeholder)) {
 			return locateMain;
+		}else if(this.mainPos != null && worldIn.getBlockState(this.mainPos).getBlock() instanceof BlockForge2) {
+			return mainPos;
 		}
+		
 		boolean left = state.getValue(LEFT);
 		boolean right = state.getValue(RIGHT);
 		EnumFacing facing = (EnumFacing)state.getValue(FACING);
 		if(right) {
 			BlockPos rightOffset = pos.offset(facing.rotateY());
 			
-			if(worldIn.getBlockState(rightOffset).getBlock() == BlockInit.forge2) {
+			if(worldIn.getBlockState(rightOffset).getBlock() instanceof BlockForge2) {
 				locateMain = rightOffset;
-			}else if(worldIn.getBlockState(rightOffset.offset(facing)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(rightOffset.offset(facing)).getBlock() instanceof BlockForge2) {
 				locateMain = rightOffset.offset(facing);
-			}else if (worldIn.getBlockState(rightOffset.offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if (worldIn.getBlockState(rightOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = rightOffset.offset(EnumFacing.DOWN);
-			}else if(worldIn.getBlockState(rightOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(rightOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = rightOffset.offset(facing).offset(EnumFacing.DOWN);
 			}
 		}else if(left) {
 			BlockPos leftOffset = pos.offset(facing.rotateYCCW());
 			
-			if(worldIn.getBlockState(leftOffset).getBlock() == BlockInit.forge2) {
+			if(worldIn.getBlockState(leftOffset).getBlock() instanceof BlockForge2) {
 				locateMain = leftOffset;
-			}else if(worldIn.getBlockState(leftOffset.offset(facing)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(leftOffset.offset(facing)).getBlock() instanceof BlockForge2) {
 				locateMain = leftOffset.offset(facing);
-			}else if (worldIn.getBlockState(leftOffset.offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if (worldIn.getBlockState(leftOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = leftOffset.offset(EnumFacing.DOWN);
-			}else if(worldIn.getBlockState(leftOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(leftOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = leftOffset.offset(facing).offset(EnumFacing.DOWN);
 			}
 		}else {
 			BlockPos midOffset = pos.offset(facing);
-			if(worldIn.getBlockState(midOffset).getBlock() == BlockInit.forge2) {
+			if(worldIn.getBlockState(midOffset).getBlock() instanceof BlockForge2) {
 				locateMain = midOffset;
-			}else if(worldIn.getBlockState(midOffset.offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(midOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = midOffset.offset(EnumFacing.DOWN);
-			}else if(worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() == BlockInit.forge2) {
+			}else if(worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
 				locateMain = pos.offset(EnumFacing.DOWN);
 			}
 		}
+		
+		this.mainPos = locateMain;
+		this.mainBlock = worldIn.getBlockState(mainPos).getBlock();
 		return locateMain;
+	}
+	
+	public Block getMainBlock(IBlockAccess worldIn, BlockPos pos, IBlockState state) {
+		BlockPos locateMain = BlockPos.ORIGIN;
+		if(worldIn.getBlockState(pos).getBlock() instanceof BlockForge2) {
+			return worldIn.getBlockState(pos).getBlock();
+		}else if(!(state.getBlock() instanceof BlockForge2Placeholder)) {
+			return null;
+		}
+//		else if(this.mainBlock != null && this.mainBlock instanceof BlockForge2) {
+//			return this.mainBlock;
+//		}
+		
+		boolean left = state.getValue(LEFT);
+		boolean right = state.getValue(RIGHT);
+		EnumFacing facing = (EnumFacing)state.getValue(FACING);
+		if(right) {
+			BlockPos rightOffset = pos.offset(facing.rotateY());
+			System.out.println("Block is on the right! Checking " + rightOffset + ", " + rightOffset.offset(facing) + ", " + rightOffset.offset(facing).offset(EnumFacing.DOWN));
+			
+			if(worldIn.getBlockState(rightOffset).getBlock() instanceof BlockForge2) {
+				locateMain = rightOffset;
+			}else if(worldIn.getBlockState(rightOffset.offset(facing)).getBlock() instanceof BlockForge2) {
+				locateMain = rightOffset.offset(facing);
+			}else if (worldIn.getBlockState(rightOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = rightOffset.offset(EnumFacing.DOWN);
+			}else if(worldIn.getBlockState(rightOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = rightOffset.offset(facing).offset(EnumFacing.DOWN);
+			}
+		}else if(left) {
+			BlockPos leftOffset = pos.offset(facing.rotateYCCW());
+			System.out.println("Block is on the left! Checking " + leftOffset + ", " + leftOffset.offset(facing) + ", " + leftOffset.offset(facing).offset(EnumFacing.DOWN));
+			
+			if(worldIn.getBlockState(leftOffset).getBlock() instanceof BlockForge2) {
+				locateMain = leftOffset;
+			}else if(worldIn.getBlockState(leftOffset.offset(facing)).getBlock() instanceof BlockForge2) {
+				locateMain = leftOffset.offset(facing);
+			}else if (worldIn.getBlockState(leftOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = leftOffset.offset(EnumFacing.DOWN);
+			}else if(worldIn.getBlockState(leftOffset.offset(facing).offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = leftOffset.offset(facing).offset(EnumFacing.DOWN);
+			}
+		}else {
+			BlockPos midOffset = pos.offset(facing);
+			System.out.println("Block is in the middle! Checking " + midOffset + ", " + midOffset.offset(EnumFacing.DOWN) + ", " + pos.offset(EnumFacing.DOWN));
+			
+			if(worldIn.getBlockState(midOffset).getBlock() instanceof BlockForge2) {
+				locateMain = midOffset;
+			}else if(worldIn.getBlockState(midOffset.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = midOffset.offset(EnumFacing.DOWN);
+			}else if(worldIn.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock() instanceof BlockForge2) {
+				locateMain = pos.offset(EnumFacing.DOWN);
+			}
+		}
+		
+		this.mainPos = locateMain;
+		this.mainBlock = worldIn.getBlockState(mainPos).getBlock();
+		return this.mainBlock;
 	}
 	
 	@Override
@@ -251,7 +368,11 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(BlockInit.forge2);
+		if(this.mainBlock == null) {
+			return Items.AIR;
+		}else {
+			return Item.getItemFromBlock(this.mainBlock);
+		}
 	}
 	
 	@Override

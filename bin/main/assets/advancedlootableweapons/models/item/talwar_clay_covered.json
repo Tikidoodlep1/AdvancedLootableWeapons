@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "advancedlootableweapons:items/talwar_clay_cover"
+	}
+}

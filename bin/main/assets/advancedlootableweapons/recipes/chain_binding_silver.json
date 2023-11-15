@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "advancedlootableweapons:armor_bindings",
+	"ingredients":
+	[
+    	{
+			"item": "advancedlootableweapons:chain_link_silver"
+		},
+		{
+			"item": "advancedlootableweapons:chain_link_silver"
+		}
+  	],
+	"result":
+	{
+		"item": "advancedlootableweapons:binding_chain_silver",
+		"count": 1
+	}
+}

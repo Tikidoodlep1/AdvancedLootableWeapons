@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:metal_blocks",
+	"pattern":
+	[
+		"III",
+		"III",
+		"III"
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"item": "advancedlootableweapons:ingot_platinum"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_platinum",
+		"count": 1
+	}
+}

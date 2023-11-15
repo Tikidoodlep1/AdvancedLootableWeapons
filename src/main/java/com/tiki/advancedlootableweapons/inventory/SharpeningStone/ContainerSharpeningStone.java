@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerSharpeningStone extends Container{
+public class ContainerSharpeningStone extends Container {
 	
 	private final IInventory outputSlot;
 

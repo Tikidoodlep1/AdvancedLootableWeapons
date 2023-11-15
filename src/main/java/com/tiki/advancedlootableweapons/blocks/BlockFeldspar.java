@@ -11,9 +11,7 @@ import net.minecraft.item.Item;
 public class BlockFeldspar extends BlockBase {
 
 	public BlockFeldspar(String name) {
-		super(name, Material.ROCK);
-		
-		setHarvestLevel("pickaxe", 1);
+		super(name, Material.ROCK, "pickaxe", 1, true);
 	}
 	
 	@Override

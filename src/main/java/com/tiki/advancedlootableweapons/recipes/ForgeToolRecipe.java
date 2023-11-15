@@ -134,6 +134,17 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		return ItemInit.DAGGER_IRON;
 	}
 	
+	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
+		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
+		if(inputs.get(0) == Ingredient.EMPTY) {
+			remainingItems.set(0, inventoryCrafting.get(0));
+		}
+		if(inputs.get(1) == Ingredient.EMPTY) {
+			remainingItems.set(1, inventoryCrafting.get(1));
+		}
+		return remainingItems;
+	}
+	
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
@@ -144,6 +155,84 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			remainingItems.set(1, inventoryCrafting.getStackInSlot(1));
 		}
 		return remainingItems;
+	}
+	
+	public boolean matches(NonNullList<ItemStack> inv, World world) {		
+		if(inv.size() != 3) {
+			return false;
+		}
+		
+		boolean match1 = false;
+		boolean match2 = false;
+		boolean matsMatch = false;
+		ItemStack input1 = inv.get(0);
+		ItemStack input2 = inv.get(1);
+		NBTTagCompound tag1 = input1.getTagCompound();
+		NBTTagCompound tag2 = input2.getTagCompound();
+		
+		if(this.inputs.get(0) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.inputs.get(0).getMatchingStacks()) {
+				if(input1.getItem() == stack.getItem()) {
+					if(ConfigHandler.ENABLE_QUENCHING) {
+						if(input1.hasTagCompound() && input1.getTagCompound().getBoolean("quenched")) {
+							match1 = true;
+						}
+					}else {
+						match1 = true;
+					}
+					break;
+				}
+			}
+		}else {
+			match1 = true;
+			matsMatch = true;
+		}
+		
+		if(this.inputs.get(1) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.inputs.get(1).getMatchingStacks()) {
+				if(input2.getItem() == stack.getItem()) {
+					match2 = true;
+					break;
+				}
+			}
+		}else {
+			match2 = true;
+			matsMatch = true;
+		}
+		
+		if(!input1.isEmpty() && input1.getItem() instanceof ItemHotToolHead) {
+			if(!input2.isEmpty() && input2.getItem() instanceof ItemHotToolHead) {
+				if(tag1.hasKey("Material") && tag2.hasKey("Material")) {
+					if(new ItemStack(tag1.getCompoundTag("Material")).getItem() == new ItemStack(tag2.getCompoundTag("Material")).getItem()) {
+						matsMatch = true;
+					}
+				}else {
+					//Mats don't match if the hot tool heads don't have mats
+					return false;
+				}
+			}else {
+				if(new ItemStack(tag1.getCompoundTag("Material")).getItem() == input2.getItem()) {
+					matsMatch = true;
+				}
+			}
+		}else {
+			if(!input2.isEmpty() && input2.getItem() instanceof ItemHotToolHead) {
+				if(new ItemStack(tag2.getCompoundTag("Material")).getItem() == input1.getItem()) {
+					matsMatch = true;
+				}
+			}else {
+				if(input1.isEmpty()	|| input2.isEmpty()) {
+					matsMatch = true;
+				}else {
+					if(input1.getItem() == input2.getItem()) {
+						matsMatch = true;
+					}
+				}
+			}
+		}
+		
+		//System.out.println("Match1: " + match1 + ", Match2: " + match2 + ", matsMatch: " + matsMatch);
+		return match1 && match2 && matsMatch;
 	}
 	
 	@Override
@@ -223,6 +312,47 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		
 		//System.out.println("Match1: " + match1 + ", Match2: " + match2 + ", matsMatch: " + matsMatch);
 		return match1 && match2 && matsMatch;
+	}
+	
+	public ItemStack getCraftingResult(final NonNullList<ItemStack> inv) {
+		ItemStack input1 = inv.get(0);
+		ItemStack input2 = inv.get(1);
+		NBTTagCompound input1Tag = input1.getTagCompound();
+		NBTTagCompound input2Tag = input2.getTagCompound();
+		this.setMaterial(input1, input2);
+		//System.out.println("Material: " + this.material);
+		ItemStack result = this.getModifiedOutput();
+		double addedDamage = 0D;
+		int addedDur = 0;
+		
+		if(input1Tag == null) {
+			input1Tag = new NBTTagCompound();
+		}
+		
+		if(input2Tag != null) {
+			addedDamage += input2Tag.getDouble("addedDamage");
+			addedDamage += checkHeat(input2);
+			
+			addedDur += input2Tag.getInteger("addedDurability");
+			addedDur += (int)(checkHeat(input2) * 100);
+		}
+		addedDamage += input1Tag.getDouble("addedDamage");
+		addedDamage += checkHeat(input1);
+			
+		addedDur += input1Tag.getInteger("addedDurability");
+		addedDur += (int)(checkHeat(input1) * 100);
+		
+		result.setTagCompound(input1Tag);
+		
+		if(result.getItem() instanceof ToolSlashSword) {
+			ToolSlashSword sword = ((ToolSlashSword)result.getItem());
+			sword.generateNameAndModifiers(result, addedDamage, addedDur, this.material);
+		}else if(result.getItem() instanceof ToolStabSword) {
+			ToolStabSword sword = ((ToolStabSword)result.getItem());
+			sword.generateNameAndModifiers(result, addedDamage, addedDur, this.material);
+		}
+		
+		return result;
 	}
 	
 	@Override

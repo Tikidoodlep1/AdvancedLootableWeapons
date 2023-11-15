@@ -8,6 +8,7 @@ import com.tiki.advancedlootableweapons.init.EnchantmentInit;
 import com.tiki.advancedlootableweapons.init.EntityInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.init.PacketHandler;
 import com.tiki.advancedlootableweapons.world.WorldGenCustomOres;
 
 import net.minecraft.block.Block;
@@ -82,7 +83,7 @@ public class RegistryHandler {
 	{
 		NetworkRegistry.INSTANCE.registerGuiHandler(Alw.instance, new GuiHandler());
 		
-		
+		PacketHandler.init();
 		SoundHandler.registerSounds();
 		GlobalDropsHandler.registerDrops();
 		Alw.proxy.addColoredItemRenderer();

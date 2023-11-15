@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:unbound_leggings",
+	"pattern":
+	[
+		"LLL",
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_steel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_plate_leggings_steel",
+		"count": 1
+	}
+}

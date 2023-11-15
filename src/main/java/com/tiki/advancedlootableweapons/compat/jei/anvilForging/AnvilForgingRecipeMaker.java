@@ -13,6 +13,7 @@ import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
 import mezz.jei.api.IJeiHelpers;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -51,7 +52,7 @@ public class AnvilForgingRecipeMaker {
             		
             		for(Item i : ItemInit.generatedItems) {
             			if(output != i && i instanceof ToolStabSword) {
-            				if(type.equals(((ToolStabSword)i).getWeaponType())) {
+            				if(type.equals(((ToolStabSword)i).getWeaponType()) && ((ToolStabSword)output).getToolMaterial() != ToolMaterial.WOOD) {
             					jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), new ItemStack(i), recipe.getExp(), button.toString()));
             				}
             			}
@@ -59,7 +60,7 @@ public class AnvilForgingRecipeMaker {
             		
             		for(Item i : ItemInit.weaponItems) {
             			if(output != i && i instanceof ToolStabSword) {
-            				if(type.equals(((ToolStabSword)i).getWeaponType())) {
+            				if(type.equals(((ToolStabSword)i).getWeaponType()) && ((ToolStabSword)output).getToolMaterial() != ToolMaterial.WOOD) {
             					jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), new ItemStack(i), recipe.getExp(), button.toString()));
             				}
             			}
@@ -70,7 +71,7 @@ public class AnvilForgingRecipeMaker {
             		
             		for(Item i : ItemInit.generatedItems) {            			
             			if(output != i && i instanceof ToolSlashSword) {
-            				if(type.equals(((ToolSlashSword)i).getWeaponType())) {
+            				if(type.equals(((ToolSlashSword)i).getWeaponType()) && ((ToolSlashSword)output).getToolMaterial() != ToolMaterial.WOOD) {
             					jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), new ItemStack(i), recipe.getExp(), button.toString()));
             				}
             			}
@@ -78,7 +79,7 @@ public class AnvilForgingRecipeMaker {
             		
             		for(Item i : ItemInit.weaponItems) {            			
             			if(output != i && i instanceof ToolSlashSword) {
-            				if(type.equals(((ToolSlashSword)i).getWeaponType())) {
+            				if(type.equals(((ToolSlashSword)i).getWeaponType()) && ((ToolSlashSword)output).getToolMaterial() != ToolMaterial.WOOD) {
             					jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), new ItemStack(i), recipe.getExp(), button.toString()));
             				}
             			}

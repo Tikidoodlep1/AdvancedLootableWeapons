@@ -1,0 +1,10 @@
+{
+	"forge_marker": 1,
+    "variants": 
+    {
+        "facing=north": { "model": "advancedlootableweapons:block_bellows_acacia", "y": 90 },
+        "facing=east": { "model": "advancedlootableweapons:block_bellows_acacia", "y": 180 },
+        "facing=south": { "model": "advancedlootableweapons:block_bellows_acacia", "y": 270 },
+        "facing=west": { "model": "advancedlootableweapons:block_bellows_acacia" }
+    }
+}

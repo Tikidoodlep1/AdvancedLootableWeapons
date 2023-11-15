@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"S",
+		"S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:long_weapon_handle",
+		"count": 1
+	}
+}

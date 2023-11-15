@@ -22,7 +22,7 @@ public class BlockAlwOre extends Block implements IHasModel {
 		BlockInit.blocks.add(this);
 		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
 		
-		setHarvestLevel("pickaxe", 2);
+		setHarvestLevel("pickaxe", harvestLevel);
 	}
 	
 	@Override

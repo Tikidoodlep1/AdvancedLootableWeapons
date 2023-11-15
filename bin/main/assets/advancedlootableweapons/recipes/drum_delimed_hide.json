@@ -1,0 +1,14 @@
+{
+	"type": "advancedlootableweapons:drum",
+	"group": "advancedlootableweapons:drum",
+	"input": {
+		"item": "advancedlootableweapons:limed_hide",
+		"count": 1
+	},
+	"fluid": "magnesium_lactate",
+	"ticks": 500,
+	"result": {
+		"item": "advancedlootableweapons:delimed_hide",
+		"count": 1
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"W",
+		"S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"W":
+		{ 
+			"item": "advancedlootableweapons:rapier_head"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:rapier_wood",
+		"count": 1
+	}
+}

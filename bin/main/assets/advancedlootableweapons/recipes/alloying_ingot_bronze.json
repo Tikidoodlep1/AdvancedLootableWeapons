@@ -1,0 +1,20 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"type": "forge:ore_dict",
+		"ore": "nuggetTin",
+		"count": 2
+    },
+    {
+		"type": "forge:ore_dict",
+		"ore": "ingotCopper"
+    }
+  ],
+  "exp": 1.1,
+  "result": {
+    "item": "advancedlootableweapons:ingot_bronze",
+    "count": 1
+  }
+}

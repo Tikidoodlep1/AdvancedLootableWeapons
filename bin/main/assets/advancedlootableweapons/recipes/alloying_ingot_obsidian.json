@@ -1,0 +1,21 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"type": "forge:ore_dict",
+		"ore": "ingotSteel",
+		"count": 1
+    },
+    {
+		"type": "forge:ore_dict",
+		"ore": "shardObsidian",
+		"count": 2
+    }
+  ],
+  "exp": 0.9,
+  "result": {
+    "item": "advancedlootableweapons:ingot_obsidian",
+    "count": 2
+  }
+}

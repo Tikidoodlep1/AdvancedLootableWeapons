@@ -42,11 +42,47 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 		return this.button;
 	}
 	
+	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
+		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
+		
+		return remainingItems;
+	}
+	
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
 		
 		return remainingItems;
+	}
+	
+	public boolean matches(NonNullList<ItemStack> inv, World world) {
+		int matches = 0;
+		
+		inventory: for(int i = 0; i < inv.size(); i++) {
+			ItemStack input = inv.get(i);
+			if(!input.isEmpty()) {
+				
+				Iterator<Ingredient> iter = inputs.iterator();
+				while(iter.hasNext()) {
+					Ingredient ingred = iter.next();
+					for(ItemStack is : ingred.getMatchingStacks()) {
+						if(is.getItem() == input.getItem()) {
+							matches++;
+							continue inventory;
+						}
+					}
+				}
+				if(matches == inputs.size()) {
+					break inventory;
+				}
+				return false;
+			}
+		}
+		
+		if(matches != inputs.size()) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -78,6 +114,26 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 			return false;
 		}
 		return true;
+	}
+	
+	public ItemStack getCraftingResult(final NonNullList<ItemStack> inv) {
+		ItemStack bindingStack = ItemStack.EMPTY;
+		ItemArmorBinding binding = null;
+		
+		for(int i = 0; i < inv.size(); i++) {
+			if(inv.get(i).getItem() instanceof ItemArmorBinding) {
+				bindingStack = inv.get(i);
+				binding = (ItemArmorBinding)bindingStack.getItem();
+				break;
+			}
+		}
+		
+		if(result.getItem() instanceof ArmorBonusesBase) {
+			((ArmorBonusesBase)result.getItem()).setBinding(bindingStack.getDisplayName(), result);
+			((ArmorBonusesBase)result.getItem()).setMaximumDamage(binding.getExtraDur(), result);
+		}
+		
+		return result;
 	}
 	
 	@Override

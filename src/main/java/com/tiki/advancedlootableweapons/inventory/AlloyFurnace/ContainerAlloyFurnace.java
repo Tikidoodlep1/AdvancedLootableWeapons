@@ -2,16 +2,12 @@ package com.tiki.advancedlootableweapons.inventory.AlloyFurnace;
 
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

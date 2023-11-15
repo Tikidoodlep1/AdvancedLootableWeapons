@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"SS",
+		"SS"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "advancedlootableweapons:shadow"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:shadow_blob",
+		"count": 1
+	}
+}

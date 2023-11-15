@@ -1,5 +1,9 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
+import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
+import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;
+import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -12,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
@@ -20,13 +25,43 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class TileEntityForge extends TileEntity implements ITickable, IInventory
 {
-	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	public static final int minTemp = 850;
+	public static final int maxTemp = 1750;
+	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
+	//private @Nonnull ItemStack fuelInventoryStack = ItemStack.EMPTY;
 	private String customName;
 	private int heat;
 	private double currentTemp = 1750D;
-	public static final int minTemp = 850;
-	public static final int maxTemp = 1750;
 	private int increaseFrames = 0;
+	private int burnTime = 0;
+	private int maxBurnTime = 0;
+	private boolean canUseFuel = false;
+	private boolean requiresIgnition = false;
+	private boolean needsFuel = false;
+	private float baseHeatingSpeed = 1.0f;
+	
+	public TileEntityForge() {
+		this(false, false);
+	}
+	
+	public TileEntityForge(boolean needsFuel, boolean needsIgnition) {
+		if(needsFuel && needsIgnition) {
+			this.canUseFuel = false;
+		}else if(needsFuel && !needsIgnition) {
+			this.canUseFuel = needsFuel;
+		}
+		this.needsFuel = needsFuel;
+		this.requiresIgnition = needsIgnition;
+		if(this.getBlockType() instanceof BlockForgeContent) {
+			this.baseHeatingSpeed = ((BlockForgeContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
+		}else if(this.getBlockType() instanceof BlockForgeFuelContent) {
+			this.baseHeatingSpeed = ((BlockForgeFuelContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
+		}else if(this.getBlockType() instanceof BlockForge2Content) {
+			this.baseHeatingSpeed = ((BlockForge2Content)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
+		}else if(this.getBlockType() instanceof BlockForge2FuelContent) {
+			this.baseHeatingSpeed = ((BlockForge2FuelContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
+		}
+	}
 	
 	public void bellowsInteraction() {
 		this.increaseFrames = 60;
@@ -37,7 +72,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		return this.hasCustomName() ? this.customName : "container_forge";
 	}
 	
-	public boolean hasCustomName() 
+	public boolean hasCustomName()
 	{
 		return this.customName != null && !this.customName.isEmpty();
 	}
@@ -70,7 +105,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return (ItemStack)this.inventory.get(index);
+		return this.inventory.get(index);
 	}
 
 	@Override
@@ -85,16 +120,20 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		ItemStack itemstack = (ItemStack)this.inventory.get(index);
-		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
+		ItemStack itemstack = ItemStack.EMPTY;
+		itemstack = (ItemStack)this.inventory.get(index);
 		this.inventory.set(index, stack);
+		
+		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
 		
 		if(stack.getCount() > this.getInventoryStackLimit()) {
 			stack.setCount(this.getInventoryStackLimit());
 		}
-		if(index == 0 && index + 1 == 1 & !flag) {
+		if(index == 0 && !flag) {
 			//ItemStack stack1 = (ItemStack)this.inventory.get(index + 1);
 			this.heat = stack.getItemDamage();
+			this.markDirty();
+		}else if(index == 1 && !flag) {
 			this.markDirty();
 		}
 	}
@@ -107,6 +146,12 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		ItemStackHelper.loadAllItems(compound, this.inventory);
 		this.heat = compound.getInteger("Heat");
 		this.currentTemp = compound.getDouble("Temperature");
+		this.burnTime = compound.getInteger("BurnTime");
+		this.maxBurnTime = compound.getInteger("MaxBurnTime");
+		this.canUseFuel = compound.getBoolean("CanUseFuel");
+		this.requiresIgnition = compound.getBoolean("RequiresIgnition");
+		this.needsFuel = compound.getBoolean("NeedsFuel");
+		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -117,6 +162,12 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		super.writeToNBT(compound);
 		compound.setInteger("Heat", (short)this.heat);
 		compound.setDouble("Temperature", this.currentTemp);
+		compound.setInteger("BurnTime", this.burnTime);
+		compound.setInteger("MaxBurnTime", this.maxBurnTime);
+		compound.setBoolean("CanUseFuel", this.canUseFuel);
+		compound.setBoolean("RequiresIgnition", this.requiresIgnition);
+		compound.setBoolean("NeedsFuel", this.needsFuel);
+		compound.setFloat("baseHeatingSpeed", this.baseHeatingSpeed);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
@@ -128,24 +179,63 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		return 64;
 	}
 	
+	public void usedIgniterOnForge() {
+		this.canUseFuel = true;
+	}
+	
+	public void setRequiresIgnition(boolean requiresIgnition) {
+		this.requiresIgnition = requiresIgnition;
+	}
+	
 	public void update()
 	{
 		if(!this.world.isRemote) {
+			
+			if(this.needsFuel) { // If the forge doesn't need fuel, there's no reason to deal w/ burnTime, etc.
+				ItemStack fuelStack = this.inventory.get(1);
+				
+				if(this.burnTime <= 0) {
+					if(!this.requiresIgnition) {
+						this.canUseFuel = true;
+					}
+					if(!fuelStack.isEmpty() && this.canUseFuel) {
+						if(fuelStack.getCount() <= 1) {
+							this.setInventorySlotContents(1, ItemStack.EMPTY);
+						}else {
+							fuelStack.setCount(fuelStack.getCount() - 1);
+							this.setInventorySlotContents(1, fuelStack);
+						}
+						
+						this.maxBurnTime = TileEntityFurnace.getItemBurnTime(fuelStack) * 2;
+						this.burnTime = maxBurnTime;
+					}else {
+						this.maxBurnTime = 0;
+						this.canUseFuel = false;
+					}
+					
+				}else {
+					this.burnTime--;
+				}
+			}
+			
 			if(currentTemp > minTemp && increaseFrames <= 0) {
-				this.currentTemp -= 0.01875D;
+				//Only drop temp if we're not burning fuel
+				if(this.burnTime <= 0) {
+					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
+				}
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
-				this.currentTemp += 1.078D;
+				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER);
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;
 			}
-			if(!(((ItemStack)this.inventory.get(0)).isEmpty() && canSmelt())) {
+			if(!this.inventory.get(0).isEmpty() && canSmelt()) {
 				this.smeltItem();
 			}
 		}
 	}
 	
-	public boolean canSmelt() 
+	public boolean canSmelt()
 	{
 		ItemStack result = (ItemStack)this.inventory.get(0);
 		if(result.isEmpty()) return false;
@@ -160,7 +250,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 			ItemStack stack = this.inventory.get(0);
 			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat = stack.getItemDamage();
 			}
 		}
@@ -187,6 +277,8 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		if(index == 0 && stack.getItem() instanceof ItemHotToolHead) {
 			return true;
+		}else if(index == 1 && TileEntityFurnace.getItemBurnTime(stack) > 0){
+			return true;
 		}else {
 			return false;
 		}
@@ -204,6 +296,10 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 			return this.heat;
 		case 1:
 			return (int)this.currentTemp;
+		case 2:
+			return this.burnTime;
+		case 3:
+			return this.maxBurnTime;
 		default:
 			return 0;
 		}
@@ -219,12 +315,18 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		case 1:
 			this.currentTemp = value;
 			break;
+		case 2:
+			this.burnTime = value;
+			break;
+		case 3:
+			this.maxBurnTime = value;
+			break;
 		}
 	}
 	
 	@Override
 	public int getFieldCount() {
-		return 2;
+		return 4;
 	}
 
 	@Override

@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"IS",
+		"S "
+	],
+
+	"key":
+	{
+		"I":
+		{
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		},
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:tanning_knife",
+		"count": 1
+	}
+}

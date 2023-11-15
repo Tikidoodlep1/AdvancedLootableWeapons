@@ -1,0 +1,17 @@
+{
+	"type": "advancedlootableweapons:use_dur_shapeless",
+	"ingredients":
+	[
+    	{
+			"item": "advancedlootableweapons:tanning_knife",
+			"data": 32767
+		},
+		{ 
+			"item": "advancedlootableweapons:untrimmed_hide"
+    	}
+  ],
+  "result": {
+    "item": "advancedlootableweapons:trimmed_hide",
+    "count": 1
+  }
+}

@@ -1,0 +1,21 @@
+{
+	"type": "advancedlootableweapons:clay_cover",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:spear_hot_tool_head_2",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:clay_quenching_mix"
+		},
+		{
+			"item": "advancedlootableweapons:clay_quenching_slip"
+		}
+	],
+  
+  	"result": {
+    	"item": "advancedlootableweapons:spear_hot_tool_head_2",
+    	"data": 0
+  	}
+}

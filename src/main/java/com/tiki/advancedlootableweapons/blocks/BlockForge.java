@@ -1,12 +1,12 @@
 package com.tiki.advancedlootableweapons.blocks;
 
+import java.util.HashSet;
 import java.util.Random;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -37,15 +37,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockForge extends BlockBase implements ITileEntityProvider
 {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public final HashSet<Item> acceptedMaterials;
 	private static boolean keepinventory;
 	
-	public BlockForge(String name)
+	public BlockForge(String name, Material mat, SoundType sound, boolean shouldRegister)
 	{
-		super(name, Material.ROCK);
-		setSoundType(SoundType.STONE);
+		this(name, mat, sound, "pickaxe", 1, shouldRegister, new HashSet<Item>());
+		
+	}
+	
+	public BlockForge(String name, Material mat, SoundType sound, String tool, int level, boolean shouldRegister, HashSet<Item> acceptedMaterials)
+	{
+		super(name, mat, tool, level, shouldRegister);
+		this.setSoundType(sound);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setHarvestLevel("pickaxe", 1);
 		this.fullBlock = false;
+		this.acceptedMaterials = acceptedMaterials;
 	}
 	
 	@Override
@@ -57,13 +64,13 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) 
 	{
-		return Item.getItemFromBlock(BlockInit.forge);
+		return Item.getItemFromBlock(this);
 	}
 	
 	@Override
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return new ItemStack(BlockInit.forge);
+		return new ItemStack(this);
 	}
 	
 	@Override
@@ -130,6 +137,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 		}
 	}
 	
+	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         if (!keepinventory)
@@ -155,7 +163,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityForge();
+		return new TileEntityForge(false, false);
 	}
 	
 	@Override
@@ -210,6 +218,114 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityForge();
+		return new TileEntityForge(false, false);
 	}
+
+//	@Override
+//	public List<IGeneratedModel> getGeneratedModels() {
+//		List<IGeneratedModel> models = Lists.newArrayList();
+//		JsonObject BlockStateJson = new JsonObject();
+//    	BlockStateJson.addProperty("forge_marker", 1);
+//    	JsonObject variants = new JsonObject();
+//    	JsonObject y0 = new JsonObject();
+//    	JsonObject y90 = new JsonObject();
+//    	JsonObject y180 = new JsonObject();
+//    	JsonObject y270 = new JsonObject();
+//    	y0.addProperty("model", new ResourceLocation("contenttweaker:" + this.name).toString());
+//    	y0.addProperty("y", 0);
+//    	y90.addProperty("model", new ResourceLocation("contenttweaker:" + this.name).toString());
+//    	y90.addProperty("y", 90);
+//    	y180.addProperty("model", new ResourceLocation("contenttweaker:" + this.name).toString());
+//    	y180.addProperty("y", 180);
+//    	y270.addProperty("model", new ResourceLocation("contenttweaker:" + this.name).toString());
+//    	y270.addProperty("y", 270);
+////    	if(this.getDefaultState().getValue(REQUIRES_IGNITION)) {
+////    		variants.add("facing=north,requires_ignition=false", y0);
+////        	variants.add("facing=east,requires_ignition=false", y90);
+////        	variants.add("facing=south,requires_ignition=false", y180);
+////        	variants.add("facing=west,requires_ignition=false", y270);
+////        	variants.add("facing=north,requires_ignition=true", y0);
+////        	variants.add("facing=east,requires_ignition=true", y90);
+////        	variants.add("facing=south,requires_ignition=true", y180);
+////        	variants.add("facing=west,requires_ignition=true", y270);
+////    	}else {
+//    		variants.add("facing=north", y0);
+//        	variants.add("facing=east", y90);
+//        	variants.add("facing=south", y180);
+//        	variants.add("facing=west", y270);
+////    	}
+//    	
+//    	BlockStateJson.add("variants", variants);
+//    	
+//    	JsonReader reader;
+//    	JsonObject BlockModelJson = new JsonObject();
+//		try {
+//			reader = new JsonReader(new BufferedReader(new FileReader(new ResourceLocation(ModInfo.ID + ":models/block/block_forge.json").toString())));
+//			Alw.logger.info("MODEL FILE ACTUALLY FOUND HOLY SHIT!!!");
+//			System.out.println("MODEL FILE ACTUALLY FOUND HOLY SHIT!!!");
+//			reader.setLenient(true);
+//			String name = null;
+//			while(reader.hasNext()) {
+//	    		JsonToken peek = reader.peek();
+//	    		if(peek == JsonToken.BEGIN_ARRAY) {
+//	    			reader.beginArray();
+//	    		}else if(peek == JsonToken.BEGIN_OBJECT) {
+//	    			reader.beginObject();
+//	    		}else if(peek == JsonToken.BOOLEAN) {
+//	    			if(name != null) {
+//	    				BlockModelJson.addProperty(name, reader.nextBoolean());
+//	    				name = null;
+//	    			}
+//	    		}else if(peek == JsonToken.NAME) {
+//	    			name = reader.nextName();
+//	    			if(name.equals("textures")) {
+//	    				JsonObject textures = new JsonObject();
+//	    				reader.beginObject();
+//	    				textures.addProperty(reader.nextName(), "contenttweaker:blocks/" + this.name);
+//	    				reader.skipValue();
+//	    				textures.addProperty(reader.nextName(), "contenttweaker:blocks/" + this.name);
+//	    				reader.skipValue();
+//	    				reader.endObject();
+//	    				BlockModelJson.add("textures", textures);
+//	    				name = null;
+//	    			}
+//	    		}else if(peek == JsonToken.NUMBER) {
+//	    			if(name != null) {
+//	    				BlockModelJson.addProperty(name, reader.nextDouble());
+//	    				name = null;
+//	    			}
+//	    		}else if(peek == JsonToken.STRING) {
+//	    			if(name != null) {
+//	    				BlockModelJson.addProperty(name, reader.nextString());
+//	    				name = null;
+//	    			}
+//	    		}else if(peek == JsonToken.END_OBJECT) {
+//	    			reader.endObject();
+//	    		}else if(peek == JsonToken.END_ARRAY) {
+//	    			reader.endArray();
+//	    		}
+//	    	}
+//			//JsonParser parser = new JsonParser(); // Using above method for custom texture path!
+//			//BlockModelJson = parser.parse(reader).getAsJsonObject();
+//			
+//			reader.close();
+//			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//    	
+//		JsonObject ItemModelJson = new JsonObject();
+//		ItemModelJson.addProperty("parent", "contenttweaker:block/" + this.name);
+//		
+//		Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
+//    	models.add(new GeneratedModel(this.name, ModelType.BLOCKSTATE, gson.toJson(BlockStateJson)));
+//    	if(BlockModelJson.size() > 0) {
+//    		models.add(new GeneratedModel(this.name, ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
+//    	}else {
+//    		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please check that you are using the latest version of ALW. If you are, please report this to the mod author!");
+//    	}
+//    	models.add(new GeneratedModel(this.name, ModelType.ITEM_MODEL, gson.toJson(ItemModelJson)));
+//    	
+//        return models;
+//	}
 }

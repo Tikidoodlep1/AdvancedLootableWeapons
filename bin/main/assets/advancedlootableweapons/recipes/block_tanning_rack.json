@@ -1,0 +1,38 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"PSP",
+		"SHS",
+		"WWW"
+	],
+
+	"key":
+	{
+		"W":
+		{
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		},
+		"P":
+		{
+			"item": "minecraft:string"
+		},
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"H":
+		{
+			"item": "advancedlootableweapons:untrimmed_hide"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:block_tanning_rack",
+		"count": 1
+	}
+}

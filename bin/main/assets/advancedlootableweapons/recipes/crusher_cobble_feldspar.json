@@ -1,0 +1,14 @@
+{
+	"type": "advancedlootableweapons:one_slot",
+	"group": "advancedlootableweapons:crusher",
+	"block": "advancedlootableweapons:block_mill",
+	"ingredients": [
+		{
+			"item": "advancedlootableweapons:cobble_feldspar"
+		}
+  ],
+  "result": {
+    "item": "advancedlootableweapons:powder_feldspar",
+    "count": 3
+  }
+}

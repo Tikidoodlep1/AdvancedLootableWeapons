@@ -50,7 +50,7 @@ public class BlockMill extends BlockBase implements ITileEntityProvider {
 	public static final AxisAlignedBB X_AXIS_AABB = new AxisAlignedBB(2.9/16D, 0.0D, 2.3/16D, 13.1/16D, 11.0/16D, 14.1/16D);
 
 	public BlockMill(String name, Material material) {
-		super(name, material);
+		super(name, material, "pickaxe", 1, true);
 		setSoundType(SoundType.STONE);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}

@@ -2,12 +2,10 @@ package com.tiki.advancedlootableweapons.compat.jei.anvilForging;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import com.tiki.advancedlootableweapons.compat.jei.JEICompat;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
@@ -53,8 +51,18 @@ public class AnvilForgingRecipe implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		List<List<ItemStack>> inputList = new ArrayList<List<ItemStack>>();
+		
 		for(Ingredient i : this.inputs) {
-			inputList.add(Arrays.stream(i.getMatchingStacks()).collect(Collectors.toList()));
+			List<ItemStack> stackList = null;
+			for(ItemStack stack : i.getMatchingStacks()) {
+				stackList = new ArrayList<ItemStack>(1);
+				stackList.add(stack);
+			}
+			
+			if(stackList != null) {
+				inputList.add(stackList);
+			}
+			//inputList.add(Arrays.stream(i.getMatchingStacks()).collect(Collectors.toList()));
 		}
 		ingredients.setInputLists(VanillaTypes.ITEM, inputList);
 		ingredients.setOutput(VanillaTypes.ITEM, output);
@@ -70,7 +78,7 @@ public class AnvilForgingRecipe implements IRecipeWrapper {
 		GlStateManager.popMatrix();
 		
 		if(exp > 0){
-			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience") + exp;
+			String expString = JEICompat.translateToLocalFormatted("gui.jei.category.smelting.experience") + ": " + exp;
 			renderer.drawString(expString, recipeWidth - 26, 48, Color.GRAY.getRGB());
 		}
 		

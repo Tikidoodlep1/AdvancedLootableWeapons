@@ -15,10 +15,7 @@ import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -31,12 +28,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.network.play.server.SPacketParticles;
-import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,20 +48,20 @@ public class ContainerForgeWeapon extends Container {
     private InventoryCrafting invCraft = new InventoryCrafting(this, 3, 1);
     
     @SideOnly(Side.CLIENT)
-    public ContainerForgeWeapon(InventoryPlayer playerInventory, World worldIn, EntityPlayer player, int i)
+    public ContainerForgeWeapon(InventoryPlayer playerInventory, World worldIn)
     {
-        this(playerInventory, worldIn, player);
+        this(playerInventory, worldIn, BlockPos.ORIGIN);
         this.buttonPressed = -1;
     }
     
-	public ContainerForgeWeapon(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
+	public ContainerForgeWeapon(InventoryPlayer playerInventory, final World worldIn, BlockPos pos)
     {
-		RayTraceResult tr = player.rayTrace(player.getAttributeMap().getAttributeInstanceByName("generic.reachDistance").getAttributeValue(), Minecraft.getMinecraft().getRenderPartialTicks());
-		this.pos = tr.getBlockPos();
-		
-		//System.out.println(this.pos + ", " + worldIn.getBlockState(this.pos).getBlock().getRegistryName());
-		
+		this.pos = pos;
         this.inputSlot = new InventoryBasic("Forge Weapon", true, 3);
+        this.player = playerInventory.player;
+        this.world = worldIn;
+        this.buttonPressed = -1;
+                
         if(player.getActiveItemStack().getItem() instanceof ToolForgeHammer) {
         	this.toolForgeHammer = player.inventory.currentItem;
         }else {
@@ -82,10 +75,6 @@ public class ContainerForgeWeapon extends Container {
         		}
         	}
         }
-        
-        this.player = player;
-        this.world = worldIn;
-        this.buttonPressed = -1;
         
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 56, 33) {
         	public boolean isItemValid(ItemStack stack)
@@ -220,6 +209,7 @@ public class ContainerForgeWeapon extends Container {
 					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(headRecipe.getExp());
+					this.detectAndSendChanges();
 					return true;
 				}
 			}else if(recipe instanceof ForgeToolRecipe) {
@@ -236,6 +226,7 @@ public class ContainerForgeWeapon extends Container {
 					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(toolRecipe.getExp());
+					this.detectAndSendChanges();
 					return true;
 				}
 			}else if(recipe instanceof ForgeArmorPlateRecipe) {
@@ -252,6 +243,7 @@ public class ContainerForgeWeapon extends Container {
 					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(toolRecipe.getExp());
+					this.detectAndSendChanges();
 					return true;
 				}
 			}else if(recipe instanceof ForgeArmorBindingRecipe) {
@@ -267,6 +259,7 @@ public class ContainerForgeWeapon extends Container {
 					this.inputSlot.setInventorySlotContents(2, result);
 					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
+					this.detectAndSendChanges();
 					return true;
 				}
 			}
@@ -366,6 +359,11 @@ public class ContainerForgeWeapon extends Container {
 			return 99;
 		}
 		return -1;
+	}
+	
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
 	}
 	
     public void onCraftMatrixChanged(IInventory inventoryIn)

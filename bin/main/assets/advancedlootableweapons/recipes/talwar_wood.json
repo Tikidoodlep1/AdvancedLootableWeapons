@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+
+	"pattern":
+	[
+		"W",
+		"S"
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"type": "forge:ore_dict",
+			"ore": "stickWood"
+		},
+		"W":
+		{ 
+			"item": "advancedlootableweapons:talwar_head"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:talwar_wood",
+		"count": 1
+	}
+}

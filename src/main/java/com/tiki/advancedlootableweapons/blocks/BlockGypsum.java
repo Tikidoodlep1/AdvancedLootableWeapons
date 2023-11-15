@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class BlockGypsum extends BlockBase {
 
 	public BlockGypsum(String name, Material material) {
-		super(name, material);
+		super(name, material, "pickaxe", 0, true);
 		this.needsRandomTick = true;
 	}
 	

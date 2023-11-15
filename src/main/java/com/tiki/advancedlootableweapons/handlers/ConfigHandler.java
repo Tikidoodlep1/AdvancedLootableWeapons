@@ -38,6 +38,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
 	public static boolean ENABLE_ARMOR_FORGING = true;
+	public static boolean USE_LARGER_TEXTURE_FOR_TEMP = false;
 	public static HashSet<String> VALID_ANVILS = new HashSet<String>();
 	public static HashSet<String> VALID_HAMMERS = new HashSet<String>();
 	public static HashSet<String> EXTRA_MATERIALS = new HashSet<String>();
@@ -47,6 +48,8 @@ public class ConfigHandler {
 	public static boolean ENABLE_QUENCHING = true;
 	public static boolean ENABLE_REGIONAL_QUENCHING = true;
 	public static float BELLOWS_EXHAUSTION = 0.1F;
+	public static float FORGE_TEMP_DECREASE_MULTIPLIER = 1.0F;
+	public static float FORGE_TEMP_INCREASE_MULTIPLIER = 1.0F;
 	public static float FORGING_EXHAUSTION = 0.0F;
 	public static float TOOL_HEAD_HEATING_MULTIPLIER = 1.0F;
 	
@@ -753,6 +756,9 @@ public class ConfigHandler {
 		TOOL_HEAD_HEATING_MULTIPLIER = ItemConfig.getFloat("Tool Head Heating Multiplier", category, 1.0F, 0.1F, 10.0F, "A multiplier for how quickly hot tool heads and weapon parts will heat up in the forge. 1.0 is realistic.");
 		BELLOWS_EXHAUSTION = ItemConfig.getFloat("Bellows Exhaustion", category, 0.1f, 0.0f, 20.0f, "The amount of exhaustion using a bellows gives the player.");
 		FORGING_EXHAUSTION = ItemConfig.getFloat("Forging Exhaustion", category, 0.0f, 0.0f, 20.0f, "");
+		FORGE_TEMP_DECREASE_MULTIPLIER = ItemConfig.getFloat("Forge Temperature Decrease Multiplier. Set to 0.0F to disable temperature drop.", category, 1.0F, 0.0F, 10.0F, "");
+		FORGE_TEMP_INCREASE_MULTIPLIER = ItemConfig.getFloat("Forge Temperature Increase Multiplier.", category, 1.0F, 0.1F, 10.0F, "");
+		USE_LARGER_TEXTURE_FOR_TEMP = ItemConfig.getBoolean("Use Larger Texture Region to Show Temperature", category, false, "Uses a larger part of the simple forge and advanced forge textures to show how hot the forge is compared to it's max heat value. In the simple forge, this uses the smoke. In the advanced forge, this uses the fiery part of the background. (True/False)");
 		VALID_ANVILS.addAll(Arrays.stream(ItemConfig.getStringList("Valid Anvil Blocks", category, new String[] {"minecraft:anvil"}, "Write any block ID to register it as a valid anvil to forge weapons on.")).collect(Collectors.toSet()));
 		VALID_HAMMERS.addAll(Arrays.stream(ItemConfig.getStringList("Valid Hammer Items", category, new String[] {
 				"advancedlootableweapons:stone_forge_hammer", "advancedlootableweapons:iron_forge_hammer", "advancedlootableweapons:kobold_forge_hammer",

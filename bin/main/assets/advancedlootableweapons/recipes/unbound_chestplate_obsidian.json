@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:unbound_chestplates",
+	"pattern":
+	[
+		"L L",
+		"LLL",
+		"LLL"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:armor_plate_obsidian"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_plate_chestplate_obsidian",
+		"count": 1
+	}
+}

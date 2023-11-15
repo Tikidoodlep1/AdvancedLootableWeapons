@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:forge_hammers",
+	"pattern":
+	[
+		"III",
+		"ISI",
+		" S "
+	],
+
+	"key":
+	{
+		"S":
+		{
+			"item": "minecraft:stick"
+		},
+		"I":
+		{ 
+			"item": "advancedlootableweapons:ingot_crystallite"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:crystallite_forge_hammer",
+		"count": 1
+	}
+}

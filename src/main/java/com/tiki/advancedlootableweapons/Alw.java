@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.apache.logging.log4j.Logger;
 
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
 import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
@@ -30,13 +31,15 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 //@Mod.EventBusSubscriber
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VER, dependencies = ModInfo.LOAD_AFTER)
 public class Alw {
 	@Instance
 	public static Alw instance;
-	
+		
 	public static File ArmorConfig;
 	public static File WeaponConfig;
 	public static File MobConfig;
@@ -73,6 +76,7 @@ public class Alw {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
+		ZenDynamicAlwResources.init();
 		RegistryHandler.preInitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(instance);
 	}
@@ -109,11 +113,13 @@ public class Alw {
 	}
 	
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onModelBake(final ModelBakeEvent event) {
 		proxy.modelBake(event);
 	}
 	
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void onTooltipEvent(final ItemTooltipEvent event) {
 		proxy.onTooltip(event);
 	}

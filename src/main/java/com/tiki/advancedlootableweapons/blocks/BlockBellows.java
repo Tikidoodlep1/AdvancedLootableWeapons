@@ -44,10 +44,9 @@ public class BlockBellows extends BlockBase {
 	public static final AxisAlignedBB BELLOWS_AABB_EW = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 0.4D, 0.75D);
 	
 	public BlockBellows(String name) {
-		super(name, Material.WOOD);
+		super(name, Material.WOOD, "axe", 0, true);
 		setSoundType(SoundType.WOOD);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setHarvestLevel("axe", 1);
 		this.fullBlock = false;
 		this.translucent = true;
 	}

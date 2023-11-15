@@ -1,0 +1,28 @@
+{
+	"type": "advancedlootableweapons:chain_link_shapeless",
+	"group": "advancedlootableweapons:chain_link",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		},
+		{
+			"item": "advancedlootableweapons:chain_ring",
+			"data": 32767
+		}
+	],
+	"material":
+	{
+		"item": "advancedlootableweapons:ingot_shadow_platinum"
+	},
+	"result": 
+	{
+		"item": "advancedlootableweapons:chain_link_shadow_platinum",
+		"count": 1
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"type": "advancedlootableweapons:one_slot",
+	"group": "advancedlootableweapons:crusher",
+	"block": "advancedlootableweapons:block_mill",
+	"ingredients": [
+    {
+		"item": "minecraft:stone",
+		"data": 1
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:powder_granite",
+    "count": 3
+  }
+}

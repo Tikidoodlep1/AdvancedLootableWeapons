@@ -1,5 +1,10 @@
 package com.tiki.advancedlootableweapons.inventory.Forge2;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.tiki.advancedlootableweapons.blocks.BlockForge2;
+import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
@@ -8,7 +13,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -16,33 +23,83 @@ public class ContainerForge2 extends Container
 {
 	private final TileEntityForge2 tileentity;
 	private int temp = 0;
+	private final Set<Item> heatableMaterials;
 	
 	public ContainerForge2(InventoryPlayer player, TileEntityForge2 tileEntityForge2) 
 	{
 		this.tileentity = tileEntityForge2;
+		if(tileentity.getBlockType() instanceof BlockForge2) {
+			this.heatableMaterials = ((BlockForge2)tileentity.getBlockType()).acceptedMaterials;
+		}else if(tileentity.getBlockType() instanceof BlockForge2Content) {
+			this.heatableMaterials = ((BlockForge2Content)tileentity.getBlockType()).getRepresentation().getMatList();
+		}else {
+			heatableMaterials = new HashSet<Item>();
+		}
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 47) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 46) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					return true;
+					if(ContainerForge2.this.heatableMaterials.size() == 0) {
+						return true;
+					}
+					
+					if(stack.hasTagCompound()) {
+						NBTTagCompound tag = stack.getTagCompound();
+						if(tag.hasKey("Material")) {
+							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
+							for(Item i : heatableMaterials) {
+								if(matStack.getItem() == i) {
+									return true;
+								}
+							}
+						}
+					}
 				}
 				return false;
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 81, 47) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 80, 46) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					return true;
+					if(ContainerForge2.this.heatableMaterials.size() == 0) {
+						return true;
+					}
+					
+					if(stack.hasTagCompound()) {
+						NBTTagCompound tag = stack.getTagCompound();
+						if(tag.hasKey("Material")) {
+							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
+							for(Item i : heatableMaterials) {
+								if(matStack.getItem() == i) {
+									return true;
+								}
+							}
+						}
+					}
 				}
 				return false;
 			}
 		});
 		
-		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 110, 47) {
+		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 108, 46) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					return true;
+					if(ContainerForge2.this.heatableMaterials.size() == 0) {
+						return true;
+					}
+					
+					if(stack.hasTagCompound()) {
+						NBTTagCompound tag = stack.getTagCompound();
+						if(tag.hasKey("Material")) {
+							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
+							for(Item i : heatableMaterials) {
+								if(matStack.getItem() == i) {
+									return true;
+								}
+							}
+						}
+					}
 				}
 				return false;
 			}

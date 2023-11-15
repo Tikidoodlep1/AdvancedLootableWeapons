@@ -46,10 +46,9 @@ public class BlockTanningRack extends BlockBase implements ITileEntityProvider
 	
 	public BlockTanningRack(String name) 
 	{
-		super(name, Material.WOOD);
+		super(name, Material.WOOD, "axe", 0, true);
 		setSoundType(SoundType.WOOD);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setHarvestLevel("axe", 1);
 		this.fullBlock = false;
 		this.translucent = true;
 	}

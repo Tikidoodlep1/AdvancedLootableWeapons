@@ -6,7 +6,9 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
+import com.tiki.advancedlootableweapons.init.PacketHandler;
+import com.tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -44,17 +46,14 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private final GuiWeaponButton toolrodButton = new GuiWeaponButton(98, 30, 190, 20, 20, I18n.format("alw.button.tool_handle.name"), 61, 60);
 	    private final GuiWeaponButton forgeButton = new GuiWeaponButton(99, 90, 220, 20, 20, I18n.format("alw.button.forge_weapon.name"), 0, 80);
 	    private int buttonPressed;
-	    private Container container;
+	    //private Container container;
 	    private final InventoryPlayer player;
 	    
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container)
 	    {
-	    	super(new ContainerForgeWeapon(inventoryIn, inventoryIn.player.getEntityWorld(), inventoryIn.player));
-	        this.container = container;
+	    	super(container);
+	        //this.container = container;
 	        this.player = inventoryIn;
-//	        if(this.player.player.openContainer instanceof ContainerForgeWeapon) {
-//	        	this.player.player.openContainer.addListener(this);
-//	        }
 	    }
 	    
 	    @Override
@@ -102,7 +101,9 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    
 	    protected void actionPerformed(GuiButton button){
 	    	this.setButtonPressed(button.id);
-	    	this.mc.playerController.sendEnchantPacket(this.container.windowId, this.getButtonPressed());
+	    	PacketForgeWeaponButtonPress packet = new PacketForgeWeaponButtonPress(this.getButtonPressed());
+	    	PacketHandler.INSTANCE.sendToServer(packet);
+	    	//this.mc.playerController.sendEnchantPacket(this.container.windowId, this.getButtonPressed());
 	    }
 	    
 	    @Override

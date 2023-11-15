@@ -26,7 +26,7 @@ public class BlockDusksteel extends BlockBase {
 	public static final PropertyInteger PHASE = PropertyInteger.create("phase", 0, 7);
 	
 	public BlockDusksteel(String name, Material material) {
-		super(name, material);
+		super(name, material, "pickaxe", 2, true);
 		setSoundType(SoundType.METAL);
 		needsRandomTick = true;
 	}

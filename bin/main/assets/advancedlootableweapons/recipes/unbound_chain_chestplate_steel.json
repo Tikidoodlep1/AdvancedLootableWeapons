@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:unbound_chestplates",
+	"pattern":
+	[
+		"L L",
+		"LLL",
+		"LLL"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_steel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chain_chestplate_steel",
+		"count": 1
+	}
+}

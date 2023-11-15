@@ -1,0 +1,19 @@
+{
+	"type": "advancedlootableweapons:alloy_furnace",
+	"group": "advancedlootableweapons:alloying",
+	"ingredients": [
+    {
+		"item": "advancedlootableweapons:crystal",
+		"count": 4
+    },
+    {
+		"type": "forge:ore_dict",
+		"ore": "ingotSteel"
+    }
+  ],
+  "exp": 1.2,
+  "result": {
+    "item": "advancedlootableweapons:ingot_crystallite",
+    "count": 2
+  }
+}

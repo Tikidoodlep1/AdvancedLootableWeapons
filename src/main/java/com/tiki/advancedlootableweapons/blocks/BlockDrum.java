@@ -42,9 +42,8 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	
 	public BlockDrum(String name)
 	{
-		super(name, Material.ROCK);
+		super(name, Material.ROCK, "pickaxe", 0, true);
 		setSoundType(SoundType.STONE);
-		this.setHarvestLevel("pickaxe", 1);
 		this.fullBlock = false;
 	}
 	

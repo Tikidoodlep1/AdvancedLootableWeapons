@@ -1,0 +1,21 @@
+{
+	"_comment": "Within ingredients, you can use 'slot': 'metal' to mean any accepted metal in the forge or 'slot': 'empty' to leave an empty slot. This list is ordered.",
+	"_comment": "This can be used to forge a check on the material to ensure they match or to set a material.",
+	
+	"type": "advancedlootableweapons:forge_tool_head",
+	
+	"button": "forge weapon",
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:staff_hot_tool_head_3",
+			"data": 32767
+		}
+	],
+	"exp": 2,
+  
+  	"result": {
+    	"item": "advancedlootableweapons:staff_hot_tool_head_4",
+    	"data": 0
+  	}
+}

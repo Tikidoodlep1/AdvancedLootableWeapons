@@ -1,13 +1,19 @@
 package com.tiki.advancedlootableweapons.compat.oreDictionary;
 
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
+import net.minecraft.init.Items;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDictionaryCompat {
 
 	public static void registerOres() {
+		
+		OreDictionary.registerOre(ZenDynamicAlwResources.IGNITION_ORE, Items.FLINT_AND_STEEL);
+		OreDictionary.registerOre(ZenDynamicAlwResources.IGNITION_UPGRADE_ORE, Items.BLAZE_POWDER);
+		
 		OreDictionary.registerOre("ingotCopper", ItemInit.INGOT_COPPER);
 		OreDictionary.registerOre("ingotSilver", ItemInit.INGOT_SILVER);
 		OreDictionary.registerOre("ingotBronze", ItemInit.INGOT_BRONZE);

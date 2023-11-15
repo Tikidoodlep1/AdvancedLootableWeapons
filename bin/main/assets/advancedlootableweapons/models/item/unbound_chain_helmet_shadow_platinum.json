@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "advancedlootableweapons:items/unbound_chain_helmet_shadow_platinum"
+	}
+}

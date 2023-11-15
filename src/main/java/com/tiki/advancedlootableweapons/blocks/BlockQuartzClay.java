@@ -12,10 +12,9 @@ public class BlockQuartzClay extends BlockBase {
 	private Item drop;
 	
 	public BlockQuartzClay(String name, Item drop) {
-		super(name, Material.CLAY);
+		super(name, Material.CLAY, "shovel", 0, true);
 		this.drop = drop;
 		
-		setHarvestLevel("shovel", 0);
 		this.setSoundType(SoundType.GROUND);
 	}
 	

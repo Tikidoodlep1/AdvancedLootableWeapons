@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.DrumTESR;
 import com.tiki.advancedlootableweapons.blocks.tileentities.MillTESR;
@@ -12,16 +13,19 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityMill;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.RenderHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.inventory.ForgeWeapon.GuiForgeWeapon;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 import com.tiki.advancedlootableweapons.util.ColorUtils;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

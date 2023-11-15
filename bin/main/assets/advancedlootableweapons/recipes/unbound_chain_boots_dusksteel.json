@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "advancedlootableweapons:unbound_boots",
+	"pattern":
+	[
+		"L L",
+		"L L"
+	],
+
+	"key":
+	{
+		"L":
+		{
+			"item": "advancedlootableweapons:chain_link_dusksteel"
+		}
+	},
+
+	"result":
+	{
+		"item": "advancedlootableweapons:unbound_chain_boots_dusksteel",
+		"count": 1
+	}
+}

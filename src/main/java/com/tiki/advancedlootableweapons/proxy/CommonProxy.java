@@ -2,7 +2,6 @@ package com.tiki.advancedlootableweapons.proxy;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Arrays;
 
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
@@ -26,6 +25,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class CommonProxy {
 	
@@ -43,22 +43,26 @@ public class CommonProxy {
 	
 	public void modelBake(final ModelBakeEvent event) {}
 	
-	public void registerCustomModelLoaders() {};
+	public void registerCustomModelLoaders() {}
 	
 	public void onTooltip(ItemTooltipEvent event) {}
+	
+	public void handleRequestContainerID(int id) {}
 	
 	public void registerCommands(final FMLServerStartingEvent e) {
 		e.registerServerCommand(new SeeToolMatsCommand());
 	}
 	
 	public void onBlockAttemptBreak(final LeftClickBlock event){
-		BlockPos blockPos = event.getPos();
-		Block block = event.getWorld().getBlockState(blockPos).getBlock();
-		if(ConfigHandler.VALID_ANVILS.contains(block.getRegistryName().toString())) {
-			EntityPlayer player = event.getEntityPlayer();
-			if(ConfigHandler.VALID_HAMMERS.contains(player.inventory.getCurrentItem().getItem().getRegistryName().toString())) {
-				player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), (int)player.posX, (int)player.posY, (int)player.posZ);
-				event.setCanceled(true);
+		if(event.getSide() == Side.SERVER) {
+			BlockPos blockPos = event.getPos();
+			Block block = event.getWorld().getBlockState(blockPos).getBlock();
+			if(ConfigHandler.VALID_ANVILS.contains(block.getRegistryName().toString())) {
+				EntityPlayer player = event.getEntityPlayer();
+				if(ConfigHandler.VALID_HAMMERS.contains(player.inventory.getCurrentItem().getItem().getRegistryName().toString())) {
+					player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ());
+					event.setCanceled(true);
+				}
 			}
 		}
 	}

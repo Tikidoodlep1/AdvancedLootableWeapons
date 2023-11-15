@@ -1,0 +1,32 @@
+{
+	"shadow_drop":
+	{
+		"category": "entity",
+		"subtitle": "sound.shadow.drop",
+		"sounds": [{ "name": "advancedlootableweapons:shadow_drop", "stream": true}]
+	},
+	"sharpening_stone":
+	{
+		"category": "block",
+		"subtitle": "sound.sharpening_stone.use",
+		"sounds": [{ "name": "advancedlootableweapons:sharpening_stone", "stream": true}]
+	},
+	"jaw_crusher":
+	{
+		"category": "block",
+		"subtitle": "sound.jaw_crusher.use",
+		"sounds": [{ "name": "advancedlootableweapons:jaw_crusher", "stream": true}]
+	},
+	"bellows":
+	{
+		"category": "block",
+		"subtitle": "sound.bellows.use",
+		"sounds": [{ "name": "advancedlootableweapons:bellows", "stream": true}]
+	},
+	"quench":
+	{
+		"category": "block",
+		"subtitle": "sound.quench",
+		"sounds": [{"name": "advancedlootableweapons:quench", "stream": true}]
+	}
+}
