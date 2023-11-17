@@ -1,12 +1,10 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
+import java.awt.Point;
 import java.util.Random;
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
-import org.lwjgl.util.Point;
-
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -21,8 +19,8 @@ import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
@@ -34,7 +32,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -99,7 +99,7 @@ public class ContainerForgeWeapon extends Container {
         	}
         }
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 0, slot1.getX(), slot1.getY()) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 0, (int)slot1.getX(), (int)slot1.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ItemInit.acceptedForgeItems.contains(stack.getItem())) {
@@ -120,7 +120,7 @@ public class ContainerForgeWeapon extends Container {
             }
         });
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 1, slot2.getX(), slot2.getY()) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 1, (int)slot2.getX(), (int)slot2.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemArmorBinding || ItemInit.acceptedForgeItems.contains(stack.getItem())) {// || ingotMap.containsKey(stack.getItem())) {
@@ -139,7 +139,7 @@ public class ContainerForgeWeapon extends Container {
             }
         });
         
-        this.addSlotToContainer(new Slot(this.inputSlot, 2, output.getX(), output.getY()) {
+        this.addSlotToContainer(new Slot(this.inputSlot, 2, (int)output.getX(), (int)output.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
         		return false;
@@ -189,7 +189,7 @@ public class ContainerForgeWeapon extends Container {
     {
 		this.buttonPressed = id;
 		
-		if(toolForgeHammer > -1 && craftItem()) {
+		if(toolForgeHammer > -1 && craftItem(playerIn)) {
 			playerIn.getFoodStats().addExhaustion(ConfigHandler.FORGING_EXHAUSTION);
 			this.buttonPressed = -1;
         	return true;
@@ -199,7 +199,7 @@ public class ContainerForgeWeapon extends Container {
 		}
     }
 	
-	public boolean craftItem() {
+	public boolean craftItem(EntityPlayer player) {
 		for(int i = 0; i < this.inputSlot.getSizeInventory(); i++) {
 			this.invCraft.setInventorySlotContents(i, this.inputSlot.getStackInSlot(i));
 		}
@@ -216,8 +216,12 @@ public class ContainerForgeWeapon extends Container {
 //			System.out.println("Recipe is NULL!");
 //		}
 		
+		Alw.logger.info("Is side server? " + (!player.world.isRemote));
+		
 		ItemStack outputSlot = this.inputSlot.getStackInSlot(2);
 		if(recipe != null && outputSlot == ItemStack.EMPTY && this.getCanCraft(this.player)) {
+			SPacketSoundEffect soundPacket = null;
+			
 			if(recipe instanceof ForgeToolHeadRecipe) {
 				ForgeToolHeadRecipe headRecipe = ((ForgeToolHeadRecipe)this.recipe);
 				if(getButtonIdFromName(headRecipe.getButton()) == this.buttonPressed) {
@@ -229,7 +233,11 @@ public class ContainerForgeWeapon extends Container {
 					}
 					
 					this.inputSlot.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					soundPacket = new SPacketSoundEffect(SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+					if(player instanceof EntityPlayerMP) {
+						((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+					}
+					//player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(headRecipe.getExp());
 					this.detectAndSendChanges();
@@ -246,7 +254,11 @@ public class ContainerForgeWeapon extends Container {
 					}
 					
 					this.inputSlot.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					soundPacket = new SPacketSoundEffect(SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+					if(player instanceof EntityPlayerMP) {
+						((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+					}
+					//player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(toolRecipe.getExp());
 					this.detectAndSendChanges();
@@ -263,7 +275,11 @@ public class ContainerForgeWeapon extends Container {
 					}
 					
 					this.inputSlot.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					soundPacket = new SPacketSoundEffect(SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+					if(player instanceof EntityPlayerMP) {
+						((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+					}
+					//player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.giveExp(toolRecipe.getExp());
 					this.detectAndSendChanges();
@@ -280,7 +296,11 @@ public class ContainerForgeWeapon extends Container {
 					}
 					
 					this.inputSlot.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					soundPacket = new SPacketSoundEffect(SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+					if(player instanceof EntityPlayerMP) {
+						((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+					}
+					//player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(1);
 					this.detectAndSendChanges();
 					return true;
@@ -292,17 +312,21 @@ public class ContainerForgeWeapon extends Container {
 	
 	private void giveExp(int exp) {
 		this.player.addExperience(exp);
-		System.out.println("Giving " + exp + " from Forge Weapons");
-//		NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
-//		SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(this.world, this.player.posX, this.player.posY, this.player.posZ, exp));
-//		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
+		SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1.0F, 1.0F);
+		if(player instanceof EntityPlayerMP) {
+			((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+		}
 	}
 	
 	private void damageForgeHammer(int amount) {
 		ItemStack forgeHammer = player.inventory.getStackInSlot(toolForgeHammer);
 		if(forgeHammer.attemptDamageItem(amount, new Random(), null)) {
 			player.inventory.deleteStack(forgeHammer);
-			Minecraft.getMinecraft().player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+			SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+//			player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+			if(player instanceof EntityPlayerMP) {
+				((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+			}
 			this.toolForgeHammer = -1;
 		}
 	}

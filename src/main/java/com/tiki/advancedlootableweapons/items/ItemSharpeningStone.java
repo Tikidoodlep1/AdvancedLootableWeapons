@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSharpeningStone extends Item implements IHasModel{
+public class ItemSharpeningStone extends Item implements IHasModel {
 	
 	private final ToolMaterial material;
 	

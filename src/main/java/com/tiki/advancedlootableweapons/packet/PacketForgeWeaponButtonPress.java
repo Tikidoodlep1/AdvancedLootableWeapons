@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketForgeWeaponButtonPress implements IMessage {
-
+	
 	int buttonID;
 	
 	public PacketForgeWeaponButtonPress() {}
@@ -25,15 +25,14 @@ public class PacketForgeWeaponButtonPress implements IMessage {
 	public void fromBytes(ByteBuf buf) {
 		this.buttonID = ByteBufUtils.readVarInt(buf, 4);
 	}
-
+	
 	@Override
 	public void toBytes(ByteBuf buf) {
 		ByteBufUtils.writeVarInt(buf, this.buttonID, 4);
 	}
-
 	
 	public static class Handler implements IMessageHandler<PacketForgeWeaponButtonPress, IMessage> {
-
+		
 		@Override
 		public IMessage onMessage(PacketForgeWeaponButtonPress message, MessageContext ctx) {
 			if(ctx.side == Side.SERVER) {

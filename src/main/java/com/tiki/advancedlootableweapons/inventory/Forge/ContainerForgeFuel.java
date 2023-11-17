@@ -3,9 +3,7 @@ package com.tiki.advancedlootableweapons.inventory.Forge;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tiki.advancedlootableweapons.blocks.BlockForge;
 import com.tiki.advancedlootableweapons.blocks.BlockForgeFuel;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;

@@ -18,10 +18,10 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -96,6 +96,14 @@ public class BlockMill extends BlockBase implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) 
 	{
+//		if(worldIn.isRemote) {
+//			TileEntityMill crusher = ((TileEntityMill)worldIn.getTileEntity(pos));
+//			if(crusher.getField(0) > 0) {
+//				worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundHandler.JAW_CRUSHER, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+//				crusher.setField(0, 0);
+//			}
+//		}
+		
 		if(!worldIn.isRemote)
 		{
 			if(playerIn.isSneaking() && worldIn.getTileEntity(pos) instanceof TileEntityMill) {
@@ -103,7 +111,10 @@ public class BlockMill extends BlockBase implements ITileEntityProvider {
 				if(crusher.getStackInSlot(0) != ItemStack.EMPTY && crusher.getStackInSlot(0).getItem() != Items.AIR) {
 					if(crusher.crushContents()) {
 						SPacketSoundEffect soundPacket = new SPacketSoundEffect(SoundHandler.JAW_CRUSHER, SoundCategory.BLOCKS, pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F);
-						playerIn.getServer().addScheduledTask(() -> {soundPacket.processPacket(Minecraft.getMinecraft().getConnection());});
+						if(playerIn instanceof EntityPlayerMP) {
+							((EntityPlayerMP)playerIn).connection.sendPacket(soundPacket);
+						}
+						
 					}
 				}
 			}else {

@@ -42,6 +42,7 @@ public class BlockBellows extends BlockBase {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;	
 	public static final AxisAlignedBB BELLOWS_AABB_NS = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 0.4D, 1.0D);
 	public static final AxisAlignedBB BELLOWS_AABB_EW = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 0.4D, 0.75D);
+	private final Timer t = new Timer("ALWCoolDowns");
 	
 	public BlockBellows(String name) {
 		super(name, Material.WOOD, "axe", 0, true);
@@ -130,7 +131,6 @@ public class BlockBellows extends BlockBase {
 			}
 		}else {
 			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
-			Timer t = new Timer("ALWCoolDowns");
 			t.schedule(new TimerTask() {
 				@Override
 				public void run() {

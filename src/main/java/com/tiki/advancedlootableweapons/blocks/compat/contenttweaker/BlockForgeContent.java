@@ -1,8 +1,5 @@
 package com.tiki.advancedlootableweapons.blocks.compat.contenttweaker;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
@@ -12,8 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.teamacronymcoders.base.client.models.generator.IHasGeneratedModel;
 import com.teamacronymcoders.base.client.models.generator.generatedmodel.GeneratedModel;
 import com.teamacronymcoders.base.client.models.generator.generatedmodel.IGeneratedModel;

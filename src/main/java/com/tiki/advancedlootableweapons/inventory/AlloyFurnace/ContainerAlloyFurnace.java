@@ -1,9 +1,12 @@
 package com.tiki.advancedlootableweapons.inventory.AlloyFurnace;
 
+import java.util.Random;
+
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
@@ -15,6 +18,7 @@ public class ContainerAlloyFurnace extends Container
 {
 	private final TileEntityAlloyFurnace tileentity;
 	private int cookTime, totalCookTime, burnTime, currentBurnTime;
+	private final Random rand = new Random();
 	
 	public ContainerAlloyFurnace(InventoryPlayer player, TileEntityAlloyFurnace tileentity) 
 	{
@@ -56,13 +60,9 @@ public class ContainerAlloyFurnace extends Container
 			}
 			
 			public ItemStack onTake(EntityPlayer player, ItemStack stack) {
-//				ContainerAlloyFurnace.this.tileentity.sendExp( (int)Math.ceil(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount()));
 				int exp = (int)Math.ceil(ContainerAlloyFurnace.this.tileentity.recipeExp * stack.getCount());
-//				System.out.println("Giving " + exp + " from Alloy Furnace");
-//				NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
-//				SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(player.world, player.posX, player.posY, player.posZ, exp));
-//				Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
 				player.addExperience(exp);
+				player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F + (rand.nextFloat() / 2F));
 				ContainerAlloyFurnace.this.tileentity.recipeExp = 0;
 				return stack;
 			}

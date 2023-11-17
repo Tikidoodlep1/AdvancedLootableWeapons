@@ -9,7 +9,7 @@ import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
-public class EnchantmentRefined extends Enchantment{
+public class EnchantmentRefined extends Enchantment {
 	
 	public EnchantmentRefined(String name) {
 		super(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND});

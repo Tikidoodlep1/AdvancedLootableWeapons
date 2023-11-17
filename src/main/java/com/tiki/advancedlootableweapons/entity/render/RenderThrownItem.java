@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderThrownItem<T extends Entity> extends Render<T>{
+public class RenderThrownItem<T extends Entity> extends Render<T> {
 	
 	private float scale = 0.5F;
 	private ModelBase model;

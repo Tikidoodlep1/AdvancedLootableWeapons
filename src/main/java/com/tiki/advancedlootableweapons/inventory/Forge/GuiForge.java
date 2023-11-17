@@ -119,17 +119,15 @@ public class GuiForge extends GuiContainer
     {
         this.sendSlotContents(containerToSend, 0, containerToSend.getSlot(0).getStack());
     }
-
-
+	
     public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack)
     {
     }
-
-
+    
     public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue)
     {
     }
-
+    
     public void sendAllWindowProperties(Container containerIn, IInventory inventory)
     {
     }

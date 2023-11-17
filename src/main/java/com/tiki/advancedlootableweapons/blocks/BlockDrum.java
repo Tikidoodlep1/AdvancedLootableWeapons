@@ -26,11 +26,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 public class BlockDrum extends BlockBase implements ITileEntityProvider
 {
@@ -125,24 +127,26 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	{
 		if(!worldIn.isRemote && hand == EnumHand.MAIN_HAND) {
 			TileEntity te = worldIn.getTileEntity(pos);
-			ItemStack activeStack = playerIn.getHeldItem(hand);
 			
 			if(te instanceof TileEntityDrum) {
-				TileEntityDrum drum = (TileEntityDrum) te;				
-				if(activeStack.getItem() instanceof ItemBucket || activeStack.getItem() instanceof UniversalBucket || activeStack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, facing)) {
-					FluidUtil.interactWithFluidHandler(playerIn, hand, drum);
-					worldIn.notifyBlockUpdate(pos, state, state, 2);
-					drum.onChanged();
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
-						drum.FluidInteraction(worldIn, pos, playerIn, hand);
-					}
-					return true;
-				}else {
-					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
-						drum.EntityInteraction(worldIn, pos, playerIn, hand);
+				TileEntityDrum drum = (TileEntityDrum) te;
+					
+					if(FluidUtil.interactWithFluidHandler(playerIn, hand, drum)) {
+						//worldIn.notifyBlockUpdate(pos, state, state, 2);
+						
+						if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
+							drum.FluidInteraction(worldIn, pos, playerIn, hand);
+						}
+						
+						drum.onChanged();
 						return true;
 					}
-				}
+					
+					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
+						drum.EntityInteraction(worldIn, pos, playerIn, hand);
+					}
+					drum.onChanged();
+					return true;
 			}
 			
 		}

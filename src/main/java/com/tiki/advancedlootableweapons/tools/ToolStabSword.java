@@ -11,7 +11,6 @@ import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.util.WeaponEffectiveness;
@@ -30,27 +29,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ToolStabSword extends Item implements IHasModel{
+public class ToolStabSword extends Item implements IHasModel {
 	private float attackDamage;
 	private double attackSpeed;
 	private final ToolMaterial material;
@@ -220,14 +213,29 @@ public class ToolStabSword extends Item implements IHasModel{
 		World world = entityLiving.getEntityWorld();
 		float reach = this.getReach();
 		
-		RayTraceResult trace = entityLiving.rayTrace(reach, Minecraft.getMinecraft().getRenderPartialTicks());
-		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, new AxisAlignedBB(trace.getBlockPos()).shrink(0.9));
+		float f = entityLiving.rotationPitch;
+        float f1 = entityLiving.rotationYaw;
+        double d0 = entityLiving.posX;
+        double d1 = entityLiving.posY + (double)entityLiving.getEyeHeight();
+        double d2 = entityLiving.posZ;
+        Vec3d vec3d = new Vec3d(d0, d1, d2);
+        float f2 = MathHelper.cos(-f1 * 0.017453292F - (float)Math.PI);
+        float f3 = MathHelper.sin(-f1 * 0.017453292F - (float)Math.PI);
+        float f4 = -MathHelper.cos(-f * 0.017453292F);
+        float f5 = MathHelper.sin(-f * 0.017453292F);
+        float f6 = f3 * f4;
+        float f7 = f2 * f4;
+        Vec3d vec3d1 = vec3d.addVector((double)f6 * reach, (double)f5 * reach, (double)f7 * reach);
+		AxisAlignedBB aabb = new AxisAlignedBB(vec3d.x, vec3d.y, vec3d.z, vec3d1.x, vec3d1.y, vec3d1.z);
+		aabb.contract(0.9d, 0d, 0.9d);
+		
+		List<Entity> ents = world.getEntitiesWithinAABBExcludingEntity(entityLiving, aabb);
 		Entity ent = null;
 		if(ents.size() > 0) {
 			ent = ents.get(0);
 		}
 		if(ent != null) {
-			if(trace == null || (ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < trace.getBlockPos().distanceSq(entityLiving.getPosition()) && entityLiving.canEntityBeSeen(ent))) {
+			if((ent.getPositionVector().distanceTo(entityLiving.getPositionVector()) < reach && entityLiving.canEntityBeSeen(ent))) {
 				if(entityLiving instanceof EntityPlayer) {
 					((EntityPlayer) entityLiving).attackTargetEntityWithCurrentItem(ent);
 					if(!((EntityPlayer) entityLiving).isCreative()) {

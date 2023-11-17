@@ -7,7 +7,7 @@ import com.tiki.advancedlootableweapons.entity.models.ModelSpear;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSpear extends RenderThrownItem<EntitySpear>{
+public class RenderSpear extends RenderThrownItem<EntitySpear> {
 	
 	public static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/entity/spear.png");
 	

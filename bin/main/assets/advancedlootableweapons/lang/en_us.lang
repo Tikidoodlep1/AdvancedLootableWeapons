@@ -993,3 +993,4 @@ alw.forge_hammer.tooltip=Hit an anvil with me to start forging weapons!
 alw.forge_hammer.config_marker.name=This item has been marked as a valid forge hammer via the Advanced Lootable Weapons config.
 alw.anvil.config_marker.name=This item has been marked as a valid anvil via the Advanced Lootable Weapons config.
 alw.armor_binding.bonus_dur.name=Bonus Durability
+alw.forge_ignition.tooltip=This forge requires ignition to consume fuel! The following items can be used

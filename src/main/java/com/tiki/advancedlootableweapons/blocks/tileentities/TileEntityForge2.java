@@ -1,7 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
 
-import com.tiki.advancedlootableweapons.blocks.BlockForge2;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;

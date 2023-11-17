@@ -73,7 +73,7 @@ public class TileEntityForgeWeapon extends TileEntity implements ITickable, IInv
 					}
 					
 					this.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(player, 1);
 					this.giveExp(player, headRecipe.getExp());
 					return true;
@@ -89,7 +89,7 @@ public class TileEntityForgeWeapon extends TileEntity implements ITickable, IInv
 					}
 					
 					this.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(player, 1);
 					this.giveExp(player, toolRecipe.getExp());
 					return true;
@@ -105,7 +105,7 @@ public class TileEntityForgeWeapon extends TileEntity implements ITickable, IInv
 					}
 					
 					this.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(player, 1);
 					this.giveExp(player, toolRecipe.getExp());
 					return true;
@@ -121,7 +121,7 @@ public class TileEntityForgeWeapon extends TileEntity implements ITickable, IInv
 					}
 					
 					this.setInventorySlotContents(2, result);
-					Minecraft.getMinecraft().player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
 					this.damageForgeHammer(player, 1);
 					return true;
 				}
@@ -132,7 +132,7 @@ public class TileEntityForgeWeapon extends TileEntity implements ITickable, IInv
 	
 	private void giveExp(EntityPlayer player, int exp) {
 		player.addExperience(exp);
-		System.out.println("Giving " + exp + " from Forge Weapons");
+		//System.out.println("Giving " + exp + " from Forge Weapons");
 	}
 	
 	private void damageForgeHammer(EntityPlayer player, int amount) {

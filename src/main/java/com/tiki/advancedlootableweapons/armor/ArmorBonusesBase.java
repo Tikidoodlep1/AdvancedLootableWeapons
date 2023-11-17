@@ -252,6 +252,6 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 	
 	@Override
 	public boolean hasOverlay(ItemStack stack) {
-		return this.getArmorMaterial()  == ItemArmor.ArmorMaterial.LEATHER || this.getArmorMaterial()  == ItemInit.CAMAT_DIAMOND || getColor(stack) != 0x00FFFFFF;
+		return this.getArmorMaterial() == ItemArmor.ArmorMaterial.LEATHER || this.getArmorMaterial()  == ItemInit.CAMAT_DIAMOND || getColor(stack) != 0x00FFFFFF;
 	}
 }

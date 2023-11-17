@@ -1,6 +1,5 @@
-package com.tiki.advancedlootableweapons.init;
+package com.tiki.advancedlootableweapons.handlers;
 
-import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -9,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
 
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
+	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("advancedlootableweap"); // netowrk channel name cannot be longer than 20 chars... lol
 	
 	public static void init() {
 		registerServerBoundMessage(PacketForgeWeaponButtonPress.Handler.class, PacketForgeWeaponButtonPress.class);

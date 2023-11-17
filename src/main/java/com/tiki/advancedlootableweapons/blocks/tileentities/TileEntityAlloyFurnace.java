@@ -5,9 +5,6 @@ import javax.annotation.Nullable;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.recipes.AlloyingRecipe;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -17,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketSpawnExperienceOrb;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
@@ -126,11 +122,11 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 		}
 	}
 	
-	public void sendExp(int exp) {
-		NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
-		SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(this.world, (double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), exp));
-		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
-	}
+//	public void sendExp(int exp) { // This crosses logical sides! TE's are present on the server!
+//		NetHandlerPlayClient clientHandler = Minecraft.getMinecraft().getConnection();
+//		SPacketSpawnExperienceOrb packet = new SPacketSpawnExperienceOrb(new EntityXPOrb(this.world, (double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), exp));
+//		Minecraft.getMinecraft().addScheduledTask(() -> packet.processPacket(clientHandler));
+//	}
 	
 	@Nullable
     private IRecipe findMatchingRecipe(InventoryCrafting craftMatrix, World worldIn)

@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -22,7 +21,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerMill extends Container {
 
-private final TileEntityMill tileentity;
+	private final TileEntityMill tileentity;
+	private int crushedContents;
 	
 	public ContainerMill(InventoryPlayer player, TileEntityMill tileEntityMill) 
 	{
@@ -80,6 +80,14 @@ private final TileEntityMill tileentity;
 	public void detectAndSendChanges() 
 	{
 		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = (IContainerListener)this.listeners.get(i);
+			
+			if(this.crushedContents != this.tileentity.getField(0)) listener.sendWindowProperty(this, 0, this.tileentity.getField(0));
+		}
+		
+		this.crushedContents = this.tileentity.getField(0);
 	}
 	
 	@Override

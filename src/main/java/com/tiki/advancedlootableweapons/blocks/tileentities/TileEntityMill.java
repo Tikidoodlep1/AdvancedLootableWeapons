@@ -29,6 +29,7 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	private Random rand = new Random();
+	private int crushedContents = 0;
 	
 	public boolean crushContents() {
 		ShapelessOneSlotRecipes recipe = findMatchingRecipe(this.inventory, this.getWorld());
@@ -51,6 +52,7 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 				}
 				
 				this.setInventorySlotContents(1, result);
+				this.crushedContents = count;
 				return true;
 			}
 		}
@@ -129,12 +131,13 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		ItemStack itemstack = (ItemStack)this.inventory.get(index);
 		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
-		this.inventory.set(index, stack);
 		
 		if(stack.getCount() > this.getInventoryStackLimit()) {
 			stack.setCount(this.getInventoryStackLimit());
 		}
-		if(index == 0 && !flag) {
+		
+		this.inventory.set(index, stack);
+		if(!flag) {
 			this.markDirty();
 		}
 	}
@@ -195,11 +198,22 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 
 	@Override
 	public int getField(int id) {
-		return 0;
+		switch(id) {
+			case 0:
+				return this.crushedContents;
+			default:
+				return 0;
+		}
 	}
 
 	@Override
-	public void setField(int id, int value) {}
+	public void setField(int id, int value) {
+		switch(id) {
+			case 0:
+				this.crushedContents = value;
+				break;
+		}
+	}
 
 	@Override
 	public int getFieldCount() {

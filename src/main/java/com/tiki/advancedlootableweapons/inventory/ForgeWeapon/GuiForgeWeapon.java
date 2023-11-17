@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
-import com.tiki.advancedlootableweapons.init.PacketHandler;
+import com.tiki.advancedlootableweapons.handlers.PacketHandler;
 import com.tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
 
 import net.minecraft.block.Block;
