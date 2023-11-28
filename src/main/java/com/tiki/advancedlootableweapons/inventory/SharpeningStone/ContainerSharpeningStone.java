@@ -21,6 +21,7 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,7 +45,7 @@ public class ContainerSharpeningStone extends Container {
 	public ContainerSharpeningStone(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player)
     {
         this.outputSlot = new InventoryCraftResult();
-        this.inputSlot = new InventoryBasic(I18n.format("container.sharpening_stone"), true, 1);
+        this.inputSlot = new InventoryBasic(new TextComponentTranslation("container.sharpening_stone").getFormattedText(), true, 1);
         this.world = worldIn;
         
         this.addSlotToContainer(new Slot(this.inputSlot, 0, 45, 19){

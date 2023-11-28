@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
+import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,31 +16,35 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	
-	private final NonNullList<Ingredient> inputs;
+	//private final NonNullList<Ingredient> inputs;
 	private final String button;
 	private final int exp;
+	public final Block block;
 	
-	ForgeToolHeadRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result) {
+	public ForgeToolHeadRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
 		super(null, inputs, result);
-		this.inputs = inputs;
+		//this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
+		this.block = block;
 	}
 	
 	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
-		if(inputs.get(0) == Ingredient.EMPTY) {
+		if(input.get(0) == Ingredient.EMPTY) {
 			remainingItems.set(0, inventoryCrafting.get(0));
 		}
-		if(inputs.get(1) == Ingredient.EMPTY) {
+		if(input.get(1) == Ingredient.EMPTY) {
 			remainingItems.set(1, inventoryCrafting.get(1));
 		}
 		return remainingItems;
@@ -48,10 +53,10 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
-		if(inputs.get(0) == Ingredient.EMPTY) {
+		if(input.get(0) == Ingredient.EMPTY) {
 			remainingItems.set(0, inventoryCrafting.getStackInSlot(0));
 		}
-		if(inputs.get(1) == Ingredient.EMPTY) {
+		if(input.get(1) == Ingredient.EMPTY) {
 			remainingItems.set(1, inventoryCrafting.getStackInSlot(1));
 		}
 		return remainingItems;
@@ -61,7 +66,7 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 		if(inv.size() != 3) {
 			return false;
 		}
-		
+				
 		boolean match1 = false;
 		boolean match2 = false;
 		boolean matsMatch = false;
@@ -70,8 +75,8 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 		NBTTagCompound tag1 = input1.getTagCompound();
 		NBTTagCompound tag2 = input2.getTagCompound();
 		
-		if(this.inputs.get(0) != Ingredient.EMPTY) {
-			for(ItemStack stack : this.inputs.get(0).getMatchingStacks()) {
+		if(this.input.get(0) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.input.get(0).getMatchingStacks()) {
 				if(input1.getItem() == stack.getItem()) {
 					match1 = true;
 					break;
@@ -82,8 +87,8 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 			matsMatch = true;
 		}
 		
-		if(this.inputs.get(1) != Ingredient.EMPTY) {
-			for(ItemStack stack : this.inputs.get(1).getMatchingStacks()) {
+		if(this.input.get(1) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.input.get(1).getMatchingStacks()) {
 				if(input2.getItem() == stack.getItem()) {
 					match2 = true;
 					break;
@@ -142,8 +147,8 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 		NBTTagCompound tag1 = input1.getTagCompound();
 		NBTTagCompound tag2 = input2.getTagCompound();
 		
-		if(this.inputs.get(0) != Ingredient.EMPTY) {
-			for(ItemStack stack : this.inputs.get(0).getMatchingStacks()) {
+		if(this.input.get(0) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.input.get(0).getMatchingStacks()) {
 				if(input1.getItem() == stack.getItem()) {
 					match1 = true;
 					break;
@@ -154,8 +159,8 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 			matsMatch = true;
 		}
 		
-		if(this.inputs.get(1) != Ingredient.EMPTY) {
-			for(ItemStack stack : this.inputs.get(1).getMatchingStacks()) {
+		if(this.input.get(1) != Ingredient.EMPTY) {
+			for(ItemStack stack : this.input.get(1).getMatchingStacks()) {
 				if(input2.getItem() == stack.getItem()) {
 					match2 = true;
 					break;
@@ -234,7 +239,7 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		if(inputs.size() >= 2 && inputs.get(inputs.size() - 1) != Ingredient.EMPTY) {
+		if(input.size() >= 2 && input.get(input.size() - 1) != Ingredient.EMPTY) {
 			if(input2.getItem() instanceof ItemHotToolHead) {
 				if(input2Tag.hasKey("addedDamage")) {
 					resultTag.setDouble("addedDamage", input2Tag.getDouble("addedDamage") + checkHeat(input2));
@@ -305,7 +310,7 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		if(inputs.size() >= 2 && inputs.get(inputs.size() - 1) != Ingredient.EMPTY) {
+		if(input.size() >= 2 && input.get(input.size() - 1) != Ingredient.EMPTY) {
 			if(input2.getItem() instanceof ItemHotToolHead) {
 				if(input2Tag.hasKey("addedDamage")) {
 					resultTag.setDouble("addedDamage", input2Tag.getDouble("addedDamage") + checkHeat(input2));
@@ -342,7 +347,7 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	}
 	
 	private boolean isAcceptedIngot(ItemStack stack) {
-		return ItemInit.acceptedForgeItems.contains(stack.getItem());
+		return ItemInit.acceptedForgeMetals.contains(stack.getItem());
 	}
 	
 	public String getButton() {
@@ -368,6 +373,8 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 		@Override
 		public IRecipe parse(JsonContext context, JsonObject json) {
 			final String button = JsonUtils.getString(json, "button");
+			final String block = JsonUtils.getString(json, "block", "");
+			
 			final NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 			JsonArray ing = JsonUtils.getJsonArray(json, "ingredients");
 			if(ing.size() > inputs.size()) {
@@ -379,17 +386,17 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 				if(e.getAsJsonObject().has("slot")) {
 					final JsonElement slot = e.getAsJsonObject().get("slot");
 					if(slot.getAsString().equalsIgnoreCase("metal")) {
-						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeItems.toArray(new Item[0])));
+						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeMetals.toArray(new Item[0])));
 					}
 				}else {
-					inputs.set(i, CraftingHelper.getIngredient(e, context));
+					inputs.set(i, CraftingHelper.getIngredient(e, context)); //Maybe: if(inputs[i] instanceof hot tool head) {check for a material listed};
 				}
 			}
 			
 			final int exp = JsonUtils.getInt(json, "exp");
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
-			return new ForgeToolHeadRecipe(button, inputs, exp, result);
+			return new ForgeToolHeadRecipe(button, inputs, exp, result, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block)));
 		}
 		
 	}

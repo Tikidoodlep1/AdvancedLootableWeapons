@@ -1,15 +1,11 @@
 package com.tiki.advancedlootableweapons.inventory.Forge;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.tiki.advancedlootableweapons.blocks.BlockForgeFuel;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -28,22 +24,18 @@ public class ContainerForgeFuel extends Container
 	private int maxBurnTime = 0;
 	private int burnTime = 0;
 	private final Set<Item> heatableMaterials;
+	private final Set<Item> fuelList;
 	
 	public ContainerForgeFuel(InventoryPlayer player, TileEntityForge tileentity) 
 	{
 		this.tileentity = tileentity;
-		if(tileentity.getBlockType() instanceof BlockForgeFuel) {
-			this.heatableMaterials = ((BlockForgeFuel)tileentity.getBlockType()).acceptedMaterials;
-		}else if(tileentity.getBlockType() instanceof BlockForgeFuelContent) {
-			this.heatableMaterials = ((BlockForgeFuelContent)tileentity.getBlockType()).getRepresentation().getMatList();
-		}else {
-			heatableMaterials = new HashSet<Item>();
-		}
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
+		this.fuelList = ZenDynamicAlwResources.getFuelListForBlock(tileentity.getBlock());
 		
 		this.addSlotToContainer(new Slot(tileentity, 0, 80, 36) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					if(ContainerForgeFuel.this.heatableMaterials.size() == 0) {
+					if(ContainerForgeFuel.this.heatableMaterials == null || ContainerForgeFuel.this.heatableMaterials.size() == 0) {
 						return true;
 					}
 					
@@ -51,11 +43,7 @@ public class ContainerForgeFuel extends Container
 						NBTTagCompound tag = stack.getTagCompound();
 						if(tag.hasKey("Material")) {
 							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
-							for(Item i : heatableMaterials) {
-								if(matStack.getItem() == i) {
-									return true;
-								}
-							}
+							return ContainerForgeFuel.this.heatableMaterials.contains(matStack.getItem());
 						}
 					}
 				}
@@ -65,11 +53,11 @@ public class ContainerForgeFuel extends Container
 		
 		this.addSlotToContainer(new Slot(tileentity, 1, 80, 59) {
 			public boolean isItemValid(ItemStack stack) {
-				Block forge = tileentity.getBlockType();
-				if(forge instanceof BlockForgeFuel) {
-					return ZenDynamicAlwResources.getFuelListForBlock(forge).contains(stack.getItem());
+				if(ContainerForgeFuel.this.fuelList == null) {
+					return true;
 				}
-				return false;
+				
+				return ContainerForgeFuel.this.fuelList.contains(stack.getItem());
 			}
 		});
 		

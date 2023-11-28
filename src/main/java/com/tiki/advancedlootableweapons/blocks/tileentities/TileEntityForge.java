@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.tileentities;
 
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
 import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;
@@ -9,6 +10,7 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -19,9 +21,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class TileEntityForge extends TileEntity implements ITickable, IInventory
 {
@@ -32,19 +36,23 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	private String customName;
 	private int heat;
 	private double currentTemp = 1750D;
-	private int increaseFrames = 0;
+	protected int increaseFrames = 0;
+	protected float airflowMultiplier = 1.0f;
 	private int burnTime = 0;
 	private int maxBurnTime = 0;
 	private boolean canUseFuel = false;
 	private boolean requiresIgnition = false;
 	private boolean needsFuel = false;
 	private float baseHeatingSpeed = 1.0f;
+	private Block block;
 	
-	public TileEntityForge() {
-		this(false, false);
+	public TileEntityForge() {}
+	
+	public TileEntityForge(Block block) {
+		this(false, false, block);
 	}
 	
-	public TileEntityForge(boolean needsFuel, boolean needsIgnition) {
+	public TileEntityForge(boolean needsFuel, boolean needsIgnition, Block block) {
 		if(needsFuel && needsIgnition) {
 			this.canUseFuel = false;
 		}else if(needsFuel && !needsIgnition) {
@@ -52,15 +60,29 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		}
 		this.needsFuel = needsFuel;
 		this.requiresIgnition = needsIgnition;
-		if(this.getBlockType() instanceof BlockForgeContent) {
-			this.baseHeatingSpeed = ((BlockForgeContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
-		}else if(this.getBlockType() instanceof BlockForgeFuelContent) {
-			this.baseHeatingSpeed = ((BlockForgeFuelContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
-		}else if(this.getBlockType() instanceof BlockForge2Content) {
-			this.baseHeatingSpeed = ((BlockForge2Content)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
-		}else if(this.getBlockType() instanceof BlockForge2FuelContent) {
-			this.baseHeatingSpeed = ((BlockForge2FuelContent)this.getBlockType()).getRepresentation().getBaseHeatingSpeed();
+		this.block = block;
+		//Block block = this.getWorld().getBlockState(this.getPos()).getBlock();
+		
+		if(Alw.isCoTLoaded) {
+			if(block instanceof BlockForgeContent) {
+				this.baseHeatingSpeed = ((BlockForgeContent)block).getRepresentation().getBaseHeatingSpeed();
+				this.customName = block.getLocalizedName();
+			}else if(block instanceof BlockForgeFuelContent) {
+				this.baseHeatingSpeed = ((BlockForgeFuelContent)block).getRepresentation().getBaseHeatingSpeed();
+				this.customName = block.getLocalizedName();
+			}else if(block instanceof BlockForge2Content) {
+				this.baseHeatingSpeed = ((BlockForge2Content)block).getRepresentation().getBaseHeatingSpeed();
+				this.customName = block.getLocalizedName();
+			}else if(block instanceof BlockForge2FuelContent) {
+				this.baseHeatingSpeed = ((BlockForge2FuelContent)block).getRepresentation().getBaseHeatingSpeed();
+				this.customName = block.getLocalizedName();
+			}
 		}
+		
+	}
+	
+	public Block getBlock() {
+		return this.block;
 	}
 	
 	public void bellowsInteraction() {
@@ -144,6 +166,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		super.readFromNBT(compound);
 		this.inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.inventory);
+		this.block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(compound.getString("block")));
 		this.heat = compound.getInteger("Heat");
 		this.currentTemp = compound.getDouble("Temperature");
 		this.burnTime = compound.getInteger("BurnTime");
@@ -153,6 +176,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		this.needsFuel = compound.getBoolean("NeedsFuel");
 		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
 		
+		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
 	
@@ -160,6 +184,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
 		super.writeToNBT(compound);
+		compound.setString("block", this.block.getRegistryName().toString());
 		compound.setInteger("Heat", (short)this.heat);
 		compound.setDouble("Temperature", this.currentTemp);
 		compound.setInteger("BurnTime", this.burnTime);
@@ -224,7 +249,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
 				}
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
-				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER);
+				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;

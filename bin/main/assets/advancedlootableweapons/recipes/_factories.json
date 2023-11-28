@@ -10,6 +10,7 @@
 		"forge_weapon": "com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe$Factory",
 		"one_slot": "com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes$Factory",
 		"forge_armor_plate": "com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe$Factory",
+		"forge_general": "com.tiki.advancedlootableweapons.recipes.ForgeGeneralCaseRecipe$Factory",
 		"alloy_furnace": "com.tiki.advancedlootableweapons.recipes.AlloyingRecipe$Factory",
 		"drum": "com.tiki.advancedlootableweapons.recipes.DrumItemRecipe$Factory",
 		"quenching": "com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe$Factory",

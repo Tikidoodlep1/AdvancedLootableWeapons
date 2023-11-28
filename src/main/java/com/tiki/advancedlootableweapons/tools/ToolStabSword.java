@@ -50,7 +50,6 @@ public class ToolStabSword extends Item implements IHasModel {
 	private double bonusDamage;
 	private float reach;
 	private boolean rand;
-	protected double addedDamage;
 	private String type;
 	private String[] randName1 = new String[] {"alw.weapon_name.repulsor.name", "alw.weapon_name.balmung.name", "alw.weapon_name.gram.name", "alw.weapon_name.arondight.name", "alw.weapon_name.caladbolg.name", "alw.weapon_name.chandrahas.name", "alw.weapon_name.colada.name", "alw.weapon_name.mors.name", "alw.weapon_name.durendal.name", "alw.weapon_name.ecke.name", "alw.weapon_name.hauteclere.name", "alw.weapon_name.mimung.name", "alw.weapon_name.naegling.name", "alw.weapon_name.tizona.name", "alw.weapon_name.tyrfing.name", "alw.weapon_name.zulfiqar.name"};
 	private String[] randName2 = new String[] {"alw.weapon_modifier.lucent.name", "alw.weapon_modifier.lambent.name", "alw.weapon_modifier.dark.name", "alw.weapon_modifier.dusk.name", "alw.weapon_modifier.aphotic.name", "alw.weapon_modifier.radiant.name", "alw.weapon_modifier.scintillant.name", "alw.weapon_modifier.vacuous.name", "alw.weapon_modifier.nixing.name", "alw.weapon_modifier.abnegating.name", "alw.weapon_modifier.collector_of_heads.name", "alw.weapon_modifier.triumphant.name"};
@@ -177,12 +176,6 @@ public class ToolStabSword extends Item implements IHasModel {
 		
 		this.setMaximumDamage(stack, addedDurability);
 		this.setUnquenched(stack);
-		
-		String matName = material.getDisplayName();
-		int index = matName.indexOf("Ingot");
-		if(index != -1) {
-			matName = matName.substring(0, index - 1);
-		}
 		
 		if(this.rand == true) {
 			stack.setStackDisplayName(new TextComponentTranslation(randName2[randGen.nextInt(12)]).getFormattedText() + " " +  new TextComponentTranslation(randName1[randGen.nextInt(16)]).getFormattedText() + " (" + this.getItemStackDisplayName(stack) + ")");

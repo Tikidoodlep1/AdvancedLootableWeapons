@@ -1,18 +1,12 @@
 package com.tiki.advancedlootableweapons.inventory.Forge2;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.blocks.BlockForge2;
-import com.tiki.advancedlootableweapons.blocks.BlockForge2Fuel;
-import com.tiki.advancedlootableweapons.blocks.BlockForgeFuel;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -31,6 +25,7 @@ public class GuiForge2 extends GuiContainer
 	private static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_2_new.png");
 	private final InventoryPlayer player;
 	private final TileEntityForge2 tileentity;
+	private StringBuilder tileName;
 	private static final int slot1x = 51;
 	private static final int slot2x = 80;
 	private static final int slot3x = 109;
@@ -43,22 +38,38 @@ public class GuiForge2 extends GuiContainer
 		super(new ContainerForge2(player, tileentity));
 		this.player = player;
 		this.tileentity = tileentity;
-		this.xSize = 175;
-		this.ySize = 165;
-		if(tileentity.getBlockType() instanceof BlockForge2) {
-			this.heatableMaterials = ((BlockForge2)tileentity.getBlockType()).acceptedMaterials;
-		}else if(tileentity.getBlockType() instanceof BlockForge2Content) {
-			this.heatableMaterials = ((BlockForge2Content)tileentity.getBlockType()).getRepresentation().getMatList();
-		}else {
-			heatableMaterials = new HashSet<Item>();
+		this.xSize = 176;
+		this.ySize = 166;
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
+	}
+	
+	private String getTileName() {
+		if(this.tileName != null) {
+			return this.tileName.toString();
 		}
+		
+		int namePlateSizeInGui = 116;
+		this.tileName = new StringBuilder(this.tileentity.getDisplayName().getUnformattedText());
+		int len = this.fontRenderer.getStringWidth(this.tileName.toString());
+		int avgCharSize = this.fontRenderer.getStringWidth("I");
+		int lettersToKeep = (namePlateSizeInGui / avgCharSize);
+		while(len > namePlateSizeInGui) {
+			this.tileName.delete(lettersToKeep--, this.tileName.length());
+			this.tileName.append("...");
+			len = this.fontRenderer.getStringWidth(this.tileName.toString());
+		}
+		
+		if(this.tileName.charAt(this.tileName.length() - 4) == ' ') {
+			this.tileName.deleteCharAt(this.tileName.length() - 4);
+		}
+		
+		return this.tileName.toString();
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
 	{
-		String tileName = this.tileentity.getBlockType().getLocalizedName();
-		this.fontRenderer.drawStringWithShadow(tileName, 30, 24, 0xFFFFFFFF);
+		this.fontRenderer.drawStringWithShadow(this.getTileName(), 30, 24, 0xFFFFFFFF);
 		this.fontRenderer.drawStringWithShadow(this.player.getDisplayName().getUnformattedText(), 5, 72, 0xFFFFFFFF);
 	}
 	
@@ -104,7 +115,7 @@ public class GuiForge2 extends GuiContainer
 		if(mouseX > this.guiLeft + 156 && mouseX < this.guiLeft + 175 && mouseY > this.guiTop + 2 && mouseY < this.guiTop + 17) {
 			List<String> lines = new ArrayList<String>(3);
 			lines.add("This Forge Can Heat:");
-			if(this.heatableMaterials.isEmpty()) {
+			if(this.heatableMaterials == null || this.heatableMaterials.isEmpty()) {
 				lines.add("Any Material");
 			}else {
 				for(Item item : this.heatableMaterials) {

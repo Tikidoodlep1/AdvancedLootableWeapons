@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.teamacronymcoders.base.client.models.generator.IHasGeneratedModel;
@@ -18,6 +20,7 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Fuel;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgeRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -60,7 +63,7 @@ public class BlockForge2FuelContent extends BlockForge2Content implements IHasGe
 	{
 		super(forge);
 		this.forge = forge;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(REQUIRES_IGNITION, true));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(REQUIRES_IGNITION, forge.needsIgnition()));
 	}
 	
 	public void setFuelList(Set<Item> items) {
@@ -307,7 +310,10 @@ public class BlockForge2FuelContent extends BlockForge2Content implements IHasGe
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION));
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForge2AirflowConsumer(true, state.getValue(REQUIRES_IGNITION), this);
+		}
+		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION), this);
 	}
 	
 	@Override
@@ -343,6 +349,7 @@ public class BlockForge2FuelContent extends BlockForge2Content implements IHasGe
 	@Override
 	public List<IGeneratedModel> getGeneratedModels() {
 		List<IGeneratedModel> models = Lists.newArrayList();
+		Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
 		JsonObject BlockStateJson = new JsonObject();
     	BlockStateJson.addProperty("forge_marker", 1);
     	JsonObject variants = new JsonObject();
@@ -377,20 +384,30 @@ public class BlockForge2FuelContent extends BlockForge2Content implements IHasGe
     	BlockStateJson.add("variants", variants);
     	
     	JsonObject BlockModelJson = ZenDynamicAlwResources.ADVANCED_FORGE_MODEL;
-		JsonElement textures = BlockModelJson.get("textures");
-    	if(textures != null && !textures.isJsonNull()) {
-    		JsonObject textureObj = textures.getAsJsonObject();
-    		JsonObject newTextureObj = new JsonObject();
-    		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
-    			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
-    		}
-    		BlockModelJson.add("textures", newTextureObj);
+    	if(BlockModelJson != null) {
+    		JsonElement textures = BlockModelJson.get("textures");
+        	if(textures != null && !textures.isJsonNull()) {
+        		JsonObject textureObj = textures.getAsJsonObject();
+        		JsonObject newTextureObj = new JsonObject();
+        		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
+        			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
+        		}
+        		BlockModelJson.add("textures", newTextureObj);
+        	}
+        	
+        	if(BlockModelJson.size() > 0) {
+        		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
+        	}else {
+        		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please check that you are using the latest version of ALW. If you are, please report this to the mod author!");
+        	}
     	}
     	
     	models.add(new GeneratedModel(forge.getName(), ModelType.BLOCKSTATE, BlockStateJson.toString()));
-    	if(BlockModelJson.size() > 0) {
-    		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, BlockModelJson.toString()));
-    	}
+    	
+    	JsonObject ItemModelJson = new JsonObject();
+		ItemModelJson.addProperty("parent", "contenttweaker:block/" + forge.getName());
+		
+    	models.add(new GeneratedModel(forge.getName(), ModelType.ITEM_MODEL, gson.toJson(ItemModelJson)));
     	
         return models;
 	}

@@ -21,12 +21,12 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ClayCoveringRecipe extends ShapelessOreRecipe {
 
-	private final NonNullList<Ingredient> inputs;
+	//private final NonNullList<Ingredient> inputs;
 	private final ItemStack result;
 	
 	ClayCoveringRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		super(group, input, result);
-		this.inputs = input;
+		//this.inputs = input;
 		this.result = result;
 	}
 	

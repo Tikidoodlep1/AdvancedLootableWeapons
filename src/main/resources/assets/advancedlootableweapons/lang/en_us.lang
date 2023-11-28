@@ -926,8 +926,10 @@ alw.weapon.makhaira.name=Makhaira
 alw.weapon.spear.name=Spear
 alw.weapon.chain_ring.name=Chain Ring
 alw.weapon.armor_plate.name=Armor Plate
-alw.button.tool_handle.name=Tool Handle
+alw.button.tool_handle.name=Handle
 alw.button.forge_weapon.name=Forge Weapon
+alw.button.next.name=Next Page
+alw.button.prev.name=Previous Page
 
 
 alw.weapon_name.repulsor.name=Repulsor

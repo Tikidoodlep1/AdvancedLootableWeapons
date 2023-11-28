@@ -1,11 +1,9 @@
 package com.tiki.advancedlootableweapons.inventory.Forge;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.tiki.advancedlootableweapons.blocks.BlockForge;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,18 +26,12 @@ public class ContainerForge extends Container
 	public ContainerForge(InventoryPlayer player, TileEntityForge tileentity) 
 	{
 		this.tileentity = tileentity;
-		if(tileentity.getBlockType() instanceof BlockForge) {
-			this.heatableMaterials = ((BlockForge)tileentity.getBlockType()).acceptedMaterials;
-		}else if(tileentity.getBlockType() instanceof BlockForgeContent) {
-			this.heatableMaterials = ((BlockForgeContent)tileentity.getBlockType()).getRepresentation().getMatList();
-		}else {
-			heatableMaterials = new HashSet<Item>();
-		}
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
 		
 		this.addSlotToContainer(new Slot(tileentity, 0, 80, 48) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					if(ContainerForge.this.heatableMaterials.size() == 0) {
+					if(ContainerForge.this.heatableMaterials == null || ContainerForge.this.heatableMaterials.size() == 0) {
 						return true;
 					}
 					
@@ -47,11 +39,7 @@ public class ContainerForge extends Container
 						NBTTagCompound tag = stack.getTagCompound();
 						if(tag.hasKey("Material")) {
 							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
-							for(Item i : heatableMaterials) {
-								if(matStack.getItem() == i) {
-									return true;
-								}
-							}
+							return ContainerForge.this.heatableMaterials.contains(matStack.getItem());
 						}
 					}
 				}

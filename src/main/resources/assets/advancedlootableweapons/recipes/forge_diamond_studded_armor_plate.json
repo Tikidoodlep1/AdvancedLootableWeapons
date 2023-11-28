@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	
+	"ingredients":
+	[
+		{
+			"item": "advancedlootableweapons:armor_plate_steel"
+		},
+		{
+			"item": "advancedlootableweapons:armor_plate_steel"
+		},
+		{
+			"item": "advancedlootableweapons:armor_plate_steel"
+		},
+		{
+			"item": "minecraft:diamond"
+		}
+	],
+  	"result": {
+    	"item": "advancedlootableweapons:armor_plate_diamond",
+    	"count": 3
+  	}
+}

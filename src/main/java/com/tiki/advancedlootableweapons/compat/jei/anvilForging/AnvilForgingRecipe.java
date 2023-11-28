@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.tiki.advancedlootableweapons.compat.jei.JEICompat;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
-import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
@@ -53,13 +52,12 @@ public class AnvilForgingRecipe implements IRecipeWrapper {
 		List<List<ItemStack>> inputList = new ArrayList<List<ItemStack>>();
 		
 		for(Ingredient i : this.inputs) {
-			List<ItemStack> stackList = null;
+			List<ItemStack> stackList = new ArrayList<ItemStack>();
 			for(ItemStack stack : i.getMatchingStacks()) {
-				stackList = new ArrayList<ItemStack>(1);
 				stackList.add(stack);
 			}
 			
-			if(stackList != null) {
+			if(!stackList.isEmpty()) {
 				inputList.add(stackList);
 			}
 			//inputList.add(Arrays.stream(i.getMatchingStacks()).collect(Collectors.toList()));

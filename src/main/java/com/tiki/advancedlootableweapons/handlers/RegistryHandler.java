@@ -15,12 +15,12 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -28,12 +28,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @EventBusSubscriber
 public class RegistryHandler {
 	
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
 		Alw.proxy.registerCustomModelLoaders();
 		OreDictionaryCompat.registerOres();
-		
 		ItemInit.generateAcceptedForgeItems();
 		ItemInit.createRecipes();
 	}
@@ -90,6 +89,10 @@ public class RegistryHandler {
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)
 	{
+		Alw.isCrTLoaded = Loader.isModLoaded("crafttweaker");
+		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
+		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
+		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
 		//Dumping furnace recipes to json files for the alloy furnace
 //		Gson gson = new Gson();
 //		for(Entry<ItemStack, ItemStack> e : FurnaceRecipes.instance().getSmeltingList().entrySet()) {

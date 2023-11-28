@@ -10,6 +10,7 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.DrumTESR;
 import com.tiki.advancedlootableweapons.blocks.tileentities.MillTESR;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityMill;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.RenderHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
@@ -221,6 +222,11 @@ public class ClientProxy extends CommonProxy {
 		}, ItemInit.generatedItems.toArray(new Item[0]) );
 	
 	
+	}
+	
+	@Override
+	public void initDynamicResources() {
+		ZenDynamicAlwResources.init();
 	}
 	
 	@Override

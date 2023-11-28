@@ -29,6 +29,11 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
 		this.block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 	}
 	
+	public ShapelessOneSlotRecipes(ResourceLocation group, NonNullList<Ingredient> input, ItemStack result, Block block) {
+		super(group, input, result);
+		this.block = block;
+	}
+	
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);

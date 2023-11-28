@@ -21,6 +21,7 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.BlockForgeFuel;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgeRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -62,7 +63,7 @@ public class BlockForgeFuelContent extends BlockForgeContent implements IHasGene
 	{
 		super(forge);
 		this.forge = forge;
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(REQUIRES_IGNITION, true));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(REQUIRES_IGNITION, forge.needsIgnition()));
 	}
 	
 	public void setFuelList(Set<Item> items) {
@@ -185,9 +186,12 @@ public class BlockForgeFuelContent extends BlockForgeContent implements IHasGene
 	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) 
+	public TileEntity createTileEntity(World world, IBlockState state)
 	{
-		return new TileEntityForge(true, state.getValue(REQUIRES_IGNITION));
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForgeAirflowConsumer(true, state.getValue(REQUIRES_IGNITION), this);
+		}
+		return new TileEntityForge(true, state.getValue(REQUIRES_IGNITION), this);
 	}
 	
 	@Override
@@ -227,7 +231,10 @@ public class BlockForgeFuelContent extends BlockForgeContent implements IHasGene
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityForge(true, getStateFromMeta(meta).getValue(REQUIRES_IGNITION));
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForgeAirflowConsumer(false, false, this);
+		}
+		return new TileEntityForge(true, getStateFromMeta(meta).getValue(REQUIRES_IGNITION), this);
 	}
 
 	@Override
@@ -269,25 +276,29 @@ public class BlockForgeFuelContent extends BlockForgeContent implements IHasGene
     	BlockStateJson.add("variants", variants);
     	
     	JsonObject BlockModelJson = ZenDynamicAlwResources.FORGE_MODEL;
-		JsonElement textures = BlockModelJson.get("textures");
-    	if(textures != null && !textures.isJsonNull()) {
-    		JsonObject textureObj = textures.getAsJsonObject();
-    		JsonObject newTextureObj = new JsonObject();
-    		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
-    			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
-    		}
-    		BlockModelJson.add("textures", newTextureObj);
+    	if(BlockModelJson != null) {
+    		JsonElement textures = BlockModelJson.get("textures");
+        	if(textures != null && !textures.isJsonNull()) {
+        		JsonObject textureObj = textures.getAsJsonObject();
+        		JsonObject newTextureObj = new JsonObject();
+        		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
+        			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
+        		}
+        		BlockModelJson.add("textures", newTextureObj);
+        	}
+        	
+        	if(BlockModelJson.size() > 0) {
+        		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
+        	}else {
+        		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please ensure that you are using the latest version of ALW. If you are, please report this to the mod author!", new JsonIOException("Unable to load JSON from ZenDynamicAlwResources.java:44"));
+        	}
     	}
-    	
+		
 		JsonObject ItemModelJson = new JsonObject();
 		ItemModelJson.addProperty("parent", "contenttweaker:block/" + forge.getName());
 		
     	models.add(new GeneratedModel(forge.getName(), ModelType.BLOCKSTATE, gson.toJson(BlockStateJson)));
-    	if(BlockModelJson.size() > 0) {
-    		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
-    	}else {
-    		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please ensure that you are using the latest version of ALW. If you are, please report this to the mod author!", new JsonIOException("Unable to load JSON from ZenDynamicAlwResources.java:44"));
-    	}
+    	
     	models.add(new GeneratedModel(forge.getName(), ModelType.ITEM_MODEL, gson.toJson(ItemModelJson)));
     	
         return models;

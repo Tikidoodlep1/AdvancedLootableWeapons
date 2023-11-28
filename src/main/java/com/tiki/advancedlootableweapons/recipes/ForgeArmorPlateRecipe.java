@@ -8,6 +8,7 @@ import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -36,13 +37,17 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 	private final NonNullList<Ingredient> inputs;
 	private final String button;
 	private final int exp;
+	//private final Item mat1;
+	public final Block block;
 	private ItemStack material = ItemStack.EMPTY;
 	
-	ForgeArmorPlateRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result) {
+	public ForgeArmorPlateRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
 		super(null, inputs, result);
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
+		//this.mat1 = mat;
+		this.block = block;
 	}
 	
 	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
@@ -119,12 +124,18 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 				if(new ItemStack(tag1.getCompoundTag("Material")).getItem() == input2.getItem()) {
 					matsMatch = true;
 				}
+//				else if(new ItemStack(tag1.getCompoundTag("Material")).getItem() == mat1) {
+//					matsMatch = true;
+//				}
 			}
 		}else {
 			if(!input2.isEmpty() && input2.getItem() instanceof ItemHotToolHead) {
 				if(new ItemStack(tag2.getCompoundTag("Material")).getItem() == input1.getItem()) {
 					matsMatch = true;
 				}
+//				else if(new ItemStack(tag2.getCompoundTag("Material")).getItem() == mat1) {
+//					matsMatch = true;
+//				}
 			}else {
 				if(input1.isEmpty()	|| input2.isEmpty()) {
 					matsMatch = true;
@@ -135,6 +146,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 				}
 			}
 		}
+		
 		//System.out.println(match1 + ", " + match2 + ", " + matsMatch);
 		return match1 && match2 && matsMatch;
 	}
@@ -207,6 +219,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 				}
 			}
 		}
+		
 		//System.out.println(match1 + ", " + match2 + ", " + matsMatch);
 		return match1 && match2 && matsMatch;
 	}
@@ -379,18 +392,21 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 		@Override
 		public IRecipe parse(JsonContext context, JsonObject json) {
 			final String button = JsonUtils.getString(json, "button");
+			//final String mat = JsonUtils.getString(json, "material", "");
+			final String block = JsonUtils.getString(json, "block", "");
+			
 			final NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 			JsonArray ing = JsonUtils.getJsonArray(json, "ingredients");
 			if(ing.size() > inputs.size()) {
 				throw new JsonParseException("There cannot be more ingredients than slots to input items!");
 			}
-				
+			
 			for(int i = 0; i < ing.size(); i++) {
 				JsonElement e = ing.get(i);
 				if(e.getAsJsonObject().has("slot")) {
 					final JsonElement slot = e.getAsJsonObject().get("slot");
 					if(slot.getAsString().equalsIgnoreCase("metal")) {
-						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeItems.toArray(new Item[0])));
+						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeMetals.toArray(new Item[0])));
 					}
 				}else {
 					inputs.set(i, CraftingHelper.getIngredient(e, context));
@@ -400,7 +416,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 			final int exp = JsonUtils.getInt(json, "exp");
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
-			return new ForgeArmorPlateRecipe(button, inputs, exp, result);
+			return new ForgeArmorPlateRecipe(button, inputs, exp, result, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block)));
 		}
 		
 	}

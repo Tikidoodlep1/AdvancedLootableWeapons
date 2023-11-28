@@ -269,7 +269,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), this.getUpdateTag());
 	}
 	
-	@SideOnly(Side.SERVER)
+	//@SideOnly(Side.SERVER)
 	public void onChanged() {
 		this.player.connection.getNetworkManager().sendPacket(getUpdatePacket());
 	}
@@ -314,7 +314,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 				markChanged = true;
 			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && !this.canQuench) {
 				Block under = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock();
-				this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || FluidRegistry.lookupFluidForBlock(under).getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500;
+				this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || (FluidRegistry.lookupFluidForBlock(under) != null && FluidRegistry.lookupFluidForBlock(under).getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500);
 				//this.onChanged();
 			}else if(this.activeRecipe instanceof DrumItemRecipe) {
 				++this.progress;

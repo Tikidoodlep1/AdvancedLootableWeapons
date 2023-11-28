@@ -1,5 +1,8 @@
 package com.tiki.advancedlootableweapons.recipes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -30,16 +33,42 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
+		List<ItemStack> containerItems = new ArrayList<ItemStack>();
+//		for(int i = 0; i < this.input.size(); i++) {
+//			Ingredient in = this.input.get(i);
+//			for(ItemStack stack : in.getMatchingStacks()) {
+//				if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() < inv.getStackInSlot(i).getCount()) {
+//					if(keptItems.get(i) == ItemStack.EMPTY) {
+//						ItemStack slot = inv.getStackInSlot(i);
+//						slot.setCount(inv.getStackInSlot(i).getCount() - stack.getCount());
+//						keptItems.set(i, slot);
+//					}
+//				}
+//			}
+//		}
 		
-		for(int i = 0; i < this.input.size(); i++) {
-			Ingredient in = this.input.get(i);
-			for(ItemStack stack : in.getMatchingStacks()) {
-				if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() < inv.getStackInSlot(i).getCount()) {
-					if(keptItems.get(i) == ItemStack.EMPTY) {
-						ItemStack slot = inv.getStackInSlot(i);
-						slot.setCount(inv.getStackInSlot(i).getCount() - stack.getCount());
-						keptItems.set(i, slot);
+		for(int i = 0; i < inv.getSizeInventory(); i++) {
+			if(inv.getStackInSlot(i) != ItemStack.EMPTY) {
+				if(keptItems.get(i) != ItemStack.EMPTY) {
+					containerItems.add(inv.getStackInSlot(i));
+				}
+				ingred: for(int j = 0; j < this.input.size(); j++) {
+					for(ItemStack s : this.input.get(j).getMatchingStacks()) {
+						if(inv.getStackInSlot(i).getItem() == s.getItem()) {
+							inv.getStackInSlot(i).setCount(inv.getStackInSlot(i).getCount() - s.getCount());
+							break ingred;
+						}
 					}
+				}
+				keptItems.set(i, inv.getStackInSlot(i));
+			}
+		}
+		
+		if(!containerItems.isEmpty()) {
+			int containerIter = 0;
+			for(int i = 0; i < inv.getSizeInventory(); i++) {
+				if(inv.getStackInSlot(i) == ItemStack.EMPTY) {
+					keptItems.set(containerIter, containerItems.get(containerIter++));
 				}
 			}
 		}

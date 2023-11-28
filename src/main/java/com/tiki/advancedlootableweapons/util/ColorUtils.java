@@ -7,6 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ColorUtils {
 
@@ -52,6 +54,7 @@ public class ColorUtils {
 		return color;
 	}
 
+	//@SideOnly(Side.CLIENT) // Fix this - Is calling when thrown spears are picked up from the server. 
 	public static int[] getColorPalateFromItemStack(ItemStack stack) {
 		return getColorPalateFromItemTexture(Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, null, null).getParticleTexture());
 	}
@@ -61,7 +64,7 @@ public class ColorUtils {
 			return new int[] {0xFFFF00FF, 0x00000000, 0xFFFF00FF, 0x00000000, 0xFFFF00FF};
 		}
 		int[] colors = new int[5];
-		int colorIter = 0;
+//		int colorIter = 0;
 		
 		int[] frameData = sprite.getFrameTextureData(0)[0];
 		int width = sprite.getIconWidth();

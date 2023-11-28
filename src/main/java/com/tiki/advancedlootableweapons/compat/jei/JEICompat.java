@@ -37,7 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
 @JEIPlugin
-public class JEICompat implements IModPlugin{
+public class JEICompat implements IModPlugin {
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {

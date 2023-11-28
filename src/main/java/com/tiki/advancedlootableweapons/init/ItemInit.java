@@ -16,6 +16,11 @@ import com.tiki.advancedlootableweapons.items.ItemBase;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemSharpeningStone;
 import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
+import com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeGeneralCaseRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.recipes.RemoveRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
@@ -31,7 +36,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -46,7 +53,8 @@ public class ItemInit {
 	public static final List<Item> items = new ArrayList<Item>();
 	public static final HashSet<Item> generatedItems = new HashSet<Item>();
 	public static final HashSet<Item> weaponItems = new HashSet<Item>();
-	public static final Set<Item> acceptedForgeItems = new HashSet<Item>();
+	public static final Set<Item> acceptedForgeMetals = new HashSet<Item>();
+	public static final Set<Item> forgeRecipeInputs = new HashSet<Item>();
 	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
 	
 	public static void generateAcceptedForgeItems() {
@@ -55,20 +63,36 @@ public class ItemInit {
 			NonNullList<ItemStack> stacks = OreDictionary.getOres(ore);
 			for(ItemStack s : stacks) {
 				if(!s.isEmpty()) {
-					acceptedForgeItems.add(s.getItem());
+					acceptedForgeMetals.add(s.getItem());
 				}
 			}
 		}
-		acceptedForgeItems.add(INGOT_KOBOLD);
-		acceptedForgeItems.add(INGOT_CRYSTALLITE);
-		acceptedForgeItems.add(INGOT_DUSKSTEEL);
-		acceptedForgeItems.add(INGOT_FROST_STEEL);
-		acceptedForgeItems.add(INGOT_SHADOW_PLATINUM);
+		acceptedForgeMetals.add(INGOT_KOBOLD);
+		acceptedForgeMetals.add(INGOT_CRYSTALLITE);
+		acceptedForgeMetals.add(INGOT_DUSKSTEEL);
+		acceptedForgeMetals.add(INGOT_FROST_STEEL);
+		acceptedForgeMetals.add(INGOT_SHADOW_PLATINUM);
+		
+		forgeRecipeInputs.addAll(acceptedForgeMetals);
+		
 	}
 	
 	public static void checkConfigOptions() {
 		
 		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
+		
+		
+		for (IRecipe irecipe : CraftingManager.REGISTRY) {
+            if (irecipe instanceof ForgeToolHeadRecipe || irecipe instanceof ForgeToolRecipe || irecipe instanceof ForgeArmorPlateRecipe || 
+            		irecipe instanceof ForgeArmorBindingRecipe || irecipe instanceof ForgeGeneralCaseRecipe) {
+            	for(Ingredient i : irecipe.getIngredients()) {
+            		for(ItemStack s : i.getMatchingStacks()) {
+            			forgeRecipeInputs.add(s.getItem());
+            		}
+            	}
+            }
+        }
+		
 		
 		for(String s : ConfigHandler.EXTRA_MATERIALS) {
 			List<ToolMaterial> addedMats = new ArrayList<ToolMaterial>();
@@ -95,7 +119,6 @@ public class ItemInit {
 			}
 			
 			try {
-				//Alw.logger.info("Adding Extra Material " + s + ", Tool Material: " + ToolMaterial.valueOf(s));
 				if(ToolMaterial.valueOf(s) != null && !addedMats.contains(ToolMaterial.valueOf(s))) {
 					generatedItems.add(new ToolStabSword("dagger_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "dagger").setMaxStackSize(1));
 					generatedItems.add(new ToolStabSword("kabutowari_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "kabutowari").setMaxStackSize(1));
@@ -113,12 +136,18 @@ public class ItemInit {
 					generatedItems.add(new ToolSlashSword("makhaira_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s), "makhaira").setMaxStackSize(1));
 					generatedItems.add(new ToolSpear("spear_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s)).setMaxStackSize(1));
 					
-					acceptedForgeItems.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
+					if(ToolMaterial.valueOf(s).getRepairItemStack() == ItemStack.EMPTY) {
+						acceptedForgeMetals.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
+						forgeRecipeInputs.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
+					}else {
+						acceptedForgeMetals.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
+						forgeRecipeInputs.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
+					}
+					
 					addedMats.add(ToolMaterial.valueOf(s));
 				}
 			}catch (IllegalArgumentException e) {
-				//Alw.logger.error("Tried to add extra material " + s + " which does not exist. Valid materials are: " + Arrays.toString(ToolMaterial.values()));
-				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist.");
+				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist. Use /materials in-game to get a list of valid tool materials.");
 			}
 		}
 		

@@ -1,10 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockAlwOre;
 import com.tiki.advancedlootableweapons.blocks.BlockBase;
@@ -27,9 +24,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class BlockInit {
@@ -97,11 +91,11 @@ public class BlockInit {
 	public static final Block water_block_display = new BlockAlwFluid("water_display", FluidRegistry.WATER, Material.WATER, MapColor.WATER);
 	public static final Block lava_block_display = new BlockAlwFluid("lava_display", FluidRegistry.LAVA, Material.LAVA, MapColor.RED_STAINED_HARDENED_CLAY);
 	
-	private static Set<Item> getItemFuels() {
-		HashSet<Item> fuels = new HashSet<Item>();
-		fuels.add(Items.COAL);
-		fuels.add(Items.LAVA_BUCKET);
-		fuels.add(Item.getItemFromBlock(Blocks.COAL_BLOCK));
-		return fuels;
-	}
+//	private static Set<Item> getItemFuels() {
+//		HashSet<Item> fuels = new HashSet<Item>();
+//		fuels.add(Items.COAL);
+//		fuels.add(Items.LAVA_BUCKET);
+//		fuels.add(Item.getItemFromBlock(Blocks.COAL_BLOCK));
+//		return fuels;
+//	}
 }

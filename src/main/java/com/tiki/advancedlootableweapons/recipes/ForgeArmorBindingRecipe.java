@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import com.tiki.advancedlootableweapons.items.ItemArmorBinding;
+
+import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -30,12 +33,14 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 	private final NonNullList<Ingredient> inputs;
 	private final ItemStack result;
 	private final String button;
+	public final Block block;
 	
-	ForgeArmorBindingRecipe(@Nullable final ResourceLocation group, final String button, final NonNullList<Ingredient> input, final ItemStack result) {
+	public ForgeArmorBindingRecipe(@Nullable final ResourceLocation group, final String button, final NonNullList<Ingredient> input, final ItemStack result, final Block block) {
 		super(group, input, result);
 		this.inputs = input;
 		this.result = result;
 		this.button = button;
+		this.block = block;
 	}
 	
 	public String getButton() {
@@ -168,6 +173,8 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 		public IRecipe parse(JsonContext context, JsonObject json) {
 			final String group = JsonUtils.getString(json, "group", "");
 			final String button = JsonUtils.getString(json, "button");
+			final String block = JsonUtils.getString(json, "block", "");
+			
 			final NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 			JsonArray ing = JsonUtils.getJsonArray(json, "ingredients");
 			if(ing.size() > inputs.size()) {
@@ -196,7 +203,7 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 			
 			ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
-			return new ForgeArmorBindingRecipe(group.isEmpty() ? null : new ResourceLocation(group), button, inputs, result);
+			return new ForgeArmorBindingRecipe(group.isEmpty() ? null : new ResourceLocation(group), button, inputs, result, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block)));
 		}
 		
 	}

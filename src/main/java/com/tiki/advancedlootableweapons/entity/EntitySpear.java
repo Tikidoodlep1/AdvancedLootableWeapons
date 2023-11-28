@@ -54,7 +54,7 @@ public class EntitySpear extends EntityArrow {
     public static final DataParameter<Float> REACH = EntityDataManager.<Float>createKey(EntitySpear.class, DataSerializers.FLOAT);
     public static final DataParameter<String> CUSTOM_NAME = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
     public static final DataParameter<String> MATERIAL = EntityDataManager.<String>createKey(EntitySpear.class, DataSerializers.STRING);
-    public static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntitySpear.class, DataSerializers.VARINT);
+    public static final DataParameter<NBTTagCompound> TAG = EntityDataManager.<NBTTagCompound>createKey(EntitySpear.class, DataSerializers.COMPOUND_TAG);
     
     public EntitySpear(World worldIn, EntityLivingBase shooter, int spearDurability, int maxDurability, double attackDamage, float reach, double attackSpeed, ItemStack stack) {
     	this(worldIn, shooter);
@@ -66,7 +66,7 @@ public class EntitySpear extends EntityArrow {
     	this.setAttackSpeedData(attackSpeed);
     	this.setReachData(reach);
     	if(this.getItemStack() != ItemStack.EMPTY) {
-			this.setColorData( (stack.hasTagCompound() ? stack.getTagCompound().getIntArray("colors")[2] : 0x77F700FF));
+			this.setTagData( (stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound()));
 		}
     }
     
@@ -194,21 +194,21 @@ public class EntitySpear extends EntityArrow {
 		if(!this.dataManager.isEmpty()) {
 			return this.dataManager.get(CUSTOM_NAME);
 		}else {
-			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
+			Alw.logger.error("SPEAR DATA MANAGER IS EMPTY!!");
 			return this.arrowStack.getDisplayName();
 		}
 	}
 	
-	private void setColorData(int color) {
-		this.dataManager.set(COLOR, color);
+	private void setTagData(NBTTagCompound color) {
+		this.dataManager.set(TAG, color);
 	}
 	
-	public int getColorData() {
+	public NBTTagCompound getTagData() {
 		if(!this.dataManager.isEmpty()) {
-			return this.dataManager.get(COLOR);
+			return this.dataManager.get(TAG);
 		}else {
-			Alw.logger.error("!! DATA MANAGER IS EMPTY !!");
-			return 0;
+			Alw.logger.error("SPEAR DATA MANAGER IS EMPTY!!");
+			return new NBTTagCompound();
 		}
 	}
 	
@@ -223,7 +223,7 @@ public class EntitySpear extends EntityArrow {
 		this.dataManager.register(REACH, 4.0F);
 		this.dataManager.register(CUSTOM_NAME, "");
 		this.dataManager.register(MATERIAL, "");
-		this.dataManager.register(COLOR, 0x00000000);
+		this.dataManager.register(TAG, new NBTTagCompound());
 	}
 	
 	@Override
@@ -269,7 +269,7 @@ public class EntitySpear extends EntityArrow {
 			player.inventory.add(slot, stack);
 			ItemStack item = player.inventory.getStackInSlot(slot);
 			((ToolSpear)item.getItem()).setMaximumDamage(item, maxDurability);
-			((ToolSpear)item.getItem()).setColors(stack, ColorUtils.getColorPalateFromItemStack(stack));
+			((ToolSpear)item.getItem()).setColors(stack, this.getTagData().getIntArray("colors"));
 			newNBT = item.getTagCompound();
 			newNBT.setDouble("totalDamage", (double)this.getDamageData());
 			item.setItemDamage(this.getDurabilityData());

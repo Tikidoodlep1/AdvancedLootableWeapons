@@ -19,6 +19,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -39,7 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Alw {
 	@Instance
 	public static Alw instance;
-		
+	
 	public static File ArmorConfig;
 	public static File WeaponConfig;
 	public static File MobConfig;
@@ -66,6 +67,11 @@ public class Alw {
 	public static final CreativeTabs AlwToolHeadsTab = new AlwToolHeadsCreativeTab("alwtoolheadscreativetab");
 	public static Logger logger;
 	
+	public static boolean isCrTLoaded = false;
+	public static boolean isCoTLoaded = false;
+	public static boolean isBWMLoaded = false;
+	public static boolean isPyrotechLoaded = false;
+	
 	static {
 		FluidRegistry.enableUniversalBucket();
 	}
@@ -76,7 +82,7 @@ public class Alw {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
-		ZenDynamicAlwResources.init();
+		proxy.initDynamicResources();
 		RegistryHandler.preInitRegistries(event);
 		MinecraftForge.EVENT_BUS.register(instance);
 	}
@@ -110,6 +116,11 @@ public class Alw {
 	@SubscribeEvent
 	public void onBlockDrops(final HarvestDropsEvent event) {
 		proxy.onBlockDrops(event);
+	}
+	
+	@SubscribeEvent
+	public void onPlayerClone(final PlayerEvent.Clone event) {
+		proxy.onPlayerClone(event);
 	}
 	
 	@SubscribeEvent

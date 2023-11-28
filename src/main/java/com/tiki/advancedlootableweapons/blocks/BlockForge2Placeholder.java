@@ -308,7 +308,7 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 		EnumFacing facing = (EnumFacing)state.getValue(FACING);
 		if(right) {
 			BlockPos rightOffset = pos.offset(facing.rotateY());
-			System.out.println("Block is on the right! Checking " + rightOffset + ", " + rightOffset.offset(facing) + ", " + rightOffset.offset(facing).offset(EnumFacing.DOWN));
+			//System.out.println("Block is on the right! Checking " + rightOffset + ", " + rightOffset.offset(facing) + ", " + rightOffset.offset(facing).offset(EnumFacing.DOWN));
 			
 			if(worldIn.getBlockState(rightOffset).getBlock() instanceof BlockForge2) {
 				locateMain = rightOffset;
@@ -321,7 +321,7 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 			}
 		}else if(left) {
 			BlockPos leftOffset = pos.offset(facing.rotateYCCW());
-			System.out.println("Block is on the left! Checking " + leftOffset + ", " + leftOffset.offset(facing) + ", " + leftOffset.offset(facing).offset(EnumFacing.DOWN));
+			//System.out.println("Block is on the left! Checking " + leftOffset + ", " + leftOffset.offset(facing) + ", " + leftOffset.offset(facing).offset(EnumFacing.DOWN));
 			
 			if(worldIn.getBlockState(leftOffset).getBlock() instanceof BlockForge2) {
 				locateMain = leftOffset;
@@ -334,7 +334,7 @@ public class BlockForge2Placeholder extends Block implements IHasModel {
 			}
 		}else {
 			BlockPos midOffset = pos.offset(facing);
-			System.out.println("Block is in the middle! Checking " + midOffset + ", " + midOffset.offset(EnumFacing.DOWN) + ", " + pos.offset(EnumFacing.DOWN));
+			//System.out.println("Block is in the middle! Checking " + midOffset + ", " + midOffset.offset(EnumFacing.DOWN) + ", " + pos.offset(EnumFacing.DOWN));
 			
 			if(worldIn.getBlockState(midOffset).getBlock() instanceof BlockForge2) {
 				locateMain = midOffset;

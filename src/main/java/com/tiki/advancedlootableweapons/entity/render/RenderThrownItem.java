@@ -36,7 +36,7 @@ public class RenderThrownItem<T extends Entity> extends Render<T> {
 		if(entity instanceof EntitySpear) {
 			GlStateManager.pushMatrix();
 			
-			int color = ((EntitySpear)entity).getColorData();
+			int color = ((EntitySpear)entity).getTagData().getIntArray("colors")[2];
 			GL11.glColor4f( ((color >> 16) & 0xFF) / 255F, ((color >> 8) & 0xFF) / 255F, ((color) & 0xFF) / 255F, ((color >> 24) & 0xFF) / 255F);
 			super.doRender(entity, x, y, z, yaw, partialTicks);
 			renderEntityModel(entity, x, y, z, yaw, partialTicks);

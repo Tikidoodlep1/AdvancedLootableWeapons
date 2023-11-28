@@ -1,10 +1,11 @@
 package com.tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.awt.Point;
+import java.util.Iterator;
 import java.util.Random;
 import javax.annotation.Nullable;
 
-import com.tiki.advancedlootableweapons.Alw;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -14,6 +15,7 @@ import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.ItemUnboundArmor;
 import com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe;
+import com.tiki.advancedlootableweapons.recipes.ForgeGeneralCaseRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe;
 import com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe;
 import com.tiki.advancedlootableweapons.tools.ToolForgeHammer;
@@ -22,6 +24,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -74,10 +77,10 @@ public class ContainerForgeWeapon extends Container {
         Block block = worldIn.getBlockState(pos).getBlock();
         if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
         	CUSTOM_CONTAINER = ZenDynamicAlwResources.guiLists.get(block);
-        	Point[] points = CUSTOM_CONTAINER.getSlots().toArray(new Point[0]);
-        	slot1 = points[0];
-        	slot2 = points[1];
-        	output = points[2];
+        	Iterator<Point> iter = CUSTOM_CONTAINER.getSlots().iterator();
+        	slot1 = iter.next();
+        	slot2 = iter.next();
+        	output = iter.next();
         }else {
         	CUSTOM_CONTAINER = null;
         	slot1 = new Point(56, 33);
@@ -102,7 +105,8 @@ public class ContainerForgeWeapon extends Container {
         this.addSlotToContainer(new Slot(this.inputSlot, 0, (int)slot1.getX(), (int)slot1.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
-        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ItemInit.acceptedForgeItems.contains(stack.getItem())) {
+        		//ItemInit.forgeRecipeInputs.forEach((i) -> {System.out.println(i.getRegistryName());});
+        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemUnboundArmor || ItemInit.forgeRecipeInputs.contains(stack.getItem())) {
         			return true;
         		}else {
             		return false;
@@ -123,7 +127,7 @@ public class ContainerForgeWeapon extends Container {
         this.addSlotToContainer(new Slot(this.inputSlot, 1, (int)slot2.getX(), (int)slot2.getY()) {
         	public boolean isItemValid(ItemStack stack)
             {
-        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemArmorBinding || ItemInit.acceptedForgeItems.contains(stack.getItem())) {// || ingotMap.containsKey(stack.getItem())) {
+        		if(stack.getItem() instanceof ItemHotToolHead || stack.getItem() instanceof ItemArmorBinding || ItemInit.forgeRecipeInputs.contains(stack.getItem())) {// || ingotMap.containsKey(stack.getItem())) {
         			return true;
         		}
         		return false;
@@ -165,7 +169,7 @@ public class ContainerForgeWeapon extends Container {
         		    	}
         		    }
         		}
-        		
+        		//System.out.println(stack.getTagCompound());
                 return stack;
             }
         });
@@ -204,7 +208,7 @@ public class ContainerForgeWeapon extends Container {
 			this.invCraft.setInventorySlotContents(i, this.inputSlot.getStackInSlot(i));
 		}
 		recipe = this.findMatchingRecipe(this.invCraft, this.world);
-		
+		//System.out.println("Block: " + this.world.getBlockState(this.pos).getBlock().getRegistryName());
 //		if(recipe != null) {
 //			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
 //			System.out.println("Ingredients:" );
@@ -216,7 +220,7 @@ public class ContainerForgeWeapon extends Container {
 //			System.out.println("Recipe is NULL!");
 //		}
 		
-		Alw.logger.info("Is side server? " + (!player.world.isRemote));
+		//Alw.logger.info("Is side server? " + (!player.world.isRemote));
 		
 		ItemStack outputSlot = this.inputSlot.getStackInSlot(2);
 		if(recipe != null && outputSlot == ItemStack.EMPTY && this.getCanCraft(this.player)) {
@@ -224,7 +228,9 @@ public class ContainerForgeWeapon extends Container {
 			
 			if(recipe instanceof ForgeToolHeadRecipe) {
 				ForgeToolHeadRecipe headRecipe = ((ForgeToolHeadRecipe)this.recipe);
-				if(getButtonIdFromName(headRecipe.getButton()) == this.buttonPressed) {
+				int recipeButtonId = getButtonIdFromName(headRecipe.getButton()) == -1 ? 
+						getButtonIdFromNameInExtras(headRecipe.getButton()) : getButtonIdFromName(headRecipe.getButton());
+				if(recipeButtonId == this.buttonPressed) {
 					ItemStack result = headRecipe.getCraftingResult(this.invCraft);
 					
 					NonNullList<ItemStack> remaining = headRecipe.getRemainingItems(this.invCraft);
@@ -245,7 +251,9 @@ public class ContainerForgeWeapon extends Container {
 				}
 			}else if(recipe instanceof ForgeToolRecipe) {
 				ForgeToolRecipe toolRecipe = ((ForgeToolRecipe)this.recipe);
-				if(getButtonIdFromName(toolRecipe.getButton()) == this.buttonPressed) {
+				int recipeButtonId = getButtonIdFromName(toolRecipe.getButton()) == -1 ? 
+						getButtonIdFromNameInExtras(toolRecipe.getButton()) : getButtonIdFromName(toolRecipe.getButton());
+				if(recipeButtonId == this.buttonPressed) {
 					ItemStack result = toolRecipe.getCraftingResult(this.invCraft);
 					
 					NonNullList<ItemStack> remaining = toolRecipe.getRemainingItems(this.invCraft);
@@ -266,7 +274,9 @@ public class ContainerForgeWeapon extends Container {
 				}
 			}else if(recipe instanceof ForgeArmorPlateRecipe) {
 				ForgeArmorPlateRecipe toolRecipe = ((ForgeArmorPlateRecipe)this.recipe);
-				if(getButtonIdFromName(toolRecipe.getButton()) == this.buttonPressed) {
+				int recipeButtonId = getButtonIdFromName(toolRecipe.getButton()) == -1 ? 
+						getButtonIdFromNameInExtras(toolRecipe.getButton()) : getButtonIdFromName(toolRecipe.getButton());
+				if(recipeButtonId == this.buttonPressed) {
 					ItemStack result = toolRecipe.getCraftingResult(this.invCraft);
 					
 					NonNullList<ItemStack> remaining = toolRecipe.getRemainingItems(this.invCraft);
@@ -287,7 +297,9 @@ public class ContainerForgeWeapon extends Container {
 				}
 			}else if(recipe instanceof ForgeArmorBindingRecipe) {
 				ForgeArmorBindingRecipe bindingRecipe = ((ForgeArmorBindingRecipe)this.recipe);
-				if(getButtonIdFromName(bindingRecipe.getButton()) == this.buttonPressed) {
+				int recipeButtonId = getButtonIdFromName(bindingRecipe.getButton()) == -1 ? 
+						getButtonIdFromNameInExtras(bindingRecipe.getButton()) : getButtonIdFromName(bindingRecipe.getButton());
+				if(recipeButtonId == this.buttonPressed) {
 					ItemStack result = bindingRecipe.getCraftingResult(this.invCraft);
 					
 					NonNullList<ItemStack> remaining = bindingRecipe.getRemainingItems(this.invCraft);
@@ -305,7 +317,31 @@ public class ContainerForgeWeapon extends Container {
 					this.detectAndSendChanges();
 					return true;
 				}
+			}else if(recipe instanceof ForgeGeneralCaseRecipe) {
+				ForgeGeneralCaseRecipe generalRecipe = ((ForgeGeneralCaseRecipe)this.recipe);
+				int recipeButtonId = getButtonIdFromName(generalRecipe.getButton()) == -1 ? 
+						getButtonIdFromNameInExtras(generalRecipe.getButton()) : getButtonIdFromName(generalRecipe.getButton());
+				if(recipeButtonId == this.buttonPressed) {
+					ItemStack result = generalRecipe.getCraftingResult(this.invCraft);
+					
+					NonNullList<ItemStack> remaining = generalRecipe.getRemainingItems(this.invCraft);
+					for(int i = 0; i < remaining.size(); i++) {
+						this.inputSlot.setInventorySlotContents(i, remaining.get(i));
+					}
+					
+					this.inputSlot.setInventorySlotContents(2, result);
+					soundPacket = new SPacketSoundEffect(SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 0.8F, 1.0F);
+					if(player instanceof EntityPlayerMP) {
+						((EntityPlayerMP)player).connection.sendPacket(soundPacket);
+					}
+					//player.playSound(SoundEvents.BLOCK_ANVIL_USE, 0.8F, 1.0F);
+					this.damageForgeHammer(1);
+					this.giveExp(generalRecipe.getExp());
+					this.detectAndSendChanges();
+					return true;
+				}
 			}
+			
 		}
 		return false;
 	}
@@ -338,25 +374,47 @@ public class ContainerForgeWeapon extends Container {
         {
             if (irecipe instanceof ForgeToolHeadRecipe)
             {
-            	if( getButtonIdFromName(((ForgeToolHeadRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
+            	int recipeButtonId = getButtonIdFromName(((ForgeToolHeadRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeToolHeadRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeToolHeadRecipe)irecipe).getButton());
+            	if(recipeButtonId == this.buttonPressed && 
+            			( ((ForgeToolHeadRecipe)irecipe).block == null || ((ForgeToolHeadRecipe)irecipe).block == Blocks.AIR || ((ForgeToolHeadRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
+            			&& irecipe.matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }
             else if (irecipe instanceof ForgeToolRecipe)
             {
-            	if( getButtonIdFromName(((ForgeToolRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
+            	int recipeButtonId = getButtonIdFromName(((ForgeToolRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeToolRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeToolRecipe)irecipe).getButton());
+            	if(recipeButtonId == this.buttonPressed && 
+            			(((ForgeToolRecipe)irecipe).block == null || ((ForgeToolRecipe)irecipe).block == Blocks.AIR || ((ForgeToolRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
+            			&& irecipe.matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }
             else if (irecipe instanceof ForgeArmorPlateRecipe)
             {
-            	if( getButtonIdFromName(((ForgeArmorPlateRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
+            	int recipeButtonId = getButtonIdFromName(((ForgeArmorPlateRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeArmorPlateRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeArmorPlateRecipe)irecipe).getButton());
+            	if(recipeButtonId == this.buttonPressed && 
+            			(((ForgeArmorPlateRecipe)irecipe).block == null || ((ForgeArmorPlateRecipe)irecipe).block == Blocks.AIR || ((ForgeArmorPlateRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
+            			&& irecipe.matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }
             else if (irecipe instanceof ForgeArmorBindingRecipe)
             {
-            	if( getButtonIdFromName(((ForgeArmorBindingRecipe)irecipe).getButton()) == this.buttonPressed && irecipe.matches(craftMatrix, worldIn)) {
+            	int recipeButtonId = getButtonIdFromName(((ForgeArmorBindingRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeArmorBindingRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeArmorBindingRecipe)irecipe).getButton());
+            	if(recipeButtonId == this.buttonPressed && 
+            			(((ForgeArmorBindingRecipe)irecipe).block == null || ((ForgeArmorBindingRecipe)irecipe).block == Blocks.AIR || ((ForgeArmorBindingRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
+            			&& irecipe.matches(craftMatrix, worldIn)) {
+            		return irecipe;
+            	}
+            }
+            else if (irecipe instanceof ForgeGeneralCaseRecipe)
+            {
+            	int recipeButtonId = getButtonIdFromName(((ForgeGeneralCaseRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeGeneralCaseRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeGeneralCaseRecipe)irecipe).getButton());
+            	System.out.println("Recieved button ID " + recipeButtonId + " == " + this.buttonPressed + ", block is " + ((ForgeGeneralCaseRecipe)irecipe).block.getRegistryName() + " = " + Blocks.AIR.getRegistryName() + ", matches = " + irecipe.matches(craftMatrix, worldIn));
+            	if(recipeButtonId == this.buttonPressed && 
+            			(((ForgeGeneralCaseRecipe)irecipe).block == null || ((ForgeGeneralCaseRecipe)irecipe).block == Blocks.AIR || ((ForgeGeneralCaseRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
+            			&& irecipe.matches(craftMatrix, worldIn)) {
             		return irecipe;
             	}
             }
@@ -364,6 +422,16 @@ public class ContainerForgeWeapon extends Container {
 
         return null;
     }
+	
+	public int getButtonIdFromNameInExtras(String button) {
+		for(ForgingGuiButtonRepresentation rep : this.CUSTOM_CONTAINER.buttons) {
+			if(rep.getName().equalsIgnoreCase(button)) {
+				return rep.getId();
+			}
+		}
+		
+		return -1;
+	}
 	
 	public static int getButtonIdFromName(String button) {
 		if(button.equalsIgnoreCase("dagger")) {
@@ -400,7 +468,7 @@ public class ContainerForgeWeapon extends Container {
 			return 15;
 		}else if(button.equalsIgnoreCase("armor plate")) {
 			return 16;
-		}else if(button.equalsIgnoreCase("tool handle")) {
+		}else if(button.equalsIgnoreCase("handle")) {
 			return 98;
 		}else if(button.equalsIgnoreCase("forge weapon")) {
 			return 99;

@@ -28,7 +28,7 @@ public class ShapelessChainLinkRecipe extends ShapelessOreRecipe {
 	private final NonNullList<Ingredient> inputs;
 	private final Item material;
 	
-	ShapelessChainLinkRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, ItemStack result, Item material) {
+	public ShapelessChainLinkRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, ItemStack result, Item material) {
 		super(group, input, result);
 		this.inputs = input;
 		this.material = material;

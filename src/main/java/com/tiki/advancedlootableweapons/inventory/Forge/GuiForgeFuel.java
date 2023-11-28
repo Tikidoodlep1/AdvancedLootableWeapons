@@ -1,14 +1,12 @@
 package com.tiki.advancedlootableweapons.inventory.Forge;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.tiki.advancedlootableweapons.ModInfo;
-import com.tiki.advancedlootableweapons.blocks.BlockForgeFuel;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
+import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.ConfigHandler;
 import com.tiki.advancedlootableweapons.inventory.Forge.ContainerForgeFuel;
 
@@ -29,27 +27,43 @@ public class GuiForgeFuel extends GuiContainer
 	private final InventoryPlayer player;
 	private final TileEntityForge tileentity;
 	private final Set<Item> heatableMaterials;
+	private StringBuilder tileName = null;
 	
 	public GuiForgeFuel(InventoryPlayer player, TileEntityForge tileentity) 
 	{
 		super(new ContainerForgeFuel(player, tileentity));
 		this.player = player;
 		this.tileentity = tileentity;
-		if(tileentity.getBlockType() instanceof BlockForgeFuel) {
-			this.heatableMaterials = ((BlockForgeFuel)tileentity.getBlockType()).acceptedMaterials;
-		}else if(tileentity.getBlockType() instanceof BlockForgeFuelContent) {
-			this.heatableMaterials = ((BlockForgeFuelContent)tileentity.getBlockType()).getRepresentation().getMatList();
-		}else {
-			heatableMaterials = new HashSet<Item>();
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
+	}
+	
+	private String getTileName() {
+		if(this.tileName != null) {
+			return this.tileName.toString();
 		}
 		
+		int namePlateSizeInGui = 49;
+		this.tileName = new StringBuilder(this.tileentity.getDisplayName().getUnformattedText());
+		int len = this.fontRenderer.getStringWidth(this.tileName.toString());
+		int avgCharSize = this.fontRenderer.getStringWidth("I");
+		int lettersToKeep = (namePlateSizeInGui / avgCharSize);
+		while(len > namePlateSizeInGui) {
+			this.tileName.delete(lettersToKeep--, this.tileName.length());
+			this.tileName.append("...");
+			len = this.fontRenderer.getStringWidth(this.tileName.toString());
+		}
+		
+		if(this.tileName.charAt(this.tileName.length() - 4) == ' ') {
+			this.tileName.deleteCharAt(this.tileName.length() - 4);
+		}
+		
+		return this.tileName.toString();
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) 
 	{
-		String tileName = this.tileentity.getDisplayName().getUnformattedText();
-		this.fontRenderer.drawStringWithShadow(tileName, 5, 6, 0xFFFFFFFF);
+		this.fontRenderer.drawStringWithShadow(this.getTileName(), 5, 6, 0xFFFFFFFF);
 		this.fontRenderer.drawStringWithShadow(this.player.getDisplayName().getUnformattedText(), 5, 72, 0xFFFFFFFF);
 	}
 	
@@ -101,11 +115,11 @@ public class GuiForgeFuel extends GuiContainer
 		if(mouseX > this.guiLeft + 156 && mouseX < this.guiLeft + 175 && mouseY > this.guiTop + 2 && mouseY < this.guiTop + 17) {
 			List<String> lines = new ArrayList<String>(3);
 			lines.add("This Forge Can Heat:");
-			if(this.heatableMaterials.isEmpty()) {
+			if(this.heatableMaterials == null || this.heatableMaterials.isEmpty()) {
 				lines.add("Any Material");
 			}else {
 				for(Item item : this.heatableMaterials) {
-					lines.add("Material: " + new TextComponentTranslation(item.getUnlocalizedName()).getFormattedText());
+					lines.add("Material: " + new TextComponentTranslation(item.getUnlocalizedName() + ".name").getFormattedText());
 				}
 			}
 			this.drawHoveringText(lines, mouseX, mouseY);

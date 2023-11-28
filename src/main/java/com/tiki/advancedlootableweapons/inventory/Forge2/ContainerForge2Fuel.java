@@ -1,15 +1,11 @@
 package com.tiki.advancedlootableweapons.inventory.Forge2;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import com.tiki.advancedlootableweapons.blocks.BlockForge2Fuel;
-import com.tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -28,22 +24,18 @@ public class ContainerForge2Fuel extends Container
 	private int burnTime = 0;
 	private int maxBurnTime = 0;
 	private final Set<Item> heatableMaterials;
+	private final Set<Item> fuelList;
 	
 	public ContainerForge2Fuel(InventoryPlayer player, TileEntityForge2 tileEntityForge2) 
 	{
 		this.tileentity = tileEntityForge2;
-		if(tileentity.getBlockType() instanceof BlockForge2Fuel) {
-			this.heatableMaterials = ((BlockForge2Fuel)tileentity.getBlockType()).acceptedMaterials;
-		}else if(tileentity.getBlockType() instanceof BlockForge2FuelContent) {
-			this.heatableMaterials = ((BlockForge2FuelContent)tileentity.getBlockType()).getRepresentation().getMatList();
-		}else {
-			heatableMaterials = new HashSet<Item>();
-		}
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
+		this.fuelList = ZenDynamicAlwResources.getFuelListForBlock(tileentity.getBlock());
 		
 		this.addSlotToContainer(new Slot(tileEntityForge2, 0, 52, 27) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					if(ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
+					if(ContainerForge2Fuel.this.heatableMaterials == null || ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
 						return true;
 					}
 					
@@ -51,11 +43,7 @@ public class ContainerForge2Fuel extends Container
 						NBTTagCompound tag = stack.getTagCompound();
 						if(tag.hasKey("Material")) {
 							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
-							for(Item i : heatableMaterials) {
-								if(matStack.getItem() == i) {
-									return true;
-								}
-							}
+							return ContainerForge2Fuel.this.heatableMaterials.contains(matStack.getItem());
 						}
 					}
 				}
@@ -66,7 +54,7 @@ public class ContainerForge2Fuel extends Container
 		this.addSlotToContainer(new Slot(tileEntityForge2, 1, 80, 27) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					if(ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
+					if(ContainerForge2Fuel.this.heatableMaterials == null || ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
 						return true;
 					}
 					
@@ -74,11 +62,7 @@ public class ContainerForge2Fuel extends Container
 						NBTTagCompound tag = stack.getTagCompound();
 						if(tag.hasKey("Material")) {
 							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
-							for(Item i : heatableMaterials) {
-								if(matStack.getItem() == i) {
-									return true;
-								}
-							}
+							return ContainerForge2Fuel.this.heatableMaterials.contains(matStack.getItem());
 						}
 					}
 				}
@@ -89,7 +73,7 @@ public class ContainerForge2Fuel extends Container
 		this.addSlotToContainer(new Slot(tileEntityForge2, 2, 108, 27) {
 			public boolean isItemValid(ItemStack stack) {
 				if(stack.getItem() instanceof ItemHotToolHead) {
-					if(ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
+					if(ContainerForge2Fuel.this.heatableMaterials == null || ContainerForge2Fuel.this.heatableMaterials.size() == 0) {
 						return true;
 					}
 					
@@ -97,11 +81,7 @@ public class ContainerForge2Fuel extends Container
 						NBTTagCompound tag = stack.getTagCompound();
 						if(tag.hasKey("Material")) {
 							ItemStack matStack = new ItemStack(tag.getCompoundTag("Material"));
-							for(Item i : heatableMaterials) {
-								if(matStack.getItem() == i) {
-									return true;
-								}
-							}
+							return ContainerForge2Fuel.this.heatableMaterials.contains(matStack.getItem());
 						}
 					}
 				}
@@ -111,11 +91,11 @@ public class ContainerForge2Fuel extends Container
 		
 		this.addSlotToContainer(new Slot(tileEntityForge2, 3, 80, 50) {
 			public boolean isItemValid(ItemStack stack) {
-				Block forge = tileentity.getBlockType();
-				if(forge instanceof BlockForge2Fuel) {
-					return ZenDynamicAlwResources.getFuelListForBlock(forge).contains(stack.getItem());
+				if(ContainerForge2Fuel.this.fuelList == null) {
+					return true;
 				}
-				return false;
+				
+				return ContainerForge2Fuel.this.fuelList.contains(stack.getItem());
 			}
 		});
 		

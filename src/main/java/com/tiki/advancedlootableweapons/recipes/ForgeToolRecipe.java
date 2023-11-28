@@ -12,6 +12,7 @@ import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.tools.ToolSlashSword;
 import com.tiki.advancedlootableweapons.tools.ToolStabSword;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -37,13 +38,24 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 	private final int exp;
 	private final String weaponType;
 	private ItemStack material = null;
+	public final Block block;
 	
-	ForgeToolRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, String result) {
+	public ForgeToolRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, String result, Block block) {
 		super(null, inputs, new ItemStack(getWeaponFromString(result)).setStackDisplayName("Example Output"));
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
 		this.weaponType = result.toLowerCase();
+		this.block = block;
+	}
+	
+	public ForgeToolRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
+		super(null, inputs, result);
+		this.inputs = inputs;
+		this.button = button;
+		this.exp = exp;
+		this.weaponType = "";
+		this.block = block;
 	}
 	
 	private ItemStack getModifiedOutput() {
@@ -95,7 +107,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		return new ItemStack(ItemInit.CLAY_GRANITE).setStackDisplayName("ERROR IN RECIPE OUTPUT");
+		return this.output.copy();
 	}
 	
 	public static Item getWeaponFromString(String weapon) {
@@ -136,6 +148,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 	
 	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
+		
 		if(inputs.get(0) == Ingredient.EMPTY) {
 			remainingItems.set(0, inventoryCrafting.get(0));
 		}
@@ -448,6 +461,8 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		@Override
 		public IRecipe parse(JsonContext context, JsonObject json) {
 			final String button = JsonUtils.getString(json, "button");
+			final String block = JsonUtils.getString(json, "block", "");
+			
 			final NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
 			JsonArray ing = JsonUtils.getJsonArray(json, "ingredients");
 			if(ing.size() > inputs.size()) {
@@ -459,7 +474,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 				if(e.getAsJsonObject().has("slot")) {
 					final JsonElement slot = e.getAsJsonObject().get("slot");
 					if(slot.getAsString().equalsIgnoreCase("metal")) {
-						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeItems.toArray(new Item[0])));
+						inputs.set(i, Ingredient.fromItems(ItemInit.acceptedForgeMetals.toArray(new Item[0])));
 					}
 				}else {
 					inputs.set(i, CraftingHelper.getIngredient(e, context));
@@ -469,7 +484,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			final int exp = JsonUtils.getInt(json, "exp");
 			final String result = JsonUtils.getString(json, "result");
 			
-			return new ForgeToolRecipe(button, inputs, exp, result);
+			return new ForgeToolRecipe(button, inputs, exp, result, ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block)));
 		}
 		
 	}

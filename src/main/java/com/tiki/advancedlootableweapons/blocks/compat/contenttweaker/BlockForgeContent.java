@@ -17,6 +17,7 @@ import com.teamacronymcoders.contenttweaker.modules.vanilla.blocks.BlockContent;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
+import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgeRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -172,7 +173,10 @@ public class BlockForgeContent extends BlockContent implements IHasGeneratedMode
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityForge(false, false);
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForgeAirflowConsumer(false, false, this);
+		}
+		return new TileEntityForge(false, false, this);
 	}
 	
 	@Override
@@ -227,12 +231,16 @@ public class BlockForgeContent extends BlockContent implements IHasGeneratedMode
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityForge(false, false);
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForgeAirflowConsumer(false, false, this);
+		}
+		return new TileEntityForge(false, false, this);
 	}
 
 	@Override
 	public List<IGeneratedModel> getGeneratedModels() {
 		List<IGeneratedModel> models = Lists.newArrayList();
+		Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
 		JsonObject BlockStateJson = new JsonObject();
     	BlockStateJson.addProperty("forge_marker", 1);
     	JsonObject variants = new JsonObject();
@@ -267,26 +275,29 @@ public class BlockForgeContent extends BlockContent implements IHasGeneratedMode
     	BlockStateJson.add("variants", variants);
     	
     	JsonObject BlockModelJson = ZenDynamicAlwResources.FORGE_MODEL;
-		JsonElement textures = BlockModelJson.get("textures");
-    	if(textures != null && !textures.isJsonNull()) {
-    		JsonObject textureObj = textures.getAsJsonObject();
-    		JsonObject newTextureObj = new JsonObject();
-    		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
-    			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
-    		}
-    		BlockModelJson.add("textures", newTextureObj);
+    	if(BlockModelJson != null) {
+    		JsonElement textures = BlockModelJson.get("textures");
+        	if(textures != null && !textures.isJsonNull()) {
+        		JsonObject textureObj = textures.getAsJsonObject();
+        		JsonObject newTextureObj = new JsonObject();
+        		for(Entry<String, JsonElement> e : textureObj.entrySet()) {
+        			newTextureObj.addProperty(e.getKey(), "contenttweaker:blocks/" + forge.getName());
+        		}
+        		BlockModelJson.add("textures", newTextureObj);
+        	}
+        	
+        	if(BlockModelJson.size() > 0) {
+        		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
+        	}else {
+        		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please check that you are using the latest version of ALW. If you are, please report this to the mod author!");
+        	}
     	}
     	
 		JsonObject ItemModelJson = new JsonObject();
 		ItemModelJson.addProperty("parent", "contenttweaker:block/" + forge.getName());
 		
-		Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
     	models.add(new GeneratedModel(forge.getName(), ModelType.BLOCKSTATE, gson.toJson(BlockStateJson)));
-    	if(BlockModelJson.size() > 0) {
-    		models.add(new GeneratedModel(forge.getName(), ModelType.BLOCK_MODEL, gson.toJson(BlockModelJson)));
-    	}else {
-    		Alw.logger.warn("Unable to generate block model for " + this.getUnlocalizedName() + ". Please check that you are using the latest version of ALW. If you are, please report this to the mod author!");
-    	}
+    	
     	models.add(new GeneratedModel(forge.getName(), ModelType.ITEM_MODEL, gson.toJson(ItemModelJson)));
     	
         return models;
