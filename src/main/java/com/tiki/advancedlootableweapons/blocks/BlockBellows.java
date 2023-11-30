@@ -174,12 +174,6 @@ public class BlockBellows extends BlockBase {
 					}
 				}
 				
-				if(Alw.isPyrotechLoaded) {
-					airflow = 25;
-					performBellows(worldIn, pos, state);
-					return true;
-				}
-				
 			}else {
 				worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
 				t.schedule(new TimerTask() {
@@ -198,21 +192,6 @@ public class BlockBellows extends BlockBase {
 		}
 		
 		return true;
-	}
-	
-	private void performBellows(World worldIn, BlockPos pos, IBlockState state) { // Kinda wonky but it works for now - I don't want bellows to use a TE if not necessary
-		if(!worldIn.isRemote) {
-			if(airflow > 0) {
-				EnumFacing face = worldIn.getBlockState(pos).getValue(FACING);
-				TileEntity afc = worldIn.getTileEntity(pos.offset(face));
-				if(afc != null && afc.hasCapability(ModuleCore.CAPABILITY_AIRFLOW_CONSUMER, face.getOpposite())) {
-					IAirflowConsumerCapability consumer = afc.getCapability(ModuleCore.CAPABILITY_AIRFLOW_CONSUMER, face.getOpposite());
-					consumer.consumeAirflow((float) (ModuleTechMachineConfig.BELLOWS.BASE_AIRFLOW * (512 * Math.pow(0.2, 5))), false);
-				}
-				airflow--;
-				performBellows(worldIn, pos, state);
-			}
-		}
 	}
 	
 	@Override

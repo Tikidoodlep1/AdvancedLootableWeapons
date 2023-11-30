@@ -5,8 +5,6 @@ import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurna
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityMill;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityTanningRack;
 
@@ -24,7 +22,5 @@ public class TileEntityHandler
 		GameRegistry.registerTileEntity(TileEntityTanningRack.class, new ResourceLocation(ModInfo.ID + ":tanning_rack"));
 		GameRegistry.registerTileEntity(TileEntityDrum.class, new ResourceLocation(ModInfo.ID + ":drum"));
 		
-		GameRegistry.registerTileEntity(TileEntityForgeAirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge_airflow_consumer"));
-		GameRegistry.registerTileEntity(TileEntityForge2AirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge2_airflow_consumer"));
 	}
 }

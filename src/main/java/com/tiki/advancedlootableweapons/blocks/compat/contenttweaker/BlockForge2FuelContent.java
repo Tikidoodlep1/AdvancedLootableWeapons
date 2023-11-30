@@ -20,7 +20,6 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.BlockForge2Fuel;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgeRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -310,9 +309,6 @@ public class BlockForge2FuelContent extends BlockForge2Content implements IHasGe
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForge2AirflowConsumer(true, state.getValue(REQUIRES_IGNITION), this);
-		}
 		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION), this);
 	}
 	

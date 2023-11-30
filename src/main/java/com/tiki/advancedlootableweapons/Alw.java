@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.apache.logging.log4j.Logger;
 
-import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.handlers.RegistryHandler;
 import com.tiki.advancedlootableweapons.inventory.AlwBlocksCreativeTab;
 import com.tiki.advancedlootableweapons.inventory.AlwCreativeTab;
@@ -70,7 +69,6 @@ public class Alw {
 	public static boolean isCrTLoaded = false;
 	public static boolean isCoTLoaded = false;
 	public static boolean isBWMLoaded = false;
-	public static boolean isPyrotechLoaded = false;
 	
 	static {
 		FluidRegistry.enableUniversalBucket();

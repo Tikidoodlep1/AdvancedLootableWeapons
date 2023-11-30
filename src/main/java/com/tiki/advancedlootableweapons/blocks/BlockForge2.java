@@ -8,8 +8,6 @@ import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.IHasModel;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemBlockForge2;
@@ -317,9 +315,6 @@ public class BlockForge2 extends Block implements IHasModel
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForge2AirflowConsumer(false, false, this);
-		}
 		return new TileEntityForge2(false, false, this);
 	}
 	

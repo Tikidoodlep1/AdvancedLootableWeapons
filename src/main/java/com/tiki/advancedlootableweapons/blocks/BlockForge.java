@@ -6,7 +6,6 @@ import java.util.Random;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -164,9 +163,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
 		return new TileEntityForge(false, false, this);
 	}
 	
@@ -222,9 +218,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
 		return new TileEntityForge(false, false, this);
 	}
 

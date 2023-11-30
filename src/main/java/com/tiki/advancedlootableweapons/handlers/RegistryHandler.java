@@ -92,7 +92,6 @@ public class RegistryHandler {
 		Alw.isCrTLoaded = Loader.isModLoaded("crafttweaker");
 		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
-		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
 		//Dumping furnace recipes to json files for the alloy furnace
 //		Gson gson = new Gson();
 //		for(Entry<ItemStack, ItemStack> e : FurnaceRecipes.instance().getSmeltingList().entrySet()) {

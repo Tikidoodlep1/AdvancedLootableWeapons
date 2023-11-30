@@ -17,7 +17,6 @@ import com.teamacronymcoders.contenttweaker.modules.vanilla.blocks.BlockContent;
 import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
-import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ForgeRepresentation;
 import com.tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -173,9 +172,6 @@ public class BlockForgeContent extends BlockContent implements IHasGeneratedMode
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
 		return new TileEntityForge(false, false, this);
 	}
 	
@@ -231,9 +227,6 @@ public class BlockForgeContent extends BlockContent implements IHasGeneratedMode
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
 		return new TileEntityForge(false, false, this);
 	}
 
