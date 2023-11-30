@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.handlers;
 
+import com.tiki.advancedlootableweapons.Alw;
 import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
@@ -24,7 +25,10 @@ public class TileEntityHandler
 		GameRegistry.registerTileEntity(TileEntityTanningRack.class, new ResourceLocation(ModInfo.ID + ":tanning_rack"));
 		GameRegistry.registerTileEntity(TileEntityDrum.class, new ResourceLocation(ModInfo.ID + ":drum"));
 		
-		GameRegistry.registerTileEntity(TileEntityForgeAirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge_airflow_consumer"));
-		GameRegistry.registerTileEntity(TileEntityForge2AirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge2_airflow_consumer"));
+		if(Alw.isPyrotechLoaded) {
+			GameRegistry.registerTileEntity(TileEntityForgeAirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge_airflow_consumer"));
+			GameRegistry.registerTileEntity(TileEntityForge2AirflowConsumer.class, new ResourceLocation(ModInfo.ID + ":forge2_airflow_consumer"));
+		}
+		
 	}
 }
