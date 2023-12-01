@@ -314,7 +314,7 @@ public class BlockForge2 extends Block implements IHasModel
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityForge2(false, false, this);
+		return new TileEntityForge2(false, false, this.getRegistryName());
 	}
 	
 	@Override

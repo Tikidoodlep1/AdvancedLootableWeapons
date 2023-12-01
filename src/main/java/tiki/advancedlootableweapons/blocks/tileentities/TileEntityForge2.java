@@ -1,7 +1,5 @@
 package tiki.advancedlootableweapons.blocks.tileentities;
 
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -13,17 +11,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tiki.advancedlootableweapons.Alw;
-import tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2Content;
-import tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForge2FuelContent;
-import tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeContent;
-import tiki.advancedlootableweapons.blocks.compat.contenttweaker.BlockForgeFuelContent;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -41,28 +32,25 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	public static final int minTemp = 850;
 	public static final int maxTemp = 2250;
 	protected int increaseFrames = 0;
-	protected float airflowMultiplier = 1.0f;
 	private int burnTime = 0;
 	private int maxBurnTime = 0;
 	private boolean canUseFuel = false;
 	private boolean requiresIgnition = false;
 	private boolean needsFuel = false;
 	private float baseHeatingSpeed = 1.0f;
-	private Block block;
+	private ResourceLocation block;
 	
 	public TileEntityForge2() {}
 	
-	public TileEntityForge2(Block block) {
+	public TileEntityForge2(ResourceLocation block) {
 		this(false, false, block);
 	}
+	
+	public TileEntityForge2(float baseHeatingSpeed, String customName, ResourceLocation block) {
+		this(false, false, baseHeatingSpeed, customName, block);
+	}
 
-//	@SuppressWarnings("deprecation")
-	public TileEntityForge2(boolean needsFuel, boolean needsIgnition, Block block) {
-//		boolean ignitionStateValue = this.blockType.getStateFromMeta(this.getBlockMetadata()).getValue(BlockForge2Fuel.REQUIRES_IGNITION);
-//		if(ignitionStateValue) {
-//			needsIgnition = ignitionStateValue;
-//		}
-		
+	public TileEntityForge2(boolean needsFuel, boolean needsIgnition, ResourceLocation block) {		
 		if(needsFuel && needsIgnition) {
 			this.canUseFuel = false;
 		}else if(needsFuel && !needsIgnition) {
@@ -71,31 +59,31 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		this.needsFuel = needsFuel;
 		this.requiresIgnition = needsIgnition;
 		this.block = block;
-		//Block block = this.getWorld().getBlockState(this.getPos()).getBlock();
-		
-		if(Alw.isCoTLoaded) {
-			if(block instanceof BlockForgeContent) {
-				this.baseHeatingSpeed = ((BlockForgeContent)block).getRepresentation().getBaseHeatingSpeed();
-				this.customName = block.getLocalizedName();
-			}else if(block instanceof BlockForgeFuelContent) {
-				this.baseHeatingSpeed = ((BlockForgeFuelContent)block).getRepresentation().getBaseHeatingSpeed();
-				this.customName = block.getLocalizedName();
-			}else if(block instanceof BlockForge2Content) {
-				this.baseHeatingSpeed = ((BlockForge2Content)block).getRepresentation().getBaseHeatingSpeed();
-				this.customName = block.getLocalizedName();
-			}else if(block instanceof BlockForge2FuelContent) {
-				this.baseHeatingSpeed = ((BlockForge2FuelContent)block).getRepresentation().getBaseHeatingSpeed();
-				this.customName = block.getLocalizedName();
-			}
-		}
-		
 	}
 	
-	public Block getBlock() {
+	//helper method for ALT
+	public TileEntityForge2(boolean needsFuel, boolean needsIgnition, float baseHeatingSpeed, String customName, ResourceLocation block) {
+		if(needsFuel && needsIgnition) {
+			this.canUseFuel = false;
+		}else if(needsFuel && !needsIgnition) {
+			this.canUseFuel = needsFuel;
+		}
+		this.needsFuel = needsFuel;
+		this.requiresIgnition = needsIgnition;
+		this.block = block;
+		
+		this.baseHeatingSpeed = baseHeatingSpeed;
+		if(customName != null && customName != "" && customName != " ") {
+			this.customName = customName;
+		}
+	}
+	
+	public ResourceLocation getBlock() {
 		return this.block;
 	}
 	
-	public void bellowsInteraction(IBlockAccess world, BlockPos pos) {
+	public void bellowsInteraction() {
+		Alw.logger.info("Activated bellows from TE forge 2");
 		this.increaseFrames = 60;
 	}
 	
@@ -184,7 +172,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		
 		this.inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.inventory);
-		this.block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(compound.getString("block")));
+		this.block = new ResourceLocation(compound.getString("block"));
 		this.heat1 = compound.getInteger("Heat1");
 		this.heat2 = compound.getInteger("Heat2");
 		this.heat3 = compound.getInteger("Heat3");
@@ -203,7 +191,11 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
 		super.writeToNBT(compound);
-		compound.setString("block", this.block.getRegistryName().toString());
+		if(block == null) {
+			Alw.logger.error("Block is null for TileEntityForge2 at " + this.pos + "! Please pick up the block and place it back down. If this error persists, please contact the mod author!");
+		}else {
+			compound.setString("block", this.block.toString());
+		}
 		compound.setInteger("Heat1", (short)this.heat1);
 		compound.setInteger("Heat2", (short)this.heat2);
 		compound.setInteger("Heat3", (short)this.heat3);
@@ -269,7 +261,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
 				}
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
-				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
+				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER);
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;

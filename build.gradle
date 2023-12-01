@@ -15,8 +15,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 //Sound credit
 //Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=104894">Pixabay</a>
-version = "1.3.1-1.12.2"
-group = "com.tiki.advancedlootableweapons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.4.0-1.12.2"
+group = "tiki.advancedlootableweapons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "advancedlootableweapons"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.

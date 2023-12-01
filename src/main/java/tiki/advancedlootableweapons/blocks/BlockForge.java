@@ -163,7 +163,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityForge(false, false, this);
+		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 	
 	@Override
@@ -218,7 +218,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityForge(false, false, this);
+		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 
 //	@Override

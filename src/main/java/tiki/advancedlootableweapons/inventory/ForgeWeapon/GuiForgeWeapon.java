@@ -18,7 +18,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
-import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
+import tiki.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.advancedlootableweapons.handlers.PacketHandler;
 import tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
@@ -67,7 +67,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private int buttonPressed;
 	    //private Container container;
 	    private final InventoryPlayer player;
-	    private final ForgingGuiRepresentation CUSTOM_TEXTURE;
+	    private final CrTForgingGuiRepresentation CUSTOM_TEXTURE;
 	    //private final Block block;
 	    
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container, Block block)
