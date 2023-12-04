@@ -32,6 +32,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	public static final int minTemp = 850;
 	public static final int maxTemp = 2250;
 	protected int increaseFrames = 0;
+	protected float airflowMultiplier = 1.0f;
 	private int burnTime = 0;
 	private int maxBurnTime = 0;
 	private boolean canUseFuel = false;
@@ -258,10 +259,10 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 			
 			if(currentTemp > minTemp && this.increaseFrames <= 0) {
 				if(this.burnTime <= 0) {
-					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
+					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER * this.airflowMultiplier);
 				}
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
-				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER);
+				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
 				this.increaseFrames--;
 			}else {
 				this.increaseFrames = 0;

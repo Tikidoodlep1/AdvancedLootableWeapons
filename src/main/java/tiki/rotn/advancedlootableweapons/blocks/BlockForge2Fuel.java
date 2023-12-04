@@ -37,6 +37,7 @@ import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.IHasModel;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
+import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.rotn.advancedlootableweapons.init.BlockInit;
 
@@ -305,6 +306,9 @@ public class BlockForge2Fuel extends BlockForge2 implements IHasModel
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForge2AirflowConsumer(true, state.getValue(REQUIRES_IGNITION), this.getRegistryName());
+		}
 		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION), this.getRegistryName());
 	}
 	

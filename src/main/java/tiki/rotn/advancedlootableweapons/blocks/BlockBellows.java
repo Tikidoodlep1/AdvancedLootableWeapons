@@ -51,7 +51,6 @@ public class BlockBellows extends BlockBase {
 	public static final AxisAlignedBB BELLOWS_AABB_NS = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 0.4D, 1.0D);
 	public static final AxisAlignedBB BELLOWS_AABB_EW = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 0.4D, 0.75D);
 	private final Timer t = new Timer("ALWCoolDowns");
-	private boolean canUse = true;
 	private int airflow = 0;
 	
 	public BlockBellows(String name) {
@@ -143,7 +142,7 @@ public class BlockBellows extends BlockBase {
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}else if(te instanceof TileEntityForge2) {
-				((TileEntityForge2)te).bellowsInteraction(worldIn, pos);								
+				((TileEntityForge2)te).bellowsInteraction();								
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}
@@ -166,11 +165,11 @@ public class BlockBellows extends BlockBase {
 				}
 			}
 			
-			if(Alw.isPyrotechLoaded) {
+			//if(Alw.isPyrotechLoaded) { // Pyrotech is a hard dependency - we KNOW it's loaded.
 				airflow = 25;
 				performBellows(worldIn, pos, state);
 				return true;
-			}
+			//}
 			
 		}else {
 			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);

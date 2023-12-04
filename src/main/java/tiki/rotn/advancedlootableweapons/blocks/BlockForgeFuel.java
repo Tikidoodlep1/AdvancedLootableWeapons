@@ -35,6 +35,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge;
+import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.rotn.advancedlootableweapons.init.BlockInit;
 
@@ -225,6 +226,9 @@ public class BlockForgeFuel extends BlockForge implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		if(Alw.isPyrotechLoaded) {
+			return new TileEntityForgeAirflowConsumer(true, getStateFromMeta(meta).getValue(REQUIRES_IGNITION), this.getRegistryName());
+		}
 		return new TileEntityForge(true, getStateFromMeta(meta).getValue(REQUIRES_IGNITION), this.getRegistryName());
 	}
 	

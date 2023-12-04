@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityForge2AirflowConsumer extends TileEntityForge2 implements ITickable, IInventory, IAirflowConsumerCapability
@@ -15,12 +16,12 @@ public class TileEntityForge2AirflowConsumer extends TileEntityForge2 implements
 		super();
 	}
 	
-	public TileEntityForge2AirflowConsumer(Block block) {
+	public TileEntityForge2AirflowConsumer(ResourceLocation block) {
 		this(false, false, block);
 	}
 
 //	@SuppressWarnings("deprecation")
-	public TileEntityForge2AirflowConsumer(boolean needsFuel, boolean needsIgnition, Block block) {
+	public TileEntityForge2AirflowConsumer(boolean needsFuel, boolean needsIgnition, ResourceLocation block) {
 		super(needsFuel, needsIgnition, block);
 	}
 	

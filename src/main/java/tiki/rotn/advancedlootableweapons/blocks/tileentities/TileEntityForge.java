@@ -248,7 +248,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 			if(currentTemp > minTemp && increaseFrames <= 0) {
 				//Only drop temp if we're not burning fuel
 				if(this.burnTime <= 0) {
-					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
+					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER * this.airflowMultiplier);
 				}
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
 				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
