@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
-import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ForgingGuiRepresentation;
+import tiki.rotn.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.rotn.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.rotn.advancedlootableweapons.init.ItemInit;
@@ -44,7 +44,7 @@ import tiki.rotn.advancedlootableweapons.tools.ToolForgeHammer;
 
 public class ContainerForgeWeapon extends Container {
 	
-	private final ForgingGuiRepresentation CUSTOM_CONTAINER;
+	private final CrTForgingGuiRepresentation CUSTOM_CONTAINER;
 	private final Point slot1;
 	private final Point slot2;
 	private final Point output;

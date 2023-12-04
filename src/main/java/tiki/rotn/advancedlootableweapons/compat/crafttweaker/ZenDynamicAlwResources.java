@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.JsonIOException;
@@ -16,8 +17,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
-import com.teamacronymcoders.contenttweaker.api.ctobjects.resourcelocation.CTResourceLocation;
-
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
@@ -43,6 +42,7 @@ import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.init.BlockInit;
 import tiki.rotn.advancedlootableweapons.init.ItemInit;
+import tiki.rotn.advancedlootableweapons.recipes.ArmorBindingRecipe;
 import tiki.rotn.advancedlootableweapons.recipes.DrumItemRecipe;
 import tiki.rotn.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import tiki.rotn.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
@@ -59,9 +59,9 @@ public class ZenDynamicAlwResources {
 
 	public static final ResourceLocation FORGE_WEAPON_TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon_new.png");
 
-	public static final HashMap<Block, Set<Item>> fuelLists = new HashMap<Block, Set<Item>>();
-	public static final HashMap<Block, ForgingGuiRepresentation> guiLists = new HashMap<Block, ForgingGuiRepresentation>();
-	public static final HashMap<Block, Set<Item>> matLists = new HashMap<Block, Set<Item>>();
+	public static final HashMap<ResourceLocation, Set<Item>> fuelLists = new HashMap<ResourceLocation, Set<Item>>();
+	public static final HashMap<ResourceLocation, CrTForgingGuiRepresentation> guiLists = new HashMap<ResourceLocation, CrTForgingGuiRepresentation>();
+	public static final HashMap<ResourceLocation, Set<Item>> matLists = new HashMap<ResourceLocation, Set<Item>>();
 	public static final String IGNITION_ORE = "ore:igniter";
 	public static final String IGNITION_UPGRADE_ORE = "ore:igniter_upgrade";
 	public static JsonObject FORGE_MODEL;
@@ -87,7 +87,7 @@ public class ZenDynamicAlwResources {
 	}
 	
 	@ZenMethod
-	public static boolean addArmorBindingRecipe(String name, String group, String button, IItemStack output, IIngredient[] inputs, String block) {
+	public static boolean addArmorBindingRecipe(String name, String group, String button, IItemStack output, IIngredient[] inputs, String block, boolean useForge) {
 		Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 		NonNullList<Ingredient> input = NonNullList.withSize(2, Ingredient.EMPTY);
 		ItemStack out = ItemStack.EMPTY;
@@ -125,10 +125,16 @@ public class ZenDynamicAlwResources {
 							ItemInit.forgeRecipeInputs.add(st.getItem());
 						}
 					}
+					if(useForge) {
+						IRecipe recipe = new ArmorBindingRecipe(new ResourceLocation(group), input, out);
+						recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
+						ForgeRegistries.RECIPES.register(recipe);
+					}else {
+						IRecipe recipe = new ForgeArmorBindingRecipe(new ResourceLocation(group), button, input, out, b);
+						recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
+						ForgeRegistries.RECIPES.register(recipe);
+					}
 					
-					IRecipe recipe = new ForgeArmorBindingRecipe(new ResourceLocation(group), button, input, out, b);
-					recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
-					ForgeRegistries.RECIPES.register(recipe);
 					return true;
 				}
 			}
@@ -562,82 +568,8 @@ public class ZenDynamicAlwResources {
 	}
 	
 	@ZenMethod
-	public static ForgingGuiRepresentation setGuiForAnvil(String block, CTResourceLocation texture, int[] inputs, int[] output) {
-		if(inputs.length != 4 || output.length != 2) {
-			Alw.logger.error("An instance of forging gui has been given an insufficient amount of slot coordinates, not creating GUI.");
-			return null;
-		}
-		
-		Block forge = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
-		if(forge == null) {
-			Alw.logger.error("Unable to set gui for block {" + block + "}. {" + block + "} is not in the Forge Block registry.");
-			return null;
-		}
-		
-		ForgingGuiRepresentation gui = new ForgingGuiRepresentation(texture.getInternal(), inputs, output);
-		guiLists.put(forge, gui);
-		return gui;
-	}
-	
-	@ZenMethod
-	public static ForgingGuiRepresentation setGuiForAnvil(String block) {
-		Block forge = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
-		if(forge == null) {
-			Alw.logger.error("Unable to set gui for block {" + block + "}. {" + block + "} is not in the Forge Block registry.");
-			return null;
-		}
-		
-		ForgingGuiRepresentation gui = new ForgingGuiRepresentation(FORGE_WEAPON_TEXTURES, new int[] {56, 33, 56, 53}, new int[] {114, 43});
-		guiLists.put(forge, gui);
-		return gui;
-	}
-	
-	@ZenMethod
-	public static int[] getButtonPosByNameInDefaultGui(String button) {
-		if(button.equalsIgnoreCase("dagger")) {
-			return new int[] {1, 1};
-		}else if(button.equalsIgnoreCase("kabutowari")) {
-			return new int[] {22, 1};
-		}else if(button.equalsIgnoreCase("talwar")) {
-			return new int[] {64, 1};
-		}else if(button.equalsIgnoreCase("rapier")) {
-			return new int[] {43, 1};
-		}else if(button.equalsIgnoreCase("mace")) {
-			return new int[] {1, 22};
-		}else if(button.equalsIgnoreCase("cleaver")) {
-			return new int[] {22, 22};
-		}else if(button.equalsIgnoreCase("staff")) {
-			return new int[] {43, 22};
-		}else if(button.equalsIgnoreCase("longsword")) {
-			return new int[] {64, 22};
-		}else if(button.equalsIgnoreCase("kodachi")) {
-			return new int[] {1, 43};
-		}else if(button.equalsIgnoreCase("battleaxe")) {
-			return new int[] {22, 43};
-		}else if(button.equalsIgnoreCase("zweihander")) {
-			return new int[] {43, 43};
-		}else if(button.equalsIgnoreCase("nodachi")) {
-			return new int[] {64, 43};
-		}else if(button.equalsIgnoreCase("sabre")) {
-			return new int[] {1, 64};
-		}else if(button.equalsIgnoreCase("makhaira")) {
-			return new int[] {22, 64};
-		}else if(button.equalsIgnoreCase("spear")) {
-			return new int[] {43, 64};
-		}else if(button.equalsIgnoreCase("chain")) {
-			return new int[] {22, 85};
-		}else if(button.equalsIgnoreCase("armor plate")) {
-			return new int[] {43, 85};
-		}else if(button.equalsIgnoreCase("handle")) {
-			return new int[] {64, 64};
-		}else if(button.equalsIgnoreCase("forge weapon")) {
-			return new int[] {1, 85};
-		}
-		return new int[] {232, 232};
-	}
-	
-	@ZenMethod
 	public static void setFuelListForBlock(IIngredient[] ingrs, String block) {
+		
 		Block forge = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 		if(forge == null) {
 			Alw.logger.error("Unable to set fuel list for block {" + block + "}. {" + block + "} is not in the Forge Block registry.");
@@ -662,8 +594,16 @@ public class ZenDynamicAlwResources {
 		}
 		
 		if(!fuelSet.isEmpty()) {
-			fuelLists.put(forge, fuelSet);
+			fuelLists.put(forge.getRegistryName(), fuelSet);
 		}
+		
+//		System.out.println("Calling setFuelListForBlock!");
+//		System.out.println("Fuel list: ");
+//		for(Entry<ResourceLocation, Set<Item>> e : fuelLists.entrySet()) {
+//			System.out.print("(" + e.getKey() + ", ");
+//			e.getValue().forEach((i) -> {System.out.print(i.getRegistryName() + ", ");});
+//			System.out.println(")");
+//		}
 	}
 	
 	@ZenMethod
@@ -693,7 +633,15 @@ public class ZenDynamicAlwResources {
 		}
 		
 		if(!matList.isEmpty()) {
-			matLists.put(forge, matList);
+			matLists.put(forge.getRegistryName(), matList);
+		}
+		
+		System.out.println("Calling setMaterialListForBlock!");
+		System.out.println("Fuel list: ");
+		for(Entry<ResourceLocation, Set<Item>> e : matLists.entrySet()) {
+			System.out.print("(" + e.getKey() + ", ");
+			e.getValue().forEach((i) -> {System.out.print(i.getRegistryName() + ", ");});
+			System.out.println(")");
 		}
 	}
 	
@@ -721,7 +669,7 @@ public class ZenDynamicAlwResources {
 		return false;
 	}
 	
-	public static boolean setFuelListForBlock(Block block, Set<Item> fuel) {
+	public static boolean setFuelListForBlock(ResourceLocation block, Set<Item> fuel) {
 		if(block == null || fuel == null || fuel.size() == 0) {
 			return false;
 		}
@@ -730,7 +678,7 @@ public class ZenDynamicAlwResources {
 		return true;
 	}
 	
-	public static Set<Item> getFuelListForBlock(Block key) {
+	public static Set<Item> getFuelListForBlock(ResourceLocation key) {
 		if(key == null || fuelLists.get(key) == null) {
 			return null;
 		}
@@ -738,7 +686,7 @@ public class ZenDynamicAlwResources {
 		return Collections.unmodifiableSet(fuelLists.get(key));
 	}
 	
-	public static boolean setMatListForBlock(Block block, Set<Item> mats) {
+	public static boolean setMatListForBlock(ResourceLocation block, Set<Item> mats) {
 		if(block == null || mats == null || mats.size() == 0) {
 			return false;
 		}
@@ -747,19 +695,12 @@ public class ZenDynamicAlwResources {
 		return true;
 	}
 	
-	public static Set<Item> getMatListForBlock(Block key) {
+	public static Set<Item> getMatListForBlock(ResourceLocation key) {
 		if(key == null || matLists.get(key) == null) {
 			return null;
 		}
 		
 		return Collections.unmodifiableSet(matLists.get(key));
-	}
-	
-	@ZenMethod
-	public static ForgeRepresentation createForge(String name, boolean useOneSlot, boolean usesAdvancedForgeModel, boolean needsFuel, boolean needsIgnition) {
-		ForgeRepresentation forge = new ForgeRepresentation(name, useOneSlot, usesAdvancedForgeModel, needsFuel, needsIgnition);
-		forge.setTextureLocation(CTResourceLocation.create("contenttweaker:blocks/" + name + ".png"));
-		return forge;
 	}
 	
 }

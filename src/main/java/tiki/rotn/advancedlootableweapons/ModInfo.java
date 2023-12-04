@@ -3,10 +3,10 @@ package tiki.rotn.advancedlootableweapons;
 public class ModInfo {
 	public static final String ID = "advancedlootableweapons";
 	public static final String NAME = "Advanced Lootable Weapons";
-	public static final String VER = "RotN-1.3.1-1.12.2";
-	public static final String LOAD_AFTER = "required-after:FML;required-after:pyrotech[1.6.9);after:betterwithmods;before:contenttweaker;before:crafttweaker;after:thermalfoundation;after:mekanismtools;after:appliedenergistics2;after:tconstruct;after:botania;after:spartanweaponry";
-	public static final String CLIENTPROXY = "com.tiki.advancedlootableweapons.proxy.ClientProxy";
-	public static final String COMMONPROXY = "com.tiki.advancedlootableweapons.proxy.CommonProxy";
+	public static final String VER = "RotN-1.4.0-1.12.2";
+	public static final String LOAD_AFTER = "required-after:FML;required-after:pyrotech@[1.6.9,);after:betterwithmods;before:contenttweaker;before:crafttweaker;after:thermalfoundation;after:mekanismtools;after:appliedenergistics2;after:tconstruct;after:botania;after:spartanweaponry";
+	public static final String CLIENTPROXY = "tiki.rotn.advancedlootableweapons.proxy.ClientProxy";
+	public static final String COMMONPROXY = "tiki.rotn.advancedlootableweapons.proxy.CommonProxy";
 	
 	public static final int GUI_SHARPENING_STONE = 0;
 	public static final int GUI_ALLOY_FURNACE = 1;

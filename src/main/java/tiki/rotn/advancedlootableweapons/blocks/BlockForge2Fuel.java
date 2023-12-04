@@ -37,7 +37,6 @@ import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.IHasModel;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
-import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge2AirflowConsumer;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.rotn.advancedlootableweapons.init.BlockInit;
 
@@ -66,19 +65,19 @@ public class BlockForge2Fuel extends BlockForge2 implements IHasModel
 	}
 	
 	public void setFuelList(Set<Item> items) {
-		ZenDynamicAlwResources.setFuelListForBlock(this, items);
+		ZenDynamicAlwResources.setFuelListForBlock(this.getRegistryName(), items);
 	}
 	
 	public void addItemToFuelList(Item item) {
-		ZenDynamicAlwResources.fuelLists.get(this).add(item);
+		ZenDynamicAlwResources.fuelLists.get(this.getRegistryName()).add(item);
 	}
 	
 	public void removeItemFromFuelList(Item item) {
-		ZenDynamicAlwResources.fuelLists.get(this).remove(item);
+		ZenDynamicAlwResources.fuelLists.get(this.getRegistryName()).remove(item);
 	}
 	
 	public Set<Item> getFuelList() {
-		return ZenDynamicAlwResources.fuelLists.get(this);
+		return ZenDynamicAlwResources.fuelLists.get(this.getRegistryName());
 	}
 	
 	@Override
@@ -306,10 +305,7 @@ public class BlockForge2Fuel extends BlockForge2 implements IHasModel
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForge2AirflowConsumer(true, state.getValue(REQUIRES_IGNITION), this);
-		}
-		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION), this);
+		return new TileEntityForge2(true, state.getValue(REQUIRES_IGNITION), this.getRegistryName());
 	}
 	
 	@Override

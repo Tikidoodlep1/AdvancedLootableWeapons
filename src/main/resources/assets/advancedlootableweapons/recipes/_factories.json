@@ -1,19 +1,19 @@
 {
 	"recipes": {
-		"chain_link_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessChainLinkRecipe$Factory",
-		"use_dur_shapeless": "com.tiki.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory",
-		"dye_armor": "com.tiki.advancedlootableweapons.recipes.ArmorDyesRecipe$Factory",
-		"bind_armor": "com.tiki.advancedlootableweapons.recipes.ArmorBindingRecipe$Factory",
-		"forge_bind_armor": "com.tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe$Factory",
-		"anywood": "com.tiki.advancedlootableweapons.recipes.AnywoodBellowsRecipe$Factory",
-		"forge_tool_head": "com.tiki.advancedlootableweapons.recipes.ForgeToolHeadRecipe$Factory",
-		"forge_weapon": "com.tiki.advancedlootableweapons.recipes.ForgeToolRecipe$Factory",
-		"one_slot": "com.tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes$Factory",
-		"forge_armor_plate": "com.tiki.advancedlootableweapons.recipes.ForgeArmorPlateRecipe$Factory",
-		"forge_general": "com.tiki.advancedlootableweapons.recipes.ForgeGeneralCaseRecipe$Factory",
-		"alloy_furnace": "com.tiki.advancedlootableweapons.recipes.AlloyingRecipe$Factory",
-		"drum": "com.tiki.advancedlootableweapons.recipes.DrumItemRecipe$Factory",
-		"quenching": "com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe$Factory",
-		"clay_cover": "com.tiki.advancedlootableweapons.recipes.ClayCoveringRecipe$Factory"
+		"chain_link_shapeless": "tiki.rotn.advancedlootableweapons.recipes.ShapelessChainLinkRecipe$Factory",
+		"use_dur_shapeless": "tiki.rotn.advancedlootableweapons.recipes.ShapelessUseDurabilityRecipe$Factory",
+		"dye_armor": "tiki.rotn.advancedlootableweapons.recipes.ArmorDyesRecipe$Factory",
+		"bind_armor": "tiki.rotn.advancedlootableweapons.recipes.ArmorBindingRecipe$Factory",
+		"forge_bind_armor": "tiki.rotn.advancedlootableweapons.recipes.ForgeArmorBindingRecipe$Factory",
+		"anywood": "tiki.rotn.advancedlootableweapons.recipes.AnywoodBellowsRecipe$Factory",
+		"forge_tool_head": "tiki.rotn.advancedlootableweapons.recipes.ForgeToolHeadRecipe$Factory",
+		"forge_weapon": "tiki.rotn.advancedlootableweapons.recipes.ForgeToolRecipe$Factory",
+		"one_slot": "tiki.rotn.advancedlootableweapons.recipes.ShapelessOneSlotRecipes$Factory",
+		"forge_armor_plate": "tiki.rotn.advancedlootableweapons.recipes.ForgeArmorPlateRecipe$Factory",
+		"forge_general": "tiki.rotn.advancedlootableweapons.recipes.ForgeGeneralCaseRecipe$Factory",
+		"alloy_furnace": "tiki.rotn.advancedlootableweapons.recipes.AlloyingRecipe$Factory",
+		"drum": "tiki.rotn.advancedlootableweapons.recipes.DrumItemRecipe$Factory",
+		"quenching": "tiki.rotn.advancedlootableweapons.recipes.DrumQuenchingRecipe$Factory",
+		"clay_cover": "tiki.rotn.advancedlootableweapons.recipes.ClayCoveringRecipe$Factory"
 	}
 }

@@ -32,7 +32,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForge;
-import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityForgeAirflowConsumer;
 import tiki.rotn.advancedlootableweapons.init.BlockInit;
 
 public class BlockForge extends BlockBase implements ITileEntityProvider
@@ -164,10 +163,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
-		return new TileEntityForge(false, false, this);
+		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 	
 	@Override
@@ -222,10 +218,7 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		if(Alw.isPyrotechLoaded) {
-			return new TileEntityForgeAirflowConsumer(false, false, this);
-		}
-		return new TileEntityForge(false, false, this);
+		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 
 //	@Override
