@@ -23,9 +23,9 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 	private final Level level;
 	protected final Container invSlots = new SimpleContainer(3) {
 		public void setChanged() {
-			this.setChanged();
+			super.setChanged();
 			AnvilForgingContainer.this.slotsChanged(invSlots);
-		};
+		}
 	};
 	
 	public AnvilForgingContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
