@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.loot_modifiers.ShadowModifierSerializer;
 
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +14,6 @@ public class GlobalDropHandler {
 	public static final List<GlobalLootModifierSerializer<?>> dropList = new ArrayList<GlobalLootModifierSerializer<?>>();
 	
 	public static void initDropList() {
-		dropList.add(new ShadowModifierSerializer().setRegistryName(new ResourceLocation(ModInfo.ID, "shadow_mod_all")));
+		dropList.add(new ShadowModifierSerializer().setRegistryName(new ResourceLocation(AdvancedLootableWeapons.ID, "shadow_mod_all")));
 	}
 }

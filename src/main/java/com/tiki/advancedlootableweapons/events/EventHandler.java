@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.events;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -13,12 +14,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 
-import com.tiki.advancedlootableweapons.ModInfo;
 import com.tiki.advancedlootableweapons.handlers.GlobalDropHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 
-@Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = AdvancedLootableWeapons.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler {
 	
 	@SubscribeEvent

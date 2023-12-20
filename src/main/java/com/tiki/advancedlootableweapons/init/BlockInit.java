@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.init;
 
 import java.util.function.Supplier;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import com.tiki.advancedlootableweapons.blocks.BlockDusksteel;
 import com.tiki.advancedlootableweapons.blocks.BlockForge;
@@ -22,7 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class BlockInit {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ModInfo.ID);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AdvancedLootableWeapons.ID);
 	
 	//Metals
 	public static final RegistryObject<Block> BLOCK_STEEL = registerBlock("block_steel", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)

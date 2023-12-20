@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.util.WeaponStackHelper;
 
@@ -137,7 +137,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 	public static class Serializer implements RecipeSerializer<AnvilForgingRecipe> {
 		
 		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(ModInfo.ID, Type.ID);
+		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.ID, Type.ID);
 		
 		@Override
 		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {

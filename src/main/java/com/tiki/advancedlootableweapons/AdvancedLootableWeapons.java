@@ -30,13 +30,14 @@ import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @SuppressWarnings("deprecation")
-@Mod(ModInfo.ID)
-public class Alw
+@Mod(AdvancedLootableWeapons.ID)
+public class AdvancedLootableWeapons
 {
+    public static final String ID = "advancedlootableweapons";
     // Directly reference a slf4j logger
     //private static final Logger LOGGER = LogUtils.getLogger();
 
-    public Alw()
+    public AdvancedLootableWeapons()
     {
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
@@ -46,8 +47,8 @@ public class Alw
         BlockEntityInit.register(eventBus);
         GuiInit.register(eventBus);
         
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigHandler.SPEC, "ALW Config-client.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfigHandler.SPEC, "ALW Config-common.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigHandler.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfigHandler.SPEC);
         
         RecipeInit.register(eventBus);
         
@@ -70,18 +71,11 @@ public class Alw
     	MenuScreens.register(GuiInit.FORGE_CONTAINER.get(), ForgeScreen::new);
     	MenuScreens.register(GuiInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
     	MenuScreens.register(GuiInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
-    	event.enqueueWork(new Runnable() {
-
-			@Override
-			public void run() {
-				Map<Item, ItemPropertyFunction> map = ItemInit.toolHeadMap;
-				for(Item i : map.keySet()) {
-					ItemProperties.register(i, new ResourceLocation(ModInfo.ID, "heat"), map.get(i));
-				}
-				
-				
-			}
-			
-    	});
+    	event.enqueueWork(() -> {
+            Map<Item, ItemPropertyFunction> map = ItemInit.toolHeadMap;
+            for(Item i : map.keySet()) {
+                ItemProperties.register(i, new ResourceLocation(ID, "heat"), map.get(i));
+            }
+        });
     }
 }

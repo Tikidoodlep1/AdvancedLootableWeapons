@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.items.armor;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.sounds.SoundEvent;
@@ -91,7 +91,7 @@ public enum ArmorAttributes implements ArmorMaterial {
     @Override
     @NotNull
     public String getName() {
-        return ModInfo.ID + ":" + this.name;
+        return AdvancedLootableWeapons.ID + ":" + this.name;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class WeaponButton extends Button {
 	
-	public static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/anvil_forging");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(AdvancedLootableWeapons.ID + ":textures/gui/anvil_forging");
 	private final int x, y, u, v;
 	private boolean down = false;
 	

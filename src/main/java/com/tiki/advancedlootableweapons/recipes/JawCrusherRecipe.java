@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.recipes;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -85,7 +85,7 @@ public class JawCrusherRecipe implements Recipe<SimpleContainer> {
 	public static class Serializer implements RecipeSerializer<JawCrusherRecipe> {
 		
 		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(ModInfo.ID, Type.ID);
+		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.ID, Type.ID);
 		
 		@Override
 		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {

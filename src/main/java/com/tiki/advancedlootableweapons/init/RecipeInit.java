@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.init;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class RecipeInit {
 
-	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ModInfo.ID);
+	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AdvancedLootableWeapons.ID);
 	
 	public static final RegistryObject<RecipeSerializer<AlloyFurnaceRecipe>> ALLOY_FURNACE_RECIPE = RECIPE_SERIALIZERS.register(AlloyFurnaceRecipe.Type.ID, 
 			() -> AlloyFurnaceRecipe.Serializer.INSTANCE);

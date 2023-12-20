@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.init;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.anvil_forging.AnvilForgingContainer;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class GuiInit {
 
-	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ModInfo.ID);
+	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedLootableWeapons.ID);
 	
 	public static final RegistryObject<MenuType<AlloyFurnaceContainer>> ALLOY_FURNACE_CONTAINER = registerMenuType(AlloyFurnaceContainer::new, "alloy_furnace_container");
 	

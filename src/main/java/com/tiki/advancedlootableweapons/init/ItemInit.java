@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.init;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.items.ItemForgeHammer;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -24,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 @SuppressWarnings("deprecation")
 public class ItemInit {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.ID);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.ID);
 	public static final Map<Item, ItemPropertyFunction> toolHeadMap = new HashMap<Item, ItemPropertyFunction>();
 	
 	//Mats

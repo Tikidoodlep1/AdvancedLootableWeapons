@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.inventory.forge;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(ModInfo.ID, "textures/gui/forge.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/forge.png");
 
 	public ForgeScreen(ForgeContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);

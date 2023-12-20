@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class JawCrusherScreen extends AbstractContainerScreen<JawCrusherContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(ModInfo.ID, "textures/gui/jaw_crusher.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/jaw_crusher.png");
 
 	public JawCrusherScreen(JawCrusherContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);

@@ -1,11 +1,10 @@
 package com.tiki.advancedlootableweapons.init;
 
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
 
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -14,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockEntityInit {
 
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ModInfo.ID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AdvancedLootableWeapons.ID);
 	
 	public static final RegistryObject<BlockEntityType<AlloyFurnaceBlockEntity>> ALLOY_FURNACE_TE = 
 			BLOCK_ENTITIES.register("alloy_furnace_te", () -> BlockEntityType.Builder.of(AlloyFurnaceBlockEntity::new, BlockInit.BLOCK_ALLOY_FURNACE.get()).build(null));

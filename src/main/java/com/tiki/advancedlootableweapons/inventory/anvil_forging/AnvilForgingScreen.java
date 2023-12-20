@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.tiki.advancedlootableweapons.ModInfo;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(ModInfo.ID, "textures/gui/anvil_forging.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/anvil_forging.png");
 	private static final WeaponButton DAGGER = new WeaponButton(30, 40, 177, 1, new TextComponent("Dagger"));
 	private static final WeaponButton KABUTOWARI = new WeaponButton(60, 40, 177, 1, new TextComponent("Kabutowari"));
 	private static final WeaponButton TALWAR = new WeaponButton(90, 40, 177, 1, new TextComponent("Talwar"));

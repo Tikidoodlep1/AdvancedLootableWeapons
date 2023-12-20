@@ -1,10 +1,9 @@
 package com.tiki.advancedlootableweapons.events;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import net.minecraftforge.fml.common.Mod;
 
-import com.tiki.advancedlootableweapons.ModInfo;
-
-@Mod.EventBusSubscriber(modid = ModInfo.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = AdvancedLootableWeapons.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventBusHandler {
 
 }
