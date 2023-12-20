@@ -10,5 +10,6 @@ public class ModDatagen {
         DataGenerator dataGenerator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         dataGenerator.addProvider(new ModItemModelProvider(dataGenerator,existingFileHelper));
+        dataGenerator.addProvider(new ModLangProvider(dataGenerator));
     }
 }

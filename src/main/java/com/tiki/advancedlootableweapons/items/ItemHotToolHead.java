@@ -80,7 +80,12 @@ public class ItemHotToolHead extends Item {
 			this.setDamage(stack, damage + 1);
 		}
 	}
-	
+
+	@Override//todo
+	public Component getName(ItemStack pStack) {
+		return super.getName(pStack);
+	}
+
 	@Override
 	public boolean isEnchantable(ItemStack p_41456_) {
 	   return false;
