@@ -94,19 +94,19 @@ public class ItemInit {
 	public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	
-	public static final RegistryObject<Item> FORGE_HAMMER_STONE = ITEMS.register("forge_hammer_stone", () -> new ItemForgeHammer(Tiers.STONE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_IRON = ITEMS.register("forge_hammer_iron", () -> new ItemForgeHammer(Tiers.IRON, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_KOBOLD = ITEMS.register("forge_hammer_kobold", () -> new ItemForgeHammer(MAT_KOBOLD, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_COPPER = ITEMS.register("forge_hammer_copper", () -> new ItemForgeHammer(MAT_COPPER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_SILVER = ITEMS.register("forge_hammer_silver", () -> new ItemForgeHammer(MAT_SILVER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_BRONZE = ITEMS.register("forge_hammer_bronze", () -> new ItemForgeHammer(MAT_BRONZE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_PLATINUM = ITEMS.register("forge_hammer_platinum", () -> new ItemForgeHammer(MAT_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_STEEL = ITEMS.register("forge_hammer_steel", () -> new ItemForgeHammer(MAT_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_SHADOW_PLATINUM = ITEMS.register("forge_hammer_shadow_platinum", () -> new ItemForgeHammer(MAT_SHADOW_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_FROST_STEEL = ITEMS.register("forge_hammer_frost_steel", () -> new ItemForgeHammer(MAT_FROST_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_OBSIDIAN = ITEMS.register("forge_hammer_obsidian", () -> new ItemForgeHammer(MAT_OBSIDIAN, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_CRYSTALLITE = ITEMS.register("forge_hammer_crystallite", () -> new ItemForgeHammer(MAT_CRYSTALLITE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-	public static final RegistryObject<Item> FORGE_HAMMER_DUSKSTEEL = ITEMS.register("forge_hammer_dusksteel", () -> new ItemForgeHammer(MAT_DUSKSTEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ItemForgeHammer(Tiers.STONE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ItemForgeHammer(Tiers.IRON, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> KOBOLD_FORGE_HAMMER = ITEMS.register("kobold_forge_hammer", () -> new ItemForgeHammer(MAT_KOBOLD, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> COPPER_FORGE_HAMMER = ITEMS.register("copper_forge_hammer", () -> new ItemForgeHammer(MAT_COPPER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> SILVER_FORGE_HAMMER = ITEMS.register("silver_forge_hammer", () -> new ItemForgeHammer(MAT_SILVER, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> BRONZE_FORGE_HAMMER = ITEMS.register("bronze_forge_hammer", () -> new ItemForgeHammer(MAT_BRONZE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> PLATINUM_FORGE_HAMMER = ITEMS.register("platinum_forge_hammer", () -> new ItemForgeHammer(MAT_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> STEEL_FORGE_HAMMER = ITEMS.register("steel_forge_hammer", () -> new ItemForgeHammer(MAT_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> SHADOW_PLATINUM_FORGE_HAMMER = ITEMS.register("shadow_platinum_forge_hammer", () -> new ItemForgeHammer(MAT_SHADOW_PLATINUM, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> FROST_STEEL_FORGE_HAMMER = ITEMS.register("frost_steel_forge_hammer", () -> new ItemForgeHammer(MAT_FROST_STEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> OBSIDIAN_FORGE_HAMMER = ITEMS.register("obsidian_forge_hammer", () -> new ItemForgeHammer(MAT_OBSIDIAN, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> CRYSTALLITE_FORGE_HAMMER = ITEMS.register("crystallite_forge_hammer", () -> new ItemForgeHammer(MAT_CRYSTALLITE, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+	public static final RegistryObject<Item> DUSKSTEEL_FORGE_HAMMER = ITEMS.register("dusksteel_forge_hammer", () -> new ItemForgeHammer(MAT_DUSKSTEEL, new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 	
 	public static final RegistryObject<Item> DAGGER_HEAD = ITEMS.register("dagger_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
 	public static final RegistryObject<Item> KABUTOWARI_HEAD = ITEMS.register("kabutowari_head", () -> new Item(new Item.Properties().tab(CreativeTabs.WEAPON_TAB)));
