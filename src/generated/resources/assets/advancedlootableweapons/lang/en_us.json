@@ -1,4 +1,7 @@
 {
+  "advancedlootableweapons.temperature.cold": "Cold",
+  "advancedlootableweapons.temperature.hot": "Hot",
+  "advancedlootableweapons.temperature.warm": "Warm",
   "attribute.name.generic.bonusAttackDamage": "Bonus Attack Damage",
   "block.advancedlootableweapons.advanced_forge": "Advanced Forge",
   "block.advancedlootableweapons.advanced_forge_1": "Advanced Forge",

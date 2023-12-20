@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -509,5 +510,9 @@ public class ModLangProvider extends LanguageProvider {
         add("itemGroup.alwTab", "Advanced Lootable Weapons");
         add("itemGroup.alwBlocks", "ALW Blocks");
         add("itemGroup.alwWeapons", "ALW Weapons & Hot Tool Heads");
+
+        add(ItemHotToolHead.COLD.getKey(),"Cold");
+        add(ItemHotToolHead.WARM.getKey(),"Warm");
+        add(ItemHotToolHead.HOT.getKey(),"Hot");
     }
 }
