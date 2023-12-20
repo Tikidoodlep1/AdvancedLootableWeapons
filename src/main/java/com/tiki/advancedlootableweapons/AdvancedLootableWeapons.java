@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons;
 
+import com.tiki.advancedlootableweapons.client.ALWClient;
 import com.tiki.advancedlootableweapons.data.ModDatagen;
 import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
@@ -14,12 +15,7 @@ import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -27,14 +23,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import java.util.Map;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @SuppressWarnings("deprecation")
-@Mod(AdvancedLootableWeapons.ID)
+@Mod(AdvancedLootableWeapons.MODID)
 public class AdvancedLootableWeapons
 {
-    public static final String ID = "advancedlootableweapons";
+    public static final String MODID = "advancedlootableweapons";
     // Directly reference a slf4j logger
     //private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -70,11 +65,6 @@ public class AdvancedLootableWeapons
     	MenuScreens.register(GuiInit.FORGE_CONTAINER.get(), ForgeScreen::new);
     	MenuScreens.register(GuiInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
     	MenuScreens.register(GuiInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
-    	event.enqueueWork(() -> {
-            Map<Item, ItemPropertyFunction> map = ItemInit.toolHeadMap;
-            for(Item i : map.keySet()) {
-                ItemProperties.register(i, new ResourceLocation(ID, "heat"), map.get(i));
-            }
-        });
+    	event.enqueueWork(ALWClient::registerItemModelPredicates);
     }
 }

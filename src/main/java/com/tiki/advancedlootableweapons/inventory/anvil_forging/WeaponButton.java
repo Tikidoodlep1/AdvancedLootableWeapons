@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class WeaponButton extends Button {
 	
-	public static final ResourceLocation TEXTURES = new ResourceLocation(AdvancedLootableWeapons.ID + ":textures/gui/anvil_forging");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(AdvancedLootableWeapons.MODID + ":textures/gui/anvil_forging");
 	private final int x, y, u, v;
 	private boolean down = false;
 	

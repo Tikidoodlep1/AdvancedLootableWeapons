@@ -11,7 +11,6 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -99,15 +98,7 @@ public class ItemHotToolHead extends Item {
     }
 
     public ItemHotToolHead addToRegistryMap() {
-        ItemInit.toolHeadMap.put(this, (stack, world, player, id) -> {
-            if (stack.getDamageValue() <= 3000) {
-                return 0;
-            } else if (stack.getDamageValue() > 3000 && stack.getDamageValue() < 5000) {
-                return 1;
-            } else {
-                return 2;
-            }
-        });
+        ItemInit.hotToolHeads.add(this);
         return this;
     }
 }

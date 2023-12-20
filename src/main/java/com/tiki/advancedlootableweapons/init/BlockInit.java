@@ -22,7 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class BlockInit {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AdvancedLootableWeapons.ID);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AdvancedLootableWeapons.MODID);
 	
 	//Metals
 	public static final RegistryObject<Block> BLOCK_STEEL = registerBlock("block_steel", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)

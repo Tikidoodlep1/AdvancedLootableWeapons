@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/forge.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/forge.png");
 
 	public ForgeScreen(ForgeContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);

@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceContainer> {
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/alloy_furnace.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/alloy_furnace.png");
 
 	public AlloyFurnaceScreen(AlloyFurnaceContainer container, Inventory inv, Component name) {
 		super(container, inv, name);

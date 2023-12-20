@@ -7,7 +7,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator,ExistingFileHelper existingFileHelper) {
-        super(generator, AdvancedLootableWeapons.ID, existingFileHelper);
+        super(generator, AdvancedLootableWeapons.MODID, existingFileHelper);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
@@ -10,7 +10,6 @@ import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -24,8 +23,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 @SuppressWarnings("deprecation")
 public class ItemInit {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.ID);
-	public static final Map<Item, ItemPropertyFunction> toolHeadMap = new HashMap<>();
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.MODID);
+	public static final List<Item> hotToolHeads = new ArrayList<>();
 	
 	//Mats
 	public static final ForgeTier MAT_KOBOLD = new ForgeTier(1, CommonConfigHandler.KOBOLD_DURABILITY.get(), 6.0F, CommonConfigHandler.KOBOLD_DAMAGE.get(), 22,

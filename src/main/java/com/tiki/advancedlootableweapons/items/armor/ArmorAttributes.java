@@ -91,7 +91,7 @@ public enum ArmorAttributes implements ArmorMaterial {
     @Override
     @NotNull
     public String getName() {
-        return AdvancedLootableWeapons.ID + ":" + this.name;
+        return AdvancedLootableWeapons.MODID + ":" + this.name;
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.ID, "textures/gui/anvil_forging.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/anvil_forging.png");
 	private static final WeaponButton DAGGER = new WeaponButton(30, 40, 177, 1, new TextComponent("Dagger"));
 	private static final WeaponButton KABUTOWARI = new WeaponButton(60, 40, 177, 1, new TextComponent("Kabutowari"));
 	private static final WeaponButton TALWAR = new WeaponButton(90, 40, 177, 1, new TextComponent("Talwar"));

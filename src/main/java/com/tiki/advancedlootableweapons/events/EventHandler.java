@@ -18,7 +18,7 @@ import com.tiki.advancedlootableweapons.handlers.GlobalDropHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 
-@Mod.EventBusSubscriber(modid = AdvancedLootableWeapons.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = AdvancedLootableWeapons.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler {
 	
 	@SubscribeEvent

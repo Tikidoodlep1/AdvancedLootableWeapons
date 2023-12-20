@@ -137,7 +137,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 	public static class Serializer implements RecipeSerializer<AnvilForgingRecipe> {
 		
 		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.ID, Type.ID);
+		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.MODID, Type.ID);
 		
 		@Override
 		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {

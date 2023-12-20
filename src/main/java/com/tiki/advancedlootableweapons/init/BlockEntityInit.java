@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlockEntityInit {
 
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AdvancedLootableWeapons.ID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AdvancedLootableWeapons.MODID);
 	
 	public static final RegistryObject<BlockEntityType<AlloyFurnaceBlockEntity>> ALLOY_FURNACE_TE = 
 			BLOCK_ENTITIES.register("alloy_furnace_te", () -> BlockEntityType.Builder.of(AlloyFurnaceBlockEntity::new, BlockInit.BLOCK_ALLOY_FURNACE.get()).build(null));

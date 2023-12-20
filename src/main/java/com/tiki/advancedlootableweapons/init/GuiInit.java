@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class GuiInit {
 
-	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedLootableWeapons.ID);
+	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedLootableWeapons.MODID);
 	
 	public static final RegistryObject<MenuType<AlloyFurnaceContainer>> ALLOY_FURNACE_CONTAINER = registerMenuType(AlloyFurnaceContainer::new, "alloy_furnace_container");
 	

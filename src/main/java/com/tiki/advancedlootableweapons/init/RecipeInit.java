@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class RecipeInit {
 
-	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AdvancedLootableWeapons.ID);
+	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AdvancedLootableWeapons.MODID);
 	
 	public static final RegistryObject<RecipeSerializer<AlloyFurnaceRecipe>> ALLOY_FURNACE_RECIPE = RECIPE_SERIALIZERS.register(AlloyFurnaceRecipe.Type.ID, 
 			() -> AlloyFurnaceRecipe.Serializer.INSTANCE);

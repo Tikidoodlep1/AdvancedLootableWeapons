@@ -7,7 +7,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 
 public class ModLangProvider extends LanguageProvider {
     public ModLangProvider(DataGenerator gen) {
-        super(gen, AdvancedLootableWeapons.ID, "en_us");
+        super(gen, AdvancedLootableWeapons.MODID, "en_us");
     }
 
     @Override
