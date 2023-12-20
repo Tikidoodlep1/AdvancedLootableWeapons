@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons;
 
+import com.tiki.advancedlootableweapons.data.ModDatagen;
 import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
@@ -56,9 +57,7 @@ public class AdvancedLootableWeapons
         
         eventBus.addListener(this::setup);
         eventBus.addListener(this::clientSetup);
-        
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        eventBus.addListener(ModDatagen::start);
     }
     
     private void setup(final FMLCommonSetupEvent event)
