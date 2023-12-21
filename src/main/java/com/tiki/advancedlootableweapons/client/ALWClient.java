@@ -11,7 +11,7 @@ import static com.tiki.advancedlootableweapons.AdvancedLootableWeapons.MODID;
 
 public class ALWClient {
 
-    static final ItemPropertyFunction HEAT_FUNCTION_WRAPPER = ItemHotToolHead.HEAT_FUNCTION::apply;
+    static final ItemPropertyFunction HEAT_FUNCTION_WRAPPER = (pP1, pP2, pP3, pP4) -> ItemHotToolHead.HEAT_FUNCTION.apply(pP1, pP2, pP3, pP4).ordinal();
 
     public static void registerItemModelPredicates() {
         for(Item i : ItemInit.hotToolHeads) {

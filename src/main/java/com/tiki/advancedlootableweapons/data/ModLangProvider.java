@@ -511,8 +511,8 @@ public class ModLangProvider extends LanguageProvider {
         add("itemGroup.alwBlocks", "ALW Blocks");
         add("itemGroup.alwWeapons", "ALW Weapons & Hot Tool Heads");
 
-        add(ItemHotToolHead.COOL.getKey(),"Cool");
-        add(ItemHotToolHead.WARM.getKey(),"Warm");
-        add(ItemHotToolHead.HOT.getKey(),"Hot");
+        add(ItemHotToolHead.Temp.cool.translation.getKey(),"Cool");
+        add(ItemHotToolHead.Temp.warm.translation.getKey(),"Warm");
+        add(ItemHotToolHead.Temp.hot.translation.getKey(),"Hot");
     }
 }

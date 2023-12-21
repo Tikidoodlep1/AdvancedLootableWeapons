@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.items;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import javax.annotation.Nullable;
 
@@ -12,6 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -77,10 +79,6 @@ public class ItemHotToolHead extends Item {
         tooltip.add(new TextComponent(ChatFormatting.GRAY + "--------------------"));
     }
 
-    public static final TranslatableComponent COOL = new TranslatableComponent("advancedlootableweapons.temperature.cool");
-    public static final TranslatableComponent WARM = new TranslatableComponent("advancedlootableweapons.temperature.warm");
-    public static final TranslatableComponent HOT = new TranslatableComponent("advancedlootableweapons.temperature.hot");
-
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity player, int p_41407_, boolean p_41408_) {
         int damage = stack.getDamageValue();
@@ -91,20 +89,9 @@ public class ItemHotToolHead extends Item {
 
     @Override
     public Component getName(ItemStack pStack) {
-        int temp = HEAT_FUNCTION.apply(pStack,null,null,null);
+        Temp temp = HEAT_FUNCTION.apply(pStack,null,null,null);
         Component baseName = super.getName(pStack);
-        switch (temp){
-            case 0-> {
-                return COOL.copy().append(" ").append(baseName);
-            }
-            case 1-> {
-                return WARM.copy().append(" ").append(baseName);
-            }
-            case 2-> {
-                return HOT.copy().append(" ").append(baseName);
-            }
-        }
-        return baseName;
+        return temp.translation.copy().append(" ").append(baseName);
     }
 
     @Override
@@ -113,17 +100,26 @@ public class ItemHotToolHead extends Item {
     }
 
     /**
-     * a side safe version of ItemPropertyFunction
+     * related to ItemPropertyFunction
+     * damage < 3000 = hot
      */
-    public static final PropertyDispatch.QuadFunction<ItemStack,Level, LivingEntity,Integer,Integer> HEAT_FUNCTION = (stack, world, player, id) -> {
+    public static final PropertyDispatch.QuadFunction<ItemStack,Level, LivingEntity,Integer,Temp> HEAT_FUNCTION = (stack, world, player, id) -> {
         if (stack.getDamageValue() <= 3000) {
-            return 0;
+            return Temp.hot;
         } else if (stack.getDamageValue() > 3000 && stack.getDamageValue() < 5000) {
-            return 1;
+            return Temp.warm;
         } else {
-            return 2;
+            return Temp.cool;
         }
     };
+
+    public enum Temp {
+    hot,warm,cool;
+    public final TranslatableComponent translation;
+    Temp() {
+        translation = new TranslatableComponent("advancedlootableweapons.temperature."+this.name());
+    }
+    }
 
     public ItemHotToolHead addToRegistryMap() {
         ItemInit.hotToolHeads.add(this);
