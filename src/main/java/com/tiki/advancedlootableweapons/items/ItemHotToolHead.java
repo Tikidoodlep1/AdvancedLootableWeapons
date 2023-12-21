@@ -9,11 +9,13 @@ import com.tiki.advancedlootableweapons.handlers.EnumMaterialType;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
@@ -75,7 +77,7 @@ public class ItemHotToolHead extends Item {
         tooltip.add(new TextComponent(ChatFormatting.GRAY + "--------------------"));
     }
 
-    public static final TranslatableComponent COLD = new TranslatableComponent("advancedlootableweapons.temperature.cold");
+    public static final TranslatableComponent COOL = new TranslatableComponent("advancedlootableweapons.temperature.cool");
     public static final TranslatableComponent WARM = new TranslatableComponent("advancedlootableweapons.temperature.warm");
     public static final TranslatableComponent HOT = new TranslatableComponent("advancedlootableweapons.temperature.hot");
 
@@ -87,15 +89,41 @@ public class ItemHotToolHead extends Item {
         }
     }
 
-    @Override//todo
+    @Override
     public Component getName(ItemStack pStack) {
-        return super.getName(pStack);
+        int temp = HEAT_FUNCTION.apply(pStack,null,null,null);
+        Component baseName = super.getName(pStack);
+        switch (temp){
+            case 0-> {
+                return COOL.copy().append(" ").append(baseName);
+            }
+            case 1-> {
+                return WARM.copy().append(" ").append(baseName);
+            }
+            case 2-> {
+                return HOT.copy().append(" ").append(baseName);
+            }
+        }
+        return baseName;
     }
 
     @Override
     public boolean isEnchantable(ItemStack p_41456_) {
         return false;
     }
+
+    /**
+     * a side safe version of ItemPropertyFunction
+     */
+    public static final PropertyDispatch.QuadFunction<ItemStack,Level, LivingEntity,Integer,Integer> HEAT_FUNCTION = (stack, world, player, id) -> {
+        if (stack.getDamageValue() <= 3000) {
+            return 0;
+        } else if (stack.getDamageValue() > 3000 && stack.getDamageValue() < 5000) {
+            return 1;
+        } else {
+            return 2;
+        }
+    };
 
     public ItemHotToolHead addToRegistryMap() {
         ItemInit.hotToolHeads.add(this);

@@ -292,94 +292,94 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.dusksteel_sharpening_stone", "Dusksteel Whetstone");
 
 
-        add("item.advancedlootableweapons.hot_tool_head", "Cool Tool Head");
+        add("item.advancedlootableweapons.hot_tool_head", "Tool Head");
 
-        add("item.advancedlootableweapons.hot_tool_rod", "Cool Weapon Handle(Stage 1)");
-        add("item.advancedlootableweapons.hot_tool_rod_2", "Cool Weapon Handle(Finished)");
-        add("item.advancedlootableweapons.long_tool_rod", "Cool Long Weapon Handle");
+        add("item.advancedlootableweapons.hot_tool_rod", "Weapon Handle(Stage 1)");
+        add("item.advancedlootableweapons.hot_tool_rod_2", "Weapon Handle(Finished)");
+        add("item.advancedlootableweapons.long_tool_rod", "Long Weapon Handle");
         add("item.advancedlootableweapons.long_weapon_handle", "Wooden Long Weapon Handle");
 
         add("item.advancedlootableweapons.dagger_head", "Wooden Dagger Head");
-        add("item.advancedlootableweapons.dagger_hot_tool_head", "Cool Dagger Head(Stage 1)");
-        add("item.advancedlootableweapons.dagger_hot_tool_head_2", "Cool Dagger Head(Finished)");
+        add("item.advancedlootableweapons.dagger_hot_tool_head", "Dagger Head(Stage 1)");
+        add("item.advancedlootableweapons.dagger_hot_tool_head_2", "Dagger Head(Finished)");
 
         add("item.advancedlootableweapons.kabutowari_head", "Wooden Kabutowari Head");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head", "Cool Kabutowari Head(Stage 1)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_2", "Cool Kabutowari Head(Stage 2)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_3", "Cool Kabutowari Head(Stage 3)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_4", "Cool Kabutowari Head(Stage 4)");
+        add("item.advancedlootableweapons.kabutowari_hot_tool_head", "Kabutowari Head(Stage 1)");
+        add("item.advancedlootableweapons.kabutowari_hot_tool_head_2", "Kabutowari Head(Stage 2)");
+        add("item.advancedlootableweapons.kabutowari_hot_tool_head_3", "Kabutowari Head(Stage 3)");
+        add("item.advancedlootableweapons.kabutowari_hot_tool_head_4", "Kabutowari Head(Stage 4)");
         add("item.advancedlootableweapons.kabutowari_hot_tool_head_5", "Hot Kabutowari Head(Finished)");
 
         add("item.advancedlootableweapons.talwar_head", "Wooden Talwar Head");
-        add("item.advancedlootableweapons.talwar_hot_tool_head", "Cool Talwar Head(Stage 1)");
-        add("item.advancedlootableweapons.talwar_hot_tool_head_2", "Cool Talwar Head(Stage 2)");
-        add("item.advancedlootableweapons.talwar_hot_tool_head_3", "Cool Talwar Head(Finished)");
+        add("item.advancedlootableweapons.talwar_hot_tool_head", "Talwar Head(Stage 1)");
+        add("item.advancedlootableweapons.talwar_hot_tool_head_2", "Talwar Head(Stage 2)");
+        add("item.advancedlootableweapons.talwar_hot_tool_head_3", "Talwar Head(Finished)");
 
         add("item.advancedlootableweapons.rapier_head", "Wooden Rapier Head");
-        add("item.advancedlootableweapons.rapier_hot_tool_head", "Cool Rapier Head(Stage 1)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_2", "Cool Rapier Head(Stage 2)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_3", "Cool Rapier Head(Stage 3)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_4", "Cool Rapier Head(Finished)");
+        add("item.advancedlootableweapons.rapier_hot_tool_head", "Rapier Head(Stage 1)");
+        add("item.advancedlootableweapons.rapier_hot_tool_head_2", "Rapier Head(Stage 2)");
+        add("item.advancedlootableweapons.rapier_hot_tool_head_3", "Rapier Head(Stage 3)");
+        add("item.advancedlootableweapons.rapier_hot_tool_head_4", "Rapier Head(Finished)");
 
         add("item.advancedlootableweapons.cleaver_head", "Wooden Cleaver Head");
-        add("item.advancedlootableweapons.cleaver_hot_tool_head", "Cool Cleaver Head(Finished)");
+        add("item.advancedlootableweapons.cleaver_hot_tool_head", "Cleaver Head(Finished)");
 
         add("item.advancedlootableweapons.mace_head", "Wooden Mace Head");
-        add("item.advancedlootableweapons.mace_hot_tool_head", "Cool Mace Head(Stage 1)");
-        add("item.advancedlootableweapons.mace_hot_tool_head_2", "Cool Mace Head(Stage 2)");
-        add("item.advancedlootableweapons.mace_hot_tool_head_3", "Cool Mace Head(Finished)");
+        add("item.advancedlootableweapons.mace_hot_tool_head", "Mace Head(Stage 1)");
+        add("item.advancedlootableweapons.mace_hot_tool_head_2", "Mace Head(Stage 2)");
+        add("item.advancedlootableweapons.mace_hot_tool_head_3", "Mace Head(Finished)");
 
         add("item.advancedlootableweapons.staff_head", "Wooden Staff Head");
-        add("item.advancedlootableweapons.staff_hot_tool_head", "Cool Staff Head(Stage 1)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_2", "Cool Staff Head(Stage 2)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_3", "Cool Staff Head(Stage 3)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_4", "Cool Staff Head(Stage 4)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_5", "Cool Staff Head(Finished)");
+        add("item.advancedlootableweapons.staff_hot_tool_head", "Staff Head(Stage 1)");
+        add("item.advancedlootableweapons.staff_hot_tool_head_2", "Staff Head(Stage 2)");
+        add("item.advancedlootableweapons.staff_hot_tool_head_3", "Staff Head(Stage 3)");
+        add("item.advancedlootableweapons.staff_hot_tool_head_4", "Staff Head(Stage 4)");
+        add("item.advancedlootableweapons.staff_hot_tool_head_5", "Staff Head(Finished)");
 
         add("item.advancedlootableweapons.longsword_head", "Wooden Longsword Head");
-        add("item.advancedlootableweapons.longsword_hot_tool_head", "Cool Longsword Head(Stage 1)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_2", "Cool Longsword Head(Stage 2)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_3", "Cool Longsword Head(Stage 3)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_4", "Cool Longsword Head(Finished)");
+        add("item.advancedlootableweapons.longsword_hot_tool_head", "Longsword Head(Stage 1)");
+        add("item.advancedlootableweapons.longsword_hot_tool_head_2", "Longsword Head(Stage 2)");
+        add("item.advancedlootableweapons.longsword_hot_tool_head_3", "Longsword Head(Stage 3)");
+        add("item.advancedlootableweapons.longsword_hot_tool_head_4", "Longsword Head(Finished)");
 
         add("item.advancedlootableweapons.kodachi_head", "Wooden Kodachi Head");
-        add("item.advancedlootableweapons.kodachi_hot_tool_head", "Cool Kodachi Head(Stage 1)");
-        add("item.advancedlootableweapons.kodachi_hot_tool_head_2", "Cool Kodachi Head(Finished)");
+        add("item.advancedlootableweapons.kodachi_hot_tool_head", "Kodachi Head(Stage 1)");
+        add("item.advancedlootableweapons.kodachi_hot_tool_head_2", "Kodachi Head(Finished)");
 
         add("item.advancedlootableweapons.battleaxe_head", "Wooden Battleaxe Head");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head", "Cool Battleaxe Head(Stage 1)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_2", "Cool Battleaxe Head(Stage 2)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_3", "Cool Battleaxe Head(Stage 3)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_4", "Cool Battleaxe Head(Stage 4)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_5", "Cool Battleaxe Head(Finished)");
+        add("item.advancedlootableweapons.battleaxe_hot_tool_head", "Battleaxe Head(Stage 1)");
+        add("item.advancedlootableweapons.battleaxe_hot_tool_head_2", "Battleaxe Head(Stage 2)");
+        add("item.advancedlootableweapons.battleaxe_hot_tool_head_3", "Battleaxe Head(Stage 3)");
+        add("item.advancedlootableweapons.battleaxe_hot_tool_head_4", "Battleaxe Head(Stage 4)");
+        add("item.advancedlootableweapons.battleaxe_hot_tool_head_5", "Battleaxe Head(Finished)");
 
         add("item.advancedlootableweapons.zweihander_head", "Wooden Zweihander head");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head", "Cool Zweihander Head(Stage 1)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_2", "Cool Zweihander Head(Stage 2)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_3", "Cool Zweihander Head(Stage 3)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_4", "Cool Zweihander Head(Stage 4)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_5", "Cool Zweihander Head(Finished)");
+        add("item.advancedlootableweapons.zweihander_hot_tool_head", "Zweihander Head(Stage 1)");
+        add("item.advancedlootableweapons.zweihander_hot_tool_head_2", "Zweihander Head(Stage 2)");
+        add("item.advancedlootableweapons.zweihander_hot_tool_head_3", "Zweihander Head(Stage 3)");
+        add("item.advancedlootableweapons.zweihander_hot_tool_head_4", "Zweihander Head(Stage 4)");
+        add("item.advancedlootableweapons.zweihander_hot_tool_head_5", "Zweihander Head(Finished)");
 
         add("item.advancedlootableweapons.nodachi_head", "Wooden Nodachi Head");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head", "Cool Nodachi Head(Stage 1)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_2", "Cool Nodachi Head(Stage 2)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_3", "Cool Nodachi Head(Stage 3)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_4", "Cool Nodachi Head(Finished)");
+        add("item.advancedlootableweapons.nodachi_hot_tool_head", "Nodachi Head(Stage 1)");
+        add("item.advancedlootableweapons.nodachi_hot_tool_head_2", "Nodachi Head(Stage 2)");
+        add("item.advancedlootableweapons.nodachi_hot_tool_head_3", "Nodachi Head(Stage 3)");
+        add("item.advancedlootableweapons.nodachi_hot_tool_head_4", "Nodachi Head(Finished)");
 
         add("item.advancedlootableweapons.sabre_head", "Wooden Sabre Head");
-        add("item.advancedlootableweapons.sabre_hot_tool_head", "Cool Sabre Head(Stage 1)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_2", "Cool Sabre Head(Stage 2)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_3", "Cool Sabre Head(Stage 3)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_4", "Cool Sabre Head(Finished)");
+        add("item.advancedlootableweapons.sabre_hot_tool_head", "Sabre Head(Stage 1)");
+        add("item.advancedlootableweapons.sabre_hot_tool_head_2", "Sabre Head(Stage 2)");
+        add("item.advancedlootableweapons.sabre_hot_tool_head_3", "Sabre Head(Stage 3)");
+        add("item.advancedlootableweapons.sabre_hot_tool_head_4", "Sabre Head(Finished)");
 
         add("item.advancedlootableweapons.makhaira_head", "Wooden Makhaira Head");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head", "Cool Makhaira Head(Stage 1)");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head_2", "Cool Makhaira Head(Stage 2)");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head_3", "Cool Makhaira Head(Finished)");
+        add("item.advancedlootableweapons.makhaira_hot_tool_head", "Makhaira Head(Stage 1)");
+        add("item.advancedlootableweapons.makhaira_hot_tool_head_2", "Makhaira Head(Stage 2)");
+        add("item.advancedlootableweapons.makhaira_hot_tool_head_3", "Makhaira Head(Finished)");
 
         add("item.advancedlootableweapons.spear_head", "Wooden Spear Head");
-        add("item.advancedlootableweapons.spear_hot_tool_head", "Cool Spear Head(Stage 1)");
-        add("item.advancedlootableweapons.spear_hot_tool_head_2", "Cool Spear Head(Finished)");
+        add("item.advancedlootableweapons.spear_hot_tool_head", "Spear Head(Stage 1)");
+        add("item.advancedlootableweapons.spear_hot_tool_head_2", "Spear Head(Finished)");
 
 
         add("item.advancedlootableweapons.minecraft:leather_helmet", "Leather Helmet");
@@ -511,7 +511,7 @@ public class ModLangProvider extends LanguageProvider {
         add("itemGroup.alwBlocks", "ALW Blocks");
         add("itemGroup.alwWeapons", "ALW Weapons & Hot Tool Heads");
 
-        add(ItemHotToolHead.COLD.getKey(),"Cold");
+        add(ItemHotToolHead.COOL.getKey(),"Cool");
         add(ItemHotToolHead.WARM.getKey(),"Warm");
         add(ItemHotToolHead.HOT.getKey(),"Hot");
     }
