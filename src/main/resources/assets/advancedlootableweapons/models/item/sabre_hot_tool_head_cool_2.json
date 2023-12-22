@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/sabre_hot_tool_head_cool_2"
+		"layer0": "advancedlootableweapons:item/sabre_hot_tool_head_cool_2"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/kobold_sharpening_stone"
+		"layer0": "advancedlootableweapons:item/kobold_sharpening_stone"
 	}
 }

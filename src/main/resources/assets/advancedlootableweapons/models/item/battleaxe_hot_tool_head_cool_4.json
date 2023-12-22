@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/battleaxe_hot_tool_head_cool_4"
+		"layer0": "advancedlootableweapons:item/battleaxe_hot_tool_head_cool_4"
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/rapier_kobold"
+		"layer0": "advancedlootableweapons:item/rapier_kobold"
 	},
 
 	"display": {

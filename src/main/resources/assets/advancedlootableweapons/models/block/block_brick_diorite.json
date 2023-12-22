@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures":
     {
-        "all": "advancedlootableweapons:blocks/block_brick_diorite"
+        "all": "advancedlootableweapons:block/block_brick_diorite"
     }
 }

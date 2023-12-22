@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/shadow_blob"
+		"layer0": "advancedlootableweapons:item/shadow_blob"
 	}
 }

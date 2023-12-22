@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures":
     {
-        "all": "advancedlootableweapons:blocks/deepslate_ore_tin"
+        "all": "advancedlootableweapons:block/deepslate_ore_tin"
     }
 }

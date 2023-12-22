@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/brick_granite"
+		"layer0": "advancedlootableweapons:item/brick_granite"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/copper_sharpening_stone"
+		"layer0": "advancedlootableweapons:item/copper_sharpening_stone"
 	}
 }

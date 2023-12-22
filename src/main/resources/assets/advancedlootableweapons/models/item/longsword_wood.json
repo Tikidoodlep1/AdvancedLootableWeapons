@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/longsword_wood"
+		"layer0": "advancedlootableweapons:item/longsword_wood"
 	}
 }

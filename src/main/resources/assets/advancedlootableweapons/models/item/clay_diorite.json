@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/clay_diorite"
+		"layer0": "advancedlootableweapons:item/clay_diorite"
 	}
 }

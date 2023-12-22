@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/crystallite_sharpening_stone"
+		"layer0": "advancedlootableweapons:item/crystallite_sharpening_stone"
 	}
 }

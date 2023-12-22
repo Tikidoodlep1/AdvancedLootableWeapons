@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures":
     {
-        "all": "advancedlootableweapons:blocks/block_powder_granite"
+        "all": "advancedlootableweapons:block/block_powder_granite"
     }
 }

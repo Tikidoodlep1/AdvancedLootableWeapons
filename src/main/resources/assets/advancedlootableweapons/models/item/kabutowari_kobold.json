@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/kabutowari_kobold"
+		"layer0": "advancedlootableweapons:item/kabutowari_kobold"
 	},
 
 	"display": {

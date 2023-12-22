@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"texture_size": [256, 256],
 	"textures": {
-		"2": "advancedlootableweapons:blocks/advanced_forge",
-		"particle": "advancedlootableweapons:blocks/advanced_forge"
+		"2": "advancedlootableweapons:block/advanced_forge",
+		"particle": "advancedlootableweapons:block/advanced_forge"
 	},
 	"elements": [
 		{

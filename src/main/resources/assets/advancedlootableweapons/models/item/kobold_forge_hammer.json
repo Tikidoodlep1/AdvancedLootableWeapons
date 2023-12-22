@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/kobold_forge_hammer"
+		"layer0": "advancedlootableweapons:item/kobold_forge_hammer"
 	}
 }

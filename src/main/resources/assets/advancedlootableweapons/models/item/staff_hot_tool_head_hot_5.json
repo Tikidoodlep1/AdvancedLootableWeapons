@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/staff_hot_tool_head_hot_5"
+		"layer0": "advancedlootableweapons:item/staff_hot_tool_head_hot_5"
 	}
 }

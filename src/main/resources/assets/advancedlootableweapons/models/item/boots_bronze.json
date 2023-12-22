@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/boots_bronze"
+		"layer0": "advancedlootableweapons:item/boots_bronze"
 	}
 }

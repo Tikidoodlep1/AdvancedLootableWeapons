@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/spear_bronze"
+		"layer0": "advancedlootableweapons:item/spear_bronze"
 	}
 }

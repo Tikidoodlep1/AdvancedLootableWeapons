@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/helmet_obsidian"
+		"layer0": "advancedlootableweapons:item/helmet_obsidian"
 	}
 }

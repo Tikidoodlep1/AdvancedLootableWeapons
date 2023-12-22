@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/dusksteel_sharpening_stone"
+		"layer0": "advancedlootableweapons:item/dusksteel_sharpening_stone"
 	}
 }

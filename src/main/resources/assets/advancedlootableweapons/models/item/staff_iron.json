@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/staff_iron"
+		"layer0": "advancedlootableweapons:item/staff_iron"
 	},
 
 	"display": {

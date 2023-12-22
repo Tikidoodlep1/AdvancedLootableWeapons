@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/mace_kobold"
+		"layer0": "advancedlootableweapons:item/mace_kobold"
 	}
 }

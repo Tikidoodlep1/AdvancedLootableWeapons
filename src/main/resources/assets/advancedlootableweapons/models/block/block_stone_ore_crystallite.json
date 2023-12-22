@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures":
     {
-        "all": "advancedlootableweapons:blocks/ore_crystallite"
+        "all": "advancedlootableweapons:block/ore_crystallite"
     }
 }

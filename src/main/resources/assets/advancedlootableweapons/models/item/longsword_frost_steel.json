@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/longsword_frost_steel"
+		"layer0": "advancedlootableweapons:item/longsword_frost_steel"
 	}
 }

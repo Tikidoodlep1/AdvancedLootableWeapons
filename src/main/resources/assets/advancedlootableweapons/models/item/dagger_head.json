@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/dagger_head"
+		"layer0": "advancedlootableweapons:item/dagger_head"
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/battleaxe_dusksteel"
+		"layer0": "advancedlootableweapons:item/battleaxe_dusksteel"
 	},
 
 	"display": {

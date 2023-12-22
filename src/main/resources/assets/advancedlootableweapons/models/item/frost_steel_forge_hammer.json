@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/frost_steel_forge_hammer"
+		"layer0": "advancedlootableweapons:item/frost_steel_forge_hammer"
 	}
 }

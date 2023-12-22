@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/nugget_bronze"
+		"layer0": "advancedlootableweapons:item/nugget_bronze"
 	}
 }

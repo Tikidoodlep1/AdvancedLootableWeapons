@@ -2,6 +2,6 @@
     "parent": "block/cube_all",
     "textures":
     {
-        "all": "advancedlootableweapons:blocks/block_dusksteel_3"
+        "all": "advancedlootableweapons:block/block_dusksteel_3"
     }
 }

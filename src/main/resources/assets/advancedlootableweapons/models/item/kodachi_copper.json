@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/kodachi_copper"
+		"layer0": "advancedlootableweapons:item/kodachi_copper"
 	}
 }

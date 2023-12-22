@@ -1,6 +1,6 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/makhaira_steel"
+		"layer0": "advancedlootableweapons:item/makhaira_steel"
 	}
 }
