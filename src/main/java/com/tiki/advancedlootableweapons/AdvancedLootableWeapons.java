@@ -6,7 +6,7 @@ import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.GuiInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
@@ -41,7 +41,7 @@ public class AdvancedLootableWeapons
         BlockInit.register(eventBus);
         
         BlockEntityInit.register(eventBus);
-        GuiInit.register(eventBus);
+        MenuInit.register(eventBus);
         
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigHandler.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfigHandler.SPEC);
@@ -61,10 +61,10 @@ public class AdvancedLootableWeapons
     }
     
     private void clientSetup(final FMLClientSetupEvent event) {
-    	MenuScreens.register(GuiInit.ALLOY_FURNACE_CONTAINER.get(), AlloyFurnaceScreen::new);
-    	MenuScreens.register(GuiInit.FORGE_CONTAINER.get(), ForgeScreen::new);
-    	MenuScreens.register(GuiInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
-    	MenuScreens.register(GuiInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
+    	MenuScreens.register(MenuInit.ALLOY_FURNACE_CONTAINER.get(), AlloyFurnaceScreen::new);
+    	MenuScreens.register(MenuInit.FORGE_CONTAINER.get(), ForgeScreen::new);
+    	MenuScreens.register(MenuInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
+    	MenuScreens.register(MenuInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
     	event.enqueueWork(ALWClient::registerItemModelPredicates);
     }
 }

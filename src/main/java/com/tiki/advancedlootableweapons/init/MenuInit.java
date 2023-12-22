@@ -15,7 +15,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class GuiInit {
+public class MenuInit {
 
 	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedLootableWeapons.MODID);
 	
@@ -28,8 +28,8 @@ public class GuiInit {
 	public static final RegistryObject<MenuType<JawCrusherContainer>> JAW_CRUSHER_CONTAINER = registerMenuType(JawCrusherContainer::new, "jaw_crusher_container");
 	
 	
-	private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
-		return GUIS.register(name,  () -> IForgeMenuType.create(factory));
+	private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(MenuType.MenuSupplier<T> factory, String name) {
+		return GUIS.register(name,  () -> new MenuType<>(factory));
 	}
 	
 	public static void register(IEventBus bus) {

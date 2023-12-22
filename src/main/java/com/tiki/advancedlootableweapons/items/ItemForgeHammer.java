@@ -15,6 +15,7 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
@@ -32,21 +33,18 @@ public class ItemForgeHammer extends TieredItem {
 	@Override
 	public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player) {
 		if(player.getLevel().getBlockState(pos).getBlock() instanceof AnvilBlock && player.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof ItemForgeHammer) {
-			if (player.getLevel().isClientSide) {
-		         return true;
-		      } else {
-		         player.openMenu(getMenuProvider(player.getLevel(), pos));
-		         return true;
-		      }
+			if (!player.getLevel().isClientSide) {
+				player.openMenu(getMenuProvider(player.getLevel(), pos));
+			}
+			return true;
 		}
 		return super.onBlockStartBreak(itemstack, pos, player);
 	}
 	
 	@Nullable
 	public MenuProvider getMenuProvider(Level pLevel, BlockPos pPos) {
-	   return new SimpleMenuProvider((int pContainerId, Inventory pPlayerInventory, Player pPlayer) -> {
-	      return new AnvilForgingContainer(pContainerId, pPlayerInventory, pPos);
-	   }, new TextComponent("Anvil Forging"));
+	   return new SimpleMenuProvider((pContainerId, pPlayerInventory, pPlayer) -> new
+			   AnvilForgingContainer(pContainerId, pPlayerInventory, ContainerLevelAccess.create(pLevel,pPos)), new TextComponent("Anvil Forging"));
 	}
 	
 	@Override

@@ -2,9 +2,8 @@ package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
 
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.GuiInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -14,36 +13,33 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class AlloyFurnaceContainer extends AbstractContainerMenu {
 
-	private final AlloyFurnaceBlockEntity entity;
 	private final Level level;
 	private final ContainerData data;
-	
-	public AlloyFurnaceContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-		this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+	private final ContainerLevelAccess access;
+
+	public AlloyFurnaceContainer(int id, Inventory inv) {
+		this(id, inv,new ItemStackHandler(1), new SimpleContainerData(4),ContainerLevelAccess.NULL);
 	}
 	
-	public AlloyFurnaceContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(GuiInit.ALLOY_FURNACE_CONTAINER.get(), id);
+	public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
+		super(MenuInit.ALLOY_FURNACE_CONTAINER.get(), id);
 		checkContainerSize(inv, 4);
-		this.entity = ((AlloyFurnaceBlockEntity) entity);
+		this.access = access;
 		this.level = inv.player.level;
 		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 		
-		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
 			this.addSlot(new SlotItemHandler(handler, 0, 45, 17));
 			this.addSlot(new SlotItemHandler(handler, 1, 68, 17));
 			this.addSlot(new SlotItemHandler(handler, 2, 57, 54));
 			this.addSlot(new SlotItemHandler(handler, 3, 116, 36));
-		});
 		
 		addDataSlots(data);
 	}
@@ -62,7 +58,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
 	
 	public int getLitTime() {
 		double time = data.get(AlloyFurnaceBlockEntity.DATA_LIT_TIME);
-		double totalTime = this.entity.getMaxBurnDuration();
+		double totalTime = 1;//todo//this.entity.getMaxBurnDuration();
 		double percent = 0;
 		if(totalTime != 0) {
 			percent = time/totalTime;
@@ -124,7 +120,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
 	
 	@Override
 	public boolean stillValid(Player player) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, BlockInit.BLOCK_ALLOY_FURNACE.get());
+		return stillValid(access, player, BlockInit.BLOCK_ALLOY_FURNACE.get());
 	}
 	
 	private void addPlayerInv(Inventory playerInventory) {

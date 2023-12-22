@@ -1,66 +1,56 @@
 package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.GuiInit;
-
-import net.minecraft.network.FriendlyByteBuf;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class JawCrusherContainer extends AbstractContainerMenu {
-	
-	private final JawCrusherBlockEntity entity;
-	private final Level level;
-	
-	public JawCrusherContainer(int id, Inventory inv, FriendlyByteBuf buf) {
-		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()));
-	}
-	
-	public JawCrusherContainer(int id, Inventory inv, BlockEntity entity) {
-		super(GuiInit.JAW_CRUSHER_CONTAINER.get(), id);
-		checkContainerSize(inv, 2);
-		this.entity = ((JawCrusherBlockEntity) entity);
-		this.level = inv.player.level;
-		
-		this.addPlayerInv(inv);
-		this.addPlayerHotbar(inv);
-		
-		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-			this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
-			this.addSlot(new SlotItemHandler(handler, 1, 81, 56));
-		});
-		
-	}
-	
-	@Override
-	public boolean stillValid(Player pPlayer) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_JAW_CRUSHER.get());
-	}
-	
-	private void addPlayerInv(Inventory playerInventory) {
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 9; j++) {
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-			}
-		}
-	}
-	
-	private void addPlayerHotbar(Inventory playerInventory) {
-		for(int i = 0; i < 9; i++) {
-			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-		}
-	}
-	
-	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
+
+    private final ContainerLevelAccess access;
+
+    public JawCrusherContainer(int id, Inventory inv) {
+        this(id, inv, new ItemStackHandler(2), ContainerLevelAccess.NULL);
+    }
+
+    public JawCrusherContainer(int id, Inventory inv, ItemStackHandler handler, ContainerLevelAccess access) {
+        super(MenuInit.JAW_CRUSHER_CONTAINER.get(), id);
+        checkContainerSize(inv, 2);
+        this.access = access;
+
+        this.addPlayerInv(inv);
+        this.addPlayerHotbar(inv);
+        this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
+        this.addSlot(new SlotItemHandler(handler, 1, 81, 56));
+
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return stillValid(access, pPlayer, BlockInit.BLOCK_JAW_CRUSHER.get());
+    }
+
+    private void addPlayerInv(Inventory playerInventory) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+            }
+        }
+    }
+
+    private void addPlayerHotbar(Inventory playerInventory) {
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+    }
+
+    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
     // Each time we add a Slot to the container, it automatically increases the slotIndex, which means

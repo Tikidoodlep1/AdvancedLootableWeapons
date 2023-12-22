@@ -2,20 +2,14 @@ package com.tiki.advancedlootableweapons.blocks;
 
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,7 +19,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
 
 public class BlockAlloyFurnace extends BaseEntityBlock {
 	
@@ -72,8 +65,8 @@ public class BlockAlloyFurnace extends BaseEntityBlock {
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if(!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
-			if(entity instanceof AlloyFurnaceBlockEntity) {
-				NetworkHooks.openGui(((ServerPlayer)player), (AlloyFurnaceBlockEntity)entity, pos);
+			if(entity instanceof AlloyFurnaceBlockEntity alloyFurnaceBlockEntity) {
+				player.openMenu(alloyFurnaceBlockEntity);
 			}else {
 				throw new IllegalStateException("Alloy Furnace Container Provider is Missing!");
 			}

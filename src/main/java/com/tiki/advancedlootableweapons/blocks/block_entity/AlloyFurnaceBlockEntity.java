@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -108,7 +109,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int containerId, Inventory inv, Player player) {
-		return new AlloyFurnaceContainer(containerId, inv, this, this.dataAccess);
+		return new AlloyFurnaceContainer(containerId, inv, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
 	}
 
 	@Override

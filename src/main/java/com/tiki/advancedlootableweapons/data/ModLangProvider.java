@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -474,7 +475,7 @@ public class ModLangProvider extends LanguageProvider {
         add("block.advancedlootableweapons.block_clay_diorite", "Diorite Clay");
         add("block.advancedlootableweapons.block_clay_granite", "Granite Clay");
         add("block.advancedlootableweapons.alloy_furnace", "Alloy Furnace");
-        add("block.advancedlootableweapons.block_basic_forge", "Basic Forge");
+        addBlock(BlockInit.BLOCK_FORGE, "Basic Forge");
         add("block.advancedlootableweapons.advanced_forge", "Advanced Forge");
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
         add("block.advancedlootableweapons.block_jaw_crusher", "Jaw Crusher");

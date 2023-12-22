@@ -2,10 +2,12 @@ package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import java.util.Optional;
 
-import com.tiki.advancedlootableweapons.init.GuiInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +17,11 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class AnvilForgingContainer extends AbstractContainerMenu {
 
-	private final BlockPos pos;
 	private final Level level;
 	protected final Container invSlots = new SimpleContainer(3) {
 		public void setChanged() {
@@ -27,54 +29,56 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 			AnvilForgingContainer.this.slotsChanged(invSlots);
 		}
 	};
-	
-	public AnvilForgingContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-		this(id, inv, extraData.readBlockPos());
+	private final ContainerLevelAccess access;
+
+	public AnvilForgingContainer(int id, Inventory inv) {
+		this(id,inv,ContainerLevelAccess.NULL);
 	}
-	
-	public AnvilForgingContainer(int id, Inventory inv, BlockPos pos) {
-		super(GuiInit.ANVIL_FORGING_CONTAINER.get(), id);
+
+	public AnvilForgingContainer(int id, Inventory inv,ContainerLevelAccess access) {
+		super(MenuInit.ANVIL_FORGING_CONTAINER.get(), id);
+		this.access = access;
 		checkContainerSize(inv, 3);
 		this.level = inv.player.level;
-		this.pos = pos;
-		
+
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
-		
+
 		this.addSlot(new Slot(this.invSlots, 0, 56, 33) {
 			@Override
 			public int getMaxStackSize() {
 				return 1;
 			}
 		});
-		
+
 		this.addSlot(new Slot(this.invSlots, 1, 56, 56) {
 			@Override
 			public int getMaxStackSize() {
 				return 1;
 			}
 		});
-		
+
 		this.addSlot(new Slot(this.invSlots, 2, 114, 43) {
 			@Override
 			public boolean mayPickup(Player pPlayer) {
 				return false;
 			}
+
 			@Override
 			public int getMaxStackSize() {
 				return 1;
 			}
 		});
-		
+
 	}
-	
+
 	@Override
 	public void slotsChanged(Container pContainer) {
 		SimpleContainer inv = new SimpleContainer(this.invSlots.getContainerSize());
 		for(int i = 0; i < this.invSlots.getContainerSize(); i++) {
 			inv.setItem(i, this.invSlots.getItem(i));
 		}
-		
+
 		Optional<AnvilForgingRecipe> match = level.getRecipeManager().getRecipeFor(AnvilForgingRecipe.Type.INSTANCE, inv, level);
 		if(match.isPresent() && canMakeRecipe()) {
 			this.invSlots.setItem(0, ItemStack.EMPTY);
@@ -85,11 +89,11 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 		}
 		super.slotsChanged(pContainer);
 	}
-	
+
 	private boolean canMakeRecipe() {
 		return this.invSlots.getItem(2) == ItemStack.EMPTY;
 	}
-	
+
 	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
@@ -140,13 +144,18 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
-	
+
 	@Override
 	public boolean stillValid(Player player) {
-		ContainerLevelAccess access = ContainerLevelAccess.create(level, pos);
-		return stillValid(access, player, Blocks.ANVIL) || stillValid(access, player, Blocks.CHIPPED_ANVIL) || stillValid(access, player, Blocks.DAMAGED_ANVIL);
+		return stillValid(access, player, BlockTags.ANVIL);
 	}
-	
+
+	protected static boolean stillValid(ContainerLevelAccess pAccess, Player pPlayer, TagKey<Block> pTargetBlock) {
+		return pAccess.evaluate((level, pos) -> {
+			return level.getBlockState(pos).is(pTargetBlock) && pPlayer.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D,  pos.getZ() + 0.5D) <= 64.0D;
+		}, true);
+	}
+
 	private void addPlayerInv(Inventory playerInventory) {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 9; j++) {
@@ -154,7 +163,7 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 			}
 		}
 	}
-	
+
 	private void addPlayerHotbar(Inventory playerInventory) {
 		for(int i = 0; i < 9; i++) {
 			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));

@@ -1,10 +1,8 @@
 package com.tiki.advancedlootableweapons.inventory.forge;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.GuiInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -14,33 +12,28 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ForgeContainer extends AbstractContainerMenu {
-	
-	private final ForgeBlockEntity entity;
-	private final Level level;
+
 	private final ContainerData data;
-	
-	public ForgeContainer(int id, Inventory inv, FriendlyByteBuf buf) {
-		this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(3));
+	private final ContainerLevelAccess access;
+
+	public ForgeContainer(int id, Inventory inv) {
+		this(id, inv,new ItemStackHandler(1), new SimpleContainerData(3),ContainerLevelAccess.NULL);
 	}
 	
-	public ForgeContainer(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-		super(GuiInit.FORGE_CONTAINER.get(), id);
+	public ForgeContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
+		super(MenuInit.FORGE_CONTAINER.get(), id);
+		this.access = access;
 		checkContainerSize(inv, 1);
-		this.entity = ((ForgeBlockEntity) entity);
-		this.level = inv.player.level;
 		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
-		
-		this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-			this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
-		});
+
+		this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
 		
 		addDataSlots(data);
 	}
@@ -51,7 +44,7 @@ public class ForgeContainer extends AbstractContainerMenu {
 	
 	@Override
 	public boolean stillValid(Player pPlayer) {
-		return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), pPlayer, BlockInit.BLOCK_FORGE.get());
+		return stillValid(access, pPlayer, BlockInit.BLOCK_FORGE.get());
 	}
 	
 	private void addPlayerInv(Inventory playerInventory) {
