@@ -100,7 +100,7 @@ public class AlwWeapon extends TieredItem implements Vanishable {
             });
         }
 
-        return false;
+        return true;
     }
     
     @Override

@@ -2,7 +2,7 @@
 	"type": "advancedlootableweapons:alloy_furnace",
 	"ingredients": [
 		{
-			"tag": "advancedlootableweapons:ingot_steel"
+			"tag": "advancedlootableweapons:steel_ingot"
 		},
 		{
 			"tag": "advancedlootableweapons:ingot_shadow_platinum",

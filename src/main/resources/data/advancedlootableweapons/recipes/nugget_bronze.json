@@ -2,11 +2,11 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_bronze"
+		"item": "advancedlootableweapons:bronze_ingot"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:nugget_bronze",
+    "item": "advancedlootableweapons:bronze_nugget",
     "count": 9
   }
 }

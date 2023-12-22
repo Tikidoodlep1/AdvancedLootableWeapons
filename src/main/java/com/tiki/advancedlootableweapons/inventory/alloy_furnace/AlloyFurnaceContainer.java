@@ -18,19 +18,17 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class AlloyFurnaceContainer extends AbstractContainerMenu {
 
-	private final Level level;
 	private final ContainerData data;
 	private final ContainerLevelAccess access;
 
 	public AlloyFurnaceContainer(int id, Inventory inv) {
-		this(id, inv,new ItemStackHandler(1), new SimpleContainerData(4),ContainerLevelAccess.NULL);
+		this(id, inv,new ItemStackHandler(4), new SimpleContainerData(4),ContainerLevelAccess.NULL);
 	}
 	
 	public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
 		super(MenuInit.ALLOY_FURNACE_CONTAINER.get(), id);
 		checkContainerSize(inv, 4);
 		this.access = access;
-		this.level = inv.player.level;
 		this.data = data;
 		
 		this.addPlayerInv(inv);

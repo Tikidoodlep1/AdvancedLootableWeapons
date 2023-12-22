@@ -2,11 +2,11 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_frost_steel"
+		"item": "advancedlootableweapons:frost_steel_ingot"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:nugget_frost_steel",
+    "item": "advancedlootableweapons:frost_steel_nugget",
     "count": 9
   }
 }

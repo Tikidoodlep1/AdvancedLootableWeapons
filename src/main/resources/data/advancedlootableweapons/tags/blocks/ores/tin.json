@@ -1,7 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"advancedlootableweapons:block_stone_ore_tin",
+		"advancedlootableweapons:tin_ore",
 		"advancedlootableweapons:block_deepslate_ore_tin",
 		{
 			"id": "advancedlootableweapons:ore_tin",

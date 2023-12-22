@@ -5,13 +5,13 @@
 			"tag": "advancedlootableweapons:shard_obsidian"
 		},
 		{
-			"tag": "advancedlootableweapons:ingot_steel"
+			"tag": "advancedlootableweapons:steel_ingot"
 		}
 	],
 
 	"result":
 	{
-		"item": "advancedlootableweapons:ingot_obsidian",
+		"item": "advancedlootableweapons:obsidian_ingot",
 		"count": 1
 	}
 }

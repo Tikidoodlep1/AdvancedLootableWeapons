@@ -1,11 +1,11 @@
 {
 	"type": "minecraft:smelting",
-	"group": "ingot_tin",
+	"group": "tin_ingot",
 	"ingredient":
 	{
 		"item": "advancedlootableweapons:raw_tin"
 	},
-	"result": "advancedlootableweapons:ingot_tin",
+	"result": "advancedlootableweapons:tin_ingot",
 	"experience": 1.0,
 	"cookingtime": 100
 }

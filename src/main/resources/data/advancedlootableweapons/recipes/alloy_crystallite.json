@@ -5,13 +5,13 @@
 			"item": "advancedlootableweapons:crystal"
 		},
 		{
-			"tag": "advancedlootableweapons:ingot_steel"
+			"tag": "advancedlootableweapons:steel_ingot"
 		}
 	],
 
 	"result":
 	{
-		"item": "advancedlootableweapons:ingot_tin",
+		"item": "advancedlootableweapons:tin_ingot",
 		"count": 2
 	}
 }

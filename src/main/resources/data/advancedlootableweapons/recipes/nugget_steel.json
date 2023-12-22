@@ -2,11 +2,11 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_steel"
+		"item": "advancedlootableweapons:steel_ingot"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:nugget_steel",
+    "item": "advancedlootableweapons:steel_nugget",
     "count": 9
   }
 }

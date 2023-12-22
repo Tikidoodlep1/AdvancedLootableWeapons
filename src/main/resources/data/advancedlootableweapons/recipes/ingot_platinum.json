@@ -12,13 +12,13 @@
 	{
 		"N":
 		{
-			"item": "advancedlootableweapons:nugget_platinum"
+			"item": "advancedlootableweapons:platinum_nugget"
 		}
 	},
 
 	"result":
 	{
-		"item": "advancedlootableweapons:ingot_platinum",
+		"item": "advancedlootableweapons:platinum_ingot",
 		"count": 1
 	}
 }

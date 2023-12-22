@@ -2,11 +2,11 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_platinum"
+		"item": "advancedlootableweapons:platinum_ingot"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:nugget_platinum",
+    "item": "advancedlootableweapons:platinum_nugget",
     "count": 9
   }
 }

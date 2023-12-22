@@ -2,7 +2,7 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_obsidian"
+		"item": "advancedlootableweapons:obsidian_ingot"
     }
   ],
   "result": {

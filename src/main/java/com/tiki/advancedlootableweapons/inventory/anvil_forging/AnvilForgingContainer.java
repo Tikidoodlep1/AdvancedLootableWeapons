@@ -1,11 +1,7 @@
 package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
-import java.util.Optional;
-
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
@@ -18,7 +14,8 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+
+import java.util.Optional;
 
 public class AnvilForgingContainer extends AbstractContainerMenu {
 

@@ -4,16 +4,16 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 public class CreativeTabs {
-	public static final CreativeModeTab MISC_TAB = new CreativeModeTab("alwTab") {
+	public static final CreativeModeTab MISC_TAB = new CreativeModeTab("alw_tab") {
 
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ItemInit.INGOT_FROST_STEEL.get());
+			return new ItemStack(ItemInit.FROST_STEEL_INGOT.get());
 		}
 		
 	};
 	
-	public static final CreativeModeTab WEAPON_TAB = new CreativeModeTab("alwWeapons") {
+	public static final CreativeModeTab WEAPON_TAB = new CreativeModeTab("alw_weapons") {
 
 		@Override
 		public ItemStack makeIcon() {
@@ -22,7 +22,7 @@ public class CreativeTabs {
 		
 	};
 	
-	public static final CreativeModeTab BLOCK_TAB = new CreativeModeTab("alwBlocks") {
+	public static final CreativeModeTab BLOCK_TAB = new CreativeModeTab("alw_blocks") {
 
 		@Override
 		public ItemStack makeIcon() {

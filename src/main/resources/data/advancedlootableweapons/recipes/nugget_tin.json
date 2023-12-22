@@ -2,11 +2,11 @@
 	"type": "minecraft:crafting_shapeless",
 	"ingredients": [
     {
-		"item": "advancedlootableweapons:ingot_tin"
+		"item": "advancedlootableweapons:tin_ingot"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:nugget_tin",
+    "item": "advancedlootableweapons:tin_nugget",
     "count": 9
   }
 }
