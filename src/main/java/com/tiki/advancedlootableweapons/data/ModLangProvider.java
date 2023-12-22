@@ -474,7 +474,7 @@ public class ModLangProvider extends LanguageProvider {
         add("block.advancedlootableweapons.block_powder_diorite", "Diorite Clay Powder");
         add("block.advancedlootableweapons.block_clay_diorite", "Diorite Clay");
         add("block.advancedlootableweapons.block_clay_granite", "Granite Clay");
-        add("block.advancedlootableweapons.alloy_furnace", "Alloy Furnace");
+        addBlock(BlockInit.BLOCK_ALLOY_FURNACE, "Alloy Furnace");
         addBlock(BlockInit.BLOCK_FORGE, "Basic Forge");
         add("block.advancedlootableweapons.advanced_forge", "Advanced Forge");
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");

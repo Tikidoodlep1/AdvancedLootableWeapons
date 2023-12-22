@@ -90,7 +90,7 @@ public class BlockInit {
 	public static final RegistryObject<Block> BLOCK_FORGE = registerBlock("block_forge", () -> new ForgeBlock(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), CreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> BLOCK_JAW_CRUSHER = registerBlock("block_jaw_crusher", () -> new BlockJawCrusher(BlockBehaviour.Properties.of(Material.METAL)
-			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().sound(SoundType.METAL).dynamicShape()), CreativeTabs.BLOCK_TAB);
+			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.METAL).dynamicShape()), CreativeTabs.BLOCK_TAB);
 	
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
 		RegistryObject<T> toReturn = BLOCKS.register(name, block);
