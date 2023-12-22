@@ -1,5 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
+import com.tiki.advancedlootableweapons.data.models.ModBlockstateProvider;
+import com.tiki.advancedlootableweapons.data.models.ModItemModelProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -15,5 +17,6 @@ public class ModDatagen {
         BlocksTagsProvider blocksTagsProvider = new BlocksTagsProvider(dataGenerator,existingFileHelper);
         dataGenerator.addProvider(blocksTagsProvider);
         dataGenerator.addProvider(new ItemsTagsProvider(dataGenerator,blocksTagsProvider,existingFileHelper));
+        dataGenerator.addProvider(new ModBlockstateProvider(dataGenerator,existingFileHelper));
     }
 }

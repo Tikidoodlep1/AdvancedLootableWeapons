@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.data;
+package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
