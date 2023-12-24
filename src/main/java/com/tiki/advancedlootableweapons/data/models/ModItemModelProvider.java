@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.CreativeTabs;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
@@ -49,6 +50,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.SILVER_NUGGET.get());
         oneLayerItem(ItemInit.STEEL_NUGGET.get());
         oneLayerItem(ItemInit.TIN_NUGGET.get());
+
+        oneLayerItem(ItemInit.CHAIN_LINK_IRON.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_GOLD.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_COPPER.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_SILVER.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_BRONZE.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_PLATINUM.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_STEEL.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_OBSIDIAN.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_KOBOLD.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_SHADOW_PLATINUM.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_FROST_STEEL.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_CRYSTALLITE.get());
+        oneLayerItem(ItemInit.CHAIN_LINK_DUSKSTEEL.get());
 
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {

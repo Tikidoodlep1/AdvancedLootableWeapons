@@ -45,6 +45,20 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.SILVER_NUGGET);
         addDefaultItem(ItemInit.STEEL_NUGGET);
         addDefaultItem(ItemInit.TIN_NUGGET);
+
+        addDefaultItem(ItemInit.CHAIN_LINK_IRON);
+        addDefaultItem(ItemInit.CHAIN_LINK_GOLD);
+        addDefaultItem(ItemInit.CHAIN_LINK_COPPER);
+        addDefaultItem(ItemInit.CHAIN_LINK_SILVER);
+        addDefaultItem(ItemInit.CHAIN_LINK_BRONZE);
+        addDefaultItem(ItemInit.CHAIN_LINK_PLATINUM);
+        addDefaultItem(ItemInit.CHAIN_LINK_STEEL);
+        addDefaultItem(ItemInit.CHAIN_LINK_OBSIDIAN);
+        addDefaultItem(ItemInit.CHAIN_LINK_KOBOLD);
+        addDefaultItem(ItemInit.CHAIN_LINK_SHADOW_PLATINUM);
+        addDefaultItem(ItemInit.CHAIN_LINK_FROST_STEEL);
+        addDefaultItem(ItemInit.CHAIN_LINK_CRYSTALLITE);
+        addDefaultItem(ItemInit.CHAIN_LINK_DUSKSTEEL);
         
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
