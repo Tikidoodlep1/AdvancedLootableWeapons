@@ -421,7 +421,7 @@
   "item.advancedlootableweapons.zweihander_hot_tool_head_3": "Zweihander Head(Stage 3)",
   "item.advancedlootableweapons.zweihander_hot_tool_head_4": "Zweihander Head(Stage 4)",
   "item.advancedlootableweapons.zweihander_hot_tool_head_5": "Zweihander Head(Finished)",
-  "itemGroup.alwBlocks": "ALW Blocks",
-  "itemGroup.alwTab": "Advanced Lootable Weapons",
-  "itemGroup.alwWeapons": "ALW Weapons & Hot Tool Heads"
+  "itemGroup.alw_blocks": "ALW Blocks",
+  "itemGroup.alw_tab": "Advanced Lootable Weapons",
+  "itemGroup.alw_weapons": "ALW Weapons & Hot Tool Heads"
 }

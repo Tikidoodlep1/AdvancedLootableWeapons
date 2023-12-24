@@ -3,9 +3,12 @@ package com.tiki.advancedlootableweapons.data;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.init.ModCreativeTabs;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
@@ -294,13 +297,17 @@ public class ModLangProvider extends LanguageProvider {
         add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
 
 
-        add("itemGroup.alwTab", "Advanced Lootable Weapons");
-        add("itemGroup.alwBlocks", "ALW Blocks");
-        add("itemGroup.alwWeapons", "ALW Weapons & Hot Tool Heads");
+        addTab(ModCreativeTabs.MISC_TAB, "Advanced Lootable Weapons");
+        addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");
+        addTab(ModCreativeTabs.WEAPON_TAB, "ALW Weapons & Hot Tool Heads");
 
         add(ItemHotToolHead.Temp.cool.translation.getKey(),"Cool");
         add(ItemHotToolHead.Temp.warm.translation.getKey(),"Warm");
         add(ItemHotToolHead.Temp.hot.translation.getKey(),"Hot");
+    }
+
+    protected void addTab(CreativeModeTab tab,String translation) {
+        add(((TranslatableComponent)tab.getDisplayName()).getKey(),translation);
     }
 
     protected void addDefaultItem(Supplier<? extends Item> supplier) {

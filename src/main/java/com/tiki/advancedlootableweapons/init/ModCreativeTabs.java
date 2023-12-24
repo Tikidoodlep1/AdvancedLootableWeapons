@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.init;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-public class CreativeTabs {
+public class ModCreativeTabs {
 	public static final CreativeModeTab MISC_TAB = new CreativeModeTab("alw_tab") {
 
 		@Override

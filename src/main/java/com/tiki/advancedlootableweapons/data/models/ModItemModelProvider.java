@@ -2,7 +2,6 @@ package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.CreativeTabs;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
