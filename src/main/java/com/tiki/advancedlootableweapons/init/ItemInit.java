@@ -23,7 +23,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 @SuppressWarnings("deprecation")
@@ -49,7 +48,7 @@ public class ItemInit {
     public static final ForgeTier MAT_FROST_STEEL = new ForgeTier(3, CommonConfigHandler.FROST_STEEL_DURABILITY.get(), 7.0F, CommonConfigHandler.FROST_STEEL_DAMAGE.get(), 30,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.FROST_STEEL_INGOT.get()));
     public static final ForgeTier MAT_OBSIDIAN = new ForgeTier(3, CommonConfigHandler.OBSIDIAN_DURABILITY.get(), 7.5F, CommonConfigHandler.OBSIDIAN_DAMAGE.get(), 18,
-            BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.OBSIDIAN_STEEL_INGOT.get()));
+            BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.REFINED_OBSIDIAN_INGOT.get()));
     public static final ForgeTier MAT_CRYSTALLITE = new ForgeTier(4, CommonConfigHandler.CRYSTALLITE_DURABILITY.get(), 7.5F, CommonConfigHandler.CRYSTALLITE_DAMAGE.get(), 20,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.CRYSTALLITE_INGOT.get()));
     public static final ForgeTier MAT_DUSKSTEEL = new ForgeTier(4, CommonConfigHandler.DUSKSTEEL_DURABILITY.get(), 8.5F, CommonConfigHandler.DUSKSTEEL_DAMAGE.get(), 14,
@@ -64,7 +63,7 @@ public class ItemInit {
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> SHADOW_PLATINUM_INGOT = ITEMS.register("shadow_platinum_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> FROST_STEEL_INGOT = ITEMS.register("frost_steel_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> OBSIDIAN_STEEL_INGOT = ITEMS.register("obsidian_steel_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> REFINED_OBSIDIAN_INGOT = ITEMS.register("refined_obsidian_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CRYSTALLITE_INGOT = ITEMS.register("crystallite_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_INGOT = ITEMS.register("dusksteel_ingot", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 

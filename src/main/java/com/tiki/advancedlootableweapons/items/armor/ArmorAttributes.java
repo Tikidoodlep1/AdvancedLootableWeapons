@@ -42,7 +42,7 @@ public enum ArmorAttributes implements ArmorMaterial {
         return Ingredient.of(ItemInit.FROST_STEEL_INGOT.get());
     }),
     OBSIDIAN_STEEL("obsidian_steel", new int[]{3, 5, 6, 3}, CommonConfigHandler.OBSIDIAN_ARMOR_DURABILITY.get(), 18, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.OBSIDIAN_ARMOR_HARDNESS.get(), 0.0F, () -> {
-        return Ingredient.of(ItemInit.OBSIDIAN_STEEL_INGOT.get());
+        return Ingredient.of(ItemInit.REFINED_OBSIDIAN_INGOT.get());
     }),
     CRYSTALLITE("crystallite", new int[]{5, 10, 13, 6}, CommonConfigHandler.CRYSTALLITE_ARMOR_DURABILITY.get(), 20, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.CRYSTALLITE_ARMOR_HARDNESS.get(), 0.0F, () -> {
         return Ingredient.of(ItemInit.CRYSTALLITE_INGOT.get());

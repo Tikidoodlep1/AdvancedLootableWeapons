@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "advancedlootableweapons:item/kabutowari",
   "textures": {
     "layer0": "advancedlootableweapons:item/iron_kabutowari"
   }

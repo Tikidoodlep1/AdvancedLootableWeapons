@@ -30,10 +30,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.TIN_INGOT.get());
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
-            if (weapon.get().attributes == WeaponAttributes.BATTLEAXE) {
-                oneLayerItemWithParent(weapon.get(),modLoc("item/battleaxe"));
-            } else {
-                oneLayerItemHandHeld(weapon.get());
+            switch (weapon.get().attributes) {
+                case BATTLEAXE -> oneLayerItemWithParent(weapon.get(), modLoc("item/battleaxe"));
+                case KABUTOWARI -> oneLayerItemWithParent(weapon.get(),modLoc("item/kabutowari"));
+                default -> oneLayerItemHandHeld(weapon.get());
             }
         }
     }

@@ -1,9 +1,5 @@
 {
 	"parent": "item/handheld",
-	"textures": {
-		"layer0": "advancedlootableweapons:item/kabutowari_steel"
-	},
-
 	"display": {
 
         "firstperson_righthand": {
