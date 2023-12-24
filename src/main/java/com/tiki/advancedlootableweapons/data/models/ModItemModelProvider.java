@@ -25,8 +25,29 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleBlockItem(BlockInit.FORGE.get().asItem());
 
+
+        simpleBlockItem(BlockInit.CRYSTALLITE_ORE.get());
+        simpleBlockItem(BlockInit.PLATINUM_ORE.get());
+        simpleBlockItem(BlockInit.SILVER_ORE.get());
+        simpleBlockItem(BlockInit.TIN_ORE.get());
+
+        simpleBlockItem(BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get());
+        simpleBlockItem(BlockInit.DEEPSLATE_PLATINUM_ORE.get());
+        simpleBlockItem(BlockInit.DEEPSLATE_SILVER_ORE.get());
+        simpleBlockItem(BlockInit.DEEPSLATE_TIN_ORE.get());
+
+        simpleBlockItem(BlockInit.COBBLED_FELDSPAR.get());
+        simpleBlockItem(BlockInit.FELDSPAR.get());
+
+        oneLayerItem(ItemInit.RAW_PLATINUM.get());
+        oneLayerItem(ItemInit.RAW_SILVER.get());
+        oneLayerItem(ItemInit.RAW_TIN.get());
+
         oneLayerItem(ItemInit.DIORITE_BRICK.get());
         oneLayerItem(ItemInit.GRANITE_BRICK.get());
+
+        simpleBlockItem(BlockInit.DIORITE_CLAY.get());
+        simpleBlockItem(BlockInit.GRANITE_CLAY.get());
 
         oneLayerItem(ItemInit.DIORITE_CLAY_BALL.get());
         oneLayerItem(ItemInit.GRANITE_CLAY_BALL.get());
@@ -73,6 +94,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.SILVER_BLOCK.get());
         simpleBlockItem(BlockInit.SHADOW_PLATINUM_BLOCK.get());
         simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
+        duskSteel();
 
         oneLayerItem(ItemInit.CHAIN_LINK_IRON.get());
         oneLayerItem(ItemInit.CHAIN_LINK_GOLD.get());
@@ -151,6 +173,11 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void simpleBlockItem(Item item, ResourceLocation loc) {
         String s = Registry.ITEM.getKey(item).toString();
         getBuilder(s).parent(new ModelFile.UncheckedModelFile(loc));//the model is generated
+    }
+
+    protected void duskSteel() {
+        String s = Registry.ITEM.getKey(BlockInit.DUSKSTEEL_BLOCK.get().asItem()).toString();
+        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID,"block/dusksteel_block_0")));//the model is generated
     }
 
     protected void simpleBlockItem(Block block) {
