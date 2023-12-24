@@ -74,7 +74,7 @@ public class AdvancedLootableWeapons
     
     private void setup(final FMLCommonSetupEvent event)
     {
-        //MinecraftForge.EVENT_BUS.addListener(this::generate);
+        MinecraftForge.EVENT_BUS.addListener(this::generate);
     }
 
     private void generate(PlayerInteractEvent.RightClickItem event) {
@@ -128,6 +128,13 @@ public class AdvancedLootableWeapons
             newParts[i-1] = parts[i];
         }
         newParts[newParts.length-1] = parts[0];
+
+        for (String part  : newParts) {
+            if (part == null) {
+                System.out.println("concen: "+oldPath);
+                return oldPath;
+            }
+        }
 
         return Arrays.stream(newParts).collect(Collectors.joining("_"));
     }
