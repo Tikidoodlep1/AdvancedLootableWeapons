@@ -1,17 +1,23 @@
 package com.tiki.advancedlootableweapons.data;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
@@ -52,6 +58,35 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.SILVER_WHETSTONE.get(),ModItemTags.INGOTS_SILVER,recipeConsumer);
         sharpeningStone(ItemInit.STEEL_WHETSTONE.get(),ModItemTags.INGOTS_STEEL,recipeConsumer);
         sharpeningStone(ItemInit.STONE_WHETSTONE.get(), ItemTags.STONE_TOOL_MATERIALS,recipeConsumer);
+
+        nineBlockStorageRecipesRecipesWithCustomUnpackingModded(recipeConsumer, ItemInit.STEEL_INGOT.get(), BlockInit.STEEL_BLOCK.get(),
+                "steel_ingot_from_steel_block", "steel_ingot");
+        nineBlockStorageRecipesWithCustomPackingModded(recipeConsumer, ItemInit.STEEL_NUGGET.get(), ItemInit.STEEL_INGOT.get(),
+                "steel_ingot_from_nuggets", "steel_ingot");
+
+       /* simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
+        simpleBlockItem(BlockInit.TIN_BLOCK.get());
+        simpleBlockItem(BlockInit.CRYSTALLITE_BLOCK.get());
+        simpleBlockItem(BlockInit.PLATINUM_BLOCK.get());
+        simpleBlockItem(BlockInit.BRONZE_BLOCK.get());
+        simpleBlockItem(BlockInit.FROST_STEEL_BLOCK.get());
+        simpleBlockItem(BlockInit.SILVER_BLOCK.get());
+        simpleBlockItem(BlockInit.SHADOW_PLATINUM_BLOCK.get());
+        simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
+        duskSteel();*/
+    }
+
+    protected static void nineBlockStorageRecipesWithCustomPackingModded(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, String pPackingRecipeGroup) {
+        nineBlockStorageRecipesModded(pFinishedRecipeConsumer, pUnpacked, pPacked, pPackingRecipeName, pPackingRecipeGroup, getSimpleRecipeName(pUnpacked), null);
+    }
+
+    protected static void nineBlockStorageRecipesRecipesWithCustomUnpackingModded(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pUnpacked, ItemLike pPacked, String pUnpackingRecipeName, String pUnpackingRecipeGroup) {
+        nineBlockStorageRecipesModded(pFinishedRecipeConsumer, pUnpacked, pPacked, getSimpleRecipeName(pPacked), null, pUnpackingRecipeName, pUnpackingRecipeGroup);
+    }
+
+    protected static void nineBlockStorageRecipesModded(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, @Nullable String pPackingRecipeGroup, String pUnpackingRecipeName, @Nullable String pUnpackingRecipeGroup) {
+        ShapelessRecipeBuilder.shapeless(pUnpacked, 9).requires(pPacked).group(pUnpackingRecipeGroup).unlockedBy(getHasName(pPacked), has(pPacked)).save(pFinishedRecipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID,pUnpackingRecipeName));
+        ShapedRecipeBuilder.shaped(pPacked).define('#', pUnpacked).pattern("###").pattern("###").pattern("###").group(pPackingRecipeGroup).unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID,pPackingRecipeName));
     }
 
     protected void forgeHammer(Item hammer, TagKey<Item> ing, Consumer<FinishedRecipe> consumer) {
@@ -67,5 +102,7 @@ public class ModRecipeProvider extends RecipeProvider {
                         has(ing))
                 .save(consumer);
     }
+
+
 
 }
