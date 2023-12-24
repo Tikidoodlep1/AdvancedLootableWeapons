@@ -23,6 +23,16 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleBlockItem(BlockInit.BLOCK_FORGE.get().asItem());
 
+        oneLayerItem(ItemInit.DIORITE_BRICK.get());
+        oneLayerItem(ItemInit.GRANITE_BRICK.get());
+
+        oneLayerItem(ItemInit.DIORITE_CLAY.get());
+        oneLayerItem(ItemInit.GRANITE_CLAY.get());
+
+        oneLayerItem(ItemInit.DIORITE_POWDER.get());
+        oneLayerItem(ItemInit.FELDSPAR_POWDER.get());
+        oneLayerItem(ItemInit.GRANITE_POWDER.get());
+
         oneLayerItem(ItemInit.OBSIDIAN_SHARD.get());
 
         oneLayerItem(ItemInit.BRONZE_INGOT.get());
@@ -39,6 +49,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
 
         oneLayerItem(ItemInit.BRONZE_NUGGET.get());
+        oneLayerItem(ItemInit.COPPER_NUGGET.get());
         oneLayerItem(ItemInit.CRYSTALLITE_NUGGET.get());
         oneLayerItem(ItemInit.DUSKSTEEL_NUGGET.get());
         oneLayerItem(ItemInit.FROST_STEEL_NUGGET.get());

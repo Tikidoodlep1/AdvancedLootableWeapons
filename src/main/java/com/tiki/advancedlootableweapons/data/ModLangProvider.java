@@ -274,13 +274,14 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.shadow_blob", "Congealed Shadow");
         add("item.advancedlootableweapons.crystal", "Crystal");
         add("item.advancedlootableweapons.shard_obsidian", "Obsidian Shard");
-        add("item.advancedlootableweapons.powder_feldspar", "Feldspar Powder");
-        add("item.advancedlootableweapons.brick_diorite", "Diorite Brick");
-        add("item.advancedlootableweapons.clay_diorite", "Diorite Clay");
-        add("item.advancedlootableweapons.powder_diorite", "Diorite Powder");
-        add("item.advancedlootableweapons.brick_granite", "Granite Brick");
-        add("item.advancedlootableweapons.clay_granite", "Granite Clay");
-        add("item.advancedlootableweapons.powder_granite", "Granite Powder");
+
+        addDefaultItem(ItemInit.FELDSPAR_POWDER);
+        addDefaultItem(ItemInit.DIORITE_BRICK);
+        addDefaultItem(ItemInit.DIORITE_CLAY);
+        addDefaultItem(ItemInit.DIORITE_POWDER);
+        addDefaultItem(ItemInit.GRANITE_BRICK);
+        addDefaultItem(ItemInit.GRANITE_CLAY);
+        addDefaultItem(ItemInit.GRANITE_POWDER);
 
 
         add("container.advancedlootableweapons.sharpeningStone", "Sharpen Weapon");
