@@ -166,10 +166,6 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.spear_hot_tool_head_2", "Spear Head(Finished)");
 
 
-        add("item.advancedlootableweapons.minecraft:leather_helmet", "Leather Helmet");
-        add("item.advancedlootableweapons.minecraft:iron_helmet", "Iron Helmet");
-        add("item.advancedlootableweapons.minecraft:golden_helmet", "Gold Helmet");
-        add("item.advancedlootableweapons.minecraft:diamond_helmet", "Diamond Helmet");
         add("item.advancedlootableweapons.helmet_kobold", "Kobold Steel Helmet");
         add("item.advancedlootableweapons.helmet_copper", "Copper Helmet");
         add("item.advancedlootableweapons.helmet_silver", "Silver Helmet");
@@ -183,10 +179,6 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.helmet_dusksteel", "Dusksteel Helmet");
 
 
-        add("item.advancedlootableweapons.minecraft:leather_chestplate", "Leather Chestplate");
-        add("item.advancedlootableweapons.minecraft:iron_chestplate", "Iron Chestplate");
-        add("item.advancedlootableweapons.minecraft:golden_chestplate", "Gold Chestplate");
-        add("item.advancedlootableweapons.minecraft:diamond_chestplate", "Diamond Chestplate");
         add("item.advancedlootableweapons.chestplate_kobold", "Kobold Steel Chestplate");
         add("item.advancedlootableweapons.chestplate_copper", "Copper Chestplate");
         add("item.advancedlootableweapons.chestplate_silver", "Silver Chestplate");
@@ -200,10 +192,6 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.chestplate_dusksteel", "Dusksteel Chestplate");
 
 
-        add("item.advancedlootableweapons.minecraft:leather_leggings", "Leather Leggings");
-        add("item.advancedlootableweapons.minecraft:iron_leggings", "Iron Leggings");
-        add("item.advancedlootableweapons.minecraft:golden_leggings", "Gold Leggings");
-        add("item.advancedlootableweapons.minecraft:diamond_leggings", "Diamond Leggings");
         add("item.advancedlootableweapons.leggings_kobold", "Kobold Steel Leggings");
         add("item.advancedlootableweapons.leggings_copper", "Copper Leggings");
         add("item.advancedlootableweapons.leggings_silver", "Silver Leggings");
@@ -217,10 +205,6 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.leggings_dusksteel", "Dusksteel Leggings");
 
 
-        add("item.advancedlootableweapons.minecraft:leather_boots", "Leather Boots");
-        add("item.advancedlootableweapons.minecraft:iron_boots", "Iron Boots");
-        add("item.advancedlootableweapons.minecraft:golden_boots", "Gold Boots");
-        add("item.advancedlootableweapons.minecraft:diamond_boots", "Diamond Boots");
         add("item.advancedlootableweapons.boots_kobold", "Kobold Steel Boots");
         add("item.advancedlootableweapons.boots_copper", "Copper Boots");
         add("item.advancedlootableweapons.boots_silver", "Silver Boots");
