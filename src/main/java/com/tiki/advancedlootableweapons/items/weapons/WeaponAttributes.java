@@ -18,7 +18,7 @@ public enum WeaponAttributes {
 	MACE("Mace", CommonConfigHandler.GLOBAL_MACE_BASE_DAMAGE.get(), CommonConfigHandler.GLOBAL_MACE_ATTACK_SPEED.get(), 3.75F, false,
 			0.8, 1, 0.95, 0, 1.0, 0, false),
 	STAFF("Staff", CommonConfigHandler.GLOBAL_STAFF_BASE_DAMAGE.get(), CommonConfigHandler.GLOBAL_STAFF_ATTACK_SPEED.get(), 5.28F, false,
-			0.85, 0, 0.95, 0, 0.95, 0, false),
+			0.85, 0, 0.95, 0, 0.95, 0, true),
 	LONGSWORD("Longsword", CommonConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE.get(), CommonConfigHandler.GLOBAL_LONGSWORD_ATTACK_SPEED.get(), 4.14F, true,
 			0.95, 25, 0.9, 10, 0.85, 4, false),
 	KODACHI("Kodachi", CommonConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE.get(), CommonConfigHandler.GLOBAL_KODACHI_ATTACK_SPEED.get(), 3.49F, true,

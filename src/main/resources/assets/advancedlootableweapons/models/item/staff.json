@@ -1,8 +1,5 @@
 {
 	"parent": "item/handheld",
-	"textures": {
-		"layer0": "advancedlootableweapons:item/staff_dusksteel"
-	},
 
 	"display": {
 
