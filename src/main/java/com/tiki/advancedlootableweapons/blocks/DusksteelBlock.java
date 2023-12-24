@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class DusksteelBlock extends Block {
 
-	private static final IntegerProperty PHASE = IntegerProperty.create("phase", 0, 7);
+	public static final IntegerProperty PHASE = IntegerProperty.create("phase", 0, 7);
 	
 	public DusksteelBlock(Properties prop) {
 		super(prop);

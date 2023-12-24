@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "phase=0": {
+      "model": "advancedlootableweapons:block/dusksteel_block_0"
+    },
+    "phase=1": {
+      "model": "advancedlootableweapons:block/dusksteel_block_1"
+    },
+    "phase=2": {
+      "model": "advancedlootableweapons:block/dusksteel_block_2"
+    },
+    "phase=3": {
+      "model": "advancedlootableweapons:block/dusksteel_block_3"
+    },
+    "phase=4": {
+      "model": "advancedlootableweapons:block/dusksteel_block_4"
+    },
+    "phase=5": {
+      "model": "advancedlootableweapons:block/dusksteel_block_5"
+    },
+    "phase=6": {
+      "model": "advancedlootableweapons:block/dusksteel_block_6"
+    },
+    "phase=7": {
+      "model": "advancedlootableweapons:block/dusksteel_block_7"
+    }
+  }
+}
