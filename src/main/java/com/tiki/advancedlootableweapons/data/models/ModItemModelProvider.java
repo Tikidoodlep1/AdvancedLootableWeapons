@@ -23,11 +23,33 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleBlockItem(BlockInit.BLOCK_FORGE.get().asItem());
 
+        oneLayerItem(ItemInit.OBSIDIAN_SHARD.get());
+
+        oneLayerItem(ItemInit.BRONZE_INGOT.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_INGOT.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_INGOT.get());
+        oneLayerItem(ItemInit.FROST_STEEL_INGOT.get());
         oneLayerItem(ItemInit.KOBOLD_INGOT.get());
         oneLayerItem(ItemInit.PLATINUM_INGOT.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_INGOT.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_INGOT.get());
         oneLayerItem(ItemInit.SILVER_INGOT.get());
         oneLayerItem(ItemInit.STEEL_INGOT.get());
         oneLayerItem(ItemInit.TIN_INGOT.get());
+
+
+        oneLayerItem(ItemInit.BRONZE_NUGGET.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_NUGGET.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_NUGGET.get());
+        oneLayerItem(ItemInit.FROST_STEEL_NUGGET.get());
+        oneLayerItem(ItemInit.KOBOLD_NUGGET.get());
+        oneLayerItem(ItemInit.PLATINUM_NUGGET.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_NUGGET.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_NUGGET.get());
+        oneLayerItem(ItemInit.SILVER_NUGGET.get());
+        oneLayerItem(ItemInit.STEEL_NUGGET.get());
+        oneLayerItem(ItemInit.TIN_NUGGET.get());
+
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;

@@ -81,7 +81,7 @@ public class ItemInit {
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> SHADOW_PLATINUM_NUGGET = ITEMS.register("shadow_platinum_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> FROST_STEEL_NUGGET = ITEMS.register("frost_steel_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> OBSIDIAN_STEEL_NUGGET = ITEMS.register("obsidian_steel_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> REFINED_OBSIDIAN_NUGGET = ITEMS.register("refined_obsidian_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CRYSTALLITE_NUGGET = ITEMS.register("crystallite_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_NUGGET = ITEMS.register("dusksteel_nugget", () -> new Item(new Item.Properties().tab(CreativeTabs.MISC_TAB)));
 
