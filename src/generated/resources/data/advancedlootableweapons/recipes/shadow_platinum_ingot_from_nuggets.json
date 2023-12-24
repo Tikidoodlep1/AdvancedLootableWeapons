@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "shadow_platinum_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:shadow_platinum_nugget"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:shadow_platinum_ingot"
+  }
+}

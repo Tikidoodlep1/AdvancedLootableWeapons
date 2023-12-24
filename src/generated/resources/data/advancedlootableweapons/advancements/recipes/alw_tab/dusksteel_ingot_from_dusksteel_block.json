@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:dusksteel_ingot_from_dusksteel_block"
+    ]
+  },
+  "criteria": {
+    "has_dusksteel_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:dusksteel_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:dusksteel_ingot_from_dusksteel_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dusksteel_block",
+      "has_the_recipe"
+    ]
+  ]
+}

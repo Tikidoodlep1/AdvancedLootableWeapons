@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "bronze_ingot",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:bronze_block"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:bronze_ingot",
+    "count": 9
+  }
+}

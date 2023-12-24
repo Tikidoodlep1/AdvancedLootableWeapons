@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "refined_obsidian_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:refined_obsidian_nugget"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:refined_obsidian_ingot"
+  }
+}

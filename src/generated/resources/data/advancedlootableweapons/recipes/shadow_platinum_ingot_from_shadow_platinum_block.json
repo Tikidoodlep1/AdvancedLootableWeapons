@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "shadow_platinum_ingot",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:shadow_platinum_block"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:shadow_platinum_ingot",
+    "count": 9
+  }
+}

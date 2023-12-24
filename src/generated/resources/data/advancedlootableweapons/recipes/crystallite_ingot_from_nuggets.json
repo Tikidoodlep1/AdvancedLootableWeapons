@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "crystallite_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:crystallite_nugget"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:crystallite_ingot"
+  }
+}

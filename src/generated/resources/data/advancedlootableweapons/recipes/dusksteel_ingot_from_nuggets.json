@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dusksteel_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:dusksteel_nugget"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:dusksteel_ingot"
+  }
+}

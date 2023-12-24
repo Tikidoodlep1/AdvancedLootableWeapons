@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:refined_obsidian_ingot"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:refined_obsidian_nugget",
+    "count": 9
+  }
+}

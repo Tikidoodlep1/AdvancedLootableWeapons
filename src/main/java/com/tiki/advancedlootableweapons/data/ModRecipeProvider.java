@@ -4,6 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -59,21 +60,29 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.STEEL_WHETSTONE.get(),ModItemTags.INGOTS_STEEL,recipeConsumer);
         sharpeningStone(ItemInit.STONE_WHETSTONE.get(), ItemTags.STONE_TOOL_MATERIALS,recipeConsumer);
 
-        nineBlockStorageRecipesRecipesWithCustomUnpackingModded(recipeConsumer, ItemInit.STEEL_INGOT.get(), BlockInit.STEEL_BLOCK.get(),
-                "steel_ingot_from_steel_block", "steel_ingot");
-        nineBlockStorageRecipesWithCustomPackingModded(recipeConsumer, ItemInit.STEEL_NUGGET.get(), ItemInit.STEEL_INGOT.get(),
-                "steel_ingot_from_nuggets", "steel_ingot");
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.DUSKSTEEL_NUGGET.get(),ItemInit.DUSKSTEEL_INGOT.get(),BlockInit.DUSKSTEEL_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.KOBOLD_NUGGET.get(),ItemInit.KOBOLD_INGOT.get(),BlockInit.KOBOLD_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.TIN_NUGGET.get(),ItemInit.TIN_INGOT.get(),BlockInit.TIN_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.CRYSTALLITE_NUGGET.get(),ItemInit.CRYSTALLITE_INGOT.get(),BlockInit.CRYSTALLITE_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.PLATINUM_NUGGET.get(),ItemInit.PLATINUM_INGOT.get(),BlockInit.PLATINUM_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.BRONZE_NUGGET.get(),ItemInit.BRONZE_INGOT.get(),BlockInit.BRONZE_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.FROST_STEEL_NUGGET.get(),ItemInit.FROST_STEEL_INGOT.get(),BlockInit.FROST_STEEL_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.SILVER_NUGGET.get(),ItemInit.SILVER_INGOT.get(),BlockInit.SILVER_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.SHADOW_PLATINUM_NUGGET.get(),ItemInit.SHADOW_PLATINUM_INGOT.get(),BlockInit.SHADOW_PLATINUM_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.REFINED_OBSIDIAN_NUGGET.get(),ItemInit.REFINED_OBSIDIAN_INGOT.get(),BlockInit.REFINED_OBSIDIAN_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
-       /* simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
-        simpleBlockItem(BlockInit.TIN_BLOCK.get());
-        simpleBlockItem(BlockInit.CRYSTALLITE_BLOCK.get());
-        simpleBlockItem(BlockInit.PLATINUM_BLOCK.get());
-        simpleBlockItem(BlockInit.BRONZE_BLOCK.get());
-        simpleBlockItem(BlockInit.FROST_STEEL_BLOCK.get());
-        simpleBlockItem(BlockInit.SILVER_BLOCK.get());
-        simpleBlockItem(BlockInit.SHADOW_PLATINUM_BLOCK.get());
-        simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
-        duskSteel();*/
+    }
+
+    protected static void nuggetIngotBlockRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer,ItemLike nugget,ItemLike ingot,ItemLike block
+    ) {
+        String materialname = Registry.ITEM.getKey((Item)nugget).getPath().replace("_nugget","");
+
+        nineBlockStorageRecipesRecipesWithCustomUnpackingModded(pFinishedRecipeConsumer,ingot,block,
+                materialname+"_ingot_from_"+materialname+"_block",materialname+"_ingot");
+
+        nineBlockStorageRecipesWithCustomPackingModded(pFinishedRecipeConsumer, nugget, ingot,
+                materialname+"_ingot_from_nuggets", materialname+"_ingot");
     }
 
     protected static void nineBlockStorageRecipesWithCustomPackingModded(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, String pPackingRecipeGroup) {

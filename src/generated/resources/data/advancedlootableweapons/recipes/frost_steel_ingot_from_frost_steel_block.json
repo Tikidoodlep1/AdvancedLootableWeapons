@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "frost_steel_ingot",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:frost_steel_block"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:frost_steel_ingot",
+    "count": 9
+  }
+}

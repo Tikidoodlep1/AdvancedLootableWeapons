@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:crystallite_ingot"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:crystallite_block"
+  }
+}

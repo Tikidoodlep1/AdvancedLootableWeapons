@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:tin_ingot"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:tin_block"
+  }
+}

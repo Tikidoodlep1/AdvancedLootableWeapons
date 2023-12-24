@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "kobold_ingot",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:kobold_block"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:kobold_ingot",
+    "count": 9
+  }
+}

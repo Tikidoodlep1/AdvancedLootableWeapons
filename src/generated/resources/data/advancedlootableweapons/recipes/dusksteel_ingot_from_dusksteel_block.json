@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "dusksteel_ingot",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:dusksteel_block"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:dusksteel_ingot",
+    "count": 9
+  }
+}

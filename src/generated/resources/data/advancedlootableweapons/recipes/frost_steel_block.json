@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:frost_steel_ingot"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:frost_steel_block"
+  }
+}
