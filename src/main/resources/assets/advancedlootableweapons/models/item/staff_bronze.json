@@ -1,0 +1,34 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "advancedlootableweapons:item/staff_bronze"
+	},
+
+	"display": {
+
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, -270 ],
+            "translation": [ 0, 3.2, -2 ],
+            "scale": [ 2, 2, 1 ]
+        },
+
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, 270 ],
+            "translation": [ 0, 3.2, -2 ],
+            "scale": [ 2, 2, 1 ]
+        },
+
+        "firstperson_righthand": {
+            "rotation": [ 0, -100, 90 ],
+            "translation": [ 1.5, 1.13, -1.5 ],
+            "scale": [ 2, 2, 1 ]
+        },
+
+        "firstperson_lefthand": {
+            "rotation": [ 0, 100, -90 ],
+            "translation": [ 1.13, 1.13, -1.5 ],
+            "scale": [ 2, 2, 1 ]
+        }
+
+    }
+}
