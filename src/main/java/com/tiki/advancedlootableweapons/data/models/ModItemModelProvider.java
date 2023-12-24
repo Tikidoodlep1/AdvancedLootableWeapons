@@ -10,7 +10,9 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -60,6 +62,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.SILVER_NUGGET.get());
         oneLayerItem(ItemInit.STEEL_NUGGET.get());
         oneLayerItem(ItemInit.TIN_NUGGET.get());
+
+        simpleBlockItem(BlockInit.STEEL_BLOCK.get());
+        simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
+        simpleBlockItem(BlockInit.TIN_BLOCK.get());
+        simpleBlockItem(BlockInit.CRYSTALLITE_BLOCK.get());
+        simpleBlockItem(BlockInit.PLATINUM_BLOCK.get());
+        simpleBlockItem(BlockInit.BRONZE_BLOCK.get());
+        simpleBlockItem(BlockInit.FROST_STEEL_BLOCK.get());
+        simpleBlockItem(BlockInit.SILVER_BLOCK.get());
+        simpleBlockItem(BlockInit.SHADOW_PLATINUM_BLOCK.get());
+        simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
 
         oneLayerItem(ItemInit.CHAIN_LINK_IRON.get());
         oneLayerItem(ItemInit.CHAIN_LINK_GOLD.get());
@@ -137,8 +150,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void simpleBlockItem(Item item, ResourceLocation loc) {
         String s = Registry.ITEM.getKey(item).toString();
-        getBuilder(s).parent(getExistingFile(loc));
+        getBuilder(s).parent(new ModelFile.UncheckedModelFile(loc));//the model is generated
     }
+
+    protected void simpleBlockItem(Block block) {
+        simpleBlockItem(block.asItem());
+    }
+
 
     protected void simpleBlockItem(Item item) {
         simpleBlockItem(item, new ResourceLocation(AdvancedLootableWeapons.MODID, "block/" + Registry.ITEM.getKey(item).getPath()));

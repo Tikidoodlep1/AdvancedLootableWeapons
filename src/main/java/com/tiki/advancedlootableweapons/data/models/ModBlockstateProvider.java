@@ -40,6 +40,18 @@ public class ModBlockstateProvider extends BlockStateProvider {
         simpleBlock(BlockInit.SHADOW_PLATINUM_BLOCK.get());
         simpleBlock(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
 
+        simpleBlock(BlockInit.COBBLED_FELDSPAR.get());
+        simpleBlock(BlockInit.FELDSPAR.get());
+
+        simpleBlock(BlockInit.DIORITE_CLAY.get());
+        simpleBlock(BlockInit.GRANITE_CLAY.get());
+
+        simpleBlock(BlockInit.DIORITE_CLAY_POWDER.get());
+        simpleBlock(BlockInit.GRANITE_CLAY_POWDER.get());
+
+        simpleBlock(BlockInit.DIORITE_BRICKS.get());
+        simpleBlock(BlockInit.GRANITE_BRICKS.get());
+
         getVariantBuilder(BlockInit.DUSKSTEEL_BLOCK.get()).forAllStates(state -> {
             int phase = state.getValue(DusksteelBlock.PHASE);
             ResourceLocation name = new ResourceLocation(AdvancedLootableWeapons.MODID,"block/dusksteel_block_"+phase);

@@ -10,6 +10,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
@@ -239,26 +240,28 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.boots_crystallite", "Crystallite Boots");
         add("item.advancedlootableweapons.boots_dusksteel", "Dusksteel Boots");
 
+        addDefaultBlock(BlockInit.BRONZE_BLOCK);
+        addDefaultBlock(BlockInit.CRYSTALLITE_BLOCK);
+        addDefaultBlock(BlockInit.DUSKSTEEL_BLOCK);
+        addDefaultBlock(BlockInit.FROST_STEEL_BLOCK);
+        addDefaultBlock(BlockInit.KOBOLD_BLOCK);
+        addDefaultBlock(BlockInit.PLATINUM_BLOCK);
+        addDefaultBlock(BlockInit.REFINED_OBSIDIAN_BLOCK);
+        addDefaultBlock(BlockInit.SHADOW_PLATINUM_BLOCK);
+        addDefaultBlock(BlockInit.SILVER_BLOCK);
+        addDefaultBlock(BlockInit.STEEL_BLOCK);
+        addDefaultBlock(BlockInit.TIN_BLOCK);
 
-        add("block.advancedlootableweapons.block_tin", "Tin Block");
-        add("block.advancedlootableweapons.block_kobold", "Kobold Steel Block");
-        add("block.advancedlootableweapons.block_silver", "Silver Block");
-        add("block.advancedlootableweapons.block_bronze", "Bronze Block");
-        add("block.advancedlootableweapons.block_platinum", "Platinum Block");
-        add("block.advancedlootableweapons.block_steel", "Steel Block");
-        add("block.advancedlootableweapons.block_shadow_platinum", "Shadow Platinum Block");
-        add("block.advancedlootableweapons.block_frost_steel", "Frost Steel Block");
-        add("block.advancedlootableweapons.block_obsidian_steel", "Refined Obsidian Block");
-        add("block.advancedlootableweapons.block_crystallite", "Crystallite Block");
-        add("block.advancedlootableweapons.block_dusksteel", "Dusksteel Block");
-        add("block.advancedlootableweapons.ore_silver", "Silver Ore");
-        add("block.advancedlootableweapons.ore_tin", "Tin Ore");
-        add("block.advancedlootableweapons.ore_platinum", "Platinum Ore");
-        add("block.advancedlootableweapons.ore_crystallite", "Crystallite Ore");
-        add("block.advancedlootableweapons.cobble_feldspar", "Cobbled Feldspar");
-        add("block.advancedlootableweapons.rock_feldspar", "Feldspar");
-        add("block.advancedlootableweapons.block_brick_diorite", "Diorite Bricks");
-        add("block.advancedlootableweapons.block_brick_granite", "Granite Bricks");
+        addDefaultBlock(BlockInit.CRYSTALLITE_ORE);
+        addDefaultBlock(BlockInit.PLATINUM_ORE);
+        addDefaultBlock(BlockInit.SILVER_ORE);
+        addDefaultBlock(BlockInit.TIN_ORE);
+
+        addDefaultBlock(BlockInit.COBBLED_FELDSPAR);
+        addDefaultBlock(BlockInit.FELDSPAR);
+        addDefaultBlock(BlockInit.DIORITE_BRICKS);
+        addDefaultBlock(BlockInit.GRANITE_BRICKS);
+
         add("block.advancedlootableweapons.block_powder_granite", "Granite Clay Powder");
         add("block.advancedlootableweapons.block_powder_diorite", "Diorite Clay Powder");
         add("block.advancedlootableweapons.block_clay_diorite", "Diorite Clay");
@@ -315,8 +318,16 @@ public class ModLangProvider extends LanguageProvider {
         addItem(supplier,getNameFromItem(supplier.get()));
     }
 
+    protected void addDefaultBlock(Supplier<? extends Block> supplier) {
+        addBlock(supplier,getNameFromBlock(supplier.get()));
+    }
+
     public static String getNameFromItem(Item item) {
         return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
+    }
+
+    public static String getNameFromBlock(Block block) {
+        return StringUtils.capitaliseAllWords(block.getDescriptionId().split("\\.")[2].replace("_", " "));
     }
 
 }
