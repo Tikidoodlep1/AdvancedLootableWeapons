@@ -7,13 +7,13 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/platinum"
+      "tag": "forge:ingots/dusksteel"
     },
     "S": {
       "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "advancedlootableweapons:platinum_forge_hammer"
+    "item": "advancedlootableweapons:dusksteel_forge_hammer"
   }
 }

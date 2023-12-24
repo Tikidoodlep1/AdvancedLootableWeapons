@@ -7,13 +7,13 @@
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/platinum"
+      "tag": "forge:ingots/steel"
     },
     "S": {
       "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "advancedlootableweapons:platinum_forge_hammer"
+    "item": "advancedlootableweapons:steel_forge_hammer"
   }
 }
