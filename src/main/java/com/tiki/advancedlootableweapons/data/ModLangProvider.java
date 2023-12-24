@@ -11,6 +11,8 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
 
+import java.util.function.Supplier;
+
 public class ModLangProvider extends LanguageProvider {
     public ModLangProvider(DataGenerator gen) {
         super(gen, AdvancedLootableWeapons.MODID, "en_us");
@@ -18,29 +20,32 @@ public class ModLangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        add("item.advancedlootableweapons.ingot_tin", "Tin Ingot");
-        add("item.advancedlootableweapons.ingot_kobold", "Kobold Steel Ingot");
-        add("item.advancedlootableweapons.ingot_silver", "Silver Ingot");
-        add("item.advancedlootableweapons.ingot_bronze", "Bronze Ingot");
-        add("item.advancedlootableweapons.ingot_platinum", "Platinum Ingot");
-        add("item.advancedlootableweapons.ingot_steel", "Steel Ingot");
-        add("item.advancedlootableweapons.ingot_shadow_platinum", "Shadow Platinum Ingot");
-        add("item.advancedlootableweapons.ingot_frost_steel", "Frost Steel Ingot");
-        add("item.advancedlootableweapons.ingot_obsidian", "Refined Obsidian Ingot");
-        add("item.advancedlootableweapons.ingot_crystallite", "Crystallite Ingot");
-        add("item.advancedlootableweapons.ingot_dusksteel", "Dusksteel Ingot");
 
-        add("item.advancedlootableweapons.nugget_tin", "Tin Nugget");
-        add("item.advancedlootableweapons.nugget_kobold", "Kobold Steel Nugget");
-        add("item.advancedlootableweapons.nugget_silver", "Silver Nugget");
-        add("item.advancedlootableweapons.nugget_bronze", "Bronze Nugget");
-        add("item.advancedlootableweapons.nugget_platinum", "Platinum Nugget");
-        add("item.advancedlootableweapons.nugget_steel", "Steel Nugget");
-        add("item.advancedlootableweapons.nugget_shadow_platinum", "Shadow Platinum Nugget");
-        add("item.advancedlootableweapons.nugget_frost_steel", "Frost Steel Nugget");
-        add("item.advancedlootableweapons.nugget_obsidian", "Refined Obsidian Nugget");
-        add("item.advancedlootableweapons.nugget_crystallite", "Crystallite Nugget");
-        add("item.advancedlootableweapons.nugget_dusksteel", "Dusksteel Nugget");
+        addDefaultItem(ItemInit.BRONZE_INGOT);
+        addDefaultItem(ItemInit.CRYSTALLITE_INGOT);
+        addDefaultItem(ItemInit.DUSKSTEEL_INGOT);
+        addDefaultItem(ItemInit.FROST_STEEL_INGOT);
+        addDefaultItem(ItemInit.KOBOLD_INGOT);
+        addDefaultItem(ItemInit.PLATINUM_INGOT);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_INGOT);
+        addDefaultItem(ItemInit.SHADOW_PLATINUM_INGOT);
+        addDefaultItem(ItemInit.SILVER_INGOT);
+        addDefaultItem(ItemInit.STEEL_INGOT);
+        addDefaultItem(ItemInit.TIN_INGOT);
+
+
+        addDefaultItem(ItemInit.BRONZE_NUGGET);
+        addDefaultItem(ItemInit.CRYSTALLITE_NUGGET);
+        addDefaultItem(ItemInit.DUSKSTEEL_NUGGET);
+        addDefaultItem(ItemInit.FROST_STEEL_NUGGET);
+        addDefaultItem(ItemInit.KOBOLD_NUGGET);
+        addDefaultItem(ItemInit.PLATINUM_NUGGET);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_NUGGET);
+        addDefaultItem(ItemInit.SHADOW_PLATINUM_NUGGET);
+        addDefaultItem(ItemInit.SILVER_NUGGET);
+        addDefaultItem(ItemInit.STEEL_NUGGET);
+        addDefaultItem(ItemInit.TIN_NUGGET);
+        
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
             addItem(weapon,getNameFromItem(weapon.get()));
@@ -284,6 +289,9 @@ public class ModLangProvider extends LanguageProvider {
         add(ItemHotToolHead.Temp.hot.translation.getKey(),"Hot");
     }
 
+    protected void addDefaultItem(Supplier<? extends Item> supplier) {
+        addItem(supplier,getNameFromItem(supplier.get()));
+    }
 
     public static String getNameFromItem(Item item) {
         return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
