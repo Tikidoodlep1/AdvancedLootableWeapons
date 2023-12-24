@@ -2,9 +2,14 @@ package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraftforge.registries.RegistryObject;
+import org.codehaus.plexus.util.StringUtils;
 
 public class ModLangProvider extends LanguageProvider {
     public ModLangProvider(DataGenerator gen) {
@@ -37,231 +42,9 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.nugget_crystallite", "Crystallite Nugget");
         add("item.advancedlootableweapons.nugget_dusksteel", "Dusksteel Nugget");
 
-
-        add("item.advancedlootableweapons.dagger_wood", "Wooden Dagger");
-        add("item.advancedlootableweapons.dagger_iron", "Iron Dagger");
-        add("item.advancedlootableweapons.dagger_kobold", "Kobold Steel Dagger");
-        add("item.advancedlootableweapons.dagger_copper", "Copper Dagger");
-        add("item.advancedlootableweapons.dagger_silver", "Silver Dagger");
-        add("item.advancedlootableweapons.dagger_bronze", "Bronze Dagger");
-        add("item.advancedlootableweapons.dagger_platinum", "Platinum Dagger");
-        add("item.advancedlootableweapons.dagger_steel", "Steel Dagger");
-        add("item.advancedlootableweapons.dagger_shadow_platinum", "Shadow Platinum Dagger");
-        add("item.advancedlootableweapons.dagger_frost_steel", "Frost Steel Dagger");
-        add("item.advancedlootableweapons.dagger_obsidian", "Refined Obsidian Dagger");
-        add("item.advancedlootableweapons.dagger_crystallite", "Crystallite Dagger");
-        add("item.advancedlootableweapons.dagger_dusksteel", "Dusksteel Dagger");
-
-
-        add("item.advancedlootableweapons.kabutowari_wood", "Wooden Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_iron", "Iron Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_kobold", "Kobold Steel Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_copper", "Copper Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_silver", "Silver Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_bronze", "Bronze Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_platinum", "Platinum Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_steel", "Steel Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_shadow_platinum", "Shadow Platinum Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_frost_steel", "Frost Steel Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_obsidian", "Refined Obsidian Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_crystallite", "Crystallite Kabutowari");
-        add("item.advancedlootableweapons.kabutowari_dusksteel", "Dusksteel Kabutowari");
-
-
-        add("item.advancedlootableweapons.rapier_wood", "Wooden Rapier");
-        add("item.advancedlootableweapons.rapier_iron", "Iron Rapier");
-        add("item.advancedlootableweapons.rapier_kobold", "Kobold Steel Rapier");
-        add("item.advancedlootableweapons.rapier_copper", "Copper Rapier");
-        add("item.advancedlootableweapons.rapier_silver", "Silver Rapier");
-        add("item.advancedlootableweapons.rapier_bronze", "Bronze Rapier");
-        add("item.advancedlootableweapons.rapier_platinum", "Platinum Rapier");
-        add("item.advancedlootableweapons.rapier_steel", "Steel Rapier");
-        add("item.advancedlootableweapons.rapier_shadow_platinum", "Shadow Platinum Rapier");
-        add("item.advancedlootableweapons.rapier_frost_steel", "Frost Steel Rapier");
-        add("item.advancedlootableweapons.rapier_obsidian", "Refined Obsidian Rapier");
-        add("item.advancedlootableweapons.rapier_crystallite", "Crystallite Rapier");
-        add("item.advancedlootableweapons.rapier_dusksteel", "Dusksteel Rapier");
-
-
-        add("item.advancedlootableweapons.talwar_wood", "Wooden Talwar");
-        add("item.advancedlootableweapons.talwar_iron", "Iron Talwar");
-        add("item.advancedlootableweapons.talwar_kobold", "Kobold Steel Talwar");
-        add("item.advancedlootableweapons.talwar_copper", "Copper Talwar");
-        add("item.advancedlootableweapons.talwar_silver", "Silver Talwar");
-        add("item.advancedlootableweapons.talwar_bronze", "Bronze Talwar");
-        add("item.advancedlootableweapons.talwar_platinum", "Platinum Talwar");
-        add("item.advancedlootableweapons.talwar_steel", "Steel Talwar");
-        add("item.advancedlootableweapons.talwar_shadow_platinum", "Shadow Platinum Talwar");
-        add("item.advancedlootableweapons.talwar_frost_steel", "Frost Steel Talwar");
-        add("item.advancedlootableweapons.talwar_obsidian", "Refined Obsidian Talwar");
-        add("item.advancedlootableweapons.talwar_crystallite", "Crystallite Talwar");
-        add("item.advancedlootableweapons.talwar_dusksteel", "Dusksteel Talwar");
-
-
-        add("item.advancedlootableweapons.cleaver_wood", "Wooden Cleaver");
-        add("item.advancedlootableweapons.cleaver_iron", "Iron Cleaver");
-        add("item.advancedlootableweapons.cleaver_kobold", "Kobold Steel Cleaver");
-        add("item.advancedlootableweapons.cleaver_copper", "Copper Cleaver");
-        add("item.advancedlootableweapons.cleaver_silver", "Silver Cleaver");
-        add("item.advancedlootableweapons.cleaver_bronze", "Bronze Cleaver");
-        add("item.advancedlootableweapons.cleaver_platinum", "Platinum Cleaver");
-        add("item.advancedlootableweapons.cleaver_steel", "Steel Cleaver");
-        add("item.advancedlootableweapons.cleaver_shadow_platinum", "Shadow Platinum Cleaver");
-        add("item.advancedlootableweapons.cleaver_frost_steel", "Frost Steel Cleaver");
-        add("item.advancedlootableweapons.cleaver_obsidian", "Refined Obsidian Cleaver");
-        add("item.advancedlootableweapons.cleaver_crystallite", "Crystallite Cleaver");
-        add("item.advancedlootableweapons.cleaver_dusksteel", "Dusksteel Cleaver");
-
-
-        add("item.advancedlootableweapons.mace_wood", "Wooden Mace");
-        add("item.advancedlootableweapons.mace_iron", "Iron Mace");
-        add("item.advancedlootableweapons.mace_kobold", "Kobold Steel Mace");
-        add("item.advancedlootableweapons.mace_copper", "Copper Mace");
-        add("item.advancedlootableweapons.mace_silver", "Silver Mace");
-        add("item.advancedlootableweapons.mace_bronze", "Bronze Mace");
-        add("item.advancedlootableweapons.mace_platinum", "Platinum Mace");
-        add("item.advancedlootableweapons.mace_steel", "Steel Mace");
-        add("item.advancedlootableweapons.mace_shadow_platinum", "Shadow Platinum Mace");
-        add("item.advancedlootableweapons.mace_frost_steel", "Frost Steel Mace");
-        add("item.advancedlootableweapons.mace_obsidian", "Refined Obsidian Mace");
-        add("item.advancedlootableweapons.mace_crystallite", "Crystallite Mace");
-        add("item.advancedlootableweapons.mace_dusksteel", "Dusksteel Mace");
-
-
-        add("item.advancedlootableweapons.staff_wood", "Wooden Staff");
-        add("item.advancedlootableweapons.staff_iron", "Iron Staff");
-        add("item.advancedlootableweapons.staff_kobold", "Kobold Steel Staff");
-        add("item.advancedlootableweapons.staff_copper", "Copper Staff");
-        add("item.advancedlootableweapons.staff_silver", "Silver Staff");
-        add("item.advancedlootableweapons.staff_bronze", "Bronze Staff");
-        add("item.advancedlootableweapons.staff_platinum", "Platinum Staff");
-        add("item.advancedlootableweapons.staff_steel", "Steel Staff");
-        add("item.advancedlootableweapons.staff_shadow_platinum", "Shadow Platinum Staff");
-        add("item.advancedlootableweapons.staff_frost_steel", "Frost Steel Staff");
-        add("item.advancedlootableweapons.staff_obsidian", "Refined Obsidian Staff");
-        add("item.advancedlootableweapons.staff_crystallite", "Crystallite Staff");
-        add("item.advancedlootableweapons.staff_dusksteel", "Dusksteel Staff");
-
-
-        add("item.advancedlootableweapons.longsword_wood", "Wooden Longsword");
-        add("item.advancedlootableweapons.longsword_iron", "Iron Longsword");
-        add("item.advancedlootableweapons.longsword_kobold", "Kobold Steel Longsword");
-        add("item.advancedlootableweapons.longsword_copper", "Copper Longsword");
-        add("item.advancedlootableweapons.longsword_silver", "Silver Longsword");
-        add("item.advancedlootableweapons.longsword_bronze", "Bronze Longsword");
-        add("item.advancedlootableweapons.longsword_platinum", "Platinum Longsword");
-        add("item.advancedlootableweapons.longsword_steel", "Steel Longsword");
-        add("item.advancedlootableweapons.longsword_shadow_platinum", "Shadow Platinum Longsword");
-        add("item.advancedlootableweapons.longsword_frost_steel", "Frost Steel Longsword");
-        add("item.advancedlootableweapons.longsword_obsidian", "Refined Obsidian Longsword");
-        add("item.advancedlootableweapons.longsword_crystallite", "Crystallite Longsword");
-        add("item.advancedlootableweapons.longsword_dusksteel", "Dusksteel Longsword");
-
-
-        add("item.advancedlootableweapons.kodachi_wood", "Wooden Kodachi");
-        add("item.advancedlootableweapons.kodachi_iron", "Iron Kodachi");
-        add("item.advancedlootableweapons.kodachi_kobold", "Kobold Steel Kodachi");
-        add("item.advancedlootableweapons.kodachi_copper", "Copper Kodachi");
-        add("item.advancedlootableweapons.kodachi_silver", "Silver Kodachi");
-        add("item.advancedlootableweapons.kodachi_bronze", "Bronze Kodachi");
-        add("item.advancedlootableweapons.kodachi_platinum", "Platinum Kodachi");
-        add("item.advancedlootableweapons.kodachi_steel", "Steel Kodachi");
-        add("item.advancedlootableweapons.kodachi_shadow_platinum", "Shadow Platinum Kodachi");
-        add("item.advancedlootableweapons.kodachi_frost_steel", "Frost Steel Kodachi");
-        add("item.advancedlootableweapons.kodachi_obsidian", "Refined Obsidian Kodachi");
-        add("item.advancedlootableweapons.kodachi_crystallite", "Crystallite Kodachi");
-        add("item.advancedlootableweapons.kodachi_dusksteel", "Dusksteel Kodachi");
-
-
-        add("item.advancedlootableweapons.battleaxe_wood", "Wooden Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_iron", "Iron Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_kobold", "Kobold Steel Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_copper", "Copper Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_silver", "Silver Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_bronze", "Bronze Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_platinum", "Platinum Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_steel", "Steel Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_shadow_platinum", "Shadow Platinum Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_frost_steel", "Frost Steel Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_obsidian", "Refined Obsidian Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_crystallite", "Crystallite Battleaxe");
-        add("item.advancedlootableweapons.battleaxe_dusksteel", "Dusksteel Battleaxe");
-
-
-        add("item.advancedlootableweapons.zweihander_wood", "Wooden Zweihander");
-        add("item.advancedlootableweapons.zweihander_iron", "Iron Zweihander");
-        add("item.advancedlootableweapons.zweihander_kobold", "Kobold Steel Zweihander");
-        add("item.advancedlootableweapons.zweihander_copper", "Copper Zweihander");
-        add("item.advancedlootableweapons.zweihander_silver", "Silver Zweihander");
-        add("item.advancedlootableweapons.zweihander_bronze", "Bronze Zweihander");
-        add("item.advancedlootableweapons.zweihander_platinum", "Platinum Zweihander");
-        add("item.advancedlootableweapons.zweihander_steel", "Steel Zweihander");
-        add("item.advancedlootableweapons.zweihander_shadow_platinum", "Shadow Platinum Zweihander");
-        add("item.advancedlootableweapons.zweihander_frost_steel", "Frost Steel Zweihander");
-        add("item.advancedlootableweapons.zweihander_obsidian", "Refined Obsidian Zweihander");
-        add("item.advancedlootableweapons.zweihander_crystallite", "Crystallite Zweihander");
-        add("item.advancedlootableweapons.zweihander_dusksteel", "Dusksteel Zweihander");
-
-
-        add("item.advancedlootableweapons.nodachi_wood", "Wooden Nodachi");
-        add("item.advancedlootableweapons.nodachi_iron", "Iron Nodachi");
-        add("item.advancedlootableweapons.nodachi_kobold", "Kobold Steel Nodachi");
-        add("item.advancedlootableweapons.nodachi_copper", "Copper Nodachi");
-        add("item.advancedlootableweapons.nodachi_silver", "Silver Nodachi");
-        add("item.advancedlootableweapons.nodachi_bronze", "Bronze Nodachi");
-        add("item.advancedlootableweapons.nodachi_platinum", "Platinum Nodachi");
-        add("item.advancedlootableweapons.nodachi_steel", "Steel Nodachi");
-        add("item.advancedlootableweapons.nodachi_shadow_platinum", "Shadow Platinum Nodachi");
-        add("item.advancedlootableweapons.nodachi_frost_steel", "Frost Steel Nodachi");
-        add("item.advancedlootableweapons.nodachi_obsidian", "Refined Obsidian Nodachi");
-        add("item.advancedlootableweapons.nodachi_crystallite", "Crystallite Nodachi");
-        add("item.advancedlootableweapons.nodachi_dusksteel", "Dusksteel Nodachi");
-
-
-        add("item.advancedlootableweapons.sabre_wood", "Wooden Sabre");
-        add("item.advancedlootableweapons.sabre_iron", "Iron Sabre");
-        add("item.advancedlootableweapons.sabre_kobold", "Kobold Steel Sabre");
-        add("item.advancedlootableweapons.sabre_copper", "Copper Sabre");
-        add("item.advancedlootableweapons.sabre_silver", "Silver Sabre");
-        add("item.advancedlootableweapons.sabre_bronze", "Bronze Sabre");
-        add("item.advancedlootableweapons.sabre_platinum", "Platinum Sabre");
-        add("item.advancedlootableweapons.sabre_steel", "Steel Sabre");
-        add("item.advancedlootableweapons.sabre_shadow_platinum", "Shadow Platinum Sabre");
-        add("item.advancedlootableweapons.sabre_frost_steel", "Frost Steel Sabre");
-        add("item.advancedlootableweapons.sabre_obsidian", "Refined Obsidian Sabre");
-        add("item.advancedlootableweapons.sabre_crystallite", "Crystallite Sabre");
-        add("item.advancedlootableweapons.sabre_dusksteel", "Dusksteel Sabre");
-
-
-        add("item.advancedlootableweapons.makhaira_wood", "Wooden Makhaira");
-        add("item.advancedlootableweapons.makhaira_iron", "Iron Makhaira");
-        add("item.advancedlootableweapons.makhaira_kobold", "Kobold Steel Makhaira");
-        add("item.advancedlootableweapons.makhaira_copper", "Copper Makhaira");
-        add("item.advancedlootableweapons.makhaira_silver", "Silver Makhaira");
-        add("item.advancedlootableweapons.makhaira_bronze", "Bronze Makhaira");
-        add("item.advancedlootableweapons.makhaira_platinum", "Platinum Makhaira");
-        add("item.advancedlootableweapons.makhaira_steel", "Steel Makhaira");
-        add("item.advancedlootableweapons.makhaira_shadow_platinum", "Shadow Platinum Makhaira");
-        add("item.advancedlootableweapons.makhaira_frost_steel", "Frost Steel Makhaira");
-        add("item.advancedlootableweapons.makhaira_obsidian", "Refined Obsidian Makhaira");
-        add("item.advancedlootableweapons.makhaira_crystallite", "Crystallite Makhaira");
-        add("item.advancedlootableweapons.makhaira_dusksteel", "Dusksteel Makhaira");
-
-
-        add("item.advancedlootableweapons.spear_wood", "Wooden Spear");
-        add("item.advancedlootableweapons.spear_iron", "Iron Spear");
-        add("item.advancedlootableweapons.spear_kobold", "Kobold Steel Spear");
-        add("item.advancedlootableweapons.spear_copper", "Copper Spear");
-        add("item.advancedlootableweapons.spear_silver", "Silver Spear");
-        add("item.advancedlootableweapons.spear_bronze", "Bronze Spear");
-        add("item.advancedlootableweapons.spear_platinum", "Platinum Spear");
-        add("item.advancedlootableweapons.spear_steel", "Steel Spear");
-        add("item.advancedlootableweapons.spear_shadow_platinum", "Shadow Platinum Spear");
-        add("item.advancedlootableweapons.spear_frost_steel", "Frost Steel Spear");
-        add("item.advancedlootableweapons.spear_obsidian", "Refined Obsidian Spear");
-        add("item.advancedlootableweapons.spear_crystallite", "Crystallite Spear");
-        add("item.advancedlootableweapons.spear_dusksteel", "Dusksteel Spear");
-
+        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
+            addItem(weapon,getNameFromItem(weapon.get()));
+        }
 
         add("item.advancedlootableweapons.stone_forge_hammer", "Stone Forge Hammer");
         add("item.advancedlootableweapons.iron_forge_hammer", "Iron Forge Hammer");
@@ -516,4 +299,10 @@ public class ModLangProvider extends LanguageProvider {
         add(ItemHotToolHead.Temp.warm.translation.getKey(),"Warm");
         add(ItemHotToolHead.Temp.hot.translation.getKey(),"Hot");
     }
+
+
+    public static String getNameFromItem(Item item) {
+        return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
+    }
+
 }
