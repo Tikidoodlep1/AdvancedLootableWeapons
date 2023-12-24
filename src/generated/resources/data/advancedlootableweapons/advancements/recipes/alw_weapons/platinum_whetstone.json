@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:crystallite_forge_hammer"
+      "advancedlootableweapons:platinum_whetstone"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/crystallite"
+            "tag": "forge:ingots/platinum"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:crystallite_forge_hammer"
+        "recipe": "advancedlootableweapons:platinum_whetstone"
       }
     }
   },

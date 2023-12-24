@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/frost_steel"
+    },
+    "S": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:frost_steel_whetstone"
+  }
+}

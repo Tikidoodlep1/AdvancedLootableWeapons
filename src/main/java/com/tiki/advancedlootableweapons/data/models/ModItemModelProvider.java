@@ -84,6 +84,19 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.STEEL_NUGGET.get());
         oneLayerItem(ItemInit.TIN_NUGGET.get());
 
+        oneLayerItem(ItemInit.BRONZE_WHETSTONE.get());
+        oneLayerItem(ItemInit.COPPER_WHETSTONE.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_WHETSTONE.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_WHETSTONE.get());
+        oneLayerItem(ItemInit.FROST_STEEL_WHETSTONE.get());
+        oneLayerItem(ItemInit.KOBOLD_WHETSTONE.get());
+        oneLayerItem(ItemInit.PLATINUM_WHETSTONE.get());
+        oneLayerItem(ItemInit.OBSIDIAN_WHETSTONE.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_WHETSTONE.get());
+        oneLayerItem(ItemInit.SILVER_WHETSTONE.get());
+        oneLayerItem(ItemInit.STEEL_WHETSTONE.get());
+        //oneLayerItem(ItemInit.TIN_WHETSTONE.get());
+
         simpleBlockItem(BlockInit.STEEL_BLOCK.get());
         simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
         simpleBlockItem(BlockInit.TIN_BLOCK.get());

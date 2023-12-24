@@ -84,19 +84,17 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.dusksteel_forge_hammer", "Dusksteel Forge Hammer");
 
 
-        add("item.advancedlootableweapons.stone_sharpening_stone", "Stone Whetstone");
-        add("item.advancedlootableweapons.iron_sharpening_stone", "Iron Whetstone");
-        add("item.advancedlootableweapons.kobold_sharpening_stone", "Kobold Steel Whetstone");
-        add("item.advancedlootableweapons.copper_sharpening_stone", "Copper Whetstone");
-        add("item.advancedlootableweapons.silver_sharpening_stone", "Silver Whetstone");
-        add("item.advancedlootableweapons.bronze_sharpening_stone", "Bronze Whetstone");
-        add("item.advancedlootableweapons.platinum_sharpening_stone", "Platinum Whetstone");
-        add("item.advancedlootableweapons.steel_sharpening_stone", "Steel Whetstone");
-        add("item.advancedlootableweapons.shadow_platinum_sharpening_stone", "Shadow Platinum Whetstone");
-        add("item.advancedlootableweapons.frost_steel_sharpening_stone", "Frost Steel Whetstone");
-        add("item.advancedlootableweapons.obsidian_sharpening_stone", "Refined Obsidian Whetstone");
-        add("item.advancedlootableweapons.crystallite_sharpening_stone", "Crystallite Whetstone");
-        add("item.advancedlootableweapons.dusksteel_sharpening_stone", "Dusksteel Whetstone");
+        addDefaultItem(ItemInit.BRONZE_WHETSTONE);
+        addDefaultItem(ItemInit.COPPER_WHETSTONE);
+        addDefaultItem(ItemInit.CRYSTALLITE_WHETSTONE);
+        addDefaultItem(ItemInit.DUSKSTEEL_WHETSTONE);
+        addDefaultItem(ItemInit.FROST_STEEL_WHETSTONE);
+        addDefaultItem(ItemInit.KOBOLD_WHETSTONE);
+        addDefaultItem(ItemInit.PLATINUM_WHETSTONE);
+        addDefaultItem(ItemInit.OBSIDIAN_WHETSTONE);
+        addDefaultItem(ItemInit.SHADOW_PLATINUM_WHETSTONE);
+        addDefaultItem(ItemInit.SILVER_WHETSTONE);
+        addDefaultItem(ItemInit.STEEL_WHETSTONE);
 
 
         add("item.advancedlootableweapons.hot_tool_head", "Tool Head");
