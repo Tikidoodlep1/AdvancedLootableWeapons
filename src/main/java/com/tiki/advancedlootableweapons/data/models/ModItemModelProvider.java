@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.data.models;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +11,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator,ExistingFileHelper existingFileHelper) {
@@ -25,6 +27,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.SILVER_INGOT.get());
         oneLayerItem(ItemInit.STEEL_INGOT.get());
         oneLayerItem(ItemInit.TIN_INGOT.get());
+
+        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
+            oneLayerItem(weapon.get());
+        }
     }
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
