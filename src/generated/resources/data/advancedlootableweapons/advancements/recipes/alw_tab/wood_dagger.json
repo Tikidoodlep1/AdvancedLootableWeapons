@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:wood_dagger"
+    ]
+  },
+  "criteria": {
+    "has_dagger_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:dagger_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:wood_dagger"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dagger_head",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -72,6 +72,9 @@ public class ModRecipeProvider extends RecipeProvider {
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.REFINED_OBSIDIAN_NUGGET.get(),ItemInit.REFINED_OBSIDIAN_INGOT.get(),BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
+        ShapedRecipeBuilder.shaped(itemLookup("wood_dagger")).define('W',ItemInit.DAGGER_HEAD.get()).define('S',Items.STICK)
+                .pattern("W").pattern("S").unlockedBy("has_dagger_head",has(ItemInit.DAGGER_HEAD.get())).save(recipeConsumer);
+
     }
 
     protected static void nuggetIngotBlockRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer,ItemLike nugget,ItemLike ingot,ItemLike block
@@ -112,6 +115,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(consumer);
     }
 
-
-
+    protected static Item itemLookup(String name) {
+        return Registry.ITEM.get(new ResourceLocation(AdvancedLootableWeapons.MODID,name));
+    }
 }

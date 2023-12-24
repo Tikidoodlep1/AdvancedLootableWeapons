@@ -49,6 +49,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.DIORITE_CLAY.get());
         simpleBlockItem(BlockInit.GRANITE_CLAY.get());
 
+        simpleBlockItem(BlockInit.DIORITE_CLAY_POWDER.get());
+        simpleBlockItem(BlockInit.GRANITE_CLAY_POWDER.get());
+
+        simpleBlockItem(BlockInit.DIORITE_BRICKS.get());
+        simpleBlockItem(BlockInit.GRANITE_BRICKS.get());
+
         oneLayerItem(ItemInit.DIORITE_CLAY_BALL.get());
         oneLayerItem(ItemInit.GRANITE_CLAY_BALL.get());
 
@@ -89,13 +95,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_WHETSTONE.get());
         oneLayerItem(ItemInit.DUSKSTEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.FROST_STEEL_WHETSTONE.get());
+        oneLayerItem(ItemInit.IRON_WHETSTONE.get());
         oneLayerItem(ItemInit.KOBOLD_WHETSTONE.get());
         oneLayerItem(ItemInit.PLATINUM_WHETSTONE.get());
         oneLayerItem(ItemInit.OBSIDIAN_WHETSTONE.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_WHETSTONE.get());
         oneLayerItem(ItemInit.SILVER_WHETSTONE.get());
         oneLayerItem(ItemInit.STEEL_WHETSTONE.get());
-        //oneLayerItem(ItemInit.TIN_WHETSTONE.get());
+        oneLayerItem(ItemInit.STONE_WHETSTONE.get());
 
         simpleBlockItem(BlockInit.STEEL_BLOCK.get());
         simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
