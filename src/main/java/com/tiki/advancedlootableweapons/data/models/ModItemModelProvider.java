@@ -4,6 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -29,8 +30,28 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.TIN_INGOT.get());
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
-            oneLayerItem(weapon.get());
+            if (weapon.get().attributes == WeaponAttributes.BATTLEAXE) {
+                oneLayerItemWithParent(weapon.get(),modLoc("item/battleaxe"));
+            } else {
+                oneLayerItemHandHeld(weapon.get());
+            }
         }
+    }
+
+    protected void oneLayerItemWithParent(Item item, ResourceLocation texture,ResourceLocation parent) {
+        String path = Registry.ITEM.getKey(item).getPath();
+        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
+                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
+            getBuilder(path).parent(getExistingFile(parent))
+                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
+        } else {
+            System.out.println("no texture for " + item + " found, skipping");
+        }
+    }
+
+    protected void oneLayerItemWithParent(Item item,ResourceLocation parent) {
+        ResourceLocation texture = Registry.ITEM.getKey(item);
+        oneLayerItemWithParent(item, texture,parent);
     }
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
@@ -47,6 +68,22 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void oneLayerItem(Item item) {
         ResourceLocation texture = Registry.ITEM.getKey(item);
         oneLayerItem(item, texture);
+    }
+
+    protected void oneLayerItemHandHeld(Item item, ResourceLocation texture) {
+        String path = Registry.ITEM.getKey(item).getPath();
+        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
+                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
+            getBuilder(path).parent(getExistingFile(mcLoc("item/handheld")))
+                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
+        } else {
+            System.out.println("no texture for " + item + " found, skipping");
+        }
+    }
+
+    protected void oneLayerItemHandHeld(Item item) {
+        ResourceLocation texture = Registry.ITEM.getKey(item);
+        oneLayerItemHandHeld(item, texture);
     }
 
     protected void simpleBlockItem(Item item, ResourceLocation loc) {

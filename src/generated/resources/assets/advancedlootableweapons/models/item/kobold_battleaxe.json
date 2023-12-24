@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "advancedlootableweapons:item/battleaxe",
   "textures": {
     "layer0": "advancedlootableweapons:item/kobold_battleaxe"
   }
