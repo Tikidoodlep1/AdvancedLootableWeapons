@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "advancedlootableweapons:item/rapier",
   "textures": {
     "layer0": "advancedlootableweapons:item/platinum_rapier"
   }
