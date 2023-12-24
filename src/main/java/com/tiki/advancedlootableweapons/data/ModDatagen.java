@@ -18,5 +18,6 @@ public class ModDatagen {
         dataGenerator.addProvider(blocksTagsProvider);
         dataGenerator.addProvider(new ItemsTagsProvider(dataGenerator,blocksTagsProvider,existingFileHelper));
         dataGenerator.addProvider(new ModBlockstateProvider(dataGenerator,existingFileHelper));
+        dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
     }
 }

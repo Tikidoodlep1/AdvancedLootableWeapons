@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class BlockDusksteel extends Block {
+public class DusksteelBlock extends Block {
 
 	private static final IntegerProperty PHASE = IntegerProperty.create("phase", 0, 7);
 	
-	public BlockDusksteel(Properties prop) {
+	public DusksteelBlock(Properties prop) {
 		super(prop);
 	}
 	

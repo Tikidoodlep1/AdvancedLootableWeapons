@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_silver"
+          "name": "advancedlootableweapons:diorite_bricks"
         }
       ],
       "conditions": [

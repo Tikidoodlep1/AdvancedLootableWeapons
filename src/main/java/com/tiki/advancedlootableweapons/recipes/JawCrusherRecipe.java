@@ -73,7 +73,7 @@ public class JawCrusherRecipe implements Recipe<SimpleContainer> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(BlockInit.BLOCK_JAW_CRUSHER.get().asItem());
+		return new ItemStack(BlockInit.JAW_CRUSHER.get().asItem());
 	}
 	
 	public static class Type implements RecipeType<JawCrusherRecipe> {

@@ -26,7 +26,7 @@ public class ModCreativeTabs {
 
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(BlockInit.BLOCK_BRICK_DIORITE.get());
+			return new ItemStack(BlockInit.DIORITE_BRICKS.get());
 		}
 		
 	};

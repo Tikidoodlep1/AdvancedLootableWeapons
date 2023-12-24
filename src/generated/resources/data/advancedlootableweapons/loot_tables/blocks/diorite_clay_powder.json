@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_bronze"
+          "name": "advancedlootableweapons:diorite_clay_powder"
         }
       ],
       "conditions": [

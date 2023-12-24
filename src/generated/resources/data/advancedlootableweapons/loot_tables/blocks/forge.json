@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_jaw_crusher"
+          "name": "advancedlootableweapons:forge"
         }
       ],
       "conditions": [

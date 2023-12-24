@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_cobbled_feldspar"
+          "name": "advancedlootableweapons:refined_obsidian_block"
         }
       ],
       "conditions": [

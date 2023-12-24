@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_platinum"
+          "name": "advancedlootableweapons:granite_clay_powder"
         }
       ],
       "conditions": [

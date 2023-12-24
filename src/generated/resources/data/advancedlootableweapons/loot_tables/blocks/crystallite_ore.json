@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "advancedlootableweapons:block_stone_ore_platinum"
+              "name": "advancedlootableweapons:crystallite_ore"
             },
             {
               "type": "minecraft:item",
@@ -39,7 +39,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "advancedlootableweapons:raw_platinum"
+              "name": "advancedlootableweapons:crystal"
             }
           ]
         }

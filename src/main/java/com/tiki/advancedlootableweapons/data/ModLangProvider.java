@@ -263,8 +263,8 @@ public class ModLangProvider extends LanguageProvider {
         add("block.advancedlootableweapons.block_powder_diorite", "Diorite Clay Powder");
         add("block.advancedlootableweapons.block_clay_diorite", "Diorite Clay");
         add("block.advancedlootableweapons.block_clay_granite", "Granite Clay");
-        addBlock(BlockInit.BLOCK_ALLOY_FURNACE, "Alloy Furnace");
-        addBlock(BlockInit.BLOCK_FORGE, "Basic Forge");
+        addBlock(BlockInit.ALLOY_FURNACE, "Alloy Furnace");
+        addBlock(BlockInit.FORGE, "Basic Forge");
         add("block.advancedlootableweapons.advanced_forge", "Advanced Forge");
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
         add("block.advancedlootableweapons.block_jaw_crusher", "Jaw Crusher");
@@ -277,10 +277,10 @@ public class ModLangProvider extends LanguageProvider {
 
         addDefaultItem(ItemInit.FELDSPAR_POWDER);
         addDefaultItem(ItemInit.DIORITE_BRICK);
-        addDefaultItem(ItemInit.DIORITE_CLAY);
+        addDefaultItem(ItemInit.DIORITE_CLAY_BALL);
         addDefaultItem(ItemInit.DIORITE_POWDER);
         addDefaultItem(ItemInit.GRANITE_BRICK);
-        addDefaultItem(ItemInit.GRANITE_CLAY);
+        addDefaultItem(ItemInit.GRANITE_CLAY_BALL);
         addDefaultItem(ItemInit.GRANITE_POWDER);
 
 

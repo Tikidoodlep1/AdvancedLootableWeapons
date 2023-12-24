@@ -12,7 +12,6 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -118,7 +117,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
 	
 	@Override
 	public boolean stillValid(Player player) {
-		return stillValid(access, player, BlockInit.BLOCK_ALLOY_FURNACE.get());
+		return stillValid(access, player, BlockInit.ALLOY_FURNACE.get());
 	}
 	
 	private void addPlayerInv(Inventory playerInventory) {

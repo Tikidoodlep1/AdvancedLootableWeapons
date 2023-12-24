@@ -13,6 +13,5 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ;
     }
 }

@@ -74,7 +74,7 @@ public class AlloyFurnaceRecipe implements Recipe<SimpleContainer> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(BlockInit.BLOCK_ALLOY_FURNACE.get().asItem());
+		return new ItemStack(BlockInit.ALLOY_FURNACE.get().asItem());
 	}
 	
 	public static class Type implements RecipeType<AlloyFurnaceRecipe> {

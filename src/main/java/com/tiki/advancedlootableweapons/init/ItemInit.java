@@ -59,8 +59,8 @@ public class ItemInit {
     public static final RegistryObject<Item> FELDSPAR_POWDER = ITEMS.register("feldspar_powder", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> GRANITE_POWDER = ITEMS.register("granite_powder", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DIORITE_POWDER = ITEMS.register("diorite_powder", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> GRANITE_CLAY = ITEMS.register("granite_clay", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> DIORITE_CLAY = ITEMS.register("diorite_clay", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> GRANITE_CLAY_BALL = ITEMS.register("granite_clay_ball", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> DIORITE_CLAY_BALL = ITEMS.register("diorite_clay_ball", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> GRANITE_BRICK = ITEMS.register("granite_brick", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DIORITE_BRICK = ITEMS.register("diorite_brick", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_crystallite"
+          "name": "advancedlootableweapons:dusksteel_block"
         }
       ],
       "conditions": [

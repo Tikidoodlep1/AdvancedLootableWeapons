@@ -33,7 +33,7 @@ public class JawCrusherContainer extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(access, pPlayer, BlockInit.BLOCK_JAW_CRUSHER.get());
+        return stillValid(access, pPlayer, BlockInit.JAW_CRUSHER.get());
     }
 
     private void addPlayerInv(Inventory playerInventory) {

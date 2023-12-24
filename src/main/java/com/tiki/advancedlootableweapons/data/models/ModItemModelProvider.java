@@ -21,13 +21,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleBlockItem(BlockInit.BLOCK_FORGE.get().asItem());
+        simpleBlockItem(BlockInit.FORGE.get().asItem());
 
         oneLayerItem(ItemInit.DIORITE_BRICK.get());
         oneLayerItem(ItemInit.GRANITE_BRICK.get());
 
-        oneLayerItem(ItemInit.DIORITE_CLAY.get());
-        oneLayerItem(ItemInit.GRANITE_CLAY.get());
+        oneLayerItem(ItemInit.DIORITE_CLAY_BALL.get());
+        oneLayerItem(ItemInit.GRANITE_CLAY_BALL.get());
 
         oneLayerItem(ItemInit.DIORITE_POWDER.get());
         oneLayerItem(ItemInit.FELDSPAR_POWDER.get());

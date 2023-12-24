@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
-import com.tiki.advancedlootableweapons.blocks.BlockDusksteel;
+import com.tiki.advancedlootableweapons.blocks.DusksteelBlock;
 import com.tiki.advancedlootableweapons.blocks.ForgeBlock;
 import com.tiki.advancedlootableweapons.blocks.BlockJawCrusher;
 import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
@@ -25,71 +25,71 @@ public class BlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AdvancedLootableWeapons.MODID);
 	
 	//Metals
-	public static final RegistryObject<Block> BLOCK_STEEL = registerBlock("block_steel", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_KOBOLD = registerBlock("block_kobold", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> KOBOLD_BLOCK = registerBlock("kobold_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(4.5F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_TIN = registerBlock("block_tin", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(3.5F).explosionResistance(3.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_CRYSTALLITE = registerBlock("block_crystallite", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> CRYSTALLITE_BLOCK = registerBlock("crystallite_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(9.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_PLATINUM = registerBlock("block_platinum", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> PLATINUM_BLOCK = registerBlock("platinum_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(5.5F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_BRONZE = registerBlock("block_bronze", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> BRONZE_BLOCK = registerBlock("bronze_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(4.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_FROST_STEEL = registerBlock("block_frost_steel", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> FROST_STEEL_BLOCK = registerBlock("frost_steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(5.5F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_SILVER = registerBlock("block_silver", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> SILVER_BLOCK = registerBlock("silver_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(4.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_SHADOW_PLATINUM = registerBlock("block_shadow_platinum", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> SHADOW_PLATINUM_BLOCK = registerBlock("shadow_platinum_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(4.8F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_OBSIDIAN_STEEL = registerBlock("block_obsidian_steel", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> REFINED_OBSIDIAN_BLOCK = registerBlock("refined_obsidian_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(6.5F).explosionResistance(100.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_DUSKSTEEL = registerBlock("block_dusksteel", () -> new BlockDusksteel(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> DUSKSTEEL_BLOCK = registerBlock("dusksteel_block", () -> new DusksteelBlock(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(5.6F).requiresCorrectToolForDrops().randomTicks().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
 	
 	//Rocks & Clays
-	public static final RegistryObject<Block> BLOCK_COBBLED_FELDSPAR = registerBlock("block_cobbled_feldspar", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> COBBLED_FELDSPAR = registerBlock("cobbled_feldspar", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.1F).explosionResistance(3.2F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_ROCK_FELDSPAR = registerBlock("block_rock_feldspar", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> FELDSPAR = registerBlock("feldspar", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(3.2F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_CLAY_GRANITE = registerBlock("block_clay_granite", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
+	public static final RegistryObject<Block> GRANITE_CLAY = registerBlock("granite_clay", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_CLAY_DIORITE = registerBlock("block_clay_diorite", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
+	public static final RegistryObject<Block> DIORITE_CLAY = registerBlock("diorite_clay", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_POWDER_GRANITE = registerBlock("block_powder_granite", () -> new BlockPowderedClay(BlockInit.BLOCK_CLAY_GRANITE.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> GRANITE_CLAY_POWDER = registerBlock("granite_clay_powder", () -> new BlockPowderedClay(BlockInit.GRANITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_POWDER_DIORITE = registerBlock("block_powder_diorite", () -> new BlockPowderedClay(BlockInit.BLOCK_CLAY_DIORITE.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> DIORITE_CLAY_POWDER = registerBlock("diorite_clay_powder", () -> new BlockPowderedClay(BlockInit.DIORITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_BRICK_GRANITE = registerBlock("block_brick_granite", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> GRANITE_BRICKS = registerBlock("granite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_BRICK_DIORITE = registerBlock("block_brick_diorite", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> DIORITE_BRICKS = registerBlock("diorite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
 	
 	//Ores
-	public static final RegistryObject<Block> BLOCK_STONE_ORE_SILVER = registerBlock("block_stone_ore_silver", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.3F).explosionResistance(3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_STONE_ORE_PLATINUM = registerBlock("block_stone_ore_platinum", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> PLATINUM_ORE = registerBlock("platinum_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.5F).explosionResistance(3.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_STONE_ORE_CRYSTALLITE = registerBlock("block_stone_ore_crystallite", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> CRYSTALLITE_ORE = registerBlock("crystallite_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.5F).explosionResistance(3.4F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_STONE_ORE_TIN = registerBlock("block_stone_ore_tin", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> TIN_ORE = registerBlock("tin_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.1F).explosionResistance(2.8F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_DEEPSLATE_ORE_SILVER = registerBlock("block_deepslate_ore_silver", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> DEEPSLATE_SILVER_ORE = registerBlock("deepslate_silver_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.5F).explosionResistance(3.0F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_DEEPSLATE_ORE_PLATINUM = registerBlock("block_deepslate_ore_platinum", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> DEEPSLATE_PLATINUM_ORE = registerBlock("deepslate_platinum_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.8F).explosionResistance(3.1F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_DEEPSLATE_ORE_CRYSTALLITE = registerBlock("block_deepslate_ore_crystallite", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> DEEPSLATE_CRYSTALLITE_ORE = registerBlock("deepslate_crystallite_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.8F).explosionResistance(3.4F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_DEEPSLATE_ORE_TIN = registerBlock("block_deepslate_ore_tin", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.1F).explosionResistance(2.8F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB);
 	
 	//Functionals
-	public static final RegistryObject<Block> BLOCK_ALLOY_FURNACE = registerBlock("block_alloy_furnace", () -> new BlockAlloyFurnace(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace", () -> new BlockAlloyFurnace(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.5F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_FORGE = registerBlock("block_forge", () -> new ForgeBlock(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> FORGE = registerBlock("forge", () -> new ForgeBlock(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> BLOCK_JAW_CRUSHER = registerBlock("block_jaw_crusher", () -> new BlockJawCrusher(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> JAW_CRUSHER = registerBlock("jaw_crusher", () -> new BlockJawCrusher(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.METAL).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
 	
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {

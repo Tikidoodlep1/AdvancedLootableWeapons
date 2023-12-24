@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_dusksteel"
+          "name": "advancedlootableweapons:tin_block"
         }
       ],
       "conditions": [

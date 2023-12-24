@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_tin"
+          "name": "advancedlootableweapons:platinum_block"
         }
       ],
       "conditions": [

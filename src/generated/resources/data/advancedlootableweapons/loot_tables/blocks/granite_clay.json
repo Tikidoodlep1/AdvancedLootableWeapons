@@ -25,16 +25,21 @@
                   }
                 }
               ],
-              "name": "advancedlootableweapons:block_rock_feldspar"
+              "name": "advancedlootableweapons:granite_clay"
             },
             {
               "type": "minecraft:item",
-              "conditions": [
+              "functions": [
                 {
-                  "condition": "minecraft:survives_explosion"
+                  "function": "minecraft:set_count",
+                  "count": 4.0,
+                  "add": false
+                },
+                {
+                  "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "advancedlootableweapons:block_cobbled_feldspar"
+              "name": "advancedlootableweapons:granite_clay_ball"
             }
           ]
         }

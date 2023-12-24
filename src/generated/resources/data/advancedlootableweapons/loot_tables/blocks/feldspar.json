@@ -25,21 +25,16 @@
                   }
                 }
               ],
-              "name": "advancedlootableweapons:block_deepslate_ore_platinum"
+              "name": "advancedlootableweapons:feldspar"
             },
             {
               "type": "minecraft:item",
-              "functions": [
+              "conditions": [
                 {
-                  "function": "minecraft:apply_bonus",
-                  "enchantment": "minecraft:fortune",
-                  "formula": "minecraft:ore_drops"
-                },
-                {
-                  "function": "minecraft:explosion_decay"
+                  "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "advancedlootableweapons:raw_platinum"
+              "name": "advancedlootableweapons:cobbled_feldspar"
             }
           ]
         }

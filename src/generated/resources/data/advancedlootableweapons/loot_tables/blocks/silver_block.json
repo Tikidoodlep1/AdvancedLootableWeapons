@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:block_steel"
+          "name": "advancedlootableweapons:silver_block"
         }
       ],
       "conditions": [
