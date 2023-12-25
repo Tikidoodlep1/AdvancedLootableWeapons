@@ -3,10 +3,10 @@ package com.tiki.advancedlootableweapons.recipes;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
+import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import net.minecraft.core.NonNullList;
@@ -30,15 +30,17 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 	private final Ingredient input2;
 	private final int count1;
 	private final int count2;
+	private final int cookTime;
 
 	public AlloyFurnaceRecipe(final ResourceLocation id, final ItemStack output, final Ingredient input1, final Ingredient input2,
-							 final int count1,final int count2) {
+							  final int count1, final int count2, int cookTime) {
 		this.id = id;
 		this.output = output;
 		this.input1 = input1;
 		this.input2 = input2;
 		this.count1 = count1;
 		this.count2 = count2;
+		this.cookTime = cookTime;
 	}
 	
 	@Override
@@ -114,9 +116,13 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 		return count2;
 	}
 
+	public int getCookTime() {
+		return cookTime;
+	}
+
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(BlockInit.ALLOY_FURNACE.get().asItem());
+		return new ItemStack(BlockInit.ALLOY_FURNACE.get());
 	}
 	
 	public static class Type implements RecipeType<AlloyFurnaceRecipe> {
@@ -160,7 +166,8 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 			int count2 = element2.get("count").getAsInt();
 
 			ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-			return new AlloyFurnaceRecipe(pRecipeId, output,ingredient1,ingredient2,count1,count2);
+			int cookTime = GsonHelper.getAsInt(json, AlloyFurnaceRecipeBuilder.COOKTIME);
+			return new AlloyFurnaceRecipe(pRecipeId, output,ingredient1,ingredient2,count1,count2, cookTime);
 		}
 
 		@Override

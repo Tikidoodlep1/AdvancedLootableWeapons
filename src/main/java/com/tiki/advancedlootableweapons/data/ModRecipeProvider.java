@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -30,6 +31,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         crafting(pFinishedRecipeConsumer);
         smelting(pFinishedRecipeConsumer);
+        crusher(pFinishedRecipeConsumer);
         alloyFurnace(pFinishedRecipeConsumer);
     }
 
@@ -105,6 +107,10 @@ public class ModRecipeProvider extends RecipeProvider {
                         has(ItemInit.GRANITE_BRICK.get()))
                 .save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemInit.SPEAR_HEAD.get())
+                .define('S',ItemTags.PLANKS)
+                .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -115,6 +121,11 @@ public class ModRecipeProvider extends RecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemInit.GRANITE_CLAY_BALL.get()), ItemInit.GRANITE_BRICK.get(),
                         0.3F, 200)
                 .unlockedBy("has_granite_clay_ball", has(ItemInit.GRANITE_CLAY_BALL.get())).save(recipeConsumer);
+    }
+
+    protected void crusher(Consumer<FinishedRecipe> recipeConsumer) {
+        CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get()),ItemInit.FELDSPAR_POWDER.get(),4)
+                .save(recipeConsumer,"feldspar_crushing");
     }
 
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {

@@ -1,0 +1,8 @@
+{
+  "type": "advancedlootableweapons:crushing",
+  "ingredient": {
+    "item": "advancedlootableweapons:feldspar"
+  },
+  "result": "advancedlootableweapons:feldspar_powder",
+  "count": 4
+}

@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.data.recipes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -27,6 +28,9 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
     private int count1 = 1;
     private Ingredient ingredient2 = Ingredient.EMPTY;
     private int count2 = 1;
+    private int cookTime = AlloyFurnaceBlockEntity.MAX_COOKING_TIME;
+
+    public static final String COOKTIME = "cookingTime";
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
@@ -65,6 +69,11 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
         return ingredient2(Ingredient.of(ingredient),count);
     }
 
+    public AlloyFurnaceRecipeBuilder cookTime(int cookTime) {
+        this.cookTime = cookTime;
+        return this;
+    }
+
 
     public AlloyFurnaceRecipeBuilder ingredient2(Ingredient ingredient, int count) {
         ingredient2 = ingredient;
@@ -92,7 +101,7 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
         pFinishedRecipeConsumer.accept(new Result(pRecipeId,  this.result,this.count,
-                this.ingredient1,this.ingredient2, this.count1,this.count2));
+                this.ingredient1,this.ingredient2, this.count1,this.count2,cookTime));
     }
 
 
@@ -104,9 +113,10 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
         private final Ingredient ingredient2;
         private final int count1;
         private final int count2;
+        private final int cookTime;
 
         public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient1, Ingredient ingredient2,
-                      int count1, int count2) {
+                      int count1, int count2, int cookTime) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
@@ -114,6 +124,7 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
             this.ingredient2 = ingredient2;
             this.count1 = count1;
             this.count2 = count2;
+            this.cookTime = cookTime;
         }
 
         public void serializeRecipeData(JsonObject pJson) {
@@ -139,6 +150,7 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
             if (this.count > 1) {
                 jsonobject.addProperty("count", this.count);
             }
+            pJson.addProperty(COOKTIME,cookTime);
 
             pJson.add("result", jsonobject);
         }

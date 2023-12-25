@@ -60,11 +60,11 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             switch (data) {
                 case DATA_LIT_TIME:
                     return AlloyFurnaceBlockEntity.this.litTime;
-                case 1:
+                case DATA_LIT_DURATION:
                     return AlloyFurnaceBlockEntity.this.litDuration;
                 case DATA_COOKING_PROGRESS:
                     return AlloyFurnaceBlockEntity.this.cookingProgress;
-                case 3:
+                case DATA_COOKING_TOTAL_TIME:
                     return AlloyFurnaceBlockEntity.this.cookingTotalTime;
                 default:
                     return 0;
@@ -76,13 +76,13 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
                 case DATA_LIT_TIME:
                     AlloyFurnaceBlockEntity.this.litTime = val;
                     break;
-                case 1:
+                case DATA_LIT_DURATION:
                     AlloyFurnaceBlockEntity.this.litDuration = val;
                     break;
                 case DATA_COOKING_PROGRESS:
                     AlloyFurnaceBlockEntity.this.cookingProgress = val;
                     break;
-                case 3:
+                case DATA_COOKING_TOTAL_TIME:
                     AlloyFurnaceBlockEntity.this.cookingTotalTime = val;
             }
         }
@@ -296,6 +296,9 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         }
         //lookup a new recipe
         cachedRecipe = level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, new RecipeWrapper(itemHandler), level).orElse(null);
+        if (cachedRecipe != null) {
+            cookingTotalTime = cachedRecipe.getCookTime();
+        }
     }
 
     public void drops() {

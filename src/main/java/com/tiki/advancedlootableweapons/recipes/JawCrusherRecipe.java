@@ -9,7 +9,6 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,8 +16,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class JawCrusherRecipe implements Recipe<SimpleContainer> {
+public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 
 	private final ResourceLocation id;
 	private final ItemStack output;
@@ -37,12 +37,12 @@ public class JawCrusherRecipe implements Recipe<SimpleContainer> {
 	}
 	
 	@Override
-	public boolean matches(final SimpleContainer pContainer, final Level pLevel) {
+	public boolean matches(final RecipeWrapper pContainer, final Level pLevel) {
 		return input.test(pContainer.getItem(0));
 	}
 	
 	@Override
-	public ItemStack assemble(final SimpleContainer pContainer) {
+	public ItemStack assemble(final RecipeWrapper pContainer) {
 		return output;
 	}
 
