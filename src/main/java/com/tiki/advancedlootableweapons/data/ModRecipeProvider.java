@@ -100,6 +100,13 @@ public class ModRecipeProvider extends RecipeProvider {
         twoByTwo(recipeConsumer,BlockInit.DIORITE_CLAY.get(),ItemInit.DIORITE_CLAY_BALL.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_CLAY.get(),ItemInit.GRANITE_CLAY_BALL.get());
 
+        ShapedRecipeBuilder.shaped(BlockInit.FORGE.get())
+                .define('C', ItemInit.GRANITE_BRICK.get()).define('S',ItemTags.STONE_CRAFTING_MATERIALS)
+                .define('I', Blocks.COAL_BLOCK)
+                .pattern(" C ").pattern("CIC").pattern("CSC").unlockedBy("has_material",
+                        has(ItemInit.GRANITE_BRICK.get()))
+                .save(recipeConsumer);
+
         ShapedRecipeBuilder.shaped(BlockInit.ALLOY_FURNACE.get())
                 .define('C', ItemInit.GRANITE_BRICK.get()).define('S',ItemTags.STONE_CRAFTING_MATERIALS)
                 .define('I',BlockInit.GRANITE_CLAY.get())
@@ -111,6 +118,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('S',ItemTags.PLANKS)
                 .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(BlockInit.DIORITE_CLAY_POWDER.get(),2)
+                .define('#', ItemInit.FELDSPAR_POWDER.get()).define('X', ItemInit.DIORITE_POWDER.get())
+                .pattern("X#X").pattern("#X#").pattern("X#X")
+                .unlockedBy("has_feldspar_powder", has(ItemInit.FELDSPAR_POWDER.get())).save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(BlockInit.GRANITE_CLAY_POWDER.get(),2)
+                .define('#', ItemInit.FELDSPAR_POWDER.get()).define('X', ItemInit.GRANITE_POWDER.get())
+                .pattern("X#X").pattern("#X#").pattern("X#X")
+                .unlockedBy("has_feldspar_powder", has(ItemInit.FELDSPAR_POWDER.get())).save(recipeConsumer);
+
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -121,11 +139,20 @@ public class ModRecipeProvider extends RecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemInit.GRANITE_CLAY_BALL.get()), ItemInit.GRANITE_BRICK.get(),
                         0.3F, 200)
                 .unlockedBy("has_granite_clay_ball", has(ItemInit.GRANITE_CLAY_BALL.get())).save(recipeConsumer);
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(BlockInit.COBBLED_FELDSPAR.get()), BlockInit.FELDSPAR.get(),
+                        0.1F, 200)
+                .unlockedBy("has_cobbled_feldspar", has(BlockInit.COBBLED_FELDSPAR.get())).save(recipeConsumer);
     }
 
     protected void crusher(Consumer<FinishedRecipe> recipeConsumer) {
         CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get()),ItemInit.FELDSPAR_POWDER.get(),4)
                 .save(recipeConsumer,"feldspar_crushing");
+
+        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.DIORITE),ItemInit.DIORITE_POWDER.get(),4)
+                .save(recipeConsumer,"diorite_crushing");
+        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.GRANITE),ItemInit.GRANITE_POWDER.get(),4)
+                .save(recipeConsumer,"granite_crushing");
     }
 
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {

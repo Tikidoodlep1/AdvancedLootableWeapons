@@ -19,7 +19,10 @@ public class ItemsTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         tag(ModItemTags.INGOTS_BRONZE).add(ItemInit.BRONZE_INGOT.get());
+        tag(ModItemTags.INGOTS_CRYSTALLITE).add(ItemInit.CRYSTALLITE_INGOT.get());
         tag(ModItemTags.INGOTS_PLATINUM).add(ItemInit.PLATINUM_INGOT.get());
+        tag(ModItemTags.INGOTS_REFINED_OBSIDIAN).add(ItemInit.REFINED_OBSIDIAN_INGOT.get());
+        tag(ModItemTags.INGOTS_SHADOW_PLATINUM).add(ItemInit.SHADOW_PLATINUM_INGOT.get());
         tag(ModItemTags.INGOTS_SILVER).add(ItemInit.SILVER_INGOT.get());
         tag(ModItemTags.INGOTS_TIN).add(ItemInit.TIN_INGOT.get());
     }

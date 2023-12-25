@@ -1,10 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"#advancedlootableweapons:shards/obsidian",
-		{
-			"id": "advancedlootableweapons:shards",
-			"required": false
-		}
+		"#advancedlootableweapons:shards/obsidian"
 	]
 }

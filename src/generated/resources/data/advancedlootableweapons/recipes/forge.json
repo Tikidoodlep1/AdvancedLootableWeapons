@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "CIC",
+    "CSC"
+  ],
+  "key": {
+    "C": {
+      "item": "advancedlootableweapons:granite_brick"
+    },
+    "S": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "I": {
+      "item": "minecraft:coal_block"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:forge"
+  }
+}

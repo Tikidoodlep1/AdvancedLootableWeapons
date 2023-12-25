@@ -3,10 +3,6 @@
 	"values": [
 		"#advancedlootableweapons:dusts/granite",
 		"#advancedlootableweapons:dusts/diorite",
-		"#advancedlootableweapons:dusts/feldspar",
-		{
-			"id": "advancedlootableweapons:dusts",
-			"required": false
-		}
+		"#advancedlootableweapons:dusts/feldspar"
 	]
 }

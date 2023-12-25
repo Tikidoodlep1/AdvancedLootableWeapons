@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:diorite_clay_powder"
+    ]
+  },
+  "criteria": {
+    "has_feldspar_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:feldspar_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:diorite_clay_powder"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_feldspar_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#X#",
+    "X#X"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:feldspar_powder"
+    },
+    "X": {
+      "item": "advancedlootableweapons:granite_powder"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:granite_clay_powder",
+    "count": 2
+  }
+}

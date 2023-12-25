@@ -2,10 +2,6 @@
 	"replace": false,
 	"values": [
 		"#advancedlootableweapons:bricks/granite",
-		"#advancedlootableweapons:bricks/diorite",
-		{
-			"id": "advancedlootableweapons:bricks",
-			"required": false
-		}
+		"#advancedlootableweapons:bricks/diorite"
 	]
 }
