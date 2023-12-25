@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "forge:ingots/copper"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "tag": "forge:ingots/tin"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:bronze_ingot",
+    "count": 4
+  }
+}
