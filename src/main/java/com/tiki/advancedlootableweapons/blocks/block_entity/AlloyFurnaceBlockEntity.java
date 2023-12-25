@@ -47,7 +47,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     public static final int MAX_COOKING_TIME = 266;
     public static final int BURN_COOL_SPEED = 2;
     protected NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
-    private int totalLitTime;
     private int litTime;
     private int litDuration;
     private int cookingProgress = 0;
@@ -237,7 +236,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         if (!hasRoom()) return;
         int burnTime = ForgeHooks.getBurnTime(itemHandler.getStackInSlot(SLOT_FUEL),null);
         if (burnTime > 0) {
-            this.totalLitTime = burnTime;
+            this.litDuration = burnTime;
             this.litTime = burnTime;
             itemHandler.extractItem(SLOT_FUEL,1,false);
             findFuel = false;
@@ -279,7 +278,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         //if the result of the recipe does NOT match what is currently in the output, like say bronze and steel, there's no room
         if (!ItemStack.isSameItemSameTags(result, output)) return false;
         //else make sure current recipe result + existing count does not go over the max stack size
-        return output.getCount() + result.getCount() <= output.getCount();
+        return output.getCount() + result.getCount() <= output.getMaxStackSize();
     }
 
     private boolean lookForRecipe = true;
@@ -308,14 +307,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 
     public static void tick(Level world, BlockPos pos, BlockState state, AlloyFurnaceBlockEntity entity) {
         entity.serverTick(world,pos,state);
-    }
-
-    public int getMaxBurnDuration() {
-        return this.totalLitTime;
-    }
-
-    private static boolean canMakeRecipe(AlloyFurnaceBlockEntity entity, ItemStack stack) {
-        return entity.itemHandler.getStackInSlot(SLOT_RESULT) == ItemStack.EMPTY || (entity.itemHandler.getStackInSlot(SLOT_RESULT).getItem() == stack.getItem() && entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + stack.getCount() < entity.itemHandler.getStackInSlot(SLOT_RESULT).getMaxStackSize());
     }
 
     public int getContainerSize() {

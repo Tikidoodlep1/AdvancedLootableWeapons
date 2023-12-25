@@ -59,7 +59,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
         double time = data.get(AlloyFurnaceBlockEntity.DATA_LIT_TIME);
         double totalTime = data.get(AlloyFurnaceBlockEntity.DATA_LIT_DURATION);
 
-        if (totalTime == 0) return 0;
+        if (totalTime == 0) totalTime = 200;
 
         double percent = time / totalTime;
 
