@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -30,6 +31,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         crafting(pFinishedRecipeConsumer);
+        alloyFurnace(pFinishedRecipeConsumer);
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -97,6 +99,13 @@ public class ModRecipeProvider extends RecipeProvider {
         twoByTwo(recipeConsumer,BlockInit.DIORITE_CLAY.get(),ItemInit.DIORITE_CLAY_BALL.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_CLAY.get(),ItemInit.GRANITE_CLAY_BALL.get());
 
+    }
+
+    protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {
+        AlloyFurnaceBuilder.alloy(ItemInit.BRONZE_INGOT.get(),4)
+                .ingredient1(Tags.Items.INGOTS_COPPER,3)
+                .ingredient2(ModItemTags.INGOTS_TIN,1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"bronze_alloying"));
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

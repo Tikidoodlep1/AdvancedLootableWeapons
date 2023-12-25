@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class ModItemTags {
 
+    public static final TagKey<Item> INGOTS_TIN = forge("ingots/tin");
     public static final TagKey<Item> INGOTS_BRONZE = forge("ingots/bronze");
     public static final TagKey<Item> INGOTS_CRYSTALLITE = forge("ingots/crystallite");
     public static final TagKey<Item> INGOTS_DUSKSTEEL = forge("ingots/dusksteel");
