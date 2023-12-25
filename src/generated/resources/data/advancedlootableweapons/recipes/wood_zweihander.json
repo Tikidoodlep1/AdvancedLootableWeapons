@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "advancedlootableweapons:zweihander_head"
+    },
+    "S": {
+      "item": "advancedlootableweapons:long_weapon_handle"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:wood_zweihander"
+  }
+}

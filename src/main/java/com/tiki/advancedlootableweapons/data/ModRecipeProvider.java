@@ -81,12 +81,14 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenWeapon(recipeConsumer,ItemInit.KODACHI_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.LONGSWORD_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.MACE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.MAKHAIRA_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.RAPIER_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.SABRE_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.STAFF_HEAD.get(),true);
         woodenWeapon(recipeConsumer,ItemInit.SPEAR_HEAD.get(),true);
         woodenWeapon(recipeConsumer,ItemInit.TALWAR_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER_HEAD.get(),true);
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_BRICKS.get(),ItemInit.GRANITE_BRICK.get());

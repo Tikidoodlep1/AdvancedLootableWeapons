@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:wood_makhaira"
+    ]
+  },
+  "criteria": {
+    "has_makhaira_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:makhaira_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:wood_makhaira"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_makhaira_head",
+      "has_the_recipe"
+    ]
+  ]
+}
