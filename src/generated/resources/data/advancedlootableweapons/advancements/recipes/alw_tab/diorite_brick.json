@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:diorite_brick"
+    ]
+  },
+  "criteria": {
+    "has_diorite_clay_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:diorite_clay_ball"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:diorite_brick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diorite_clay_ball",
+      "has_the_recipe"
+    ]
+  ]
+}

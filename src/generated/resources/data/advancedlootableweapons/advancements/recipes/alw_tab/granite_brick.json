@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:granite_brick"
+    ]
+  },
+  "criteria": {
+    "has_granite_clay_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:granite_clay_ball"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:granite_brick"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_granite_clay_ball",
+      "has_the_recipe"
+    ]
+  ]
+}

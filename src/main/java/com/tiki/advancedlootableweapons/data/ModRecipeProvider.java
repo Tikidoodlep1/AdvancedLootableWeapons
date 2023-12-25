@@ -7,15 +7,13 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -100,10 +98,23 @@ public class ModRecipeProvider extends RecipeProvider {
         twoByTwo(recipeConsumer,BlockInit.DIORITE_CLAY.get(),ItemInit.DIORITE_CLAY_BALL.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_CLAY.get(),ItemInit.GRANITE_CLAY_BALL.get());
 
+        ShapedRecipeBuilder.shaped(BlockInit.ALLOY_FURNACE.get())
+                .define('C', ItemInit.GRANITE_BRICK.get()).define('S',ItemTags.STONE_CRAFTING_MATERIALS)
+                .define('I',BlockInit.GRANITE_CLAY.get())
+                .pattern("CCC").pattern("C C").pattern("ISI").unlockedBy("has_material",
+                        has(ItemInit.GRANITE_BRICK.get()))
+                .save(recipeConsumer);
+
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemInit.DIORITE_CLAY_BALL.get()), ItemInit.DIORITE_BRICK.get(),
+                        0.3F, 200)
+                .unlockedBy("has_diorite_clay_ball", has(ItemInit.DIORITE_CLAY_BALL.get())).save(recipeConsumer);
 
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ItemInit.GRANITE_CLAY_BALL.get()), ItemInit.GRANITE_BRICK.get(),
+                        0.3F, 200)
+                .unlockedBy("has_granite_clay_ball", has(ItemInit.GRANITE_CLAY_BALL.get())).save(recipeConsumer);
     }
 
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {
