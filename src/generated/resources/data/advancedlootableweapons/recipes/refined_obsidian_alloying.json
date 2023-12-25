@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "advancedlootableweapons:obsidian_shard"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "tag": "forge:ingots/steel"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:refined_obsidian_ingot",
+    "count": 2
+  }
+}

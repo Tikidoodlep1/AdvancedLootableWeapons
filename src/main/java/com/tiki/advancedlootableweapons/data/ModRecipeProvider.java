@@ -31,6 +31,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         crafting(pFinishedRecipeConsumer);
+        smelting(pFinishedRecipeConsumer);
         alloyFurnace(pFinishedRecipeConsumer);
     }
 
@@ -101,11 +102,51 @@ public class ModRecipeProvider extends RecipeProvider {
 
     }
 
+    protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
+
+    }
+
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.BRONZE_INGOT.get(),4)
                 .ingredient1(Tags.Items.INGOTS_COPPER,3)
                 .ingredient2(ModItemTags.INGOTS_TIN,1)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"bronze_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.CRYSTALLITE_INGOT.get(),2)
+                .ingredient1(ModItemTags.INGOTS_STEEL,1)
+                .ingredient2(ItemInit.CRYSTAL.get(),1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"crystallite_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.DUSKSTEEL_INGOT.get(),4)
+                .ingredient1(ModItemTags.INGOTS_STEEL,1)
+                .ingredient2(ModItemTags.INGOTS_SHADOW_PLATINUM,3)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dusksteel_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.FROST_STEEL_INGOT.get(),2)
+                .ingredient1(ModItemTags.INGOTS_PLATINUM,1)
+                .ingredient2(ModItemTags.INGOTS_SILVER,1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"frost_steel_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.KOBOLD_INGOT.get(),4)
+                .ingredient1(BlockInit.FELDSPAR.get(), 1)
+                .ingredient2(Tags.Items.INGOTS_IRON,2)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kobold_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.REFINED_OBSIDIAN_INGOT.get(),2)
+                .ingredient1(ItemInit.OBSIDIAN_SHARD.get(), 1)
+                .ingredient2(ModItemTags.INGOTS_STEEL,1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"refined_obsidian_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.SHADOW_PLATINUM_INGOT.get(),1)
+                .ingredient1(ModItemTags.INGOTS_PLATINUM, 1)
+                .ingredient2(ItemInit.CONGEALED_SHADOW.get(), 1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"shadow_platinum_alloying"));
+
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.STEEL_INGOT.get(),5)
+                .ingredient1(Tags.Items.INGOTS_IRON, 4)
+                .ingredient2(ItemTags.COALS, 1)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"steel_alloying"));
+
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

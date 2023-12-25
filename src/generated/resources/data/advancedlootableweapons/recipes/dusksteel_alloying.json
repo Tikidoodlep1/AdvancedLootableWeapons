@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "forge:ingots/steel"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "tag": "forge:ingots/shadow_platinum"
+      },
+      "count": 3
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:dusksteel_ingot",
+    "count": 4
+  }
+}

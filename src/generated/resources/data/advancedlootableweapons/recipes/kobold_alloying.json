@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "advancedlootableweapons:feldspar"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "tag": "forge:ingots/iron"
+      },
+      "count": 2
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:kobold_ingot",
+    "count": 4
+  }
+}

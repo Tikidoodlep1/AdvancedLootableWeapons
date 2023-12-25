@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "forge:ingots/steel"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "advancedlootableweapons:crystal"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:crystallite_ingot",
+    "count": 2
+  }
+}

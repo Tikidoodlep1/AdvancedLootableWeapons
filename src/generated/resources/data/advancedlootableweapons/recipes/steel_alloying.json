@@ -1,0 +1,21 @@
+{
+  "type": "advancedlootableweapons:alloy_furnace",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "forge:ingots/iron"
+      },
+      "count": 4
+    },
+    {
+      "ingredient": {
+        "tag": "minecraft:coals"
+      },
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:steel_ingot",
+    "count": 5
+  }
+}
