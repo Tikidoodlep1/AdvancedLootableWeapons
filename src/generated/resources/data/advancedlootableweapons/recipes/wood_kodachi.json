@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "advancedlootableweapons:kodachi_head"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:wood_kodachi"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:diorite_brick"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:diorite_bricks"
+  }
+}

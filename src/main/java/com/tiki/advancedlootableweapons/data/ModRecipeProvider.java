@@ -16,6 +16,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
@@ -72,9 +73,36 @@ public class ModRecipeProvider extends RecipeProvider {
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.REFINED_OBSIDIAN_NUGGET.get(),ItemInit.REFINED_OBSIDIAN_INGOT.get(),BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
-        ShapedRecipeBuilder.shaped(itemLookup("wood_dagger")).define('W',ItemInit.DAGGER_HEAD.get()).define('S',Items.STICK)
-                .pattern("W").pattern("S").unlockedBy("has_dagger_head",has(ItemInit.DAGGER_HEAD.get())).save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(itemLookup("wood_battleaxe")).define('W',ItemInit.BATTLEAXE_HEAD.get())
+                .define('S',ItemInit.LONG_WEAPON_HANDLE.get())
+                .pattern("W").pattern("S")
+                .unlockedBy("has_battleaxe_head",has(ItemInit.BATTLEAXE_HEAD.get())).save(recipeConsumer);
+
+        woodenWeapon(recipeConsumer,ItemInit.DAGGER_HEAD.get());
+        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI_HEAD.get());
+        woodenWeapon(recipeConsumer,ItemInit.KODACHI_HEAD.get());
+        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get());
+        woodenWeapon(recipeConsumer,ItemInit.SABRE_HEAD.get());
+
+        twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
+        twoByTwo(recipeConsumer,BlockInit.GRANITE_BRICKS.get(),ItemInit.GRANITE_BRICK.get());
+
+        twoByTwo(recipeConsumer,BlockInit.DIORITE_CLAY.get(),ItemInit.DIORITE_CLAY_BALL.get());
+        twoByTwo(recipeConsumer,BlockInit.GRANITE_CLAY.get(),ItemInit.GRANITE_CLAY_BALL.get());
+
+    }
+
+    protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {
+        ShapedRecipeBuilder.shaped(result).define('#', ing)
+                .pattern("##").pattern("##")
+                .unlockedBy("has_brick", has(ing)).save(consumer);
+    }
+
+    protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head) {
+        String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
+        ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',Items.STICK)
+                .pattern("W").pattern("S").unlockedBy("has_"+base+"_head",has(head)).save(consumer);
     }
 
     protected static void nuggetIngotBlockRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer,ItemLike nugget,ItemLike ingot,ItemLike block

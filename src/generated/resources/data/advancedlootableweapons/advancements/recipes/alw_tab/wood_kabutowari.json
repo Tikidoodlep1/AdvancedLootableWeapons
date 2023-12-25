@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:wood_kabutowari"
+    ]
+  },
+  "criteria": {
+    "has_kabutowari_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:kabutowari_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:wood_kabutowari"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_kabutowari_head",
+      "has_the_recipe"
+    ]
+  ]
+}
