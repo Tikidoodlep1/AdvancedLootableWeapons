@@ -116,19 +116,19 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         duskSteel();
 
-        oneLayerItem(ItemInit.CHAIN_LINK_IRON.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_GOLD.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_COPPER.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_SILVER.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_BRONZE.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_PLATINUM.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_STEEL.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_OBSIDIAN.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_KOBOLD.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_SHADOW_PLATINUM.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_FROST_STEEL.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_CRYSTALLITE.get());
-        oneLayerItem(ItemInit.CHAIN_LINK_DUSKSTEEL.get());
+        oneLayerItem(ItemInit.IRON_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.GOLD_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.COPPER_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.SILVER_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.BRONZE_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.PLATINUM_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.STEEL_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.OBSIDIAN_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.KOBOLD_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.FROST_STEEL_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_LINK.get());
 
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {

@@ -74,19 +74,23 @@ public class ModRecipeProvider extends RecipeProvider {
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
 
-        ShapedRecipeBuilder.shaped(itemLookup("wood_battleaxe")).define('W',ItemInit.BATTLEAXE_HEAD.get())
-                .define('S',ItemInit.LONG_WEAPON_HANDLE.get())
-                .pattern("W").pattern("S")
-                .unlockedBy("has_battleaxe_head",has(ItemInit.BATTLEAXE_HEAD.get())).save(recipeConsumer);
-
-        woodenWeapon(recipeConsumer,ItemInit.DAGGER_HEAD.get());
-        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI_HEAD.get());
-        woodenWeapon(recipeConsumer,ItemInit.KODACHI_HEAD.get());
-        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get());
-        woodenWeapon(recipeConsumer,ItemInit.SABRE_HEAD.get());
+        woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.CLEAVER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.DAGGER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.LONGSWORD_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.MACE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.RAPIER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.SABRE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.STAFF_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.SPEAR_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.TALWAR_HEAD.get(),false);
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_BRICKS.get(),ItemInit.GRANITE_BRICK.get());
+        twoByTwo(recipeConsumer,Blocks.OBSIDIAN,ItemInit.OBSIDIAN_SHARD.get());
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_CLAY.get(),ItemInit.DIORITE_CLAY_BALL.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_CLAY.get(),ItemInit.GRANITE_CLAY_BALL.get());
@@ -99,9 +103,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(ing)).save(consumer);
     }
 
-    protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head) {
+    protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head,boolean longHandle) {
+        Item handle = longHandle ? ItemInit.LONG_WEAPON_HANDLE.get() : Items.STICK;
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
-        ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',Items.STICK)
+        ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',handle)
                 .pattern("W").pattern("S").unlockedBy("has_"+base+"_head",has(head)).save(consumer);
     }
 
