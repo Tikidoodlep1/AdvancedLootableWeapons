@@ -1,7 +1,5 @@
 package com.tiki.advancedlootableweapons.blocks.block_entity;
 
-import java.util.Optional;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -13,8 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.util.Mth;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -35,263 +32,293 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider {
-	public static final int SLOT_INPUT_1 = 0;
-	public static final int SLOT_INPUT_2 = 1;
-	public static final int SLOT_FUEL = 2;
-	public static final int SLOT_RESULT = 3;
-	public static final int DATA_LIT_TIME = 0;
-	public static final int DATA_LIT_DURATION = 1;
-	public static final int DATA_COOKING_PROGRESS = 2;
-	public static final int DATA_COOKING_TOTAL_TIME = 3;
-	public static final int NUM_DATA_VALUES = 4;
-	public static final int MAX_COOKING_TIME = 266;
-	public static final int BURN_COOL_SPEED = 2;
-	protected NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
-	private int totalLitTime;
-	private int litTime;
-	private int litDuration;
-	private int cookingProgress = 0;
-	private int cookingTotalTime = MAX_COOKING_TIME;
-	protected final ContainerData dataAccess = new ContainerData() {
-	   public int get(int data) {
-	      switch(data) {
-	      case 0:
-	         return AlloyFurnaceBlockEntity.this.litTime;
-	      case 1:
-	         return AlloyFurnaceBlockEntity.this.litDuration;
-	      case 2:
-	         return AlloyFurnaceBlockEntity.this.cookingProgress;
-	      case 3:
-	         return AlloyFurnaceBlockEntity.this.cookingTotalTime;
-	      default:
-	         return 0;
-	      }
-	   }
-	   
-	   public void set(int data, int val) {
-	      switch(data) {
-	      case 0:
-	    	  AlloyFurnaceBlockEntity.this.litTime = val;
-	         break;
-	      case 1:
-	     	 AlloyFurnaceBlockEntity.this.litDuration = val;
-	         break;
-	      case 2:
-	     	 AlloyFurnaceBlockEntity.this.cookingProgress = val;
-	         break;
-	      case 3:
-	     	 AlloyFurnaceBlockEntity.this.cookingTotalTime = val;
-	      }
-	   }
+    public static final int SLOT_INPUT_1 = 0;
+    public static final int SLOT_INPUT_2 = 1;
+    public static final int SLOT_FUEL = 2;
+    public static final int SLOT_RESULT = 3;
+    public static final int DATA_LIT_TIME = 0;
+    public static final int DATA_LIT_DURATION = 1;
+    public static final int DATA_COOKING_PROGRESS = 2;
+    public static final int DATA_COOKING_TOTAL_TIME = 3;
+    public static final int NUM_DATA_VALUES = 4;
+    public static final int MAX_COOKING_TIME = 266;
+    public static final int BURN_COOL_SPEED = 2;
+    protected NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
+    private int totalLitTime;
+    private int litTime;
+    private int litDuration;
+    private int cookingProgress = 0;
+    private int cookingTotalTime = MAX_COOKING_TIME;
 
-	   @Override
-	   public int getCount() {
-		   return 4;
-	   }
-	   
-	};
-	
-	private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
-		@Override
-		protected void onContentsChanged(int slot) {
-			setChanged();
-		}
-	};
+    private AlloyFurnaceRecipe cachedRecipe = null;
 
-	private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-	
-	public AlloyFurnaceBlockEntity(BlockPos pos, BlockState state) {
-		super(BlockEntityInit.ALLOY_FURNACE_TE.get(), pos, state);
-	}
+    private Component name;
+    protected final ContainerData dataAccess = new ContainerData() {
+        public int get(int data) {
+            switch (data) {
+                case DATA_LIT_TIME:
+                    return AlloyFurnaceBlockEntity.this.litTime;
+                case 1:
+                    return AlloyFurnaceBlockEntity.this.litDuration;
+                case DATA_COOKING_PROGRESS:
+                    return AlloyFurnaceBlockEntity.this.cookingProgress;
+                case 3:
+                    return AlloyFurnaceBlockEntity.this.cookingTotalTime;
+                default:
+                    return 0;
+            }
+        }
 
-	@Nullable
-	@Override
-	public AbstractContainerMenu createMenu(int containerId, Inventory inv, Player player) {
-		return new AlloyFurnaceContainer(containerId, inv, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
-	}
+        public void set(int data, int val) {
+            switch (data) {
+                case DATA_LIT_TIME:
+                    AlloyFurnaceBlockEntity.this.litTime = val;
+                    break;
+                case 1:
+                    AlloyFurnaceBlockEntity.this.litDuration = val;
+                    break;
+                case DATA_COOKING_PROGRESS:
+                    AlloyFurnaceBlockEntity.this.cookingProgress = val;
+                    break;
+                case 3:
+                    AlloyFurnaceBlockEntity.this.cookingTotalTime = val;
+            }
+        }
 
-	@Override
-	public Component getDisplayName() {
-		return new TextComponent("Alloy Furnace");
-	}
+        @Override
+        public int getCount() {
+            return 4;
+        }
 
-	@Nonnull
-	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return lazyItemHandler.cast();
-		}
-		return super.getCapability(cap, side);
-	}
-	
-	private boolean isLit() {
-	   return this.dataAccess.get(DATA_LIT_TIME) > 0;
-	}
-	
-	@Override
-	public void onLoad() {
-		super.onLoad();
-		lazyItemHandler = LazyOptional.of(() -> itemHandler);
-	}
-	
-	@Override
-	public void invalidateCaps() {
-		super.invalidateCaps();
-		lazyItemHandler.invalidate();
-	}
-	
-	@Override
-	protected void saveAdditional(CompoundTag tag) {
-		tag.put("inventory", itemHandler.serializeNBT());
-		super.saveAdditional(tag);
-		tag.putInt("BurnTime", this.dataAccess.get(DATA_LIT_TIME));
-	    tag.putInt("CookTime", this.dataAccess.get(DATA_LIT_DURATION));
-	    tag.putInt("CookTimeTotal", this.dataAccess.get(DATA_COOKING_TOTAL_TIME));
-	    ContainerHelper.saveAllItems(tag, this.inventory);
-	}
-	
-	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
-		itemHandler.deserializeNBT(tag.getCompound("inventory"));
-	    this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-	    ContainerHelper.loadAllItems(tag, this.inventory);
-	    this.dataAccess.set(DATA_LIT_TIME, tag.getInt("BurnTime"));
-	    this.dataAccess.set(DATA_COOKING_PROGRESS, tag.getInt("CookTime"));
-	    this.dataAccess.set(DATA_COOKING_TOTAL_TIME, tag.getInt("CookTimeTotal"));
-	    this.litDuration = ForgeHooks.getBurnTime(this.itemHandler.getStackInSlot(SLOT_FUEL), RecipeType.SMELTING);
-	}
-	
-	public void drops() {
-		SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-		for(int i = 0; i < itemHandler.getSlots(); i++) {
-			inventory.setItem(i,  itemHandler.getStackInSlot(i));
-		}
-	}
-	
-	public static void tick(Level world, BlockPos pos, BlockState state, AlloyFurnaceBlockEntity entity) {
-//		ItemStack input1 = entity.itemHandler.getStackInSlot(SLOT_INPUT_1);
-//	    ItemStack input2 = entity.itemHandler.getStackInSlot(SLOT_INPUT_2);
-//	    Recipe<Integer> recipe = AlloyFurnaceRecipes.INSTANCE.getRecipe(input1, input2);
-//		if(recipe != null && hasNotReachedStackLimit(entity)) {
-//			smeltItem(world, pos, state, entity, recipe);
-//		}else {
-//			entity.dataAccess.set(DATA_COOKING_PROGRESS, 0);
-//			setChanged(world, pos, state);
-//		}
-		if(hasRecipe(entity)) {
-			entity.cookingProgress++;
-			setChanged(world, pos, state);
-			if(entity.cookingProgress >= entity.cookingTotalTime) {
-				smeltItem(entity, world, state, pos);
-			}
-		}else {
-			entity.cookingProgress = 0;
-			setChanged(world, pos, state);
-		}
-	}
-	
-	private static boolean hasRecipe(AlloyFurnaceBlockEntity entity) {
-		Level level = entity.level;
-		SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-		for(int i = 0; i < entity.itemHandler.getSlots(); i++) {
-			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
-		}
-		
-		Optional<AlloyFurnaceRecipe> match = level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, inv, level);
-		//System.out.println("Is Recipe Match Present? " + match.isPresent());
-		return match.isPresent() && canMakeRecipe(entity, match.get().getResultItem());
-	}
-	
-	private static void smeltItem(AlloyFurnaceBlockEntity entity, Level level, BlockState state, BlockPos pos) {		
-		boolean flag = entity.isLit();
-	    boolean flag1 = false;
-	    if (entity.isLit()) {
-	       entity.dataAccess.set(0, --entity.litTime);
-	       if(entity.dataAccess.get(DATA_LIT_TIME) == 0) {
-	    	   entity.totalLitTime = 0;
-	       }
-	    }
-	    
-	    ItemStack fuel = entity.itemHandler.getStackInSlot(SLOT_FUEL);
-	    
-	    if (entity.isLit() || !fuel.isEmpty()) {
-	    	entity.dataAccess.set(DATA_COOKING_TOTAL_TIME, MAX_COOKING_TIME);
-	        if (!entity.isLit()) {
-	        	entity.dataAccess.set(DATA_LIT_TIME, ForgeHooks.getBurnTime(fuel, RecipeType.SMELTING));
-	        	entity.totalLitTime = ForgeHooks.getBurnTime(fuel, RecipeType.SMELTING);
-	        	entity.dataAccess.set(DATA_LIT_DURATION, entity.litTime);
-	        	
-	            if (entity.isLit()) {
-	            	flag1 = true;
-	            	if (fuel.hasContainerItem())
-	            		entity.itemHandler.setStackInSlot(SLOT_FUEL, fuel.getContainerItem());
-	            	else
-	            	if (!fuel.isEmpty()) {
-	            		fuel.shrink(1);
-	            		state = state.setValue(AbstractFurnaceBlock.LIT, Boolean.valueOf(true));
-	            		if (fuel.isEmpty()) {
-	            			entity.itemHandler.setStackInSlot(SLOT_FUEL, fuel.getContainerItem());
-	            		}
-	            	}
-	            }
-	        }
-	        
-	        if (entity.isLit()) {
-	        	entity.dataAccess.set(DATA_COOKING_PROGRESS, ++entity.cookingProgress);
-	        	//System.out.println("PROGRESS: " + entity.dataAccess.get(DATA_COOKING_PROGRESS));
-	            if(entity.dataAccess.get(DATA_COOKING_PROGRESS) >= entity.dataAccess.get(DATA_COOKING_TOTAL_TIME)) {
-	            	entity.dataAccess.set(DATA_COOKING_PROGRESS, 0);
-	            	SimpleContainer inv = new SimpleContainer(entity.itemHandler.getSlots());
-	        		for(int i = 0; i < entity.itemHandler.getSlots(); i++) {
-	        			inv.setItem(i, entity.itemHandler.getStackInSlot(i));
-	        		}
-	        		
-	        		Optional<AlloyFurnaceRecipe> match = level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, inv, level);
-	        		if(match.isPresent()) {
-	        			entity.itemHandler.extractItem(SLOT_INPUT_1, 1, false);
-	        			entity.itemHandler.extractItem(SLOT_INPUT_2, 1, false);
-	        			entity.itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(match.get().getResultItem().getItem(), entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + match.get().getResultItem().getCount()));
-	        		}
-	                flag1 = true;
-	            }
-	        }else {
-	        	entity.dataAccess.set(DATA_COOKING_PROGRESS, 0);
-	         }
-	      }else if (!entity.isLit() && entity.dataAccess.get(DATA_COOKING_PROGRESS) > 0) {
-	    	  entity.dataAccess.set(DATA_COOKING_PROGRESS, Mth.clamp(entity.dataAccess.get(DATA_COOKING_PROGRESS) - 2, 0, entity.dataAccess.get(DATA_COOKING_TOTAL_TIME)));
-	      }
-	    
-	      if (flag != entity.isLit()) {
-	         flag1 = true;
-	         state = state.setValue(AbstractFurnaceBlock.LIT, Boolean.valueOf(entity.isLit()));
-	         level.setBlock(pos, state, 3);
-	      }
+    };
 
-	      if (flag1) {
-	         setChanged(level, pos, state);
-	      }
-	}
-	
-	public int getMaxBurnDuration() {
-		return this.totalLitTime;
-	}
+    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+            if (slot == SLOT_INPUT_1 || slot == SLOT_INPUT_2) {
+                lookForRecipe = true;
+            } else if (slot == SLOT_FUEL) {
+                findFuel = true;
+            }
+        }
+    };
 
-//	private void burn(Recipe<Integer> recipe, ItemStackHandler itemHandler) {
-//		int input1Count = recipe.getItemCount(this.itemHandler.getStackInSlot(SLOT_INPUT_1).getItem());
-//		int input2Count = recipe.getItemCount(this.itemHandler.getStackInSlot(SLOT_INPUT_2).getItem());
-//		this.itemHandler.getStackInSlot(SLOT_INPUT_1).shrink(input1Count);
-//		this.itemHandler.getStackInSlot(SLOT_INPUT_2).shrink(input2Count);
-//		itemHandler.setStackInSlot(SLOT_RESULT, new ItemStack(recipe.getOutput().getItem(), itemHandler.getStackInSlot(SLOT_RESULT).getCount() + recipe.getOutput().getCount()));
-//	}
-	
-	private static boolean canMakeRecipe(AlloyFurnaceBlockEntity entity, ItemStack stack) {
-		return entity.itemHandler.getStackInSlot(SLOT_RESULT) == ItemStack.EMPTY || (entity.itemHandler.getStackInSlot(SLOT_RESULT).getItem() == stack.getItem() && entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + stack.getCount() < entity.itemHandler.getStackInSlot(SLOT_RESULT).getMaxStackSize());
-	}
-	
-	public int getContainerSize() {
-		return 4;
-	}
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+
+    public AlloyFurnaceBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityInit.ALLOY_FURNACE_TE.get(), pos, state);
+    }
+
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, Inventory inv, Player player) {
+        return new AlloyFurnaceContainer(containerId, inv, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level, worldPosition));
+    }
+
+    public void setCustomName(Component pName) {
+        this.name = pName;
+    }
+
+    public Component getName() {
+        return this.name != null ? this.name : this.getDefaultName();
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return this.getName();
+    }
+
+    @Nullable
+    public Component getCustomName() {
+        return this.name;
+    }
+
+    protected Component getDefaultName() {
+        return new TranslatableComponent("container.advancedlootableweapons.alloy_furnace");
+    }
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return lazyItemHandler.cast();
+        }
+        return super.getCapability(cap, side);
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyItemHandler.invalidate();
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        tag.put("inventory", itemHandler.serializeNBT());
+        super.saveAdditional(tag);
+        tag.putInt("BurnTime", this.litTime);
+        tag.putInt("CookTime", this.cookingProgress);
+        tag.putInt("CookTimeTotal", this.cookingTotalTime);
+        ContainerHelper.saveAllItems(tag, this.inventory);
+        if (this.name != null) {
+            tag.putString("CustomName", Component.Serializer.toJson(this.name));
+        }
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        itemHandler.deserializeNBT(tag.getCompound("inventory"));
+        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag, this.inventory);
+        this.litTime = tag.getInt("BurnTime");
+        this.cookingProgress = tag.getInt("CookTime");
+        this.cookingTotalTime = tag.getInt("CookTimeTotal");
+        this.litDuration = ForgeHooks.getBurnTime(this.itemHandler.getStackInSlot(SLOT_FUEL), RecipeType.SMELTING);
+        if (tag.contains("CustomName", 8)) {
+            this.name = Component.Serializer.fromJson(tag.getString("CustomName"));
+        }
+    }
+
+    protected void serverTick(Level level,BlockPos pos,BlockState state) {
+        if (lookForRecipe) {
+            lookForRecipe();
+            lookForRecipe = false;
+            if (cachedRecipe != null) {
+                findFuel = true;
+            }
+        }
+
+        boolean wasLit = isLit();
+
+        //checking fuel
+        if (wasLit) {
+            litTime--;
+        } else if (findFuel) {
+            findFuel();
+            //didn't find fuel, reset to 0 and end early
+            if (!isLit()) {
+                cookingProgress = 0;
+            }
+        }
+
+        if (cachedRecipe != null) {
+            if (hasRoom() && isLit()) {
+                cookingProgress++;
+                //the recipe is finished, cook the items and reset the timer
+                if (cookingProgress >= cookingTotalTime) {
+                    smelt();
+                    cookingProgress = 0;
+                }
+            }
+        }
+
+        if (wasLit != isLit()) {
+            state = state.setValue(AbstractFurnaceBlock.LIT,isLit());
+            level.setBlock(pos, state, 3);
+        }
+    }
+
+    //find fuel and use it to cook
+    protected void findFuel() {
+        //there is no recipe, don't look for fuel
+        if (cachedRecipe == null) return;
+        //don't bother looking for fuel if there's no room left
+        if (!hasRoom()) return;
+        int burnTime = ForgeHooks.getBurnTime(itemHandler.getStackInSlot(SLOT_FUEL),null);
+        if (burnTime > 0) {
+            this.totalLitTime = burnTime;
+            this.litTime = burnTime;
+            itemHandler.extractItem(SLOT_FUEL,1,false);
+            findFuel = false;
+        }
+    }
+
+    private boolean isLit() {
+        return this.litTime > 0;
+    }
+
+    protected void smelt() {
+        boolean normalOrientation = getOrientation();
+
+        if (normalOrientation) {
+            //shrink 1st stack using 1st recipe input
+            itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount1(), false);
+            //shrink 2nd stack using 2nd recipe input
+            itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount2(), false);
+        } else {
+            //shrink 1st stack using 2nd recipe input
+            itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount2(), false);
+            //shrink 2nd stack using 1st recipe input
+            itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount1(), false);
+        }
+        //add result to output
+        itemHandler.insertItem(SLOT_RESULT, cachedRecipe.getResultItem(), false);
+    }
+
+    protected boolean getOrientation() {
+        return cachedRecipe.normalOrientation(new RecipeWrapper(itemHandler));
+    }
+
+    //check if there's enough room to process the current recipe
+    protected boolean hasRoom() {
+        ItemStack result = cachedRecipe.assemble(null);
+        ItemStack output = itemHandler.getStackInSlot(SLOT_RESULT);
+        //if the output is empty, then there's always enough room
+        if (output.isEmpty()) return true;
+        //if the result of the recipe does NOT match what is currently in the output, like say bronze and steel, there's no room
+        if (!ItemStack.isSameItemSameTags(result, output)) return false;
+        //else make sure current recipe result + existing count does not go over the max stack size
+        return output.getCount() + result.getCount() <= output.getCount();
+    }
+
+    private boolean lookForRecipe = true;
+    private boolean findFuel = true;
+
+    protected void lookForRecipe() {
+        //check if the prior recipe matches
+        if (cachedRecipe != null) {
+            if (cachedRecipe.matches(new RecipeWrapper(itemHandler), level)) {
+                return;
+            }
+            //else invalidate and set progress to 0
+            cachedRecipe = null;
+            cookingProgress = 0;
+        }
+        //lookup a new recipe
+        cachedRecipe = level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, new RecipeWrapper(itemHandler), level).orElse(null);
+    }
+
+    public void drops() {
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+            inventory.setItem(i, itemHandler.getStackInSlot(i));
+        }
+    }
+
+    public static void tick(Level world, BlockPos pos, BlockState state, AlloyFurnaceBlockEntity entity) {
+        entity.serverTick(world,pos,state);
+    }
+
+    public int getMaxBurnDuration() {
+        return this.totalLitTime;
+    }
+
+    private static boolean canMakeRecipe(AlloyFurnaceBlockEntity entity, ItemStack stack) {
+        return entity.itemHandler.getStackInSlot(SLOT_RESULT) == ItemStack.EMPTY || (entity.itemHandler.getStackInSlot(SLOT_RESULT).getItem() == stack.getItem() && entity.itemHandler.getStackInSlot(SLOT_RESULT).getCount() + stack.getCount() < entity.itemHandler.getStackInSlot(SLOT_RESULT).getMaxStackSize());
+    }
+
+    public int getContainerSize() {
+        return 4;
+    }
 }

@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class AlloyFurnaceBuilder implements RecipeBuilder {
+public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
 
     private final Item result;
     private final int count;
@@ -30,43 +30,43 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public AlloyFurnaceBuilder(ItemLike pResult, int pCount) {
+    public AlloyFurnaceRecipeBuilder(ItemLike pResult, int pCount) {
         this.result = pResult.asItem();
         this.count = pCount;
     }
 
-    public static AlloyFurnaceBuilder alloy(ItemLike result,int count) {
-        return new AlloyFurnaceBuilder(result,count);
+    public static AlloyFurnaceRecipeBuilder alloy(ItemLike result, int count) {
+        return new AlloyFurnaceRecipeBuilder(result,count);
     }
 
-    public static AlloyFurnaceBuilder alloy(ItemLike result) {
+    public static AlloyFurnaceRecipeBuilder alloy(ItemLike result) {
         return alloy(result,1);
     }
 
-    public AlloyFurnaceBuilder ingredient1(ItemLike ingredient,int count) {
+    public AlloyFurnaceRecipeBuilder ingredient1(ItemLike ingredient, int count) {
         return ingredient1(Ingredient.of(ingredient),count);
     }
 
-    public AlloyFurnaceBuilder ingredient1(TagKey<Item> ingredient, int count) {
+    public AlloyFurnaceRecipeBuilder ingredient1(TagKey<Item> ingredient, int count) {
         return ingredient1(Ingredient.of(ingredient),count);
     }
 
-    public AlloyFurnaceBuilder ingredient1(Ingredient ingredient,int count) {
+    public AlloyFurnaceRecipeBuilder ingredient1(Ingredient ingredient, int count) {
         ingredient1 = ingredient;
         count1 = count;
         return this;
     }
 
-    public AlloyFurnaceBuilder ingredient2(ItemLike ingredient,int count) {
+    public AlloyFurnaceRecipeBuilder ingredient2(ItemLike ingredient, int count) {
         return ingredient2(Ingredient.of(ingredient),count);
     }
 
-    public AlloyFurnaceBuilder ingredient2(TagKey<Item> ingredient, int count) {
+    public AlloyFurnaceRecipeBuilder ingredient2(TagKey<Item> ingredient, int count) {
         return ingredient2(Ingredient.of(ingredient),count);
     }
 
 
-    public AlloyFurnaceBuilder ingredient2(Ingredient ingredient,int count) {
+    public AlloyFurnaceRecipeBuilder ingredient2(Ingredient ingredient, int count) {
         ingredient2 = ingredient;
         count2 = count;
         return this;
@@ -75,12 +75,12 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
 
 
     @Override
-    public AlloyFurnaceBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
+    public AlloyFurnaceRecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         return this;
     }
 
     @Override
-    public AlloyFurnaceBuilder group(@Nullable String pGroupName) {
+    public AlloyFurnaceRecipeBuilder group(@Nullable String pGroupName) {
         return this;
     }
 
@@ -92,9 +92,7 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
     @Override
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
         pFinishedRecipeConsumer.accept(new Result(pRecipeId,  this.result,this.count,
-                this.ingredient1,this.ingredient2, this.count1,this.count2,
-                this.advancement,
-                new ResourceLocation(pRecipeId.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+                this.ingredient1,this.ingredient2, this.count1,this.count2));
     }
 
 
@@ -106,11 +104,9 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
         private final Ingredient ingredient2;
         private final int count1;
         private final int count2;
-        private final Advancement.Builder advancement;
-        private final ResourceLocation advancementId;
 
-        public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient1,Ingredient ingredient2,
-                      int count1,int count2,Advancement.Builder pAdvancement, ResourceLocation pAdvancementId) {
+        public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient1, Ingredient ingredient2,
+                      int count1, int count2) {
             this.id = pId;
             this.result = pResult;
             this.count = pCount;
@@ -118,8 +114,6 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
             this.ingredient2 = ingredient2;
             this.count1 = count1;
             this.count2 = count2;
-            this.advancement = pAdvancement;
-            this.advancementId = pAdvancementId;
         }
 
         public void serializeRecipeData(JsonObject pJson) {
@@ -165,7 +159,7 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
          */
         @javax.annotation.Nullable
         public JsonObject serializeAdvancement() {
-            return this.advancement.serializeToJson();
+            return null;
         }
 
         /**
@@ -174,7 +168,7 @@ public class AlloyFurnaceBuilder implements RecipeBuilder {
          */
         @javax.annotation.Nullable
         public ResourceLocation getAdvancementId() {
-            return this.advancementId;
+            return null;
         }
     }
 

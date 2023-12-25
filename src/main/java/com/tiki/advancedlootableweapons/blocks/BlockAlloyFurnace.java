@@ -76,6 +76,6 @@ public class BlockAlloyFurnace extends BaseEntityBlock {
 	
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, BlockEntityInit.ALLOY_FURNACE_TE.get(), AlloyFurnaceBlockEntity::tick);
+		return world.isClientSide ? null :createTickerHelper(type, BlockEntityInit.ALLOY_FURNACE_TE.get(), AlloyFurnaceBlockEntity::tick);
 	}
 }

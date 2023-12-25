@@ -24,7 +24,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleBlockItem(BlockInit.FORGE.get().asItem());
-
+        simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
 
         simpleBlockItem(BlockInit.CRYSTALLITE_ORE.get());
         simpleBlockItem(BlockInit.PLATINUM_ORE.get());

@@ -17,54 +17,56 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class AlloyFurnaceContainer extends AbstractContainerMenu {
 
-	private final ContainerData data;
-	private final ContainerLevelAccess access;
+    private final ContainerData data;
+    private final ContainerLevelAccess access;
 
-	public AlloyFurnaceContainer(int id, Inventory inv) {
-		this(id, inv,new ItemStackHandler(4), new SimpleContainerData(4),ContainerLevelAccess.NULL);
-	}
-	
-	public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
-		super(MenuInit.ALLOY_FURNACE_CONTAINER.get(), id);
-		checkContainerSize(inv, 4);
-		this.access = access;
-		this.data = data;
-		
-		this.addPlayerInv(inv);
-		this.addPlayerHotbar(inv);
-		
-			this.addSlot(new SlotItemHandler(handler, 0, 45, 17));
-			this.addSlot(new SlotItemHandler(handler, 1, 68, 17));
-			this.addSlot(new SlotItemHandler(handler, 2, 57, 54));
-			this.addSlot(new SlotItemHandler(handler, 3, 116, 36));
-		
-		addDataSlots(data);
-	}
-	
-	public boolean isCrafting() {
-		return data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS) > 0;
-	}
-	
-	public int getScaledProgress() {
-		int progress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS);
-		int maxProgress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_TOTAL_TIME);
-		int progressArrowSize = 26;
-		
-		return maxProgress != 0 && progress != 0 ? (progress / maxProgress) * progressArrowSize : 0;
-	}
-	
-	public int getLitTime() {
-		double time = data.get(AlloyFurnaceBlockEntity.DATA_LIT_TIME);
-		double totalTime = 1;//todo//this.entity.getMaxBurnDuration();
-		double percent = 0;
-		if(totalTime != 0) {
-			percent = time/totalTime;
-		}
-		
-		return ((int)(percent * 100)/15);
-	}
-	
-	// CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
+    public AlloyFurnaceContainer(int id, Inventory inv) {
+        this(id, inv, new ItemStackHandler(4), new SimpleContainerData(4), ContainerLevelAccess.NULL);
+    }
+
+    public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
+        super(MenuInit.ALLOY_FURNACE_CONTAINER.get(), id);
+        checkContainerSize(inv, 4);
+        this.access = access;
+        this.data = data;
+
+        this.addPlayerInv(inv);
+        this.addPlayerHotbar(inv);
+
+        this.addSlot(new SlotItemHandler(handler, 0, 45, 17));
+        this.addSlot(new SlotItemHandler(handler, 1, 68, 17));
+        this.addSlot(new SlotItemHandler(handler, 2, 57, 54));
+        this.addSlot(new SlotItemHandler(handler, 3, 116, 36));
+
+        addDataSlots(data);
+    }
+
+    public boolean isCrafting() {
+        return data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS) > 0;
+    }
+
+    public int getScaledProgress() {
+        int progress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_PROGRESS);
+        int maxProgress = data.get(AlloyFurnaceBlockEntity.DATA_COOKING_TOTAL_TIME);
+        int progressArrowSize = 26;
+
+        if (maxProgress == 0) return 0;
+
+        return (int) (((double)progress / maxProgress) * progressArrowSize);
+    }
+
+    public int getLitTime() {
+        double time = data.get(AlloyFurnaceBlockEntity.DATA_LIT_TIME);
+        double totalTime = data.get(AlloyFurnaceBlockEntity.DATA_LIT_DURATION);
+
+        if (totalTime == 0) return 0;
+
+        double percent = time / totalTime;
+
+        return(int) (percent * 15);
+    }
+
+    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
     // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
     // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
@@ -114,23 +116,23 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
-	
-	@Override
-	public boolean stillValid(Player player) {
-		return stillValid(access, player, BlockInit.ALLOY_FURNACE.get());
-	}
-	
-	private void addPlayerInv(Inventory playerInventory) {
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 9; j++) {
-				this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-			}
-		}
-	}
-	
-	private void addPlayerHotbar(Inventory playerInventory) {
-		for(int i = 0; i < 9; i++) {
-			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-		}
-	}
+
+    @Override
+    public boolean stillValid(Player player) {
+        return stillValid(access, player, BlockInit.ALLOY_FURNACE.get());
+    }
+
+    private void addPlayerInv(Inventory playerInventory) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+            }
+        }
+    }
+
+    private void addPlayerHotbar(Inventory playerInventory) {
+        for (int i = 0; i < 9; i++) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
+    }
 }

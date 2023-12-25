@@ -24,24 +24,27 @@ public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceCont
 		RenderSystem.setShaderTexture(0, TEXTURE);
 		int x = (width - imageWidth) / 2;
 		int y = (height - imageHeight) / 2;
-		
+
 		this.blit(poseStack, x, y, 0, 0, imageWidth, imageHeight);
-		
-		
+
+
 		if(menu.isCrafting()) {
-			blit(poseStack, x + 79, y + 36, 176, 14, menu.getScaledProgress(), 17);
-			int litTime = menu.getLitTime();
+			int cookProgress = menu.getScaledProgress();
+			blit(poseStack, x + 79, y + 36, 176, 14, cookProgress, 17);
+		}
+
+		int litTime = menu.getLitTime();
+		if (litTime > 0) {
 			blit(poseStack, x + 58, y + 51 - litTime, 176, 14 - litTime, 14, litTime + 1);
-			
 		}
 	}
-	
+
 	@Override
 	public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
 		renderBackground(poseStack);
 		super.render(poseStack, mouseX, mouseY, delta);
 		renderTooltip(poseStack, mouseX, mouseY);
-		
+
 	}
 
 }

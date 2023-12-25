@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -102,7 +102,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {
-        AlloyFurnaceBuilder.alloy(ItemInit.BRONZE_INGOT.get(),4)
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.BRONZE_INGOT.get(),4)
                 .ingredient1(Tags.Items.INGOTS_COPPER,3)
                 .ingredient2(ModItemTags.INGOTS_TIN,1)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"bronze_alloying"));
