@@ -131,6 +131,8 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue OBSIDIAN_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue CRYSTALLITE_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue DUSKSTEEL_ARMOR_HARDNESS;
+
+	public static ForgeConfigSpec.DoubleValue BELLOWS_EXHAUSTION;
 	
 	public static ForgeConfigSpec.IntValue SHADOW_DROP_RATE;
 	public static ForgeConfigSpec.ConfigValue<Boolean> LAND_MOBS_DROP_SHADOW;
@@ -169,7 +171,8 @@ public class CommonConfigHandler {
 		ENABLE_ARMOR_FORGING = BUILDER.comment("Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)").define("Enable Armor Forging", true);
 		DISABLE_VANILLA_ARMORS = BUILDER.comment("Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)").define("Disable Vanilla Armors", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
-		
+		BELLOWS_EXHAUSTION = BUILDER.comment("The amount of exhaustion using a bellows gives the player.").defineInRange("Bellows Exhaustion", 0.1F, 0.0F, 20.0F);
+
 		BUILDER.comment("MATERIAL MODIFICATION");
 		KOBOLD_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F);
 		COPPER_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of copper.").defineInRange("Copper Base Damage", 3.5F, 0F, 100F);

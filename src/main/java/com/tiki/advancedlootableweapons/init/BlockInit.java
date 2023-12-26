@@ -89,7 +89,31 @@ public class BlockInit {
 			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> JAW_CRUSHER = registerBlock("jaw_crusher", () -> new JawCrusherBlock(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.METAL).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
-	
+
+	public static final RegistryObject<Block> OAK_BELLOWS = registerBlock("oak_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
+	public static final RegistryObject<Block> SPRUCE_BELLOWS = registerBlock("spruce_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
+	public static final RegistryObject<Block> BIRCH_BELLOWS = registerBlock("birch_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
+	public static final RegistryObject<Block> JUNGLE_BELLOWS = registerBlock("jungle_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
+	public static final RegistryObject<Block> ACACIA_BELLOWS = registerBlock("acacia_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
+	public static final RegistryObject<Block> DARK_OAK_BELLOWS = registerBlock("dark_oak_bellows", () -> new BellowsBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(1.8F)
+			.noOcclusion().sound(SoundType.WOOD).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
 		RegistryObject<T> toReturn = BLOCKS.register(name, block);
 		registerBlockItem(name, toReturn, tab);

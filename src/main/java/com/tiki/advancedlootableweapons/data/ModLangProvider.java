@@ -270,6 +270,13 @@ public class ModLangProvider extends LanguageProvider {
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
         addDefaultBlock(BlockInit.JAW_CRUSHER);
 
+        addDefaultBlock(BlockInit.OAK_BELLOWS);
+        addDefaultBlock(BlockInit.BIRCH_BELLOWS);
+        addDefaultBlock(BlockInit.JUNGLE_BELLOWS);
+        addDefaultBlock(BlockInit.SPRUCE_BELLOWS);
+        addDefaultBlock(BlockInit.ACACIA_BELLOWS);
+        addDefaultBlock(BlockInit.DARK_OAK_BELLOWS);
+
         addDefaultItem(ItemInit.SHADOW);
         addDefaultItem(ItemInit.CONGEALED_SHADOW);
         addDefaultItem(ItemInit.CRYSTAL);

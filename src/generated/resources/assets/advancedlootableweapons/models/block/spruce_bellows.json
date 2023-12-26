@@ -1,0 +1,6 @@
+{
+  "parent": "advancedlootableweapons:block/bellows",
+  "textures": {
+    "#3": "minecraft:block/spruce_planks"
+  }
+}

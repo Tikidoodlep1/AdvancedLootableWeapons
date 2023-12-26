@@ -25,6 +25,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
+        simpleBlockItem(BlockInit.ADVANCED_FORGE.get());
+
+        simpleBlockItem(BlockInit.OAK_BELLOWS.get());
+        simpleBlockItem(BlockInit.BIRCH_BELLOWS.get());
+        simpleBlockItem(BlockInit.JUNGLE_BELLOWS.get());
+        simpleBlockItem(BlockInit.SPRUCE_BELLOWS.get());
+        simpleBlockItem(BlockInit.ACACIA_BELLOWS.get());
+        simpleBlockItem(BlockInit.DARK_OAK_BELLOWS.get());
 
         simpleBlockItem(BlockInit.CRYSTALLITE_ORE.get());
         simpleBlockItem(BlockInit.PLATINUM_ORE.get());

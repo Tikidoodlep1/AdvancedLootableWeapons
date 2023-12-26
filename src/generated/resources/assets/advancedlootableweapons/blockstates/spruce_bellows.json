@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "advancedlootableweapons:block/spruce_bellows"
+    },
+    "facing=south": {
+      "model": "advancedlootableweapons:block/spruce_bellows",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedlootableweapons:block/spruce_bellows",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "advancedlootableweapons:block/spruce_bellows",
+      "y": 90
+    }
+  }
+}

@@ -42,6 +42,13 @@ public class ModBlockLoot extends BlockLoot {
         dropSelf(BlockInit.JAW_CRUSHER.get());
         dropSelf(BlockInit.ADVANCED_FORGE.get());
 
+        dropSelf(BlockInit.OAK_BELLOWS.get());
+        dropSelf(BlockInit.BIRCH_BELLOWS.get());
+        dropSelf(BlockInit.SPRUCE_BELLOWS.get());
+        dropSelf(BlockInit.DARK_OAK_BELLOWS.get());
+        dropSelf(BlockInit.JUNGLE_BELLOWS.get());
+        dropSelf(BlockInit.ACACIA_BELLOWS.get());
+
         add(BlockInit.FELDSPAR.get(), (block) -> createSingleItemTableWithSilkTouch(block, BlockInit.COBBLED_FELDSPAR.get()));
         dropSelf(BlockInit.COBBLED_FELDSPAR.get());
 
