@@ -40,6 +40,7 @@ public class ModBlockLoot extends BlockLoot {
         dropSelf(BlockInit.FORGE.get());
         dropSelf(BlockInit.ALLOY_FURNACE.get());
         dropSelf(BlockInit.JAW_CRUSHER.get());
+        dropSelf(BlockInit.ADVANCED_FORGE.get());
 
         add(BlockInit.FELDSPAR.get(), (block) -> createSingleItemTableWithSilkTouch(block, BlockInit.COBBLED_FELDSPAR.get()));
         dropSelf(BlockInit.COBBLED_FELDSPAR.get());

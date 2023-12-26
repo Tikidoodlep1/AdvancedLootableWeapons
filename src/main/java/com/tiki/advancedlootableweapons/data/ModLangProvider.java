@@ -260,21 +260,20 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultBlock(BlockInit.DIORITE_BRICKS);
         addDefaultBlock(BlockInit.GRANITE_BRICKS);
 
-        add("block.advancedlootableweapons.block_powder_granite", "Granite Clay Powder");
-        add("block.advancedlootableweapons.block_powder_diorite", "Diorite Clay Powder");
-        add("block.advancedlootableweapons.block_clay_diorite", "Diorite Clay");
-        add("block.advancedlootableweapons.block_clay_granite", "Granite Clay");
-        addBlock(BlockInit.ALLOY_FURNACE, "Alloy Furnace");
-        addBlock(BlockInit.FORGE, "Basic Forge");
-        add("block.advancedlootableweapons.advanced_forge", "Advanced Forge");
+        addDefaultBlock(BlockInit.DIORITE_CLAY_POWDER);
+        addDefaultBlock(BlockInit.GRANITE_CLAY_POWDER);
+        addDefaultBlock(BlockInit.DIORITE_CLAY);
+        addDefaultBlock(BlockInit.GRANITE_CLAY);
+        addDefaultBlock(BlockInit.ALLOY_FURNACE);
+        addDefaultBlock(BlockInit.FORGE);
+        addDefaultBlock(BlockInit.ADVANCED_FORGE);
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
-        add("block.advancedlootableweapons.block_jaw_crusher", "Jaw Crusher");
+        addDefaultBlock(BlockInit.JAW_CRUSHER);
 
-
-        add("item.advancedlootableweapons.shadow", "Shadow");
-        add("item.advancedlootableweapons.shadow_blob", "Congealed Shadow");
-        add("item.advancedlootableweapons.crystal", "Crystal");
-        add("item.advancedlootableweapons.shard_obsidian", "Obsidian Shard");
+        addDefaultItem(ItemInit.SHADOW);
+        addDefaultItem(ItemInit.CONGEALED_SHADOW);
+        addDefaultItem(ItemInit.CRYSTAL);
+        addDefaultItem(ItemInit.OBSIDIAN_SHARD);
 
         addDefaultItem(ItemInit.FELDSPAR_POWDER);
         addDefaultItem(ItemInit.DIORITE_BRICK);

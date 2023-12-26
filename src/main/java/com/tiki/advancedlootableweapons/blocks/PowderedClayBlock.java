@@ -12,11 +12,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlockPowderedClay extends FallingBlock {
+public class PowderedClayBlock extends FallingBlock {
 	
 	private final BlockState clayBlock;
 
-	public BlockPowderedClay(Block clay, Properties prop) {
+	public PowderedClayBlock(Block clay, Properties prop) {
 		super(prop);
 		clayBlock = clay.defaultBlockState();
 	}

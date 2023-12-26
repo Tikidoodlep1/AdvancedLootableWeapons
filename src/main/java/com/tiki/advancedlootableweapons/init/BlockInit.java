@@ -3,11 +3,7 @@ package com.tiki.advancedlootableweapons.init;
 import java.util.function.Supplier;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
-import com.tiki.advancedlootableweapons.blocks.DusksteelBlock;
-import com.tiki.advancedlootableweapons.blocks.ForgeBlock;
-import com.tiki.advancedlootableweapons.blocks.BlockJawCrusher;
-import com.tiki.advancedlootableweapons.blocks.BlockPowderedClay;
+import com.tiki.advancedlootableweapons.blocks.*;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -57,9 +53,9 @@ public class BlockInit {
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> DIORITE_CLAY = registerBlock("diorite_clay", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> GRANITE_CLAY_POWDER = registerBlock("granite_clay_powder", () -> new BlockPowderedClay(BlockInit.GRANITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> GRANITE_CLAY_POWDER = registerBlock("granite_clay_powder", () -> new PowderedClayBlock(BlockInit.GRANITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> DIORITE_CLAY_POWDER = registerBlock("diorite_clay_powder", () -> new BlockPowderedClay(BlockInit.DIORITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> DIORITE_CLAY_POWDER = registerBlock("diorite_clay_powder", () -> new PowderedClayBlock(BlockInit.DIORITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> GRANITE_BRICKS = registerBlock("granite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
@@ -85,11 +81,13 @@ public class BlockInit {
 			.destroyTime(4.1F).explosionResistance(2.8F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB);
 	
 	//Functionals
-	public static final RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace", () -> new BlockAlloyFurnace(BlockBehaviour.Properties.of(Material.STONE)
+	public static final RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace", () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.5F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> FORGE = registerBlock("forge", () -> new ForgeBlock(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> JAW_CRUSHER = registerBlock("jaw_crusher", () -> new BlockJawCrusher(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> ADVANCED_FORGE = registerBlock("advanced_forge", () -> new AdvancedForgeBlock(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
+	public static final RegistryObject<Block> JAW_CRUSHER = registerBlock("jaw_crusher", () -> new JawCrusherBlock(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.METAL).dynamicShape()), ModCreativeTabs.BLOCK_TAB);
 	
 	private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
