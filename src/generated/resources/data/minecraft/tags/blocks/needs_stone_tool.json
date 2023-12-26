@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "advancedlootableweapons:alloy_furnace",
+    "advancedlootableweapons:cobbled_feldspar",
+    "advancedlootableweapons:deepslate_tin_ore",
+    "advancedlootableweapons:diorite_bricks",
+    "advancedlootableweapons:diorite_clay",
+    "advancedlootableweapons:feldspar",
+    "advancedlootableweapons:forge",
+    "advancedlootableweapons:granite_bricks",
+    "advancedlootableweapons:granite_clay",
+    "advancedlootableweapons:jaw_crusher",
+    "advancedlootableweapons:tin_ore"
+  ]
+}

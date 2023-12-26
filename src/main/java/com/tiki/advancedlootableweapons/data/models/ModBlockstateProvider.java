@@ -58,6 +58,9 @@ public class ModBlockstateProvider extends BlockStateProvider {
             return ConfiguredModel.builder().modelFile(models().cubeAll("dusksteel_block_" + phase, name)).build();
         });
 
+        horizontalBlock(BlockInit.JAW_CRUSHER.get(),models().getExistingFile(
+                new ResourceLocation(AdvancedLootableWeapons.MODID,"block/jaw_crusher")),180);
+
         getVariantBuilder(BlockInit.ALLOY_FURNACE.get()).forAllStates(state -> {
             boolean lit = state.getValue(AlloyFurnaceBlock.LIT);
             ResourceLocation side = new ResourceLocation(AdvancedLootableWeapons.MODID, "block/alloy_furnace_side");

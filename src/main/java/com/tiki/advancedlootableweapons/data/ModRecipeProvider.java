@@ -114,6 +114,27 @@ public class ModRecipeProvider extends RecipeProvider {
                         has(ItemInit.GRANITE_BRICK.get()))
                 .save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(BlockInit.JAW_CRUSHER.get())
+                .define('C',ItemTags.STONE_CRAFTING_MATERIALS)
+                .define('I',Tags.Items.INGOTS_IRON)
+                .pattern("I I")
+                .pattern("ICC")
+                .pattern("ICI")
+                .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(BlockInit.ADVANCED_FORGE.get())
+                .define('C',ItemTags.STONE_CRAFTING_MATERIALS)
+                .define('D',BlockInit.DIORITE_BRICKS.get())
+                .define('B',ItemInit.DIORITE_BRICK.get())
+                .define('F',Items.FLINT_AND_STEEL)
+                .define('N',Blocks.NETHERRACK)
+                .pattern("CCC")
+                .pattern("CNF")
+                .pattern("DBD")
+                .unlockedBy("has_netherrack", has(Blocks.NETHERRACK))
+                .save(recipeConsumer);
+
         ShapedRecipeBuilder.shaped(ItemInit.SPEAR_HEAD.get())
                 .define('S',ItemTags.PLANKS)
                 .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "advancedlootableweapons:block/jaw_crusher"
+    },
+    "facing=south": {
+      "model": "advancedlootableweapons:block/jaw_crusher",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advancedlootableweapons:block/jaw_crusher",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "advancedlootableweapons:block/jaw_crusher",
+      "y": 90
+    }
+  }
+}

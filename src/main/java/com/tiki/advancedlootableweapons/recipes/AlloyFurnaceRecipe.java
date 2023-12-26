@@ -172,21 +172,29 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 
 		@Override
 		public AlloyFurnaceRecipe fromNetwork(final ResourceLocation pRecipeId, final FriendlyByteBuf pBuffer) {
-			NonNullList<Ingredient> inputs = NonNullList.withSize(pBuffer.readInt(), Ingredient.EMPTY);
-			for(int i = 0; i < inputs.size(); i++) {
-				inputs.set(i, Ingredient.fromNetwork(pBuffer));
-			}
-			ItemStack output = pBuffer.readItem();
-			return null;//new AlloyFurnaceRecipe(pRecipeId, output, );
+			Ingredient ing1 = Ingredient.fromNetwork(pBuffer);
+			Ingredient ing2 = Ingredient.fromNetwork(pBuffer);
+
+			int count1 = pBuffer.readInt();
+			int count2 = pBuffer.readInt();
+
+			ItemStack result = pBuffer.readItem();
+
+			int cooktime = pBuffer.readInt();
+
+			return new AlloyFurnaceRecipe(pRecipeId,result,ing1,ing2,count1,count2,cooktime);
 		}
 
 		@Override
 		public void toNetwork(final FriendlyByteBuf pBuffer, final AlloyFurnaceRecipe pRecipe) {
-			pBuffer.writeInt(pRecipe.getIngredients().size());
-			for(Ingredient i : pRecipe.getIngredients()) {
-				i.toNetwork(pBuffer);
-			}
-			pBuffer.writeItemStack(pRecipe.getResultItem(), true);
+			pRecipe.input1.toNetwork(pBuffer);
+			pRecipe.input2.toNetwork(pBuffer);
+
+			pBuffer.writeInt(pRecipe.count1);
+			pBuffer.writeInt(pRecipe.count2);
+
+			pBuffer.writeItemStack(pRecipe.output,false);
+			pBuffer.writeInt(pRecipe.cookTime);
 		}
 		
 		@SuppressWarnings("unchecked")

@@ -30,5 +30,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.TIN_ORE.get()
                 );
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BlockInit.DIORITE_CLAY.get(),BlockInit.GRANITE_CLAY.get());
+
+        tag(BlockTags.NEEDS_STONE_TOOL)
+                .add(BlockInit.ALLOY_FURNACE.get(),BlockInit.COBBLED_FELDSPAR.get(),BlockInit.DEEPSLATE_TIN_ORE.get(),
+                        BlockInit.DIORITE_BRICKS.get(), BlockInit.DIORITE_CLAY.get(), BlockInit.FELDSPAR.get(),
+                        BlockInit.FORGE.get(),BlockInit.GRANITE_BRICKS.get(),BlockInit.GRANITE_CLAY.get(),
+                        BlockInit.JAW_CRUSHER.get(),BlockInit.TIN_ORE.get());
     }
 }

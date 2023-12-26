@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CNF",
+    "DBD"
+  ],
+  "key": {
+    "C": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "D": {
+      "item": "advancedlootableweapons:diorite_bricks"
+    },
+    "B": {
+      "item": "advancedlootableweapons:diorite_brick"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "N": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:advanced_forge"
+  }
+}
