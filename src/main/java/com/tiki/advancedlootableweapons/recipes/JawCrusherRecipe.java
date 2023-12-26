@@ -23,17 +23,17 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final Ingredient input;
-	private final int maxCount;
+	private final int bonus;
 	
-	public JawCrusherRecipe(final ResourceLocation id, final ItemStack output, final int maxCount, final Ingredient input) {
+	public JawCrusherRecipe(final ResourceLocation id, final ItemStack output, final int bonus, final Ingredient input) {
 		this.id = id;
 		this.output = output;
-		this.maxCount = maxCount;
+		this.bonus = bonus;
 		this.input = input;
 	}
 	
-	public int getMaxItemCount() {
-		return this.maxCount;
+	public int getBonus() {
+		return this.bonus;
 	}
 	
 	@Override
@@ -105,9 +105,10 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 		
 		@Override
 		public JawCrusherRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
-			Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
+			Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
 			ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-			int maxCount = GsonHelper.getAsInt(json, "maxCount");
+
+			int maxCount = json.has("bonus") ? GsonHelper.getAsInt(json, "bonus") : 0;
 			return new JawCrusherRecipe(pRecipeId, output, maxCount, input);
 		}
 		
@@ -123,7 +124,7 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 		public void toNetwork(final FriendlyByteBuf pBuffer, final JawCrusherRecipe pRecipe) {
 			pRecipe.input.toNetwork(pBuffer);
 			pBuffer.writeItemStack(pRecipe.getResultItem(), true);
-			pBuffer.writeInt(pRecipe.maxCount);
+			pBuffer.writeInt(pRecipe.bonus);
 		}
 		
 		@SuppressWarnings("unchecked")

@@ -14,9 +14,9 @@ public class ModDatagen {
         dataGenerator.addProvider(new ModItemModelProvider(dataGenerator,existingFileHelper));
         dataGenerator.addProvider(new ModLangProvider(dataGenerator));
         dataGenerator.addProvider(new ModRecipeProvider(dataGenerator));
-        BlocksTagsProvider blocksTagsProvider = new BlocksTagsProvider(dataGenerator,existingFileHelper);
-        dataGenerator.addProvider(blocksTagsProvider);
-        dataGenerator.addProvider(new ItemsTagsProvider(dataGenerator,blocksTagsProvider,existingFileHelper));
+        ModBlockTagsProvider modBlockTagsProvider = new ModBlockTagsProvider(dataGenerator,existingFileHelper);
+        dataGenerator.addProvider(modBlockTagsProvider);
+        dataGenerator.addProvider(new ItemsTagsProvider(dataGenerator, modBlockTagsProvider,existingFileHelper));
         dataGenerator.addProvider(new ModBlockstateProvider(dataGenerator,existingFileHelper));
         dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
     }

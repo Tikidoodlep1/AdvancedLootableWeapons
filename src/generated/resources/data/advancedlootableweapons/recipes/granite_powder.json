@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "minecraft:granite"
   },
-  "result": "advancedlootableweapons:granite_powder",
-  "count": 4
+  "result": {
+    "item": "advancedlootableweapons:granite_powder",
+    "count": 4
+  }
 }

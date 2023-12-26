@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "minecraft:diorite"
   },
-  "result": "advancedlootableweapons:diorite_powder",
-  "count": 4
+  "result": {
+    "item": "advancedlootableweapons:diorite_powder",
+    "count": 4
+  }
 }

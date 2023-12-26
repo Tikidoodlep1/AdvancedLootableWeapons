@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "advancedlootableweapons:alloy_furnace",
+    "advancedlootableweapons:bronze_block",
+    "advancedlootableweapons:cobbled_feldspar",
+    "advancedlootableweapons:crystallite_block",
+    "advancedlootableweapons:crystallite_ore",
+    "advancedlootableweapons:deepslate_crystallite_ore",
+    "advancedlootableweapons:deepslate_platinum_ore",
+    "advancedlootableweapons:deepslate_silver_ore",
+    "advancedlootableweapons:deepslate_tin_ore",
+    "advancedlootableweapons:diorite_bricks",
+    "advancedlootableweapons:dusksteel_block",
+    "advancedlootableweapons:feldspar",
+    "advancedlootableweapons:forge",
+    "advancedlootableweapons:frost_steel_block",
+    "advancedlootableweapons:granite_bricks",
+    "advancedlootableweapons:jaw_crusher",
+    "advancedlootableweapons:kobold_block",
+    "advancedlootableweapons:platinum_block",
+    "advancedlootableweapons:platinum_ore",
+    "advancedlootableweapons:refined_obsidian_block",
+    "advancedlootableweapons:shadow_platinum_block",
+    "advancedlootableweapons:silver_ore",
+    "advancedlootableweapons:silver_block",
+    "advancedlootableweapons:steel_block",
+    "advancedlootableweapons:tin_block",
+    "advancedlootableweapons:tin_ore"
+  ]
+}

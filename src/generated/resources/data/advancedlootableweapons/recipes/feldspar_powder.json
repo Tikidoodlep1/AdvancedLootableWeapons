@@ -3,6 +3,8 @@
   "ingredient": {
     "item": "advancedlootableweapons:feldspar"
   },
-  "result": "advancedlootableweapons:feldspar_powder",
-  "count": 4
+  "result": {
+    "item": "advancedlootableweapons:feldspar_powder",
+    "count": 4
+  }
 }

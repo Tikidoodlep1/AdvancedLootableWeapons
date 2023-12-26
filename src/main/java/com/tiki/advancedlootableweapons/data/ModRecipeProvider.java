@@ -147,12 +147,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected void crusher(Consumer<FinishedRecipe> recipeConsumer) {
         CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get()),ItemInit.FELDSPAR_POWDER.get(),4)
-                .save(recipeConsumer,"feldspar_crushing");
+                .save(recipeConsumer);
 
         CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.DIORITE),ItemInit.DIORITE_POWDER.get(),4)
-                .save(recipeConsumer,"diorite_crushing");
+                .save(recipeConsumer);
         CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.GRANITE),ItemInit.GRANITE_POWDER.get(),4)
-                .save(recipeConsumer,"granite_crushing");
+                .save(recipeConsumer);
     }
 
     protected void alloyFurnace(Consumer<FinishedRecipe> recipeConsumer) {

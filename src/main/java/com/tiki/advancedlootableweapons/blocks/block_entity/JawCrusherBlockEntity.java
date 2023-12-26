@@ -76,8 +76,8 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 	public ItemStack crushContents() {
 		RecipeWrapper inv = new RecipeWrapper(itemHandler);
 		Optional<JawCrusherRecipe> match = level.getRecipeManager().getRecipeFor(JawCrusherRecipe.Type.INSTANCE, inv, level);
-		if(match.isPresent() && canMakeRecipe(new ItemStack(match.get().getResultItem().getItem(), match.get().getMaxItemCount()))) {
-			final ItemStack result = new ItemStack(match.get().getResultItem().getItem(), this.itemHandler.getStackInSlot(1).getCount() + (RAND.nextInt(match.get().getMaxItemCount()) + match.get().getResultItem().getCount()));
+		if(match.isPresent() && canMakeRecipe(new ItemStack(match.get().getResultItem().getItem(), match.get().getBonus()))) {
+			final ItemStack result = new ItemStack(match.get().getResultItem().getItem(), this.itemHandler.getStackInSlot(1).getCount() + (RAND.nextInt(match.get().getBonus()) + match.get().getResultItem().getCount()));
 			this.itemHandler.extractItem(0, 1, false);
 			this.itemHandler.setStackInSlot(1, result);
 			return result;
