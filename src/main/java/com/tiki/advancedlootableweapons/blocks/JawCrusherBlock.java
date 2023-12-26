@@ -74,8 +74,6 @@ public class JawCrusherBlock extends BaseEntityBlock {
 				}else {
 					player.openMenu(crusher);
 				}
-			}else {
-				throw new IllegalStateException("Forge Container Provider is Missing!");
 			}
 		}
 		return InteractionResult.sidedSuccess(world.isClientSide());

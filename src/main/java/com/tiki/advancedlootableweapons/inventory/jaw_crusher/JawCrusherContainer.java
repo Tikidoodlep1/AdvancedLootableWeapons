@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
+import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,8 +27,8 @@ public class JawCrusherContainer extends AbstractContainerMenu {
 
         this.addPlayerInv(inv);
         this.addPlayerHotbar(inv);
-        this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
-        this.addSlot(new SlotItemHandler(handler, 1, 81, 56));
+        this.addSlot(new SlotItemHandler(handler, JawCrusherBlockEntity.INPUT_SLOT, 54, 43));
+        this.addSlot(new SlotItemHandler(handler, JawCrusherBlockEntity.OUTPUT_SLOT, 108, 43));
 
     }
 
@@ -79,7 +80,7 @@ public class JawCrusherContainer extends AbstractContainerMenu {
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
-                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                    + TE_INVENTORY_SLOT_COUNT - 1, false)) {//avoid the output slot
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
         } else if (index < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {

@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.ContainerHelper;
@@ -31,8 +32,10 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
+import org.jetbrains.annotations.NotNull;
 
 public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider {
     public static final int SLOT_INPUT_1 = 0;
@@ -46,7 +49,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     public static final int NUM_DATA_VALUES = 4;
     public static final int MAX_COOKING_TIME = 266;
     public static final int BURN_COOL_SPEED = 2;
-    protected NonNullList<ItemStack> inventory = NonNullList.withSize(3, ItemStack.EMPTY);
     private int litTime;
     private int litDuration;
     private int cookingProgress = 0;
@@ -95,6 +97,14 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     };
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            if (slot == SLOT_RESULT) return false;//don't allow player or automation to insert into output
+            if (slot == SLOT_FUEL) return ForgeHooks.getBurnTime(stack,RecipeType.SMELTING) > 0;//only allow fuels in fuel slot
+            return super.isItemValid(slot, stack);
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -168,7 +178,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         tag.putInt("BurnTime", this.litTime);
         tag.putInt("CookTime", this.cookingProgress);
         tag.putInt("CookTimeTotal", this.cookingTotalTime);
-        ContainerHelper.saveAllItems(tag, this.inventory);
         if (this.name != null) {
             tag.putString("CustomName", Component.Serializer.toJson(this.name));
         }
@@ -178,13 +187,11 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("inventory"));
-        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.inventory);
         this.litTime = tag.getInt("BurnTime");
         this.cookingProgress = tag.getInt("CookTime");
         this.cookingTotalTime = tag.getInt("CookTimeTotal");
         this.litDuration = ForgeHooks.getBurnTime(this.itemHandler.getStackInSlot(SLOT_FUEL), RecipeType.SMELTING);
-        if (tag.contains("CustomName", 8)) {
+        if (tag.contains("CustomName", Tag.TAG_STRING)) {
             this.name = Component.Serializer.fromJson(tag.getString("CustomName"));
         }
     }
@@ -234,7 +241,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         if (cachedRecipe == null) return;
         //don't bother looking for fuel if there's no room left
         if (!hasRoom()) return;
-        int burnTime = ForgeHooks.getBurnTime(itemHandler.getStackInSlot(SLOT_FUEL),null);
+        int burnTime = ForgeHooks.getBurnTime(itemHandler.getStackInSlot(SLOT_FUEL),RecipeType.SMELTING);
         if (burnTime > 0) {
             this.litDuration = burnTime;
             this.litTime = burnTime;
@@ -261,8 +268,10 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             //shrink 2nd stack using 1st recipe input
             itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount1(), false);
         }
+        int existingCount = itemHandler.getStackInSlot(SLOT_RESULT).getCount();
         //add result to output
-        itemHandler.insertItem(SLOT_RESULT, cachedRecipe.getResultItem(), false);
+        itemHandler.setStackInSlot(SLOT_RESULT, ItemHandlerHelper.
+                copyStackWithSize(cachedRecipe.getResultItem(),cachedRecipe.getResultItem().getCount() + existingCount));
     }
 
     protected boolean getOrientation() {
