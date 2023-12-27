@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=north": {
-      "model": "advancedlootableweapons:block/jungle_bellows"
+      "model": "advancedlootableweapons:block/jungle_bellows",
+      "y": 90
     },
     "facing=south": {
       "model": "advancedlootableweapons:block/jungle_bellows",
-      "y": 180
+      "y": 270
     },
     "facing=west": {
-      "model": "advancedlootableweapons:block/jungle_bellows",
-      "y": 270
+      "model": "advancedlootableweapons:block/jungle_bellows"
     },
     "facing=east": {
       "model": "advancedlootableweapons:block/jungle_bellows",
-      "y": 90
+      "y": 180
     }
   }
 }

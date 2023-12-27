@@ -119,7 +119,7 @@ public class BellowsBlock extends Block {
 	@Nullable
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-		return this.defaultBlockState().setValue(FACING, pContext.getNearestLookingDirection().getOpposite());
+		return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
 	}
 
 	/**
