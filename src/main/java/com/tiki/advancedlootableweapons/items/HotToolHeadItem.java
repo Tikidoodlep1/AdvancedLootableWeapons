@@ -2,19 +2,18 @@ package com.tiki.advancedlootableweapons.items;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.TreeMap;
 
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.handlers.EnumMaterialType;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
+import com.tiki.advancedlootableweapons.init.ModMaterials;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -22,23 +21,23 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-public class ItemHotToolHead extends Item {
-    private final CompoundTag nbt = new CompoundTag();
-    private final ItemHotToolHead next;
+public class HotToolHeadItem extends Item {
+    private final HotToolHeadItem next;
     private final int level;
     private final boolean finished;
 
-    public ItemHotToolHead(@Nullable ItemHotToolHead next, int level, boolean finished, Properties prop) {
+    public HotToolHeadItem(@Nullable HotToolHeadItem next, int level, boolean finished, Properties prop) {
         super(prop);
         this.next = next;
         this.level = level;
         this.finished = finished;
-        nbt.putString("material", "null");
-        nbt.putDouble("addedDamage", 0.0D);
-        nbt.putInt("addedDurability", 0);
     }
 
-    public ItemHotToolHead getNextToolHead() {
+    //         nbt.putString("material", "null");
+    //        nbt.putDouble("addedDamage", 0.0D);
+    //        nbt.putInt("addedDurability", 0);
+
+    public HotToolHeadItem getNextToolHead() {
         return this.next;
     }
 
@@ -50,21 +49,22 @@ public class ItemHotToolHead extends Item {
         return this.finished;
     }
 
-    public void setMaterial(Tier mat) {
-        nbt.putString("material", EnumMaterialType.getMaterialNameF(mat));
+    public void setMaterial(ItemStack stack,Tier mat) {
+        stack.getOrCreateTag().putString("material", EnumMaterialType.getMaterialNameF(mat));
     }
 
-    public void setMaterial(String matName) {
-        nbt.putString("material", matName);
+    public void setMaterial(ItemStack stack,String matName) {
+        stack.getOrCreateTag().putString("material", matName);
     }
 
-    public String getMaterial() {
-        return nbt.getString("material");
+    public String getMaterial(ItemStack stack) {
+        return stack.hasTag() ? stack.getTag().getString("material") : "null";
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
-        if (!Objects.equals(this.getMaterial(), EnumMaterialType.NULL_MAT.getMaterialNameF())) {
+        CompoundTag nbt = stack.getTag();
+        if (!Objects.equals(this.getMaterial(stack), EnumMaterialType.NULL_MAT.getMaterialNameF())) {
             tooltip.add(new TextComponent(ChatFormatting.BLUE + nbt.getString("material")));
         } else {
             tooltip.add(new TextComponent(ChatFormatting.BLUE + "No Material"));
@@ -123,18 +123,23 @@ public class ItemHotToolHead extends Item {
     //this method adds warm and cool as well
     @Override
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
-        super.fillItemCategory(pCategory, pItems);
+        //super.fillItemCategory(pCategory, pItems);
         if (allowdedIn(pCategory)) {//be careful not to put them in every tab
+            ItemStack hot = new ItemStack(this);
+            setMaterial(hot, ModMaterials.MAT_STEEL);
+            pItems.add(hot);
             ItemStack warm = new ItemStack(this);
+            setMaterial(warm, ModMaterials.MAT_STEEL);
             warm.setDamageValue(getMaxDamage() / 2 + 1);
             ItemStack cool = new ItemStack(this);
+            setMaterial(cool, ModMaterials.MAT_STEEL);
             cool.setDamageValue(getMaxDamage());
             pItems.add(warm);
             pItems.add(cool);
         }
     }
 
-    public ItemHotToolHead addToRegistryMap() {
+    public HotToolHeadItem addToRegistryMap() {
         ItemInit.hotToolHeads.add(this);
         return this;
     }

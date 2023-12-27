@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
+import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -96,14 +97,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 
     };
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
+    private final ItemStackHandler itemHandler = new AlloyFurnaceHandler(4) {
 
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if (slot == SLOT_RESULT) return false;//don't allow player or automation to insert into output
-            if (slot == SLOT_FUEL) return ForgeHooks.getBurnTime(stack,RecipeType.SMELTING) > 0;//only allow fuels in fuel slot
-            return super.isItemValid(slot, stack);
-        }
 
         @Override
         protected void onContentsChanged(int slot) {

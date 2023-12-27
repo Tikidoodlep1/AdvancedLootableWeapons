@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
+import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 
 import net.minecraft.core.BlockPos;
@@ -45,13 +46,7 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
 	private Component name;
 
-	private final ItemStackHandler itemHandler = new ItemStackHandler(getContainerSize()) {
-
-		@Override
-		public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-			return slot != OUTPUT_SLOT && super.isItemValid(slot, stack);//dont allow inserting items into output
-		}
-
+	private final ItemStackHandler itemHandler = new JawCrusherHandler(getContainerSize()) {
 		@Override
 		protected void onContentsChanged(int slot) {
 			setChanged();

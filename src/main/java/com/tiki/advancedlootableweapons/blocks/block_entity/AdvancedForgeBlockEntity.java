@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
-import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -148,18 +148,14 @@ public class AdvancedForgeBlockEntity extends BlockEntity implements MenuProvide
 	}
 
 	public static void tick(Level world, BlockPos pos, BlockState state, AdvancedForgeBlockEntity entity) {
-		if(entity.dataAccess.get(2) > 0) {
-			entity.dataAccess.set(0, entity.dataAccess.get(0) + 1);
-		}else {
-			TEMP_COUNTER++;
+		if(entity.increaseFrames > 0) {
+			entity.containerTemp += 1;
+		}else if(entity.containerTemp >= MIN_TEMP) {
+			entity.containerTemp -=1;
 		}
-		if(entity.dataAccess.get(0) >= MIN_TEMP && TEMP_COUNTER >= HotMetalHelper.getForgeHeatLoss(entity.dataAccess.get(0))) {
-			entity.dataAccess.set(0, entity.dataAccess.get(0) - 1);
-			TEMP_COUNTER = 0;
-		}
-		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof ItemHotToolHead toolHead) {
+		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HotToolHeadItem toolHead) {
 			ItemStack stack = entity.itemHandler.getStackInSlot(0);
-			stack.setDamageValue(stack.getDamageValue() - HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(), entity.dataAccess.get(0), stack.getDamageValue()));
+			stack.setDamageValue(stack.getDamageValue() - HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));
 		}
 	}
 

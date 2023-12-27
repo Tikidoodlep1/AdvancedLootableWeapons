@@ -133,7 +133,10 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue DUSKSTEEL_ARMOR_HARDNESS;
 
 	public static ForgeConfigSpec.DoubleValue BELLOWS_EXHAUSTION;
-	
+	public static ForgeConfigSpec.DoubleValue FORGE_TEMP_DECREASE;
+
+	public static ForgeConfigSpec.DoubleValue FORGE_TEMP_INCREASE;
+
 	public static ForgeConfigSpec.IntValue SHADOW_DROP_RATE;
 	public static ForgeConfigSpec.ConfigValue<Boolean> LAND_MOBS_DROP_SHADOW;
 	public static ForgeConfigSpec.ConfigValue<Boolean> AIR_MOBS_DROP_SHADOW;
@@ -172,6 +175,8 @@ public class CommonConfigHandler {
 		DISABLE_VANILLA_ARMORS = BUILDER.comment("Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)").define("Disable Vanilla Armors", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
 		BELLOWS_EXHAUSTION = BUILDER.comment("The amount of exhaustion using a bellows gives the player.").defineInRange("Bellows Exhaustion", 0.1F, 0.0F, 20.0F);
+		FORGE_TEMP_DECREASE = BUILDER.comment("Forge Temperature Decrease. Set to 0.0F to disable temperature drop.").defineInRange("Forge Temperature Decrease", 0.02F, 0.0F, 10.0F);
+		FORGE_TEMP_INCREASE = BUILDER.comment("Forge Temperature Increase.").defineInRange("Forge Temperature Increase", 1, 0.0F, 20.0F);
 
 		BUILDER.comment("MATERIAL MODIFICATION");
 		KOBOLD_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F);

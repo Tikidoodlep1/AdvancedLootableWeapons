@@ -17,7 +17,7 @@ public class JawCrusherContainer extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
 
     public JawCrusherContainer(int id, Inventory inv) {
-        this(id, inv, new ItemStackHandler(2), ContainerLevelAccess.NULL);
+        this(id, inv, new JawCrusherHandler(2), ContainerLevelAccess.NULL);
     }
 
     public JawCrusherContainer(int id, Inventory inv, ItemStackHandler handler, ContainerLevelAccess access) {

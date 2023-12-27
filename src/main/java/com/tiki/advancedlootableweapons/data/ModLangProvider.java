@@ -4,7 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModCreativeTabs;
-import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -309,9 +309,9 @@ public class ModLangProvider extends LanguageProvider {
         addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");
         addTab(ModCreativeTabs.WEAPON_TAB, "ALW Weapons & Hot Tool Heads");
 
-        add(ItemHotToolHead.Temp.cool.translation.getKey(),"Cool");
-        add(ItemHotToolHead.Temp.warm.translation.getKey(),"Warm");
-        add(ItemHotToolHead.Temp.hot.translation.getKey(),"Hot");
+        add(HotToolHeadItem.Temp.cool.translation.getKey(),"Cool");
+        add(HotToolHeadItem.Temp.warm.translation.getKey(),"Warm");
+        add(HotToolHeadItem.Temp.hot.translation.getKey(),"Hot");
     }
 
     protected void addTab(CreativeModeTab tab,String translation) {

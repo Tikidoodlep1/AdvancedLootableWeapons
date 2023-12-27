@@ -3,18 +3,18 @@ package com.tiki.advancedlootableweapons.blocks.block_entity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
-import com.tiki.advancedlootableweapons.items.ItemHotToolHead;
+import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -31,19 +31,18 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 
 	public static final int MIN_TEMP = 450;
 	public static final int MAX_TEMP = 1750;
-	private static int TEMP_COUNTER = 0;
 	private int increaseFrames = 0;
 	private double containerTemp = 850;
 	private int itemTemp = 293;
-	protected NonNullList<ItemStack> inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 	private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
-	private final ItemStackHandler itemHandler = new ItemStackHandler(getContainerSize()) {
+	private final ForgeHandler itemHandler = new ForgeHandler() {
 		@Override
 		protected void onContentsChanged(int slot) {
 			setChanged();
@@ -124,21 +123,18 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 	protected void saveAdditional(CompoundTag tag) {
 		tag.put("inventory", itemHandler.serializeNBT());
 		super.saveAdditional(tag);
-		tag.putInt("containerTemp", this.dataAccess.get(0));
-		tag.putInt("itemTemp", this.dataAccess.get(1));
-		tag.putInt("increaseFrames", this.dataAccess.get(2));
-		ContainerHelper.saveAllItems(tag, this.inventory);
+		tag.putDouble("containerTemp", this.containerTemp);
+		tag.putInt("itemTemp", this.itemTemp);
+		tag.putInt("increaseFrames", this.increaseFrames);
 	}
 
 	@Override
 	public void load(CompoundTag tag) {
 		super.load(tag);
 		itemHandler.deserializeNBT(tag.getCompound("inventory"));
-		this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(tag, this.inventory);
-		this.dataAccess.set(0, tag.getInt("containerTemp"));
-		this.dataAccess.set(1, tag.getInt("itemTemp"));
-		this.dataAccess.set(2, tag.getInt("increaseFrames"));
+		this.containerTemp = tag.getInt("containerTemp");
+		this.itemTemp = tag.getInt("itemTemp");
+		this.increaseFrames = tag.getInt("increaseFrames");
 	}
 
 	public void drops() {
@@ -149,18 +145,16 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 	}
 
 	public static void tick(Level world, BlockPos pos, BlockState state, ForgeBlockEntity entity) {
-		if(entity.dataAccess.get(2) > 0) {
-			entity.dataAccess.set(0, entity.dataAccess.get(0) + 1);
-		}else {
-			TEMP_COUNTER++;
+		if(entity.increaseFrames > 0 && entity.containerTemp < MAX_TEMP) {
+			entity.containerTemp += CommonConfigHandler.FORGE_TEMP_INCREASE.get();
+			entity.increaseFrames--;
+		}else if(entity.containerTemp >= MIN_TEMP) {
+			entity.containerTemp -= CommonConfigHandler.FORGE_TEMP_DECREASE.get();
 		}
-		if(entity.dataAccess.get(0) >= MIN_TEMP && TEMP_COUNTER >= HotMetalHelper.getForgeHeatLoss(entity.dataAccess.get(0))) {
-			entity.dataAccess.set(0, entity.dataAccess.get(0) - 1);
-			TEMP_COUNTER = 0;
-		}
-		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof ItemHotToolHead toolHead) {
+		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HotToolHeadItem toolHead) {
 			ItemStack stack = entity.itemHandler.getStackInSlot(0);
-			stack.setDamageValue(stack.getDamageValue() - HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(), entity.dataAccess.get(0), stack.getDamageValue()));
+			stack.setDamageValue(stack.getDamageValue() -
+					HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));
 		}
 	}
 

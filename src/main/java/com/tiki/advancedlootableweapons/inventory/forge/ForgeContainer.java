@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.inventory.forge;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,7 +21,7 @@ public class ForgeContainer extends AbstractContainerMenu {
 	private final ContainerLevelAccess access;
 
 	public ForgeContainer(int id, Inventory inv) {
-		this(id, inv,new ItemStackHandler(1), new SimpleContainerData(3),ContainerLevelAccess.NULL);
+		this(id, inv,new ForgeHandler(), new SimpleContainerData(3),ContainerLevelAccess.NULL);
 	}
 	
 	public ForgeContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
@@ -84,6 +85,10 @@ public class ForgeContainer extends AbstractContainerMenu {
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
+
+        if (!(sourceStack.getItem() instanceof HotToolHeadItem)) {
+            return ItemStack.EMPTY;
+        }
 
         // Check if the slot clicked is one of the vanilla container slots
         if (index < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {

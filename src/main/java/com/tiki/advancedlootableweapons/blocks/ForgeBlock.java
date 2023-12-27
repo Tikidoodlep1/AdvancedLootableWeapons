@@ -93,6 +93,6 @@ public class ForgeBlock extends BaseEntityBlock {
 	
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, BlockEntityInit.FORGE_TE.get(), ForgeBlockEntity::tick);
+		return world.isClientSide ? null : createTickerHelper(type, BlockEntityInit.FORGE_TE.get(), ForgeBlockEntity::tick);
 	}
 }

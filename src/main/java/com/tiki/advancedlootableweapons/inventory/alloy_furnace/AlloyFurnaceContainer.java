@@ -21,7 +21,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
 
     public AlloyFurnaceContainer(int id, Inventory inv) {
-        this(id, inv, new ItemStackHandler(4), new SimpleContainerData(4), ContainerLevelAccess.NULL);
+        this(id, inv, new AlloyFurnaceHandler(4), new SimpleContainerData(4), ContainerLevelAccess.NULL);
     }
 
     public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
