@@ -61,6 +61,10 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 	}
 	
 	public boolean matches(NonNullList<ItemStack> inv, World world) {
+		if(inv.size() > 3) {
+			return false;
+		}
+		
 		int matches = 0;
 		
 		inventory: for(int i = 0; i < inv.size(); i++) {
@@ -92,6 +96,10 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
+		if(inv.getSizeInventory() > 3) {
+			return false;
+		}
+		
 		int matches = 0;
 		
 		inventory: for(int i = 0; i < inv.getSizeInventory(); i++) {

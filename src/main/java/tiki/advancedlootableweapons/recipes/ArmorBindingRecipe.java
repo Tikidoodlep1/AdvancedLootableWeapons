@@ -22,7 +22,6 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import tiki.advancedlootableweapons.armor.ArmorBonusesBase;
-import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemArmorBinding;
 
 public class ArmorBindingRecipe extends ShapelessOreRecipe {
@@ -30,7 +29,7 @@ public class ArmorBindingRecipe extends ShapelessOreRecipe {
 	private final NonNullList<Ingredient> inputs;
 	private final ItemStack result;
 	
-	ArmorBindingRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
+	public ArmorBindingRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		super(group, input, result);
 		this.inputs = input;
 		this.result = result;
@@ -45,6 +44,9 @@ public class ArmorBindingRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
+//		if(inv.getSizeInventory() > 3) {
+//			return false;
+//		}
 		
 		int matches = 0;
 		
@@ -77,9 +79,19 @@ public class ArmorBindingRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
+		ItemStack bindingStack = ItemStack.EMPTY;
+		ItemArmorBinding binding = null;
+		
+		for(int i = 0; i < inv.getSizeInventory(); i++) {
+			if(inv.getStackInSlot(i).getItem() instanceof ItemArmorBinding) {
+				bindingStack = inv.getStackInSlot(i);
+				binding = (ItemArmorBinding)bindingStack.getItem();
+				break;
+			}
+		}
 		
 		((ArmorBonusesBase)result.getItem()).setBinding(new TextComponentTranslation("item.binding_leather.name").getFormattedText(), result);
-		((ArmorBonusesBase)result.getItem()).setMaximumDamage(((ItemArmorBinding)ItemInit.LEATHER_BINDING).getExtraDur(), result);
+		((ArmorBonusesBase)result.getItem()).setMaximumDamage(binding.getExtraDur(), result);
 		
 		return result;
 	}

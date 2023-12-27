@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -46,6 +45,7 @@ import tiki.advancedlootableweapons.tools.ToolSpear;
 import tiki.advancedlootableweapons.tools.ToolStabSword;
 import tiki.advancedlootableweapons.tools.ToolTanningKnife;
 import tiki.advancedlootableweapons.util.ArmorTypes;
+import tiki.advancedlootableweapons.util.HTHTree;
 
 public class ItemInit {
 
@@ -55,8 +55,84 @@ public class ItemInit {
 	public static final Set<Item> acceptedForgeMetals = new HashSet<Item>();
 	public static final Set<Item> forgeRecipeInputs = new HashSet<Item>();
 	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
+	public static final HTHTree hotToolHeadTree = new HTHTree();
 	
 	public static void generateAcceptedForgeItems() {
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.HOT_TOOL_ROD, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD, 
+//				(ItemHotToolHead)ItemInit.CLEAVER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD, 
+//				(ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD, 
+//				(ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD, 
+//				(ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD, 
+//				(ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.CHAIN_RING);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_ROD, (ItemHotToolHead)ItemInit.HOT_TOOL_ROD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_ROD_2, (ItemHotToolHead)ItemInit.LONG_TOOL_ROD);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONG_TOOL_ROD, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
+//				
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_5);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
+//		
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_2);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_3);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_4);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5);
+//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
+		
 		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver", "ingotIron", "ingotGold"};
 		for(String ore : ores) {
 			NonNullList<ItemStack> stacks = OreDictionary.getOres(ore);
@@ -662,7 +738,7 @@ public class ItemInit {
 					(int)(ConfigHandler.GOLD_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.GOLD_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
 			ConfigHandler.GOLD_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, ConfigHandler.GOLD_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(Items.GOLD_INGOT));
 	
-	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:camat_diamond", ModInfo.ID + ":diamond_studded_DIAMOND_STUDDED_LEATHER", (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
+	public static final ArmorMaterial CAMAT_DIAMOND = EnumHelper.addArmorMaterial("alw:camat_diamond", ModInfo.ID + ":diamond_studded_leather", (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_DURABILITY * ConfigHandler.CHAIN_DURABILITY_MULTIPLIER), 
 			new int[] {(int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_BOOTS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_LEGGINGS_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), 
 					(int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_CHESTPLATE_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER), (int)(ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_HELMET_REDUCTION * ConfigHandler.CHAIN_PROTECTION_MULTIPLIER)},
 			ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_ENCHANTABILITY, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, ConfigHandler.DIAMOND_STUDDED_LEATHER_ARMOR_TOUGHNESS).setRepairItem(new ItemStack(ItemInit.DIAMOND_STUDDED_LEATHER));
@@ -1114,80 +1190,80 @@ public class ItemInit {
 	
 	//Hot Tool Heads
 	//						 ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished)
-	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head", null, 0, false, false);
+	public static final Item HOT_TOOL_HEAD = new ItemHotToolHead("hot_tool_head", null, 0, false, false, 0);
 	
-	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2", null, 2, true, false);
-	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod", (ItemHotToolHead)HOT_TOOL_ROD_2, 1, false, false);
-	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod", null, 3, true, false);
+	public static final Item HOT_TOOL_ROD_2 = new ItemHotToolHead("hot_tool_rod_2", null, 2, true, false, 1);
+	public static final Item HOT_TOOL_ROD = new ItemHotToolHead("hot_tool_rod", (ItemHotToolHead)HOT_TOOL_ROD_2, 1, false, false, 1);
+	public static final Item LONG_TOOL_ROD = new ItemHotToolHead("long_tool_rod", null, 3, true, false, 1);
 	
-	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2", null, 2, true, true);
-	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head", (ItemHotToolHead)DAGGER_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item DAGGER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("dagger_hot_tool_head_2", null, 2, true, true, 2);
+	public static final Item DAGGER_HOT_TOOL_HEAD = new ItemHotToolHead("dagger_hot_tool_head", (ItemHotToolHead)DAGGER_HOT_TOOL_HEAD_2, 1, false, true, 2);
 	
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5", null, 5, true, true);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_5, 4, false, true);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_5 = new ItemHotToolHead("kabutowari_hot_tool_head_5", null, 5, true, true, 3);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("kabutowari_hot_tool_head_4", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_5, 4, false, true, 3);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("kabutowari_hot_tool_head_3", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_4, 3, false, true, 3);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kabutowari_hot_tool_head_2", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_3, 2, false, true, 3);
+	public static final Item KABUTOWARI_HOT_TOOL_HEAD = new ItemHotToolHead("kabutowari_hot_tool_head", (ItemHotToolHead)KABUTOWARI_HOT_TOOL_HEAD_2, 1, false, true, 3);
 	
-	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3", null, 3, true, true);
-	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item TALWAR_HOT_TOOL_HEAD_3 = new ItemHotToolHead("talwar_hot_tool_head_3", null, 3, true, true, 4);
+	public static final Item TALWAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("talwar_hot_tool_head_2", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_3, 2, false, true, 4);
+	public static final Item TALWAR_HOT_TOOL_HEAD = new ItemHotToolHead("talwar_hot_tool_head", (ItemHotToolHead)TALWAR_HOT_TOOL_HEAD_2, 1, false, true, 4);
 	
-	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4", null, 4, true, true);
-	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item RAPIER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("rapier_hot_tool_head_4", null, 4, true, true, 5);
+	public static final Item RAPIER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("rapier_hot_tool_head_3", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_4, 3, false, true, 5);
+	public static final Item RAPIER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("rapier_hot_tool_head_2", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_3, 2, false, true, 5);
+	public static final Item RAPIER_HOT_TOOL_HEAD = new ItemHotToolHead("rapier_hot_tool_head", (ItemHotToolHead)RAPIER_HOT_TOOL_HEAD_2, 1, false, true, 5);
 	
-	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head", null, 2, true, true);
+	public static final Item CLEAVER_HOT_TOOL_HEAD = new ItemHotToolHead("cleaver_hot_tool_head", null, 2, true, true, 6);
 	
-	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3", null, 3, true, true);
-	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item MACE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("mace_hot_tool_head_3", null, 3, true, true, 7);
+	public static final Item MACE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("mace_hot_tool_head_2", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_3, 2, false, true, 7);
+	public static final Item MACE_HOT_TOOL_HEAD = new ItemHotToolHead("mace_hot_tool_head", (ItemHotToolHead)MACE_HOT_TOOL_HEAD_2, 1, false, true, 7);
 	
-	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5", null, 5, true, true);
-	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_5, 4, false, true);
-	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item STAFF_HOT_TOOL_HEAD_5 = new ItemHotToolHead("staff_hot_tool_head_5", null, 5, true, true, 8);
+	public static final Item STAFF_HOT_TOOL_HEAD_4 = new ItemHotToolHead("staff_hot_tool_head_4", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_5, 4, false, true, 8);
+	public static final Item STAFF_HOT_TOOL_HEAD_3 = new ItemHotToolHead("staff_hot_tool_head_3", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_4, 3, false, true, 8);
+	public static final Item STAFF_HOT_TOOL_HEAD_2 = new ItemHotToolHead("staff_hot_tool_head_2", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_3, 2, false, true, 8);
+	public static final Item STAFF_HOT_TOOL_HEAD = new ItemHotToolHead("staff_hot_tool_head", (ItemHotToolHead)STAFF_HOT_TOOL_HEAD_2, 1, false, true, 8);
 	
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4", null, 4, true, true);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_4 = new ItemHotToolHead("longsword_hot_tool_head_4", null, 4, true, true, 9);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_3 = new ItemHotToolHead("longsword_hot_tool_head_3", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_4, 3, false, true, 9);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD_2 = new ItemHotToolHead("longsword_hot_tool_head_2", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_3, 2, false, true, 9);
+	public static final Item LONGSWORD_HOT_TOOL_HEAD = new ItemHotToolHead("longsword_hot_tool_head", (ItemHotToolHead)LONGSWORD_HOT_TOOL_HEAD_2, 1, false, true, 9);
 	
-	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2", null, 2, true, true);
-	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head", (ItemHotToolHead)KODACHI_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item KODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("kodachi_hot_tool_head_2", null, 2, true, true, 10);
+	public static final Item KODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("kodachi_hot_tool_head", (ItemHotToolHead)KODACHI_HOT_TOOL_HEAD_2, 1, false, true, 10);
 	
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5", null, 5, true, true);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_5, 4, false, true);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_5 = new ItemHotToolHead("battleaxe_hot_tool_head_5", null, 5, true, true, 12);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("battleaxe_hot_tool_head_4", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_5, 4, false, true, 12);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("battleaxe_hot_tool_head_3", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_4, 3, false, true, 12);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("battleaxe_hot_tool_head_2", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_3, 2, false, true, 12);
+	public static final Item BATTLEAXE_HOT_TOOL_HEAD = new ItemHotToolHead("battleaxe_hot_tool_head", (ItemHotToolHead)BATTLEAXE_HOT_TOOL_HEAD_2, 1, false, true, 12);
 	
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5", null, 5, true, true);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_5, 4, false, true);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_5 = new ItemHotToolHead("zweihander_hot_tool_head_5", null, 5, true, true, 13);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_4 = new ItemHotToolHead("zweihander_hot_tool_head_4", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_5, 4, false, true,  13);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_3 = new ItemHotToolHead("zweihander_hot_tool_head_3", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_4, 3, false, true, 13);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD_2 = new ItemHotToolHead("zweihander_hot_tool_head_2", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_3, 2, false, true, 13);
+	public static final Item ZWEIHANDER_HOT_TOOL_HEAD = new ItemHotToolHead("zweihander_hot_tool_head", (ItemHotToolHead)ZWEIHANDER_HOT_TOOL_HEAD_2, 1, false, true, 13);
 	
-	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4", null, 4, true, true);
-	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item NODACHI_HOT_TOOL_HEAD_4 = new ItemHotToolHead("nodachi_hot_tool_head_4", null, 4, true, true, 11);
+	public static final Item NODACHI_HOT_TOOL_HEAD_3 = new ItemHotToolHead("nodachi_hot_tool_head_3", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_4, 3, false, true, 11);
+	public static final Item NODACHI_HOT_TOOL_HEAD_2 = new ItemHotToolHead("nodachi_hot_tool_head_2", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_3, 2, false, true, 11);
+	public static final Item NODACHI_HOT_TOOL_HEAD = new ItemHotToolHead("nodachi_hot_tool_head", (ItemHotToolHead)NODACHI_HOT_TOOL_HEAD_2, 1, false, true, 11);
 	
-	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4", null, 4, true, true);
-	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_4, 3, false, true);
-	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item SABRE_HOT_TOOL_HEAD_4 = new ItemHotToolHead("sabre_hot_tool_head_4", null, 4, true, true, 14);
+	public static final Item SABRE_HOT_TOOL_HEAD_3 = new ItemHotToolHead("sabre_hot_tool_head_3", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_4, 3, false, true, 14);
+	public static final Item SABRE_HOT_TOOL_HEAD_2 = new ItemHotToolHead("sabre_hot_tool_head_2", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_3, 2, false, true, 14);
+	public static final Item SABRE_HOT_TOOL_HEAD = new ItemHotToolHead("sabre_hot_tool_head", (ItemHotToolHead)SABRE_HOT_TOOL_HEAD_2, 1, false, true, 14);
 	
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3", null, 3, true, true);
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_3, 2, false, true);
-	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_3 = new ItemHotToolHead("makhaira_hot_tool_head_3", null, 3, true, true, 15);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD_2 = new ItemHotToolHead("makhaira_hot_tool_head_2", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_3, 2, false, true, 15);
+	public static final Item MAKHAIRA_HOT_TOOL_HEAD = new ItemHotToolHead("makhaira_hot_tool_head", (ItemHotToolHead)MAKHAIRA_HOT_TOOL_HEAD_2, 1, false, true, 15);
 	
-	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2", null, 2, true, true);
-	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head", (ItemHotToolHead)SPEAR_HOT_TOOL_HEAD_2, 1, false, true);
+	public static final Item SPEAR_HOT_TOOL_HEAD_2 = new ItemHotToolHead("spear_hot_tool_head_2", null, 2, true, true, 16);
+	public static final Item SPEAR_HOT_TOOL_HEAD = new ItemHotToolHead("spear_hot_tool_head", (ItemHotToolHead)SPEAR_HOT_TOOL_HEAD_2, 1, false, true, 16);
 	
-	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true, false);
+	public static final Item CHAIN_RING = new ItemHotToolHead("chain_ring", null, 1, true, false, 17);
 	
 	//Armor
 	public static final Item HELMET_LEATHER = new ArmorBonusesBase("helmet_leather", ArmorTypes.SOFT, ArmorMaterial.LEATHER, 1, 0.0D, 1, EntityEquipmentSlot.HEAD, 0.5D, 0D, 1);

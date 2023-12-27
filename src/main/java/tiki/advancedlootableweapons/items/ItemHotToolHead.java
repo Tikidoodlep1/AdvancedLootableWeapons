@@ -1,6 +1,6 @@
-
 package tiki.advancedlootableweapons.items;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -23,17 +23,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.IHasModel;
+import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.util.HotMetalHelper;
 
-public class ItemHotToolHead extends Item implements IHasModel {
-	public final ItemHotToolHead next;
+public class ItemHotToolHead extends Item implements IHasModel, Comparable<ItemHotToolHead> {
+	//public final ItemHotToolHead next;
+	public final int type;
 	public final int level;
 	public final boolean finished;
 	public final boolean isMain;
 	
-	public ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished, boolean isMain) {
-		this.next = next;
+	public ItemHotToolHead(String name, ItemHotToolHead next, int level, boolean finished, boolean isMain, int type) {
+		//this.next = next;
+		this.type = type;
 		this.level = level;
 		this.finished = finished;
 		this.isMain = isMain;
@@ -101,10 +104,15 @@ public class ItemHotToolHead extends Item implements IHasModel {
 			tooltip.add(TextFormatting.DARK_AQUA + material.getDisplayName());
 		}
 		
-		if(stack.hasTagCompound() && this.isMain) {
-			boolean quenched = Stacknbt.getBoolean("quenched");
-			tooltip.add(quenched ? TextFormatting.BLUE + new TextComponentTranslation("alw.tool_head.quenched.name").getFormattedText() : TextFormatting.RED + new TextComponentTranslation("alw.tool_head.unquenched.name").getFormattedText());
+		if(ConfigHandler.ENABLE_QUENCHING) {
+			if(stack.hasTagCompound() && this.isMain) {
+				boolean quenched = Stacknbt.getBoolean("quenched");
+				tooltip.add(quenched ? TextFormatting.GREEN + new TextComponentTranslation("alw.tool_head.quenched.name").getFormattedText() : TextFormatting.RED + new TextComponentTranslation("alw.tool_head.unquenched.name").getFormattedText());
+			}
+		}else {
+			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("alw.tool_head.no_quench_required.name").getFormattedText());
 		}
+		
 		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDamage")) {
 			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forging_quality.name").getFormattedText());
@@ -171,4 +179,20 @@ public class ItemHotToolHead extends Item implements IHasModel {
     {
         return false;
     }
+
+	@Override
+	public int compareTo(ItemHotToolHead o) {
+		return this.type - o.type;
+	}
+	
+	public static Comparator<ItemHotToolHead> getComparator() {
+		return new Comparator<ItemHotToolHead>() {
+
+			@Override
+			public int compare(ItemHotToolHead o1, ItemHotToolHead o2) {
+				return o1.type - o2.type;
+			}
+			
+		};
+	}
 }

@@ -69,6 +69,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		this.properties = new ArmorProperties(1, absorbRatio, maxAbsorb);
 	}
 	
+	public double getBonusHealth() {
+		return this.bonusHealth;
+	}
+	
 	public void setBinding(String binding, ItemStack stack) {
 		NBTTagCompound tag = stack.getTagCompound();
 		if(!stack.hasTagCompound()) {

@@ -42,6 +42,7 @@ import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
+import tiki.advancedlootableweapons.recipes.ArmorBindingRecipe;
 import tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
@@ -86,7 +87,7 @@ public class ZenDynamicAlwResources {
 	}
 	
 	@ZenMethod
-	public static boolean addArmorBindingRecipe(String name, String group, String button, IItemStack output, IIngredient[] inputs, String block) {
+	public static boolean addArmorBindingRecipe(String name, String group, String button, IItemStack output, IIngredient[] inputs, String block, boolean useForge) {
 		Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 		NonNullList<Ingredient> input = NonNullList.withSize(2, Ingredient.EMPTY);
 		ItemStack out = ItemStack.EMPTY;
@@ -124,10 +125,16 @@ public class ZenDynamicAlwResources {
 							ItemInit.forgeRecipeInputs.add(st.getItem());
 						}
 					}
+					if(useForge) {
+						IRecipe recipe = new ArmorBindingRecipe(new ResourceLocation(group), input, out);
+						recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
+						ForgeRegistries.RECIPES.register(recipe);
+					}else {
+						IRecipe recipe = new ForgeArmorBindingRecipe(new ResourceLocation(group), button, input, out, b);
+						recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
+						ForgeRegistries.RECIPES.register(recipe);
+					}
 					
-					IRecipe recipe = new ForgeArmorBindingRecipe(new ResourceLocation(group), button, input, out, b);
-					recipe.setRegistryName(new ResourceLocation(ModInfo.ID, name));
-					ForgeRegistries.RECIPES.register(recipe);
 					return true;
 				}
 			}
@@ -590,13 +597,13 @@ public class ZenDynamicAlwResources {
 			fuelLists.put(forge.getRegistryName(), fuelSet);
 		}
 		
-		System.out.println("Calling setFuelListForBlock!");
-		System.out.println("Fuel list: ");
-		for(Entry<ResourceLocation, Set<Item>> e : fuelLists.entrySet()) {
-			System.out.print("(" + e.getKey() + ", ");
-			e.getValue().forEach((i) -> {System.out.print(i.getRegistryName() + ", ");});
-			System.out.println(")");
-		}
+//		System.out.println("Calling setFuelListForBlock!");
+//		System.out.println("Fuel list: ");
+//		for(Entry<ResourceLocation, Set<Item>> e : fuelLists.entrySet()) {
+//			System.out.print("(" + e.getKey() + ", ");
+//			e.getValue().forEach((i) -> {System.out.print(i.getRegistryName() + ", ");});
+//			System.out.println(")");
+//		}
 	}
 	
 	@ZenMethod

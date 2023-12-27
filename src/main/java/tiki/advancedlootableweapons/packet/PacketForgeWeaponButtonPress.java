@@ -38,7 +38,7 @@ public class PacketForgeWeaponButtonPress implements IMessage {
 				EntityPlayerMP player = ctx.getServerHandler().player;
 				Container c = player.openContainer;
 				if(c instanceof ContainerForgeWeapon) {
-					((ContainerForgeWeapon)c).enchantItem(player, message.buttonID);
+					((ContainerForgeWeapon)c).enchantItem(player, message.buttonID); // enchantItem is the lagacy name, doesn't have to use this method
 				}
 			}
 			return null;

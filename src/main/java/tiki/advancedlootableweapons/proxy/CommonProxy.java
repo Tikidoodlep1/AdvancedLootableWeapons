@@ -23,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
+import tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.handlers.GlobalDropsHandler;
@@ -142,5 +143,12 @@ public class CommonProxy {
 					new ResourceLocation("minecraft", "diamond_leggings"), new ResourceLocation("minecraft", "diamond_boots")};
 			event.getEntityPlayer().unlockRecipes(recipes);
 		}
+		
+		event.getEntityPlayer().getArmorInventoryList().forEach((stack) -> {
+			if(!stack.isEmpty() && stack.getItem() instanceof ArmorBonusesBase && ConfigHandler.USE_ARMOR_BONUS_HEALTH) {
+				event.getEntityPlayer().heal( (int)((ArmorBonusesBase)stack.getItem()).getBonusHealth() );
+			}
+		});// end forEach
+		
 	}
 }

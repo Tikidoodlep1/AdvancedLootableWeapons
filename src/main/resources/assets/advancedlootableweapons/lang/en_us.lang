@@ -990,6 +990,7 @@ alw.clay.info=Clay blocks can be obtained by placing the respective clay powder 
 alw.clay_cover.name=Clay Covered
 alw.tool_head.quenched.name=Quenched
 alw.tool_head.unquenched.name=Unquenched
+alw.tool_head.no_quench_required.name=Quenching Disabled
 alw.sharpening_stone.tooltip=Right click with this to sharpen your weapons!
 alw.forge_hammer.tooltip=Hit an anvil with me to start forging weapons!
 alw.forge_hammer.config_marker.name=This item has been marked as a valid forge hammer via the Advanced Lootable Weapons config.
