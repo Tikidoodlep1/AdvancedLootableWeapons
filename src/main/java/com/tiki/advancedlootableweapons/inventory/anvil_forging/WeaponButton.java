@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 
 public class WeaponButton extends Button {
 	
-	public static final ResourceLocation TEXTURES = new ResourceLocation(AdvancedLootableWeapons.MODID + ":textures/gui/anvil_forging");
 	private final int x, y, u, v;
 	private boolean down = false;
 	
@@ -54,7 +53,7 @@ public class WeaponButton extends Button {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.setShaderTexture(0, TEXTURES);
+		RenderSystem.setShaderTexture(0, AnvilForgingScreen.TEXTURE);
 		RenderSystem.enableBlend();
 	    RenderSystem.defaultBlendFunc();
 	    RenderSystem.enableDepthTest();

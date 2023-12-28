@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/anvil_forging.png");
+	static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/anvil_forging.png");
 	private static final WeaponButton DAGGER = new WeaponButton(30, 40, 177, 1, new TextComponent("Dagger"));
 	private static final WeaponButton KABUTOWARI = new WeaponButton(60, 40, 177, 1, new TextComponent("Kabutowari"));
 	private static final WeaponButton TALWAR = new WeaponButton(90, 40, 177, 1, new TextComponent("Talwar"));
@@ -40,7 +40,6 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 	
 	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.setShaderTexture(0, TEXTURE);

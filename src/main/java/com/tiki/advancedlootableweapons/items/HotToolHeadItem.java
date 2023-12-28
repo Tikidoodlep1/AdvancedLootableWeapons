@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
-import com.tiki.advancedlootableweapons.handlers.EnumMaterialType;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import com.tiki.advancedlootableweapons.init.ModMaterials;
@@ -49,8 +49,8 @@ public class HotToolHeadItem extends Item {
         return this.finished;
     }
 
-    public void setMaterial(ItemStack stack,Tier mat) {
-        stack.getOrCreateTag().putString("material", EnumMaterialType.getMaterialNameF(mat));
+    public void setMaterial(ItemStack stack,WeaponMaterial mat) {
+        stack.getOrCreateTag().putString("material", WeaponMaterial.getMaterialNameF(mat));
     }
 
     public void setMaterial(ItemStack stack,String matName) {
@@ -64,7 +64,7 @@ public class HotToolHeadItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
-        if (!Objects.equals(this.getMaterial(stack), EnumMaterialType.NULL_MAT.getMaterialNameF())) {
+        if (!Objects.equals(this.getMaterial(stack), "null")) {
             tooltip.add(new TextComponent(ChatFormatting.BLUE + nbt.getString("material")));
         } else {
             tooltip.add(new TextComponent(ChatFormatting.BLUE + "No Material"));
@@ -126,13 +126,13 @@ public class HotToolHeadItem extends Item {
         //super.fillItemCategory(pCategory, pItems);
         if (allowdedIn(pCategory)) {//be careful not to put them in every tab
             ItemStack hot = new ItemStack(this);
-            setMaterial(hot, ModMaterials.MAT_STEEL);
+            setMaterial(hot, WeaponMaterial.STEEL);
             pItems.add(hot);
             ItemStack warm = new ItemStack(this);
-            setMaterial(warm, ModMaterials.MAT_STEEL);
+            setMaterial(warm, WeaponMaterial.STEEL);
             warm.setDamageValue(getMaxDamage() / 2 + 1);
             ItemStack cool = new ItemStack(this);
-            setMaterial(cool, ModMaterials.MAT_STEEL);
+            setMaterial(cool, WeaponMaterial.STEEL);
             cool.setDamageValue(getMaxDamage());
             pItems.add(warm);
             pItems.add(cool);

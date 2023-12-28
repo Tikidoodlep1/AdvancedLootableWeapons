@@ -79,7 +79,7 @@ public class ItemInit {
     public static final RegistryObject<Item> STEEL_FORGE_HAMMER = ITEMS.register("steel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> SHADOW_PLATINUM_FORGE_HAMMER = ITEMS.register("shadow_platinum_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_SHADOW_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> FROST_STEEL_FORGE_HAMMER = ITEMS.register("frost_steel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_FROST_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> OBSIDIAN_FORGE_HAMMER = ITEMS.register("obsidian_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_OBSIDIAN, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> OBSIDIAN_FORGE_HAMMER = ITEMS.register("obsidian_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_REFINED_OBSIDIAN, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CRYSTALLITE_FORGE_HAMMER = ITEMS.register("crystallite_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_CRYSTALLITE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_FORGE_HAMMER = ITEMS.register("dusksteel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_DUSKSTEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
@@ -172,7 +172,7 @@ public class ItemInit {
         tiers.add(Pair.of("steel", ModMaterials.MAT_STEEL));
         tiers.add(Pair.of("shadow_platinum", ModMaterials.MAT_SHADOW_PLATINUM));
         tiers.add(Pair.of("frost_steel", ModMaterials.MAT_FROST_STEEL));
-        tiers.add(Pair.of("obsidian", ModMaterials.MAT_OBSIDIAN));
+        tiers.add(Pair.of("obsidian", ModMaterials.MAT_REFINED_OBSIDIAN));
         tiers.add(Pair.of("crystallite", ModMaterials.MAT_CRYSTALLITE));
         tiers.add(Pair.of("dusksteel", ModMaterials.MAT_DUSKSTEEL));
 
@@ -272,7 +272,7 @@ public class ItemInit {
     public static final RegistryObject<Item> STEEL_WHETSTONE = ITEMS.register("steel_whetstone",() -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_STEEL));
     public static final RegistryObject<Item> SHADOW_PLATINUM_WHETSTONE = ITEMS.register("shadow_platinum_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_SHADOW_PLATINUM));
     public static final RegistryObject<Item> FROST_STEEL_WHETSTONE = ITEMS.register("frost_steel_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_FROST_STEEL));
-    public static final RegistryObject<Item> OBSIDIAN_WHETSTONE = ITEMS.register("obsidian_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_OBSIDIAN));
+    public static final RegistryObject<Item> OBSIDIAN_WHETSTONE = ITEMS.register("obsidian_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_REFINED_OBSIDIAN));
     public static final RegistryObject<Item> CRYSTALLITE_WHETSTONE = ITEMS.register("crystallite_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_CRYSTALLITE));
     public static final RegistryObject<Item> DUSKSTEEL_WHETSTONE = ITEMS.register("dusksteel_whetstone",() -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_DUSKSTEEL));
 

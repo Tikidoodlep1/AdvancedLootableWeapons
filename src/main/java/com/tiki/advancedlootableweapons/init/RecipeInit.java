@@ -18,8 +18,8 @@ public class RecipeInit {
 	public static final RegistryObject<RecipeSerializer<AlloyFurnaceRecipe>> ALLOY_FURNACE_RECIPE = RECIPE_SERIALIZERS.register("alloy_furnace",
 			AlloyFurnaceRecipe.Serializer::new);
 	
-//	public static final RegistryObject<RecipeSerializer<AnvilForgingRecipe>> ANVIL_FORGING_RECIPE = RECIPE_SERIALIZERS.register(AnvilForgingRecipe.Type.ID,
-	//		() -> AnvilForgingRecipe.Serializer.INSTANCE);
+	public static final RegistryObject<RecipeSerializer<AnvilForgingRecipe>> ANVIL_FORGING_RECIPE = RECIPE_SERIALIZERS.register(AnvilForgingRecipe.Type.ID,
+			() -> AnvilForgingRecipe.Serializer.INSTANCE);
 	
 	public static final RegistryObject<RecipeSerializer<JawCrusherRecipe>> JAW_CRUSHER_RECIPE = RECIPE_SERIALIZERS.register("crushing",
 			JawCrusherRecipe.Serializer::new);

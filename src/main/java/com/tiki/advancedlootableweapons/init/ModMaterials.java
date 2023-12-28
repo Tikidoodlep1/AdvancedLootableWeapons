@@ -1,7 +1,6 @@
 package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
-import com.tiki.advancedlootableweapons.items.armor.ArmorAttributes;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,7 +23,7 @@ public class ModMaterials {
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.SHADOW_PLATINUM_INGOT.get()));
     public static final ConfigurableForgeTier MAT_FROST_STEEL = new ConfigurableForgeTier(3, CommonConfigHandler.FROST_STEEL_DURABILITY, 7.0F, CommonConfigHandler.FROST_STEEL_DAMAGE, 30,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.FROST_STEEL_INGOT.get()));
-    public static final ConfigurableForgeTier MAT_OBSIDIAN = new ConfigurableForgeTier(3, CommonConfigHandler.OBSIDIAN_DURABILITY, 7.5F, CommonConfigHandler.OBSIDIAN_DAMAGE, 18,
+    public static final ConfigurableForgeTier MAT_REFINED_OBSIDIAN = new ConfigurableForgeTier(3, CommonConfigHandler.OBSIDIAN_DURABILITY, 7.5F, CommonConfigHandler.OBSIDIAN_DAMAGE, 18,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.REFINED_OBSIDIAN_INGOT.get()));
     public static final ConfigurableForgeTier MAT_CRYSTALLITE = new ConfigurableForgeTier(4, CommonConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, CommonConfigHandler.CRYSTALLITE_DAMAGE, 20,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.CRYSTALLITE_INGOT.get()));
