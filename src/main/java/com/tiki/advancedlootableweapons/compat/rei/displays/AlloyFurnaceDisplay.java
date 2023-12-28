@@ -1,5 +1,6 @@
-package com.tiki.advancedlootableweapons.compat.rei;
+package com.tiki.advancedlootableweapons.compat.rei.displays;
 
+import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.SimpleGridMenuDisplay;
@@ -55,13 +56,13 @@ public class AlloyFurnaceDisplay extends BasicDisplay implements SimpleGridMenuD
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return AlloyFurnaceCategory.CATEGORY_IDENTIFIER;
+        return REICompat.ALLOY_FURNACE;
     }
 
-    public static <R extends AlloyFurnaceDisplay> BasicDisplay.Serializer<R> serializer(BasicDisplay.Serializer.RecipeLessConstructor<R> constructor) {
+    public static <R extends JawCrusherDisplay> BasicDisplay.Serializer<R> serializer(BasicDisplay.Serializer.RecipeLessConstructor<R> constructor) {
         return BasicDisplay.Serializer.ofRecipeLess(constructor, (display, tag) -> {
             //tag.putFloat("xp", display.getXp());
-            tag.putDouble("cookTime", display.cookTime);
+            //tag.putDouble("cookTime", display.cookTime);
         });
     }
 

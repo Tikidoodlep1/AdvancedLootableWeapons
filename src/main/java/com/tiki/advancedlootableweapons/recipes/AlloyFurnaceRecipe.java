@@ -9,6 +9,7 @@ import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEnt
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import com.tiki.advancedlootableweapons.init.RecipeInit;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -108,7 +109,7 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return Serializer.INSTANCE;
+		return RecipeInit.ALLOY_FURNACE_RECIPE.get();
 	}
 
 	@Override
@@ -148,19 +149,19 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 	}
 	
 	public static class Serializer implements RecipeSerializer<AlloyFurnaceRecipe> {
-		
-		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.MODID, Type.ID);
-		
+
+		private ResourceLocation name;
+
 		@Override
 		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
-			return INSTANCE;
+			this.name = name;
+			return this;
 		}
 		
 		@Nullable
 		@Override
 		public ResourceLocation getRegistryName() {
-			return ID;
+			return name;
 		}
 		
 		@Override

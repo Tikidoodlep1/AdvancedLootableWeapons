@@ -24,11 +24,10 @@ public class JawCrusherContainer extends AbstractContainerMenu {
         super(MenuInit.JAW_CRUSHER_CONTAINER.get(), id);
         checkContainerSize(inv, 2);
         this.access = access;
-
-        this.addPlayerInv(inv);
-        this.addPlayerHotbar(inv);
         this.addSlot(new SlotItemHandler(handler, JawCrusherBlockEntity.INPUT_SLOT, 54, 43));
         this.addSlot(new SlotItemHandler(handler, JawCrusherBlockEntity.OUTPUT_SLOT, 108, 43));
+        this.addPlayerInv(inv);
+        this.addPlayerHotbar(inv);
 
     }
 

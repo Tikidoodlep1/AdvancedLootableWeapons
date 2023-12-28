@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import com.tiki.advancedlootableweapons.init.RecipeInit;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -61,9 +62,13 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 		return id;
 	}
 
+	public Ingredient getInput() {
+		return input;
+	}
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return Serializer.INSTANCE;
+		return RecipeInit.JAW_CRUSHER_RECIPE.get();
 	}
 
 	@Override
@@ -83,19 +88,20 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 	}
 	
 	public static class Serializer implements RecipeSerializer<JawCrusherRecipe> {
-		
-		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.MODID, Type.ID);
-		
+
+
+		private ResourceLocation name;
+
 		@Override
 		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
-			return INSTANCE;
+			this.name = name;
+			return this;
 		}
 		
 		@Nullable
 		@Override
 		public ResourceLocation getRegistryName() {
-			return ID;
+			return name;
 		}
 		
 		@Override
