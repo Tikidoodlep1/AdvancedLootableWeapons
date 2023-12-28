@@ -69,6 +69,14 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 		return testSlot1(slot1)&& testSlot2(slot2);
 	}
 
+	@Override
+	public NonNullList<Ingredient> getIngredients() {
+		NonNullList<Ingredient> ingredients = NonNullList.create();
+		ingredients.add(input1);
+		ingredients.add(input2);
+		return ingredients;
+	}
+
 	//check ingredient and count
 	public boolean testSlot1(ItemStack stack) {
 		return input1.test(stack) && stack.getCount() >= count1;
@@ -106,6 +114,14 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 	@Override
 	public RecipeType<?> getType() {
 		return Type.INSTANCE;
+	}
+
+	public Ingredient getInput1() {
+		return input1;
+	}
+
+	public Ingredient getInput2() {
+		return input2;
 	}
 
 	public int getCount1() {

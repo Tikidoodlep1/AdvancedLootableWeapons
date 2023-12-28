@@ -55,6 +55,8 @@ minecraft {
             args '--username', 'Dev'
 
             property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
+
         }
 
         server {
@@ -62,6 +64,9 @@ minecraft {
             jvmArg '-Dterminal.ansi=true'
 
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
+
         }
 
         data {
@@ -71,6 +76,9 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             args '--mod', 'advancedlootableweapons', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             ideaModule project.name + ".datagen"
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
 
             mods {
                 advancedlootableweapons {
