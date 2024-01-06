@@ -37,7 +37,32 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 	public AnvilForgingScreen(AnvilForgingContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
-	
+
+	@Override
+	protected void init() {
+		super.init();
+
+		addRenderableWidget(DAGGER);
+		addRenderableWidget(KABUTOWARI);
+		addRenderableWidget(TALWAR);
+		addRenderableWidget(RAPIER);
+		addRenderableWidget(MACE);
+		addRenderableWidget(CLEAVER);
+		addRenderableWidget(STAFF);
+		addRenderableWidget(LONGSWORD);
+		addRenderableWidget(KODACHI);
+		addRenderableWidget(NODACHI);
+		addRenderableWidget(BATTLEAXE);
+		addRenderableWidget(ZWEIHANDER);
+		addRenderableWidget(SABRE);
+		addRenderableWidget(MAKHAIRA);
+		addRenderableWidget(SPEAR);
+		addRenderableWidget(CHAIN_LINK);
+		addRenderableWidget(ARMOR_PLATE);
+		addRenderableWidget(TOOL_ROD);
+		addRenderableWidget(FORGE);
+	}
+
 	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -47,25 +72,7 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 		int y = (height - imageHeight) / 2;
 		
 		this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
-		DAGGER.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		KABUTOWARI.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		TALWAR.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		RAPIER.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		MACE.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		CLEAVER.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		STAFF.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		LONGSWORD.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		KODACHI.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		NODACHI.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		BATTLEAXE.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		ZWEIHANDER.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		SABRE.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		MAKHAIRA.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		SPEAR.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		CHAIN_LINK.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		ARMOR_PLATE.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		TOOL_ROD.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
-		FORGE.renderButton(pPoseStack, pMouseX, pMouseY, pPartialTick);
+
 	}
 	
 	@Override
