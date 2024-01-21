@@ -107,11 +107,6 @@ public class Alw {
 	}
 	
 	@SubscribeEvent
-	public void onLivingDrops(final LivingDropsEvent event) {
-		proxy.onEntityDrops(event);
-	}
-	
-	@SubscribeEvent
 	public void onBlockDrops(final HarvestDropsEvent event) {
 		proxy.onBlockDrops(event);
 	}

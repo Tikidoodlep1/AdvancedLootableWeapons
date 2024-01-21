@@ -41,6 +41,7 @@ public class RegistryHandler {
 		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
 		TileEntityHandler.registerTileEntities();
 		Alw.proxy.registerCustomMeshesAndStateStuff();
+		//Alw.logger.info("Bellows is an instance of " + BlockInit.bellows.getClass().getName());
 	}
 	
 	@SubscribeEvent
@@ -74,6 +75,7 @@ public class RegistryHandler {
 		ConfigHandler.registerConfig(event);
 		ItemInit.checkConfigOptions();
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
+		LootHandler.registerLootFunctions();
 	}
 	
 	public static void initRegistries(FMLInitializationEvent event)
@@ -82,7 +84,7 @@ public class RegistryHandler {
 		
 		PacketHandler.init();
 		SoundHandler.registerSounds();
-		GlobalDropsHandler.registerDrops();
+		LootTableHandler.registerAll();
 		Alw.proxy.addColoredItemRenderer();
 	}
 	
@@ -92,6 +94,7 @@ public class RegistryHandler {
 		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
 		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
+		
 		//Dumping furnace recipes to json files for the alloy furnace
 //		Gson gson = new Gson();
 //		for(Entry<ItemStack, ItemStack> e : FurnaceRecipes.instance().getSmeltingList().entrySet()) {

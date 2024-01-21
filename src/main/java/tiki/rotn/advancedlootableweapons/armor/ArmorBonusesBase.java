@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -30,6 +31,7 @@ import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.IHasModel;
 import tiki.rotn.advancedlootableweapons.entity.EntitySpear;
 import tiki.rotn.advancedlootableweapons.handlers.ConfigHandler;
+import tiki.rotn.advancedlootableweapons.init.EnchantmentInit;
 import tiki.rotn.advancedlootableweapons.init.ItemInit;
 import tiki.rotn.advancedlootableweapons.tools.ToolSlashSword;
 import tiki.rotn.advancedlootableweapons.tools.ToolStabSword;
@@ -43,7 +45,6 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 	private final double bonusMoveSpeed;
 	private final int tier;
 	private int maxDamage;
-	private String binding;
 	private final ArmorProperties properties;
 	private final ArmorTypes armorMakeup;
 	
@@ -64,12 +65,15 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		this.bonusMoveSpeed = bonusMoveSpeed;
 		this.tier = tier;
 		this.maxDamage = materialIn.getDurability(equipmentSlotIn);
-		this.binding = "No Binding";
 		this.armorMakeup = armorMakeup;
 		this.properties = new ArmorProperties(1, absorbRatio, maxAbsorb);
 	}
 	
-	public void setBinding(String binding, ItemStack stack) {
+	public double getBonusHealth() {
+		return this.bonusHealth;
+	}
+	
+	public static void setBinding(String binding, ItemStack stack) {
 		NBTTagCompound tag = stack.getTagCompound();
 		if(!stack.hasTagCompound()) {
 			tag = new NBTTagCompound();
@@ -78,12 +82,12 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		stack.setTagCompound(tag);
 	}
 	
-	public String getBinding(ItemStack stack) {
+	public static String getBinding(ItemStack stack) {
 		NBTTagCompound tag = stack.getTagCompound();
 		if(stack.hasTagCompound() && tag.hasKey("Binding")) {
 			return tag.getString("Binding");
 		}
-		return this.binding;
+		return "No Binding";
 	}
 	
 	@Override
@@ -91,10 +95,84 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		Alw.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 	
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot equipmentSlot, ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+		
+		double msD = -1.0;
+		if(stack.isItemEnchanted()) {
+			for(int i = 0; i < stack.getEnchantmentTagList().tagCount(); i++) {
+				NBTTagCompound ench = stack.getEnchantmentTagList().getCompoundTagAt(i);
+				if(ench.getShort("id") == (short)Enchantment.getEnchantmentID(EnchantmentInit.LIGHT)) {
+					msD = 1.0 + (ench.getShort("lvl")/3.0);
+				}
+			}
+		}
+		
+        if (equipmentSlot == this.armorType)
+        {
+        	if(ConfigHandler.USE_ARMOR_BONUS_DAMAGE) {
+        		multimap.put(Alw.BONUS_ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Armor modifier", this.bonusDamage, 0));
+        	}
+        }
+        if (equipmentSlot == EntityEquipmentSlot.HEAD && this.armorType == EntityEquipmentSlot.HEAD) {
+        	if(ConfigHandler.USE_ARMOR_BONUS_HEALTH) {
+        		multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(Alw.HEAD_MAX_HEALTH_MODIFIER, "Armor modifier", this.bonusHealth, 0));
+        	}
+        	if(ConfigHandler.USE_ARMOR_WEIGHT) {
+        		if(msD != -1.0) {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.HEAD_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed/msD, 0));
+        		}else {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.HEAD_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed, 0));
+        		}
+        	}
+        }
+        if (equipmentSlot == EntityEquipmentSlot.CHEST && this.armorType == EntityEquipmentSlot.CHEST) {
+        	if(ConfigHandler.USE_ARMOR_BONUS_HEALTH) {
+        		multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(Alw.CHEST_MAX_HEALTH_MODIFIER, "Armor modifier", this.bonusHealth, 0));
+        	}
+        	if(ConfigHandler.USE_ARMOR_WEIGHT) {
+        		if(msD != -1.0) {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.CHEST_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed/msD, 0));
+        		}else {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.CHEST_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed, 0));
+        		}
+        	}
+        }
+        if (equipmentSlot == EntityEquipmentSlot.LEGS && this.armorType == EntityEquipmentSlot.LEGS) {
+        	if(ConfigHandler.USE_ARMOR_BONUS_HEALTH) {
+        		multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(Alw.LEGS_MAX_HEALTH_MODIFIER, "Armor modifier", this.bonusHealth, 0));
+        	}
+        	if(ConfigHandler.USE_ARMOR_WEIGHT) {
+        		if(msD != -1.0) {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.LEGS_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed/msD, 0));
+        		}else {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.LEGS_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed, 0));
+        		}
+        	}
+        }
+        if (equipmentSlot == EntityEquipmentSlot.FEET && this.armorType == EntityEquipmentSlot.FEET) {
+        	if(ConfigHandler.USE_ARMOR_BONUS_HEALTH) {
+        		multimap.put(SharedMonsterAttributes.MAX_HEALTH.getName(), new AttributeModifier(Alw.FEET_MAX_HEALTH_MODIFIER, "Armor modifier", this.bonusHealth, 0));
+        	}
+        	if(ConfigHandler.USE_ARMOR_WEIGHT) {
+        		if(msD != -1.0) {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.FEET_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed/msD, 0));
+        		}else {
+        			multimap.put(SharedMonsterAttributes.MOVEMENT_SPEED.getName(), new AttributeModifier(Alw.FEET_MOVEMENT_SPEED_MODIFIER, "Armor modifier", this.bonusMoveSpeed, 0));
+        		}
+        	}
+        }
+
+        return multimap;
+	}
+	
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
+        Alw.logger.warn("Not using ItemStack sensitive version of getAttributeModifiers! Light Enchantment will NOT work!!");
+        
         if (equipmentSlot == this.armorType)
         {
         	if(ConfigHandler.USE_ARMOR_BONUS_DAMAGE) {
@@ -168,7 +246,7 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
 		tooltip.add(TextFormatting.BLUE + "Tier: " + TextFormatting.YELLOW + "" + TextFormatting.ITALIC + this.tier);
-		tooltip.add(TextFormatting.BLUE + "Binding: " + TextFormatting.GRAY + this.getBinding(stack));
+		tooltip.add(TextFormatting.BLUE + "Binding: " + TextFormatting.GRAY + ArmorBonusesBase.getBinding(stack));
     }
 	
 	@Override

@@ -118,7 +118,7 @@ public class ContainerTanningRack extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
             
-            if (index == 0)
+            if (index == 0 || index == 1) // Two container slots
             {
                 if (!this.mergeItemStack(itemstack1, 2, 38, true))
                 {
@@ -126,13 +126,12 @@ public class ContainerTanningRack extends Container
                 }
                 slot.onSlotChange(itemstack1, itemstack);
             }
-            else if (index != 0)
+            else if (index >= 2) // Player inventory start
             {
-                if (index >= 2 && index < 38 && !this.mergeItemStack(itemstack1, 0, 1, false))
+                if (index < 38 && !this.mergeItemStack(itemstack1, 0, 1, false)) // was: index >= 2 && index < 38 && !this.mergeItemStack(itemstack1, 0, 1, false)
                 {
                     return ItemStack.EMPTY;
                 }
-                //playerIn.inventoryContainer.getSlot(index).decrStackSize(64);
             }
             else if (!this.mergeItemStack(itemstack1, 2, 38, false))
             {

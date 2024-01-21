@@ -4,12 +4,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,17 +21,13 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import tiki.rotn.advancedlootableweapons.Alw;
 import tiki.rotn.advancedlootableweapons.ModInfo;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.DrumTESR;
-import tiki.rotn.advancedlootableweapons.blocks.tileentities.MillTESR;
 import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
-import tiki.rotn.advancedlootableweapons.blocks.tileentities.TileEntityMill;
 import tiki.rotn.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.rotn.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.rotn.advancedlootableweapons.handlers.RenderHandler;
 import tiki.rotn.advancedlootableweapons.init.ItemInit;
-import tiki.rotn.advancedlootableweapons.inventory.ForgeWeapon.GuiForgeWeapon;
 import tiki.rotn.advancedlootableweapons.items.ItemHotToolHead;
 import tiki.rotn.advancedlootableweapons.tools.ToolForgeHammer;
 import tiki.rotn.advancedlootableweapons.tools.ToolSlashSword;
@@ -74,72 +68,51 @@ public class ClientProxy extends CommonProxy {
         }, ItemInit.HELMET_LEATHER, ItemInit.CHESTPLATE_LEATHER, ItemInit.LEGGINGS_LEATHER, ItemInit.BOOTS_LEATHER, 
         ItemInit.DIAMOND_STUDDED_LEATHER_HELMET, ItemInit.DIAMOND_STUDDED_LEATHER_CHESTPLATE, ItemInit.DIAMOND_STUDDED_LEATHER_LEGGINGS, ItemInit.DIAMOND_STUDDED_LEATHER_BOOTS);
 		
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
+		if(!ConfigHandler.USE_LEGACY_TEXTURES) {
+			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 
-			@Override
-			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				NBTTagCompound tag = stack.getTagCompound();
-				int[] colorArray;
-				if(tag != null && tag.hasKey("colors")) {
-					colorArray = tag.getIntArray("colors");
-				}else {
-					colorArray = new int[5];
-					Arrays.fill(colorArray, 0xFFFFFF);
-				
-					if(stack.getItem() instanceof ToolSlashSword) {
-						ItemStack repair = ((ToolSlashSword)stack.getItem()).getToolMaterial().getRepairItemStack();
-						if(repair.getItem() == Items.IRON_INGOT) {
-							colorArray[0] = 0xFF101010;
-							colorArray[1] = 0xFF424242;
-							colorArray[2] = 0xFF696969;
-							colorArray[3] = 0xFFBDBDBD;
-							colorArray[4] = 0xFFFFFFFF;
-						}else if(repair.getItem() == Items.GOLD_INGOT) {
-							colorArray[0] = 0xFF3C3C00;
-							colorArray[1] = 0xFF505000;
-							colorArray[2] = 0xFFDEDE00;
-							colorArray[3] = 0xFFFFFF8B;
-							colorArray[4] = 0xFFFFFFFF;
-						}else if(repair.getItem() == Items.DIAMOND) {
-							colorArray[0] = 0xFF0C3730;
-							colorArray[1] = 0xFF1B7B6B;
-							colorArray[2] = 0xFF2CCDB1;
-							colorArray[3] = 0xFF8CF4E2;
-							colorArray[4] = 0xFFFFFFFF;
-						}else {
-							System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
+				@Override
+				public int colorMultiplier(ItemStack stack, int tintIndex) {
+					NBTTagCompound tag = stack.getTagCompound();
+					int[] colorArray;
+					if(tag != null && tag.hasKey("colors")) {
+						colorArray = tag.getIntArray("colors");
+					}else {
+						colorArray = new int[5];
+						Arrays.fill(colorArray, 0xFFFFFF);
+					
+						if(stack.getItem() instanceof ToolSlashSword) {
+							ItemStack repair = ((ToolSlashSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+							if(repair.getItem() == Items.IRON_INGOT) {
+								colorArray[0] = 0xFF101010; colorArray[1] = 0xFF424242; colorArray[2] = 0xFF696969; colorArray[3] = 0xFFBDBDBD; colorArray[4] = 0xFFFFFFFF;
+							}else if(repair.getItem() == Items.GOLD_INGOT) {
+								colorArray[0] = 0xFF3C3C00; colorArray[1] = 0xFF505000; colorArray[2] = 0xFFDEDE00; colorArray[3] = 0xFFFFFF8B; colorArray[4] = 0xFFFFFFFF;
+							}else if(repair.getItem() == Items.DIAMOND) {
+								colorArray[0] = 0xFF0C3730; colorArray[1] = 0xFF1B7B6B; colorArray[2] = 0xFF2CCDB1; colorArray[3] = 0xFF8CF4E2; colorArray[4] = 0xFFFFFFFF;
+							}else {
+								System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
+							}
+							((ToolSlashSword)stack.getItem()).setColors(stack, colorArray);
+						}else if(stack.getItem() instanceof ToolStabSword) {
+							ItemStack repair = ((ToolStabSword)stack.getItem()).getToolMaterial().getRepairItemStack();
+							if(repair.getItem() == Items.IRON_INGOT) {
+								colorArray[0] = 0xFF101010; colorArray[1] = 0xFF424242; colorArray[2] = 0xFF696969; colorArray[3] = 0xFFBDBDBD; colorArray[4] = 0xFFFFFFFF;
+							}else if(repair.getItem() == Items.GOLD_INGOT) {
+								colorArray[0] = 0xFF3C3C00; colorArray[1] = 0xFF505000; colorArray[2] = 0xFFDEDE00; colorArray[3] = 0xFFFFFF8B; colorArray[4] = 0xFFFFFFFF;
+							}else if(repair.getItem() == Items.DIAMOND) {
+								colorArray[0] = 0xFF0C3730; colorArray[1] = 0xFF1B7B6B; colorArray[2] = 0xFF2CCDB1; colorArray[3] = 0xFF8CF4E2; colorArray[4] = 0xFFFFFFFF;
+							}else {
+								System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
+							}
+							((ToolStabSword)stack.getItem()).setColors(stack, colorArray);
 						}
-						((ToolSlashSword)stack.getItem()).setColors(stack, colorArray);
-					}else if(stack.getItem() instanceof ToolStabSword) {
-						ItemStack repair = ((ToolStabSword)stack.getItem()).getToolMaterial().getRepairItemStack();
-						if(repair.getItem() == Items.IRON_INGOT) {
-							colorArray[0] = 0xFF101010;
-							colorArray[1] = 0xFF424242;
-							colorArray[2] = 0xFF696969;
-							colorArray[3] = 0xFFBDBDBD;
-							colorArray[4] = 0xFFFFFFFF;
-						}else if(repair.getItem() == Items.GOLD_INGOT) {
-							colorArray[0] = 0xFF3C3C00;
-							colorArray[1] = 0xFF505000;
-							colorArray[2] = 0xFFDEDE00;
-							colorArray[3] = 0xFFFFFF8B;
-							colorArray[4] = 0xFFFFFFFF;
-						}else if(repair.getItem() == Items.DIAMOND) {
-							colorArray[0] = 0xFF0C3730;
-							colorArray[1] = 0xFF1B7B6B;
-							colorArray[2] = 0xFF2CCDB1;
-							colorArray[3] = 0xFF8CF4E2;
-							colorArray[4] = 0xFFFFFFFF;
-						}else {
-							System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
-						}
-						((ToolStabSword)stack.getItem()).setColors(stack, colorArray);
 					}
+					return colorArray[tintIndex];
 				}
-				return colorArray[tintIndex];
-			}
-			
-		}, weapons);
+				
+			}, weapons);
+		}
+		
 		
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 
@@ -162,23 +135,11 @@ public class ClientProxy extends CommonProxy {
 						}
 						
 						if(repair.getItem() == Items.IRON_INGOT) {
-							colorArray[0] = 0xFF101010;
-							colorArray[1] = 0xFF424242;
-							colorArray[2] = 0xFF696969;
-							colorArray[3] = 0xFFBDBDBD;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF101010; colorArray[1] = 0xFF424242; colorArray[2] = 0xFF696969; colorArray[3] = 0xFFBDBDBD; colorArray[4] = 0xFFFFFFFF;
 						}else if(repair.getItem() == Items.GOLD_INGOT) {
-							colorArray[0] = 0xFF3C3C00;
-							colorArray[1] = 0xFF505000;
-							colorArray[2] = 0xFFDEDE00;
-							colorArray[3] = 0xFFFFFF8B;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF3C3C00; colorArray[1] = 0xFF505000; colorArray[2] = 0xFFDEDE00; colorArray[3] = 0xFFFFFF8B; colorArray[4] = 0xFFFFFFFF;
 						}else if(repair.getItem() == Items.DIAMOND) {
-							colorArray[0] = 0xFF0C3730;
-							colorArray[1] = 0xFF1B7B6B;
-							colorArray[2] = 0xFF2CCDB1;
-							colorArray[3] = 0xFF8CF4E2;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF0C3730; colorArray[1] = 0xFF1B7B6B; colorArray[2] = 0xFF2CCDB1; colorArray[3] = 0xFF8CF4E2; colorArray[4] = 0xFFFFFFFF;
 						}else {
 							System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
 						}
@@ -192,23 +153,11 @@ public class ClientProxy extends CommonProxy {
 						}
 						
 						if(repair.getItem() == Items.IRON_INGOT) {
-							colorArray[0] = 0xFF101010;
-							colorArray[1] = 0xFF424242;
-							colorArray[2] = 0xFF696969;
-							colorArray[3] = 0xFFBDBDBD;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF101010; colorArray[1] = 0xFF424242; colorArray[2] = 0xFF696969; colorArray[3] = 0xFFBDBDBD; colorArray[4] = 0xFFFFFFFF;
 						}else if(repair.getItem() == Items.GOLD_INGOT) {
-							colorArray[0] = 0xFF3C3C00;
-							colorArray[1] = 0xFF505000;
-							colorArray[2] = 0xFFDEDE00;
-							colorArray[3] = 0xFFFFFF8B;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF3C3C00; colorArray[1] = 0xFF505000; colorArray[2] = 0xFFDEDE00; colorArray[3] = 0xFFFFFF8B; colorArray[4] = 0xFFFFFFFF;
 						}else if(repair.getItem() == Items.DIAMOND) {
-							colorArray[0] = 0xFF0C3730;
-							colorArray[1] = 0xFF1B7B6B;
-							colorArray[2] = 0xFF2CCDB1;
-							colorArray[3] = 0xFF8CF4E2;
-							colorArray[4] = 0xFFFFFFFF;
+							colorArray[0] = 0xFF0C3730; colorArray[1] = 0xFF1B7B6B; colorArray[2] = 0xFF2CCDB1; colorArray[3] = 0xFF8CF4E2; colorArray[4] = 0xFFFFFFFF;
 						}else {
 							System.arraycopy(ColorUtils.getColorPalateFromItemStack(repair), 0, colorArray, 0, 5); 
 						}
@@ -230,8 +179,9 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerCustomModelLoaders() {
-//		ModelLoaderRegistry.registerLoader(HotWeaponModelHandler.Loader.INSTANCE);
-//		ModelLoader.registerItemVariants(item, names);
+		if(!ConfigHandler.USE_LEGACY_TEXTURES) {
+			Arrays.stream(weapons).forEach((item) -> ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(getGenericWeaponResourceLocation(item), "inventory")));
+		}
 		ItemInit.generatedItems.forEach((item) -> ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(getGenericWeaponResourceLocation(item), "inventory")));
 	}
 	

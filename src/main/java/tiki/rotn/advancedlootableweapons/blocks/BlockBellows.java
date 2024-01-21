@@ -1,6 +1,5 @@
 package tiki.rotn.advancedlootableweapons.blocks;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,14 +17,12 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -61,20 +58,20 @@ public class BlockBellows extends BlockBase {
 		this.translucent = true;
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		super.addInformation(stack, player, tooltip, advanced);
-		
-		if(stack.hasTagCompound()) {
-			NBTTagCompound tag = stack.getTagCompound();
-			if(tag.hasKey("wood")) {
-				ItemStack wood = new ItemStack(tag.getCompoundTag("wood"));
-				if(!wood.isEmpty()) {
-					tooltip.add(wood.getDisplayName());
-				}
-			}
-		}
-	}
+//	@Override
+//	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
+//		super.addInformation(stack, player, tooltip, advanced);
+//		
+//		if(stack.hasTagCompound()) {
+//			NBTTagCompound tag = stack.getTagCompound();
+//			if(tag.hasKey("wood")) {
+//				ItemStack wood = new ItemStack(tag.getCompoundTag("wood"));
+//				if(!wood.isEmpty()) {
+//					tooltip.add(wood.getDisplayName());
+//				}
+//			}
+//		}
+//	}
 	
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, SpawnPlacementType type) {
@@ -165,12 +162,9 @@ public class BlockBellows extends BlockBase {
 				}
 			}
 			
-			//if(Alw.isPyrotechLoaded) { // Pyrotech is a hard dependency - we KNOW it's loaded.
-				airflow = 25;
-				performBellows(worldIn, pos, state);
-				return true;
-			//}
-			
+			airflow = 25;
+			performBellows(worldIn, pos, state);
+			return true;			
 		}else {
 			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
 			t.schedule(new TimerTask() {

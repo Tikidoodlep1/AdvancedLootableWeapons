@@ -37,6 +37,7 @@ public class ConfigHandler {
 	public static boolean ENABLE_MAKHAIRAS = true;
 	public static boolean ENABLE_ARMORS = true;
 	public static boolean ENABLE_ARMOR_FORGING = true;
+	public static boolean USE_LEGACY_TEXTURES = false;
 	public static boolean USE_LARGER_TEXTURE_FOR_TEMP = false;
 	public static HashSet<String> VALID_ANVILS = new HashSet<String>();
 	public static HashSet<String> VALID_HAMMERS = new HashSet<String>();
@@ -49,6 +50,7 @@ public class ConfigHandler {
 	public static float BELLOWS_EXHAUSTION = 0.1F;
 	public static float FORGE_TEMP_DECREASE_MULTIPLIER = 1.0F;
 	public static float FORGE_TEMP_INCREASE_MULTIPLIER = 1.0F;
+	public static float FORGE_NETHER_HEATING_MULTIPLIER = 2.5F;
 	public static float FORGING_EXHAUSTION = 0.0F;
 	public static float TOOL_HEAD_HEATING_MULTIPLIER = 1.0F;
 	
@@ -109,28 +111,29 @@ public class ConfigHandler {
 	public static float ARMOR_BONUS_HEALTH_MULTIPLIER = 1.0F;
 	public static float ARMOR_BONUS_DAMAGE_MULTIPLIER = 1.0F;
 	
-	public static float KOBOLD_DAMAGE = 3F;//old was 3.5
+	//										ALL OLD DAMAGE/DUR VALUES WERE UPDATED ALW 1.4.2
+	public static float KOBOLD_DAMAGE = 4.25F;//old was 3.5
 	public static float COPPER_DAMAGE = 3.5F;//old was 4.0
-	public static float SILVER_DAMAGE = 4F;//old was 4.5
+	public static float SILVER_DAMAGE = 4F;//old was 4.25
 	public static float BRONZE_DAMAGE = 4.25F;//old was 4.75
 	public static float PLATINUM_DAMAGE = 4.75F;//old was 5.25
 	public static float STEEL_DAMAGE = 5.5F;//old was 6
 	public static float SHADOW_PLATINUM_DAMAGE = 5.75F;//old was 6.25
-	public static float FROST_STEEL_DAMAGE = 6.0F;//old was 6.5
+	public static float FROST_STEEL_DAMAGE = 6.5F;//old was 6.5
 	public static float OBSIDIAN_DAMAGE = 6.25F;//old was 6.75
 	public static float CRYSTALLITE_DAMAGE = 6.75F;//old was 7.5
 	public static float DUSKSTEEL_DAMAGE = 7.5F;//old was 8.25
-	public static int KOBOLD_DURABILITY = 203;
-	public static int COPPER_DURABILITY = 256;
-	public static int SILVER_DURABILITY = 277;
-	public static int BRONZE_DURABILITY = 330;
-	public static int PLATINUM_DURABILITY = 212;
-	public static int STEEL_DURABILITY = 416;
-	public static int SHADOW_PLATINUM_DURABILITY = 461;
-	public static int FROST_STEEL_DURABILITY = 507;
-	public static int OBSIDIAN_DURABILITY = 598;
-	public static int CRYSTALLITE_DURABILITY = 627;
-	public static int DUSKSTEEL_DURABILITY = 812;
+	public static int KOBOLD_DURABILITY = 128;// was 256
+	public static int COPPER_DURABILITY = 101;// was 203
+	public static int SILVER_DURABILITY = 138;// was 277
+	public static int BRONZE_DURABILITY = 165;// was 330
+	public static int PLATINUM_DURABILITY = 106;// was 212
+	public static int STEEL_DURABILITY = 208;// was 416
+	public static int SHADOW_PLATINUM_DURABILITY = 230;// was 461
+	public static int FROST_STEEL_DURABILITY = 253;// was 507
+	public static int OBSIDIAN_DURABILITY = 299;// was 598
+	public static int CRYSTALLITE_DURABILITY = 313;// was 627
+	public static int DUSKSTEEL_DURABILITY = 406;// was 812
 	
 	public static float CHAIN_DURABILITY_MULTIPLIER = 0.75F;
 	public static float CHAIN_PROTECTION_MULTIPLIER = 0.8F;
@@ -360,10 +363,10 @@ public class ConfigHandler {
 	public static int PLATINUM_ORE_MIN_SPAWN_HEIGHT = 5;
 	public static int PLATINUM_ORE_MAX_SPAWN_HEIGHT = 46;
 	
-	public static int CRYSTALLITE_ORE_BLOCKS_PER_VEIN = 6;
-	public static int CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK = 3;
+	public static int CRYSTALLITE_ORE_BLOCKS_PER_VEIN = 3;
+	public static int CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK = 8;
 	public static int CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT = 0;
-	public static int CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT = 20;
+	public static int CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT = 55;
 	
 	public static int SALT_ORE_BLOCKS_PER_VEIN = 6;
 	public static int SALT_ORE_MAX_VEINS_PER_CHUNK = 10;
@@ -566,6 +569,8 @@ public class ConfigHandler {
 		//**********************************WEAPON MODIFICATION**********************************
 		category = "WEAPON MODIFICATION";
 		
+		USE_LEGACY_TEXTURES = WeaponConfig.getBoolean("Use Legacy Weapon Textures", category, false, "Change weapons to use the legacy textures. This makes weapon textures more easily changed via resource packs.");
+		
 		WeaponConfig.addCustomCategoryComment(category, "Enable or disable weapon types");
 		ENABLE_DAGGERS = WeaponConfig.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = WeaponConfig.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");
@@ -640,29 +645,29 @@ public class ConfigHandler {
 		WeaponConfig.addCustomCategoryComment(category, "Modifications to the materials of all weapons such as durability and damage");
 		EXTRA_MATERIALS.addAll(Arrays.stream(WeaponConfig.getStringList("Extra Weapon Materials", category, new String[] {}, "Put tool materials here (Ex. DIAMOND for vanilla diamonds) to add a new craftable set of ALW weapons. The repair item will be used as the base item (Ex. Iron ingots for iron). If the tool material does not have a repair item (Crafts into granite clay), specify one using a comma as a delimiter. (Ex TF:CONSTANTAN,thermalfoundation:material#164 using # to specify item metadata) Available tool materials can be seen with /materials in game. NOTE: If you're haiving issues with the items crafting into air, try adding \"zz\" to the beginning of the ALW jar file.")).collect(Collectors.toSet()));
 		
-		KOBOLD_DAMAGE = WeaponConfig.getFloat("Kobold Steel Base Damage", category, 3.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of kobold steel.");
-		COPPER_DAMAGE = WeaponConfig.getFloat("Copper Base Damage", category, 4.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of copper.");
-		SILVER_DAMAGE = WeaponConfig.getFloat("Silver Base Damage", category, 4.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of silver.");
-		BRONZE_DAMAGE = WeaponConfig.getFloat("Bronze Base Damage", category, 4.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of bronze.");
-		PLATINUM_DAMAGE = WeaponConfig.getFloat("Platinum Base Damage", category, 5.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of platinum.");
-		STEEL_DAMAGE = WeaponConfig.getFloat("Steel Base Damage", category, 6.0F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of steel.");
-		SHADOW_PLATINUM_DAMAGE = WeaponConfig.getFloat("Shadow Platinum Base Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of shadow platinum.");
+		KOBOLD_DAMAGE = WeaponConfig.getFloat("Kobold Steel Base Damage", category, 4.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of kobold steel.");
+		COPPER_DAMAGE = WeaponConfig.getFloat("Copper Base Damage", category, 3.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of copper.");
+		SILVER_DAMAGE = WeaponConfig.getFloat("Silver Base Damage", category, 4F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of silver.");
+		BRONZE_DAMAGE = WeaponConfig.getFloat("Bronze Base Damage", category, 4.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of bronze.");
+		PLATINUM_DAMAGE = WeaponConfig.getFloat("Platinum Base Damage", category, 4.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of platinum.");
+		STEEL_DAMAGE = WeaponConfig.getFloat("Steel Base Damage", category, 5.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of steel.");
+		SHADOW_PLATINUM_DAMAGE = WeaponConfig.getFloat("Shadow Platinum Base Damage", category, 5.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of shadow platinum.");
 		FROST_STEEL_DAMAGE = WeaponConfig.getFloat("Frost Steel Base Damage", category, 6.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of frost steel.");
-		OBSIDIAN_DAMAGE = WeaponConfig.getFloat("Obsidian Base Damage", category, 6.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of obsidian.");
-		CRYSTALLITE_DAMAGE = WeaponConfig.getFloat("Crystallite Base Damage", category, 7.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of crystallite.");
-		DUSKSTEEL_DAMAGE = WeaponConfig.getFloat("Dusksteel Base Damage", category, 8.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of dusksteel.");
+		OBSIDIAN_DAMAGE = WeaponConfig.getFloat("Obsidian Base Damage", category, 6.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of obsidian.");
+		CRYSTALLITE_DAMAGE = WeaponConfig.getFloat("Crystallite Base Damage", category, 6.75F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of crystallite.");
+		DUSKSTEEL_DAMAGE = WeaponConfig.getFloat("Dusksteel Base Damage", category, 7.5F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of dusksteel.");
 		
-		KOBOLD_DURABILITY = WeaponConfig.getInt("Kobold Steel Base Durability", category, 203, 0, 1000, "Use to change the durability that the weapons made of kobold steel have.");
-		COPPER_DURABILITY = WeaponConfig.getInt("Copper Base Durability", category, 256, 0, 1000, "Use to change the durability that the weapons made of copper have.");
-		SILVER_DURABILITY = WeaponConfig.getInt("Silver Base Durability", category, 277, 0, 1000, "Use to change the durability that the weapons made of silver have.");
-		BRONZE_DURABILITY = WeaponConfig.getInt("Bronze Base Durability", category, 330, 0, 1000, "Use to change the durability that the weapons made of bronze have.");
-		PLATINUM_DURABILITY = WeaponConfig.getInt("Platinum Base Durability", category, 121, 0, 1000, "Use to change the durability that the weapons made of platinum have.");
-		STEEL_DURABILITY = WeaponConfig.getInt("Steel Base Durability", category, 416, 0, 1000, "Use to change the durability that the weapons made of steel have.");
-		SHADOW_PLATINUM_DURABILITY = WeaponConfig.getInt("Shadow Platinum Base Durability", category, 461, 0, 1000, "Use to change the durability that the weapons made of shadow platinum have.");
-		FROST_STEEL_DURABILITY = WeaponConfig.getInt("Frost Steel Base Durability", category, 507, 0, 1000, "Use to change the durability that the weapons made of frost steel have.");
-		OBSIDIAN_DURABILITY = WeaponConfig.getInt("Obsidian Base Durability", category, 598, 0, 1000, "Use to change the durability that the weapons made of obsidian have.");
-		CRYSTALLITE_DURABILITY = WeaponConfig.getInt("Crystallite Base Durability", category, 627, 0, 1000, "Use to change the durability that the weapons made of crystallite have.");
-		DUSKSTEEL_DURABILITY = WeaponConfig.getInt("Dusksteel Base Durability", category, 812, 0, 1000, "Use to change the durability that the weapons made of dusksteel have.");
+		KOBOLD_DURABILITY = WeaponConfig.getInt("Kobold Steel Base Durability", category, 128, 0, 1000, "Use to change the durability that the weapons made of kobold steel have.");
+		COPPER_DURABILITY = WeaponConfig.getInt("Copper Base Durability", category, 101, 0, 1000, "Use to change the durability that the weapons made of copper have.");
+		SILVER_DURABILITY = WeaponConfig.getInt("Silver Base Durability", category, 138, 0, 1000, "Use to change the durability that the weapons made of silver have.");
+		BRONZE_DURABILITY = WeaponConfig.getInt("Bronze Base Durability", category, 165, 0, 1000, "Use to change the durability that the weapons made of bronze have.");
+		PLATINUM_DURABILITY = WeaponConfig.getInt("Platinum Base Durability", category, 106, 0, 1000, "Use to change the durability that the weapons made of platinum have.");
+		STEEL_DURABILITY = WeaponConfig.getInt("Steel Base Durability", category, 208, 0, 1000, "Use to change the durability that the weapons made of steel have.");
+		SHADOW_PLATINUM_DURABILITY = WeaponConfig.getInt("Shadow Platinum Base Durability", category, 230, 0, 1000, "Use to change the durability that the weapons made of shadow platinum have.");
+		FROST_STEEL_DURABILITY = WeaponConfig.getInt("Frost Steel Base Durability", category, 253, 0, 1000, "Use to change the durability that the weapons made of frost steel have.");
+		OBSIDIAN_DURABILITY = WeaponConfig.getInt("Obsidian Base Durability", category, 299, 0, 1000, "Use to change the durability that the weapons made of obsidian have.");
+		CRYSTALLITE_DURABILITY = WeaponConfig.getInt("Crystallite Base Durability", category, 313, 0, 1000, "Use to change the durability that the weapons made of crystallite have.");
+		DUSKSTEEL_DURABILITY = WeaponConfig.getInt("Dusksteel Base Durability", category, 406, 0, 1000, "Use to change the durability that the weapons made of dusksteel have.");
 		
 		WeaponConfig.save();
 	}
@@ -672,70 +677,11 @@ public class ConfigHandler {
 		
 		String category;
 		
-		category = "GLOBAL DROPS - GENERAL MODIFICATION";
-		MobConfig.addCustomCategoryComment(category, "You can modify which vanilla mobs drop shadows, blood, etc...");
-		SHADOW_DROP_RATE = MobConfig.getFloat("Shadow Drop Rate", category, 0.05F, 0.01F, 1.0F, "The drop rate for the shadow item in percentage, 0.05 = 5%");
-		LAND_MOBS_DROP_SHADOW = MobConfig.getBoolean("Land Mobs - Shadow", category, true, "Should land mobs drop the shadow item? (True/False)");
-		WATER_MOBS_DROP_SHADOW = MobConfig.getBoolean("Water Mobs - Shadow", category, false, "Should water mobs drop the shadow item? (True/False)");
-		AIR_MOBS_DROP_SHADOW = MobConfig.getBoolean("Air Mobs - Shadow", category, false, "Should air mobs drop the shadow item? NOTE: The ender dragon and wither are considered flying, but \"Bosses - Shadow\" will override this option. (True/False)");
-		PEACEFUL_MOBS_DROP_SHADOW = MobConfig.getBoolean("Peaceful Mobs - Shadow", category, false, "Should peaceful mobs drop the shadow item? (True/False)");
-		NEUTRAL_MOBS_DROP_SHADOW = MobConfig.getBoolean("Neutral Mobs - Shadow", category, false, "Should neutral mobs drop the shadow item? (True/False)");
-		HOSTILE_MOBS_DROP_SHADOW = MobConfig.getBoolean("Hostile Mobs - Shadow", category, true, "Should hostile mobs drop the shadow item? (True/False)");
-		BOSS_DROPS_SHADOW = MobConfig.getBoolean("Bosses - Shadow", category, true, "Should the witch drop the shadow item? (True/False)");
-		ONLY_BOSS_DROPS_SHADOW = MobConfig.getBoolean("Only Bosses Drop Shadows", category, false, "Should \"boss\" mobs be the only ones to drop shadows? (True/False)");
-		NON_VANILLA_DROPS_SHADOW = MobConfig.getBoolean("Non-Vanilla Mobs - Shadow", category, true, "Should any non-vanilla mobs drop shadows? This does NOT take into account if the mob is passive, flying, water, etc. (True/False)");
-
-		
-		category = "GLOBAL DROPS - INDIVIDUAL MODIFICATION";
-		MobConfig.addCustomCategoryComment(category, "You can modify whether you want individual mobs to drop the shadow items. NOTE: The overarching categories in \"GLOBAL DROPS - GENERAL MODIFICATION\" are used to determine each group, but these values will override any individual mob in each enabled group, Ex. If \"Hostile Mobs - Shadow\" is TRUE, but \"Skeleton - Shadow\" is FALSE, the skeleton will NOT drop the shadow item.");
-		WITCH_DROP_SHADOW = MobConfig.getBoolean("Witch - Shadow", category, true, "Should the witch drop the shadow item. (True/False)");
+		category = "SHADOW DROPS - INDIVIDUAL MODIFICATION";
+		MobConfig.addCustomCategoryComment(category, "You can modify whether you want mobs to drop the shadow item.");
 		VEX_DROP_SHADOW = MobConfig.getBoolean("Vex - Shadow", category, true, "Should the vex drop the shadow item. (True/False)");
 		EVOKER_DROP_SHADOW = MobConfig.getBoolean("Evoker - Shadow", category, true, "Should the evoker drop the shadow item. (True/False)");
-		SHULKER_DROP_SHADOW = MobConfig.getBoolean("Shulker - Shadow", category, true, "Should the shulker drop the shadow item. (True/False)");
-		DRAGON_DROP_SHADOW = MobConfig.getBoolean("Ender Dragon - Shadow", category, true, "Should the ender dragon drop the shadow item. (True/False)");
-		ENDERMAN_DROP_SHADOW = MobConfig.getBoolean("Enderman - Shadow", category, true, "Should the enderman drop the shadow item. (True/False)");
-		ENDERMITE_DROP_SHADOW = MobConfig.getBoolean("Endermite - Shadow", category, true, "Should the endermite drop the shadow item. (True/False)");
-		VILLAGER_DROP_SHADOW = MobConfig.getBoolean("Villager - Shadow", category, true, "Should the villager drop the shadow item. (True/False)");
-		PARROT_DROP_SHADOW = MobConfig.getBoolean("Parrot - Shadow", category, true, "Should the parrot drop the shadow item. (True/False)");
-		LLAMA_DROP_SHADOW = MobConfig.getBoolean("Llama - Shadow", category, true, "Should the llama drop the shadow item. (True/False)");
-		POLARBEAR_DROP_SHADOW = MobConfig.getBoolean("Polar Bear - Shadow", category, true, "Should the polar bear drop the shadow item. (True/False)");
-		RABBIT_DROP_SHADOW = MobConfig.getBoolean("Rabbit - Shadow", category, true, "Should the rabbit drop the shadow item. (True/False)");
-		HORSE_DROP_SHADOW = MobConfig.getBoolean("Horse - Shadow", category, true, "Should the horse drop the shadow item. (True/False)");
-		IRONGOLEM_DROP_SHADOW = MobConfig.getBoolean("Iron Golem - Shadow", category, true, "Should the iron golem drop the shadow item. (True/False)");
-		OCELOT_DROP_SHADOW = MobConfig.getBoolean("Ocelot - Shadow", category, true, "Should the ocelot drop the shadow item. (True/False)");
-		SNOWMAN_DROP_SHADOW = MobConfig.getBoolean("Snowman - Shadow", category, true, "Should the snowman drop the shadow item. (True/False)");
-		MOOSHROOM_DROP_SHADOW = MobConfig.getBoolean("Mooshroom - Shadow", category, true, "Should the mooshroom drop the shadow item. (True/False)");
-		WOLF_DROP_SHADOW = MobConfig.getBoolean("Wolf - Shadow", category, true, "Should the wolf drop the shadow item. (True/False)");
-		SQUID_DROP_SHADOW = MobConfig.getBoolean("Squid - Shadow", category, true, "Should the squid drop the shadow item. (True/False)");
-		CHICKEN_DROP_SHADOW = MobConfig.getBoolean("Chicken - Shadow", category, true, "Should the chicken drop the shadow item. (True/False)");
-		SHEEP_DROP_SHADOW = MobConfig.getBoolean("Sheep - Shadow", category, true, "Should the sheep drop the shadow item. (True/False)");
-		COW_DROP_SHADOW = MobConfig.getBoolean("Cow - Shadow", category, true, "Should the cow drop the shadow item. (True/False)");
-		PIG_DROP_SHADOW = MobConfig.getBoolean("Pig - Shadow", category, true, "Should the pig drop the shadow item. (True/False)");
-		BAT_DROP_SHADOW = MobConfig.getBoolean("Bat - Shadow", category, true, "Should the bat drop the shadow item. (True/False)");
-		GUARDIAN_DROP_SHADOW = MobConfig.getBoolean("Guardian - Shadow", category, true, "Should the guardian drop the shadow item. (True/False)");
-		WITHER_DROP_SHADOW = MobConfig.getBoolean("Wither - Shadow", category, true, "Should the wither drop the shadow item. (True/False)");
-		PIGZOMBIE_DROP_SHADOW = MobConfig.getBoolean("Zombie Pigman - Shadow", category, true, "Should the zombie pigman drop the shadow item. (True/False)");
-		GIANTZOMBIE_DROP_SHADOW = MobConfig.getBoolean("Giant - Shadow", category, true, "Should the giant drop the shadow item. (True/False)");
-		ILLUSIONILLAGER_DROP_SHADOW = MobConfig.getBoolean("Illusioner - Shadow", category, true, "Should the illusioner drop the shadow item. (True/False)");
-		MULE_DROP_SHADOW = MobConfig.getBoolean("Mule - Shadow", category, true, "Should the mule drop the shadow item. (True/False)");
-		DONKEY_DROP_SHADOW = MobConfig.getBoolean("Donkey - Shadow", category, true, "Should the donkey drop the shadow item. (True/False)");
-		ZOMBIEHORSE_DROP_SHADOW = MobConfig.getBoolean("Zombie Horse - Shadow", category, true, "Should the zombie horse drop the shadow item. (True/False)");
-		SKELETONHORSE_DROP_SHADOW = MobConfig.getBoolean("Skeleton - Shadow", category, true, "Should the skeleton horse drop the shadow item. (True/False)");
-		ZOMBIEVILLAGER_DROP_SHADOW = MobConfig.getBoolean("Zombie Villager - Shadow", category, true, "Should the zombie villager drop the shadow item. (True/False)");
 		WITHERSKELETON_DROP_SHADOW = MobConfig.getBoolean("Wither Skeleton - Shadow", category, true, "Should the wither drop the shadow item. (True/False)");
-		ELDERGUARDIAN_DROP_SHADOW = MobConfig.getBoolean("Elder Guardian - Shadow", category, true, "Should the elder guardian drop the shadow item. (True/False)");
-		ZOMBIE_DROP_SHADOW = MobConfig.getBoolean("Zombie - Shadow", category, true, "Should the zombie drop the shadow item. (True/False)");
-		HUSK_DROP_SHADOW = MobConfig.getBoolean("Husk - Shadow", category, true, "Should the husk drop the shadow item. (True/False)");
-		SKELETON_DROP_SHADOW = MobConfig.getBoolean("Skeleton - Shadow", category, true, "Should the skeleton drop the shadow item. (True/False)");
-		STRAY_DROP_SHADOW = MobConfig.getBoolean("Stray - Shadow", category, true, "Should the stray drop the shadow item. (True/False)");
-		BLAZE_DROP_SHADOW = MobConfig.getBoolean("Blaze - Shadow", category, true, "Should the blaze drop the shadow item. (True/False)");
-		CREEPER_DROP_SHADOW = MobConfig.getBoolean("Creeper - Shadow", category, true, "Should the creeper drop the shadow item. (True/False)");
-		GHAST_DROP_SHADOW = MobConfig.getBoolean("Ghast - Shadow", category, true, "Should the ghast drop the shadow item. (True/False)");
-		MAGMACUBE_DROP_SHADOW = MobConfig.getBoolean("Magma Cube - Shadow", category, true, "Should the magma cube drop the shadow item. (True/False)");
-		SILVERFISH_DROP_SHADOW = MobConfig.getBoolean("Silverfish - Shadow", category, true, "Should the silverfish drop the shadow item. (True/False)");
-		SLIME_DROP_SHADOW = MobConfig.getBoolean("Slime - Shadow", category, true, "Should the slime drop the shadow item. (True/False)");
-		SPIDER_DROP_SHADOW = MobConfig.getBoolean("Spider - Shadow", category, true, "Should the spider drop the shadow item. (True/False)");
-		CAVESPIDER_DROP_SHADOW = MobConfig.getBoolean("Cave Spider - Shadow", category, true, "Should the cave spider drop the shadow item. (True/False)");
 		VINDICATOR_DROP_SHADOW = MobConfig.getBoolean("Vindicator - Shadow", category, true, "Should the vindicator drop the shadow item. (True/False)");
 		
 		MobConfig.save();
@@ -757,6 +703,7 @@ public class ConfigHandler {
 		FORGING_EXHAUSTION = ItemConfig.getFloat("Forging Exhaustion", category, 0.0f, 0.0f, 20.0f, "");
 		FORGE_TEMP_DECREASE_MULTIPLIER = ItemConfig.getFloat("Forge Temperature Decrease Multiplier. Set to 0.0F to disable temperature drop.", category, 1.0F, 0.0F, 10.0F, "");
 		FORGE_TEMP_INCREASE_MULTIPLIER = ItemConfig.getFloat("Forge Temperature Increase Multiplier.", category, 1.0F, 0.1F, 10.0F, "");
+		FORGE_NETHER_HEATING_MULTIPLIER = ItemConfig.getFloat("Forge Nether Heating Multiplier", category, 2.5F, 0.1F, 20.0F, "A multiplier used for when forges are placed in the nether.");
 		USE_LARGER_TEXTURE_FOR_TEMP = ItemConfig.getBoolean("Use Larger Texture Region to Show Temperature", category, false, "Uses a larger part of the simple forge and advanced forge textures to show how hot the forge is compared to it's max heat value. In the simple forge, this uses the smoke. In the advanced forge, this uses the fiery part of the background. (True/False)");
 		VALID_ANVILS.addAll(Arrays.stream(ItemConfig.getStringList("Valid Anvil Blocks", category, new String[] {"minecraft:anvil"}, "Write any block ID to register it as a valid anvil to forge weapons on.")).collect(Collectors.toSet()));
 		VALID_HAMMERS.addAll(Arrays.stream(ItemConfig.getStringList("Valid Hammer Items", category, new String[] {
@@ -811,10 +758,10 @@ public class ConfigHandler {
 		PLATINUM_ORE_MIN_SPAWN_HEIGHT = WorldConfig.getInt("Platinum Ore Min Spawn Height", category, 5, 0, 256, "");
 		PLATINUM_ORE_MAX_SPAWN_HEIGHT = WorldConfig.getInt("Platinum Ore Max Spawn Height", category, 146, 0, 256, "");
 		
-		CRYSTALLITE_ORE_BLOCKS_PER_VEIN = WorldConfig.getInt("Crystallite Ore Max Blocks Per Vein", category, 6, 1, 100, "");
-		CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK = WorldConfig.getInt("Crystallite Ore Max Veins Per Chunk", category, 3, 1, 100, "");
-		CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT = WorldConfig.getInt("Crystallite Ore Min Spawn Height", category, 0, 0, 256, "");
-		CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT = WorldConfig.getInt("Crystallite Ore Max Spawn Height", category, 20, 0, 256, "");
+		CRYSTALLITE_ORE_BLOCKS_PER_VEIN = WorldConfig.getInt("Crystallite Ore Max Blocks Per Vein", category, 3, 1, 100, "");
+		CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK = WorldConfig.getInt("Crystallite Ore Max Veins Per Chunk", category, 11, 1, 100, "");
+		CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT = WorldConfig.getInt("Crystallite Ore Min Spawn Height", category, 0, 0, 255, "");
+		CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT = WorldConfig.getInt("Crystallite Ore Max Spawn Height", category, 60, 0, 256, "");
 		
 		SALT_ORE_BLOCKS_PER_VEIN = WorldConfig.getInt("Salt Ore Max Blocks Per Vein", category, 6, 1, 100, "");
 		SALT_ORE_MAX_VEINS_PER_CHUNK = WorldConfig.getInt("Salt Ore Max Veins Per Chunk", category, 10, 1, 100, "");

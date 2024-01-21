@@ -29,6 +29,8 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 	private String customName;
 	private Random rand = new Random();
 	private int crushedContents = 0;
+	private int rotate = 0;
+	private int rotation = 0;
 	
 	public boolean crushContents() {
 		ShapelessOneSlotRecipes recipe = findMatchingRecipe(this.inventory, this.getWorld());
@@ -52,6 +54,7 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 				
 				this.setInventorySlotContents(1, result);
 				this.crushedContents = count;
+				this.rotate = 90;
 				return true;
 			}
 		}
@@ -74,6 +77,26 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 
         return null;
     }
+	
+	public int getRotation() {
+		return this.rotation;
+	}
+	
+	@Override
+	public void update() {
+		if(rotate > 0) {
+			rotation++;
+			if(rotation >= 360) {
+				rotation = 0;
+			}
+			this.rotate--;
+		}
+	}
+	
+	@Override
+	public boolean hasFastRenderer() {
+		return false;
+	}
 	
 	@Override
 	public String getName() {
@@ -147,6 +170,8 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 		super.readFromNBT(compound);
 		this.inventory = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.inventory);
+		this.rotation = compound.getInteger("rot");
+		this.rotate = compound.getInteger("rotLeft");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -156,6 +181,8 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 	{
 		super.writeToNBT(compound);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
+		compound.setInteger("rot", this.rotation);
+		compound.setInteger("rotLeft", this.rotate);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
@@ -200,6 +227,10 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 		switch(id) {
 			case 0:
 				return this.crushedContents;
+			case 1:
+				return this.rotation;
+			case 2:
+				return this.rotate;
 			default:
 				return 0;
 		}
@@ -211,20 +242,23 @@ public class TileEntityMill extends TileEntity implements ITickable, IInventory 
 			case 0:
 				this.crushedContents = value;
 				break;
+			case 1:
+				this.rotation = value;
+				break;
+			case 2:
+				this.rotate = value;
+				break;
 		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 0;
+		return 3;
 	}
 
 	@Override
 	public void clear() {
 		this.inventory.clear();
 	}
-
-	@Override
-	public void update() {}
 
 }

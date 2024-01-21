@@ -3,7 +3,6 @@ package tiki.rotn.advancedlootableweapons.blocks.tileentities;
 import com.codetaylor.mc.pyrotech.IAirflowConsumerCapability;
 import com.codetaylor.mc.pyrotech.modules.core.ModuleCore;
 
-import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;

@@ -29,6 +29,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	private String customName;
 	private int heat;
 	private double currentTemp = 1750D;
+	private int biomeMinTemp = 850;
 	protected int increaseFrames = 0;
 	protected float airflowMultiplier = 1.0f;
 	private int burnTime = 0;
@@ -39,7 +40,15 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	private float baseHeatingSpeed = 1.0f;
 	private ResourceLocation block;
 	
-	public TileEntityForge() {}
+	public TileEntityForge() {
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
+	}
 	
 	public TileEntityForge(ResourceLocation block) {
 		this(false, false, block);
@@ -58,6 +67,13 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		this.needsFuel = needsFuel;
 		this.requiresIgnition = needsIgnition;
 		this.block = block;
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
 		
 	}
 	
@@ -75,7 +91,13 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		if(customName != null && customName != "" && customName != " ") {
 			this.customName = customName;
 		}
-		
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
 	}
 	
 	public ResourceLocation getBlock() {
@@ -83,7 +105,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	}
 	
 	public void bellowsInteraction() {
-		Alw.logger.info("Activated bellows from TE forge");
+		Alw.logger.debug("Activated bellows from TE forge");
 		this.increaseFrames = 60;
 	}
 	
@@ -173,7 +195,7 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		this.requiresIgnition = compound.getBoolean("RequiresIgnition");
 		this.needsFuel = compound.getBoolean("NeedsFuel");
 		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
-		
+		this.biomeMinTemp = compound.getInteger("biomeTemp");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -195,10 +217,23 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		compound.setBoolean("RequiresIgnition", this.requiresIgnition);
 		compound.setBoolean("NeedsFuel", this.needsFuel);
 		compound.setFloat("baseHeatingSpeed", this.baseHeatingSpeed);
+		compound.setInteger("biomeTemp", this.biomeMinTemp);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
+	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		NBTTagCompound tag = super.getUpdateTag();
+		this.writeToNBT(tag);
+		return tag;
+	}
+	
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag) {
+		this.readFromNBT(tag);
 	}
 	
 	@Override
@@ -245,10 +280,10 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 				}
 			}
 			
-			if(currentTemp > minTemp && increaseFrames <= 0) {
+			if(currentTemp > this.biomeMinTemp && increaseFrames <= 0) {
 				//Only drop temp if we're not burning fuel
 				if(this.burnTime <= 0) {
-					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER * this.airflowMultiplier);
+					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
 				}
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
 				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
@@ -276,8 +311,9 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 		if(this.canSmelt()) {
 			ItemStack stack = this.inventory.get(0);
 			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			int ambientTemp = stack.hasTagCompound() && stack.getTagCompound().hasKey("temp") ? stack.getTagCompound().getInteger("temp") : 30;
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack.getItemDamage(), ambientTemp+273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat = stack.getItemDamage();
 			}
 		}
