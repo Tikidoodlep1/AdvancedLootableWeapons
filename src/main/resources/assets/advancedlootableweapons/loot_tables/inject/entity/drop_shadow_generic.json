@@ -1,0 +1,28 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:shadow",
+					"functions": [
+                        {
+                        "function": "looting_enchant",
+                        "count": {
+                            "min": 0,
+                            "max": 1
+                        }
+                    }
+                    ],
+					"weight": 33
+				},
+				{
+					"type": "empty",
+					"weight": 67
+				}
+			]
+		}
+	]
+}

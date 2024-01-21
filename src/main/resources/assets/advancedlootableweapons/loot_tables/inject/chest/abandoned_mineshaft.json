@@ -1,0 +1,73 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": {
+				"min": 1,
+				"max": 2
+			},
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_platinum",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ],
+					"weight": 2
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_copper",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 2,
+                                "max": 3
+                            }
+                        }
+                    ],
+					"weight": 35
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_steel",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ],
+					"weight": 5
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_tin",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ],
+					"weight": 30
+				},
+				{
+					"type": "empty",
+					"weight": 28
+				}
+			]
+		}
+	]
+}

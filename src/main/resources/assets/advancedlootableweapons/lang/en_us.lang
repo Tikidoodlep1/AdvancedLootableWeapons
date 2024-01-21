@@ -889,6 +889,7 @@ container.tanning_rack=Tanning Rack
 
 
 enchantment.refined=Refined
+enchantment.light=Lightweight
 
 
 alw.command.materials.use=/materials - Shows all available tool materials for creating custom ALW weapon sets
@@ -982,6 +983,16 @@ alw.hold=Hold
 alw.effectiveness.info.name=for Effectiveness Information
 alw.colors.info.name=for Color Information
 
+
+alw.forge.usable_mat_fuel.name=Usable Materials and Fuels
+alw.forge.any_mat.name=Any Material
+alw.forge.any_fuel=Any Fuel
+
+
+alw.temp.toolhead.name=Temperature:
+alw.temp.outside.name=Outside Temperature:
+alw.temp.celcius.name=Celcius
+alw.temp.forge.name=Forge Temperature:
 
 alw.damage_tooltip.name= Damage
 alw.dur_tooltip.name= Durability

@@ -3,8 +3,8 @@
 
 	"pattern":
 	[
-		"W",
-		"S"
+		"WT",
+		"S "
 	],
 
 	"key":
@@ -17,6 +17,11 @@
 		"W":
 		{ 
 			"item": "advancedlootableweapons:rapier_head"
+		},
+		"T":
+		{
+			"type": "forge:ore_dict",
+			"ore": "string"
 		}
 	},
 

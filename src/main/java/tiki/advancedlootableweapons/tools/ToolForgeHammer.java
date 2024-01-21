@@ -33,7 +33,7 @@ public class ToolForgeHammer extends Item implements IHasModel {
 		
 		ItemInit.items.add(this);
 		
-		this.setMaxDamage(material.getMaxUses() / 5);
+		this.setMaxDamage(material.getMaxUses() / 2);
 		this.maxStackSize = 1;
 		this.attackDamage = material.getAttackDamage();
 		this.canRepair = true;

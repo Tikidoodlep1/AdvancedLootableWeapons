@@ -5,15 +5,16 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.init.EnchantmentInit;
 
 public class EnchantmentRefined extends Enchantment {
 	
-	public EnchantmentRefined(String name) {
+	public EnchantmentRefined() {
 		super(Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND});
-		this.setName(name);
-		this.setRegistryName(ModInfo.ID + ":" + name);
+		this.setName("refined");
+		this.setRegistryName(ModInfo.ID + ":refined");
 		
 		EnchantmentInit.enchantments.add(this);
 	}
@@ -37,14 +38,8 @@ public class EnchantmentRefined extends Enchantment {
     }
 	
 	@Override
-	public boolean isCurse()
-    {
-        return false;
-    }
-	
-	@Override
 	public int getMinEnchantability(int enchantmentLevel) {
-		return 99;
+		return 100;
 	}
 	
 	@Override
@@ -53,8 +48,23 @@ public class EnchantmentRefined extends Enchantment {
 	}
 	
 	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack) {
+		return false;
+	}
+	
+	@Override
+	public boolean canApply(ItemStack stack) {
+		return stack.isItemStackDamageable();
+	}
+	
+	@Override
 	protected boolean canApplyTogether(Enchantment ench) {
 		return super.canApplyTogether(ench) && ench != Enchantments.SHARPNESS;
+	}
+	
+	@Override
+	public boolean isAllowedOnBooks() {
+		return false;
 	}
 	
 	@Override

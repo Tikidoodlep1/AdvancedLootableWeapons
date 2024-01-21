@@ -314,6 +314,9 @@ public class BlockForge2 extends Block implements IHasModel
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
+//		if(Alw.isPyrotechLoaded) {
+//			return new TileEntityForge2AirflowConsumer(false, false, this.getRegistryName());
+//		}
 		return new TileEntityForge2(false, false, this.getRegistryName());
 	}
 	

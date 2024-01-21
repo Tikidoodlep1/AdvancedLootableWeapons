@@ -1,0 +1,42 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": 2,
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_copper",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 6
+                            }
+                        }
+                    ],
+					"weight": 22
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_platinum",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 5
+                            }
+                        }
+                    ],
+					"weight": 6
+				},
+				{
+					"type": "empty",
+					"weight": 72
+				}
+			]
+		}
+	]
+}

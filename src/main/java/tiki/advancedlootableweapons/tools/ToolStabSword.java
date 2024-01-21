@@ -25,6 +25,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -249,7 +250,7 @@ public class ToolStabSword extends Item implements IHasModel {
 	
 	@Override
 	public void registerModels() {
-		if(!ItemInit.generatedItems.contains(this)) {
+		if(!ItemInit.generatedItems.contains(this) && (ConfigHandler.USE_LEGACY_TEXTURES || this.getToolMaterial() == ToolMaterial.WOOD)) {
 			Alw.proxy.registerItemRenderer(this, 0, "inventory");
 		}
 	}

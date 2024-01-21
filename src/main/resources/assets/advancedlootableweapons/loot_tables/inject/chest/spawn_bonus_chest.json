@@ -1,0 +1,100 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": 2,
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:clay_granite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 2,
+                                "max": 6
+                            }
+                        }
+                    ],
+					"weight": 12
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:clay_diorite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 2,
+                                "max": 6
+                            }
+                        }
+                    ],
+					"weight": 12
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:brick_granite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+					"weight": 18
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:brick_diorite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 4
+                            }
+                        }
+                    ],
+					"weight": 18
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:dagger_wood",
+					"functions": [],
+					"weight": 3
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:staff_wood",
+					"functions": [],
+					"weight": 2
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:kabutowari_wood",
+					"functions": [],
+					"weight": 3
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:kodachi_wood",
+					"functions": [],
+					"weight": 3
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:sabre_wood",
+					"functions": [],
+					"weight": 2
+				},
+				{
+					"type": "empty",
+					"weight": 27
+				}
+			]
+		}
+	]
+}

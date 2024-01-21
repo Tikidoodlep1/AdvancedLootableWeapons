@@ -10,7 +10,7 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
@@ -68,6 +68,7 @@ public class Alw {
 	public static boolean isCrTLoaded = false;
 	public static boolean isCoTLoaded = false;
 	public static boolean isBWMLoaded = false;
+	public static boolean isPyrotechLoaded = false;
 	
 	static {
 		FluidRegistry.enableUniversalBucket();
@@ -105,10 +106,10 @@ public class Alw {
 		proxy.onBlockAttemptBreak(event);
 	}
 	
-	@SubscribeEvent
-	public void onLivingDrops(final LivingDropsEvent event) {
-		proxy.onEntityDrops(event);
-	}
+//	@SubscribeEvent
+//	public void onLivingDrops(final LivingDropsEvent event) {
+//		proxy.onEntityDrops(event);
+//	}
 	
 	@SubscribeEvent
 	public void onBlockDrops(final HarvestDropsEvent event) {
@@ -118,6 +119,11 @@ public class Alw {
 	@SubscribeEvent
 	public void onPlayerClone(final PlayerEvent.Clone event) {
 		proxy.onPlayerClone(event);
+	}
+	
+	@SubscribeEvent
+	public void onLootTableLoad(final LootTableLoadEvent event) {
+		proxy.onLootTableLoad(event);
 	}
 	
 	@SubscribeEvent

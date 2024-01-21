@@ -4,7 +4,7 @@
 	"pattern":
 	[
 		"  W",
-		" S ",
+		"TST",
 		"W  "
 	],
 
@@ -17,6 +17,11 @@
 		"W":
 		{ 
 			"item": "advancedlootableweapons:staff_head"
+		},
+		"T":
+		{
+			"type": "forge:ore_dict",
+			"ore": "string"
 		}
 	},
 

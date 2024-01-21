@@ -1,6 +1,5 @@
 package tiki.advancedlootableweapons.items;
 
-import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -27,7 +26,7 @@ import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.util.HotMetalHelper;
 
-public class ItemHotToolHead extends Item implements IHasModel, Comparable<ItemHotToolHead> {
+public class ItemHotToolHead extends Item implements IHasModel{
 	//public final ItemHotToolHead next;
 	public final int type;
 	public final int level;
@@ -107,20 +106,28 @@ public class ItemHotToolHead extends Item implements IHasModel, Comparable<ItemH
 		if(ConfigHandler.ENABLE_QUENCHING) {
 			if(stack.hasTagCompound() && this.isMain) {
 				boolean quenched = Stacknbt.getBoolean("quenched");
-				tooltip.add(quenched ? TextFormatting.GREEN + new TextComponentTranslation("alw.tool_head.quenched.name").getFormattedText() : TextFormatting.RED + new TextComponentTranslation("alw.tool_head.unquenched.name").getFormattedText());
+				tooltip.add(quenched ? TextFormatting.GREEN + new TextComponentTranslation("alw.tool_head.quenched.name").getFormattedText() : TextFormatting.DARK_RED + new TextComponentTranslation("alw.tool_head.unquenched.name").getFormattedText());
 			}
 		}else {
 			tooltip.add(TextFormatting.GREEN + new TextComponentTranslation("alw.tool_head.no_quench_required.name").getFormattedText());
 		}
 		
-		
 		if(stack.hasTagCompound() && Stacknbt.hasKey("addedDamage")) {
 			tooltip.add(TextFormatting.BLUE + new TextComponentTranslation("alw.forging_quality.name").getFormattedText());
-			tooltip.add(TextFormatting.GRAY + "--------------------");
+			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.STRIKETHROUGH + "--------------------");
 			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getDouble("addedDamage") + new TextComponentTranslation("alw.damage_tooltip.name").getFormattedText());
 			tooltip.add(TextFormatting.BLUE + "+" + Stacknbt.getInteger("addedDurability") + new TextComponentTranslation("alw.dur_tooltip.name").getFormattedText());
-			tooltip.add(TextFormatting.GRAY + "--------------------");
+			tooltip.add(TextFormatting.GRAY + "" + TextFormatting.STRIKETHROUGH + "--------------------");
 		}
+		
+		//Test if commenting this makes drops work again - after having this in inv dropping items just deletes them
+//		if(stack.hasTagCompound() && Stacknbt.hasKey("temp")) {
+//			if(!material.isEmpty()) {
+//				int k = HotMetalHelper.getCurrentTempScaled(material.getItem(), stack.getItemDamage(), Stacknbt.getInteger("temp"));
+//				tooltip.add(TextFormatting.GOLD + new TextComponentTranslation("alw.temp.toolhead.name").getFormattedText() + " " + ((k)) + " " + new TextComponentTranslation("alw.temp.celcius.name").getFormattedText());
+//			}
+//			tooltip.add(TextFormatting.YELLOW + new TextComponentTranslation("alw.temp.outside.name").getFormattedText() + " " + Stacknbt.getInteger("temp") + " " + new TextComponentTranslation("alw.temp.celcius.name").getFormattedText());
+//		}
     }
 	
 	@Override
@@ -131,12 +138,19 @@ public class ItemHotToolHead extends Item implements IHasModel, Comparable<ItemH
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
     {
-		int damage = stack.getMetadata();
-		Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
-		if(damage <= 5999) {
-			this.setDamage(stack, (damage + HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.ROOM_TEMP, this.getDamage(stack))));
-		}else if(damage > 6000) {
-			this.setDamage(stack, 6000);
+		if(!worldIn.isRemote) {
+			int temp = HotMetalHelper.getAvgTempForBiomeInC(worldIn.getBiome(entityIn.getPosition()), entityIn.getPosition());
+			NBTTagCompound tag = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+			if(!tag.hasKey("temp") || tag.getInteger("temp") != temp) {
+				tag.setInteger("temp", temp);
+			}
+			int damage = stack.getMetadata();
+			Item material = !tag.hasKey("Material") ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			if(damage <= 5999) {
+				this.setDamage(stack, (damage - HotMetalHelper.getHeatGainLoss(material, tag.getInteger("temp")+273, this.getDamage(stack), tag.getInteger("temp")+273)));
+			}else if(damage > 6000) {
+				this.setDamage(stack, 6000);
+			}
 		}
     }
 	
@@ -179,20 +193,4 @@ public class ItemHotToolHead extends Item implements IHasModel, Comparable<ItemH
     {
         return false;
     }
-
-	@Override
-	public int compareTo(ItemHotToolHead o) {
-		return this.type - o.type;
-	}
-	
-	public static Comparator<ItemHotToolHead> getComparator() {
-		return new Comparator<ItemHotToolHead>() {
-
-			@Override
-			public int compare(ItemHotToolHead o1, ItemHotToolHead o2) {
-				return o1.type - o2.type;
-			}
-			
-		};
-	}
 }

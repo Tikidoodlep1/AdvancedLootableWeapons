@@ -22,6 +22,8 @@ import tiki.advancedlootableweapons.util.HotMetalHelper;
 
 public class TileEntityForge2 extends TileEntity implements ITickable, IInventory
 {
+	public static final int minTemp = 850;
+	public static final int maxTemp = 2250;
 	//private TileEntityForge2 mainTE = null;
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	//private @Nonnull ItemStack fuelInventoryStack = ItemStack.EMPTY;
@@ -29,9 +31,9 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	private int heat1, heat2, heat3;
 	//private boolean isMain = false;
 	private double currentTemp = 2250D;
-	public static final int minTemp = 850;
-	public static final int maxTemp = 2250;
+	private int biomeMinTemp = 850;
 	protected int increaseFrames = 0;
+	protected float airflowMultiplier = 1.0f;
 	private int burnTime = 0;
 	private int maxBurnTime = 0;
 	private boolean canUseFuel = false;
@@ -40,7 +42,15 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	private float baseHeatingSpeed = 1.0f;
 	private ResourceLocation block;
 	
-	public TileEntityForge2() {}
+	public TileEntityForge2() {
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
+	}
 	
 	public TileEntityForge2(ResourceLocation block) {
 		this(false, false, block);
@@ -59,6 +69,13 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		this.needsFuel = needsFuel;
 		this.requiresIgnition = needsIgnition;
 		this.block = block;
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
 	}
 	
 	//helper method for ALT
@@ -76,6 +93,13 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		if(customName != null && customName != "" && customName != " ") {
 			this.customName = customName;
 		}
+		if(this.hasWorld()) {
+			if(this.getWorld().provider.isNether()) {
+				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
+			}
+			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
+			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
+		}
 	}
 	
 	public ResourceLocation getBlock() {
@@ -83,7 +107,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 	}
 	
 	public void bellowsInteraction() {
-		Alw.logger.info("Activated bellows from TE forge 2");
+		Alw.logger.debug("Activated bellows from TE forge 2");
 		this.increaseFrames = 60;
 	}
 	
@@ -183,6 +207,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		this.requiresIgnition = compound.getBoolean("RequiresIgnition");
 		this.needsFuel = compound.getBoolean("NeedsFuel");
 		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
+		this.biomeMinTemp = compound.getInteger("biomeTemp");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -207,10 +232,23 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		compound.setBoolean("isMain", true);
 		compound.setBoolean("NeedsFuel", this.needsFuel);
 		compound.setFloat("baseHeatingSpeed", this.baseHeatingSpeed);
+		compound.setInteger("biomeTemp", this.biomeMinTemp);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
+	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		NBTTagCompound tag = super.getUpdateTag();
+		this.writeToNBT(tag);
+		return tag;
+	}
+	
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag) {
+		this.readFromNBT(tag);
 	}
 	
 	@Override
@@ -256,7 +294,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 				}
 			}
 			
-			if(currentTemp > minTemp && this.increaseFrames <= 0) {
+			if(currentTemp > this.biomeMinTemp && this.increaseFrames <= 0) {
 				if(this.burnTime <= 0) {
 					this.currentTemp -= (0.01875D * ConfigHandler.FORGE_TEMP_DECREASE_MULTIPLIER);
 				}
@@ -274,24 +312,27 @@ public class TileEntityForge2 extends TileEntity implements ITickable, IInventor
 		if(this.inventory.get(0) != ItemStack.EMPTY && this.inventory.get(0).getItem() instanceof ItemHotToolHead) {
 			ItemStack stack = this.inventory.get(0);
 			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			int ambientTemp = stack.hasTagCompound() && stack.getTagCompound().hasKey("temp") ? stack.getTagCompound().getInteger("temp") : 30;
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack.getItemDamage(), ambientTemp+273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat1 = stack.getItemDamage();
 			}
 		}
 		if(this.inventory.get(1) != ItemStack.EMPTY && this.inventory.get(1).getItem() instanceof ItemHotToolHead) {
 			ItemStack stack = this.inventory.get(1);
 			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			int ambientTemp = stack.hasTagCompound() && stack.getTagCompound().hasKey("temp") ? stack.getTagCompound().getInteger("temp") : 30;
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack.getItemDamage(), ambientTemp+273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat2 = stack.getItemDamage();
 			}
 		}
 		if(this.inventory.get(2) != ItemStack.EMPTY && this.inventory.get(2).getItem() instanceof ItemHotToolHead) {
 			ItemStack stack = this.inventory.get(2);
 			Item material = stack.getTagCompound() == null ? ItemInit.BRONZE_SHARPENING_STONE : new ItemStack(stack.getTagCompound().getCompoundTag("Material")).getItem();
+			int ambientTemp = stack.hasTagCompound() && stack.getTagCompound().hasKey("temp") ? stack.getTagCompound().getInteger("temp") : 30;
 			if(stack.getItemDamage() > 0) {
-				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, HotMetalHelper.BASIC_FORGE_TEMP, stack.getItemDamage()) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				stack.setItemDamage(stack.getItemDamage() - (int)(HotMetalHelper.getHeatGainLoss(material, (int)this.currentTemp, stack.getItemDamage(), ambientTemp+273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				this.heat3 = stack.getItemDamage();
 			}
 		}

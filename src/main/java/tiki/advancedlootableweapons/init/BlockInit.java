@@ -8,6 +8,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.FluidRegistry;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import tiki.advancedlootableweapons.blocks.BlockAlwOre;
 import tiki.advancedlootableweapons.blocks.BlockBase;
@@ -25,6 +26,7 @@ import tiki.advancedlootableweapons.blocks.BlockPowderedClay;
 import tiki.advancedlootableweapons.blocks.BlockQuartzClay;
 import tiki.advancedlootableweapons.blocks.BlockTanningRack;
 import tiki.advancedlootableweapons.blocks.fluids.BlockAlwFluid;
+import tiki.advancedlootableweapons.compat.pyrotech.blocks.BlockPyrotechBellows;
 
 public class BlockInit {
 	public static final List<Block> blocks = new ArrayList<Block>();
@@ -62,6 +64,7 @@ public class BlockInit {
 	public static final Block ore_copper = new BlockAlwOre("block_ore_copper", 1).setHardness(1.9F).setResistance(3.0F);
 	public static final Block ore_platinum = new BlockAlwOre("block_ore_platinum", 2).setHardness(3.2F).setResistance(3.0F);
 	public static final Block ore_crystallite = new BlockOreDropItem("block_ore_crystallite", ItemInit.CRYSTAL, 1, 3, 3).setHardness(3.8F).setResistance(3.5F);
+	public static final Block ore_end_crystallite = new BlockOreDropItem("block_ore_end_crystallite", ItemInit.CRYSTAL, 1, 3, 3).setHardness(4.6F).setResistance(3.5F);
 	public static final Block ore_tin = new BlockAlwOre("block_ore_tin", 1).setHardness(1.5F).setResistance(3.0F);
 	public static final Block ore_salt = new BlockOreDropItem("block_ore_salt", ItemInit.RAW_SALT, 2, 6, 1).setHardness(1.3F).setResistance(2.6F);
 	
@@ -74,12 +77,13 @@ public class BlockInit {
 	public static final Block mill = new BlockMill("block_mill", Material.IRON).setHardness(2.5F).setResistance(7.0F);
 	public static final Block tanning_rack = new BlockTanningRack("block_tanning_rack").setHardness(1.3F);
 	public static final Block drum = new BlockDrum("block_drum").setHardness(2.0F).setResistance(5.5F);
-	public static final Block bellows = new BlockBellows("block_bellows").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_birch = new BlockBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_spruce = new BlockBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_jungle = new BlockBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_acacia = new BlockBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_dark_oak = new BlockBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F);
+	
+	public static final Block bellows = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_birch = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_spruce = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_jungle = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_acacia = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows_dark_oak = Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F);
 	
 	//public static final Block forge_fuel = new BlockForgeFuel("block_forge_fuel", Material.ROCK, SoundType.STONE, "pickaxe", 0, true, getItemFuels(), new HashSet<Item>(), 1.0F);
 	//public static final Block forge2_fuel = new BlockForge2Fuel("block_advanced_forge_fuel", Material.ROCK, SoundType.STONE, "pickaxe", 1, true, getItemFuels(), new HashSet<Item>(), 1.0F);

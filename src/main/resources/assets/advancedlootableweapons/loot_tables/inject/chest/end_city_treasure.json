@@ -1,0 +1,87 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": {
+				"min": 1,
+				"max": 3
+			},
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:nugget_dusksteel",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 9
+                            }
+                        }
+                    ],
+					"weight": 12
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_frost_steel",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 5,
+                                "max": 8
+                            }
+                        }
+                    ],
+					"weight": 18
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_crystallite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 3
+                            }
+                        }
+                    ],
+					"weight": 6
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:shadow_blob",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 7
+                            }
+                        }
+                    ],
+					"weight": 21
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_shadow_platinum",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 9
+                            }
+                        }
+                    ],
+					"weight": 9
+				},
+				{
+					"type": "empty",
+					"weight": 34
+				}
+			]
+		}
+	]
+}

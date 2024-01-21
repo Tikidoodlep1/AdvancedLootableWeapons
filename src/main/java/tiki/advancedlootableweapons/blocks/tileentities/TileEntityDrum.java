@@ -32,8 +32,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.TileFluidHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -52,7 +50,6 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	private IRecipe activeRecipe = null;
 	public boolean needsBubbles = false;
 	public boolean needsQuench = false;
-	private EntityPlayerMP player;
 	
 	private Container tempContainer = new Container() {
 		@Override
@@ -66,18 +63,10 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		if(this.getTank().getFluidAmount() <= 0) {
 			this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
 		}
-		
-		if(playerIn instanceof EntityPlayerMP) {
-			this.player = (EntityPlayerMP)playerIn;
-		}
 	}
 	
 	public boolean EntityInteraction(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand) {
 		ItemStack activeStack = playerIn.getHeldItem(hand);
-		
-		if(playerIn instanceof EntityPlayerMP) {
-			this.player = (EntityPlayerMP)playerIn;
-		}
 		
 		if(!playerIn.isSneaking() && activeStack != ItemStack.EMPTY) {
 			if(this.inventory.get(INPUT_SLOT).isEmpty()) {
@@ -270,7 +259,12 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 	
 	//@SideOnly(Side.SERVER)
 	public void onChanged() {
-		this.player.connection.getNetworkManager().sendPacket(getUpdatePacket());
+		SPacketUpdateTileEntity updatePacket = getUpdatePacket();
+		for(EntityPlayer p : this.getWorld().playerEntities) {
+			if(p instanceof EntityPlayerMP) {
+				((EntityPlayerMP)p).connection.getNetworkManager().sendPacket(updatePacket);
+			}
+		}
 	}
 	
 	@Override

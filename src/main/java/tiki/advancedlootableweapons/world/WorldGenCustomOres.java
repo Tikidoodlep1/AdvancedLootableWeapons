@@ -18,7 +18,7 @@ import tiki.advancedlootableweapons.init.BlockInit;
 
 public class WorldGenCustomOres implements IWorldGenerator {
 
-	private WorldGenerator ore_copper, ore_silver, ore_platinum, ore_crystallite, ore_tin, ore_salt, rock_feldspar, rock_gypsum, rock_dolomite;
+	private WorldGenerator ore_copper, ore_silver, ore_platinum, ore_crystallite, ore_tin, ore_salt, rock_feldspar, rock_gypsum, rock_dolomite, ore_end_crystallite;
 	
 	public WorldGenCustomOres(){
 		rock_feldspar = new WorldGenMinable(BlockInit.rock_feldspar.getDefaultState(), ConfigHandler.FELDSPAR_BLOCKS_PER_VEIN, BlockMatcher.forBlock(Blocks.STONE));
@@ -30,14 +30,16 @@ public class WorldGenCustomOres implements IWorldGenerator {
 		ore_platinum = new WorldGenMinable(BlockInit.ore_platinum.getDefaultState(), ConfigHandler.PLATINUM_ORE_BLOCKS_PER_VEIN, BlockMatcher.forBlock(Blocks.STONE));
 		ore_crystallite = new WorldGenMinable(BlockInit.ore_crystallite.getDefaultState(), ConfigHandler.CRYSTALLITE_ORE_BLOCKS_PER_VEIN, BlockMatcher.forBlock(Blocks.STONE));
 		ore_salt = new WorldGenMinable(BlockInit.ore_salt.getDefaultState(), ConfigHandler.SALT_ORE_BLOCKS_PER_VEIN, BlockMatcher.forBlock(Blocks.STONE));
+		
+		ore_end_crystallite = new WorldGenMinable(BlockInit.ore_end_crystallite.getDefaultState(), ConfigHandler.CRYSTALLITE_ORE_BLOCKS_PER_VEIN, BlockMatcher.forBlock(Blocks.END_STONE));
 	}
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 		switch(world.provider.getDimension()) {
-		case -1:
+		case -1: // Nether
 			break;
-		case 0:
+		case 0: // Overworld
 			runGenerator(rock_feldspar, world, random, chunkX, chunkZ, ConfigHandler.FELDSPAR_MAX_VEINS_PER_CHUNK, ConfigHandler.FELDSPAR_MIN_SPAWN_HEIGHT, ConfigHandler.FELDSPAR_MAX_SPAWN_HEIGHT);
 			runGenerator(rock_gypsum, world, random, chunkX, chunkZ, ConfigHandler.GYPSUM_MAX_VEINS_PER_CHUNK, ConfigHandler.GYPSUM_MIN_SPAWN_HEIGHT, ConfigHandler.GYPSUM_MAX_SPAWN_HEIGHT);
 			runGenerator(rock_dolomite, world, random, chunkX, chunkZ, ConfigHandler.DOLOMITE_MAX_VEINS_PER_CHUNK, ConfigHandler.DOLOMITE_MIN_SPAWN_HEIGHT, ConfigHandler.DOLOMITE_MAX_SPAWN_HEIGHT);
@@ -45,10 +47,11 @@ public class WorldGenCustomOres implements IWorldGenerator {
 			runGenerator(ore_copper, world, random, chunkX, chunkZ, ConfigHandler.COPPER_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.COPPER_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.COPPER_ORE_MAX_SPAWN_HEIGHT);
 			runGenerator(ore_silver, world, random, chunkX, chunkZ, ConfigHandler.SILVER_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.SILVER_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.SILVER_ORE_MAX_SPAWN_HEIGHT);
 			runGenerator(ore_platinum, world, random, chunkX, chunkZ, ConfigHandler.PLATINUM_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.PLATINUM_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.PLATINUM_ORE_MAX_SPAWN_HEIGHT);
-			runGenerator(ore_crystallite, world, random, chunkX, chunkZ, ConfigHandler.CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT);
+			//runGenerator(ore_crystallite, world, random, chunkX, chunkZ, ConfigHandler.CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT);
 			runGenerator(ore_salt, world, random, chunkX, chunkZ, ConfigHandler.SALT_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.SALT_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.SALT_ORE_MAX_SPAWN_HEIGHT);
 			break;
-		case 1:
+		case 1: // End
+			runGenerator(ore_end_crystallite, world, random, chunkX, chunkZ, ConfigHandler.CRYSTALLITE_ORE_MAX_VEINS_PER_CHUNK, ConfigHandler.CRYSTALLITE_ORE_MIN_SPAWN_HEIGHT, ConfigHandler.CRYSTALLITE_ORE_MAX_SPAWN_HEIGHT);
 			break;
 		}
 	}

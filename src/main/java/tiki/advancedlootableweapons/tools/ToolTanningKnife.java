@@ -26,7 +26,7 @@ public class ToolTanningKnife extends Item implements IHasModel {
 		
 		this.setMaxDamage(material.getMaxUses() / 2);
 		this.maxStackSize = 1;
-		this.attackDamage = material.getAttackDamage() / 0.25F;
+		this.attackDamage = material.getAttackDamage() * 0.75F;
 		this.canRepair = true;
 		this.setContainerItem(this);
 	}

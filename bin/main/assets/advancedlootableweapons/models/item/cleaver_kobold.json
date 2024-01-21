@@ -1,11 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/cleaver_layer5",
-		"layer1": "advancedlootableweapons:items/cleaver_layer4",
-		"layer2": "advancedlootableweapons:items/cleaver_layer3",
-		"layer3": "advancedlootableweapons:items/cleaver_layer2",
-		"layer4": "advancedlootableweapons:items/cleaver_layer1"
+		"layer0": "advancedlootableweapons:items/cleaver_kobold"
 	}
 
 }

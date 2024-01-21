@@ -240,7 +240,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 	
 	@Override
 	public void registerModels() {
-		if(!ItemInit.generatedItems.contains(this)) {
+		if(!ItemInit.generatedItems.contains(this) && (ConfigHandler.USE_LEGACY_TEXTURES || this.getToolMaterial() == ToolMaterial.WOOD)) {
 			Alw.proxy.registerItemRenderer(this, 0, "inventory");
 		}
 	}

@@ -1,0 +1,56 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": 2,
+			"entries": [
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:nugget_shadow_platinum",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 4,
+                                "max": 15
+                            }
+                        }
+                    ],
+					"weight": 12
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_steel",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 13
+                            }
+                        }
+                    ],
+					"weight": 6
+				},
+				{
+					"type": "item",
+					"name": "advancedlootableweapons:ingot_crystallite",
+					"functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 2
+                            }
+                        }
+                    ],
+					"weight": 3
+				},
+				{
+					"type": "empty",
+					"weight": 79
+				}
+			]
+		}
+	]
+}

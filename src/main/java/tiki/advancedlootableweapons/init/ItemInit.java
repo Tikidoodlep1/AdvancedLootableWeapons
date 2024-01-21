@@ -45,7 +45,6 @@ import tiki.advancedlootableweapons.tools.ToolSpear;
 import tiki.advancedlootableweapons.tools.ToolStabSword;
 import tiki.advancedlootableweapons.tools.ToolTanningKnife;
 import tiki.advancedlootableweapons.util.ArmorTypes;
-import tiki.advancedlootableweapons.util.HTHTree;
 
 public class ItemInit {
 
@@ -55,83 +54,8 @@ public class ItemInit {
 	public static final Set<Item> acceptedForgeMetals = new HashSet<Item>();
 	public static final Set<Item> forgeRecipeInputs = new HashSet<Item>();
 	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
-	public static final HTHTree hotToolHeadTree = new HTHTree();
 	
 	public static void generateAcceptedForgeItems() {
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.HOT_TOOL_ROD, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD, 
-//				(ItemHotToolHead)ItemInit.CLEAVER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD, 
-//				(ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD, 
-//				(ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD, 
-//				(ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD, 
-//				(ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.CHAIN_RING);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_ROD, (ItemHotToolHead)ItemInit.HOT_TOOL_ROD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.HOT_TOOL_ROD_2, (ItemHotToolHead)ItemInit.LONG_TOOL_ROD);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONG_TOOL_ROD, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.DAGGER_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.KODACHI_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.LONGSWORD_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MACE_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.NODACHI_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
-//				
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.RAPIER_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SABRE_HOT_TOOL_HEAD_4, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.SPEAR_HOT_TOOL_HEAD_2, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_5);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.STAFF_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.TALWAR_HOT_TOOL_HEAD_3, new ItemHotToolHead[0]);
-//		
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_2);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_2, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_3);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_3, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_4);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_4, (ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5);
-//		hotToolHeadTree.setNode((ItemHotToolHead)ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5, new ItemHotToolHead[0]);
 		
 		String[] ores = new String[] {"ingotBronze", "ingotCopper", "ingotPlatinum", "ingotSteel", "ingotRefinedObsidian", "ingotSilver", "ingotIron", "ingotGold"};
 		for(String ore : ores) {
@@ -149,7 +73,6 @@ public class ItemInit {
 		acceptedForgeMetals.add(INGOT_SHADOW_PLATINUM);
 		
 		forgeRecipeInputs.addAll(acceptedForgeMetals);
-		
 	}
 	
 	public static void checkConfigOptions() {
@@ -716,8 +639,8 @@ public class ItemInit {
 	 */
 	
 	//Mats Declarations
-	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("alw:kobold", 1, ConfigHandler.KOBOLD_DURABILITY, 6.0F, ConfigHandler.KOBOLD_DAMAGE, 22).setRepairItem(new ItemStack(INGOT_KOBOLD));;
-	public static final ToolMaterial MAT_COPPER = EnumHelper.addToolMaterial("alw:copper", 2, ConfigHandler.COPPER_DURABILITY, 6.5F, ConfigHandler.COPPER_DAMAGE, 10).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ToolMaterial MAT_COPPER = EnumHelper.addToolMaterial("alw:copper", 1, ConfigHandler.COPPER_DURABILITY, 6.2F, ConfigHandler.COPPER_DAMAGE, 10).setRepairItem(new ItemStack(INGOT_COPPER));
+	public static final ToolMaterial MAT_KOBOLD = EnumHelper.addToolMaterial("alw:kobold", 2, ConfigHandler.KOBOLD_DURABILITY, 7.5F, ConfigHandler.KOBOLD_DAMAGE, 22).setRepairItem(new ItemStack(INGOT_KOBOLD));
 	public static final ToolMaterial MAT_SILVER = EnumHelper.addToolMaterial("alw:silver", 2, ConfigHandler.SILVER_DURABILITY, 7.0F, ConfigHandler.SILVER_DAMAGE, 24).setRepairItem(new ItemStack(INGOT_SILVER));
 	public static final ToolMaterial MAT_BRONZE = EnumHelper.addToolMaterial("alw:bronze", 2, ConfigHandler.BRONZE_DURABILITY, 6.5F, ConfigHandler.BRONZE_DAMAGE, 12).setRepairItem(new ItemStack(INGOT_BRONZE));
 	public static final ToolMaterial MAT_PLATINUM = EnumHelper.addToolMaterial("alw:platinum", 2, ConfigHandler.PLATINUM_DURABILITY, 10.0F, ConfigHandler.PLATINUM_DAMAGE, 26).setRepairItem(new ItemStack(INGOT_PLATINUM));

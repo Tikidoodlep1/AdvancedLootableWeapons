@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
@@ -31,6 +32,7 @@ public class GuiForge2Fuel extends GuiContainer
 	private static final int sloty = 27;
 	private static final int slotSize = 18;
 	private final Set<Item> heatableMaterials;
+	private final Set<Item> fuels;
 	
 	public GuiForge2Fuel(InventoryPlayer player, TileEntityForge2 tileentity) 
 	{
@@ -40,6 +42,7 @@ public class GuiForge2Fuel extends GuiContainer
 		this.xSize = 176;
 		this.ySize = 166;
 		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
+		this.fuels = ZenDynamicAlwResources.getFuelListForBlock(tileentity.getBlock());
 	}
 	
 	private String getTileName() {
@@ -115,21 +118,39 @@ public class GuiForge2Fuel extends GuiContainer
 				!(mouseX > this.guiLeft + slot1x && mouseX < this.guiLeft + slot1x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize) &&
 				!(mouseX > this.guiLeft + slot2x && mouseX < this.guiLeft + slot2x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize) &&
 				!(mouseX > this.guiLeft + slot3x && mouseX < this.guiLeft + slot3x + slotSize && mouseY > this.guiTop + sloty && mouseY < this.guiTop + sloty + slotSize)) {
-			this.drawHoveringText("Forge Temperature: " + (int)((this.tileentity.getField(3)-32)*5/9) + " Celcius", mouseX, mouseY);
+			this.drawHoveringText(new TextComponentTranslation("alw.temp.forge.name").getFormattedText() + " " + (this.tileentity.getField(3)-273) + " " + new TextComponentTranslation("alw.temp.celcius.name").getFormattedText(), mouseX, mouseY);
 		}
 	}
 	
 	private void drawHoveringMaterialText(int mouseX, int mouseY) {
 		if(mouseX > this.guiLeft + 156 && mouseX < this.guiLeft + 175 && mouseY > this.guiTop + 2 && mouseY < this.guiTop + 17) {
 			List<String> lines = new ArrayList<String>(3);
-			lines.add("This Forge Can Heat:");
+			lines.add(new TextComponentTranslation("alw.forge.usable_mat_fuel.name").getFormattedText());
+			lines.add(TextFormatting.STRIKETHROUGH + "---------------------------");
+			String mat = "";
 			if(this.heatableMaterials == null || this.heatableMaterials.isEmpty()) {
-				lines.add("Any Material");
+				mat += TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.forge.any_mat.name").getFormattedText();
 			}else {
+				
 				for(Item item : this.heatableMaterials) {
-					lines.add("Material: " + new TextComponentTranslation(item.getUnlocalizedName() + ".name").getFormattedText());
+					mat += TextFormatting.LIGHT_PURPLE + new TextComponentTranslation(item.getUnlocalizedName() + ".name").getFormattedText() + ", ";
 				}
+				mat = mat.substring(0, mat.length() - 2);
 			}
+			lines.add("Materials: " + mat);
+			
+			String fuel = "";
+			if(this.fuels == null || this.fuels.isEmpty()) {
+				fuel += TextFormatting.GOLD + new TextComponentTranslation("alw.forge.any_fuel.name").getFormattedText();
+			}else {
+				
+				for(Item item : this.fuels) {
+					fuel += TextFormatting.GOLD + new TextComponentTranslation(item.getUnlocalizedName() + ".name").getFormattedText() + ", ";
+				}
+				fuel = fuel.substring(0, fuel.length() - 2);
+			}
+			lines.add("Fuels: " + fuel);
+			
 			this.drawHoveringText(lines, mouseX, mouseY);
 		}
 	}

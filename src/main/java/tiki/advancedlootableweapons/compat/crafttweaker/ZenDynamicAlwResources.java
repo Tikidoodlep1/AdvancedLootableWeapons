@@ -635,14 +635,6 @@ public class ZenDynamicAlwResources {
 		if(!matList.isEmpty()) {
 			matLists.put(forge.getRegistryName(), matList);
 		}
-		
-		System.out.println("Calling setMaterialListForBlock!");
-		System.out.println("Fuel list: ");
-		for(Entry<ResourceLocation, Set<Item>> e : matLists.entrySet()) {
-			System.out.print("(" + e.getKey() + ", ");
-			e.getValue().forEach((i) -> {System.out.print(i.getRegistryName() + ", ");});
-			System.out.println(")");
-		}
 	}
 	
 	@ZenMethod

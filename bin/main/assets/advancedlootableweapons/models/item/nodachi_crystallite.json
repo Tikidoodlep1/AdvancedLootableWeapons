@@ -1,11 +1,7 @@
 {
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "advancedlootableweapons:items/nodachi_layer5",
-		"layer1": "advancedlootableweapons:items/nodachi_layer4",
-		"layer2": "advancedlootableweapons:items/nodachi_layer3",
-		"layer3": "advancedlootableweapons:items/nodachi_layer2",
-		"layer4": "advancedlootableweapons:items/nodachi_layer1"
+		"layer0": "advancedlootableweapons:items/nodachi_crystallite"
 	},
 	"display": {
 		"thirdperson_righthand": {
