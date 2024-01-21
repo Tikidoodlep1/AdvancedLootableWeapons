@@ -14,12 +14,13 @@ import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
 
 public class GuiWeaponButton extends GuiButton {
+	//We use two texture locations here - One for the texture of the button itself, and one for the texture of the overlay file.
 	protected static final ResourceLocation OVERLAY = new ResourceLocation(ModInfo.ID + ":textures/gui/button_overlay.png");
 	protected static final ResourceLocation BUTTON_TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/button.png");
 	private int cooldown, overlayX, overlayY, textureX, textureY, pressedX, pressedY;
 	private boolean pressed;
 	private final String name;
-	
+	//This is a helper for CraftTweaker Comapatability that contains all of the information the container and GUI would need.
 	private final ForgingGuiButtonRepresentation CUSTOM_TEXTURE;
 	
 	public GuiWeaponButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, int overlayX, int overlayY) {
@@ -78,7 +79,7 @@ public class GuiWeaponButton extends GuiButton {
 		if(mouseX > 130) {
 			return false;
 		}
-		
+		//When pressed, create a 0.5s cooldown timer and set it to pressed
 		if(this.cooldown == 0 && this.enabled && this.visible && mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height) {
 			this.cooldown = 1;
 			this.pressed = true;
@@ -109,7 +110,7 @@ public class GuiWeaponButton extends GuiButton {
         if (this.visible)
         {
         	GlStateManager.pushMatrix();
-        	//GlStateManager.enableDepth();
+        	//Draw the button background
             mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
             if(this.pressed) {
             	this.drawTexturedModalRect(this.x, this.y, this.pressedX, this.pressedY, this.width, this.height);
@@ -117,6 +118,7 @@ public class GuiWeaponButton extends GuiButton {
             	this.drawTexturedModalRect(this.x, this.y, this.textureX, this.textureY, this.width, this.height);
             }
             
+            //If it's made with CraftTweaker, get the texture path. Otherwise, get the default overlay image
             if(this.CUSTOM_TEXTURE == null || !this.CUSTOM_TEXTURE.usesCustomOverlay()) {
             	mc.getTextureManager().bindTexture(OVERLAY);
             }else {
@@ -125,10 +127,10 @@ public class GuiWeaponButton extends GuiButton {
             
             //width -  1 to account for shading, - 20 to account for overlay width, /2 to center overlay
             this.drawTexturedModalRect(this.x + ((this.width - 1 - 20) / 2), this.y + ((this.height - 1 - 20) / 2), overlayX, overlayY, 20, 20);
-            //GlStateManager.disableDepth();
             GlStateManager.popMatrix();
             
             GL11.glPushMatrix();
+            //Scale text to 55% of the normal size, then draw the button name.
             GL11.glScalef(0.55f, 0.55f, 0.55f);
 	        this.drawCenteredString(mc.fontRenderer, this.displayString, (int)((this.x + (this.getButtonWidth() / 2)) / 0.55), (int)((this.y - 3) / 0.55), Color.WHITE.getRGB());
 	        GL11.glPopMatrix();

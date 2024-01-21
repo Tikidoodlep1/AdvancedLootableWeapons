@@ -2,7 +2,9 @@ package tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
@@ -16,6 +18,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
@@ -51,9 +54,12 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private final GuiWeaponButton rightButton = new GuiWeaponButton(100, 145 - 57 + 7, 12 + 10, 16, 13, I18n.format("alw.button.next.name"), 232, 1, 0, 23, 23, 23);
 	    private final GuiWeaponButton leftButton = new GuiWeaponButton(101, 81 - 57 + 7, 12 + 10, 16, 13, I18n.format("alw.button.prev.name"), 232, 1, 0, 36, 23, 36);
 	    
+	    //Keep a list of buttons added with CraftTweaker
 	    private final ArrayList<GuiWeaponButton> addedButtons = new ArrayList<GuiWeaponButton>();
 	    
+	    //Make a list of lists of buttons used as "pages" of buttons that are iterable
 	    private final ArrayList<ArrayList<GuiButton>> buttonPages = new ArrayList<ArrayList<GuiButton>>();
+	    //Buttons present on all pages
 	    private final GuiWeaponButton[] staticButtons = new GuiWeaponButton[4];
 	    private int staticButtonsLength = 2;
 	    private int rows = 5;
@@ -62,20 +68,20 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private int colCounter = 1;
 	    private int pageCounter = 0;
 	    private int currPage = 0;
-	    //private boolean didInitButtons = false;
 	    
 	    private int buttonPressed;
 	    //private Container container;
 	    private final InventoryPlayer player;
 	    private final CrTForgingGuiRepresentation CUSTOM_TEXTURE;
-	    //private final Block block;
+	    private final ResourceLocation block;
 	    
-	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container, Block block)
+	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container, ResourceLocation block)
 	    {
 	    	super(container);
 	    	//this.block = block;
 	        //this.container = container;
 	        this.player = inventoryIn;
+	        //Check if CraftTeaker is giving this gui more buttons
 	        if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
 	        	CUSTOM_TEXTURE = ZenDynamicAlwResources.guiLists.get(block);
 	        	for(ForgingGuiButtonRepresentation rep : CUSTOM_TEXTURE.buttons) {
@@ -87,35 +93,36 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	        
 	        staticButtons[0] = toolrodButton;
 	        staticButtons[1] = forgeButton;
+	        
+	        this.block = block;
 	    }
 	    
 	    @Override
 	    public void initGui() {
 	    	super.initGui();
 	    	
-//	    	for(Entry<Block, ForgingGuiRepresentation> gui : ZenDynamicAlwResources.guiLists.entrySet()) {
-//	    		System.out.println("Block is " + gui.getKey().getRegistryName());
-//	    		System.out.print("Representation is: [Texture: " + gui.getValue().textureLocation + ", ");
-//	    		System.out.print("Slots: " + Arrays.toString(gui.getValue().slots.toArray()) + ", ");
-//	    		for(ForgingGuiButtonRepresentation button : gui.getValue().buttons) {
-//	    			System.out.print("Button: " + button.getId() + ", " + button.getName() + ", " + button.getOverlay() + ", ");
-//	    		}
-//	    		System.out.println("]");
-//	    		System.out.println("==========================================================================================================================");
-//	    	}
+	    	for(Entry<ResourceLocation, CrTForgingGuiRepresentation> gui : ZenDynamicAlwResources.guiLists.entrySet()) {
+	    		Alw.logger.debug("Block is " + gui.getKey());
+	    		String rep = "Representation is: [Texture: " + gui.getValue().textureLocation + ", " + "Slots: " + Arrays.toString(gui.getValue().slots.toArray()) + ", ";
+	    		for(ForgingGuiButtonRepresentation button : gui.getValue().buttons) {
+	    			rep += "Button: " + button.getId() + ", " + button.getName() + ", " + button.getOverlay() + ", ";
+	    		}
+	    		Alw.logger.debug(rep.substring(0, rep.length() - 3) + "]");
+	    		Alw.logger.debug("==========================================================================================================================");
+	    	}
 	    	
-//	    	System.out.println("Block: " + this.block.getRegistryName());
-//	    	if(this.CUSTOM_TEXTURE != null) {
-//	    		System.out.println("Custom button list: " + this.CUSTOM_TEXTURE.buttons);
-//	    		System.out.println("Button list: " + this.CUSTOM_TEXTURE == null ? "null" : Arrays.toString(this.CUSTOM_TEXTURE.buttons.toArray(new ForgingGuiButtonRepresentation[0])));
-//	    	}
-//	    	System.out.println(Arrays.toString(this.addedButtons.toArray(new GuiWeaponButton[0]))); // Not being set somewhere
+	    	Alw.logger.debug("Block: " + this.block);
+	    	if(this.CUSTOM_TEXTURE != null) {
+	    		Alw.logger.debug("Custom button list: " + this.CUSTOM_TEXTURE.buttons);
+	    		Alw.logger.debug("Button list: " + this.CUSTOM_TEXTURE == null ? "null" : Arrays.toString(this.CUSTOM_TEXTURE.buttons.toArray(new ForgingGuiButtonRepresentation[0])));
+	    	}
+	    	Alw.logger.debug(Arrays.toString(this.addedButtons.toArray(new GuiWeaponButton[0])));
 	    	
-//	    	if(!didInitButtons) {
 	    	this.rowCounter = 1;
 	    	this.colCounter = 1;
 	    	this.currPage = 0;
 	    	this.pageCounter = 0;
+	    	//init runs when resizing, so make sure to clear button pages
 	    	for(ArrayList<GuiButton> page : buttonPages) {
 	    		page.clear();
 	    	}
@@ -138,33 +145,35 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
         	this.addButton(chainButton);
         	this.addButton(plateButton);
         	
+        	//add all extra buttons
         	for(GuiWeaponButton button : this.addedButtons) {
         		this.addButton(button);
         	}
         	
+        	//if there is a need for arrow buttons, add them to static buttons
         	if(this.buttonPages.size() > 1) {
         		staticButtons[2] = leftButton;
     	        staticButtons[3] = rightButton;
     	        this.staticButtonsLength = 4;
         	}
     	    
+        	//add static buttons to all pages
         	for(int i = 0; i < this.buttonPages.size(); i++) {
         		List<GuiButton> list = this.buttonPages.get(i);
         		for(int j = 0; j < this.staticButtonsLength; j++) {
         			list.add(this.staticButtons[j]);
         		}
         	}
-	        
-//	        	this.didInitButtons = true;
-//	    	}
         	
         	this.buttonList = this.buttonPages.get(currPage);
 	    }
 	    
 	    public void addButton(GuiWeaponButton button) {
-	    	if(colCounter <= cols && rowCounter <= rows) { // add to this row
+	    	//When adding a button, we don't really need x and y coordinates. We should determine them based on page row and column size, rows & cols respectively.
+	    	if(colCounter <= cols && rowCounter <= rows) { // add to this row. We iterate colCounter because each row has cols columns.
 	    		button.setPos(colCounter * 30, (rowCounter * 30) + 10);
 	    		colCounter++;
+	    		//If we need to add more pages from extra CraftTweaker buttons, add more pages. Otherwise, add the button to the current page.
 	    		if(buttonPages.size() == pageCounter || buttonPages.get(pageCounter) == null) {
 	    			ArrayList<GuiButton> page = new ArrayList<GuiButton>();
 	    			page.add(button);

@@ -36,14 +36,20 @@ public class GuiForge extends GuiContainer
 		this.xSize = 176;
 		this.ySize = 166;
 		
+		//Get CraftTweaker defined heatable materials
 		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());	
 	}
 	
 	private String getTileName() {
+		//If we already set the tile name, don't redo the work, just return the string
 		if(this.tileName != null) {
 			return this.tileName.toString();
 		}
 		
+		/*49 pixels are currently reserved for the forge nameplate. We get the default tile entity name, then get the length of it. 
+		 * If it's longer than the reserved length, truncate letters based on how many I's we could fit in that length, assuming I is about the average size of a letter.
+		 * Append ... to show we've truncated the name, then repeat, removing 1 letter at a time until it fits.
+		*/
 		int namePlateSizeInGui = 49;
 		this.tileName = new StringBuilder(this.tileentity.getDisplayName().getUnformattedText());
 		int len = this.fontRenderer.getStringWidth(this.tileName.toString());
@@ -55,6 +61,7 @@ public class GuiForge extends GuiContainer
 			len = this.fontRenderer.getStringWidth(this.tileName.toString());
 		}
 		
+		//Don't append ... after a space, that looks wonky
 		if(this.tileName.charAt(this.tileName.length() - 4) == ' ') {
 			this.tileName.deleteCharAt(this.tileName.length() - 4);
 		}
@@ -101,6 +108,7 @@ public class GuiForge extends GuiContainer
 	
 	private void drawHoveringForgeTempText(int mouseX, int mouseY) {
 		if(mouseX > this.guiLeft + 76 && mouseX < this.guiLeft + 101 && mouseY > this.guiTop + 27 && mouseY < this.guiTop + 52) {
+			//draw the temperature of the forge out. this.tileentity.getField(1) returns the temperature in Kelvin, so we convert to C.
 			this.drawHoveringText(new TextComponentTranslation("alw.temp.forge.name").getFormattedText() + " " + (this.tileentity.getField(1)-273) + " " + new TextComponentTranslation("alw.temp.celcius.name").getFormattedText(), mouseX, mouseY);
 		}
 	}
@@ -128,11 +136,13 @@ public class GuiForge extends GuiContainer
 	
 	private int getSlotTempScaled()
 	{
+		//This is for drawing the temperature of the forge behind the slot for a visual representation
 		return (int)((this.tileentity.getField(1) - 840) * 0.0166);
 	}
 	
 	private int getSmokeTempScaled()
 	{
+		//This is for drawing the temperature of the forge over the smoke for a larger visual representation
 		return (int)((this.tileentity.getField(1) - 850) * 0.0277);
 	}
 	
