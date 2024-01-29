@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Locale;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.items.ItemForgeHammer;
+import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.SharpeningStoneItem;
-import com.tiki.advancedlootableweapons.items.armor.ItemArmorPlate;
+import com.tiki.advancedlootableweapons.items.armor.ArmorPlateItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
@@ -70,19 +70,19 @@ public class ItemInit {
     public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
-    public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ItemForgeHammer(Tiers.STONE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ItemForgeHammer(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> KOBOLD_FORGE_HAMMER = ITEMS.register("kobold_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_KOBOLD, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> COPPER_FORGE_HAMMER = ITEMS.register("copper_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_COPPER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> SILVER_FORGE_HAMMER = ITEMS.register("silver_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_SILVER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> BRONZE_FORGE_HAMMER = ITEMS.register("bronze_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_BRONZE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> PLATINUM_FORGE_HAMMER = ITEMS.register("platinum_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> STEEL_FORGE_HAMMER = ITEMS.register("steel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> SHADOW_PLATINUM_FORGE_HAMMER = ITEMS.register("shadow_platinum_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_SHADOW_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> FROST_STEEL_FORGE_HAMMER = ITEMS.register("frost_steel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_FROST_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> OBSIDIAN_FORGE_HAMMER = ITEMS.register("obsidian_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_REFINED_OBSIDIAN, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> CRYSTALLITE_FORGE_HAMMER = ITEMS.register("crystallite_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_CRYSTALLITE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> DUSKSTEEL_FORGE_HAMMER = ITEMS.register("dusksteel_forge_hammer", () -> new ItemForgeHammer(ModMaterials.MAT_DUSKSTEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ForgeHammerItem(Tiers.STONE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ForgeHammerItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> KOBOLD_FORGE_HAMMER = ITEMS.register("kobold_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_KOBOLD, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> COPPER_FORGE_HAMMER = ITEMS.register("copper_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_COPPER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> SILVER_FORGE_HAMMER = ITEMS.register("silver_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_SILVER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> BRONZE_FORGE_HAMMER = ITEMS.register("bronze_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_BRONZE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> PLATINUM_FORGE_HAMMER = ITEMS.register("platinum_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> STEEL_FORGE_HAMMER = ITEMS.register("steel_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> SHADOW_PLATINUM_FORGE_HAMMER = ITEMS.register("shadow_platinum_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_SHADOW_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> FROST_STEEL_FORGE_HAMMER = ITEMS.register("frost_steel_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_FROST_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> OBSIDIAN_FORGE_HAMMER = ITEMS.register("obsidian_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_REFINED_OBSIDIAN, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CRYSTALLITE_FORGE_HAMMER = ITEMS.register("crystallite_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_CRYSTALLITE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> DUSKSTEEL_FORGE_HAMMER = ITEMS.register("dusksteel_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_DUSKSTEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
     public static final RegistryObject<Item> DAGGER_HEAD = ITEMS.register("dagger_head", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> KABUTOWARI_HEAD = ITEMS.register("kabutowari_head", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
@@ -118,21 +118,21 @@ public class ItemInit {
     public static final RegistryObject<Item> CRYSTALLITE_CHAIN_LINK = ITEMS.register("crystallite_chain_link", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_CHAIN_LINK = ITEMS.register("dusksteel_chain_link", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
-    public static final RegistryObject<Item> IRON_ARMOR_PLATE = ITEMS.register("iron_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> GOLD_ARMOR_PLATE = ITEMS.register("gold_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> DIAMOND_STUDDED_STEEL_ARMOR_PLATE = ITEMS.register("diamond_studded_steel_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> COPPER_ARMOR_PLATE = ITEMS.register("copper_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> SILVER_ARMOR_PLATE = ITEMS.register("silver_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> BRONZE_ARMOR_PLATE = ITEMS.register("bronze_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> PLATINUM_ARMOR_PLATE = ITEMS.register("platinum_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> STEEL_ARMOR_PLATE = ITEMS.register("steel_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> OBSIDIAN_ARMOR_PLATE = ITEMS.register("obsidian_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> IRON_ARMOR_PLATE = ITEMS.register("iron_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> GOLD_ARMOR_PLATE = ITEMS.register("gold_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> DIAMOND_STUDDED_STEEL_ARMOR_PLATE = ITEMS.register("diamond_studded_steel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> COPPER_ARMOR_PLATE = ITEMS.register("copper_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> SILVER_ARMOR_PLATE = ITEMS.register("silver_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> BRONZE_ARMOR_PLATE = ITEMS.register("bronze_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> PLATINUM_ARMOR_PLATE = ITEMS.register("platinum_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> STEEL_ARMOR_PLATE = ITEMS.register("steel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> OBSIDIAN_ARMOR_PLATE = ITEMS.register("obsidian_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
-    public static final RegistryObject<Item> KOBOLD_ARMOR_PLATE = ITEMS.register("kobold_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> SHADOW_PLATINUM_ARMOR_PLATE= ITEMS.register("shadow_platinum_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> FROST_STEEL_ARMOR_PLATE = ITEMS.register("frost_steel_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> CRYSTALLITE_ARMOR_PLATE = ITEMS.register("crystallite_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> DUSKSTEEL_ARMOR_PLATE = ITEMS.register("dusksteel_armor_plate", () -> new ItemArmorPlate(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> KOBOLD_ARMOR_PLATE = ITEMS.register("kobold_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> SHADOW_PLATINUM_ARMOR_PLATE= ITEMS.register("shadow_platinum_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> FROST_STEEL_ARMOR_PLATE = ITEMS.register("frost_steel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> CRYSTALLITE_ARMOR_PLATE = ITEMS.register("crystallite_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> DUSKSTEEL_ARMOR_PLATE = ITEMS.register("dusksteel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
     /*public static final RegistryObject<Item> CHAIN_BINDING_IRON = new ItemArmorBinding("binding_chain_iron", ArmorMaterial.IRON);
     public static final RegistryObject<Item> CHAIN_BINDING_GOLD = new ItemArmorBinding("binding_chain_gold", ArmorMaterial.GOLD);

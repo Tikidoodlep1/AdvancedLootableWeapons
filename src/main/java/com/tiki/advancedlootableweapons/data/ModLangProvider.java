@@ -4,8 +4,11 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModCreativeTabs;
+import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
@@ -83,6 +86,10 @@ public class ModLangProvider extends LanguageProvider {
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
             addItem(weapon,getNameFromItem(weapon.get()));
         }
+
+        add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
+        add(ArmorBindingItem.INFO,"Bonus Durability");
+        add("container.advancedlootableweapons.anvil_forging","Anvil Forging");
 
         add("item.advancedlootableweapons.stone_forge_hammer", "Stone Forge Hammer");
         add("item.advancedlootableweapons.iron_forge_hammer", "Iron Forge Hammer");

@@ -1,4 +1,6 @@
 {
+  "advancedlootableweapons.armor_binding.info": "Bonus Durability",
+  "advancedlootableweapons.forge_hammer.info": "Hit an anvil with me to start forging weapons!",
   "advancedlootableweapons.temperature.cool": "Cool",
   "advancedlootableweapons.temperature.hot": "Hot",
   "advancedlootableweapons.temperature.warm": "Warm",
@@ -38,6 +40,7 @@
   "block.advancedlootableweapons.tin_block": "Tin Block",
   "block.advancedlootableweapons.tin_ore": "Tin Ore",
   "container.advancedlootableweapons.alloy_furnace": "Alloy Furnace",
+  "container.advancedlootableweapons.anvil_forging": "Anvil Forging",
   "container.advancedlootableweapons.forge": "Forge",
   "container.advancedlootableweapons.forge2": "Advanced Forge",
   "container.advancedlootableweapons.forgeWeapon": "Anvil Forging",

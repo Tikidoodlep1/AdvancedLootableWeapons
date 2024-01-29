@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ItemArmorPlate extends Item {
-    public ItemArmorPlate(Properties pProperties) {
+public class ArmorPlateItem extends Item {
+    public ArmorPlateItem(Properties pProperties) {
         super(pProperties);
     }
 
