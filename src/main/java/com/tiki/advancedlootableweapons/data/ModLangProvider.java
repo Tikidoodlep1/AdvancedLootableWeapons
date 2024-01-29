@@ -63,6 +63,21 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.FROST_STEEL_CHAIN_LINK);
         addDefaultItem(ItemInit.CRYSTALLITE_CHAIN_LINK);
         addDefaultItem(ItemInit.DUSKSTEEL_CHAIN_LINK);
+
+        addDefaultItem(ItemInit.IRON_ARMOR_PLATE);
+        addDefaultItem(ItemInit.GOLD_ARMOR_PLATE);
+        addDefaultItem(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE);
+        addDefaultItem(ItemInit.COPPER_ARMOR_PLATE);
+        addDefaultItem(ItemInit.SILVER_ARMOR_PLATE);
+        addDefaultItem(ItemInit.BRONZE_ARMOR_PLATE);
+        addDefaultItem(ItemInit.PLATINUM_ARMOR_PLATE);
+        addDefaultItem(ItemInit.STEEL_ARMOR_PLATE);
+        addDefaultItem(ItemInit.OBSIDIAN_ARMOR_PLATE);
+        addDefaultItem(ItemInit.KOBOLD_ARMOR_PLATE);
+        addDefaultItem(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE);
+        addDefaultItem(ItemInit.FROST_STEEL_ARMOR_PLATE);
+        addDefaultItem(ItemInit.CRYSTALLITE_ARMOR_PLATE);
+        addDefaultItem(ItemInit.DUSKSTEEL_ARMOR_PLATE);
         
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {

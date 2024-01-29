@@ -138,6 +138,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
         oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_LINK.get());
 
+        oneLayerItem(ItemInit.IRON_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.GOLD_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.COPPER_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.SILVER_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.BRONZE_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.PLATINUM_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.STEEL_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.OBSIDIAN_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.KOBOLD_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.FROST_STEEL_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_ARMOR_PLATE.get());
+
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;

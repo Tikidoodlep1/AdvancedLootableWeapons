@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -37,7 +38,7 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 	private final ItemButton SPEAR = makeButton(90, 160, "copper_spear");
 	private final ItemButton CHAIN_LINK = makeButton(30, 190, "copper_chain_link");
 	private final ItemButton ARMOR_PLATE = makeButton(60, 190, "copper_armor_plate");
-	private final ItemButton TOOL_ROD = makeButton(90, 190, "copper_tool_rod");
+	private final ItemButton TOOL_ROD = makeButton(90, 190, "hot_tool_rod");
 	private final ItemButton FORGE = makeButton(90, 220, "copper_forge");
 
 	int index = 0;
@@ -47,7 +48,7 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 		Component component = stack.getHoverName();
 
 		Button.OnTooltip tooltip = (pButton, pPoseStack, pMouseX, pMouseY) -> renderTooltip(pPoseStack,component, x, y);
-		return new ItemButton(x,y,20,20,new TextComponent(""),pButton -> {},tooltip, stack);
+		return new ItemButton(x,y,20,20, MCVersion.empty(), pButton -> {},tooltip, stack);
 	}
 
 	private static Item lookup(String string) {

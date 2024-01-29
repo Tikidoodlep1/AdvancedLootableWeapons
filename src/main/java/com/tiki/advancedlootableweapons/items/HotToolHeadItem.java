@@ -9,11 +9,13 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import com.tiki.advancedlootableweapons.init.ModMaterials;
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -115,7 +117,7 @@ public class HotToolHeadItem extends Item {
         hot, warm, cool;
         public final TranslatableComponent translation;
         Temp() {
-            translation = new TranslatableComponent("advancedlootableweapons.temperature." + this.name());
+            translation = (TranslatableComponent) MCVersion.translation("advancedlootableweapons.temperature." + this.name());
         }
     }
 

@@ -11,6 +11,7 @@ import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContaine
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -92,7 +93,7 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 	}
 
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.advancedlootableweapons.jaw_crusher");
+		return MCVersion.translation("container.advancedlootableweapons.jaw_crusher");
 	}
 
 	protected boolean hasRoom() {
