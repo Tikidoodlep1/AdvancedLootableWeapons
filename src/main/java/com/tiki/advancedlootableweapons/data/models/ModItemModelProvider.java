@@ -26,6 +26,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
         simpleBlockItem(BlockInit.ADVANCED_FORGE.get());
+        simpleBlockItem(BlockInit.CLAY_DRUM.get());
 
         simpleBlockItem(BlockInit.OAK_BELLOWS.get());
         simpleBlockItem(BlockInit.BIRCH_BELLOWS.get());

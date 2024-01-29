@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
+import com.tiki.advancedlootableweapons.init.RecipeInit;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.util.WeaponStackHelper;
 
@@ -115,12 +117,12 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return Serializer.INSTANCE;
+		return RecipeInit.ANVIL_FORGING_RECIPE.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return Type.INSTANCE;
+		return ModRecipeTypes.ANVIL_FORGING;
 	}
 	
 	@Override
@@ -128,32 +130,7 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 		return new ItemStack(Blocks.ANVIL.asItem());
 	}
 	
-	public static class Type implements RecipeType<AnvilForgingRecipe> {
-		private Type() {}
-		public static final Type INSTANCE = new Type();
-		public static final String ID = "anvil_forging_combine";
-	}
-	
-	public static class Serializer implements RecipeSerializer<AnvilForgingRecipe> {
-		
-		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = new ResourceLocation(AdvancedLootableWeapons.MODID, Type.ID);
-		
-		@Override
-		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
-			return INSTANCE;
-		}
-		
-		@Nullable
-		@Override
-		public ResourceLocation getRegistryName() {
-			return ID;
-		}
-		
-		@Override
-		public Class<RecipeSerializer<?>> getRegistryType() {
-			return Serializer.castClass(RecipeSerializer.class);
-		}
+	public static class Serializer extends AbstractRecipeSerializer<AnvilForgingRecipe> {
 		
 		@Override
 		public AnvilForgingRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
@@ -187,12 +164,6 @@ public class AnvilForgingRecipe implements Recipe<SimpleContainer> {
 			}
 			pBuffer.writeItemStack(pRecipe.getResultItem(), true);
 		}
-		
-		@SuppressWarnings("unchecked")
-		private static <T> Class<T> castClass(Class<?> cls) {
-			return (Class<T>)cls;
-		}
-		
 	}
 
 }

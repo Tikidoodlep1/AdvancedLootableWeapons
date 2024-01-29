@@ -10,7 +10,7 @@ import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
-import com.tiki.advancedlootableweapons.inventory.anvil_forging.AnvilForgingScreen;
+import com.tiki.advancedlootableweapons.client.screens.AnvilForgingScreen;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 
@@ -18,6 +18,7 @@ import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -28,18 +29,11 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @SuppressWarnings("deprecation")
@@ -72,8 +66,7 @@ public class AdvancedLootableWeapons
         eventBus.addListener(ModDatagen::start);
     }
     
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.addListener(this::generate);
     }
 
@@ -158,10 +151,6 @@ public class AdvancedLootableWeapons
     }
     
     private void clientSetup(final FMLClientSetupEvent event) {
-        MenuScreens.register(MenuInit.ALLOY_FURNACE_CONTAINER.get(), AlloyFurnaceScreen::new);
-        MenuScreens.register(MenuInit.FORGE_CONTAINER.get(), ForgeScreen::new);
-        MenuScreens.register(MenuInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
-        MenuScreens.register(MenuInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
-        event.enqueueWork(ALWClient::registerItemModelPredicates);
+        ALWClient.setup(event);
     }
 }

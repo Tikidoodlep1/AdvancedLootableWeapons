@@ -289,6 +289,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultBlock(BlockInit.ALLOY_FURNACE);
         addDefaultBlock(BlockInit.FORGE);
         addDefaultBlock(BlockInit.ADVANCED_FORGE);
+        addDefaultBlock(BlockInit.CLAY_DRUM);
         add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
         addDefaultBlock(BlockInit.JAW_CRUSHER);
 

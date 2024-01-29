@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.compat.rei.categories.JawCrusherCategory
 import com.tiki.advancedlootableweapons.compat.rei.displays.AlloyFurnaceDisplay;
 import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
@@ -42,8 +43,8 @@ public class REICompat implements REIClientPlugin {
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
-        registry.registerRecipeFiller(AlloyFurnaceRecipe.class, AlloyFurnaceRecipe.Type.INSTANCE, AlloyFurnaceDisplay::new);
-        registry.registerRecipeFiller(JawCrusherRecipe.class, JawCrusherRecipe.Type.INSTANCE, JawCrusherDisplay::new);
+        registry.registerRecipeFiller(AlloyFurnaceRecipe.class, ModRecipeTypes.ALLOY_FURNACE, AlloyFurnaceDisplay::new);
+        registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
 
     }
 

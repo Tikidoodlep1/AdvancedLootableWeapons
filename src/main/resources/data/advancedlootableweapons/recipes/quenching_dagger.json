@@ -1,0 +1,13 @@
+{	
+	"type": "advancedlootableweapons:drum",
+	
+	"input": {
+		"item": "advancedlootableweapons:dagger_hot_tool_head_2"
+	},
+	"fluid": {
+		"fluid":"water"
+	},
+	"time": 50,
+	"clay": false,
+	"quenching" : true
+}

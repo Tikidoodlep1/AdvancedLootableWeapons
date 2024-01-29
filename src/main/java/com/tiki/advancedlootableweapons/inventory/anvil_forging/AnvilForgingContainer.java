@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.inventory.anvil_forging;
 
 import com.tiki.advancedlootableweapons.init.MenuInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -76,7 +77,7 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 			inv.setItem(i, this.invSlots.getItem(i));
 		}
 
-		Optional<AnvilForgingRecipe> match = level.getRecipeManager().getRecipeFor(AnvilForgingRecipe.Type.INSTANCE, inv, level);
+		Optional<AnvilForgingRecipe> match = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, inv, level);
 		if(match.isPresent() && canMakeRecipe()) {
 			this.invSlots.setItem(0, ItemStack.EMPTY);
 			if(match.get().getIngredients().size() >= 2) {

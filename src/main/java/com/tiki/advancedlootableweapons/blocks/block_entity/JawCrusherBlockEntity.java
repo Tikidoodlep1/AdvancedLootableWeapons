@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
@@ -129,7 +130,7 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
 	void lookupRecipe() {
 		RecipeWrapper inv = new RecipeWrapper(itemHandler);
-		lastRecipe = level.getRecipeManager().getRecipeFor(JawCrusherRecipe.Type.INSTANCE, inv, level).orElse(null);
+		lastRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.CRUSHING, inv, level).orElse(null);
 	}
 
 	@Override

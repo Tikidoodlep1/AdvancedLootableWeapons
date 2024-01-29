@@ -1,10 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AdvancedForgeBlockEntity;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
-import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
+import com.tiki.advancedlootableweapons.blocks.block_entity.*;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,7 +25,11 @@ public class BlockEntityInit {
 
 	public static final RegistryObject<BlockEntityType<JawCrusherBlockEntity>> JAW_CRUSHER_TE =
 			BLOCK_ENTITIES.register("jaw_crusher", () -> BlockEntityType.Builder.of(JawCrusherBlockEntity::new, BlockInit.JAW_CRUSHER.get()).build(null));
-	
+
+	public static final RegistryObject<BlockEntityType<DrumBlockEntity>> DRUM_TE =
+			BLOCK_ENTITIES.register("drum", () -> BlockEntityType.Builder.of(DrumBlockEntity::new,
+					BlockInit.CLAY_DRUM.get()).build(null));
+
 	public static void register(IEventBus bus) {
 		BLOCK_ENTITIES.register(bus);
 	}

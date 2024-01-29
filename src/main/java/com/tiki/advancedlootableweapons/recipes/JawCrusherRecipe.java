@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -73,42 +74,17 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeType<?> getType() {
-		return Type.INSTANCE;
+		return ModRecipeTypes.CRUSHING;
 	}
 	
 	@Override
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BlockInit.JAW_CRUSHER.get().asItem());
 	}
+
 	
-	public static class Type implements RecipeType<JawCrusherRecipe> {
-		private Type() {}
-		public static final Type INSTANCE = new Type();
-		public static final String ID = "crushing";
-	}
-	
-	public static class Serializer implements RecipeSerializer<JawCrusherRecipe> {
+	public static class Serializer extends AbstractRecipeSerializer<JawCrusherRecipe> {
 
-
-		private ResourceLocation name;
-
-		@Override
-		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
-			this.name = name;
-			return this;
-		}
-		
-		@Nullable
-		@Override
-		public ResourceLocation getRegistryName() {
-			return name;
-		}
-		
-		@Override
-		public Class<RecipeSerializer<?>> getRegistryType() {
-			return Serializer.castClass(RecipeSerializer.class);
-		}
-		
 		@Override
 		public JawCrusherRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
 			Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
@@ -131,11 +107,6 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 			pRecipe.input.toNetwork(pBuffer);
 			pBuffer.writeItemStack(pRecipe.getResultItem(), true);
 			pBuffer.writeInt(pRecipe.bonus);
-		}
-		
-		@SuppressWarnings("unchecked")
-		private static <T> Class<T> castClass(Class<?> cls) {
-			return (Class<T>)cls;
 		}
 		
 	}

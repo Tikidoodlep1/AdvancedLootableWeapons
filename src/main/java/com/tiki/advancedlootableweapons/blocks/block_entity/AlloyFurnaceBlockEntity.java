@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
@@ -99,8 +100,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     };
 
     private final ItemStackHandler itemHandler = new AlloyFurnaceHandler(4) {
-
-
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -300,7 +299,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             cookingProgress = 0;
         }
         //lookup a new recipe
-        cachedRecipe = level.getRecipeManager().getRecipeFor(AlloyFurnaceRecipe.Type.INSTANCE, new RecipeWrapper(itemHandler), level).orElse(null);
+        cachedRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ALLOY_FURNACE, new RecipeWrapper(itemHandler), level).orElse(null);
         if (cachedRecipe != null) {
             cookingTotalTime = cachedRecipe.getCookTime();
         }

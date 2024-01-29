@@ -9,6 +9,7 @@ import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEnt
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
+import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -114,7 +115,7 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeType<?> getType() {
-		return Type.INSTANCE;
+		return ModRecipeTypes.ALLOY_FURNACE;
 	}
 
 	public Ingredient getInput1() {
@@ -141,34 +142,10 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 	public ItemStack getToastSymbol() {
 		return new ItemStack(BlockInit.ALLOY_FURNACE.get());
 	}
-	
-	public static class Type implements RecipeType<AlloyFurnaceRecipe> {
-		private Type() {}
-		public static final Type INSTANCE = new Type();
-		public static final String ID = "alloy_furnace";
-	}
-	
-	public static class Serializer implements RecipeSerializer<AlloyFurnaceRecipe> {
 
-		private ResourceLocation name;
+	public static class Serializer extends AbstractRecipeSerializer<AlloyFurnaceRecipe> {
 
-		@Override
-		public RecipeSerializer<?> setRegistryName(final ResourceLocation name) {
-			this.name = name;
-			return this;
-		}
-		
-		@Nullable
-		@Override
-		public ResourceLocation getRegistryName() {
-			return name;
-		}
-		
-		@Override
-		public Class<RecipeSerializer<?>> getRegistryType() {
-			return Serializer.castClass(RecipeSerializer.class);
-		}
-		
+
 		@Override
 		public AlloyFurnaceRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
 			JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
@@ -213,12 +190,5 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 			pBuffer.writeItemStack(pRecipe.output,false);
 			pBuffer.writeInt(pRecipe.cookTime);
 		}
-		
-		@SuppressWarnings("unchecked")
-		private static <T> Class<T> castClass(Class<?> cls) {
-			return (Class<T>)cls;
-		}
-		
 	}
-
 }
