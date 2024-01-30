@@ -1,10 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
-import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
-import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
-import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
+import com.tiki.advancedlootableweapons.recipes.*;
 
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -27,6 +24,9 @@ public class RecipeInit {
 
 	public static final RegistryObject<RecipeSerializer<DrumRecipe>> DRUM_RECIPE = RECIPE_SERIALIZERS.register("drum",
 			DrumRecipe.Serializer::new);
+
+	public static final RegistryObject<RecipeSerializer<DrumQuenchingRecipe>> DRUM_QUENCHING_RECIPE = RECIPE_SERIALIZERS.register("drum_quenching",
+			DrumQuenchingRecipe.Serializer::new);
 	
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZERS.register(bus);

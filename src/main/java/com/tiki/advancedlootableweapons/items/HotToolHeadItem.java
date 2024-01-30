@@ -63,20 +63,29 @@ public class HotToolHeadItem extends Item {
         return stack.hasTag() ? stack.getTag().getString("material") : "null";
     }
 
+    public static final String QUENCH_KEY ="advancedlootableweapons.tool_head.quenched";
+    public static final String UNQUENCH_KEY ="advancedlootableweapons.tool_head.unquenched";
+
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
         if (!Objects.equals(this.getMaterial(stack), "null")) {
-            tooltip.add(new TextComponent(ChatFormatting.BLUE + nbt.getString("material")));
+            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("material")));
         } else {
-            tooltip.add(new TextComponent(ChatFormatting.BLUE + "No Material"));
+            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
         }
 
-        tooltip.add(new TextComponent(ChatFormatting.BLUE + "Forging Quality"));
-        tooltip.add(new TextComponent(ChatFormatting.GRAY + "--------------------"));
-        tooltip.add(new TextComponent(ChatFormatting.BLUE + nbt.getString("addedDamage")));
-        tooltip.add(new TextComponent(ChatFormatting.BLUE + nbt.getString("addedDurability")));
-        tooltip.add(new TextComponent(ChatFormatting.GRAY + "--------------------"));
+        if(nbt!= null && this.isFinished()) {
+            boolean quenched = nbt.getBoolean("quenched");
+            tooltip.add(quenched ? MCVersion.translation(QUENCH_KEY).withStyle(ChatFormatting.BLUE) :
+                    MCVersion.translation(UNQUENCH_KEY).withStyle(ChatFormatting.RED));
+        }
+
+        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "Forging Quality"));
+        tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
+        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDamage")));
+        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDurability")));
+        tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
     }
 
     @Override

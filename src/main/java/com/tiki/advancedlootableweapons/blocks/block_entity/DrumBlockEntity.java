@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.blocks.block_entity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
 import com.tiki.advancedlootableweapons.recipes.SingleFluidRecipeWrapper;
 import com.tiki.advancedlootableweapons.tags.ModBlockTags;
@@ -37,7 +38,7 @@ public class DrumBlockEntity extends BlockEntity {
     public int progress = 0;
     private int cookingTotalTime = MAX_COOKING_TIME;
 
-    private DrumRecipe activeRecipe = null;
+    private DrumQuenchingRecipe activeRecipe = null;
     private boolean lookForRecipe = true;
 
     public boolean displayBubbles = false;
@@ -89,6 +90,12 @@ public class DrumBlockEntity extends BlockEntity {
         return saveWithoutMetadata();
     }
 
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        level.sendBlockUpdated(getBlockPos(),getBlockState(),getBlockState(),3);//this is required to sync fluids/items to client
+    }
+
     public static void tick(Level world, BlockPos pos, BlockState state, DrumBlockEntity entity) {
         entity.serverTick(world,pos,state);
     }
@@ -101,7 +108,7 @@ public class DrumBlockEntity extends BlockEntity {
 
         if (activeRecipe != null) {
             boolean canProceed = true;
-            boolean isQuenchRecipe = activeRecipe.needsQuenching();
+            boolean isQuenchRecipe = activeRecipe!= null;//activeRecipe.needsQuenching();
             if (isQuenchRecipe) {
                 canProceed = hasHotBlockOrFluid();
             }
@@ -143,7 +150,7 @@ public class DrumBlockEntity extends BlockEntity {
             progress = 0;
         }
         //lookup a new recipe
-        activeRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.DRUM,
+        activeRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.DRUM_QUENCHING,
                 new SingleFluidRecipeWrapper(itemStackHandler,fluidTank), level).orElse(null);
         if (activeRecipe != null) {
             cookingTotalTime = activeRecipe.getTime();

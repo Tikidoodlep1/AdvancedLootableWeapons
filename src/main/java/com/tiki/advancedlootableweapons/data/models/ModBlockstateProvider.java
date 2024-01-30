@@ -65,6 +65,8 @@ public class ModBlockstateProvider extends BlockStateProvider {
         horizontalBlock(BlockInit.JAW_CRUSHER.get(), models().getExistingFile(
                 new ResourceLocation(AdvancedLootableWeapons.MODID, "block/jaw_crusher")), 180);
 
+        simpleBlock(BlockInit.CLAY_DRUM.get(),models().getExistingFile(new ResourceLocation(AdvancedLootableWeapons.MODID,"block/clay_drum")));
+
         int bellows = 270;
 
 

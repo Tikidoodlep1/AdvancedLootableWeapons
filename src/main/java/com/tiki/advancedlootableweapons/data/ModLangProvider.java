@@ -119,6 +119,9 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.STEEL_WHETSTONE);
 
 
+        add(HotToolHeadItem.QUENCH_KEY,"Quenched");
+        add(HotToolHeadItem.UNQUENCH_KEY,"Unquenched");
+
         add("item.advancedlootableweapons.hot_tool_head", "Tool Head");
 
         add("item.advancedlootableweapons.hot_tool_rod", "Weapon Handle(Stage 1)");
