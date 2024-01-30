@@ -58,6 +58,9 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
         //the more "damage" an item has, the colder it is
         inputCopy.setDamageValue(Math.min(itemInSlot.getDamageValue() + 3500,itemInSlot.getMaxDamage()));
 
+        inputCopy.getOrCreateTag().putBoolean("quenched", true);
+        inputCopy.getTag().remove("clay");
+
         return inputCopy;
     }
 

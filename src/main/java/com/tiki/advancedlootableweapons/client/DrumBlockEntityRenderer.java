@@ -60,7 +60,7 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
         if (!input.isEmpty()) {
             pPoseStack.pushPose();
             pPoseStack.translate(0.5D, 0.4D, 0.5D);
-             pPoseStack.mulPose(Vector3f.XP.rotationDegrees(-90));
+            pPoseStack.mulPose(Vector3f.XP.rotationDegrees(-90));
             pPoseStack.scale(0.9f, 0.9f, 0.9f);
             itemRenderer.renderStatic(input, ItemTransforms.TransformType.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
             pPoseStack.popPose();
@@ -68,29 +68,28 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
 
         if (!output.isEmpty()) {
             pPoseStack.pushPose();
+
+            double offset = .15d;
+
             switch (facing) {
-                case EAST:
-                    pPoseStack.translate(1.175D, 0.425D, 0.5D);
-                    // GlStateManager.rotate(90.0F, 0F, 1F, 0F);
-                    //GlStateManager.rotate(-22.5F, 1F, 0F, 0F);
-                    break;
-                case NORTH:
-                    pPoseStack.translate(0.5D, 0.4D, 0.175D);
-                    //   GlStateManager.rotate(22.5F, 1F, 0F, 0F);
-                    break;
-                case SOUTH:
-                    pPoseStack.translate(0.5D, 0.4D, 1.175D);
-                    //  GlStateManager.rotate(-22.5F, 1F, 0F, 0F);
-                    break;
-                case WEST:
-                    pPoseStack.translate(0.175D, 0.425D, 0.5D);
-                    //  GlStateManager.rotate(-90.0F, 0F, 1F, 0F);
-                    //  GlStateManager.rotate(-22.5F, 1F, 0F, 0F);
-                    break;
-                default:
-                    pPoseStack.translate(0.5D, 0.4D, 0.175D);
-                    //  GlStateManager.rotate(22.5F, 1F, 0F, 0F);
-                    break;
+                case EAST -> {
+                    pPoseStack.translate(1+offset, 0.425D, 0.5D);
+                    pPoseStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(-22.5F));
+                }
+                case NORTH -> {
+                    pPoseStack.translate(0.5D, 0.4D, -offset);
+                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(22.5F));
+                }
+                case SOUTH -> {
+                    pPoseStack.translate(0.5D, 0.4D, 1+offset);
+                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(-22.5F));
+                }
+                case WEST -> {
+                    pPoseStack.translate(-offset, 0.425D, 0.5D);
+                    pPoseStack.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
+                    pPoseStack.mulPose(Vector3f.XP.rotationDegrees(-22.5F));
+                }
             }
 
             itemRenderer.renderStatic(output, ItemTransforms.TransformType.FIXED, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, 0);
@@ -102,11 +101,10 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
             renderFluid(fluid, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
         }
 
-        if (blockEntity.displayQuenching) {
-            renderQuench(world, blockEntity.getBlockPos().getX(), blockEntity.getBlockPos().getY() - 0.5, blockEntity.getBlockPos().getZ(), blockEntity.progress);
-        } else if (blockEntity.displayBubbles) {
-            renderBubbles(world, blockEntity.getBlockPos().getX(), blockEntity.getBlockPos().getY() - 0.5, blockEntity.getBlockPos().getZ());
-        }
+
+     //   } else if (blockEntity.displayBubbles) {
+     //       renderBubbles(world, blockEntity.getBlockPos().getX(), blockEntity.getBlockPos().getY() - 0.5, blockEntity.getBlockPos().getZ());
+      //  }
     }
 
     private void renderBubbles(Level world, double x, double y, double z) {
@@ -134,16 +132,6 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
         }
     }
 
-    private void renderQuench(Level world, double x, double y, double z, int progress) {
-        Random rand = world.random;
-        if (progress % 2 == 0) {
-            world.addParticle(ParticleTypes.SPIT, x + 0.5 + (rand.nextFloat() - 0.5), y + 0.85 + (rand.nextFloat() - 0.5), z + 0.5 + (rand.nextFloat() - 0.5), 0.0, 0.0, 0.01f);
-        }
-        if (progress == 6) {
-            world.playSound(null, x, y, z, SoundInit.QUENCH, SoundSource.BLOCKS, 1.0f, 1.0f);
-        }
-    }
-
     static final float MAX_D = 10.01F / 16F;
 
     static final float MIN_WH = 0; //Width/height of cutout
@@ -159,7 +147,7 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
         Matrix4f matrix = pPoseStack.last().pose();
         Matrix3f normal = pPoseStack.last().normal();
 
-        float depth = (fluid.getAmount()/1000f) * MAX_D; //Depth
+        float depth = (fluid.getAmount() / 1000f) * MAX_D; //Depth
 
         float minU = sprite.getU(0);
         float maxU = sprite.getU(16);

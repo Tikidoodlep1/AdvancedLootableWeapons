@@ -1,5 +1,5 @@
 {	
-	"type": "advancedlootableweapons:drum",
+	"type": "advancedlootableweapons:drum_quenching",
 	
 	"input": {
 		"item": "advancedlootableweapons:dagger_hot_tool_head_2"
@@ -8,6 +8,5 @@
 		"fluid":"water"
 	},
 	"time": 50,
-	"clay": false,
-	"quenching" : true
+	"clay": false
 }
