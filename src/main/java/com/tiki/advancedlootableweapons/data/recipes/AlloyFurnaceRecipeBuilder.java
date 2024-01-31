@@ -33,8 +33,6 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
 
     public static final String COOKTIME = "cookingTime";
 
-    private final Advancement.Builder advancement = Advancement.Builder.advancement();
-
     public AlloyFurnaceRecipeBuilder(ItemLike pResult, int pCount) {
         this.result = pResult.asItem();
         this.count = pCount;

@@ -135,7 +135,7 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
     static final float MAX_D = 10.01F / 16F;
 
     static final float MIN_WH = 0; //Width/height of cutout
-    static final float MAX_WH = (1 + 1) / 2f; //Width/height of cutout
+    static final float MAX_WH = 1; //Width/height of cutout
 
     protected void renderFluid(FluidStack fluid, PoseStack pPoseStack, MultiBufferSource buffer, int pPackedLight, int overlay) {
 

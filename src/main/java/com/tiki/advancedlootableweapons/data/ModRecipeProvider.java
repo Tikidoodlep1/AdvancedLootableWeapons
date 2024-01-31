@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.data;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.DrumQuenchingRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -17,7 +18,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -33,6 +36,7 @@ public class ModRecipeProvider extends RecipeProvider {
         smelting(pFinishedRecipeConsumer);
         crusher(pFinishedRecipeConsumer);
         alloyFurnace(pFinishedRecipeConsumer);
+        drumQuenching(pFinishedRecipeConsumer);
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -217,6 +221,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .ingredient2(ItemTags.COALS, 1)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"steel_alloying"));
 
+    }
+
+    protected void drumQuenching(Consumer<FinishedRecipe> recipeConsumer) {
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.DAGGER_HOT_TOOL_HEAD_2.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dagger_quenching"));
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

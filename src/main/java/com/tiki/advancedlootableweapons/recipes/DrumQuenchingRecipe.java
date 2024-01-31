@@ -95,7 +95,7 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
         @Override
         public DrumQuenchingRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             ItemStack input  = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "input"));
-            FluidStack fluidInput = Utils.getFluidStackFromJson(pSerializedRecipe.get("fluid").getAsJsonObject());
+            FluidStack fluidInput = Utils.getFluidStackFromJson(pSerializedRecipe.get("fluid_input").getAsJsonObject());
             int time = GsonHelper.getAsInt(pSerializedRecipe,"time");
             boolean clay = GsonHelper.getAsBoolean(pSerializedRecipe,"clay");
             return new DrumQuenchingRecipe(pRecipeId, input, fluidInput,  time, clay);
