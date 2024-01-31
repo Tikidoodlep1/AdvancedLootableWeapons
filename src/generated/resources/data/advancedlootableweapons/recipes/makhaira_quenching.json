@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:drum_quenching",
+  "input": {
+    "item": "advancedlootableweapons:makhaira_hot_tool_head_3"
+  },
+  "fluid_input": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "time": 50,
+  "clay": true
+}

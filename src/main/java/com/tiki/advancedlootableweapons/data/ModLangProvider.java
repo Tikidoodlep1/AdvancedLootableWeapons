@@ -138,7 +138,7 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.kabutowari_hot_tool_head_2", "Kabutowari Head(Stage 2)");
         add("item.advancedlootableweapons.kabutowari_hot_tool_head_3", "Kabutowari Head(Stage 3)");
         add("item.advancedlootableweapons.kabutowari_hot_tool_head_4", "Kabutowari Head(Stage 4)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_5", "Hot Kabutowari Head(Finished)");
+        add("item.advancedlootableweapons.kabutowari_hot_tool_head_5", "Kabutowari Head(Finished)");
 
         add("item.advancedlootableweapons.talwar_head", "Wooden Talwar Head");
         add("item.advancedlootableweapons.talwar_hot_tool_head", "Talwar Head(Stage 1)");
@@ -262,6 +262,8 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.boots_obsidian", "Refined Obsidian Boots");
         add("item.advancedlootableweapons.boots_crystallite", "Crystallite Boots");
         add("item.advancedlootableweapons.boots_dusksteel", "Dusksteel Boots");
+
+        add("category.advancedlootableweapons.drum_quenching.requires_clay","Requires Clay");
 
         addDefaultBlock(BlockInit.BRONZE_BLOCK);
         addDefaultBlock(BlockInit.CRYSTALLITE_BLOCK);

@@ -3,8 +3,10 @@ package com.tiki.advancedlootableweapons.compat.rei;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.categories.AlloyFurnaceCategory;
+import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
 import com.tiki.advancedlootableweapons.compat.rei.categories.JawCrusherCategory;
 import com.tiki.advancedlootableweapons.compat.rei.displays.AlloyFurnaceDisplay;
+import com.tiki.advancedlootableweapons.compat.rei.displays.DrumQuenchingDisplay;
 import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
@@ -13,6 +15,7 @@ import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScre
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
+import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -30,22 +33,26 @@ public class REICompat implements REIClientPlugin {
 
     public static final CategoryIdentifier<JawCrusherDisplay> JAW_CRUSHER = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/jaw_crusher");
     public static final CategoryIdentifier<AlloyFurnaceDisplay> ALLOY_FURNACE = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/alloy_furnace");
+    public static final CategoryIdentifier<DrumQuenchingDisplay> DRUM_QUENCHING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum_quenching");
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
         AlloyFurnaceCategory alloyFurnaceCategory = new AlloyFurnaceCategory();
         JawCrusherCategory jawCrusherCategory = new JawCrusherCategory();
+        DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory();
         registry.add(alloyFurnaceCategory);
         registry.add(jawCrusherCategory);
+        registry.add(drumQuenchingCategory);
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
+        registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
     }
 
     @Override
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerRecipeFiller(AlloyFurnaceRecipe.class, ModRecipeTypes.ALLOY_FURNACE, AlloyFurnaceDisplay::new);
         registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
-
+        registry.registerRecipeFiller(DrumQuenchingRecipe.class,ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
     }
 
     @Override

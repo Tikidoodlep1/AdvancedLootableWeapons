@@ -29,7 +29,7 @@ public class ALWClient {
         MenuScreens.register(MenuInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
         MenuScreens.register(MenuInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
         event.enqueueWork(ALWClient::registerItemModelPredicates);
-        BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), (BlockEntityRendererProvider.Context context) -> new DrumBlockEntityRenderer(context));
+        BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), DrumBlockEntityRenderer::new);
     }
     public static void registerItemModelPredicates() {
         for(Item i : ItemInit.hotToolHeads) {

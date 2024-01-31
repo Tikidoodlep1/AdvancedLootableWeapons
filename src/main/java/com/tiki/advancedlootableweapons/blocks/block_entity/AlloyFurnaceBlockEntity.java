@@ -100,6 +100,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     };
 
     private final ItemStackHandler itemHandler = new AlloyFurnaceHandler(4) {
+
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();

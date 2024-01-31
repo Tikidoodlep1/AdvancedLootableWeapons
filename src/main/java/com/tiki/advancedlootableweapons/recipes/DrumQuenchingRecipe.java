@@ -40,6 +40,14 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
         return true;
     }
 
+    public ItemStack getInput() {
+        return input;
+    }
+
+    public boolean needsClay() {
+        return needsClay;
+    }
+
     @Override
     public ItemStack getToastSymbol() {
         return new ItemStack(BlockInit.CLAY_DRUM.get());
@@ -51,17 +59,21 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     @Override//important, no side effects allowed
     public ItemStack assemble(SingleFluidRecipeWrapper pContainer) {
-        ItemStack inputCopy = input.copy();
+        ItemStack itemInSlot = pContainer.getItem(DrumBlockEntity.INPUT_SLOT);
+        return applyQuench(itemInSlot);
+    }
 
-        ItemStack itemInSlot = pContainer.getItem(DrumBlockEntity.INPUT_SLOT).copy();
+    public static ItemStack applyQuench(ItemStack stack) {
+        ItemStack copy = stack.copy();
 
         //the more "damage" an item has, the colder it is
-        inputCopy.setDamageValue(Math.min(itemInSlot.getDamageValue() + 3500,itemInSlot.getMaxDamage()));
+        copy.setDamageValue(stack.getDamageValue() + 3500);
 
-        inputCopy.getOrCreateTag().putBoolean("quenched", true);
-        inputCopy.getTag().remove("clay");
+        copy.getOrCreateTag().putBoolean("quenched", true);
+        copy.getTag().remove("clay");
 
-        return inputCopy;
+        return copy;
+
     }
 
     @Override

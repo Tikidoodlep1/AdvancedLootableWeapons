@@ -20,7 +20,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -224,9 +223,67 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void drumQuenching(Consumer<FinishedRecipe> recipeConsumer) {
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"battleaxe_quenching"));
+
         DrumQuenchingRecipeBuilder.quenching(ItemInit.DAGGER_HOT_TOOL_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dagger_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.CLEAVER_HOT_TOOL_HEAD.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"cleaver_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5.get())
+                .defaultFluid(Fluids.WATER)
+                .needsClay()
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kabutowari_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.KODACHI_HOT_TOOL_HEAD_2.get())
+                .defaultFluid(Fluids.WATER)
+                .needsClay()
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kodachi_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"longsword_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.MACE_HOT_TOOL_HEAD_3.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"mace_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3.get())
+                .defaultFluid(Fluids.WATER)
+                .needsClay()
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"makhaira_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.RAPIER_HOT_TOOL_HEAD_4.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"rapier_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.SABRE_HOT_TOOL_HEAD_4.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"sabre_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.SPEAR_HOT_TOOL_HEAD_2.get())
+                .defaultFluid(Fluids.WATER)
+                .needsClay()
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"spear_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.STAFF_HOT_TOOL_HEAD_5.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"staff_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.TALWAR_HOT_TOOL_HEAD_3.get())
+                .defaultFluid(Fluids.WATER)
+                .needsClay()
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"talwar_quenching"));
+
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5.get())
+                .defaultFluid(Fluids.WATER)
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"zweihander_quenching"));
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

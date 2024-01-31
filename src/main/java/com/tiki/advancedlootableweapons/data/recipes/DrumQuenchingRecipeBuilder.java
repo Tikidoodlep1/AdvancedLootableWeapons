@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.data.recipes;
 
 import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -29,7 +30,8 @@ public class DrumQuenchingRecipeBuilder implements RecipeBuilder {
         this.input = input;
     }
 
-    public static DrumQuenchingRecipeBuilder quenching(Item item) {
+    public static DrumQuenchingRecipeBuilder quenching(HotToolHeadItem item) {
+        if (!item.isFinished()) throw new RuntimeException("can't quench "+item);
         return new DrumQuenchingRecipeBuilder(item);
     }
 
@@ -57,7 +59,7 @@ public class DrumQuenchingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public DrumQuenchingRecipeBuilder requiresClay() {
+    public DrumQuenchingRecipeBuilder needsClay() {
         this.requiresClay = true;
         return this;
     }

@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.blocks.block_entity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.SoundInit;
+import com.tiki.advancedlootableweapons.inventory.ExternalIItemHandler;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
@@ -28,11 +29,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Random;
 
 public class DrumBlockEntity extends BlockEntity {
@@ -49,6 +52,7 @@ public class DrumBlockEntity extends BlockEntity {
     public static final int MAX_COOKING_TIME = 66;
 
     public final ItemStackHandler itemStackHandler = new ItemStackHandler(3) {
+
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
@@ -67,7 +71,8 @@ public class DrumBlockEntity extends BlockEntity {
         }
     };
 
-    protected final LazyOptional<ItemStackHandler> itemStackHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
+    protected final LazyOptional<IItemHandler> itemStackHandlerLazyOptional = LazyOptional.of(() ->
+            new ExternalIItemHandler(itemStackHandler, List.of(INPUT_SLOT,ADDITIVE_SLOT),List.of(OUTPUT_SLOT)));
     protected final LazyOptional<FluidTank> fluidTankLazyOptional = LazyOptional.of(() -> fluidTank);
 
     public DrumBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -150,8 +155,10 @@ public class DrumBlockEntity extends BlockEntity {
 
     protected void process() {
         ItemStack result = activeRecipe.assemble(new SingleFluidRecipeWrapper(itemStackHandler, fluidTank));
+        //using setStackInSlot bypasses insertion/extraction checks and is faster
         //shrink 1st stack using 1st recipe input
-        itemStackHandler.extractItem(INPUT_SLOT, 1, false);
+        ItemStack input = itemStackHandler.getStackInSlot(INPUT_SLOT);
+        itemStackHandler.setStackInSlot(INPUT_SLOT, ItemHandlerHelper.copyStackWithSize(input,input.getCount() - 1));
         //add result to output
         itemStackHandler.setStackInSlot(OUTPUT_SLOT,result);
     }
