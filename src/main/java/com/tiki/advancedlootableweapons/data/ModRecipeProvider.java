@@ -154,6 +154,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("X#X").pattern("#X#").pattern("X#X")
                 .unlockedBy("has_feldspar_powder", has(ItemInit.FELDSPAR_POWDER.get())).save(recipeConsumer);
 
+        ShapelessRecipeBuilder.shapeless(ItemInit.TRIMMED_HIDE.get()).requires(ItemInit.UNTRIMMED_HIDE.get()).requires(ItemInit.TANNING_KNIFE.get())
+                .unlockedBy("has_tanning_knife",has(ItemInit.TANNING_KNIFE.get()))
+                .save(recipeConsumer);
+
+        singleItemRecipe(ItemInit.CURED_HIDE.get(), ItemInit.TRIMMED_HIDE.get(),recipeConsumer);
+        singleItemRecipe(ItemInit.LIMED_HIDE.get(), ItemInit.CURED_HIDE.get(),recipeConsumer);
+        singleItemRecipe(ItemInit.DELIMED_HIDE.get(), ItemInit.LIMED_HIDE.get(),recipeConsumer);
+        singleItemRecipe(Items.LEATHER, ItemInit.DELIMED_HIDE.get(),recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"leather_from_tanning"));
+
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -302,6 +311,17 @@ public class ModRecipeProvider extends RecipeProvider {
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
         ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',handle)
                 .pattern("W").pattern("S").unlockedBy("has_"+base+"_head",has(head)).save(consumer);
+    }
+
+    protected static void singleItemRecipe(ItemLike result,ItemLike input,Consumer<FinishedRecipe> consumer) {
+        singleItemRecipe(result,input,consumer,RecipeBuilder.getDefaultRecipeId(result));
+    }
+
+    protected static void singleItemRecipe(ItemLike result,ItemLike input,Consumer<FinishedRecipe> consumer,ResourceLocation name) {
+        ShapelessRecipeBuilder.shapeless(result)
+                .requires(input)
+                .unlockedBy("has_"+getItemName(input),has(input))
+                .save(consumer,name);
     }
 
     protected static void nuggetIngotBlockRecipe(Consumer<FinishedRecipe> pFinishedRecipeConsumer,ItemLike nugget,ItemLike ingot,ItemLike block

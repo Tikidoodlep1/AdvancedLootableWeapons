@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:untrimmed_hide"
+    },
+    {
+      "item": "advancedlootableweapons:tanning_knife"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:trimmed_hide"
+  }
+}

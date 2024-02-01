@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:trimmed_hide"
+    ]
+  },
+  "criteria": {
+    "has_tanning_knife": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:tanning_knife"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:trimmed_hide"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tanning_knife",
+      "has_the_recipe"
+    ]
+  ]
+}

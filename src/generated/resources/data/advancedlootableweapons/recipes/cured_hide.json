@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:trimmed_hide"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:cured_hide"
+  }
+}

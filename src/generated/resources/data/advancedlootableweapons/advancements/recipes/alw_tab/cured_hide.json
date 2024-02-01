@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:cured_hide"
+    ]
+  },
+  "criteria": {
+    "has_trimmed_hide": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:trimmed_hide"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:cured_hide"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_trimmed_hide",
+      "has_the_recipe"
+    ]
+  ]
+}

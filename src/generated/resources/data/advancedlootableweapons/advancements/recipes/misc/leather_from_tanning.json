@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:leather_from_tanning"
+    ]
+  },
+  "criteria": {
+    "has_delimed_hide": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:delimed_hide"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:leather_from_tanning"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_delimed_hide",
+      "has_the_recipe"
+    ]
+  ]
+}
