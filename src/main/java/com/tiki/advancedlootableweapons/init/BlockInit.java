@@ -9,6 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ConcretePowderBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -53,9 +54,9 @@ public class BlockInit {
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> DIORITE_CLAY = registerBlock("diorite_clay", () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
 			.destroyTime(0.8F).explosionResistance(1.3F).sound(SoundType.WET_GRASS)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> GRANITE_CLAY_POWDER = registerBlock("granite_clay_powder", () -> new PowderedClayBlock(BlockInit.GRANITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> GRANITE_CLAY_POWDER = registerBlock("granite_clay_powder", () -> new ConcretePowderBlock(BlockInit.GRANITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> DIORITE_CLAY_POWDER = registerBlock("diorite_clay_powder", () -> new PowderedClayBlock(BlockInit.DIORITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
+	public static final RegistryObject<Block> DIORITE_CLAY_POWDER = registerBlock("diorite_clay_powder", () -> new ConcretePowderBlock(BlockInit.DIORITE_CLAY.get(), BlockBehaviour.Properties.of(Material.SAND)
 			.destroyTime(0.5F).sound(SoundType.SAND)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> GRANITE_BRICKS = registerBlock("granite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB);
