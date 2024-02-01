@@ -26,7 +26,7 @@ public class ModBlockLoot extends BlockLoot {
         add(BlockInit.DEEPSLATE_TIN_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_TIN.get()));
 
         dropSelf(BlockInit.STEEL_BLOCK.get());
-        dropSelf(BlockInit.KOBOLD_BLOCK.get());
+        dropSelf(BlockInit.KOBOLD_STEEL_BLOCK.get());
         dropSelf(BlockInit.TIN_BLOCK.get());
         dropSelf(BlockInit.CRYSTALLITE_BLOCK.get());
         dropSelf(BlockInit.PLATINUM_BLOCK.get());

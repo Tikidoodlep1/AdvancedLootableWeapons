@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "advancedlootableweapons:kobold_block"
+          "name": "advancedlootableweapons:kobold_steel_block"
         }
       ],
       "conditions": [

@@ -69,7 +69,7 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.STONE_WHETSTONE.get(), ItemTags.STONE_TOOL_MATERIALS,recipeConsumer);
 
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.DUSKSTEEL_NUGGET.get(),ItemInit.DUSKSTEEL_INGOT.get(),BlockInit.DUSKSTEEL_BLOCK.get());
-        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.KOBOLD_NUGGET.get(),ItemInit.KOBOLD_INGOT.get(),BlockInit.KOBOLD_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.KOBOLD_NUGGET.get(),ItemInit.KOBOLD_INGOT.get(),BlockInit.KOBOLD_STEEL_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.TIN_NUGGET.get(),ItemInit.TIN_INGOT.get(),BlockInit.TIN_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.CRYSTALLITE_NUGGET.get(),ItemInit.CRYSTALLITE_INGOT.get(),BlockInit.CRYSTALLITE_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.PLATINUM_NUGGET.get(),ItemInit.PLATINUM_INGOT.get(),BlockInit.PLATINUM_BLOCK.get());

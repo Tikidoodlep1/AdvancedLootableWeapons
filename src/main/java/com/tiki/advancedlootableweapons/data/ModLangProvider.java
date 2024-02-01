@@ -8,7 +8,6 @@ import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
-import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
@@ -276,7 +275,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultBlock(BlockInit.CRYSTALLITE_BLOCK);
         addDefaultBlock(BlockInit.DUSKSTEEL_BLOCK);
         addDefaultBlock(BlockInit.FROST_STEEL_BLOCK);
-        addDefaultBlock(BlockInit.KOBOLD_BLOCK);
+        addDefaultBlock(BlockInit.KOBOLD_STEEL_BLOCK);
         addDefaultBlock(BlockInit.PLATINUM_BLOCK);
         addDefaultBlock(BlockInit.REFINED_OBSIDIAN_BLOCK);
         addDefaultBlock(BlockInit.SHADOW_PLATINUM_BLOCK);

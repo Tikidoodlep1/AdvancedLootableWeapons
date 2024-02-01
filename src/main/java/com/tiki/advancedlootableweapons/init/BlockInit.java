@@ -23,7 +23,7 @@ public class BlockInit {
 	//Metals
 	public static final RegistryObject<Block> STEEL_BLOCK = registerBlock("steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(5.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
-	public static final RegistryObject<Block> KOBOLD_BLOCK = registerBlock("kobold_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
+	public static final RegistryObject<Block> KOBOLD_STEEL_BLOCK = registerBlock("kobold_steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(5.0F).explosionResistance(4.5F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);
 	public static final RegistryObject<Block> TIN_BLOCK = registerBlock("tin_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(3.5F).explosionResistance(3.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)), ModCreativeTabs.BLOCK_TAB);

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "advancedlootableweapons:bronze_block",
+    "advancedlootableweapons:crystallite_block",
+    "advancedlootableweapons:dusksteel_block",
+    "advancedlootableweapons:frost_steel_block",
+    "advancedlootableweapons:kobold_steel_block",
+    "advancedlootableweapons:platinum_block",
+    "advancedlootableweapons:refined_obsidian_block",
+    "advancedlootableweapons:shadow_platinum_block",
+    "advancedlootableweapons:silver_block",
+    "advancedlootableweapons:steel_block",
+    "advancedlootableweapons:tin_block"
+  ]
+}

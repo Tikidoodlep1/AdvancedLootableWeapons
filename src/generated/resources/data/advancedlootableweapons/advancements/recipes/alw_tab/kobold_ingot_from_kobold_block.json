@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_kobold_block": {
+    "has_kobold_steel_block": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:kobold_block"
+              "advancedlootableweapons:kobold_steel_block"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_kobold_block",
+      "has_kobold_steel_block",
       "has_the_recipe"
     ]
   ]

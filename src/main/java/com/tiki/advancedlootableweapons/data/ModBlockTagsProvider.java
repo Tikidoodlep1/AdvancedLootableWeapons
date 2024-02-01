@@ -27,7 +27,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.DIORITE_BRICKS.get(),
                         BlockInit.DUSKSTEEL_BLOCK.get(), BlockInit.FELDSPAR.get(),BlockInit.FORGE.get(),
                         BlockInit.FROST_STEEL_BLOCK.get(),BlockInit.GRANITE_BRICKS.get(),BlockInit.JAW_CRUSHER.get(),
-                        BlockInit.KOBOLD_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(),BlockInit.PLATINUM_ORE.get(),
+                        BlockInit.KOBOLD_STEEL_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(),BlockInit.PLATINUM_ORE.get(),
                         BlockInit.REFINED_OBSIDIAN_BLOCK.get(),
                         BlockInit.SHADOW_PLATINUM_BLOCK.get(),BlockInit.SILVER_ORE.get(),
                         BlockInit.SILVER_BLOCK.get(), BlockInit.STEEL_BLOCK.get(), BlockInit.TIN_BLOCK.get(),
@@ -40,6 +40,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.DIORITE_BRICKS.get(), BlockInit.DIORITE_CLAY.get(), BlockInit.FELDSPAR.get(),
                         BlockInit.FORGE.get(),BlockInit.GRANITE_BRICKS.get(),BlockInit.GRANITE_CLAY.get(),
                         BlockInit.JAW_CRUSHER.get(),BlockInit.TIN_ORE.get());
+
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(BlockInit.BRONZE_BLOCK.get(),BlockInit.CRYSTALLITE_BLOCK.get(),BlockInit.DUSKSTEEL_BLOCK.get(),
+                BlockInit.FROST_STEEL_BLOCK.get(),BlockInit.KOBOLD_STEEL_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(),
+                BlockInit.REFINED_OBSIDIAN_BLOCK.get(),
+                BlockInit.SHADOW_PLATINUM_BLOCK.get(),BlockInit.SILVER_BLOCK.get(),
+                BlockInit.STEEL_BLOCK.get(),BlockInit.TIN_BLOCK.get());
 
         tag(ModBlockTags.DRUM_HEATING)
                 .addTags(BlockTags.FIRE,BlockTags.CAMPFIRES)

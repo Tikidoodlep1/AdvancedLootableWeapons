@@ -121,7 +121,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.STONE_WHETSTONE.get());
 
         simpleBlockItem(BlockInit.STEEL_BLOCK.get());
-        simpleBlockItem(BlockInit.KOBOLD_BLOCK.get());
+        simpleBlockItem(BlockInit.KOBOLD_STEEL_BLOCK.get());
         simpleBlockItem(BlockInit.TIN_BLOCK.get());
         simpleBlockItem(BlockInit.CRYSTALLITE_BLOCK.get());
         simpleBlockItem(BlockInit.PLATINUM_BLOCK.get());

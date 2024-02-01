@@ -30,7 +30,7 @@ public class ModBlockstateProvider extends BlockStateProvider {
         simpleBlock(BlockInit.DEEPSLATE_TIN_ORE.get());*/
 
         simpleBlock(BlockInit.STEEL_BLOCK.get());
-        simpleBlock(BlockInit.KOBOLD_BLOCK.get());
+        simpleBlock(BlockInit.KOBOLD_STEEL_BLOCK.get());
         simpleBlock(BlockInit.TIN_BLOCK.get());
         simpleBlock(BlockInit.CRYSTALLITE_BLOCK.get());
         simpleBlock(BlockInit.PLATINUM_BLOCK.get());

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "advancedlootableweapons:block/kobold_block"
+    "all": "advancedlootableweapons:block/kobold_steel_block"
   }
 }
