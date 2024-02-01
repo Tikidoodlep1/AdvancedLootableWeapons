@@ -34,7 +34,7 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 	}
 
 	public AnvilForgingContainer(int id, Inventory inv,ContainerLevelAccess access) {
-		super(MenuInit.ANVIL_FORGING_CONTAINER.get(), id);
+		super(MenuInit.ANVIL_FORGING.get(), id);
 		this.access = access;
 		checkContainerSize(inv, 3);
 		this.level = inv.player.level;

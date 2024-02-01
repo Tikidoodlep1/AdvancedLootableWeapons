@@ -25,7 +25,7 @@ public class AlloyFurnaceContainer extends AbstractContainerMenu {
     }
 
     public AlloyFurnaceContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
-        super(MenuInit.ALLOY_FURNACE_CONTAINER.get(), id);
+        super(MenuInit.ALLOY_FURNACE.get(), id);
         checkContainerSize(inv, 4);
         this.access = access;
         this.data = data;

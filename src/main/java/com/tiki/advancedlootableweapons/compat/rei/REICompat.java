@@ -3,9 +3,11 @@ package com.tiki.advancedlootableweapons.compat.rei;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.categories.AlloyFurnaceCategory;
+import com.tiki.advancedlootableweapons.compat.rei.categories.DrumCategory;
 import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
 import com.tiki.advancedlootableweapons.compat.rei.categories.JawCrusherCategory;
 import com.tiki.advancedlootableweapons.compat.rei.displays.AlloyFurnaceDisplay;
+import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
 import com.tiki.advancedlootableweapons.compat.rei.displays.DrumQuenchingDisplay;
 import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -16,7 +18,9 @@ import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContaine
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
+import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
+import dev.architectury.fluid.FluidStack;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -34,18 +38,34 @@ public class REICompat implements REIClientPlugin {
     public static final CategoryIdentifier<JawCrusherDisplay> JAW_CRUSHER = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/jaw_crusher");
     public static final CategoryIdentifier<AlloyFurnaceDisplay> ALLOY_FURNACE = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/alloy_furnace");
     public static final CategoryIdentifier<DrumQuenchingDisplay> DRUM_QUENCHING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum_quenching");
+    public static final CategoryIdentifier<DrumDisplay> DRUM = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum");
+
+    public static final String ALLOY_FURNACE_CAT = "category.rei.advancedlootableweapons.alloy_furnace";
+    public static final String JAW_CRUSHER_CAT = "category.rei.advancedlootableweapons.jaw_crusher";
+
+    public static final String QUENCHING = "category.rei.advancedlootableweapons.drum_quenching";
+    public static final String DRUM_CAT = "category.rei.advancedlootableweapons.drum";
+
+    public static FluidStack convert(net.minecraftforge.fluids.FluidStack stack) {
+        return FluidStack.create(stack.getFluid(),stack.getAmount());
+    }
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
-        AlloyFurnaceCategory alloyFurnaceCategory = new AlloyFurnaceCategory();
-        JawCrusherCategory jawCrusherCategory = new JawCrusherCategory();
-        DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory();
+        AlloyFurnaceCategory alloyFurnaceCategory = new AlloyFurnaceCategory(ALLOY_FURNACE_CAT);
+        JawCrusherCategory jawCrusherCategory = new JawCrusherCategory(JAW_CRUSHER_CAT);
+        DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory(QUENCHING);
+        DrumCategory drumCategory = new DrumCategory(DRUM_CAT);
+
         registry.add(alloyFurnaceCategory);
         registry.add(jawCrusherCategory);
         registry.add(drumQuenchingCategory);
+        registry.add(drumCategory);
+
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
         registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
+        registry.addWorkstations(drumCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
     }
 
     @Override
@@ -53,6 +73,7 @@ public class REICompat implements REIClientPlugin {
         registry.registerRecipeFiller(AlloyFurnaceRecipe.class, ModRecipeTypes.ALLOY_FURNACE, AlloyFurnaceDisplay::new);
         registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
         registry.registerRecipeFiller(DrumQuenchingRecipe.class,ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
+        registry.registerRecipeFiller(DrumRecipe.class,ModRecipeTypes.DRUM, DrumDisplay::new);
     }
 
     @Override

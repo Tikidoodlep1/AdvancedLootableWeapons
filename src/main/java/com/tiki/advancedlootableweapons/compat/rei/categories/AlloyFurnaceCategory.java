@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.AlloyFurnaceDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -18,6 +19,12 @@ import java.util.List;
 
 public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay> {
 
+    private final String categoryName;
+
+    public AlloyFurnaceCategory(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     @Override
     public CategoryIdentifier<? extends AlloyFurnaceDisplay> getCategoryIdentifier() {
         return REICompat.ALLOY_FURNACE;
@@ -25,7 +32,7 @@ public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay
 
     @Override
     public Component getTitle() {
-        return BlockInit.ALLOY_FURNACE.get().getName();
+        return MCVersion.translation(categoryName);
     }
 
     @Override

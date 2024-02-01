@@ -21,7 +21,7 @@ public class JawCrusherContainer extends AbstractContainerMenu {
     }
 
     public JawCrusherContainer(int id, Inventory inv, ItemStackHandler handler, ContainerLevelAccess access) {
-        super(MenuInit.JAW_CRUSHER_CONTAINER.get(), id);
+        super(MenuInit.JAW_CRUSHER.get(), id);
         checkContainerSize(inv, 2);
         this.access = access;
         this.addSlot(new SlotItemHandler(handler, JawCrusherBlockEntity.INPUT_SLOT, 54, 43));

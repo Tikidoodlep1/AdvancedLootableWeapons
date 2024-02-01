@@ -25,7 +25,7 @@ public class ForgeContainer extends AbstractContainerMenu {
 	}
 	
 	public ForgeContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
-		super(MenuInit.FORGE_CONTAINER.get(), id);
+		super(MenuInit.FORGE.get(), id);
 		this.access = access;
 		checkContainerSize(inv, 1);
 		this.data = data;

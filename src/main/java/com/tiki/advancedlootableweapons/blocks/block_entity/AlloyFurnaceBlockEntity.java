@@ -4,11 +4,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -143,7 +145,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     }
 
     protected Component getDefaultName() {
-        return MCVersion.translation("container.advancedlootableweapons.alloy_furnace");
+        return MCVersion.translation(Utils.getMenuDescId(MenuInit.ALLOY_FURNACE.get()));
     }
 
     @Nonnull

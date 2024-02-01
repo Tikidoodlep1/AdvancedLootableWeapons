@@ -9,7 +9,6 @@ import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
@@ -24,10 +23,10 @@ public class ALWClient {
     static final ItemPropertyFunction HEAT_FUNCTION_WRAPPER = (pP1, pP2, pP3, pP4) -> HotToolHeadItem.HEAT_FUNCTION.apply(pP1, pP2, pP3, pP4).ordinal();
 
     public static void setup(FMLClientSetupEvent event) {
-        MenuScreens.register(MenuInit.ALLOY_FURNACE_CONTAINER.get(), AlloyFurnaceScreen::new);
-        MenuScreens.register(MenuInit.FORGE_CONTAINER.get(), ForgeScreen::new);
-        MenuScreens.register(MenuInit.ANVIL_FORGING_CONTAINER.get(), AnvilForgingScreen::new);
-        MenuScreens.register(MenuInit.JAW_CRUSHER_CONTAINER.get(), JawCrusherScreen::new);
+        MenuScreens.register(MenuInit.ALLOY_FURNACE.get(), AlloyFurnaceScreen::new);
+        MenuScreens.register(MenuInit.FORGE.get(), ForgeScreen::new);
+        MenuScreens.register(MenuInit.ANVIL_FORGING.get(), AnvilForgingScreen::new);
+        MenuScreens.register(MenuInit.JAW_CRUSHER.get(), JawCrusherScreen::new);
         event.enqueueWork(ALWClient::registerItemModelPredicates);
         BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), DrumBlockEntityRenderer::new);
     }

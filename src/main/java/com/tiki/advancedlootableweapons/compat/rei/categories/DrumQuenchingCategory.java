@@ -14,10 +14,17 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
 
 public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDisplay> {
+
+    private String categoryName;
+    public static final String REQUIRES_CLAY = "category.advancedlootableweapons.drum_quenching.requires_clay";
+    public DrumQuenchingCategory(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     @Override
     public CategoryIdentifier<? extends DrumQuenchingDisplay> getCategoryIdentifier() {
@@ -26,7 +33,7 @@ public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDispl
 
     @Override
     public Component getTitle() {
-        return BlockInit.CLAY_DRUM.get().getName();
+        return MCVersion.translation(categoryName);
     }
 
     @Override
@@ -42,12 +49,15 @@ public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDispl
 
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 85, startPoint.y + 9)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 1)).entries(display.getInputEntries().get(0))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 5)).entries(display.getInputEntries().get(0))
+                .markInput());
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 30, startPoint.y + 5)).entries(display.getInputEntries().get(1))
                 .markInput());
 
         if (display.needsClay) {
             widgets.add(Widgets.createLabel(new Point(bounds.x + 26, bounds.getMaxY() - 15),
-                            MCVersion.translation("category.advancedlootableweapons.drum_quenching.requires_clay"))
+                            MCVersion.translation(REQUIRES_CLAY))
                     .color(0xFF404040, 0xFFBBBBBB).noShadow().leftAligned());
         }
 
@@ -64,6 +74,6 @@ public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDispl
 
     @Override
     public int getDisplayHeight() {
-        return 49;
+        return 48;
     }
 }

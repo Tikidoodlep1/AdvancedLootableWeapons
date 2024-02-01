@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.compat.rei.categories;
 
 import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
-import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
+import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import me.shedaniel.math.Point;
@@ -17,17 +17,17 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class JawCrusherCategory implements DisplayCategory<JawCrusherDisplay> {
+public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
     private final String categoryName;
 
-    public JawCrusherCategory(String categoryName) {
+    public DrumCategory(String categoryName) {
         this.categoryName = categoryName;
     }
 
     @Override
-    public CategoryIdentifier<? extends JawCrusherDisplay> getCategoryIdentifier() {
-        return REICompat.JAW_CRUSHER;
+    public CategoryIdentifier<? extends DrumDisplay> getCategoryIdentifier() {
+        return REICompat.DRUM;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class JawCrusherCategory implements DisplayCategory<JawCrusherDisplay> {
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(BlockInit.JAW_CRUSHER.get());
+        return EntryStacks.of(BlockInit.CLAY_DRUM.get());
     }
 
     @Override
-    public List<Widget> setupDisplay(JawCrusherDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(DrumDisplay display, Rectangle bounds) {
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         Point startPoint = new Point(bounds.getCenterX() - 52, bounds.getCenterY() - 16);
@@ -51,8 +51,11 @@ public class JawCrusherCategory implements DisplayCategory<JawCrusherDisplay> {
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 1)).entries(display.getInputEntries().get(0))
                 .markInput());
 
+
+
+
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 52, startPoint.y + 9))
-                .animationDurationTicks(5));
+                .animationDurationTicks(display.time));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 85, startPoint.y + 9)).entries(display.getOutputEntries().get(0))
                 .disableBackground().markOutput());

@@ -42,6 +42,18 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
         return true;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public Ingredient getAdditive() {
+        return additive;
+    }
+
+    public FluidStack getFluidInput() {
+        return fluidInput;
+    }
+
     @Override
     public ItemStack getToastSymbol() {
         return new ItemStack(BlockInit.CLAY_DRUM.get());

@@ -14,10 +14,13 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class MCVersion {
 
+    public static MutableComponent translation(String key) {
+        return new TranslatableComponent(key);
+    }
+
     public static MutableComponent translation(String key,Object... objects) {
         return new TranslatableComponent(key,objects);
     }
-
     public static MutableComponent literal(String key) {
         return new TextComponent(key);
     }

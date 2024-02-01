@@ -44,6 +44,10 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
         return input;
     }
 
+    public FluidStack getFluidInput() {
+        return fluidInput;
+    }
+
     public boolean needsClay() {
         return needsClay;
     }

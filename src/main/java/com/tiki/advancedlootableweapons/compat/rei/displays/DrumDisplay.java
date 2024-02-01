@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.compat.rei.displays;
 
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
+import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.SimpleGridMenuDisplay;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -12,20 +13,20 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 import java.util.Optional;
 
-public class DrumQuenchingDisplay extends BasicDisplay implements SimpleGridMenuDisplay {
+public class DrumDisplay extends BasicDisplay implements SimpleGridMenuDisplay {
     public final int time;
-    public final boolean needsClay;
-
-    public DrumQuenchingDisplay(DrumQuenchingRecipe recipe) {
-        this(List.of(EntryIngredients.of(recipe.getInput()),EntryIngredients.of(REICompat.convert(recipe.getFluidInput()))),
-                List.of(EntryIngredients.of(DrumQuenchingRecipe.applyQuench(recipe.getInput()))),
-                Optional.ofNullable(recipe).map(DrumQuenchingRecipe::getId),recipe.getTime(),recipe.needsClay());
+    public DrumDisplay(DrumRecipe recipe) {
+        this(List.of(EntryIngredients.ofIngredient(recipe.getInput()),EntryIngredients.ofIngredient(recipe.getAdditive())
+                ,EntryIngredients.of(REICompat.convert(recipe.getFluidInput()))),
+                List.of(EntryIngredients.of(recipe.getResultItem())),
+                Optional.ofNullable(recipe).map(DrumRecipe::getId),recipe.getTime());
     }
 
-    public DrumQuenchingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> location,int time,boolean needsClay) {
+
+
+    public DrumDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> location, int time) {
         super(inputs, outputs, location);
         this.time = time;
-        this.needsClay = needsClay;
     }
 
     @Override
@@ -40,6 +41,6 @@ public class DrumQuenchingDisplay extends BasicDisplay implements SimpleGridMenu
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REICompat.DRUM_QUENCHING;
+        return REICompat.DRUM;
     }
 }

@@ -1,15 +1,20 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.compat.rei.REICompat;
+import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModCreativeTabs;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +32,89 @@ public class ModLangProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
 
+        blockTranslations();
+        itemTranslations();
+
+        add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
+        add(ArmorBindingItem.INFO,"Bonus Durability");
+
+        add(HotToolHeadItem.QUENCH_KEY,"Quenched");
+        add(HotToolHeadItem.UNQUENCH_KEY,"Unquenched");
+
+        add(DrumQuenchingCategory.REQUIRES_CLAY,"Requires Clay");
+
+        addDefaultMenu(MenuInit.ANVIL_FORGING);
+        addDefaultMenu(MenuInit.JAW_CRUSHER);
+        add("container.advancedlootableweapons.sharpeningStone", "Sharpen Weapon");
+        add("container.advancedlootableweapons.alloy_furnace", "Alloy Furnace");
+        add("container.advancedlootableweapons.forge", "Forge");
+        add("container.advancedlootableweapons.forge2", "Advanced Forge");
+        add("container.advancedlootableweapons.forgeWeapon", "Anvil Forging");
+
+        add(REICompat.QUENCHING,"Drum Quenching");
+        add(REICompat.DRUM_CAT,"Drum");
+        add(REICompat.JAW_CRUSHER_CAT,"Jaw Crusher");
+        add(REICompat.ALLOY_FURNACE_CAT,"Alloy Furnace");
+
+
+        add("enchantment.advancedlootableweapons.refined", "Refined");
+
+
+        add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
+
+
+        addTab(ModCreativeTabs.MISC_TAB, "Advanced Lootable Weapons");
+        addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");
+        addTab(ModCreativeTabs.WEAPON_TAB, "ALW Weapons & Hot Tool Heads");
+
+        add(HotToolHeadItem.Temp.cool.translation.getKey(),"Cool");
+        add(HotToolHeadItem.Temp.warm.translation.getKey(),"Warm");
+        add(HotToolHeadItem.Temp.hot.translation.getKey(),"Hot");
+    }
+
+    protected void blockTranslations() {
+        addDefaultBlock(BlockInit.BRONZE_BLOCK);
+        addDefaultBlock(BlockInit.CRYSTALLITE_BLOCK);
+        addDefaultBlock(BlockInit.DUSKSTEEL_BLOCK);
+        addDefaultBlock(BlockInit.FROST_STEEL_BLOCK);
+        addDefaultBlock(BlockInit.KOBOLD_STEEL_BLOCK);
+        addDefaultBlock(BlockInit.PLATINUM_BLOCK);
+        addDefaultBlock(BlockInit.REFINED_OBSIDIAN_BLOCK);
+        addDefaultBlock(BlockInit.SHADOW_PLATINUM_BLOCK);
+        addDefaultBlock(BlockInit.SILVER_BLOCK);
+        addDefaultBlock(BlockInit.STEEL_BLOCK);
+        addDefaultBlock(BlockInit.TIN_BLOCK);
+
+        addDefaultBlock(BlockInit.CRYSTALLITE_ORE);
+        addDefaultBlock(BlockInit.PLATINUM_ORE);
+        addDefaultBlock(BlockInit.SILVER_ORE);
+        addDefaultBlock(BlockInit.TIN_ORE);
+
+        addDefaultBlock(BlockInit.COBBLED_FELDSPAR);
+        addDefaultBlock(BlockInit.FELDSPAR);
+        addDefaultBlock(BlockInit.DIORITE_BRICKS);
+        addDefaultBlock(BlockInit.GRANITE_BRICKS);
+
+        addDefaultBlock(BlockInit.DIORITE_CLAY_POWDER);
+        addDefaultBlock(BlockInit.GRANITE_CLAY_POWDER);
+        addDefaultBlock(BlockInit.DIORITE_CLAY);
+        addDefaultBlock(BlockInit.GRANITE_CLAY);
+        addDefaultBlock(BlockInit.ALLOY_FURNACE);
+        addDefaultBlock(BlockInit.FORGE);
+        addDefaultBlock(BlockInit.ADVANCED_FORGE);
+        addDefaultBlock(BlockInit.CLAY_DRUM);
+        add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
+        addDefaultBlock(BlockInit.JAW_CRUSHER);
+
+        addDefaultBlock(BlockInit.OAK_BELLOWS);
+        addDefaultBlock(BlockInit.BIRCH_BELLOWS);
+        addDefaultBlock(BlockInit.JUNGLE_BELLOWS);
+        addDefaultBlock(BlockInit.SPRUCE_BELLOWS);
+        addDefaultBlock(BlockInit.ACACIA_BELLOWS);
+        addDefaultBlock(BlockInit.DARK_OAK_BELLOWS);
+    }
+
+    protected void itemTranslations() {
         addDefaultItem(ItemInit.BRONZE_INGOT);
         addDefaultItem(ItemInit.CRYSTALLITE_INGOT);
         addDefaultItem(ItemInit.DUSKSTEEL_INGOT);
@@ -80,7 +168,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.FROST_STEEL_ARMOR_PLATE);
         addDefaultItem(ItemInit.CRYSTALLITE_ARMOR_PLATE);
         addDefaultItem(ItemInit.DUSKSTEEL_ARMOR_PLATE);
-        
+
 
         for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
             addItem(weapon,getNameFromItem(weapon.get()));
@@ -93,9 +181,18 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.LIMED_HIDE);
         addDefaultItem(ItemInit.DELIMED_HIDE);
 
-        add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
-        add(ArmorBindingItem.INFO,"Bonus Durability");
-        add("container.advancedlootableweapons.anvil_forging","Anvil Forging");
+        addDefaultItem(ItemInit.SHADOW);
+        addDefaultItem(ItemInit.CONGEALED_SHADOW);
+        addDefaultItem(ItemInit.CRYSTAL);
+        addDefaultItem(ItemInit.OBSIDIAN_SHARD);
+
+        addDefaultItem(ItemInit.FELDSPAR_POWDER);
+        addDefaultItem(ItemInit.DIORITE_BRICK);
+        addDefaultItem(ItemInit.DIORITE_CLAY_BALL);
+        addDefaultItem(ItemInit.DIORITE_POWDER);
+        addDefaultItem(ItemInit.GRANITE_BRICK);
+        addDefaultItem(ItemInit.GRANITE_CLAY_BALL);
+        addDefaultItem(ItemInit.GRANITE_POWDER);
 
         addDefaultItem(ItemInit.STONE_FORGE_HAMMER);
         addDefaultItem(ItemInit.IRON_FORGE_HAMMER);
@@ -123,10 +220,6 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.SHADOW_PLATINUM_WHETSTONE);
         addDefaultItem(ItemInit.SILVER_WHETSTONE);
         addDefaultItem(ItemInit.STEEL_WHETSTONE);
-
-
-        add(HotToolHeadItem.QUENCH_KEY,"Quenched");
-        add(HotToolHeadItem.UNQUENCH_KEY,"Unquenched");
 
         add("item.advancedlootableweapons.hot_tool_head", "Tool Head");
 
@@ -268,88 +361,18 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.boots_obsidian", "Refined Obsidian Boots");
         add("item.advancedlootableweapons.boots_crystallite", "Crystallite Boots");
         add("item.advancedlootableweapons.boots_dusksteel", "Dusksteel Boots");
-
-        add("category.advancedlootableweapons.drum_quenching.requires_clay","Requires Clay");
-
-        addDefaultBlock(BlockInit.BRONZE_BLOCK);
-        addDefaultBlock(BlockInit.CRYSTALLITE_BLOCK);
-        addDefaultBlock(BlockInit.DUSKSTEEL_BLOCK);
-        addDefaultBlock(BlockInit.FROST_STEEL_BLOCK);
-        addDefaultBlock(BlockInit.KOBOLD_STEEL_BLOCK);
-        addDefaultBlock(BlockInit.PLATINUM_BLOCK);
-        addDefaultBlock(BlockInit.REFINED_OBSIDIAN_BLOCK);
-        addDefaultBlock(BlockInit.SHADOW_PLATINUM_BLOCK);
-        addDefaultBlock(BlockInit.SILVER_BLOCK);
-        addDefaultBlock(BlockInit.STEEL_BLOCK);
-        addDefaultBlock(BlockInit.TIN_BLOCK);
-
-        addDefaultBlock(BlockInit.CRYSTALLITE_ORE);
-        addDefaultBlock(BlockInit.PLATINUM_ORE);
-        addDefaultBlock(BlockInit.SILVER_ORE);
-        addDefaultBlock(BlockInit.TIN_ORE);
-
-        addDefaultBlock(BlockInit.COBBLED_FELDSPAR);
-        addDefaultBlock(BlockInit.FELDSPAR);
-        addDefaultBlock(BlockInit.DIORITE_BRICKS);
-        addDefaultBlock(BlockInit.GRANITE_BRICKS);
-
-        addDefaultBlock(BlockInit.DIORITE_CLAY_POWDER);
-        addDefaultBlock(BlockInit.GRANITE_CLAY_POWDER);
-        addDefaultBlock(BlockInit.DIORITE_CLAY);
-        addDefaultBlock(BlockInit.GRANITE_CLAY);
-        addDefaultBlock(BlockInit.ALLOY_FURNACE);
-        addDefaultBlock(BlockInit.FORGE);
-        addDefaultBlock(BlockInit.ADVANCED_FORGE);
-        addDefaultBlock(BlockInit.CLAY_DRUM);
-        add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
-        addDefaultBlock(BlockInit.JAW_CRUSHER);
-
-        addDefaultBlock(BlockInit.OAK_BELLOWS);
-        addDefaultBlock(BlockInit.BIRCH_BELLOWS);
-        addDefaultBlock(BlockInit.JUNGLE_BELLOWS);
-        addDefaultBlock(BlockInit.SPRUCE_BELLOWS);
-        addDefaultBlock(BlockInit.ACACIA_BELLOWS);
-        addDefaultBlock(BlockInit.DARK_OAK_BELLOWS);
-
-        addDefaultItem(ItemInit.SHADOW);
-        addDefaultItem(ItemInit.CONGEALED_SHADOW);
-        addDefaultItem(ItemInit.CRYSTAL);
-        addDefaultItem(ItemInit.OBSIDIAN_SHARD);
-
-        addDefaultItem(ItemInit.FELDSPAR_POWDER);
-        addDefaultItem(ItemInit.DIORITE_BRICK);
-        addDefaultItem(ItemInit.DIORITE_CLAY_BALL);
-        addDefaultItem(ItemInit.DIORITE_POWDER);
-        addDefaultItem(ItemInit.GRANITE_BRICK);
-        addDefaultItem(ItemInit.GRANITE_CLAY_BALL);
-        addDefaultItem(ItemInit.GRANITE_POWDER);
-
-
-        add("container.advancedlootableweapons.sharpeningStone", "Sharpen Weapon");
-        add("container.advancedlootableweapons.alloy_furnace", "Alloy Furnace");
-        add("container.advancedlootableweapons.forge", "Forge");
-        add("container.advancedlootableweapons.forge2", "Advanced Forge");
-        add("container.advancedlootableweapons.forgeWeapon", "Anvil Forging");
-        add("container.advancedlootableweapons.jaw_crusher", "Jaw Crusher");
-
-
-        add("enchantment.advancedlootableweapons.refined", "Refined");
-
-
-        add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
-
-
-        addTab(ModCreativeTabs.MISC_TAB, "Advanced Lootable Weapons");
-        addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");
-        addTab(ModCreativeTabs.WEAPON_TAB, "ALW Weapons & Hot Tool Heads");
-
-        add(HotToolHeadItem.Temp.cool.translation.getKey(),"Cool");
-        add(HotToolHeadItem.Temp.warm.translation.getKey(),"Warm");
-        add(HotToolHeadItem.Temp.hot.translation.getKey(),"Hot");
     }
 
     protected void addTab(CreativeModeTab tab,String translation) {
         add(((TranslatableComponent)tab.getDisplayName()).getKey(),translation);
+    }
+
+    protected void addMenu(Supplier<? extends MenuType<?>> supplier,String key) {
+        add(Utils.getMenuDescId(supplier.get()),key);
+    }
+
+    protected void addDefaultMenu(Supplier<? extends MenuType<?>> supplier) {
+        addMenu(supplier,getNameFromMenu(supplier.get()));
     }
 
     protected void addDefaultItem(Supplier<? extends Item> supplier) {
@@ -360,9 +383,14 @@ public class ModLangProvider extends LanguageProvider {
         addBlock(supplier,getNameFromBlock(supplier.get()));
     }
 
+    public static String getNameFromMenu(MenuType<?> menuType) {
+        return StringUtils.capitaliseAllWords(Utils.getMenuDescId(menuType).split("\\.")[2].replace("_", " "));
+    }
+
     public static String getNameFromItem(Item item) {
         return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
     }
+
 
     public static String getNameFromBlock(Block block) {
         return StringUtils.capitaliseAllWords(block.getDescriptionId().split("\\.")[2].replace("_", " "));
