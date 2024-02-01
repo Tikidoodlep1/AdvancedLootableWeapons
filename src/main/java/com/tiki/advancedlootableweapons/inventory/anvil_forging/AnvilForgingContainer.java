@@ -67,7 +67,11 @@ public class AnvilForgingContainer extends AbstractContainerMenu {
 				return 1;
 			}
 		});
+	}
 
+	@Override
+	public boolean clickMenuButton(Player pPlayer, int pId) {
+		return super.clickMenuButton(pPlayer, pId);
 	}
 
 	@Override

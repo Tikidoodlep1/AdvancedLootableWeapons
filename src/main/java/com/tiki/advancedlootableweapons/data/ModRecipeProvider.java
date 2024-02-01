@@ -4,6 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.DrumQuenchingRecipeBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.DrumRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -36,6 +37,7 @@ public class ModRecipeProvider extends RecipeProvider {
         crusher(pFinishedRecipeConsumer);
         alloyFurnace(pFinishedRecipeConsumer);
         drumQuenching(pFinishedRecipeConsumer);
+        drum(pFinishedRecipeConsumer);
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -284,6 +286,10 @@ public class ModRecipeProvider extends RecipeProvider {
         DrumQuenchingRecipeBuilder.quenching(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"zweihander_quenching"));
+    }
+
+    protected void drum(Consumer<FinishedRecipe> recipeConsumer) {
+        //DrumRecipeBuilder.drum()
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

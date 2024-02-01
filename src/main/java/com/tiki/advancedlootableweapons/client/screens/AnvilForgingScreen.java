@@ -14,9 +14,6 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 
 	static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/anvil_forging.png");
 
-	private final AnvilForgingButtons anvilForgingButtons = new AnvilForgingButtons();
-
-
 	public AnvilForgingScreen(AnvilForgingContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
@@ -24,10 +21,6 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 	@Override
 	protected void init() {
 		super.init();
-		this.anvilForgingButtons.init(this.width, this.height, this.minecraft);
-		this.leftPos = this.anvilForgingButtons.updateScreenPosition(this.width, this.imageWidth);
-		this.addWidget(this.anvilForgingButtons);
-		this.setInitialFocus(this.anvilForgingButtons);
 	}
 
 	@Override
@@ -43,15 +36,12 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingCont
 	@Override
 	public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
 		renderBackground(pPoseStack);
-		this.anvilForgingButtons.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		renderTooltip(pPoseStack, pMouseX, pMouseY);
-		this.anvilForgingButtons.renderTooltip(pPoseStack, this.leftPos, this.topPos, pMouseX, pMouseY);
 	}
 
 	@Override
 	public void removed() {
-		anvilForgingButtons.removed();
 		super.removed();
 	}
 }

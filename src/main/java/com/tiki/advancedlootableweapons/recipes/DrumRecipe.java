@@ -19,25 +19,24 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     private final ResourceLocation id;
     private final Ingredient input;
+    private final Ingredient additive;
     private final FluidStack fluidInput;
     private final ItemStack result;
     private final int time;
-    private final boolean needsClay;
-    private final boolean needsQuenching;
 
-    public DrumRecipe(ResourceLocation id, Ingredient input, FluidStack fluidInput, ItemStack result, int time, boolean needsClay, boolean needsQuenching) {
+    public DrumRecipe(ResourceLocation id, Ingredient input, Ingredient additive, FluidStack fluidInput, ItemStack result, int time) {
         this.id = id;
         this.input = input;
+        this.additive = additive;
         this.fluidInput = fluidInput;
         this.result = result;
         this.time = time;
-        this.needsClay = needsClay;
-        this.needsQuenching = needsQuenching;
     }
 
     @Override
     public boolean matches(SingleFluidRecipeWrapper pContainer, Level pLevel) {
         if (!input.test(pContainer.getItem(DrumBlockEntity.INPUT_SLOT))) return false;
+        if (!additive.test(pContainer.getItem(DrumBlockEntity.ADDITIVE_SLOT))) return false;
         if (!fluidInput.isEmpty() && !pContainer.testFluid(fluidInput)) return false;
 
         return true;
@@ -50,10 +49,6 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     public int getTime() {
         return time;
-    }
-
-    public boolean needsQuenching() {
-        return needsQuenching;
     }
 
     @Override
@@ -92,13 +87,12 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
         @Override
         public DrumRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             Ingredient input  = Ingredient.fromJson(pSerializedRecipe.get("input"));
-            FluidStack fluidInput = Utils.getFluidStackFromJson(pSerializedRecipe.get("fluid").getAsJsonObject());
+            Ingredient additive  = Ingredient.fromJson(pSerializedRecipe.get("additive"));
+            FluidStack fluidInput = Utils.getFluidStackFromJson(pSerializedRecipe.get("fluid_input").getAsJsonObject());
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
             int time = GsonHelper.getAsInt(pSerializedRecipe,"time");
 
-            boolean clay = GsonHelper.getAsBoolean(pSerializedRecipe,"clay");
-            boolean quenching = GsonHelper.getAsBoolean(pSerializedRecipe,"quenching");
-            return new DrumRecipe(pRecipeId, input, fluidInput, result, time, clay, quenching);
+            return new DrumRecipe(pRecipeId, input, additive, fluidInput, result, time);
         }
 
         @Nullable

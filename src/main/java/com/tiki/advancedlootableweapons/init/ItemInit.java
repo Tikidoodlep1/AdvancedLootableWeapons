@@ -22,7 +22,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.tuple.Pair;
 
-@SuppressWarnings("deprecation")
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.MODID);
     public static final List<Item> hotToolHeads = new ArrayList<>();
@@ -70,6 +69,14 @@ public class ItemInit {
     public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
+    //tanning
+    public static final RegistryObject<Item> UNTRIMMED_HIDE = ITEMS.register("untrimmed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> TRIMMED_HIDE = ITEMS.register("trimmed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CURED_HIDE = ITEMS.register("cured_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> LIMED_HIDE = ITEMS.register("limed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> DELIMED_HIDE = ITEMS.register("delimed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+
+    //forge hammers
     public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ForgeHammerItem(Tiers.STONE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ForgeHammerItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> KOBOLD_FORGE_HAMMER = ITEMS.register("kobold_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_KOBOLD, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));

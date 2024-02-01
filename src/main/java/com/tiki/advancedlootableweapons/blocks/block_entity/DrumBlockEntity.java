@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -47,7 +48,7 @@ public class DrumBlockEntity extends BlockEntity {
     public int progress = 0;
     private int cookingTotalTime = MAX_COOKING_TIME;
 
-    private DrumQuenchingRecipe activeRecipe = null;
+    private Recipe<SingleFluidRecipeWrapper> activeRecipe = null;
     private boolean lookForRecipe = true;
     public static final int MAX_COOKING_TIME = 66;
 
@@ -60,6 +61,11 @@ public class DrumBlockEntity extends BlockEntity {
                 lookForRecipe = true;
             }
             setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return slot == ADDITIVE_SLOT ? !(stack.getItem() instanceof HotToolHeadItem) : super.isItemValid(slot, stack);
         }
     };
 
@@ -116,7 +122,7 @@ public class DrumBlockEntity extends BlockEntity {
 
         if (activeRecipe != null) {
             boolean canProceed = true;
-            boolean isQuenchRecipe = activeRecipe != null;//activeRecipe.needsQuenching();
+            boolean isQuenchRecipe = activeRecipe instanceof DrumQuenchingRecipe;
             if (isQuenchRecipe) {
                 canProceed = hasHotBlockOrFluid();
             }
@@ -177,7 +183,11 @@ public class DrumBlockEntity extends BlockEntity {
         activeRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.DRUM_QUENCHING,
                 new SingleFluidRecipeWrapper(itemStackHandler, fluidTank), level).orElse(null);
         if (activeRecipe != null) {
-            cookingTotalTime = activeRecipe.getTime();
+            cookingTotalTime = ((DrumQuenchingRecipe)activeRecipe).getTime();
+        } else {
+            activeRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.DRUM,
+                    new SingleFluidRecipeWrapper(itemStackHandler, fluidTank), level).orElse(null);
+            cookingTotalTime = ((DrumRecipe)activeRecipe).getTime();
         }
     }
 
