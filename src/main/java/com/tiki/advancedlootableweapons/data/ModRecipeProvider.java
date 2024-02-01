@@ -4,7 +4,6 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.DrumQuenchingRecipeBuilder;
-import com.tiki.advancedlootableweapons.data.recipes.DrumRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -47,8 +46,8 @@ public class ModRecipeProvider extends RecipeProvider {
         forgeHammer(ItemInit.DUSKSTEEL_FORGE_HAMMER.get(),ModItemTags.INGOTS_DUSKSTEEL,recipeConsumer);
         forgeHammer(ItemInit.FROST_STEEL_FORGE_HAMMER.get(),ModItemTags.INGOTS_FROST_STEEL,recipeConsumer);
         forgeHammer(ItemInit.IRON_FORGE_HAMMER.get(),Tags.Items.INGOTS_IRON, recipeConsumer);
-        forgeHammer(ItemInit.KOBOLD_FORGE_HAMMER.get(),ModItemTags.INGOTS_KOBOLD,recipeConsumer);
-        forgeHammer(ItemInit.OBSIDIAN_FORGE_HAMMER.get(),ModItemTags.INGOTS_REFINED_OBSIDIAN,recipeConsumer);
+        forgeHammer(ItemInit.KOBOLD_STEEL_FORGE_HAMMER.get(),ModItemTags.INGOTS_KOBOLD,recipeConsumer);
+        forgeHammer(ItemInit.REFINED_OBSIDIAN_FORGE_HAMMER.get(),ModItemTags.INGOTS_REFINED_OBSIDIAN,recipeConsumer);
         forgeHammer(ItemInit.PLATINUM_FORGE_HAMMER.get(),ModItemTags.INGOTS_PLATINUM,recipeConsumer);
         forgeHammer(ItemInit.SHADOW_PLATINUM_FORGE_HAMMER.get(),ModItemTags.INGOTS_SHADOW_PLATINUM,recipeConsumer);
         forgeHammer(ItemInit.SILVER_FORGE_HAMMER.get(),ModItemTags.INGOTS_SILVER,recipeConsumer);

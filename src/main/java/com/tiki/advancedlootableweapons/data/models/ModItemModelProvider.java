@@ -67,6 +67,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DIORITE_CLAY_BALL.get());
         oneLayerItem(ItemInit.GRANITE_CLAY_BALL.get());
 
+        oneLayerItem(ItemInit.TANNING_KNIFE.get());
+        oneLayerItem(ItemInit.UNTRIMMED_HIDE.get());
+        oneLayerItem(ItemInit.TRIMMED_HIDE.get());
+        oneLayerItem(ItemInit.CURED_HIDE.get());
+        oneLayerItem(ItemInit.LIMED_HIDE.get());
+        oneLayerItem(ItemInit.DELIMED_HIDE.get());
+
         oneLayerItem(ItemInit.DIORITE_POWDER.get());
         oneLayerItem(ItemInit.FELDSPAR_POWDER.get());
         oneLayerItem(ItemInit.GRANITE_POWDER.get());
@@ -138,6 +145,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.FROST_STEEL_CHAIN_LINK.get());
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
         oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_LINK.get());
+
+        oneLayerItemHandHeld(ItemInit.STONE_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.IRON_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.COPPER_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.SILVER_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.BRONZE_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.PLATINUM_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.STEEL_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.REFINED_OBSIDIAN_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.KOBOLD_STEEL_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.SHADOW_PLATINUM_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.FROST_STEEL_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.CRYSTALLITE_FORGE_HAMMER.get());
+        oneLayerItemHandHeld(ItemInit.DUSKSTEEL_FORGE_HAMMER.get());
 
         oneLayerItem(ItemInit.IRON_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.GOLD_ARMOR_PLATE.get());

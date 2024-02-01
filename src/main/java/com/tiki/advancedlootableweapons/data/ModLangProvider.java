@@ -87,23 +87,30 @@ public class ModLangProvider extends LanguageProvider {
             addItem(weapon,getNameFromItem(weapon.get()));
         }
 
+        addDefaultItem(ItemInit.TANNING_KNIFE);
+        addDefaultItem(ItemInit.UNTRIMMED_HIDE);
+        addDefaultItem(ItemInit.TRIMMED_HIDE);
+        addDefaultItem(ItemInit.CURED_HIDE);
+        addDefaultItem(ItemInit.LIMED_HIDE);
+        addDefaultItem(ItemInit.DELIMED_HIDE);
+
         add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
         add(ArmorBindingItem.INFO,"Bonus Durability");
         add("container.advancedlootableweapons.anvil_forging","Anvil Forging");
 
-        add("item.advancedlootableweapons.stone_forge_hammer", "Stone Forge Hammer");
-        add("item.advancedlootableweapons.iron_forge_hammer", "Iron Forge Hammer");
-        add("item.advancedlootableweapons.kobold_forge_hammer", "Kobold Steel Forge Hammer");
-        add("item.advancedlootableweapons.copper_forge_hammer", "Copper Forge Hammer");
-        add("item.advancedlootableweapons.silver_forge_hammer", "Silver Forge Hammer");
-        add("item.advancedlootableweapons.bronze_forge_hammer", "Bronze Forge Hammer");
-        add("item.advancedlootableweapons.platinum_forge_hammer", "Platinum Forge Hammer");
-        add("item.advancedlootableweapons.steel_forge_hammer", "Steel Forge Hammer");
-        add("item.advancedlootableweapons.shadow_platinum_forge_hammer", "Shadow Platinum Forge Hammer");
-        add("item.advancedlootableweapons.frost_steel_forge_hammer", "Frost Steel Forge Hammer");
-        add("item.advancedlootableweapons.obsidian_forge_hammer", "Refined Obsidian Forge Hammer");
-        add("item.advancedlootableweapons.crystallite_forge_hammer", "Crystallite Forge Hammer");
-        add("item.advancedlootableweapons.dusksteel_forge_hammer", "Dusksteel Forge Hammer");
+        addDefaultItem(ItemInit.STONE_FORGE_HAMMER);
+        addDefaultItem(ItemInit.IRON_FORGE_HAMMER);
+        addDefaultItem(ItemInit.COPPER_FORGE_HAMMER);
+        addDefaultItem(ItemInit.SILVER_FORGE_HAMMER);
+        addDefaultItem(ItemInit.BRONZE_FORGE_HAMMER);
+        addDefaultItem(ItemInit.PLATINUM_FORGE_HAMMER);
+        addDefaultItem(ItemInit.STEEL_FORGE_HAMMER);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_FORGE_HAMMER);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_FORGE_HAMMER);
+        addDefaultItem(ItemInit.SHADOW_PLATINUM_FORGE_HAMMER);
+        addDefaultItem(ItemInit.FROST_STEEL_FORGE_HAMMER);
+        addDefaultItem(ItemInit.CRYSTALLITE_FORGE_HAMMER);
+        addDefaultItem(ItemInit.DUSKSTEEL_FORGE_HAMMER);
 
 
         addDefaultItem(ItemInit.BRONZE_WHETSTONE);

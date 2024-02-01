@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:obsidian_forge_hammer"
+      "advancedlootableweapons:kobold_steel_forge_hammer"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/refined_obsidian"
+            "tag": "forge:ingots/kobold"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:obsidian_forge_hammer"
+        "recipe": "advancedlootableweapons:kobold_steel_forge_hammer"
       }
     }
   },

@@ -187,7 +187,9 @@ public class DrumBlockEntity extends BlockEntity {
         } else {
             activeRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.DRUM,
                     new SingleFluidRecipeWrapper(itemStackHandler, fluidTank), level).orElse(null);
-            cookingTotalTime = ((DrumRecipe)activeRecipe).getTime();
+            if (activeRecipe != null) {
+                cookingTotalTime = ((DrumRecipe) activeRecipe).getTime();
+            }
         }
     }
 
