@@ -104,7 +104,7 @@ dependencies {
     implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
 
     // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
-    runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")// core
+    implementation fg.deobf("mekanism:Mekanism:${mekanism_version}")// core
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

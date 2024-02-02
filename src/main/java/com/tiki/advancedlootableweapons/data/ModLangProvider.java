@@ -3,10 +3,7 @@ package com.tiki.advancedlootableweapons.data;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
-import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.init.MenuInit;
-import com.tiki.advancedlootableweapons.init.ModCreativeTabs;
+import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
@@ -18,6 +15,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
@@ -34,6 +32,9 @@ public class ModLangProvider extends LanguageProvider {
 
         blockTranslations();
         itemTranslations();
+
+        addDefaultFluid(FluidInit.MILK_OF_LIME);
+        addDefaultFluid(FluidInit.MAGNESIUM_LACTATE);
 
         add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
         add(ArmorBindingItem.INFO,"Bonus Durability");
@@ -85,6 +86,9 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultBlock(BlockInit.STEEL_BLOCK);
         addDefaultBlock(BlockInit.TIN_BLOCK);
 
+        addDefaultBlock(BlockInit.MILK_OF_LIME);
+        addDefaultBlock(BlockInit.MAGNESIUM_LACTATE);
+
         addDefaultBlock(BlockInit.CRYSTALLITE_ORE);
         addDefaultBlock(BlockInit.PLATINUM_ORE);
         addDefaultBlock(BlockInit.SILVER_ORE);
@@ -127,6 +131,8 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.STEEL_INGOT);
         addDefaultItem(ItemInit.TIN_INGOT);
 
+        addDefaultItem(ItemInit.MILK_OF_LIME_BUCKET);
+        addDefaultItem(ItemInit.MAGNESIUM_LACTATE_BUCKET);
 
         addDefaultItem(ItemInit.BRONZE_NUGGET);
         addDefaultItem(ItemInit.CRYSTALLITE_NUGGET);
@@ -371,8 +377,16 @@ public class ModLangProvider extends LanguageProvider {
         add(Utils.getMenuDescId(supplier.get()),key);
     }
 
+    protected void addFluid(Supplier<? extends Fluid> supplier,String key) {
+        add(Utils.getFluidDescId(supplier.get()),key);
+    }
+
     protected void addDefaultMenu(Supplier<? extends MenuType<?>> supplier) {
         addMenu(supplier,getNameFromMenu(supplier.get()));
+    }
+
+    protected void addDefaultFluid(Supplier<? extends Fluid> supplier) {
+        addFluid(supplier,getNameFromFluid(supplier.get()));
     }
 
     protected void addDefaultItem(Supplier<? extends Item> supplier) {
@@ -385,6 +399,10 @@ public class ModLangProvider extends LanguageProvider {
 
     public static String getNameFromMenu(MenuType<?> menuType) {
         return StringUtils.capitaliseAllWords(Utils.getMenuDescId(menuType).split("\\.")[2].replace("_", " "));
+    }
+
+    public static String getNameFromFluid(Fluid fluid) {
+        return StringUtils.capitaliseAllWords(Utils.getFluidDescId(fluid).split("\\.")[2].replace("_", " "));
     }
 
     public static String getNameFromItem(Item item) {

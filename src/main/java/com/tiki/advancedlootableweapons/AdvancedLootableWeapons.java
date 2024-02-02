@@ -4,11 +4,7 @@ import com.tiki.advancedlootableweapons.client.ALWClient;
 import com.tiki.advancedlootableweapons.data.ModDatagen;
 import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
-import com.tiki.advancedlootableweapons.init.BlockEntityInit;
-import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.init.MenuInit;
-import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.client.screens.AnvilForgingScreen;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
@@ -46,10 +42,12 @@ public class AdvancedLootableWeapons
 
     public AdvancedLootableWeapons()
     {
+        ForgeMod.enableMilkFluid();
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         
         ItemInit.register(eventBus);
         BlockInit.register(eventBus);
+        FluidInit.register(eventBus);
         
         BlockEntityInit.register(eventBus);
         MenuInit.register(eventBus);

@@ -37,4 +37,9 @@ public class Utils {
     public static String getMenuDescId(MenuType<?> menuType) {
         return Util.makeDescriptionId("container", Registry.MENU.getKey(menuType));
     }
+
+    public static String getFluidDescId(Fluid fluid) {
+        return Util.makeDescriptionId("fluid", Registry.FLUID.getKey(fluid));
+    }
+
 }

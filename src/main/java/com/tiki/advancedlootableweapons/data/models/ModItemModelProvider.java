@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -91,6 +93,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.SILVER_INGOT.get());
         oneLayerItem(ItemInit.STEEL_INGOT.get());
         oneLayerItem(ItemInit.TIN_INGOT.get());
+
+        getBuilder("milk_of_lime_bucket")
+                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MILK_OF_LIME.get());
+
+        getBuilder("magnesium_lactate_bucket")
+                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MAGNESIUM_LACTATE.get());
 
 
         oneLayerItem(ItemInit.BRONZE_NUGGET.get());
