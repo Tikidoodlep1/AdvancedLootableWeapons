@@ -1,0 +1,14 @@
+{
+  "type": "advancedlootableweapons:drum",
+  "input": {
+    "item": "advancedlootableweapons:limed_hide"
+  },
+  "fluid_input": {
+    "fluid": "advancedlootableweapons:magnesium_lactate",
+    "amount": 1000
+  },
+  "time": 500,
+  "result": {
+    "item": "advancedlootableweapons:delimed_hide"
+  }
+}

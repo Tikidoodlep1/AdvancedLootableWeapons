@@ -4,7 +4,9 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
 import com.tiki.advancedlootableweapons.data.recipes.DrumQuenchingRecipeBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.DrumRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
@@ -297,7 +299,10 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void drum(Consumer<FinishedRecipe> recipeConsumer) {
-        //DrumRecipeBuilder.drum()
+        DrumRecipeBuilder.drum(ItemInit.LIMED_HIDE.get(),ItemInit.DELIMED_HIDE.get())
+                .time(500)
+                .defaultFluid(FluidInit.MAGNESIUM_LACTATE.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"delimed_hide_advanced"));
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

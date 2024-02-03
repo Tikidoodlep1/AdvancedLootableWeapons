@@ -12,8 +12,11 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.List;
 
@@ -48,13 +51,28 @@ public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 85, startPoint.y + 9)));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 1)).entries(display.getInputEntries().get(0))
+        List<EntryIngredient> entryIngredients = display.getInputEntries();
+
+        int ingY = 8;
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x, startPoint.y + ingY)).entries(entryIngredients.get(0))
                 .markInput());
 
+        if (!entryIngredients.get(1).isEmpty()) {
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 18, startPoint.y + ingY)).entries(entryIngredients.get(1))
+                    .markInput());
+        } else {
+            ItemStack stack = new ItemStack(Items.BARRIER);
+            stack.setHoverName(MCVersion.literal("Empty Slot"));
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 18, startPoint.y + ingY)).entries(List.of(EntryStacks.of(stack)))
+                    .markInput());
+        }
+
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 36, startPoint.y + ingY)).entries(entryIngredients.get(2))
+                    .markInput());
 
 
-
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 52, startPoint.y + 9))
+        widgets.add(Widgets.createArrow(new Point(startPoint.x + 55, startPoint.y + 9))
                 .animationDurationTicks(display.time));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 85, startPoint.y + 9)).entries(display.getOutputEntries().get(0))

@@ -36,6 +36,10 @@ public class DrumRecipeBuilder implements RecipeBuilder {
         return new DrumRecipeBuilder(input, result);
     }
 
+    public static DrumRecipeBuilder drum(ItemLike input,ItemLike result) {
+        return drum(Ingredient.of(input),result);
+    }
+
 
     public DrumRecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         return this;
@@ -121,7 +125,7 @@ public class DrumRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return RecipeInit.DRUM_QUENCHING_RECIPE.get();
+            return RecipeInit.DRUM_RECIPE.get();
         }
 
         /**

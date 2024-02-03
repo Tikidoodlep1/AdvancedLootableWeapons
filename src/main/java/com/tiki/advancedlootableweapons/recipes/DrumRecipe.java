@@ -99,7 +99,7 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
         @Override
         public DrumRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
             Ingredient input  = Ingredient.fromJson(pSerializedRecipe.get("input"));
-            Ingredient additive  = Ingredient.fromJson(pSerializedRecipe.get("additive"));
+            Ingredient additive  = pSerializedRecipe.has("additive") ? Ingredient.fromJson(pSerializedRecipe.get("additive")) : Ingredient.EMPTY;
             FluidStack fluidInput = Utils.getFluidStackFromJson(pSerializedRecipe.get("fluid_input").getAsJsonObject());
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "result"));
             int time = GsonHelper.getAsInt(pSerializedRecipe,"time");
