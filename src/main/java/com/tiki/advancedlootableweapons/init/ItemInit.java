@@ -78,7 +78,7 @@ public class ItemInit {
     public static final RegistryObject<Item> CURED_HIDE = ITEMS.register("cured_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> LIMED_HIDE = ITEMS.register("limed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> DELIMED_HIDE = ITEMS.register("delimed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     //forge hammers
     public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ForgeHammerItem(Tiers.STONE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ForgeHammerItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));

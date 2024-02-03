@@ -75,6 +75,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CURED_HIDE.get());
         oneLayerItem(ItemInit.LIMED_HIDE.get());
         oneLayerItem(ItemInit.DELIMED_HIDE.get());
+        oneLayerItem(ItemInit.SALT.get());
 
         oneLayerItem(ItemInit.DIORITE_POWDER.get());
         oneLayerItem(ItemInit.FELDSPAR_POWDER.get());

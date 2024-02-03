@@ -1,0 +1,14 @@
+{
+  "type": "advancedlootableweapons:drum",
+  "input": {
+    "item": "advancedlootableweapons:cured_hide"
+  },
+  "fluid_input": {
+    "fluid": "advancedlootableweapons:milk_of_lime",
+    "amount": 1000
+  },
+  "time": 500,
+  "result": {
+    "item": "advancedlootableweapons:limed_hide"
+  }
+}

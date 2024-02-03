@@ -40,6 +40,11 @@ public class DrumRecipeBuilder implements RecipeBuilder {
         return drum(Ingredient.of(input),result);
     }
 
+    public DrumRecipeBuilder additive(Ingredient additive) {
+        this.additive = additive;
+        return this;
+    }
+
 
     public DrumRecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
         return this;
@@ -99,7 +104,7 @@ public class DrumRecipeBuilder implements RecipeBuilder {
             pJson.add("input", input.toJson());
 
             if (!additive.isEmpty()) {
-                pJson.add("additive", input.toJson());
+                pJson.add("additive", additive.toJson());
             }
 
             if (!fluid.isEmpty()) {

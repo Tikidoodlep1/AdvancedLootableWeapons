@@ -6,14 +6,12 @@
     ]
   },
   "criteria": {
-    "has_trimmed_hide": {
+    "has_salt": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "advancedlootableweapons:trimmed_hide"
-            ]
+            "tag": "forge:dusts/salt"
           }
         ]
       }
@@ -27,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_trimmed_hide",
+      "has_salt",
       "has_the_recipe"
     ]
   ]

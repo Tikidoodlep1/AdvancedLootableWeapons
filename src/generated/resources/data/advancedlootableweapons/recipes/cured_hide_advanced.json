@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:drum",
+  "input": {
+    "item": "advancedlootableweapons:trimmed_hide"
+  },
+  "additive": {
+    "tag": "forge:dusts/salt"
+  },
+  "fluid_input": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "time": 500,
+  "result": {
+    "item": "advancedlootableweapons:cured_hide"
+  }
+}

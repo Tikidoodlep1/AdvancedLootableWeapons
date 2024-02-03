@@ -160,7 +160,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_tanning_knife",has(ItemInit.TANNING_KNIFE.get()))
                 .save(recipeConsumer);
 
-        singleItemRecipe(ItemInit.CURED_HIDE.get(), ItemInit.TRIMMED_HIDE.get(),recipeConsumer);
+        ShapelessRecipeBuilder.shapeless(ItemInit.CURED_HIDE.get())
+                .requires(ItemInit.TRIMMED_HIDE.get()).requires(ModItemTags.SALT)
+                .unlockedBy("has_salt",has(ModItemTags.SALT)).save(recipeConsumer);
+
         singleItemRecipe(ItemInit.LIMED_HIDE.get(), ItemInit.CURED_HIDE.get(),recipeConsumer);
         singleItemRecipe(ItemInit.DELIMED_HIDE.get(), ItemInit.LIMED_HIDE.get(),recipeConsumer);
         singleItemRecipe(Items.LEATHER, ItemInit.DELIMED_HIDE.get(),recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"leather_from_tanning"));
@@ -299,6 +302,18 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void drum(Consumer<FinishedRecipe> recipeConsumer) {
+
+        DrumRecipeBuilder.drum(ItemInit.TRIMMED_HIDE.get(),ItemInit.CURED_HIDE.get())
+                .time(500)
+                .defaultFluid(Fluids.WATER)
+                .additive(Ingredient.of(ModItemTags.SALT))
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"cured_hide_advanced"));
+
+        DrumRecipeBuilder.drum(ItemInit.CURED_HIDE.get(),ItemInit.LIMED_HIDE.get())
+                .time(500)
+                .defaultFluid(FluidInit.MILK_OF_LIME.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"limed_hide_advanced"));
+
         DrumRecipeBuilder.drum(ItemInit.LIMED_HIDE.get(),ItemInit.DELIMED_HIDE.get())
                 .time(500)
                 .defaultFluid(FluidInit.MAGNESIUM_LACTATE.get())

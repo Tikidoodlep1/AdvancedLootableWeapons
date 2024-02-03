@@ -3,6 +3,9 @@
   "ingredients": [
     {
       "item": "advancedlootableweapons:trimmed_hide"
+    },
+    {
+      "tag": "forge:dusts/salt"
     }
   ],
   "result": {

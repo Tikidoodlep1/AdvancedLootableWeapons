@@ -26,5 +26,7 @@ public class ItemsTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.INGOTS_SILVER).add(ItemInit.SILVER_INGOT.get());
         tag(ModItemTags.INGOTS_STEEL).add(ItemInit.STEEL_INGOT.get());
         tag(ModItemTags.INGOTS_TIN).add(ItemInit.TIN_INGOT.get());
+
+        tag(ModItemTags.SALT).add(ItemInit.SALT.get());
     }
 }

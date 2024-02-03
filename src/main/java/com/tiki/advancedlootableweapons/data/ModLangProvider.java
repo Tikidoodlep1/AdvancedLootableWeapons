@@ -186,6 +186,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.CURED_HIDE);
         addDefaultItem(ItemInit.LIMED_HIDE);
         addDefaultItem(ItemInit.DELIMED_HIDE);
+        addDefaultItem(ItemInit.SALT);
 
         addDefaultItem(ItemInit.SHADOW);
         addDefaultItem(ItemInit.CONGEALED_SHADOW);

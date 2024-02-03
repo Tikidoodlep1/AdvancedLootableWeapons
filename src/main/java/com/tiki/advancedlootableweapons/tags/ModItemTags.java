@@ -18,6 +18,7 @@ public class ModItemTags {
     public static final TagKey<Item> INGOTS_SILVER = forge("ingots/silver");
     public static final TagKey<Item> INGOTS_STEEL = forge("ingots/steel");
     public static final TagKey<Item> INGOTS_SHADOW_PLATINUM = forge("ingots/shadow_platinum");
+    public static final TagKey<Item> SALT = forge("dusts/salt");
 
 
     private static TagKey<Item> forge(String name) {
