@@ -30,13 +30,7 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
     protected final BlockRenderDispatcher dispatcher;
     protected final ItemRenderer itemRenderer;
 
-    private final Vector3f bubbleColumn1 = new Vector3f(0.0f, 1.0f, 0.0f);
-    private final Vector3f bubbleColumn2 = new Vector3f(0.0f, 1.0f, 0.0f);
-    private float speedFactor1 = 0.01f;
-    private float speedFactor2 = 0.01f;
-    private float bubbleOffset1 = 0.0f;
-    private float bubbleOffset2 = 0.0f;
-    private boolean canBubble2 = true;
+
 
     public DrumBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         dispatcher = context.getBlockRenderDispatcher();
@@ -107,30 +101,7 @@ public class DrumBlockEntityRenderer implements BlockEntityRenderer<DrumBlockEnt
       //  }
     }
 
-    private void renderBubbles(Level world, double x, double y, double z) {
-        Random rand = world.random;
-        if ((bubbleColumn1.y() + bubbleOffset1) >= 1) {
-            bubbleColumn1.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
-            bubbleOffset1 = 0.0f;
-            speedFactor1 = (rand.nextFloat() + 0.1f) / 50f;
-        }
-        world.addParticle(ParticleTypes.BUBBLE, x + bubbleColumn1.x(), y + bubbleColumn1.y() + bubbleOffset1, z + bubbleColumn1.z(), 0.0f, 0.0f, 0.0f);
-        bubbleOffset1 += speedFactor1;
 
-        if (canBubble2 && rand.nextFloat() >= 0.9) {
-            canBubble2 = false;
-        }
-        if ((bubbleColumn2.y() + bubbleOffset2) >= 1) {
-            bubbleColumn2.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
-            bubbleOffset2 = 0.0f;
-            speedFactor2 = (rand.nextFloat() + 0.1f) / 50f;
-            canBubble2 = true;
-        }
-        if (!canBubble2) {
-            world.addParticle(ParticleTypes.BUBBLE, x + bubbleColumn2.x(), y + bubbleColumn2.y() + bubbleOffset2, z + bubbleColumn2.z(), 0.0f, 0.0f, 0.0f);
-            bubbleOffset2 += speedFactor2;
-        }
-    }
 
     static final float MAX_D = 10.01F / 16F;
 

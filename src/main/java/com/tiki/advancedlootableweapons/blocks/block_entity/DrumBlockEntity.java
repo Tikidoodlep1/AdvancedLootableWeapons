@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.blocks.block_entity;
 
+import com.mojang.math.Vector3f;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.SoundInit;
@@ -141,7 +142,7 @@ public class DrumBlockEntity extends BlockEntity {
                             blockPos.getY() + rand.nextFloat(), blockPos.getZ() + rand.nextFloat(),
                             1, 0, 0, 0, .01f);
                 } else {
-
+                    renderBubbles(blockPos.getX() ,blockPos.getY(),blockPos.getZ());
                 }
                 progress++;
                 if (progress >= cookingTotalTime) {
@@ -158,6 +159,39 @@ public class DrumBlockEntity extends BlockEntity {
             }
         }
     }
+
+    private void renderBubbles(double x, double y, double z) {
+        Random rand = level.random;
+        if ((bubbleColumn1.y() + bubbleOffset1) >= 1) {
+            bubbleColumn1.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
+            bubbleOffset1 = 0.0f;
+            speedFactor1 = (rand.nextFloat() + 0.1f) / 50f;
+        }
+        ((ServerLevel)level).sendParticles(ParticleTypes.BUBBLE, x + bubbleColumn1.x(), y + bubbleColumn1.y() + bubbleOffset1, z + bubbleColumn1.z(), 1,0.0f, 0.0f, 0.0f,0);
+        bubbleOffset1 += speedFactor1;
+
+        if (canBubble2 && rand.nextFloat() >= 0.9) {
+            canBubble2 = false;
+        }
+        if ((bubbleColumn2.y() + bubbleOffset2) >= 1) {
+            bubbleColumn2.set(0.25f + (rand.nextFloat() / 2f), 0.0125f, 0.25f + (rand.nextFloat() / 2f));
+            bubbleOffset2 = 0.0f;
+            speedFactor2 = (rand.nextFloat() + 0.1f) / 50f;
+            canBubble2 = true;
+        }
+        if (!canBubble2) {
+            ((ServerLevel)level).sendParticles(ParticleTypes.BUBBLE, x + bubbleColumn2.x(), y + bubbleColumn2.y() + bubbleOffset2, z + bubbleColumn2.z(), 1,0.0f, 0.0f, 0.0f,0);
+            bubbleOffset2 += speedFactor2;
+        }
+    }
+
+    private final Vector3f bubbleColumn1 = new Vector3f(0.0f, 1.0f, 0.0f);
+    private final Vector3f bubbleColumn2 = new Vector3f(0.0f, 1.0f, 0.0f);
+    private float speedFactor1 = 0.01f;
+    private float speedFactor2 = 0.01f;
+    private float bubbleOffset1 = 0.0f;
+    private float bubbleOffset2 = 0.0f;
+    private boolean canBubble2 = true;
 
     protected void process() {
         ItemStack result = activeRecipe.assemble(new SingleFluidRecipeWrapper(itemStackHandler, fluidTank));
