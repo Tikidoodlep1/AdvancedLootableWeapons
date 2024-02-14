@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -19,11 +20,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 
-public class TileEntityTanningRack extends TileEntity implements ITickable, IInventory {
+public class TileEntityTanningRack extends TileEntity implements ITickable, ISidedInventory {
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	private String customName;
 	private int progress = 0;
@@ -236,4 +238,37 @@ public class TileEntityTanningRack extends TileEntity implements ITickable, IInv
 	public void clear() {
 		this.inventory.clear();
 	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch(side) {
+		case DOWN:
+			return new int[] {1};
+		default:
+			return new int[] {0};
+		}
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		if(direction != EnumFacing.DOWN) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		if(direction == EnumFacing.DOWN) {
+			return true;
+		}
+		return false;
+	}
+
+    @Override
+    @Nullable
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        return super.getCapability(capability, facing);
+    }
 }

@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -25,6 +25,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -32,13 +33,16 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.TileFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
 import tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 
-public class TileEntityDrum extends TileFluidHandler implements ITickable, IInventory, IFluidHandler
+public class TileEntityDrum extends TileFluidHandler implements ITickable, ISidedInventory, IFluidHandler
 {
 	public static final int INPUT_SLOT = 0;
 	public static final int ADDITIVE_SLOT = 1;
@@ -445,4 +449,53 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, IInve
 		this.markDirty();
 		return tank.drain(maxDrain, doDrain);
 	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch(side) {
+		case DOWN:
+			return new int[] {OUTPUT_SLOT};
+		case UP:
+			return new int[] {INPUT_SLOT};
+		default:
+			return new int[] {ADDITIVE_SLOT};
+		}
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		if(direction == EnumFacing.DOWN) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		if(direction != EnumFacing.DOWN) {
+			return false;
+		}
+		return true;
+	}
+	
+	IItemHandler handlerAdd = new SidedInvWrapper(this, EnumFacing.EAST);
+    IItemHandler handlerOutput = new SidedInvWrapper(this, EnumFacing.DOWN);
+    IItemHandler handlerInput = new SidedInvWrapper(this, EnumFacing.UP);
+
+    @SuppressWarnings("unchecked")
+    @Override
+    @Nullable
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        if(facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        	if(facing == EnumFacing.DOWN) {
+        		return (T) handlerOutput;
+        	}else if(facing == EnumFacing.UP) {
+        		return (T) handlerInput;
+        	}else {
+        		return (T) handlerAdd;
+        	}
+        }
+        return super.getCapability(capability, facing);
+    }
 }

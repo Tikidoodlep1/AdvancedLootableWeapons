@@ -1,26 +1,34 @@
 package tiki.advancedlootableweapons.blocks.tileentities;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
 import tiki.advancedlootableweapons.util.HotMetalHelper;
 
-public class TileEntityForge extends TileEntity implements ITickable, IInventory
+public class TileEntityForge extends TileEntity implements ITickable, ISidedInventory
 {
 	public static final int minTemp = 850;
 	public static final int maxTemp = 1750;
@@ -396,4 +404,29 @@ public class TileEntityForge extends TileEntity implements ITickable, IInventory
 	public void clear() {
 		this.inventory.clear();
 	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch(side) {
+		default:
+			return new int[] {0};
+		}
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		return stack.getItemDamage() == 0;
+	}
+
+    @Override
+    @Nullable
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        return super.getCapability(capability, facing);
+    }
 }

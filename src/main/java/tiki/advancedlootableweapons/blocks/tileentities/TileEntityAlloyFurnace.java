@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -13,19 +14,24 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tiki.advancedlootableweapons.blocks.BlockAlloyFurnace;
 import tiki.advancedlootableweapons.recipes.AlloyingRecipe;
 
-public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IInventory
+public class TileEntityAlloyFurnace extends TileEntity implements ITickable, ISidedInventory
 {
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	private String customName;
@@ -44,7 +50,7 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	};
 	
 	private InventoryCrafting inv = new InventoryCrafting(tempContainer, 3, 1);
-
+	
 	@Override
 	public String getName() {
 		return this.hasCustomName() ? this.customName : "container_alloy_furnace";
@@ -344,4 +350,67 @@ public class TileEntityAlloyFurnace extends TileEntity implements ITickable, IIn
 	public void clear() {
 		this.inventory.clear();
 	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side) {
+		switch(side) {
+		case UP:
+			return new int[] {2};
+		case DOWN:
+			return new int[] {3};
+		case EAST:
+			return new int[] {0};
+		case NORTH:
+			return new int[] {0};
+		case SOUTH:
+			return new int[] {1};
+		case WEST:
+			return new int[] {1};
+		}
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+		switch(index) {
+		case 2:
+			return isItemFuel(itemStackIn);
+		case 3:
+			return false;
+		default:
+			return !(itemStackIn.getItem().isDamageable());
+		}
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+		if(index == 3) {
+			return true;
+		}
+		return false;
+	}
+	
+	IItemHandler handlerSlot1 = new SidedInvWrapper(this, EnumFacing.EAST);
+    IItemHandler handlerOutput = new SidedInvWrapper(this, EnumFacing.DOWN);
+    IItemHandler handlerSlot2 = new SidedInvWrapper(this, EnumFacing.WEST);
+    IItemHandler handlerFuel = new SidedInvWrapper(this, EnumFacing.UP);
+
+    @SuppressWarnings("unchecked")
+    @Override
+    @Nullable
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        if(facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        	if(facing == EnumFacing.DOWN) {
+        		return (T) handlerOutput;
+        	}else if(facing == EnumFacing.UP) {
+        		return (T) handlerFuel;
+        	}else if(facing == EnumFacing.EAST || facing == EnumFacing.NORTH) {
+        		return (T) handlerSlot1;
+        	}else {
+        		return (T) handlerSlot2;
+        	}
+        }
+        return super.getCapability(capability, facing);
+    }
 }
