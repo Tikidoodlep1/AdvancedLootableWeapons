@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.compat.rei.categories;
 
 import com.google.common.collect.Lists;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -15,8 +16,8 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.List;
 
@@ -47,43 +48,36 @@ public class DrumCategory implements DisplayCategory<DrumDisplay> {
     public List<Widget> setupDisplay(DrumDisplay display, Rectangle bounds) {
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        Point startPoint = new Point(bounds.getCenterX() - 52, bounds.getCenterY() - 16);
 
-        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 85, startPoint.y + 9)));
+        Point startPoint = new Point(bounds.getX() + 25, bounds.getY() + 3);
 
+        widgets.add(Widgets.createTexturedWidget(new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/rei/drum.png"),
+                new Rectangle(startPoint.x, startPoint.y, 100, 66)));
         List<EntryIngredient> entryIngredients = display.getInputEntries();
 
-        int ingY = 8;
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x, startPoint.y + ingY)).entries(entryIngredients.get(0))
-                .markInput());
+        widgets.add(Widgets.createSlot(new Point(startPoint.x+1, startPoint.y+21)).entries(entryIngredients.get(0))
+                .disableBackground().markInput());
 
         if (!entryIngredients.get(1).isEmpty()) {
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 18, startPoint.y + ingY)).entries(entryIngredients.get(1))
-                    .markInput());
-        } else {
-            ItemStack stack = new ItemStack(Items.BARRIER);
-            stack.setHoverName(MCVersion.literal("Empty Slot"));
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 18, startPoint.y + ingY)).entries(List.of(EntryStacks.of(stack)))
-                    .markInput());
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 27, startPoint.y+1)).entries(entryIngredients.get(1))
+                    .disableBackground().markInput());
         }
 
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 36, startPoint.y + ingY)).entries(entryIngredients.get(2))
-                    .markInput());
+         ItemStack stack = new ItemStack(BlockInit.CLAY_DRUM.get());
+              widgets.add(Widgets.createSlot(new Point(startPoint.x + 27, startPoint.y + 43)).entries(List.of(EntryStacks.of(stack)))
+                      .disableBackground().markInput());
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 53, startPoint.y + 21)).entries(entryIngredients.get(2))
+                .disableBackground().markInput());
 
 
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + 55, startPoint.y + 9))
+        widgets.add(Widgets.createArrow(new Point(startPoint.x + 49, startPoint.y + 44))
                 .animationDurationTicks(display.time));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 85, startPoint.y + 9)).entries(display.getOutputEntries().get(0))
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 80, startPoint.y + 43)).entries(display.getOutputEntries().get(0))
                 .disableBackground().markOutput());
 
         return widgets;
-    }
-
-
-    @Override
-    public int getDisplayHeight() {
-        return 49;
     }
 }
