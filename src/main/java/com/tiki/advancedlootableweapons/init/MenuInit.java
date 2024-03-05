@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
-import com.tiki.advancedlootableweapons.inventory.anvil_forging.AnvilForgingContainer;
+import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 
@@ -21,7 +21,7 @@ public class MenuInit {
 	
 	public static final RegistryObject<MenuType<ForgeContainer>> FORGE = registerMenuType(ForgeContainer::new, "forge");
 	
-	public static final RegistryObject<MenuType<AnvilForgingContainer>> ANVIL_FORGING = registerMenuType(AnvilForgingContainer::new, "anvil_forging");
+	public static final RegistryObject<MenuType<AnvilForgingMenu>> ANVIL_FORGING = registerMenuType(AnvilForgingMenu::new, "anvil_forging");
 	
 	public static final RegistryObject<MenuType<JawCrusherContainer>> JAW_CRUSHER = registerMenuType(JawCrusherContainer::new, "jaw_crusher");
 	

@@ -1,0 +1,11 @@
+{
+  "type": "advancedlootableweapons:anvil_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:kobold_ingot"
+  },
+  "result": {
+    "item": "advancedlootableweapons:hot_tool_head",
+    "Count": 1,
+    "nbt": "{Damage:6000,material:\"kobold_steel\"}"
+  }
+}

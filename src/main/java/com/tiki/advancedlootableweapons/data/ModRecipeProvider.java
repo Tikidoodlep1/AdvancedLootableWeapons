@@ -1,13 +1,13 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
-import com.tiki.advancedlootableweapons.data.recipes.CrusherRecipeBuilder;
-import com.tiki.advancedlootableweapons.data.recipes.DrumQuenchingRecipeBuilder;
-import com.tiki.advancedlootableweapons.data.recipes.DrumRecipeBuilder;
+import com.tiki.advancedlootableweapons.data.recipes.*;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
@@ -39,6 +41,8 @@ public class ModRecipeProvider extends RecipeProvider {
         alloyFurnace(pFinishedRecipeConsumer);
         drumQuenching(pFinishedRecipeConsumer);
         drum(pFinishedRecipeConsumer);
+        anvilForging(pFinishedRecipeConsumer);
+
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -318,6 +322,23 @@ public class ModRecipeProvider extends RecipeProvider {
                 .time(500)
                 .defaultFluid(FluidInit.MAGNESIUM_LACTATE.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"delimed_hide_advanced"));
+    }
+
+    protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
+        for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
+            WeaponMaterial weaponMaterial = entry.getValue();
+            if (weaponMaterial != WeaponMaterial.NULL) {
+                AnvilForgingRecipeBuilder.anvilForging(weaponMaterial.tier().getRepairIngredient(), createToolHead(weaponMaterial))
+                        .save(recipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID, "anvil_forging_tool_head_" + entry.getKey()));
+            }
+        }
+    }
+
+    protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
+        ItemStack stack = new ItemStack(ItemInit.HOT_TOOL_HEAD.get());
+        HotToolHeadItem.setMaterial(stack,weaponMaterial);
+        HotToolHeadItem.setTemperature(stack,0);
+        return stack;
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer,ItemLike result,Item ing) {

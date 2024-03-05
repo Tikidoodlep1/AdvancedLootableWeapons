@@ -51,7 +51,7 @@ public class HotToolHeadItem extends Item {
         return this.finished;
     }
 
-    public void setMaterial(ItemStack stack,WeaponMaterial mat) {
+    public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
         stack.getOrCreateTag().putString("material", WeaponMaterial.getMaterialNameF(mat));
     }
 
@@ -141,13 +141,17 @@ public class HotToolHeadItem extends Item {
             pItems.add(hot);
             ItemStack warm = new ItemStack(this);
             setMaterial(warm, WeaponMaterial.STEEL);
-            warm.setDamageValue(getMaxDamage() / 2 + 1);
+            setTemperature(warm,getMaxDamage() / 2);
             ItemStack cool = new ItemStack(this);
             setMaterial(cool, WeaponMaterial.STEEL);
-            cool.setDamageValue(getMaxDamage());
+            setTemperature(cool,0);
             pItems.add(warm);
             pItems.add(cool);
         }
+    }
+
+    public static void setTemperature(ItemStack stack, int temp) {
+        stack.setDamageValue(stack.getMaxDamage() - temp);
     }
 
     public HotToolHeadItem addToRegistryMap() {

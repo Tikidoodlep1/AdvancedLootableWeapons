@@ -15,24 +15,24 @@ public record WeaponMaterial(Tier tier, MetalStats metalStats) {
 	public static final WeaponMaterial STEEL = new WeaponMaterial(ModMaterials.MAT_STEEL,MetalStats.STEEL);
 
 	static {
-		LOOKUP.put("Wood",new WeaponMaterial(Tiers.WOOD, null));
-		LOOKUP.put("Stone",new WeaponMaterial(Tiers.STONE, null));
-		LOOKUP.put("Copper",new WeaponMaterial(ModMaterials.MAT_COPPER,MetalStats.COPPER));
-		LOOKUP.put("Iron",new WeaponMaterial(Tiers.IRON,MetalStats.IRON));
-		LOOKUP.put("Gold",new WeaponMaterial(Tiers.GOLD,MetalStats.GOLD));
-		LOOKUP.put("Diamond",new WeaponMaterial(Tiers.DIAMOND,null));
-		LOOKUP.put("Netherite",new WeaponMaterial(Tiers.NETHERITE,null));
-		LOOKUP.put("Bronze",new WeaponMaterial(ModMaterials.MAT_BRONZE,MetalStats.BRONZE));
-		LOOKUP.put("Kobold_Steel",new WeaponMaterial(ModMaterials.MAT_KOBOLD,MetalStats.KOBOLD));
-		LOOKUP.put("Silver",new WeaponMaterial(ModMaterials.MAT_SILVER,MetalStats.SILVER));
-		LOOKUP.put("Platinum",new WeaponMaterial(ModMaterials.MAT_PLATINUM,MetalStats.PLATINUM));
-		LOOKUP.put("Refined_Obsidian",new WeaponMaterial(ModMaterials.MAT_REFINED_OBSIDIAN,MetalStats.REFINED_OBSIDIAN));
-		LOOKUP.put("Shadow_Platinum",new WeaponMaterial(ModMaterials.MAT_SHADOW_PLATINUM,MetalStats.SHADOW_PLATINUM));
-		LOOKUP.put("Frost_Steel",new WeaponMaterial(ModMaterials.MAT_FROST_STEEL,MetalStats.FROST_STEEL));
-		LOOKUP.put("Dusk_Steel",new WeaponMaterial(ModMaterials.MAT_DUSKSTEEL,MetalStats.DUSKSTEEL));
-		LOOKUP.put("Crystallite",new WeaponMaterial(ModMaterials.MAT_CRYSTALLITE,MetalStats.CRYSTALLITE));
+		LOOKUP.put("wood",new WeaponMaterial(Tiers.WOOD, null));
+		LOOKUP.put("stone",new WeaponMaterial(Tiers.STONE, null));
+		LOOKUP.put("copper",new WeaponMaterial(ModMaterials.MAT_COPPER,MetalStats.COPPER));
+		LOOKUP.put("iron",new WeaponMaterial(Tiers.IRON,MetalStats.IRON));
+		LOOKUP.put("gold",new WeaponMaterial(Tiers.GOLD,MetalStats.GOLD));
+		LOOKUP.put("diamond",new WeaponMaterial(Tiers.DIAMOND,null));
+		LOOKUP.put("netherite",new WeaponMaterial(Tiers.NETHERITE,null));
+		LOOKUP.put("bronze",new WeaponMaterial(ModMaterials.MAT_BRONZE,MetalStats.BRONZE));
+		LOOKUP.put("kobold_steel",new WeaponMaterial(ModMaterials.MAT_KOBOLD,MetalStats.KOBOLD));
+		LOOKUP.put("silver",new WeaponMaterial(ModMaterials.MAT_SILVER,MetalStats.SILVER));
+		LOOKUP.put("platinum",new WeaponMaterial(ModMaterials.MAT_PLATINUM,MetalStats.PLATINUM));
+		LOOKUP.put("refined_obsidian",new WeaponMaterial(ModMaterials.MAT_REFINED_OBSIDIAN,MetalStats.REFINED_OBSIDIAN));
+		LOOKUP.put("shadow_platinum",new WeaponMaterial(ModMaterials.MAT_SHADOW_PLATINUM,MetalStats.SHADOW_PLATINUM));
+		LOOKUP.put("frost_steel",new WeaponMaterial(ModMaterials.MAT_FROST_STEEL,MetalStats.FROST_STEEL));
+		LOOKUP.put("dusk_steel",new WeaponMaterial(ModMaterials.MAT_DUSKSTEEL,MetalStats.DUSKSTEEL));
+		LOOKUP.put("crystallite",new WeaponMaterial(ModMaterials.MAT_CRYSTALLITE,MetalStats.CRYSTALLITE));
 
-		LOOKUP.put("Steel",STEEL);
+		LOOKUP.put("steel",STEEL);
 
 		LOOKUP.put("null",NULL);
 	}

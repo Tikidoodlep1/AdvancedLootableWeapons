@@ -1,16 +1,10 @@
 package com.tiki.advancedlootableweapons.items;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import com.tiki.advancedlootableweapons.inventory.anvil_forging.AnvilForgingContainer;
-
+import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,6 +16,9 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AnvilBlock;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ForgeHammerItem extends TieredItem {
 
@@ -44,7 +41,7 @@ public class ForgeHammerItem extends TieredItem {
 	@Nullable
 	public MenuProvider getMenuProvider(Level pLevel, BlockPos pPos) {
 	   return new SimpleMenuProvider((pContainerId, pPlayerInventory, pPlayer) -> new
-			   AnvilForgingContainer(pContainerId, pPlayerInventory, ContainerLevelAccess.create(pLevel,pPos)),
+               AnvilForgingMenu(pContainerId, pPlayerInventory, ContainerLevelAccess.create(pLevel,pPos)),
 			   MCVersion.translation("container.advancedlootableweapons.anvil_forging"));
 	}
 

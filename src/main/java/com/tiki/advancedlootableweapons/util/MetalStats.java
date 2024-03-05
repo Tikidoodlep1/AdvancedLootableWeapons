@@ -1,7 +1,5 @@
 package com.tiki.advancedlootableweapons.util;
 
-import static com.tiki.advancedlootableweapons.util.HotMetalHelper.*;
-
 public class MetalStats {
 
     public final int mp;
