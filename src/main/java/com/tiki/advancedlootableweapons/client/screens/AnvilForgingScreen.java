@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
-import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
+import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgeingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -76,18 +76,17 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<AnvilForgingRecipe> list = this.menu.getRecipes();
+            List<AbstractAnvilForgeingRecipe> list = this.menu.getRecipes();
 
             for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (pX >= j1 && pX < j1 + 16 && pY >= k1 && pY < k1 + 18) {
-                    this.renderTooltip(pPoseStack, list.get(l).getResultItem(), pX, pY);
+                    this.renderTooltip(pPoseStack, list.get(l).getProcessedResult(menu.container.getItem(0)), pX, pY);
                 }
             }
         }
-
     }
 
     private void renderButtons(PoseStack pPoseStack, int pMouseX, int pMouseY, int pX, int pY, int pLastVisibleElementIndex) {
@@ -109,7 +108,7 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
     }
 
     private void renderRecipes(int pLeft, int pTop, int pRecipeIndexOffsetMax) {
-        List<AnvilForgingRecipe> list = this.menu.getRecipes();
+        List<AbstractAnvilForgeingRecipe> list = this.menu.getRecipes();
 
         for (int i = this.startIndex; i < pRecipeIndexOffsetMax && i < this.menu.getNumRecipes(); ++i) {
             int j = i - this.startIndex;

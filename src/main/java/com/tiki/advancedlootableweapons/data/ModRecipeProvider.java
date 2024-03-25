@@ -7,7 +7,6 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
-import com.tiki.advancedlootableweapons.recipes.AnvilForgingRecipe;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -328,10 +327,15 @@ public class ModRecipeProvider extends RecipeProvider {
         for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
             WeaponMaterial weaponMaterial = entry.getValue();
             if (weaponMaterial != WeaponMaterial.NULL) {
-                AnvilForgingRecipeBuilder.anvilForging(weaponMaterial.tier().getRepairIngredient(), createToolHead(weaponMaterial))
+                ItemStack toolHead = createToolHead(weaponMaterial);
+                AnvilForgingRecipeBuilder.anvilMaterialForging(weaponMaterial.tier().getRepairIngredient(), toolHead)
                         .save(recipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID, "anvil_forging_tool_head_" + entry.getKey()));
             }
         }
+
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.HOT_TOOL_ROD.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod"));
+
     }
 
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {

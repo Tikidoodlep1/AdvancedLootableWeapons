@@ -2,17 +2,17 @@ package com.tiki.advancedlootableweapons.recipes;
 
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class SingleItemWithNBTRecipe implements Recipe<Container> {
+public abstract class AbstractAnvilForgeingRecipe implements Recipe<RecipeWrapper> {
     protected final Ingredient ingredient;
     protected final ItemStack result;
     private final RecipeType<?> type;
@@ -20,7 +20,7 @@ public abstract class SingleItemWithNBTRecipe implements Recipe<Container> {
     protected final ResourceLocation id;
     protected final String group;
 
-    public SingleItemWithNBTRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
+    public AbstractAnvilForgeingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
         this.type = pType;
         this.serializer = pSerializer;
         this.id = pId;
@@ -58,7 +58,11 @@ public abstract class SingleItemWithNBTRecipe implements Recipe<Container> {
      */
     @Override
     public ItemStack getResultItem() {
-        return this.result;
+        return ItemStack.EMPTY;
+    }
+
+    public ItemStack getProcessedResult(ItemStack input) {
+        return result;
     }
 
     @Override
@@ -80,11 +84,11 @@ public abstract class SingleItemWithNBTRecipe implements Recipe<Container> {
      * Returns an Item that is the result of this recipe
      */
     @Override
-    public ItemStack assemble(Container pInv) {
+    public ItemStack assemble(RecipeWrapper pInv) {
         return this.result.copy();
     }
 
-    public static class Serializer<T extends SingleItemWithNBTRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
+    public static class Serializer<T extends AbstractAnvilForgeingRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
         final SingleItemMaker<T> factory;
 
         public Serializer(SingleItemMaker<T> pFactory) {
@@ -120,7 +124,7 @@ public abstract class SingleItemWithNBTRecipe implements Recipe<Container> {
             pBuffer.writeItem(pRecipe.result);
         }
 
-        public interface SingleItemMaker<T extends SingleItemWithNBTRecipe> {
+        public interface SingleItemMaker<T extends AbstractAnvilForgeingRecipe> {
             T create(ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult);
         }
     }

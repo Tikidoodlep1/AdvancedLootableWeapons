@@ -22,14 +22,14 @@ public class FluidInit {
                     new ResourceLocation("forge", "block/milk_still"),
                     new ResourceLocation("forge", "block/milk_flowing"))
                     .density(1024).viscosity(1024).color(0xff_DFD3BE))
-                    .block(BlockInit.MILK_OF_LIME).bucket((ItemInit.MILK_OF_LIME_BUCKET));
+                    .block(BlockInit.MILK_OF_LIME).bucket(ItemInit.MILK_OF_LIME_BUCKET);
 
     static final Supplier<ForgeFlowingFluid.Properties> magnesium_props = () ->
             new ForgeFlowingFluid.Properties(FluidInit.MAGNESIUM_LACTATE,FluidInit.FLOWING_MAGNESIUM_LACTATE,FluidAttributes.builder(
                             new ResourceLocation("forge", "block/milk_still"),
                             new ResourceLocation("forge", "block/milk_flowing"))
                     .density(1024).viscosity(1024).color(0xff_eeeeee))
-                    .block(BlockInit.MAGNESIUM_LACTATE).bucket((ItemInit.MAGNESIUM_LACTATE_BUCKET));
+                    .block(BlockInit.MAGNESIUM_LACTATE).bucket(ItemInit.MAGNESIUM_LACTATE_BUCKET);
 
     public static final RegistryObject<FlowingFluid> MILK_OF_LIME = FLUIDS.register("milk_of_lime",
             () -> new ForgeFlowingFluid.Source(props.get()));

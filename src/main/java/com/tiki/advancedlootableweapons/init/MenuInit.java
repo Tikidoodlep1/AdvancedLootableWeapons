@@ -22,7 +22,7 @@ public class MenuInit {
 	public static final RegistryObject<MenuType<ForgeContainer>> FORGE = registerMenuType(ForgeContainer::new, "forge");
 	
 	public static final RegistryObject<MenuType<AnvilForgingMenu>> ANVIL_FORGING = registerMenuType(AnvilForgingMenu::new, "anvil_forging");
-	
+
 	public static final RegistryObject<MenuType<JawCrusherContainer>> JAW_CRUSHER = registerMenuType(JawCrusherContainer::new, "jaw_crusher");
 	
 	

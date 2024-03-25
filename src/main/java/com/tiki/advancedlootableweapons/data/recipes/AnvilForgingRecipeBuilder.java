@@ -10,7 +10,6 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,16 +34,20 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         this.ingredient = pIngredient;
     }
 
-    public static AnvilForgingRecipeBuilder anvilForging(Ingredient pIngredient, ItemLike pResult) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_FORGING_RECIPE.get(), pIngredient, new ItemStack(pResult));
+    public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemLike pResult) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient, new ItemStack(pResult));
     }
 
-    public static AnvilForgingRecipeBuilder anvilForging(Ingredient pIngredient, ItemLike pResult, int pCount) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_FORGING_RECIPE.get(), pIngredient,new ItemStack(pResult, pCount));
+    public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemLike pResult, int pCount) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient,new ItemStack(pResult, pCount));
     }
 
-    public static AnvilForgingRecipeBuilder anvilForging(Ingredient pIngredient, ItemStack stack) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_FORGING_RECIPE.get(), pIngredient,stack);
+    public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemStack stack) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient,stack);
+    }
+
+    public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(),Ingredient.of(ingredient),new ItemStack(result));
     }
 
 
@@ -102,6 +105,23 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
             pJson.add("result", serializeStack(result));
         }
 
+        private JsonObject serializeStack(ItemStack stack) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("item",Registry.ITEM.getKey(stack.getItem()).toString());
+            if (saveNBT()) {
+                jsonObject.addProperty("Count", stack.getCount());
+                if (stack.hasTag()) {
+                    jsonObject.addProperty("nbt", stack.getTag().toString());
+                }
+            }
+            return jsonObject;
+        }
+
+        boolean saveNBT() {
+            return type == RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get();
+        }
+
+
         /**
          * Gets the ID for the recipe.
          */
@@ -131,14 +151,5 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         }
     }
 
-    private static JsonObject serializeStack(ItemStack stack) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("item",Registry.ITEM.getKey(stack.getItem()).toString());
-        jsonObject.addProperty("Count",stack.getCount());
-        if (stack.hasTag()) {
-            jsonObject.addProperty("nbt",stack.getTag().toString());
-        }
-        return jsonObject;
-    }
 
 }

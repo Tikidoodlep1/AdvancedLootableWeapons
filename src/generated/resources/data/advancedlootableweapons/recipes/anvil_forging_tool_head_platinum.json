@@ -1,5 +1,5 @@
 {
-  "type": "advancedlootableweapons:anvil_forging",
+  "type": "advancedlootableweapons:anvil_material_forging",
   "ingredient": {
     "item": "advancedlootableweapons:platinum_ingot"
   },

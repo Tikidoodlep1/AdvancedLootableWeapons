@@ -8,10 +8,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
-public class AnvilForgingRecipe extends SingleItemWithNBTRecipe {
+public class AnvilToolForgingRecipe extends AbstractAnvilForgeingRecipe {
 
-	public AnvilForgingRecipe( ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
-		super(ModRecipeTypes.ANVIL_FORGING, RecipeInit.ANVIL_FORGING_RECIPE.get(), pId, pGroup, pIngredient, pResult);
+	public AnvilToolForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
+		super(ModRecipeTypes.ANVIL_FORGING, RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(), pId, pGroup, pIngredient, pResult);
 	}
 
 	/**
@@ -20,5 +20,10 @@ public class AnvilForgingRecipe extends SingleItemWithNBTRecipe {
 	@Override
 	public boolean matches(Container pInv, Level pLevel) {
 		return this.ingredient.test(pInv.getItem(0));
+	}
+
+	@Override
+	public ItemStack assemble(Container pInv) {
+		return super.assemble(pInv);
 	}
 }
