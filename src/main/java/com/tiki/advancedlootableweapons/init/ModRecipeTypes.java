@@ -9,7 +9,7 @@ public class ModRecipeTypes {
 
     public static final RecipeType<AlloyFurnaceRecipe> ALLOY_FURNACE = register("alloy_furnace");
     public static final RecipeType<JawCrusherRecipe> CRUSHING = register("crushing");
-    public static final RecipeType<AbstractAnvilForgeingRecipe> ANVIL_FORGING = register("anvil_forging");
+    public static final RecipeType<AbstractAnvilForgingRecipe> ANVIL_FORGING = register("anvil_forging");
     public static final RecipeType<DrumRecipe> DRUM = register("drum");
     public static final RecipeType<DrumQuenchingRecipe> DRUM_QUENCHING = register("drum_quenching");
 

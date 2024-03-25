@@ -17,10 +17,10 @@ public class RecipeInit {
 			AlloyFurnaceRecipe.Serializer::new);
 	
 	public static final RegistryObject<RecipeSerializer<AnvilMaterialForgingRecipe>> ANVIL_MATERIAL_FORGING_RECIPE = RECIPE_SERIALIZERS.register("anvil_material_forging",
-			() -> new AbstractAnvilForgeingRecipe.Serializer<>(AnvilMaterialForgingRecipe::new));
+			() -> new AbstractAnvilForgingRecipe.Serializer<>(AnvilMaterialForgingRecipe::new));
 
 	public static final RegistryObject<RecipeSerializer<AnvilToolForgingRecipe>> ANVIL_TOOL_FORGING_RECIPE = RECIPE_SERIALIZERS.register("anvil_tool_forging",
-			() -> new AbstractAnvilForgeingRecipe.Serializer<>(AnvilToolForgingRecipe::new));
+			() -> new AbstractAnvilForgingRecipe.Serializer<>(AnvilToolForgingRecipe::new));
 
 	public static final RegistryObject<RecipeSerializer<JawCrusherRecipe>> JAW_CRUSHER_RECIPE = RECIPE_SERIALIZERS.register("crushing",
 			JawCrusherRecipe.Serializer::new);

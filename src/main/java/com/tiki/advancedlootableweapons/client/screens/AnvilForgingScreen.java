@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
-import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgeingRecipe;
+import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -76,14 +76,14 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<AbstractAnvilForgeingRecipe> list = this.menu.getRecipes();
+            List<AbstractAnvilForgingRecipe> list = this.menu.getRecipes();
 
             for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (pX >= j1 && pX < j1 + 16 && pY >= k1 && pY < k1 + 18) {
-                    this.renderTooltip(pPoseStack, list.get(l).getProcessedResult(menu.container.getItem(0)), pX, pY);
+                    this.renderTooltip(pPoseStack, list.get(l).getProcessedResult(menu.handler.getStackInSlot(0)), pX, pY);
                 }
             }
         }
@@ -108,14 +108,14 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
     }
 
     private void renderRecipes(int pLeft, int pTop, int pRecipeIndexOffsetMax) {
-        List<AbstractAnvilForgeingRecipe> list = this.menu.getRecipes();
+        List<AbstractAnvilForgingRecipe> list = this.menu.getRecipes();
 
         for (int i = this.startIndex; i < pRecipeIndexOffsetMax && i < this.menu.getNumRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = pLeft + j % 4 * 16;
             int l = j / 4;
             int i1 = pTop + l * 18 + 2;
-            this.minecraft.getItemRenderer().renderAndDecorateItem(list.get(i).getResultItem(), k, i1);
+            this.minecraft.getItemRenderer().renderAndDecorateItem(list.get(i).getProcessedResult(menu.handler.getStackInSlot(0)), k, i1);
         }
 
     }

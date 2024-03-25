@@ -5,27 +5,28 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractAnvilForgeingRecipe implements Recipe<RecipeWrapper> {
+public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper> {
     protected final Ingredient ingredient;
+    protected final Ingredient ingredient2;
     protected final ItemStack result;
     private final RecipeType<?> type;
     private final RecipeSerializer<?> serializer;
     protected final ResourceLocation id;
     protected final String group;
 
-    public AbstractAnvilForgeingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult) {
+    public AbstractAnvilForgingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult) {
         this.type = pType;
         this.serializer = pSerializer;
         this.id = pId;
         this.group = pGroup;
         this.ingredient = pIngredient;
+        this.ingredient2 = ingredient2;
         this.result = pResult;
     }
 
@@ -88,10 +89,10 @@ public abstract class AbstractAnvilForgeingRecipe implements Recipe<RecipeWrappe
         return this.result.copy();
     }
 
-    public static class Serializer<T extends AbstractAnvilForgeingRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
-        final SingleItemMaker<T> factory;
+    public static class Serializer<T extends AbstractAnvilForgingRecipe> extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<T> {
+        final DualItemMaker<T> factory;
 
-        public Serializer(SingleItemMaker<T> pFactory) {
+        public Serializer(DualItemMaker<T> pFactory) {
             this.factory = pFactory;
         }
 
@@ -105,27 +106,42 @@ public abstract class AbstractAnvilForgeingRecipe implements Recipe<RecipeWrappe
                 ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(pJson, "ingredient"));
             }
 
-            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-            return this.factory.create(pRecipeId, s, ingredient, itemstack);
+            Ingredient ingredient2;
+
+            if (pJson.has("ingredient2")) {
+
+                if (GsonHelper.isArrayNode(pJson, "ingredient2")) {
+                    ingredient2 = Ingredient.fromJson(GsonHelper.getAsJsonArray(pJson, "ingredient2"));
+                } else {
+                    ingredient2 = Ingredient.fromJson(GsonHelper.getAsJsonObject(pJson, "ingredient2"));
+                }
+            } else {
+                ingredient2 = Ingredient.EMPTY;
+            }
+
+                ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
+                return this.factory.create(pRecipeId, s, ingredient, ingredient2, itemstack);
         }
 
         @Override
         public T fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
             String s = pBuffer.readUtf();
             Ingredient ingredient = Ingredient.fromNetwork(pBuffer);
+            Ingredient ingredient2 = Ingredient.fromNetwork(pBuffer);
             ItemStack itemstack = pBuffer.readItem();
-            return this.factory.create(pRecipeId, s, ingredient, itemstack);
+            return this.factory.create(pRecipeId, s, ingredient,ingredient2, itemstack);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf pBuffer, T pRecipe) {
             pBuffer.writeUtf(pRecipe.group);
             pRecipe.ingredient.toNetwork(pBuffer);
+            pRecipe.ingredient2.toNetwork(pBuffer);
             pBuffer.writeItem(pRecipe.result);
         }
 
-        public interface SingleItemMaker<T extends AbstractAnvilForgeingRecipe> {
-            T create(ResourceLocation pId, String pGroup, Ingredient pIngredient, ItemStack pResult);
+        public interface DualItemMaker<T extends AbstractAnvilForgingRecipe> {
+            T create(ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult);
         }
     }
 }
