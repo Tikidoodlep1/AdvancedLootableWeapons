@@ -326,7 +326,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
         for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
             WeaponMaterial weaponMaterial = entry.getValue();
-            if (weaponMaterial != WeaponMaterial.NULL) {
+            if (weaponMaterial.metalStats() != null) {
                 ItemStack toolHead = createToolHead(weaponMaterial);
                 AnvilForgingRecipeBuilder.anvilMaterialForging(weaponMaterial.tier().getRepairIngredient(), toolHead)
                         .save(recipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID, "anvil_forging_tool_head_" + entry.getKey()));

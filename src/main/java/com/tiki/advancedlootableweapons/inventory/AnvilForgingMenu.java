@@ -38,6 +38,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	private List<AbstractAnvilForgingRecipe> recipes = Lists.newArrayList();
 	/** The {@plainlink ItemStack} set in the input slot by the player. */
 	private ItemStack input = ItemStack.EMPTY;
+	private ItemStack input2 = ItemStack.EMPTY;
 	/**
 	 * Stores the game time of the last time the player took items from the the crafting result slot. This is used to
 	 * prevent the sound from being played multiple times on the same tick.
@@ -79,10 +80,12 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 			/**
 			 * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
 			 */
+			@Override
 			public boolean mayPlace(ItemStack p_40362_) {
 				return false;
 			}
 
+			@Override
 			public void onTake(Player p_150672_, ItemStack p_150673_) {
 				p_150673_.onCraftedBy(p_150672_.level, p_150672_, p_150673_.getCount());
 				AnvilForgingMenu.this.resultContainer.awardUsedRecipes(p_150672_);
@@ -138,6 +141,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	/**
 	 * Determines whether supplied player can use this container
 	 */
+	@Override
 	public boolean stillValid(Player pPlayer) {
 		return stillValid(this.access, pPlayer, BlockTags.ANVIL);
 	}
@@ -150,6 +154,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	/**
 	 * Handles the given Button-click on the server, currently only used by enchanting. Name is for legacy.
 	 */
+	@Override
 	public boolean clickMenuButton(Player pPlayer, int pId) {
 		if (this.isValidRecipeIndex(pId)) {
 			this.selectedRecipeIndex.set(pId);
@@ -166,13 +171,16 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	/**
 	 * Callback for when the crafting matrix is changed.
 	 */
+	@Override
 	public void slotsChanged(Container pInventory) {
 	}
 
 	public void slotsChanged(ItemStackHandler handler) {
-		ItemStack itemstack = this.inputSlot1.getItem();
-		if (!itemstack.is(this.input.getItem())) {
-			this.input = itemstack.copy();
+		ItemStack itemstack = inputSlot1.getItem();
+		ItemStack itemstack2 = inputSlot2.getItem();
+		if (!itemstack.is(input.getItem()) || !itemstack2.is(input2.getItem())) {
+			input = itemstack.copy();
+			input2 = itemstack2.copy();
 			this.setupRecipeList(new RecipeWrapper(handler), itemstack);
 		}
 	}
@@ -199,6 +207,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		this.broadcastChanges();
 	}
 
+	@Override
 	public MenuType<?> getType() {
 		return MenuInit.ANVIL_FORGING.get();
 	}
@@ -211,6 +220,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	 * Called to determine if the current slot is valid for the stack merging (double-click) code. The stack passed in is
 	 * null for the initial slot that was double-clicked.
 	 */
+	@Override
 	public boolean canTakeItemForPickAll(ItemStack pStack, Slot pSlot) {
 		return pSlot.container != this.resultContainer && super.canTakeItemForPickAll(pStack, pSlot);
 	}
@@ -219,6 +229,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	 * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player
 	 * inventory and the other inventory(s).
 	 */
+	@Override
 	public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(pIndex);
@@ -275,6 +286,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	/**
 	 * Called when the container is closed.
 	 */
+	@Override
 	public void removed(Player pPlayer) {
 		super.removed(pPlayer);
 		this.resultContainer.removeItemNoUpdate(1);
