@@ -1,7 +1,8 @@
-package com.tiki.advancedlootableweapons.recipes;
+package com.tiki.advancedlootableweapons.recipes.anvilforging;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -19,6 +20,7 @@ public class AnvilToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	 */
 	@Override
 	public boolean matches(RecipeWrapper pInv, Level pLevel) {
+
 		return this.ingredient.test(pInv.getItem(0));
 	}
 

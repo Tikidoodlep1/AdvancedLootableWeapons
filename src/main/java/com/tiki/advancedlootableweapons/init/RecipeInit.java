@@ -3,6 +3,9 @@ package com.tiki.advancedlootableweapons.init;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.recipes.*;
 
+import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilMaterialForgingRecipe;
+import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilToolForgingRecipe;
+import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilTwoToolForgingRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +24,9 @@ public class RecipeInit {
 
 	public static final RegistryObject<RecipeSerializer<AnvilToolForgingRecipe>> ANVIL_TOOL_FORGING_RECIPE = RECIPE_SERIALIZERS.register("anvil_tool_forging",
 			() -> new AbstractAnvilForgingRecipe.Serializer<>(AnvilToolForgingRecipe::new));
+
+	public static final RegistryObject<RecipeSerializer<AnvilTwoToolForgingRecipe>> ANVIL_TWO_TOOL_FORGING_RECIPE = RECIPE_SERIALIZERS.register("anvil_two_tool_forging",
+			() -> new AbstractAnvilForgingRecipe.Serializer<>(AnvilTwoToolForgingRecipe::new));
 
 	public static final RegistryObject<RecipeSerializer<JawCrusherRecipe>> JAW_CRUSHER_RECIPE = RECIPE_SERIALIZERS.register("crushing",
 			JawCrusherRecipe.Serializer::new);

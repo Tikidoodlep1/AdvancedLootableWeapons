@@ -23,31 +23,31 @@ import java.util.function.Consumer;
 public class AnvilForgingRecipeBuilder implements RecipeBuilder {
     private final ItemStack result;
     private final Ingredient ingredient;
+    @Nullable
+    private final Ingredient ingredient2;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
     @Nullable
     private String group;
     private final RecipeSerializer<?> type;
 
-    public AnvilForgingRecipeBuilder(RecipeSerializer<?> pType, Ingredient pIngredient, ItemStack result) {
+    public AnvilForgingRecipeBuilder(RecipeSerializer<?> pType, Ingredient pIngredient, @Nullable Ingredient ingredient2, ItemStack result) {
         this.type = pType;
         this.result = result;
         this.ingredient = pIngredient;
-    }
-
-    public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemLike pResult) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient, new ItemStack(pResult));
-    }
-
-    public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemLike pResult, int pCount) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient,new ItemStack(pResult, pCount));
+        this.ingredient2 = ingredient2;
     }
 
     public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemStack stack) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient,stack);
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient, null, stack);
     }
 
     public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(),Ingredient.of(ingredient),new ItemStack(result));
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(), Ingredient.of(ingredient), null, new ItemStack(result));
+    }
+
+    public static AnvilForgingRecipeBuilder anvilTwoToolForging(ItemLike ingredient,ItemLike ingredient2,ItemLike result) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TWO_TOOL_FORGING_RECIPE.get(),Ingredient.of(ingredient),Ingredient.of(ingredient2),
+                new ItemStack(result));
     }
 
 
@@ -68,7 +68,7 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
     public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
         //this.ensureValid(pRecipeId);
         this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId)).rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
-        pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.type, this.group == null ? "" : this.group, this.ingredient, this.result, this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+        pFinishedRecipeConsumer.accept(new Result(pRecipeId, this.type, this.group == null ? "" : this.group, this.ingredient,ingredient2, this.result, this.advancement, new ResourceLocation(pRecipeId.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
     }
 
     private void ensureValid(ResourceLocation pId) {
@@ -81,16 +81,19 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation id;
         private final String group;
         private final Ingredient ingredient;
+        @Nullable
+        private final Ingredient ingredient2;
         private final ItemStack result;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
         private final RecipeSerializer<?> type;
 
-        public Result(ResourceLocation pId, RecipeSerializer<?> pType, String pGroup, Ingredient pIngredient, ItemStack pResult, Advancement.Builder pAdvancement, ResourceLocation pAdvancementId) {
+        public Result(ResourceLocation pId, RecipeSerializer<?> pType, String pGroup, Ingredient pIngredient, @Nullable Ingredient ingredient2, ItemStack pResult, Advancement.Builder pAdvancement, ResourceLocation pAdvancementId) {
             this.id = pId;
             this.type = pType;
             this.group = pGroup;
             this.ingredient = pIngredient;
+            this.ingredient2 = ingredient2;
             this.result = pResult;
             this.advancement = pAdvancement;
             this.advancementId = pAdvancementId;
@@ -102,6 +105,11 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
             }
 
             pJson.add("ingredient", this.ingredient.toJson());
+
+            if (ingredient2 != null) {
+                pJson.add("ingredient2", this.ingredient2.toJson());
+            }
+
             pJson.add("result", serializeStack(result));
         }
 

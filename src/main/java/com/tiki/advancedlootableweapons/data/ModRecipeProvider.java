@@ -336,6 +336,12 @@ public class ModRecipeProvider extends RecipeProvider {
         AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.HOT_TOOL_ROD.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod"));
 
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_ROD.get(), ItemInit.HOT_TOOL_ROD_2.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod_2"));
+
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.LONG_TOOL_ROD.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_long_tool_rod"));
+
     }
 
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {

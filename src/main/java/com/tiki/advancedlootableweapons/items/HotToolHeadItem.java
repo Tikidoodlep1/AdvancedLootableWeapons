@@ -8,15 +8,12 @@ import javax.annotation.Nullable;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
-import com.tiki.advancedlootableweapons.init.ModMaterials;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,12 +24,14 @@ public class HotToolHeadItem extends Item {
     private final HotToolHeadItem next;
     private final int level;
     private final boolean finished;
+    private final boolean isMain;
 
-    public HotToolHeadItem(@Nullable HotToolHeadItem next, int level, boolean finished, Properties prop) {
+    public HotToolHeadItem(@Nullable HotToolHeadItem next, int level, boolean isMain, Properties prop) {
         super(prop);
         this.next = next;
         this.level = level;
-        this.finished = finished;
+        this.finished = next == null;
+        this.isMain = isMain;
     }
 
     //         nbt.putString("material", "null");
@@ -75,7 +74,7 @@ public class HotToolHeadItem extends Item {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
         }
 
-        if(nbt!= null && this.isFinished()) {
+        if(nbt!= null && isMain) {
             boolean quenched = nbt.getBoolean("quenched");
             tooltip.add(quenched ? MCVersion.translation(QUENCH_KEY).withStyle(ChatFormatting.BLUE) :
                     MCVersion.translation(UNQUENCH_KEY).withStyle(ChatFormatting.RED));

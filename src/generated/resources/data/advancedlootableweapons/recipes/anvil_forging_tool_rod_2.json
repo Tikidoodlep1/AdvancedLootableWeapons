@@ -1,0 +1,9 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:hot_tool_rod"
+  },
+  "result": {
+    "item": "advancedlootableweapons:hot_tool_rod_2"
+  }
+}
