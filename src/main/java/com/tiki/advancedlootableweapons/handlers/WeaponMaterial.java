@@ -34,7 +34,7 @@ public record WeaponMaterial(Tier tier, MetalStats metalStats) {
 
 		LOOKUP.put("steel",STEEL);
 
-		LOOKUP.put("null",NULL);
+		LOOKUP.put("",NULL);
 	}
 
 	public static String getMaterialNameF(WeaponMaterial mat) {
@@ -43,6 +43,6 @@ public record WeaponMaterial(Tier tier, MetalStats metalStats) {
 				return e.getKey();
 			}
 		}
-		return "null";
+		return "";
 	}
 }

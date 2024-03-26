@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.recipes.anvilforging;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +21,9 @@ public class AnvilTwoToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	 */
 	@Override
 	public boolean matches(RecipeWrapper pInv, Level pLevel) {
-		return this.ingredient.test(pInv.getItem(0)) && this.ingredient2.test(pInv.getItem(1));
+		ItemStack stackA = pInv.getItem(0);
+		ItemStack stackB = pInv.getItem(1);
+		return this.ingredient.test(stackA) && this.ingredient2.test(stackB) && HotToolHeadItem.isSameMaterial(stackA,stackB);
 	}
 
 	@Override

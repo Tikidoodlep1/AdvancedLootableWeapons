@@ -3,6 +3,7 @@ package com.tiki.advancedlootableweapons.inventory;
 import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
+import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -178,7 +179,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	public void slotsChanged(ItemStackHandler handler) {
 		ItemStack itemstack = inputSlot1.getItem();
 		ItemStack itemstack2 = inputSlot2.getItem();
-		if (!itemstack.is(input.getItem()) || !itemstack2.is(input2.getItem())) {
+		if (!ItemStack.isSameItemSameTags(itemstack,input) || !ItemStack.isSameItemSameTags(itemstack2,input2)) {
 			input = itemstack.copy();
 			input2 = itemstack2.copy();
 			this.setupRecipeList(new RecipeWrapper(handler), itemstack);
@@ -255,7 +256,8 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 			}
 
 
-			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, new RecipeWrapper(handler), this.level).isPresent()) {
+			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, new RecipeWrapper(handler), this.level).isPresent()
+					|| itemstack.getItem() instanceof HotToolHeadItem) {
 				if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 					return ItemStack.EMPTY;
 				}

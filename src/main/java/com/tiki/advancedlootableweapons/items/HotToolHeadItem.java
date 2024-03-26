@@ -21,14 +21,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 public class HotToolHeadItem extends Item {
-    private final HotToolHeadItem next;
     private final int level;
     private final boolean finished;
     private final boolean isMain;
 
     public HotToolHeadItem(@Nullable HotToolHeadItem next, int level, boolean isMain, Properties prop) {
         super(prop);
-        this.next = next;
         this.level = level;
         this.finished = next == null;
         this.isMain = isMain;
@@ -37,10 +35,6 @@ public class HotToolHeadItem extends Item {
     //         nbt.putString("material", "null");
     //        nbt.putDouble("addedDamage", 0.0D);
     //        nbt.putInt("addedDurability", 0);
-
-    public HotToolHeadItem getNextToolHead() {
-        return this.next;
-    }
 
     public int getLevel() {
         return this.level;
@@ -51,15 +45,21 @@ public class HotToolHeadItem extends Item {
     }
 
     public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
-        stack.getOrCreateTag().putString("material", WeaponMaterial.getMaterialNameF(mat));
+        setMaterial(stack,WeaponMaterial.getMaterialNameF(mat));
     }
 
-    public void setMaterial(ItemStack stack,String matName) {
+    public static void setMaterial(ItemStack stack,String matName) {
         stack.getOrCreateTag().putString("material", matName);
     }
 
-    public String getMaterial(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getString("material") : "null";
+    public static String getMaterial(ItemStack stack) {
+        return stack.hasTag() ? stack.getTag().getString("material") : "";
+    }
+
+    public static boolean isSameMaterial(ItemStack stackA,ItemStack stackB) {
+        String matA = getMaterial(stackA);
+        String matB = getMaterial(stackB);
+        return Objects.equals(matA,matB);
     }
 
     public static final String QUENCH_KEY ="advancedlootableweapons.tool_head.quenched";
@@ -68,7 +68,7 @@ public class HotToolHeadItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
-        if (!Objects.equals(this.getMaterial(stack), "null")) {
+        if (!getMaterial(stack).isEmpty()) {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("material")));
         } else {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
