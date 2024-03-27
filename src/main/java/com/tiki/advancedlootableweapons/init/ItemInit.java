@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.SharpeningStoneItem;
@@ -70,13 +71,13 @@ public class ItemInit {
     public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
     //tanning
-    public static final RegistryObject<Item> TANNING_KNIFE = ITEMS.register("tanning_knife",() -> new TanningKnifeItem(Tiers.IRON,new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> UNTRIMMED_HIDE = ITEMS.register("untrimmed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> TRIMMED_HIDE = ITEMS.register("trimmed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> CURED_HIDE = ITEMS.register("cured_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> LIMED_HIDE = ITEMS.register("limed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> DELIMED_HIDE = ITEMS.register("delimed_hide",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> SALT = ITEMS.register("salt",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> TANNING_KNIFE = ITEMS.register("tanning_knife", () -> new TanningKnifeItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> UNTRIMMED_HIDE = ITEMS.register("untrimmed_hide", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> TRIMMED_HIDE = ITEMS.register("trimmed_hide", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CURED_HIDE = ITEMS.register("cured_hide", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> LIMED_HIDE = ITEMS.register("limed_hide", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> DELIMED_HIDE = ITEMS.register("delimed_hide", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     //forge hammers
     public static final RegistryObject<Item> STONE_FORGE_HAMMER = ITEMS.register("stone_forge_hammer", () -> new ForgeHammerItem(Tiers.STONE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ForgeHammerItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
@@ -137,7 +138,7 @@ public class ItemInit {
     public static final RegistryObject<Item> OBSIDIAN_ARMOR_PLATE = ITEMS.register("obsidian_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
     public static final RegistryObject<Item> KOBOLD_ARMOR_PLATE = ITEMS.register("kobold_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> SHADOW_PLATINUM_ARMOR_PLATE= ITEMS.register("shadow_platinum_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> SHADOW_PLATINUM_ARMOR_PLATE = ITEMS.register("shadow_platinum_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> FROST_STEEL_ARMOR_PLATE = ITEMS.register("frost_steel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> CRYSTALLITE_ARMOR_PLATE = ITEMS.register("crystallite_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_ARMOR_PLATE = ITEMS.register("dusksteel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
@@ -159,24 +160,28 @@ public class ItemInit {
 
     public static final RegistryObject<Item> LEATHER_BINDING = new ItemArmorBinding("binding_leather", ArmorMaterial.LEATHER);*/
 
-    //////////
+    ////////// weapons
+
+    public static final RegistryObject<AlwWeaponItem> DAGGER = registerWeaponType(WeaponAttributes.DAGGER);
+    public static final RegistryObject<AlwWeaponItem> KABUTOWARI = registerWeaponType(WeaponAttributes.KABUTOWARI);
+    public static final RegistryObject<AlwWeaponItem> RAPIER = registerWeaponType(WeaponAttributes.RAPIER);
+    public static final RegistryObject<AlwWeaponItem> TALWAR = registerWeaponType(WeaponAttributes.TALWAR);
+    public static final RegistryObject<AlwWeaponItem> CLEAVER = registerWeaponType(WeaponAttributes.CLEAVER);
+    public static final RegistryObject<AlwWeaponItem> MACE = registerWeaponType(WeaponAttributes.MACE);
+    public static final RegistryObject<AlwWeaponItem> STAFF = registerWeaponType(WeaponAttributes.STAFF);
+    public static final RegistryObject<AlwWeaponItem> LONGSWORD = registerWeaponType(WeaponAttributes.LONGSWORD);
+    public static final RegistryObject<AlwWeaponItem> KODACHI = registerWeaponType(WeaponAttributes.KODACHI);
+    public static final RegistryObject<AlwWeaponItem> NODACHI = registerWeaponType(WeaponAttributes.NODACHI);
+    public static final RegistryObject<AlwWeaponItem> BATTLEAXE = registerWeaponType(WeaponAttributes.BATTLEAXE);
+    public static final RegistryObject<AlwWeaponItem> ZWEIHANDER = registerWeaponType(WeaponAttributes.ZWEIHANDER);
+    public static final RegistryObject<AlwWeaponItem> SABRE = registerWeaponType(WeaponAttributes.SABRE);
+    public static final RegistryObject<AlwWeaponItem> MAKHAIRA = registerWeaponType(WeaponAttributes.MAKHAIRA);
+    public static final RegistryObject<AlwWeaponItem> SPEAR = registerWeaponType(WeaponAttributes.SPEAR);
 
 
-    public static WeaponAttributes[] attributes;
-
-    public static final List<RegistryObject<AlwWeaponItem>> WEAPONS = new ArrayList<>();
-
-    static {
-
-
-        attributes = Arrays.copyOf(WeaponAttributes.values(), WeaponAttributes.values().length - 2);
-
-        for (WeaponAttributes attribute : attributes) {
-                RegistryObject<AlwWeaponItem> weapon =
-                        ITEMS.register( attribute.getType().toLowerCase(Locale.ROOT),
-                                () -> new AlwWeaponItem(attribute, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-                WEAPONS.add(weapon);
-            }
+    private static RegistryObject<AlwWeaponItem> registerWeaponType(WeaponAttributes weaponAttributes) {
+        return ITEMS.register(weaponAttributes.getType(),
+                () -> new AlwWeaponItem(weaponAttributes, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     }
 
     public static final RegistryObject<HotToolHeadItem> HOT_TOOL_HEAD = ITEMS.register("hot_tool_head", () -> new HotToolHeadItem(null, 0, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
@@ -267,8 +272,8 @@ public class ItemInit {
     public static final RegistryObject<Item> CRYSTALLITE_WHETSTONE = ITEMS.register("crystallite_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_CRYSTALLITE));
     public static final RegistryObject<Item> DUSKSTEEL_WHETSTONE = ITEMS.register("dusksteel_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_DUSKSTEEL));
 
-    public static final RegistryObject<BucketItem> MILK_OF_LIME_BUCKET = ITEMS.register("milk_of_lime_bucket", () -> new BucketItem(FluidInit.MILK_OF_LIME,new Item.Properties().tab(ModCreativeTabs.BLOCK_TAB)));
-    public static final RegistryObject<BucketItem> MAGNESIUM_LACTATE_BUCKET = ITEMS.register("magnesium_lactate_bucket", () -> new BucketItem(FluidInit.MAGNESIUM_LACTATE,new Item.Properties().tab(ModCreativeTabs.BLOCK_TAB)));
+    public static final RegistryObject<BucketItem> MILK_OF_LIME_BUCKET = ITEMS.register("milk_of_lime_bucket", () -> new BucketItem(FluidInit.MILK_OF_LIME, new Item.Properties().tab(ModCreativeTabs.BLOCK_TAB)));
+    public static final RegistryObject<BucketItem> MAGNESIUM_LACTATE_BUCKET = ITEMS.register("magnesium_lactate_bucket", () -> new BucketItem(FluidInit.MAGNESIUM_LACTATE, new Item.Properties().tab(ModCreativeTabs.BLOCK_TAB)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

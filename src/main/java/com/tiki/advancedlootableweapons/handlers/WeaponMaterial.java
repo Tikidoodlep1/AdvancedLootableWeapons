@@ -1,7 +1,10 @@
 package com.tiki.advancedlootableweapons.handlers;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.ModMaterials;
 import com.tiki.advancedlootableweapons.util.MetalStats;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 
@@ -32,6 +35,10 @@ public record WeaponMaterial(Tier tier, MetalStats metalStats) {
 		LOOKUP.put("dusk_steel",new WeaponMaterial(ModMaterials.MAT_DUSKSTEEL,MetalStats.DUSKSTEEL));
 		LOOKUP.put("crystallite",new WeaponMaterial(ModMaterials.MAT_CRYSTALLITE,MetalStats.CRYSTALLITE));
 		LOOKUP.put("steel",STEEL);
+	}
+
+	public static TranslatableComponent getTranslationKey(String material) {
+		return new TranslatableComponent(AdvancedLootableWeapons.MODID+".material."+material);
 	}
 
 	public static String getMaterialNameF(WeaponMaterial mat) {

@@ -358,6 +358,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head,boolean longHandle) {
+        if (true) return;//todo
         Item handle = longHandle ? ItemInit.LONG_WEAPON_HANDLE.get() : Items.STICK;
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
         ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',handle)

@@ -3,11 +3,13 @@ package com.tiki.advancedlootableweapons.data;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
+import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -175,9 +177,24 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.CRYSTALLITE_ARMOR_PLATE);
         addDefaultItem(ItemInit.DUSKSTEEL_ARMOR_PLATE);
 
+        addDefaultItem(ItemInit.DAGGER);
+        addDefaultItem(ItemInit.KABUTOWARI);
+        addDefaultItem(ItemInit.RAPIER);
+        addDefaultItem(ItemInit.TALWAR);
+        addDefaultItem(ItemInit.CLEAVER);
+        addDefaultItem(ItemInit.MACE);
+        addDefaultItem(ItemInit.STAFF);
+        addDefaultItem(ItemInit.LONGSWORD);
+        addDefaultItem(ItemInit.KODACHI);
+        addDefaultItem(ItemInit.NODACHI);
+        addDefaultItem(ItemInit.BATTLEAXE);
+        addDefaultItem(ItemInit.ZWEIHANDER);
+        addDefaultItem(ItemInit.SABRE);
+        addDefaultItem(ItemInit.MAKHAIRA);
+        addDefaultItem(ItemInit.SPEAR);
 
-        for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
-            addItem(weapon,getNameFromItem(weapon.get()));
+        for (String s : WeaponMaterial.LOOKUP.keySet()) {
+            add(WeaponMaterial.getTranslationKey(s).getKey(),getBasicName(s));
         }
 
         addDefaultItem(ItemInit.TANNING_KNIFE);
@@ -408,6 +425,10 @@ public class ModLangProvider extends LanguageProvider {
 
     public static String getNameFromItem(Item item) {
         return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
+    }
+
+    public static String getBasicName(String key) {
+        return StringUtils.capitaliseAllWords(key.replace("_", " "));
     }
 
 

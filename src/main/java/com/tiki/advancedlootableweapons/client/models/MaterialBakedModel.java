@@ -47,8 +47,7 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
             models.put(entry.getKey(),entry.getValue().bake(bakery,entry.getValue(),spriteGetter,modelTransform,modelLocation,true));
         }
 
-        ItemOverrides customOverrides = new ItemOverrides()
-        {
+        ItemOverrides customOverrides = new ItemOverrides() {
             @Nullable
             @Override
             public BakedModel resolve(BakedModel pModel, ItemStack pStack, @Nullable ClientLevel pLevel, @Nullable LivingEntity pEntity, int pSeed) {
@@ -56,7 +55,7 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
                 if (tag!= null && tag.contains(AlwWeaponItem.MATERIAL_KEY)) {
                     return models.get(tag.getString(AlwWeaponItem.MATERIAL_KEY));
                 }
-                return null;
+                return pModel;
             }
         };
 
@@ -132,7 +131,6 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
 
         @Override
         public void onResourceManagerReload(final ResourceManager pResourceManager) {
-
         }
 
         @Override
@@ -143,11 +141,11 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
 
             for(String s : WeaponMaterial.LOOKUP.keySet()) {
                 JsonObject fakeModel = new JsonObject();
-                fakeModel.addProperty("parent",     new ResourceLocation(AdvancedLootableWeapons.MODID,
+                fakeModel.addProperty("parent",
+                        new ResourceLocation(AdvancedLootableWeapons.MODID,
                         "item/"+folder+"/"+s).toString());
 
-                    BlockModel unbakedModel =
-                            deserializationContext.deserialize(fakeModel, BlockModel.class);
+                    BlockModel unbakedModel = deserializationContext.deserialize(fakeModel, BlockModel.class);
                     models.put(s, unbakedModel);
             }
 

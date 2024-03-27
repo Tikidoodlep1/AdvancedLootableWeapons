@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
 import net.minecraft.ChatFormatting;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -74,7 +76,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
     public MutableComponent getMaterialName(ItemStack stack) {
         CompoundTag tag = stack.getTag();
         if (tag != null && tag.contains(MATERIAL_KEY)) {
-            return new TextComponent(tag.getString(MATERIAL_KEY));
+            return WeaponMaterial.getTranslationKey(tag.getString(MATERIAL_KEY));
         }
         return new TextComponent("");
     }
@@ -132,7 +134,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
 
     @Override
     public Component getName(ItemStack pStack) {
-        return getMaterialName(pStack).append(super.getName(pStack));
+        return getMaterialName(pStack).append(" ").append(super.getName(pStack));
     }
 
     @Override

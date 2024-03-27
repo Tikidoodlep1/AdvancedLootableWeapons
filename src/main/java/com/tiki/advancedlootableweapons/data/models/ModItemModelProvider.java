@@ -187,7 +187,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DUSKSTEEL_ARMOR_PLATE.get());
 
 
-        for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
+      /*  for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;
 
             if (weaponAttributes.isCustomModel()) {
@@ -195,7 +195,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             } else {
                 oneLayerItemHandHeld(weapon.get());
             }
-        }
+        }*/
     }
 
     protected void oneLayerItemWithParent(Item item, ResourceLocation texture,ResourceLocation parent) {

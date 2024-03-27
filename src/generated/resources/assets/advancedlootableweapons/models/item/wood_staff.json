@@ -1,6 +1,0 @@
-{
-  "parent": "advancedlootableweapons:item/staff",
-  "textures": {
-    "layer0": "advancedlootableweapons:item/wood_staff"
-  }
-}
