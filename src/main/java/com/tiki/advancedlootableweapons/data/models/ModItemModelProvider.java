@@ -186,6 +186,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.DUSKSTEEL_ARMOR_PLATE.get());
 
+        for (WeaponAttributes weaponAttributes : WeaponAttributes.values()) {
+            if (weaponAttributes.hasItem()) {
+                String type = weaponAttributes.getType();
+                getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
+            }
+        }
+
 
       /*  for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;
