@@ -1,4 +1,8 @@
 {
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/silver_kodachi"
+  },
   "loader": "advancedlootableweapons:material_loader",
   "folder": "kodachi"
 }

@@ -1,10 +1,10 @@
 package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -16,10 +16,9 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(DataGenerator generator,ExistingFileHelper existingFileHelper) {
+    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, AdvancedLootableWeapons.MODID, existingFileHelper);
     }
 
@@ -96,11 +95,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.TIN_INGOT.get());
 
         getBuilder("milk_of_lime_bucket")
-                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .parent(getExistingFile(new ResourceLocation("forge", "item/bucket")))
                 .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MILK_OF_LIME.get());
 
         getBuilder("magnesium_lactate_bucket")
-                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .parent(getExistingFile(new ResourceLocation("forge", "item/bucket")))
                 .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MAGNESIUM_LACTATE.get());
 
 
@@ -190,6 +189,27 @@ public class ModItemModelProvider extends ItemModelProvider {
             if (weaponAttributes.hasItem()) {
                 String type = weaponAttributes.getType();
                 getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
+
+                for (String material : WeaponMaterial.LOOKUP.keySet()) {
+                    ResourceLocation modelPath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + type + "/" + material);
+                    ResourceLocation texturePath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + material + "_" + type);
+
+                    if (weaponAttributes.isCustomModel()) {
+
+
+                        if (existingFileHelper.exists(texturePath,PackType.CLIENT_RESOURCES, ".png", "textures")) {
+                            ResourceLocation parent = modLoc("item/custom/" + type);
+                            getBuilder(modelPath.getPath()).parent(getExistingFile(parent))
+                                    .texture("layer0", texturePath);
+                        } else {
+                            System.out.println("no texture for " + material + "/" + type + " found, skipping");
+                        }
+
+                        //  oneLayerItemWithParent(weapon.get(), modLoc("item/"+weaponAttributes.name().toLowerCase()));
+                    } else {
+                        oneLayerItemHandHeld(modelPath.getPath(), texturePath);
+                    }
+                }
             }
         }
 
@@ -197,28 +217,8 @@ public class ModItemModelProvider extends ItemModelProvider {
       /*  for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;
 
-            if (weaponAttributes.isCustomModel()) {
-                oneLayerItemWithParent(weapon.get(), modLoc("item/"+weaponAttributes.name().toLowerCase()));
-            } else {
-                oneLayerItemHandHeld(weapon.get());
-            }
+
         }*/
-    }
-
-    protected void oneLayerItemWithParent(Item item, ResourceLocation texture,ResourceLocation parent) {
-        String path = Registry.ITEM.getKey(item).getPath();
-        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
-                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(getExistingFile(parent))
-                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
-        } else {
-            System.out.println("no texture for " + item + " found, skipping");
-        }
-    }
-
-    protected void oneLayerItemWithParent(Item item,ResourceLocation parent) {
-        ResourceLocation texture = Registry.ITEM.getKey(item);
-        oneLayerItemWithParent(item, texture,parent);
     }
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
@@ -235,6 +235,16 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void oneLayerItem(Item item) {
         ResourceLocation texture = Registry.ITEM.getKey(item);
         oneLayerItem(item, texture);
+    }
+
+    protected void oneLayerItemHandHeld(String path, ResourceLocation texture) {
+        if (existingFileHelper.exists(texture
+                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
+            getBuilder(path).parent(getExistingFile(mcLoc("item/handheld")))
+                    .texture("layer0", texture);
+        } else {
+            System.out.println("no texture for " + path + " found, skipping");
+        }
     }
 
     protected void oneLayerItemHandHeld(Item item, ResourceLocation texture) {
@@ -260,7 +270,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void duskSteel() {
         String s = Registry.ITEM.getKey(BlockInit.DUSKSTEEL_BLOCK.get().asItem()).toString();
-        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID,"block/dusksteel_block_0")));//the model is generated
+        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID, "block/dusksteel_block_0")));//the model is generated
     }
 
     protected void simpleBlockItem(Block block) {

@@ -1,0 +1,6 @@
+{
+  "parent": "advancedlootableweapons:item/custom/battleaxe",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/bronze_battleaxe"
+  }
+}
