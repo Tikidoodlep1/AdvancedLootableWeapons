@@ -17,6 +17,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.Map;
+
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, AdvancedLootableWeapons.MODID, existingFileHelper);
@@ -190,27 +192,22 @@ public class ModItemModelProvider extends ItemModelProvider {
                 String type = weaponAttributes.getType();
                 getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
 
-                for (String material : WeaponMaterial.LOOKUP.keySet()) {
-                    ResourceLocation modelPath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + type + "/" + material);
-                    ResourceLocation texturePath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + material + "_" + type);
+                for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
 
-                    if (weaponAttributes.isCustomModel()) {
+                    if (entry.getValue().canMakeWeapon()) {
+                        String material = entry.getKey();
 
-
+                        ResourceLocation modelPath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + type + "/" + material);
+                        ResourceLocation texturePath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + material + "_" + type);
                         if (existingFileHelper.exists(texturePath, PackType.CLIENT_RESOURCES, ".png", "textures")) {
-                            ResourceLocation parent = modLoc("item/custom/" + type);
-                            getBuilder(modelPath.getPath()).parent(getExistingFile(parent))
-                                    .texture("layer0", texturePath);
-                        } else {
-                            System.out.println("no texture for " + material + "/" + type + " found, skipping");
-                        }
-
-                        //  oneLayerItemWithParent(weapon.get(), modLoc("item/"+weaponAttributes.name().toLowerCase()));
-                    } else {
-                        if (existingFileHelper.exists(texturePath
-                                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-                            getBuilder(modelPath.getPath()).parent(getExistingFile(mcLoc("item/handheld")))
-                                    .texture("layer0", texturePath);
+                            if (weaponAttributes.isCustomModel()) {
+                                ResourceLocation parent = modLoc("item/custom/" + type);
+                                getBuilder(modelPath.getPath()).parent(getExistingFile(parent))
+                                        .texture("layer0", texturePath);
+                            } else {
+                                getBuilder(modelPath.getPath()).parent(getExistingFile(mcLoc("item/handheld")))
+                                        .texture("layer0", texturePath);
+                            }
                         } else {
                             System.out.println("no texture for " + material + "/" + type + " found, skipping");
                         }
@@ -218,13 +215,6 @@ public class ModItemModelProvider extends ItemModelProvider {
                 }
             }
         }
-
-
-      /*  for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
-            WeaponAttributes weaponAttributes = weapon.get().attributes;
-
-
-        }*/
     }
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {

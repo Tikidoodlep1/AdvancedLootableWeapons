@@ -198,9 +198,11 @@ public class AlwWeaponItem extends Item implements Vanishable {
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         if (allowdedIn(pCategory)) {
             for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
-                ItemStack stack = new ItemStack(this);
-                stack.getOrCreateTag().putString(MATERIAL_KEY,entry.getKey());
-                pItems.add(stack);
+                if (entry.getValue().canMakeWeapon()) {
+                    ItemStack stack = new ItemStack(this);
+                    stack.getOrCreateTag().putString(MATERIAL_KEY, entry.getKey());
+                    pItems.add(stack);
+                }
             }
         }
     }

@@ -138,20 +138,19 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
             String folder = GsonHelper.getAsString(modelContents,"folder");
 
             Map<String,BlockModel> models = new HashMap<>();
-
-            for(String s : WeaponMaterial.LOOKUP.keySet()) {
-                JsonObject fakeModel = new JsonObject();
-                fakeModel.addProperty("parent",
-                        new ResourceLocation(AdvancedLootableWeapons.MODID,
-                        "item/"+folder+"/"+s).toString());
+            for(Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
+                if (entry.getValue().canMakeWeapon()) {
+                    String material = entry.getKey();
+                    JsonObject fakeModel = new JsonObject();
+                    fakeModel.addProperty("parent",
+                            new ResourceLocation(AdvancedLootableWeapons.MODID,
+                                    "item/" + folder + "/" + entry).toString());
 
                     BlockModel unbakedModel = deserializationContext.deserialize(fakeModel, BlockModel.class);
-                    models.put(s, unbakedModel);
+                    models.put(material, unbakedModel);
+                }
             }
-
-
             return new MaterialBakedModel(models);
         }
     }
-
 }
