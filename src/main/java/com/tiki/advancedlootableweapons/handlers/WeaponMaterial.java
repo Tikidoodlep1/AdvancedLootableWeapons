@@ -31,10 +31,7 @@ public record WeaponMaterial(Tier tier, MetalStats metalStats) {
 		LOOKUP.put("frost_steel",new WeaponMaterial(ModMaterials.MAT_FROST_STEEL,MetalStats.FROST_STEEL));
 		LOOKUP.put("dusk_steel",new WeaponMaterial(ModMaterials.MAT_DUSKSTEEL,MetalStats.DUSKSTEEL));
 		LOOKUP.put("crystallite",new WeaponMaterial(ModMaterials.MAT_CRYSTALLITE,MetalStats.CRYSTALLITE));
-
 		LOOKUP.put("steel",STEEL);
-
-		LOOKUP.put("",NULL);
 	}
 
 	public static String getMaterialNameF(WeaponMaterial mat) {

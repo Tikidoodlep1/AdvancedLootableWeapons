@@ -11,18 +11,16 @@ import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.SharpeningStoneItem;
 import com.tiki.advancedlootableweapons.items.TanningKnifeItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorPlateItem;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.tuple.Pair;
 
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.MODID);
@@ -164,39 +162,21 @@ public class ItemInit {
     //////////
 
 
-    public static final List<Pair<String, Tier>> tiers;
-
     public static WeaponAttributes[] attributes;
 
-    public static final List<RegistryObject<AlwWeapon>> WEAPONS = new ArrayList<>();
+    public static final List<RegistryObject<AlwWeaponItem>> WEAPONS = new ArrayList<>();
 
     static {
 
-        tiers = new ArrayList<>();
-        tiers.add(Pair.of("wood", Tiers.WOOD));
-        tiers.add(Pair.of("iron", Tiers.IRON));
-        tiers.add(Pair.of("kobold", ModMaterials.MAT_KOBOLD));
-        tiers.add(Pair.of("copper", ModMaterials.MAT_COPPER));
-        tiers.add(Pair.of("silver", ModMaterials.MAT_SILVER));
-        tiers.add(Pair.of("bronze", ModMaterials.MAT_BRONZE));
-        tiers.add(Pair.of("platinum", ModMaterials.MAT_PLATINUM));
-        tiers.add(Pair.of("steel", ModMaterials.MAT_STEEL));
-        tiers.add(Pair.of("shadow_platinum", ModMaterials.MAT_SHADOW_PLATINUM));
-        tiers.add(Pair.of("frost_steel", ModMaterials.MAT_FROST_STEEL));
-        tiers.add(Pair.of("obsidian", ModMaterials.MAT_REFINED_OBSIDIAN));
-        tiers.add(Pair.of("crystallite", ModMaterials.MAT_CRYSTALLITE));
-        tiers.add(Pair.of("dusksteel", ModMaterials.MAT_DUSKSTEEL));
 
         attributes = Arrays.copyOf(WeaponAttributes.values(), WeaponAttributes.values().length - 2);
 
         for (WeaponAttributes attribute : attributes) {
-            for (Pair<String, Tier> tier : tiers) {
-                RegistryObject<AlwWeapon> weapon =
-                        ITEMS.register(tier.getLeft() + "_" + attribute.getType().toLowerCase(Locale.ROOT),
-                                () -> new AlwWeapon(tier.getRight(), attribute, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+                RegistryObject<AlwWeaponItem> weapon =
+                        ITEMS.register( attribute.getType().toLowerCase(Locale.ROOT),
+                                () -> new AlwWeaponItem(attribute, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
                 WEAPONS.add(weapon);
             }
-        }
     }
 
     public static final RegistryObject<HotToolHeadItem> HOT_TOOL_HEAD = ITEMS.register("hot_tool_head", () -> new HotToolHeadItem(null, 0, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());

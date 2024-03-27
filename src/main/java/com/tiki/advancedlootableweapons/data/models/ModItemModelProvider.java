@@ -4,7 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -187,7 +187,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DUSKSTEEL_ARMOR_PLATE.get());
 
 
-        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
+        for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
             WeaponAttributes weaponAttributes = weapon.get().attributes;
 
             if (weaponAttributes.isCustomModel()) {

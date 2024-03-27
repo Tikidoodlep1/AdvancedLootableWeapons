@@ -7,7 +7,7 @@ import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -176,7 +176,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.DUSKSTEEL_ARMOR_PLATE);
 
 
-        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
+        for (RegistryObject<AlwWeaponItem> weapon : ItemInit.WEAPONS) {
             addItem(weapon,getNameFromItem(weapon.get()));
         }
 
