@@ -20,7 +20,7 @@ public class MetalStats {
     public static final MetalStats FROST_STEEL = new MetalStats(1442,158,318,1.4);
     public static final MetalStats GOLD = new MetalStats(1337,327,129,2.78);
     public static final MetalStats IRON = new MetalStats(1811, 94, 460, 1.13);
-    public static final MetalStats KOBOLD = new MetalStats(487,183,284,1.22);
+    public static final MetalStats KOBOLD_STEEL = new MetalStats(487,183,284,1.22);
     public static final MetalStats REFINED_OBSIDIAN = new MetalStats(1578,52,837,.35);
     public static final MetalStats PLATINUM = new MetalStats(2041,72,125,3.09);
     public static final MetalStats SHADOW_PLATINUM = new MetalStats(1463,124,627,2.52);

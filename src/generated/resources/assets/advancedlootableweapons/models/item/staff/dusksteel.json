@@ -1,0 +1,6 @@
+{
+  "parent": "advancedlootableweapons:item/custom/staff",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/dusksteel_staff"
+  }
+}

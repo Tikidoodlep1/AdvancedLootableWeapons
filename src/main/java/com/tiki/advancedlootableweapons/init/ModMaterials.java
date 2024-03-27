@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 public class ModMaterials {
     //Mats
     public static final ConfigurableForgeTier MAT_KOBOLD = new ConfigurableForgeTier(1, CommonConfigHandler.KOBOLD_DURABILITY, 6.0F, CommonConfigHandler.KOBOLD_DAMAGE, 22,
-            BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.KOBOLD_INGOT.get()));
+            BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.KOBOLD_STEEL_INGOT.get()));
     public static final ConfigurableForgeTier MAT_COPPER = new ConfigurableForgeTier(1, CommonConfigHandler.COPPER_DURABILITY, 6.0F, CommonConfigHandler.COPPER_DAMAGE, 22,
             BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Items.COPPER_INGOT));
     public static final ConfigurableForgeTier MAT_SILVER = new ConfigurableForgeTier(1, CommonConfigHandler.SILVER_DURABILITY, 7.0F, CommonConfigHandler.SILVER_DAMAGE, 24,

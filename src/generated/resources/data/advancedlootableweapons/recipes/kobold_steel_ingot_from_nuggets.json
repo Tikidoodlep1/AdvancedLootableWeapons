@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "kobold_steel_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "advancedlootableweapons:kobold_steel_nugget"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:kobold_steel_ingot"
+  }
+}

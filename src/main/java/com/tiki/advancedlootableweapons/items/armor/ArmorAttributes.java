@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public enum ArmorAttributes implements ArmorMaterial {
 
     KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY, 22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS, 0.0F, () -> {
-        return Ingredient.of(ItemInit.KOBOLD_INGOT.get());
+        return Ingredient.of(ItemInit.KOBOLD_STEEL_INGOT.get());
     }),
     COPPER("copper", new int[]{2, 3, 4, 2}, CommonConfigHandler.COPPER_ARMOR_DURABILITY, 10, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.COPPER_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(Items.COPPER_INGOT);

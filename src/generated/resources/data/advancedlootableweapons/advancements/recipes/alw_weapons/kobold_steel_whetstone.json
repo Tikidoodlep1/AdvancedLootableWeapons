@@ -2,18 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:kobold_steel_block"
+      "advancedlootableweapons:kobold_steel_whetstone"
     ]
   },
   "criteria": {
-    "has_kobold_steel_ingot": {
+    "has_material": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "advancedlootableweapons:kobold_steel_ingot"
-            ]
+            "tag": "forge:ingots/kobold"
           }
         ]
       }
@@ -21,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:kobold_steel_block"
+        "recipe": "advancedlootableweapons:kobold_steel_whetstone"
       }
     }
   },
   "requirements": [
     [
-      "has_kobold_steel_ingot",
+      "has_material",
       "has_the_recipe"
     ]
   ]

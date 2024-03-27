@@ -88,7 +88,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_INGOT.get());
         oneLayerItem(ItemInit.DUSKSTEEL_INGOT.get());
         oneLayerItem(ItemInit.FROST_STEEL_INGOT.get());
-        oneLayerItem(ItemInit.KOBOLD_INGOT.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_INGOT.get());
         oneLayerItem(ItemInit.PLATINUM_INGOT.get());
         oneLayerItem(ItemInit.REFINED_OBSIDIAN_INGOT.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_INGOT.get());
@@ -110,7 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_NUGGET.get());
         oneLayerItem(ItemInit.DUSKSTEEL_NUGGET.get());
         oneLayerItem(ItemInit.FROST_STEEL_NUGGET.get());
-        oneLayerItem(ItemInit.KOBOLD_NUGGET.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_NUGGET.get());
         oneLayerItem(ItemInit.PLATINUM_NUGGET.get());
         oneLayerItem(ItemInit.REFINED_OBSIDIAN_NUGGET.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_NUGGET.get());
@@ -124,9 +124,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DUSKSTEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.FROST_STEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.IRON_WHETSTONE.get());
-        oneLayerItem(ItemInit.KOBOLD_WHETSTONE.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.PLATINUM_WHETSTONE.get());
-        oneLayerItem(ItemInit.OBSIDIAN_WHETSTONE.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_WHETSTONE.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_WHETSTONE.get());
         oneLayerItem(ItemInit.SILVER_WHETSTONE.get());
         oneLayerItem(ItemInit.STEEL_WHETSTONE.get());
@@ -151,8 +151,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.BRONZE_CHAIN_LINK.get());
         oneLayerItem(ItemInit.PLATINUM_CHAIN_LINK.get());
         oneLayerItem(ItemInit.STEEL_CHAIN_LINK.get());
-        oneLayerItem(ItemInit.OBSIDIAN_CHAIN_LINK.get());
-        oneLayerItem(ItemInit.KOBOLD_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get());
         oneLayerItem(ItemInit.FROST_STEEL_CHAIN_LINK.get());
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
@@ -180,8 +180,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.BRONZE_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.PLATINUM_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.STEEL_ARMOR_PLATE.get());
-        oneLayerItem(ItemInit.OBSIDIAN_ARMOR_PLATE.get());
-        oneLayerItem(ItemInit.KOBOLD_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.FROST_STEEL_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.CRYSTALLITE_ARMOR_PLATE.get());
