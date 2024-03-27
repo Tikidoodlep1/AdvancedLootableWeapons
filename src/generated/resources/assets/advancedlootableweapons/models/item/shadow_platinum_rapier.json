@@ -1,6 +1,0 @@
-{
-  "parent": "advancedlootableweapons:item/rapier",
-  "textures": {
-    "layer0": "advancedlootableweapons:item/shadow_platinum_rapier"
-  }
-}

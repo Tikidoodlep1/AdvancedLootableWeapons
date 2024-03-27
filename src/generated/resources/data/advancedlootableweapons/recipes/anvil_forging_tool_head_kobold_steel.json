@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:anvil_material_forging",
   "ingredient": {
-    "item": "advancedlootableweapons:kobold_ingot"
+    "item": "advancedlootableweapons:kobold_steel_ingot"
   },
   "result": {
     "item": "advancedlootableweapons:hot_tool_head",

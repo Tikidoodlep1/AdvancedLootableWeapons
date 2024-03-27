@@ -1,5 +1,7 @@
 package com.tiki.advancedlootableweapons.client;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.client.models.MaterialBakedModel;
 import com.tiki.advancedlootableweapons.client.screens.AnvilForgingScreen;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
@@ -14,9 +16,9 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import static com.tiki.advancedlootableweapons.AdvancedLootableWeapons.MODID;
 
 public class ALWClient {
 
@@ -30,9 +32,15 @@ public class ALWClient {
         event.enqueueWork(ALWClient::registerItemModelPredicates);
         BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), DrumBlockEntityRenderer::new);
     }
+
+    public static final ResourceLocation MATERIAL_LOADER = new ResourceLocation(AdvancedLootableWeapons.MODID,"material_loader");
+
+    public static void models(ModelRegistryEvent event) {
+        ModelLoaderRegistry.registerLoader(MATERIAL_LOADER, MaterialBakedModel.Loader.INSTANCE);
+    }
     public static void registerItemModelPredicates() {
         for(Item i : ItemInit.hotToolHeads) {
-            ItemProperties.register(i, new ResourceLocation(MODID, "heat"), HEAT_FUNCTION_WRAPPER);
+            ItemProperties.register(i, new ResourceLocation(AdvancedLootableWeapons.MODID, "heat"), HEAT_FUNCTION_WRAPPER);
         }
     }
 }

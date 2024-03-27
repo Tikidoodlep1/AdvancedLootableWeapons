@@ -1,10 +1,10 @@
 package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -16,10 +16,11 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Map;
 
 public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(DataGenerator generator,ExistingFileHelper existingFileHelper) {
+    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, AdvancedLootableWeapons.MODID, existingFileHelper);
     }
 
@@ -87,7 +88,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_INGOT.get());
         oneLayerItem(ItemInit.DUSKSTEEL_INGOT.get());
         oneLayerItem(ItemInit.FROST_STEEL_INGOT.get());
-        oneLayerItem(ItemInit.KOBOLD_INGOT.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_INGOT.get());
         oneLayerItem(ItemInit.PLATINUM_INGOT.get());
         oneLayerItem(ItemInit.REFINED_OBSIDIAN_INGOT.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_INGOT.get());
@@ -96,11 +97,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.TIN_INGOT.get());
 
         getBuilder("milk_of_lime_bucket")
-                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .parent(getExistingFile(new ResourceLocation("forge", "item/bucket")))
                 .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MILK_OF_LIME.get());
 
         getBuilder("magnesium_lactate_bucket")
-                .parent(getExistingFile(new ResourceLocation("forge","item/bucket")))
+                .parent(getExistingFile(new ResourceLocation("forge", "item/bucket")))
                 .customLoader(DynamicBucketModelBuilder::begin).fluid(FluidInit.MAGNESIUM_LACTATE.get());
 
 
@@ -109,7 +110,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_NUGGET.get());
         oneLayerItem(ItemInit.DUSKSTEEL_NUGGET.get());
         oneLayerItem(ItemInit.FROST_STEEL_NUGGET.get());
-        oneLayerItem(ItemInit.KOBOLD_NUGGET.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_NUGGET.get());
         oneLayerItem(ItemInit.PLATINUM_NUGGET.get());
         oneLayerItem(ItemInit.REFINED_OBSIDIAN_NUGGET.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_NUGGET.get());
@@ -123,9 +124,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DUSKSTEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.FROST_STEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.IRON_WHETSTONE.get());
-        oneLayerItem(ItemInit.KOBOLD_WHETSTONE.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_WHETSTONE.get());
         oneLayerItem(ItemInit.PLATINUM_WHETSTONE.get());
-        oneLayerItem(ItemInit.OBSIDIAN_WHETSTONE.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_WHETSTONE.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_WHETSTONE.get());
         oneLayerItem(ItemInit.SILVER_WHETSTONE.get());
         oneLayerItem(ItemInit.STEEL_WHETSTONE.get());
@@ -150,8 +151,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.BRONZE_CHAIN_LINK.get());
         oneLayerItem(ItemInit.PLATINUM_CHAIN_LINK.get());
         oneLayerItem(ItemInit.STEEL_CHAIN_LINK.get());
-        oneLayerItem(ItemInit.OBSIDIAN_CHAIN_LINK.get());
-        oneLayerItem(ItemInit.KOBOLD_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get());
         oneLayerItem(ItemInit.FROST_STEEL_CHAIN_LINK.get());
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
@@ -179,39 +180,41 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.BRONZE_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.PLATINUM_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.STEEL_ARMOR_PLATE.get());
-        oneLayerItem(ItemInit.OBSIDIAN_ARMOR_PLATE.get());
-        oneLayerItem(ItemInit.KOBOLD_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.FROST_STEEL_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.CRYSTALLITE_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.DUSKSTEEL_ARMOR_PLATE.get());
 
+        for (WeaponAttributes weaponAttributes : WeaponAttributes.values()) {
+            if (weaponAttributes.hasItem()) {
+                String type = weaponAttributes.getType();
+                getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
 
-        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
-            WeaponAttributes weaponAttributes = weapon.get().attributes;
+                for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
 
-            if (weaponAttributes.isCustomModel()) {
-                oneLayerItemWithParent(weapon.get(), modLoc("item/"+weaponAttributes.name().toLowerCase()));
-            } else {
-                oneLayerItemHandHeld(weapon.get());
+                    if (entry.getValue().canMakeWeapon()) {
+                        String material = entry.getKey();
+
+                        ResourceLocation modelPath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + type + "/" + material);
+                        ResourceLocation texturePath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + material + "_" + type);
+                        if (existingFileHelper.exists(texturePath, PackType.CLIENT_RESOURCES, ".png", "textures")) {
+                            if (weaponAttributes.isCustomModel()) {
+                                ResourceLocation parent = modLoc("item/custom/" + type);
+                                getBuilder(modelPath.getPath()).parent(getExistingFile(parent))
+                                        .texture("layer0", texturePath);
+                            } else {
+                                getBuilder(modelPath.getPath()).parent(getExistingFile(mcLoc("item/handheld")))
+                                        .texture("layer0", texturePath);
+                            }
+                        } else {
+                            System.out.println("no texture for " + material + "/" + type + " found, skipping");
+                        }
+                    }
+                }
             }
         }
-    }
-
-    protected void oneLayerItemWithParent(Item item, ResourceLocation texture,ResourceLocation parent) {
-        String path = Registry.ITEM.getKey(item).getPath();
-        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
-                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(getExistingFile(parent))
-                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
-        } else {
-            System.out.println("no texture for " + item + " found, skipping");
-        }
-    }
-
-    protected void oneLayerItemWithParent(Item item,ResourceLocation parent) {
-        ResourceLocation texture = Registry.ITEM.getKey(item);
-        oneLayerItemWithParent(item, texture,parent);
     }
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
@@ -253,7 +256,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void duskSteel() {
         String s = Registry.ITEM.getKey(BlockInit.DUSKSTEEL_BLOCK.get().asItem()).toString();
-        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID,"block/dusksteel_block_0")));//the model is generated
+        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID, "block/dusksteel_block_0")));//the model is generated
     }
 
     protected void simpleBlockItem(Block block) {

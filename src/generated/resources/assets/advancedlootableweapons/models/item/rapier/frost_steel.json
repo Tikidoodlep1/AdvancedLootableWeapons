@@ -1,0 +1,6 @@
+{
+  "parent": "advancedlootableweapons:item/custom/rapier",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/frost_steel_rapier"
+  }
+}

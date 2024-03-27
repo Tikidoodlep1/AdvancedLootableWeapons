@@ -1,6 +1,0 @@
-{
-  "parent": "advancedlootableweapons:item/kabutowari",
-  "textures": {
-    "layer0": "advancedlootableweapons:item/steel_kabutowari"
-  }
-}

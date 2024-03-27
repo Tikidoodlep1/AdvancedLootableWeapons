@@ -3,11 +3,11 @@ package com.tiki.advancedlootableweapons.data;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeapon;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -17,7 +17,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
 
 import java.util.function.Supplier;
@@ -123,7 +122,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.CRYSTALLITE_INGOT);
         addDefaultItem(ItemInit.DUSKSTEEL_INGOT);
         addDefaultItem(ItemInit.FROST_STEEL_INGOT);
-        addDefaultItem(ItemInit.KOBOLD_INGOT);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_INGOT);
         addDefaultItem(ItemInit.PLATINUM_INGOT);
         addDefaultItem(ItemInit.REFINED_OBSIDIAN_INGOT);
         addDefaultItem(ItemInit.SHADOW_PLATINUM_INGOT);
@@ -138,7 +137,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.CRYSTALLITE_NUGGET);
         addDefaultItem(ItemInit.DUSKSTEEL_NUGGET);
         addDefaultItem(ItemInit.FROST_STEEL_NUGGET);
-        addDefaultItem(ItemInit.KOBOLD_NUGGET);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_NUGGET);
         addDefaultItem(ItemInit.PLATINUM_NUGGET);
         addDefaultItem(ItemInit.REFINED_OBSIDIAN_NUGGET);
         addDefaultItem(ItemInit.SHADOW_PLATINUM_NUGGET);
@@ -153,8 +152,8 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.BRONZE_CHAIN_LINK);
         addDefaultItem(ItemInit.PLATINUM_CHAIN_LINK);
         addDefaultItem(ItemInit.STEEL_CHAIN_LINK);
-        addDefaultItem(ItemInit.OBSIDIAN_CHAIN_LINK);
-        addDefaultItem(ItemInit.KOBOLD_CHAIN_LINK);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_CHAIN_LINK);
         addDefaultItem(ItemInit.SHADOW_PLATINUM_CHAIN_LINK);
         addDefaultItem(ItemInit.FROST_STEEL_CHAIN_LINK);
         addDefaultItem(ItemInit.CRYSTALLITE_CHAIN_LINK);
@@ -168,16 +167,31 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.BRONZE_ARMOR_PLATE);
         addDefaultItem(ItemInit.PLATINUM_ARMOR_PLATE);
         addDefaultItem(ItemInit.STEEL_ARMOR_PLATE);
-        addDefaultItem(ItemInit.OBSIDIAN_ARMOR_PLATE);
-        addDefaultItem(ItemInit.KOBOLD_ARMOR_PLATE);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_ARMOR_PLATE);
         addDefaultItem(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE);
         addDefaultItem(ItemInit.FROST_STEEL_ARMOR_PLATE);
         addDefaultItem(ItemInit.CRYSTALLITE_ARMOR_PLATE);
         addDefaultItem(ItemInit.DUSKSTEEL_ARMOR_PLATE);
 
+        addDefaultItem(ItemInit.DAGGER);
+        addDefaultItem(ItemInit.KABUTOWARI);
+        addDefaultItem(ItemInit.RAPIER);
+        addDefaultItem(ItemInit.TALWAR);
+        addDefaultItem(ItemInit.CLEAVER);
+        addDefaultItem(ItemInit.MACE);
+        addDefaultItem(ItemInit.STAFF);
+        addDefaultItem(ItemInit.LONGSWORD);
+        addDefaultItem(ItemInit.KODACHI);
+        addDefaultItem(ItemInit.NODACHI);
+        addDefaultItem(ItemInit.BATTLEAXE);
+        addDefaultItem(ItemInit.ZWEIHANDER);
+        addDefaultItem(ItemInit.SABRE);
+        addDefaultItem(ItemInit.MAKHAIRA);
+        addDefaultItem(ItemInit.SPEAR);
 
-        for (RegistryObject<AlwWeapon> weapon : ItemInit.WEAPONS) {
-            addItem(weapon,getNameFromItem(weapon.get()));
+        for (String s : WeaponMaterial.LOOKUP.keySet()) {
+            add(WeaponMaterial.getTranslationKey(s).getKey(),getBasicName(s));
         }
 
         addDefaultItem(ItemInit.TANNING_KNIFE);
@@ -221,9 +235,9 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.CRYSTALLITE_WHETSTONE);
         addDefaultItem(ItemInit.DUSKSTEEL_WHETSTONE);
         addDefaultItem(ItemInit.FROST_STEEL_WHETSTONE);
-        addDefaultItem(ItemInit.KOBOLD_WHETSTONE);
+        addDefaultItem(ItemInit.KOBOLD_STEEL_WHETSTONE);
         addDefaultItem(ItemInit.PLATINUM_WHETSTONE);
-        addDefaultItem(ItemInit.OBSIDIAN_WHETSTONE);
+        addDefaultItem(ItemInit.REFINED_OBSIDIAN_WHETSTONE);
         addDefaultItem(ItemInit.SHADOW_PLATINUM_WHETSTONE);
         addDefaultItem(ItemInit.SILVER_WHETSTONE);
         addDefaultItem(ItemInit.STEEL_WHETSTONE);
@@ -408,6 +422,10 @@ public class ModLangProvider extends LanguageProvider {
 
     public static String getNameFromItem(Item item) {
         return StringUtils.capitaliseAllWords(item.getDescriptionId().split("\\.")[2].replace("_", " "));
+    }
+
+    public static String getBasicName(String key) {
+        return StringUtils.capitaliseAllWords(key.replace("_", " "));
     }
 
 

@@ -1,0 +1,6 @@
+{
+  "parent": "advancedlootableweapons:item/custom/kabutowari",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/iron_kabutowari"
+  }
+}

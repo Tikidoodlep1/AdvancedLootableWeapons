@@ -65,8 +65,8 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.DUSKSTEEL_WHETSTONE.get(),ModItemTags.INGOTS_DUSKSTEEL,recipeConsumer);
         sharpeningStone(ItemInit.FROST_STEEL_WHETSTONE.get(),ModItemTags.INGOTS_FROST_STEEL,recipeConsumer);
         sharpeningStone(ItemInit.IRON_WHETSTONE.get(),Tags.Items.INGOTS_IRON,recipeConsumer);
-        sharpeningStone(ItemInit.KOBOLD_WHETSTONE.get(),ModItemTags.INGOTS_KOBOLD,recipeConsumer);
-        sharpeningStone(ItemInit.OBSIDIAN_WHETSTONE.get(),ModItemTags.INGOTS_REFINED_OBSIDIAN,recipeConsumer);
+        sharpeningStone(ItemInit.KOBOLD_STEEL_WHETSTONE.get(),ModItemTags.INGOTS_KOBOLD,recipeConsumer);
+        sharpeningStone(ItemInit.REFINED_OBSIDIAN_WHETSTONE.get(),ModItemTags.INGOTS_REFINED_OBSIDIAN,recipeConsumer);
         sharpeningStone(ItemInit.PLATINUM_WHETSTONE.get(),ModItemTags.INGOTS_PLATINUM,recipeConsumer);
         sharpeningStone(ItemInit.SHADOW_PLATINUM_WHETSTONE.get(),ModItemTags.INGOTS_SHADOW_PLATINUM,recipeConsumer);
         sharpeningStone(ItemInit.SILVER_WHETSTONE.get(),ModItemTags.INGOTS_SILVER,recipeConsumer);
@@ -74,7 +74,7 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.STONE_WHETSTONE.get(), ItemTags.STONE_TOOL_MATERIALS,recipeConsumer);
 
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.DUSKSTEEL_NUGGET.get(),ItemInit.DUSKSTEEL_INGOT.get(),BlockInit.DUSKSTEEL_BLOCK.get());
-        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.KOBOLD_NUGGET.get(),ItemInit.KOBOLD_INGOT.get(),BlockInit.KOBOLD_STEEL_BLOCK.get());
+        nuggetIngotBlockRecipe(recipeConsumer,ItemInit.KOBOLD_STEEL_NUGGET.get(),ItemInit.KOBOLD_STEEL_INGOT.get(),BlockInit.KOBOLD_STEEL_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.TIN_NUGGET.get(),ItemInit.TIN_INGOT.get(),BlockInit.TIN_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.CRYSTALLITE_NUGGET.get(),ItemInit.CRYSTALLITE_INGOT.get(),BlockInit.CRYSTALLITE_BLOCK.get());
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.PLATINUM_NUGGET.get(),ItemInit.PLATINUM_INGOT.get(),BlockInit.PLATINUM_BLOCK.get());
@@ -218,7 +218,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .ingredient2(ModItemTags.INGOTS_SILVER,1)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"frost_steel_alloying"));
 
-        AlloyFurnaceRecipeBuilder.alloy(ItemInit.KOBOLD_INGOT.get(),4)
+        AlloyFurnaceRecipeBuilder.alloy(ItemInit.KOBOLD_STEEL_INGOT.get(),4)
                 .ingredient1(BlockInit.FELDSPAR.get(), 1)
                 .ingredient2(Tags.Items.INGOTS_IRON,2)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kobold_alloying"));
@@ -358,6 +358,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head,boolean longHandle) {
+        if (true) return;//todo
         Item handle = longHandle ? ItemInit.LONG_WEAPON_HANDLE.get() : Items.STICK;
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
         ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',handle)

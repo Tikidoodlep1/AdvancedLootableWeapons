@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:kobold_steel_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_kobold_steel_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:kobold_steel_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:kobold_steel_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_kobold_steel_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

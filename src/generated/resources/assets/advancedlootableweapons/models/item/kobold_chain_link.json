@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "advancedlootableweapons:item/kobold_chain_link"
-  }
-}
