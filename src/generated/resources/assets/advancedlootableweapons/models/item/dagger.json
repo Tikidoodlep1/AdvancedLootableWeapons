@@ -1,8 +1,4 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "advancedlootableweapons:item/silver_dagger"
-  },
   "loader": "advancedlootableweapons:material_loader",
   "folder": "dagger"
 }

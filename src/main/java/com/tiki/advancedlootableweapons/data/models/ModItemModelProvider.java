@@ -197,7 +197,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     if (weaponAttributes.isCustomModel()) {
 
 
-                        if (existingFileHelper.exists(texturePath,PackType.CLIENT_RESOURCES, ".png", "textures")) {
+                        if (existingFileHelper.exists(texturePath, PackType.CLIENT_RESOURCES, ".png", "textures")) {
                             ResourceLocation parent = modLoc("item/custom/" + type);
                             getBuilder(modelPath.getPath()).parent(getExistingFile(parent))
                                     .texture("layer0", texturePath);
@@ -207,7 +207,13 @@ public class ModItemModelProvider extends ItemModelProvider {
 
                         //  oneLayerItemWithParent(weapon.get(), modLoc("item/"+weaponAttributes.name().toLowerCase()));
                     } else {
-                        oneLayerItemHandHeld(modelPath.getPath(), texturePath);
+                        if (existingFileHelper.exists(texturePath
+                                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
+                            getBuilder(modelPath.getPath()).parent(getExistingFile(mcLoc("item/handheld")))
+                                    .texture("layer0", texturePath);
+                        } else {
+                            System.out.println("no texture for " + material + "/" + type + " found, skipping");
+                        }
                     }
                 }
             }
@@ -235,16 +241,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void oneLayerItem(Item item) {
         ResourceLocation texture = Registry.ITEM.getKey(item);
         oneLayerItem(item, texture);
-    }
-
-    protected void oneLayerItemHandHeld(String path, ResourceLocation texture) {
-        if (existingFileHelper.exists(texture
-                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(getExistingFile(mcLoc("item/handheld")))
-                    .texture("layer0", texture);
-        } else {
-            System.out.println("no texture for " + path + " found, skipping");
-        }
     }
 
     protected void oneLayerItemHandHeld(Item item, ResourceLocation texture) {
