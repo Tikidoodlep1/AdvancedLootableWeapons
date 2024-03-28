@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/hot_tool_rod"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 0.0
+      },
+      "model": "advancedlootableweapons:item/hot_tool_rod"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 1.0
+      },
+      "model": "advancedlootableweapons:item/warm_tool_rod"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 2.0
+      },
+      "model": "advancedlootableweapons:item/cool_tool_rod"
+    }
+  ]
+}

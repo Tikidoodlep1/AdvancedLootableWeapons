@@ -146,6 +146,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         duskSteel();
 
+        heatableItem(ItemInit.TOOL_HEAD.get());
+        heatableItem(ItemInit.TOOL_ROD.get());
+        heatableItem(ItemInit.TOOL_ROD_2.get());
+        heatableItem(ItemInit.LONG_TOOL_ROD.get());
+
         heatableItem(ItemInit.DAGGER_HEAD.get());
         heatableItem(ItemInit.DAGGER_HEAD_2.get());
 
@@ -195,6 +200,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         for (WeaponAttributes weaponAttributes : WeaponAttributes.values()) {
             if (weaponAttributes.hasItem()) {
                 String type = weaponAttributes.getType();
+
+                oneLayerItemHandHeld("wooden_"+type+"_head",new ResourceLocation(AdvancedLootableWeapons.MODID,"wooden_"+type+"_head"));
+
                 getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
 
                 for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
@@ -260,6 +268,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
                 , PackType.CLIENT_RESOURCES, ".png", "textures")) {
             getBuilder(path).parent(getExistingFile(mcLoc("item/handheld")))
+                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
+        } else {
+            System.out.println("no texture for " + item + " found, skipping");
+        }
+    }
+
+    protected void oneLayerItemHandHeld(String item, ResourceLocation texture) {
+        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
+                , PackType.CLIENT_RESOURCES, ".png", "textures")) {
+            getBuilder(item).parent(getExistingFile(mcLoc("item/handheld")))
                     .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
         } else {
             System.out.println("no texture for " + item + " found, skipping");

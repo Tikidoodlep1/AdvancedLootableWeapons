@@ -181,10 +181,10 @@ public class ItemInit {
                 () -> new AlwWeaponItem(weaponAttributes, new Item.Properties().tab(ModCreativeTabs.MISC_TAB).durability(2)));
     }
 
-    public static final RegistryObject<HeatableToolPartItem> HOT_TOOL_HEAD = ITEMS.register("hot_tool_head", () -> new HeatableToolPartItem(0, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
+    public static final RegistryObject<HeatableToolPartItem> TOOL_HEAD = ITEMS.register("tool_head", () -> new HeatableToolPartItem(0, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
 
-    public static final RegistryObject<HeatableToolPartItem> HOT_TOOL_ROD_2 = ITEMS.register("hot_tool_rod_2", () -> new HeatableToolPartItem(2, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
-    public static final RegistryObject<HeatableToolPartItem> HOT_TOOL_ROD = ITEMS.register("hot_tool_rod", () -> new HeatableToolPartItem(1, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
+    public static final RegistryObject<HeatableToolPartItem> TOOL_ROD_2 = ITEMS.register("tool_rod_2", () -> new HeatableToolPartItem(2, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
+    public static final RegistryObject<HeatableToolPartItem> TOOL_ROD = ITEMS.register("tool_rod", () -> new HeatableToolPartItem(1, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
     public static final RegistryObject<HeatableToolPartItem> LONG_TOOL_ROD = ITEMS.register("long_tool_rod", () -> new HeatableToolPartItem(3, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());
 
     public static final RegistryObject<HeatableToolPartItem> DAGGER_HEAD_2 = ITEMS.register("dagger_head_2", () -> new HeatableToolPartItem(2, true, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());

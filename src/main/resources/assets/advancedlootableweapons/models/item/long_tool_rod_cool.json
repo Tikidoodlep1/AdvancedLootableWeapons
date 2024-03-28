@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "advancedlootableweapons:item/long_tool_rod_cool"
-	}
-}

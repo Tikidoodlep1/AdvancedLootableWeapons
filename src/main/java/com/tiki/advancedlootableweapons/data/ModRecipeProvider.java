@@ -334,33 +334,33 @@ public class ModRecipeProvider extends RecipeProvider {
             }
         }
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.HOT_TOOL_ROD.get())
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TOOL_ROD.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod"));
 
         //dagger chain
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get())
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head"));
 
         AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head_2"));
 
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.DAGGER.get())
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.DAGGER.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger"));
 
 
         //tool rods
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_ROD.get(), ItemInit.HOT_TOOL_ROD_2.get())
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod_2"));
 
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.LONG_TOOL_ROD.get())
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.TOOL_ROD_2.get(),ItemInit.TOOL_ROD_2.get(),ItemInit.LONG_TOOL_ROD.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_long_tool_rod"));
 
     }
 
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
-        ItemStack stack = new ItemStack(ItemInit.HOT_TOOL_HEAD.get());
+        ItemStack stack = new ItemStack(ItemInit.TOOL_HEAD.get());
         HeatableToolPartItem.setMaterial(stack,weaponMaterial);
         HeatableToolPartItem.setTemperature(stack,0);
         return stack;

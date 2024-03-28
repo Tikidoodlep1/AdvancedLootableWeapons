@@ -4,7 +4,7 @@
     "item": "advancedlootableweapons:bronze_ingot"
   },
   "result": {
-    "item": "advancedlootableweapons:hot_tool_head",
+    "item": "advancedlootableweapons:tool_head",
     "Count": 1,
     "nbt": "{Damage:6000,material:\"bronze\"}"
   }

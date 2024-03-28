@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/wooden_rapier_head"
+  }
+}
