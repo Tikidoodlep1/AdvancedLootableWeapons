@@ -178,7 +178,7 @@ public class ItemInit {
 
     private static RegistryObject<AlwWeaponItem> registerWeaponType(WeaponAttributes weaponAttributes) {
         return ITEMS.register(weaponAttributes.getType(),
-                () -> new AlwWeaponItem(weaponAttributes, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+                () -> new AlwWeaponItem(weaponAttributes, new Item.Properties().tab(ModCreativeTabs.MISC_TAB).durability(2)));
     }
 
     public static final RegistryObject<HotToolHeadItem> HOT_TOOL_HEAD = ITEMS.register("hot_tool_head", () -> new HotToolHeadItem(null, 0, false, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB).durability(6000).setNoRepair()).addToRegistryMap());

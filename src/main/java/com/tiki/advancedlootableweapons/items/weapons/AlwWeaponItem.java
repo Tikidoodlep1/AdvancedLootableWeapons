@@ -2,7 +2,9 @@ package com.tiki.advancedlootableweapons.items.weapons;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
@@ -38,9 +40,12 @@ import net.minecraftforge.common.util.Lazy;
 public class AlwWeaponItem extends Item implements Vanishable {
 
     public static final String MATERIAL_KEY = "material";
+    public static final String BONUS_DURABILITY_KEY = "bonus_durability";
     private final double attackDamage;
     public final WeaponAttributes attributes;
     private final Lazy<Multimap<Attribute, AttributeModifier>> defaultModifiers;
+
+    private static final UUID MATERIAL_UUID = UUID.fromString("2e03b879-e09e-41b4-b64e-93a10fa31944");
     
     public AlwWeaponItem(WeaponAttributes attributes, Item.Properties pProperties) {
         super(pProperties);
@@ -93,8 +98,12 @@ public class AlwWeaponItem extends Item implements Vanishable {
     public int getMaxDamage(ItemStack stack) {
         int maxDur = super.getMaxDamage(stack);
         CompoundTag tag = stack.getTag();
-        if(tag != null && tag.contains("addedDurability")) {
-            maxDur += tag.getInt("addedDurability");
+        if (tag != null) {
+            WeaponMaterial weaponMaterial = getMaterial(stack);
+            maxDur = weaponMaterial.tier().getUses();
+            if (tag.contains(BONUS_DURABILITY_KEY)) {
+                maxDur += tag.getInt(BONUS_DURABILITY_KEY);
+            }
         }
         return maxDur;
     }
@@ -163,23 +172,21 @@ public class AlwWeaponItem extends Item implements Vanishable {
     }
     
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot,ItemStack stack) {
         if(slot == EquipmentSlot.MAINHAND) {
-            return this.defaultModifiers.get();
+
+            Multimap<Attribute,AttributeModifier> baseModifiers = ArrayListMultimap.create(defaultModifiers.get());
+            WeaponMaterial material = getMaterial(stack);
+
+            baseModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(MATERIAL_UUID, "Material modifier",material.tier().getAttackDamageBonus(),
+                    AttributeModifier.Operation.ADDITION));
+
+            return baseModifiers;
         }else {
             return ImmutableMultimap.of();
         }
     }
-    
-    @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-        if(slot == EquipmentSlot.MAINHAND) {
-            return this.defaultModifiers.get();
-        }else {
-            return ImmutableMultimap.of();
-        }
-    }
-    
+
     @Override
     public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
         if(this.attributes.getReach() > 0) {
