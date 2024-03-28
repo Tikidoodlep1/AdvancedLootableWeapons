@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:nodachi_head"
+    ]
+  },
+  "criteria": {
+    "has_nodachi_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:nodachi_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:nodachi_head"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nodachi_head",
+      "has_the_recipe"
+    ]
+  ]
+}

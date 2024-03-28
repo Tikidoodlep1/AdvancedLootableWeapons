@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:battleaxe"
+    ]
+  },
+  "criteria": {
+    "has_battleaxe_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:battleaxe_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:battleaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_battleaxe_head",
+      "has_the_recipe"
+    ]
+  ]
+}

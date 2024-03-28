@@ -73,6 +73,10 @@ public class AlwWeaponItem extends Item implements Vanishable {
         return WeaponMaterial.NULL;
     }
 
+    public static void setMaterial(ItemStack stack,String material) {
+        stack.getOrCreateTag().putString(MATERIAL_KEY,material);
+    }
+
     public MutableComponent getMaterialName(ItemStack stack) {
         CompoundTag tag = stack.getTag();
         if (tag != null && tag.contains(MATERIAL_KEY)) {
@@ -200,7 +204,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
             for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
                 if (entry.getValue().canMakeWeapon()) {
                     ItemStack stack = new ItemStack(this);
-                    stack.getOrCreateTag().putString(MATERIAL_KEY, entry.getKey());
+                    setMaterial(stack,entry.getKey());
                     pItems.add(stack);
                 }
             }

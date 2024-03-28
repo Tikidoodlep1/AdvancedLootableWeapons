@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "advancedlootableweapons:spear_head"
+    },
+    "S": {
+      "item": "advancedlootableweapons:long_weapon_handle"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:spear",
+    "count": 1,
+    "nbt": "{material:\"wood\"}"
+  }
+}

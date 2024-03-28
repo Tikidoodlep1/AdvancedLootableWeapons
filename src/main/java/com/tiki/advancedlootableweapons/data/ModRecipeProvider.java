@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -86,21 +87,21 @@ public class ModRecipeProvider extends RecipeProvider {
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
 
-        woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.CLEAVER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.DAGGER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.KODACHI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.LONGSWORD_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.MACE_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.MAKHAIRA_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.RAPIER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.SABRE_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.STAFF_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.SPEAR_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.TALWAR_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE.get(),ItemInit.BATTLEAXE_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.CLEAVER.get(),ItemInit.CLEAVER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.DAGGER.get(),ItemInit.DAGGER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI.get(),ItemInit.KABUTOWARI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KODACHI.get(),ItemInit.KODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.LONGSWORD.get(),ItemInit.LONGSWORD_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.MACE_HEAD.get(),ItemInit.MACE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.MAKHAIRA_HEAD.get(),ItemInit.MAKHAIRA_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get(),ItemInit.NODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.RAPIER.get(),ItemInit.RAPIER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.SABRE.get(),ItemInit.SABRE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.STAFF.get(),ItemInit.STAFF_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.SPEAR.get(),ItemInit.SPEAR_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.TALWAR.get(),ItemInit.TALWAR_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER.get(),ItemInit.ZWEIHANDER_HEAD.get(),true);
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_BRICKS.get(),ItemInit.GRANITE_BRICK.get());
@@ -357,11 +358,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(ing)).save(consumer);
     }
 
-    protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,Item head,boolean longHandle) {
-        if (true) return;//todo
+    protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,ItemLike result,Item head,boolean longHandle) {
         Item handle = longHandle ? ItemInit.LONG_WEAPON_HANDLE.get() : Items.STICK;
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
-        ShapedRecipeBuilder.shaped(itemLookup("wood_"+base)).define('W',head).define('S',handle)
+
+        ItemStack woodWeapon = new ItemStack(result);
+        AlwWeaponItem.setMaterial(woodWeapon,"wood");
+
+        NBTOutputShapedRecipeBuilder.shaped(woodWeapon).define('W',head).define('S',handle)
                 .pattern("W").pattern("S").unlockedBy("has_"+base+"_head",has(head)).save(consumer);
     }
 
@@ -412,9 +416,5 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("  S").pattern("III").unlockedBy("has_material",
                         has(ing))
                 .save(consumer);
-    }
-
-    protected static Item itemLookup(String name) {
-        return Registry.ITEM.get(new ResourceLocation(AdvancedLootableWeapons.MODID,name));
     }
 }

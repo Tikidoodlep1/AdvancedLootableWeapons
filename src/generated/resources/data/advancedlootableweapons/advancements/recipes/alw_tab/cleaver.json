@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:cleaver"
+    ]
+  },
+  "criteria": {
+    "has_cleaver_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:cleaver_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:cleaver"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_cleaver_head",
+      "has_the_recipe"
+    ]
+  ]
+}

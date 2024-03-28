@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:talwar"
+    ]
+  },
+  "criteria": {
+    "has_talwar_head": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:talwar_head"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:talwar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_talwar_head",
+      "has_the_recipe"
+    ]
+  ]
+}
