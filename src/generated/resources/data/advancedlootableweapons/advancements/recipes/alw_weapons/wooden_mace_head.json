@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:makhaira_head"
+      "advancedlootableweapons:wooden_mace_head"
     ]
   },
   "criteria": {
-    "has_makhaira_head": {
+    "has_wooden_mace_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:makhaira_head"
+              "advancedlootableweapons:wooden_mace_head"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:makhaira_head"
+        "recipe": "advancedlootableweapons:wooden_mace_head"
       }
     }
   },
   "requirements": [
     [
-      "has_makhaira_head",
+      "has_wooden_mace_head",
       "has_the_recipe"
     ]
   ]

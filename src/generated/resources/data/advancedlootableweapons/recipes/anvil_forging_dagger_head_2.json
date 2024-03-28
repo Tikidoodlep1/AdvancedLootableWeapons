@@ -1,0 +1,9 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:dagger_head"
+  },
+  "result": {
+    "item": "advancedlootableweapons:dagger_head_2"
+  }
+}

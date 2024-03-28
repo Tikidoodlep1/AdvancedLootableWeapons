@@ -6,7 +6,7 @@
   ],
   "key": {
     "W": {
-      "item": "advancedlootableweapons:kodachi_head"
+      "item": "advancedlootableweapons:wooden_kodachi_head"
     },
     "S": {
       "item": "minecraft:stick"
@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:kodachi",
     "count": 1,
-    "nbt": "{material:\"wood\"}"
+    "nbt": "{Damage:0,material:\"wood\"}"
   }
 }

@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_sabre_head": {
+    "has_wooden_sabre_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:sabre_head"
+              "advancedlootableweapons:wooden_sabre_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_sabre_head",
+      "has_wooden_sabre_head",
       "has_the_recipe"
     ]
   ]

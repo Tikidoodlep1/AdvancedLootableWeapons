@@ -6,7 +6,7 @@
   ],
   "key": {
     "W": {
-      "item": "advancedlootableweapons:spear_head"
+      "item": "advancedlootableweapons:wooden_spear_head"
     },
     "S": {
       "item": "advancedlootableweapons:long_weapon_handle"
@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:spear",
     "count": 1,
-    "nbt": "{material:\"wood\"}"
+    "nbt": "{Damage:0,material:\"wood\"}"
   }
 }

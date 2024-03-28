@@ -7,7 +7,7 @@ import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 
 import net.minecraft.core.BlockPos;
@@ -30,8 +30,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -151,7 +149,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 		}else if(entity.containerTemp >= MIN_TEMP) {
 			entity.containerTemp -= CommonConfigHandler.FORGE_TEMP_DECREASE.get();
 		}
-		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HotToolHeadItem toolHead) {
+		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HeatableToolPartItem toolHead) {
 			ItemStack stack = entity.itemHandler.getStackInSlot(0);
 			stack.setDamageValue(stack.getDamageValue() -
 					HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));

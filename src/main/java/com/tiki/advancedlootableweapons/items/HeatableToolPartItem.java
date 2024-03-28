@@ -20,28 +20,22 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-public class HotToolHeadItem extends Item {
+public class HeatableToolPartItem extends Item {
     private final int level;
-    private final boolean finished;
     private final boolean isMain;
 
-    public HotToolHeadItem(@Nullable HotToolHeadItem next, int level, boolean isMain, Properties prop) {
+    public HeatableToolPartItem(int level, boolean isMain, Properties prop) {
         super(prop);
         this.level = level;
-        this.finished = next == null;
         this.isMain = isMain;
     }
-
-    //         nbt.putString("material", "null");
-    //        nbt.putDouble("addedDamage", 0.0D);
-    //        nbt.putInt("addedDurability", 0);
 
     public int getLevel() {
         return this.level;
     }
 
     public boolean isFinished() {
-        return this.finished;
+        return true;
     }
 
     public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
@@ -153,7 +147,7 @@ public class HotToolHeadItem extends Item {
         stack.setDamageValue(stack.getMaxDamage() - temp);
     }
 
-    public HotToolHeadItem addToRegistryMap() {
+    public HeatableToolPartItem addToRegistryMap() {
         ItemInit.hotToolHeads.add(this);
         return this;
     }

@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:mace_head"
+      "advancedlootableweapons:wooden_nodachi_head"
     ]
   },
   "criteria": {
-    "has_mace_head": {
+    "has_wooden_nodachi_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:mace_head"
+              "advancedlootableweapons:wooden_nodachi_head"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:mace_head"
+        "recipe": "advancedlootableweapons:wooden_nodachi_head"
       }
     }
   },
   "requirements": [
     [
-      "has_mace_head",
+      "has_wooden_nodachi_head",
       "has_the_recipe"
     ]
   ]

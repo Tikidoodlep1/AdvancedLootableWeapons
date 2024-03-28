@@ -6,7 +6,7 @@
   ],
   "key": {
     "W": {
-      "item": "advancedlootableweapons:rapier_head"
+      "item": "advancedlootableweapons:wooden_rapier_head"
     },
     "S": {
       "item": "minecraft:stick"
@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:rapier",
     "count": 1,
-    "nbt": "{material:\"wood\"}"
+    "nbt": "{Damage:0,material:\"wood\"}"
   }
 }

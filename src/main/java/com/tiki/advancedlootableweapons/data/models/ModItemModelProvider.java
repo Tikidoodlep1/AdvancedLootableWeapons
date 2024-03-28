@@ -1,10 +1,12 @@
 package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.client.ALWClient;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -144,6 +146,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         duskSteel();
 
+        heatableItem(ItemInit.DAGGER_HEAD.get());
+        heatableItem(ItemInit.DAGGER_HEAD_2.get());
+
         oneLayerItem(ItemInit.IRON_CHAIN_LINK.get());
         oneLayerItem(ItemInit.GOLD_CHAIN_LINK.get());
         oneLayerItem(ItemInit.COPPER_CHAIN_LINK.get());
@@ -216,6 +221,23 @@ public class ModItemModelProvider extends ItemModelProvider {
             }
         }
     }
+
+    protected final ModelFile GENERATED = getExistingFile(mcLoc("item/generated"));
+
+    protected void heatableItem(HeatableToolPartItem heatableToolPartItem) {
+        String path = Registry.ITEM.getKey(heatableToolPartItem).getPath();
+        ResourceLocation base = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/"+path);
+        ResourceLocation hot = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/hot_"+path);
+        ResourceLocation warm = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/warm_"+path);
+        ResourceLocation cool = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/cool_"+path);
+            getBuilder(path).parent(GENERATED)
+                    .texture("layer0",hot)
+                    .override().model(getBuilder(hot.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,0).end()
+                    .override().model(getBuilder(warm.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,1).end()
+                    .override().model(getBuilder(cool.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,2).end();
+    }
+
+
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
         String path = Registry.ITEM.getKey(item).getPath();

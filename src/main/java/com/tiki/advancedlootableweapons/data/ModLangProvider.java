@@ -6,7 +6,7 @@ import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCateg
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
@@ -38,8 +38,8 @@ public class ModLangProvider extends LanguageProvider {
         add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
         add(ArmorBindingItem.INFO,"Bonus Durability");
 
-        add(HotToolHeadItem.QUENCH_KEY,"Quenched");
-        add(HotToolHeadItem.UNQUENCH_KEY,"Unquenched");
+        add(HeatableToolPartItem.QUENCH_KEY,"Quenched");
+        add(HeatableToolPartItem.UNQUENCH_KEY,"Unquenched");
 
         add(DrumQuenchingCategory.REQUIRES_CLAY,"Requires Clay");
 
@@ -67,9 +67,9 @@ public class ModLangProvider extends LanguageProvider {
         addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");
         addTab(ModCreativeTabs.WEAPON_TAB, "ALW Weapons & Hot Tool Heads");
 
-        add(HotToolHeadItem.Temp.cool.translation.getKey(),"Cool");
-        add(HotToolHeadItem.Temp.warm.translation.getKey(),"Warm");
-        add(HotToolHeadItem.Temp.hot.translation.getKey(),"Hot");
+        add(HeatableToolPartItem.Temp.cool.translation.getKey(),"Cool");
+        add(HeatableToolPartItem.Temp.warm.translation.getKey(),"Warm");
+        add(HeatableToolPartItem.Temp.hot.translation.getKey(),"Hot");
     }
 
     protected void blockTranslations() {

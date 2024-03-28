@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_kabutowari_head": {
+    "has_wooden_kabutowari_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:kabutowari_head"
+              "advancedlootableweapons:wooden_kabutowari_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_kabutowari_head",
+      "has_wooden_kabutowari_head",
       "has_the_recipe"
     ]
   ]

@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_dagger_head": {
+    "has_wooden_dagger_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:dagger_head"
+              "advancedlootableweapons:wooden_dagger_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_dagger_head",
+      "has_wooden_dagger_head",
       "has_the_recipe"
     ]
   ]

@@ -17,7 +17,7 @@ public class ModCreativeTabs {
 
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ItemInit.SABRE_HEAD.get());
+			return new ItemStack(ItemInit.WOODEN_SABRE_HEAD.get());
 		}
 		
 	};

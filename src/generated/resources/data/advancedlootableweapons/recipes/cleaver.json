@@ -6,7 +6,7 @@
   ],
   "key": {
     "W": {
-      "item": "advancedlootableweapons:cleaver_head"
+      "item": "advancedlootableweapons:wooden_cleaver_head"
     },
     "S": {
       "item": "minecraft:stick"
@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:cleaver",
     "count": 1,
-    "nbt": "{material:\"wood\"}"
+    "nbt": "{Damage:0,material:\"wood\"}"
   }
 }

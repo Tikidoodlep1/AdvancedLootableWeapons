@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_longsword_head": {
+    "has_wooden_longsword_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:longsword_head"
+              "advancedlootableweapons:wooden_longsword_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_longsword_head",
+      "has_wooden_longsword_head",
       "has_the_recipe"
     ]
   ]

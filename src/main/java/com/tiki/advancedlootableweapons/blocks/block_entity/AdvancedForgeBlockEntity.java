@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -153,7 +153,7 @@ public class AdvancedForgeBlockEntity extends BlockEntity implements MenuProvide
 		}else if(entity.containerTemp >= MIN_TEMP) {
 			entity.containerTemp -=1;
 		}
-		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HotToolHeadItem toolHead) {
+		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HeatableToolPartItem toolHead) {
 			ItemStack stack = entity.itemHandler.getStackInSlot(0);
 			stack.setDamageValue(stack.getDamageValue() - HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));
 		}

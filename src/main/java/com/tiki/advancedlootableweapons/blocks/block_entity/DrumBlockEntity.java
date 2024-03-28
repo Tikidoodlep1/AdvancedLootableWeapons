@@ -5,7 +5,7 @@ import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.SoundInit;
 import com.tiki.advancedlootableweapons.inventory.ExternalIItemHandler;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
 import com.tiki.advancedlootableweapons.recipes.SingleFluidRecipeWrapper;
@@ -66,7 +66,7 @@ public class DrumBlockEntity extends BlockEntity {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return slot == ADDITIVE_SLOT ? !(stack.getItem() instanceof HotToolHeadItem) : super.isItemValid(slot, stack);
+            return slot == ADDITIVE_SLOT ? !(stack.getItem() instanceof HeatableToolPartItem) : super.isItemValid(slot, stack);
         }
     };
 
@@ -235,7 +235,7 @@ public class DrumBlockEntity extends BlockEntity {
             if (this.itemStackHandler.getStackInSlot(INPUT_SLOT).isEmpty()) {
                 this.itemStackHandler.setStackInSlot(INPUT_SLOT, activeStack);
                 playerIn.setItemInHand(hand, ItemStack.EMPTY);
-            } else if (this.itemStackHandler.getStackInSlot(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof HotToolHeadItem)) {
+            } else if (this.itemStackHandler.getStackInSlot(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof HeatableToolPartItem)) {
                 this.itemStackHandler.setStackInSlot(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
                 activeStack.shrink(1);
             }

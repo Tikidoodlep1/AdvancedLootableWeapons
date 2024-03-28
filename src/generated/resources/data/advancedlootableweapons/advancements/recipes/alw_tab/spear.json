@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_spear_head": {
+    "has_wooden_spear_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:spear_head"
+              "advancedlootableweapons:wooden_spear_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_spear_head",
+      "has_wooden_spear_head",
       "has_the_recipe"
     ]
   ]

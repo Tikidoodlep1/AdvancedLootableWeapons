@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_zweihander_head": {
+    "has_wooden_zweihander_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:zweihander_head"
+              "advancedlootableweapons:wooden_zweihander_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_zweihander_head",
+      "has_wooden_zweihander_head",
       "has_the_recipe"
     ]
   ]

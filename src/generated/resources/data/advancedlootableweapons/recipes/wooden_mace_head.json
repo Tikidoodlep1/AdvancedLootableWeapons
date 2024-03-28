@@ -6,14 +6,14 @@
   ],
   "key": {
     "W": {
-      "item": "advancedlootableweapons:makhaira_head"
+      "item": "advancedlootableweapons:wooden_mace_head"
     },
     "S": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "advancedlootableweapons:makhaira_head",
+    "item": "advancedlootableweapons:wooden_mace_head",
     "count": 1,
     "nbt": "{material:\"wood\"}"
   }

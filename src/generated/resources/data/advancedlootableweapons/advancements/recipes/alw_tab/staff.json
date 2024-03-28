@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_staff_head": {
+    "has_wooden_staff_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:staff_head"
+              "advancedlootableweapons:wooden_staff_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_staff_head",
+      "has_wooden_staff_head",
       "has_the_recipe"
     ]
   ]

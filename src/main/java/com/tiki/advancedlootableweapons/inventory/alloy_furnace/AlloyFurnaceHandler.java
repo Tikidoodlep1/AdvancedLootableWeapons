@@ -1,7 +1,6 @@
 package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
 
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeHooks;

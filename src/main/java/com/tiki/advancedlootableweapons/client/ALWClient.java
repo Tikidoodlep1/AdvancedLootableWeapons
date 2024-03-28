@@ -9,7 +9,7 @@ import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class ALWClient {
 
-    static final ItemPropertyFunction HEAT_FUNCTION_WRAPPER = (pP1, pP2, pP3, pP4) -> HotToolHeadItem.HEAT_FUNCTION.apply(pP1, pP2, pP3, pP4).ordinal();
+    static final ItemPropertyFunction HEAT_FUNCTION_WRAPPER = (pP1, pP2, pP3, pP4) -> HeatableToolPartItem.HEAT_FUNCTION.apply(pP1, pP2, pP3, pP4).ordinal();
 
     public static void setup(FMLClientSetupEvent event) {
         MenuScreens.register(MenuInit.ALLOY_FURNACE.get(), AlloyFurnaceScreen::new);
@@ -34,13 +34,14 @@ public class ALWClient {
     }
 
     public static final ResourceLocation MATERIAL_LOADER = new ResourceLocation(AdvancedLootableWeapons.MODID,"material_loader");
+    public static final ResourceLocation HEAT = new ResourceLocation(AdvancedLootableWeapons.MODID,"heat");
 
     public static void models(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(MATERIAL_LOADER, MaterialBakedModel.Loader.INSTANCE);
     }
     public static void registerItemModelPredicates() {
         for(Item i : ItemInit.hotToolHeads) {
-            ItemProperties.register(i, new ResourceLocation(AdvancedLootableWeapons.MODID, "heat"), HEAT_FUNCTION_WRAPPER);
+            ItemProperties.register(i, HEAT, HEAT_FUNCTION_WRAPPER);
         }
     }
 }

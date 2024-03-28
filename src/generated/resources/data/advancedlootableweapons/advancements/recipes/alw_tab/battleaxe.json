@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_battleaxe_head": {
+    "has_wooden_battleaxe_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "advancedlootableweapons:battleaxe_head"
+              "advancedlootableweapons:wooden_battleaxe_head"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_battleaxe_head",
+      "has_wooden_battleaxe_head",
       "has_the_recipe"
     ]
   ]

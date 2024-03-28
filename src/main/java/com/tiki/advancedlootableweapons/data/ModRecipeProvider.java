@@ -6,7 +6,7 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
@@ -88,19 +88,19 @@ public class ModRecipeProvider extends RecipeProvider {
 
 
         woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE.get(),ItemInit.BATTLEAXE_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.CLEAVER.get(),ItemInit.CLEAVER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.DAGGER.get(),ItemInit.DAGGER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI.get(),ItemInit.KABUTOWARI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.KODACHI.get(),ItemInit.KODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.CLEAVER.get(),ItemInit.WOODEN_CLEAVER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.DAGGER.get(),ItemInit.WOODEN_DAGGER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI.get(),ItemInit.WOODEN_KABUTOWARI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.KODACHI.get(),ItemInit.WOODEN_KODACHI_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.LONGSWORD.get(),ItemInit.LONGSWORD_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.MACE_HEAD.get(),ItemInit.MACE_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.MAKHAIRA_HEAD.get(),ItemInit.MAKHAIRA_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.NODACHI_HEAD.get(),ItemInit.NODACHI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.RAPIER.get(),ItemInit.RAPIER_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.SABRE.get(),ItemInit.SABRE_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.STAFF.get(),ItemInit.STAFF_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.SPEAR.get(),ItemInit.SPEAR_HEAD.get(),true);
-        woodenWeapon(recipeConsumer,ItemInit.TALWAR.get(),ItemInit.TALWAR_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.WOODEN_MACE_HEAD.get(),ItemInit.WOODEN_MACE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.WOODEN_MAKHAIRA_HEAD.get(),ItemInit.WOODEN_MAKHAIRA_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.WOODEN_NODACHI_HEAD.get(),ItemInit.WOODEN_NODACHI_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.RAPIER.get(),ItemInit.WOODEN_RAPIER_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.SABRE.get(),ItemInit.WOODEN_SABRE_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.STAFF.get(),ItemInit.WOODEN_STAFF_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.SPEAR.get(),ItemInit.WOODEN_SPEAR_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.TALWAR.get(),ItemInit.WOODEN_TALWAR_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER.get(),ItemInit.ZWEIHANDER_HEAD.get(),true);
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
@@ -145,7 +145,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_netherrack", has(Blocks.NETHERRACK))
                 .save(recipeConsumer);
 
-        ShapedRecipeBuilder.shaped(ItemInit.SPEAR_HEAD.get())
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_SPEAR_HEAD.get())
                 .define('S',ItemTags.PLANKS)
                 .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(recipeConsumer);
@@ -247,7 +247,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"battleaxe_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.DAGGER_HOT_TOOL_HEAD_2.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.DAGGER_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dagger_quenching"));
 
@@ -337,6 +337,20 @@ public class ModRecipeProvider extends RecipeProvider {
         AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.HOT_TOOL_ROD.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod"));
 
+        //dagger chain
+
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head"));
+
+        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head_2"));
+
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.HOT_TOOL_ROD_2.get(),ItemInit.DAGGER.get())
+                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger"));
+
+
+        //tool rods
+
         AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.HOT_TOOL_ROD.get(), ItemInit.HOT_TOOL_ROD_2.get())
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod_2"));
 
@@ -347,8 +361,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
         ItemStack stack = new ItemStack(ItemInit.HOT_TOOL_HEAD.get());
-        HotToolHeadItem.setMaterial(stack,weaponMaterial);
-        HotToolHeadItem.setTemperature(stack,0);
+        HeatableToolPartItem.setMaterial(stack,weaponMaterial);
+        HeatableToolPartItem.setTemperature(stack,0);
         return stack;
     }
 

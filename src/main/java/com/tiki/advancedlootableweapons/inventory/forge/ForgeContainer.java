@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.inventory.forge;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -86,7 +86,7 @@ public class ForgeContainer extends AbstractContainerMenu {
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
-        if (!(sourceStack.getItem() instanceof HotToolHeadItem)) {
+        if (!(sourceStack.getItem() instanceof HeatableToolPartItem)) {
             return ItemStack.EMPTY;
         }
 

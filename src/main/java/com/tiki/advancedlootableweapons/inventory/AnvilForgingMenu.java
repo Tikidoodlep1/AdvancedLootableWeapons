@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.inventory;
 import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.items.HotToolHeadItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -257,7 +257,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 
 
 			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, new RecipeWrapper(handler), this.level).isPresent()
-					|| itemstack.getItem() instanceof HotToolHeadItem) {
+					|| itemstack.getItem() instanceof HeatableToolPartItem) {
 				if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 					return ItemStack.EMPTY;
 				}
