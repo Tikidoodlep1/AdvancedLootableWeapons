@@ -17,16 +17,19 @@ public class FluidInit {
 
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, AdvancedLootableWeapons.MODID);
 
+    public static final ResourceLocation MOL_TEXTURE = new ResourceLocation("forge", "block/milk_still");
+    public static final ResourceLocation ML_TEXTURE = new ResourceLocation("forge", "block/milk_still");
+
     static final Supplier<ForgeFlowingFluid.Properties> props = () ->
             new ForgeFlowingFluid.Properties(FluidInit.MILK_OF_LIME,FluidInit.FLOWING_MILK_OF_LIME,FluidAttributes.builder(
-                    new ResourceLocation("forge", "block/milk_still"),
+                            MOL_TEXTURE,
                     new ResourceLocation("forge", "block/milk_flowing"))
                     .density(1024).viscosity(1024).color(0xff_DFD3BE))
                     .block(BlockInit.MILK_OF_LIME).bucket(ItemInit.MILK_OF_LIME_BUCKET);
 
     static final Supplier<ForgeFlowingFluid.Properties> magnesium_props = () ->
             new ForgeFlowingFluid.Properties(FluidInit.MAGNESIUM_LACTATE,FluidInit.FLOWING_MAGNESIUM_LACTATE,FluidAttributes.builder(
-                            new ResourceLocation("forge", "block/milk_still"),
+                            ML_TEXTURE,
                             new ResourceLocation("forge", "block/milk_flowing"))
                     .density(1024).viscosity(1024).color(0xff_eeeeee))
                     .block(BlockInit.MAGNESIUM_LACTATE).bucket(ItemInit.MAGNESIUM_LACTATE_BUCKET);

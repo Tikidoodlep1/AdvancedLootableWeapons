@@ -4,6 +4,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.AlloyFurnaceBlock;
 import com.tiki.advancedlootableweapons.blocks.DusksteelBlock;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.FluidInit;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -51,6 +52,14 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
         simpleBlock(BlockInit.DIORITE_BRICKS.get());
         simpleBlock(BlockInit.GRANITE_BRICKS.get());
+
+        simpleBlock(BlockInit.MILK_OF_LIME.get(),
+                ConfiguredModel.builder().modelFile(models().getBuilder("milk_of_lime")
+                .texture("particle", FluidInit.MOL_TEXTURE)).build());
+
+        simpleBlock(BlockInit.MAGNESIUM_LACTATE.get(),
+                ConfiguredModel.builder().modelFile(models().getBuilder("magnesium_lactate")
+                        .texture("particle", FluidInit.ML_TEXTURE)).build());
 
         getVariantBuilder(BlockInit.DUSKSTEEL_BLOCK.get()).forAllStates(state -> {
             int phase = state.getValue(DusksteelBlock.PHASE);
