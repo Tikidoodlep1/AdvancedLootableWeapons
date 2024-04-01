@@ -1,6 +1,0 @@
-{
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "advancedlootableweapons:item/longsword_hot_tool_head_hot"
-	}
-}

@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/hot_staff_head"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 0.0
+      },
+      "model": "advancedlootableweapons:item/hot_staff_head"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 1.0
+      },
+      "model": "advancedlootableweapons:item/warm_staff_head"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 2.0
+      },
+      "model": "advancedlootableweapons:item/cool_staff_head"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:talwar_hot_tool_head_3"
+    "item": "advancedlootableweapons:talwar_head_3"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

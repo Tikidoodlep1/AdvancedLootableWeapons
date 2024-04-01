@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:spear_hot_tool_head_2"
+    "item": "advancedlootableweapons:spear_head_2"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

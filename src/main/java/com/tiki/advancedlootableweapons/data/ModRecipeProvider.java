@@ -87,12 +87,12 @@ public class ModRecipeProvider extends RecipeProvider {
         nuggetIngotBlockRecipe(recipeConsumer,ItemInit.STEEL_NUGGET.get(),ItemInit.STEEL_INGOT.get(),BlockInit.STEEL_BLOCK.get());
 
 
-        woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE.get(),ItemInit.BATTLEAXE_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.BATTLEAXE.get(),ItemInit.WOODEN_BATTLEAXE_HEAD.get(),true);
         woodenWeapon(recipeConsumer,ItemInit.CLEAVER.get(),ItemInit.WOODEN_CLEAVER_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.DAGGER.get(),ItemInit.WOODEN_DAGGER_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.KABUTOWARI.get(),ItemInit.WOODEN_KABUTOWARI_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.KODACHI.get(),ItemInit.WOODEN_KODACHI_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.LONGSWORD.get(),ItemInit.LONGSWORD_HEAD.get(),false);
+        woodenWeapon(recipeConsumer,ItemInit.LONGSWORD.get(),ItemInit.WOODEN_LONGSWORD_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.WOODEN_MACE_HEAD.get(),ItemInit.WOODEN_MACE_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.WOODEN_MAKHAIRA_HEAD.get(),ItemInit.WOODEN_MAKHAIRA_HEAD.get(),false);
         woodenWeapon(recipeConsumer,ItemInit.WOODEN_NODACHI_HEAD.get(),ItemInit.WOODEN_NODACHI_HEAD.get(),false);
@@ -101,7 +101,7 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenWeapon(recipeConsumer,ItemInit.STAFF.get(),ItemInit.WOODEN_STAFF_HEAD.get(),true);
         woodenWeapon(recipeConsumer,ItemInit.SPEAR.get(),ItemInit.WOODEN_SPEAR_HEAD.get(),true);
         woodenWeapon(recipeConsumer,ItemInit.TALWAR.get(),ItemInit.WOODEN_TALWAR_HEAD.get(),false);
-        woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER.get(),ItemInit.ZWEIHANDER_HEAD.get(),true);
+        woodenWeapon(recipeConsumer,ItemInit.ZWEIHANDER.get(),ItemInit.WOODEN_ZWEIHANDER_HEAD.get(),true);
 
         twoByTwo(recipeConsumer,BlockInit.DIORITE_BRICKS.get(),ItemInit.DIORITE_BRICK.get());
         twoByTwo(recipeConsumer,BlockInit.GRANITE_BRICKS.get(),ItemInit.GRANITE_BRICK.get());
@@ -243,7 +243,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected void drumQuenching(Consumer<FinishedRecipe> recipeConsumer) {
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.BATTLEAXE_HOT_TOOL_HEAD_5.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.BATTLEAXE_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"battleaxe_quenching"));
 
@@ -251,56 +251,56 @@ public class ModRecipeProvider extends RecipeProvider {
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dagger_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.CLEAVER_HOT_TOOL_HEAD.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.CLEAVER_HEAD.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"cleaver_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.KABUTOWARI_HOT_TOOL_HEAD_5.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.KABUTOWARI_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kabutowari_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.KODACHI_HOT_TOOL_HEAD_2.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.KODACHI_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kodachi_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.LONGSWORD_HOT_TOOL_HEAD_4.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.LONGSWORD_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"longsword_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.MACE_HOT_TOOL_HEAD_3.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.MACE_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"mace_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.MAKHAIRA_HOT_TOOL_HEAD_3.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.MAKHAIRA_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"makhaira_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.RAPIER_HOT_TOOL_HEAD_4.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.RAPIER_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"rapier_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.SABRE_HOT_TOOL_HEAD_4.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.SABRE_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"sabre_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.SPEAR_HOT_TOOL_HEAD_2.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.SPEAR_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"spear_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.STAFF_HOT_TOOL_HEAD_5.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.STAFF_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"staff_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.TALWAR_HOT_TOOL_HEAD_3.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.TALWAR_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"talwar_quenching"));
 
-        DrumQuenchingRecipeBuilder.quenching(ItemInit.ZWEIHANDER_HOT_TOOL_HEAD_5.get())
+        DrumQuenchingRecipeBuilder.quenching(ItemInit.ZWEIHANDER_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"zweihander_quenching"));
     }

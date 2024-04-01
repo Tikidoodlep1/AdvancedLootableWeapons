@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:kabutowari_hot_tool_head_5"
+    "item": "advancedlootableweapons:kabutowari_head_5"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

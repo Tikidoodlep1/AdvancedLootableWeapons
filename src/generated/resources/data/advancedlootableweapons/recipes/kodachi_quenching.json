@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:kodachi_hot_tool_head_2"
+    "item": "advancedlootableweapons:kodachi_head_2"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

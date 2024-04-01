@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:cleaver_hot_tool_head"
+    "item": "advancedlootableweapons:cleaver_head"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

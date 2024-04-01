@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/hot_sabre_head_4"
+  }
+}

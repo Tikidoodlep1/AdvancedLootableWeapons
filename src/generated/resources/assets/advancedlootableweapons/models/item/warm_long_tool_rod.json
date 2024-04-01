@@ -1,3 +1,6 @@
 {
-  "parent": "minecraft:item/generated"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/warm_long_tool_rod"
+  }
 }

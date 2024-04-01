@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:rapier_hot_tool_head_4"
+    "item": "advancedlootableweapons:rapier_head_4"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

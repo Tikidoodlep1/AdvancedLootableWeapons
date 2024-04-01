@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/hot_sabre_head_2"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 0.0
+      },
+      "model": "advancedlootableweapons:item/hot_sabre_head_2"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 1.0
+      },
+      "model": "advancedlootableweapons:item/warm_sabre_head_2"
+    },
+    {
+      "predicate": {
+        "advancedlootableweapons:heat": 2.0
+      },
+      "model": "advancedlootableweapons:item/cool_sabre_head_2"
+    }
+  ]
+}

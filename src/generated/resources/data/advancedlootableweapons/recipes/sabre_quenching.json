@@ -1,7 +1,7 @@
 {
   "type": "advancedlootableweapons:drum_quenching",
   "input": {
-    "item": "advancedlootableweapons:sabre_hot_tool_head_4"
+    "item": "advancedlootableweapons:sabre_head_4"
   },
   "fluid_input": {
     "fluid": "minecraft:water",

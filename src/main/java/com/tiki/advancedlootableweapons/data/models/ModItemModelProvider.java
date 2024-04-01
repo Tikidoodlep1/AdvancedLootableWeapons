@@ -146,13 +146,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.REFINED_OBSIDIAN_BLOCK.get());
         duskSteel();
 
-        heatableItem(ItemInit.TOOL_HEAD.get());
-        heatableItem(ItemInit.TOOL_ROD.get());
-        heatableItem(ItemInit.TOOL_ROD_2.get());
-        heatableItem(ItemInit.LONG_TOOL_ROD.get());
-
-        heatableItem(ItemInit.DAGGER_HEAD.get());
-        heatableItem(ItemInit.DAGGER_HEAD_2.get());
+        heatableItems();
 
         oneLayerItem(ItemInit.IRON_CHAIN_LINK.get());
         oneLayerItem(ItemInit.GOLD_CHAIN_LINK.get());
@@ -230,6 +224,81 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
+    protected void heatableItems() {
+        heatableItem(ItemInit.TOOL_HEAD.get());
+        heatableItem(ItemInit.TOOL_ROD.get());
+        heatableItem(ItemInit.TOOL_ROD_2.get());
+        heatableItem(ItemInit.LONG_TOOL_ROD.get());
+
+        heatableItem(ItemInit.BATTLEAXE_HEAD.get());
+        heatableItem(ItemInit.BATTLEAXE_HEAD_2.get());
+        heatableItem(ItemInit.BATTLEAXE_HEAD_3.get());
+        heatableItem(ItemInit.BATTLEAXE_HEAD_4.get());
+        heatableItem(ItemInit.BATTLEAXE_HEAD_5.get());
+
+        heatableItem(ItemInit.CLEAVER_HEAD.get());
+
+        heatableItem(ItemInit.DAGGER_HEAD.get());
+        heatableItem(ItemInit.DAGGER_HEAD_2.get());
+
+        heatableItem(ItemInit.KABUTOWARI_HEAD.get());
+        heatableItem(ItemInit.KABUTOWARI_HEAD_2.get());
+        heatableItem(ItemInit.KABUTOWARI_HEAD_3.get());
+        heatableItem(ItemInit.KABUTOWARI_HEAD_4.get());
+        heatableItem(ItemInit.KABUTOWARI_HEAD_5.get());
+
+        heatableItem(ItemInit.KODACHI_HEAD.get());
+        heatableItem(ItemInit.KODACHI_HEAD_2.get());
+
+        heatableItem(ItemInit.LONGSWORD_HEAD.get());
+        heatableItem(ItemInit.LONGSWORD_HEAD_2.get());
+        heatableItem(ItemInit.LONGSWORD_HEAD_3.get());
+        heatableItem(ItemInit.LONGSWORD_HEAD_4.get());
+
+        heatableItem(ItemInit.MACE_HEAD.get());
+        heatableItem(ItemInit.MACE_HEAD_2.get());
+        heatableItem(ItemInit.MACE_HEAD_3.get());
+
+        heatableItem(ItemInit.MAKHAIRA_HEAD.get());
+        heatableItem(ItemInit.MAKHAIRA_HEAD_2.get());
+        heatableItem(ItemInit.MAKHAIRA_HEAD_3.get());
+
+        heatableItem(ItemInit.NODACHI_HEAD.get());
+        heatableItem(ItemInit.NODACHI_HEAD_2.get());
+        heatableItem(ItemInit.NODACHI_HEAD_3.get());
+        heatableItem(ItemInit.NODACHI_HEAD_4.get());
+
+        heatableItem(ItemInit.RAPIER_HEAD.get());
+        heatableItem(ItemInit.RAPIER_HEAD_2.get());
+        heatableItem(ItemInit.RAPIER_HEAD_3.get());
+        heatableItem(ItemInit.RAPIER_HEAD_4.get());
+
+        heatableItem(ItemInit.SABRE_HEAD.get());
+        heatableItem(ItemInit.SABRE_HEAD_2.get());
+        heatableItem(ItemInit.SABRE_HEAD_3.get());
+        heatableItem(ItemInit.SABRE_HEAD_4.get());
+
+        heatableItem(ItemInit.SPEAR_HEAD.get());
+        heatableItem(ItemInit.SPEAR_HEAD_2.get());
+
+        heatableItem(ItemInit.STAFF_HEAD.get());
+        heatableItem(ItemInit.STAFF_HEAD_2.get());
+        heatableItem(ItemInit.STAFF_HEAD_3.get());
+        heatableItem(ItemInit.STAFF_HEAD_4.get());
+        heatableItem(ItemInit.STAFF_HEAD_5.get());
+
+        heatableItem(ItemInit.TALWAR_HEAD.get());
+        heatableItem(ItemInit.TALWAR_HEAD_2.get());
+        heatableItem(ItemInit.TALWAR_HEAD_3.get());
+
+        heatableItem(ItemInit.ZWEIHANDER_HEAD.get());
+        heatableItem(ItemInit.ZWEIHANDER_HEAD_2.get());
+        heatableItem(ItemInit.ZWEIHANDER_HEAD_3.get());
+        heatableItem(ItemInit.ZWEIHANDER_HEAD_4.get());
+        heatableItem(ItemInit.ZWEIHANDER_HEAD_5.get());
+
+    }
+
     protected final ModelFile GENERATED = getExistingFile(mcLoc("item/generated"));
 
     protected void heatableItem(HeatableToolPartItem heatableToolPartItem) {
@@ -240,9 +309,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         ResourceLocation cool = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/cool_"+path);
             getBuilder(path).parent(GENERATED)
                     .texture("layer0",hot)
-                    .override().model(getBuilder(hot.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,0).end()
-                    .override().model(getBuilder(warm.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,1).end()
-                    .override().model(getBuilder(cool.toString()).parent(GENERATED)).predicate(ALWClient.HEAT,2).end();
+                    .override().model(getBuilder(hot.toString()).parent(GENERATED).texture("layer0",hot)).predicate(ALWClient.HEAT,0).end()
+                    .override().model(getBuilder(warm.toString()).parent(GENERATED).texture("layer0",warm)).predicate(ALWClient.HEAT,1).end()
+                    .override().model(getBuilder(cool.toString()).parent(GENERATED).texture("layer0",cool)).predicate(ALWClient.HEAT,2).end();
     }
 
 
@@ -251,7 +320,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         String path = Registry.ITEM.getKey(item).getPath();
         if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
                 , PackType.CLIENT_RESOURCES, ".png", "textures")) {
-            getBuilder(path).parent(getExistingFile(mcLoc("item/generated")))
+            getBuilder(path).parent(GENERATED)
                     .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
         } else {
             System.out.println("no texture for " + item + " found, skipping");
