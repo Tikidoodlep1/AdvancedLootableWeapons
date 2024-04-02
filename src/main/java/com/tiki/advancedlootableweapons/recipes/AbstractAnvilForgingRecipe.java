@@ -59,7 +59,7 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
      */
     @Override
     public ItemStack getResultItem() {
-        return ItemStack.EMPTY;
+        return result;
     }
 
     public ItemStack getProcessedResult(ItemStack input) {

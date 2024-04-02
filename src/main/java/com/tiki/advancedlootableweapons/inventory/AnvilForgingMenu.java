@@ -59,10 +59,13 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		@Override
 		protected void onContentsChanged(int slot) {
 			super.onContentsChanged(slot);
-			AnvilForgingMenu.this.slotsChanged(this);
+			AnvilForgingMenu.this.slotsChanged();
 			AnvilForgingMenu.this.slotUpdateListener.run();
 		}
 	};
+
+	private final RecipeWrapper recipeWrapper = new RecipeWrapper(handler);
+
 	/** The inventory that stores the output of the crafting recipe. */
 	final ResultContainer resultContainer = new ResultContainer();
 
@@ -176,13 +179,13 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 	public void slotsChanged(Container pInventory) {
 	}
 
-	public void slotsChanged(ItemStackHandler handler) {
+	public void slotsChanged() {
 		ItemStack itemstack = inputSlot1.getItem();
 		ItemStack itemstack2 = inputSlot2.getItem();
 		if (!ItemStack.isSameItemSameTags(itemstack,input) || !ItemStack.isSameItemSameTags(itemstack2,input2)) {
 			input = itemstack.copy();
 			input2 = itemstack2.copy();
-			this.setupRecipeList(new RecipeWrapper(handler), itemstack);
+			this.setupRecipeList(recipeWrapper, itemstack);
 		}
 	}
 
@@ -192,6 +195,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		this.resultSlot.set(ItemStack.EMPTY);
 		if (!pStack.isEmpty()) {
 			this.recipes = this.level.getRecipeManager().getRecipesFor(ModRecipeTypes.ANVIL_FORGING, pContainer, this.level);
+			System.out.println();
 		}
 
 	}
@@ -200,7 +204,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
 			AbstractAnvilForgingRecipe forgingRecipe = this.recipes.get(this.selectedRecipeIndex.get());
 			this.resultContainer.setRecipeUsed(forgingRecipe);
-			this.resultSlot.set(forgingRecipe.assemble(new RecipeWrapper(this.handler)));
+			this.resultSlot.set(forgingRecipe.assemble(recipeWrapper));
 		} else {
 			this.resultSlot.set(ItemStack.EMPTY);
 		}
@@ -256,7 +260,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 			}
 
 
-			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, new RecipeWrapper(handler), this.level).isPresent()
+			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, recipeWrapper, this.level).isPresent()
 					|| itemstack.getItem() instanceof HeatableToolPartItem) {
 				if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 					return ItemStack.EMPTY;
@@ -293,7 +297,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		super.removed(pPlayer);
 		this.resultContainer.removeItemNoUpdate(1);
 		this.access.execute((p_40313_, p_40314_) -> {
-			this.clearContainer(pPlayer, new RecipeWrapper(this.handler));
+			this.clearContainer(pPlayer, recipeWrapper);
 		});
 	}
 }
