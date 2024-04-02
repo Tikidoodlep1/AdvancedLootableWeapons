@@ -20,8 +20,7 @@ public class AnvilToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	 */
 	@Override
 	public boolean matches(RecipeWrapper pInv, Level pLevel) {
-
-		return this.ingredient.test(pInv.getItem(0));
+		return this.ingredient.test(pInv.getItem(0)) && pInv.getItem(1).isEmpty();
 	}
 
 	@Override

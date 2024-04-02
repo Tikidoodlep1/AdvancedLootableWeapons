@@ -90,23 +90,25 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 			}
 
 			@Override
-			public void onTake(Player p_150672_, ItemStack p_150673_) {
-				p_150673_.onCraftedBy(p_150672_.level, p_150672_, p_150673_.getCount());
-				AnvilForgingMenu.this.resultContainer.awardUsedRecipes(p_150672_);
+			public void onTake(Player player, ItemStack stack) {
+				stack.onCraftedBy(player.level, player, stack.getCount());
+				AnvilForgingMenu.this.resultContainer.awardUsedRecipes(player);
 				ItemStack itemstack = AnvilForgingMenu.this.inputSlot1.remove(1);
+				ItemStack itemstack2 = AnvilForgingMenu.this.inputSlot2.remove(1);
+
 				if (!itemstack.isEmpty()) {
 					AnvilForgingMenu.this.setupResultSlot();
 				}
 
-				pAccess.execute((p_40364_, p_40365_) -> {
-					long l = p_40364_.getGameTime();
+				pAccess.execute((level, pos) -> {
+					long l = level.getGameTime();
 					if (AnvilForgingMenu.this.lastSoundTime != l) {
-						p_40364_.playSound(null, p_40365_, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
+						level.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
 						AnvilForgingMenu.this.lastSoundTime = l;
 					}
 
 				});
-				super.onTake(p_150672_, p_150673_);
+				super.onTake(player, stack);
 			}
 		});
 
