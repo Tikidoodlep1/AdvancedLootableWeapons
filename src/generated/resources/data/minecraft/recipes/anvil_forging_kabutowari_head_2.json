@@ -1,0 +1,9 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:kabutowari_head"
+  },
+  "result": {
+    "item": "advancedlootableweapons:kabutowari_head_2"
+  }
+}

@@ -334,30 +334,133 @@ public class ModRecipeProvider extends RecipeProvider {
             }
         }
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TOOL_ROD.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod"));
+        //tool rods
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TOOL_ROD.get(),recipeConsumer);
+        toolForging(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get(),recipeConsumer);
+        twoToolForging(ItemInit.TOOL_ROD_2.get(),ItemInit.TOOL_ROD_2.get(),ItemInit.LONG_TOOL_ROD.get(),recipeConsumer);
+
+        // battleaxe
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.BATTLEAXE_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.BATTLEAXE_HEAD.get(), ItemInit.BATTLEAXE_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.BATTLEAXE_HEAD_2.get(), ItemInit.BATTLEAXE_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.BATTLEAXE_HEAD_3.get(), ItemInit.BATTLEAXE_HEAD_4.get(),recipeConsumer);
+        toolForging(ItemInit.BATTLEAXE_HEAD_4.get(), ItemInit.BATTLEAXE_HEAD_5.get(),recipeConsumer);
+        twoToolForging(ItemInit.BATTLEAXE_HEAD_5.get(), ItemInit.LONG_TOOL_ROD.get(),ItemInit.BATTLEAXE.get(),recipeConsumer);
+
+        // cleaver
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.CLEAVER_HEAD.get(),recipeConsumer);
+        twoToolForging(ItemInit.CLEAVER_HEAD.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.CLEAVER.get(),recipeConsumer);
 
         //dagger chain
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head"));
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get(),recipeConsumer);
+        twoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.DAGGER.get(),recipeConsumer);
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger_head_2"));
+        // kabutowari
 
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.DAGGER.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_dagger"));
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.KABUTOWARI_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.KABUTOWARI_HEAD.get(), ItemInit.KABUTOWARI_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.KABUTOWARI_HEAD_2.get(), ItemInit.KABUTOWARI_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.KABUTOWARI_HEAD_3.get(), ItemInit.KABUTOWARI_HEAD_4.get(),recipeConsumer);
+        toolForging(ItemInit.KABUTOWARI_HEAD_4.get(), ItemInit.KABUTOWARI_HEAD_5.get(),recipeConsumer);
+        twoToolForging(ItemInit.KABUTOWARI_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.KABUTOWARI.get(),recipeConsumer);
 
+        // kodachi
 
-        //tool rods
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.KODACHI_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.KODACHI_HEAD.get(), ItemInit.KODACHI_HEAD_2.get(),recipeConsumer);
+        twoToolForging(ItemInit.KODACHI_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.KODACHI.get(),recipeConsumer);
 
-        AnvilForgingRecipeBuilder.anvilToolForging(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_tool_rod_2"));
+        // longsword
 
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.TOOL_ROD_2.get(),ItemInit.TOOL_ROD_2.get(),ItemInit.LONG_TOOL_ROD.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"anvil_forging_long_tool_rod"));
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.LONGSWORD_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.LONGSWORD_HEAD.get(), ItemInit.LONGSWORD_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.LONGSWORD_HEAD_2.get(), ItemInit.LONGSWORD_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.LONGSWORD_HEAD_3.get(), ItemInit.LONGSWORD_HEAD_4.get(),recipeConsumer);
+        twoToolForging(ItemInit.LONGSWORD_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.LONGSWORD.get(),recipeConsumer);
+
+        // mace
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.MACE_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.MACE_HEAD.get(), ItemInit.MACE_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.MACE_HEAD_2.get(), ItemInit.MACE_HEAD_3.get(),recipeConsumer);
+        twoToolForging(ItemInit.MACE_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.MACE.get(),recipeConsumer);
+
+        // makhaira
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.MAKHAIRA_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.MAKHAIRA_HEAD.get(), ItemInit.MAKHAIRA_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.MAKHAIRA_HEAD_2.get(), ItemInit.MAKHAIRA_HEAD_3.get(),recipeConsumer);
+        twoToolForging(ItemInit.MAKHAIRA_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.MAKHAIRA.get(),recipeConsumer);
+
+        // nodachi
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.NODACHI_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.NODACHI_HEAD.get(), ItemInit.NODACHI_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.NODACHI_HEAD_2.get(), ItemInit.NODACHI_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.NODACHI_HEAD_3.get(), ItemInit.NODACHI_HEAD_4.get(),recipeConsumer);
+        twoToolForging(ItemInit.NODACHI_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.NODACHI.get(),recipeConsumer);
+
+        // rapier
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.RAPIER_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.RAPIER_HEAD.get(), ItemInit.RAPIER_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.RAPIER_HEAD_2.get(), ItemInit.RAPIER_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.RAPIER_HEAD_3.get(), ItemInit.RAPIER_HEAD_4.get(),recipeConsumer);
+        twoToolForging(ItemInit.RAPIER_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.RAPIER.get(),recipeConsumer);
+
+        // sabre
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.SABRE_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.SABRE_HEAD.get(), ItemInit.SABRE_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.SABRE_HEAD_2.get(), ItemInit.SABRE_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.SABRE_HEAD_3.get(), ItemInit.SABRE_HEAD_4.get(),recipeConsumer);
+        twoToolForging(ItemInit.SABRE_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.SABRE.get(),recipeConsumer);
+
+        // spear
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.SPEAR_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.SPEAR_HEAD.get(), ItemInit.SPEAR_HEAD_2.get(),recipeConsumer);
+        twoToolForging(ItemInit.SPEAR_HEAD_2.get(), ItemInit.LONG_TOOL_ROD.get(),ItemInit.SPEAR.get(),recipeConsumer);
+
+        // staff
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.STAFF_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.STAFF_HEAD.get(), ItemInit.STAFF_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.STAFF_HEAD_2.get(), ItemInit.STAFF_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.STAFF_HEAD_3.get(), ItemInit.STAFF_HEAD_4.get(),recipeConsumer);
+        twoToolForging(ItemInit.STAFF_HEAD_4.get(), ItemInit.LONG_TOOL_ROD.get(),ItemInit.STAFF.get(),recipeConsumer);
+
+        // talwar
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TALWAR_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.TALWAR_HEAD.get(), ItemInit.TALWAR_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.TALWAR_HEAD_2.get(), ItemInit.TALWAR_HEAD_3.get(),recipeConsumer);
+        twoToolForging(ItemInit.TALWAR_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.TALWAR.get(),recipeConsumer);
+
+        // zweihander
+
+        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.ZWEIHANDER_HEAD.get(),recipeConsumer);
+        toolForging(ItemInit.ZWEIHANDER_HEAD.get(), ItemInit.ZWEIHANDER_HEAD_2.get(),recipeConsumer);
+        toolForging(ItemInit.ZWEIHANDER_HEAD_2.get(), ItemInit.ZWEIHANDER_HEAD_3.get(),recipeConsumer);
+        toolForging(ItemInit.ZWEIHANDER_HEAD_3.get(), ItemInit.ZWEIHANDER_HEAD_4.get(),recipeConsumer);
+        toolForging(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(),recipeConsumer);
+        twoToolForging(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(),ItemInit.ZWEIHANDER.get(),recipeConsumer);
 
     }
+
+    protected void toolForging(ItemLike input,ItemLike result,Consumer<FinishedRecipe> consumer) {
+        AnvilForgingRecipeBuilder.anvilToolForging(input,result).save(consumer,new ResourceLocation("anvil_forging_"+getItemName(result)));
+    }
+
+    protected void twoToolForging(ItemLike input,ItemLike input2,ItemLike result,Consumer<FinishedRecipe> consumer) {
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(input,input2,result).save(consumer,new ResourceLocation("anvil_forging_"+getItemName(result)));
+    }
+
 
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
         ItemStack stack = new ItemStack(ItemInit.TOOL_HEAD.get());

@@ -2,14 +2,14 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:anvil_forging_tool_rod"
+      "minecraft:anvil_forging_kabutowari_head_2"
     ]
   },
   "criteria": {
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:anvil_forging_tool_rod"
+        "recipe": "minecraft:anvil_forging_kabutowari_head_2"
       }
     }
   },

@@ -1,0 +1,9 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:battleaxe_head_4"
+  },
+  "result": {
+    "item": "advancedlootableweapons:battleaxe_head_5"
+  }
+}

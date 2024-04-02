@@ -1,0 +1,9 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:spear_head"
+  },
+  "result": {
+    "item": "advancedlootableweapons:spear_head_2"
+  }
+}
