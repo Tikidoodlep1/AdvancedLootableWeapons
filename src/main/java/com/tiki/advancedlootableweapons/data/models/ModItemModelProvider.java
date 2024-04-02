@@ -148,6 +148,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         heatableItems();
 
+        oneLayerItemHandHeld(ItemInit.WOODEN_LONG_TOOL_ROD.get());
+
         oneLayerItem(ItemInit.IRON_CHAIN_LINK.get());
         oneLayerItem(ItemInit.GOLD_CHAIN_LINK.get());
         oneLayerItem(ItemInit.COPPER_CHAIN_LINK.get());
