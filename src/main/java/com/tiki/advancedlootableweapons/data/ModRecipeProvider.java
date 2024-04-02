@@ -373,7 +373,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected static void woodenWeapon(Consumer<FinishedRecipe> consumer,ItemLike result,Item head,boolean longHandle) {
-        Item handle = longHandle ? ItemInit.LONG_WEAPON_HANDLE.get() : Items.STICK;
+        Item handle = longHandle ? ItemInit.WOODEN_LONG_TOOL_ROD.get() : Items.STICK;
         String base = Registry.ITEM.getKey(head).getPath().replace("_head","");
 
         ItemStack woodWeapon = new ItemStack(result);

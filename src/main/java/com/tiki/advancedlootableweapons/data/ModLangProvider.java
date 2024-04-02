@@ -242,94 +242,95 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultItem(ItemInit.SILVER_WHETSTONE);
         addDefaultItem(ItemInit.STEEL_WHETSTONE);
 
-        add("item.advancedlootableweapons.hot_tool_head", "Tool Head");
+        add(ItemInit.TOOL_HEAD.get(), "Tool Head");
 
-        add("item.advancedlootableweapons.hot_tool_rod", "Weapon Handle(Stage 1)");
-        add("item.advancedlootableweapons.hot_tool_rod_2", "Weapon Handle(Finished)");
-        add("item.advancedlootableweapons.long_tool_rod", "Long Weapon Handle");
-        add("item.advancedlootableweapons.long_weapon_handle", "Wooden Long Weapon Handle");
+        add(ItemInit.TOOL_ROD.get(), "Tool Rod(Stage 1)");
+        add(ItemInit.TOOL_ROD_2.get(), "Tool Rod(Finished)");
+        
+        add(ItemInit.LONG_TOOL_ROD.get(), "Long Tool Rod");
+        add(ItemInit.WOODEN_LONG_TOOL_ROD.get(), "Wooden Long Tool Rod");
 
-        add("item.advancedlootableweapons.dagger_head", "Wooden Dagger Head");
-        add("item.advancedlootableweapons.dagger_hot_tool_head", "Dagger Head(Stage 1)");
-        add("item.advancedlootableweapons.dagger_hot_tool_head_2", "Dagger Head(Finished)");
+        add(ItemInit.WOODEN_DAGGER_HEAD.get(), "Wooden Dagger Head");
+        add(ItemInit.DAGGER_HEAD.get(), "Dagger Head(Stage 1)");
+        add(ItemInit.DAGGER_HEAD_2.get(), "Dagger Head(Finished)");
 
-        add("item.advancedlootableweapons.kabutowari_head", "Wooden Kabutowari Head");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head", "Kabutowari Head(Stage 1)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_2", "Kabutowari Head(Stage 2)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_3", "Kabutowari Head(Stage 3)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_4", "Kabutowari Head(Stage 4)");
-        add("item.advancedlootableweapons.kabutowari_hot_tool_head_5", "Kabutowari Head(Finished)");
+        add(ItemInit.WOODEN_KABUTOWARI_HEAD.get(), "Wooden Kabutowari Head");
+        add(ItemInit.KABUTOWARI_HEAD.get(), "Kabutowari Head(Stage 1)");
+        add(ItemInit.KABUTOWARI_HEAD_2.get(), "Kabutowari Head(Stage 2)");
+        add(ItemInit.KABUTOWARI_HEAD_3.get(), "Kabutowari Head(Stage 3)");
+        add(ItemInit.KABUTOWARI_HEAD_4.get(), "Kabutowari Head(Stage 4)");
+        add(ItemInit.KABUTOWARI_HEAD_5.get(), "Kabutowari Head(Finished)");
 
-        add("item.advancedlootableweapons.talwar_head", "Wooden Talwar Head");
-        add("item.advancedlootableweapons.talwar_hot_tool_head", "Talwar Head(Stage 1)");
-        add("item.advancedlootableweapons.talwar_hot_tool_head_2", "Talwar Head(Stage 2)");
-        add("item.advancedlootableweapons.talwar_hot_tool_head_3", "Talwar Head(Finished)");
+        add(ItemInit.WOODEN_TALWAR_HEAD.get(), "Wooden Talwar Head");
+        add(ItemInit.TALWAR_HEAD.get(), "Talwar Head(Stage 1)");
+        add(ItemInit.TALWAR_HEAD_2.get(), "Talwar Head(Stage 2)");
+        add(ItemInit.TALWAR_HEAD_3.get(), "Talwar Head(Finished)");
 
-        add("item.advancedlootableweapons.rapier_head", "Wooden Rapier Head");
-        add("item.advancedlootableweapons.rapier_hot_tool_head", "Rapier Head(Stage 1)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_2", "Rapier Head(Stage 2)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_3", "Rapier Head(Stage 3)");
-        add("item.advancedlootableweapons.rapier_hot_tool_head_4", "Rapier Head(Finished)");
+        add(ItemInit.WOODEN_RAPIER_HEAD.get(), "Wooden Rapier Head");
+        add(ItemInit.RAPIER_HEAD.get(), "Rapier Head(Stage 1)");
+        add(ItemInit.RAPIER_HEAD_2.get(), "Rapier Head(Stage 2)");
+        add(ItemInit.RAPIER_HEAD_3.get(), "Rapier Head(Stage 3)");
+        add(ItemInit.RAPIER_HEAD_4.get(), "Rapier Head(Finished)");
 
-        add("item.advancedlootableweapons.cleaver_head", "Wooden Cleaver Head");
-        add("item.advancedlootableweapons.cleaver_hot_tool_head", "Cleaver Head(Finished)");
+        add(ItemInit.WOODEN_CLEAVER_HEAD.get(), "Wooden Cleaver Head");
+        add(ItemInit.CLEAVER_HEAD.get(), "Cleaver Head(Finished)");
 
-        add("item.advancedlootableweapons.mace_head", "Wooden Mace Head");
-        add("item.advancedlootableweapons.mace_hot_tool_head", "Mace Head(Stage 1)");
-        add("item.advancedlootableweapons.mace_hot_tool_head_2", "Mace Head(Stage 2)");
-        add("item.advancedlootableweapons.mace_hot_tool_head_3", "Mace Head(Finished)");
+        add(ItemInit.WOODEN_MACE_HEAD.get(), "Wooden Mace Head");
+        add(ItemInit.MACE_HEAD.get(), "Mace Head(Stage 1)");
+        add(ItemInit.MACE_HEAD_2.get(), "Mace Head(Stage 2)");
+        add(ItemInit.MACE_HEAD_3.get(), "Mace Head(Finished)");
 
-        add("item.advancedlootableweapons.staff_head", "Wooden Staff Head");
-        add("item.advancedlootableweapons.staff_hot_tool_head", "Staff Head(Stage 1)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_2", "Staff Head(Stage 2)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_3", "Staff Head(Stage 3)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_4", "Staff Head(Stage 4)");
-        add("item.advancedlootableweapons.staff_hot_tool_head_5", "Staff Head(Finished)");
+        add(ItemInit.WOODEN_STAFF_HEAD.get(), "Wooden Staff Head");
+        add(ItemInit.STAFF_HEAD.get(), "Staff Head(Stage 1)");
+        add(ItemInit.STAFF_HEAD_2.get(), "Staff Head(Stage 2)");
+        add(ItemInit.STAFF_HEAD_3.get(), "Staff Head(Stage 3)");
+        add(ItemInit.STAFF_HEAD_4.get(), "Staff Head(Stage 4)");
+        add(ItemInit.STAFF_HEAD_5.get(), "Staff Head(Finished)");
 
-        add("item.advancedlootableweapons.longsword_head", "Wooden Longsword Head");
-        add("item.advancedlootableweapons.longsword_hot_tool_head", "Longsword Head(Stage 1)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_2", "Longsword Head(Stage 2)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_3", "Longsword Head(Stage 3)");
-        add("item.advancedlootableweapons.longsword_hot_tool_head_4", "Longsword Head(Finished)");
+        add(ItemInit.WOODEN_LONGSWORD_HEAD.get(), "Wooden Longsword Head");
+        add(ItemInit.LONGSWORD_HEAD.get(), "Longsword Head(Stage 1)");
+        add(ItemInit.LONGSWORD_HEAD_2.get(), "Longsword Head(Stage 2)");
+        add(ItemInit.LONGSWORD_HEAD_3.get(), "Longsword Head(Stage 3)");
+        add(ItemInit.LONGSWORD_HEAD_4.get(), "Longsword Head(Finished)");
 
-        add("item.advancedlootableweapons.kodachi_head", "Wooden Kodachi Head");
-        add("item.advancedlootableweapons.kodachi_hot_tool_head", "Kodachi Head(Stage 1)");
-        add("item.advancedlootableweapons.kodachi_hot_tool_head_2", "Kodachi Head(Finished)");
+        add(ItemInit.WOODEN_KODACHI_HEAD.get(), "Wooden Kodachi Head");
+        add(ItemInit.KODACHI_HEAD.get(), "Kodachi Head(Stage 1)");
+        add(ItemInit.KODACHI_HEAD_2.get(), "Kodachi Head(Finished)");
 
-        add("item.advancedlootableweapons.battleaxe_head", "Wooden Battleaxe Head");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head", "Battleaxe Head(Stage 1)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_2", "Battleaxe Head(Stage 2)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_3", "Battleaxe Head(Stage 3)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_4", "Battleaxe Head(Stage 4)");
-        add("item.advancedlootableweapons.battleaxe_hot_tool_head_5", "Battleaxe Head(Finished)");
+        add(ItemInit.WOODEN_BATTLEAXE_HEAD.get(), "Wooden Battleaxe Head");
+        add(ItemInit.BATTLEAXE_HEAD.get(), "Battleaxe Head(Stage 1)");
+        add(ItemInit.BATTLEAXE_HEAD_2.get(), "Battleaxe Head(Stage 2)");
+        add(ItemInit.BATTLEAXE_HEAD_3.get(), "Battleaxe Head(Stage 3)");
+        add(ItemInit.BATTLEAXE_HEAD_4.get(), "Battleaxe Head(Stage 4)");
+        add(ItemInit.BATTLEAXE_HEAD_5.get(), "Battleaxe Head(Finished)");
 
-        add("item.advancedlootableweapons.zweihander_head", "Wooden Zweihander head");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head", "Zweihander Head(Stage 1)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_2", "Zweihander Head(Stage 2)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_3", "Zweihander Head(Stage 3)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_4", "Zweihander Head(Stage 4)");
-        add("item.advancedlootableweapons.zweihander_hot_tool_head_5", "Zweihander Head(Finished)");
+        add(ItemInit.WOODEN_ZWEIHANDER_HEAD.get(), "Wooden Zweihander head");
+        add(ItemInit.ZWEIHANDER_HEAD.get(), "Zweihander Head(Stage 1)");
+        add(ItemInit.ZWEIHANDER_HEAD_2.get(), "Zweihander Head(Stage 2)");
+        add(ItemInit.ZWEIHANDER_HEAD_3.get(), "Zweihander Head(Stage 3)");
+        add(ItemInit.ZWEIHANDER_HEAD_4.get(), "Zweihander Head(Stage 4)");
+        add(ItemInit.ZWEIHANDER_HEAD_5.get(), "Zweihander Head(Finished)");
 
-        add("item.advancedlootableweapons.nodachi_head", "Wooden Nodachi Head");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head", "Nodachi Head(Stage 1)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_2", "Nodachi Head(Stage 2)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_3", "Nodachi Head(Stage 3)");
-        add("item.advancedlootableweapons.nodachi_hot_tool_head_4", "Nodachi Head(Finished)");
+        add(ItemInit.WOODEN_NODACHI_HEAD.get(), "Wooden Nodachi Head");
+        add(ItemInit.NODACHI_HEAD.get(), "Nodachi Head(Stage 1)");
+        add(ItemInit.NODACHI_HEAD_2.get(), "Nodachi Head(Stage 2)");
+        add(ItemInit.NODACHI_HEAD_3.get(), "Nodachi Head(Stage 3)");
+        add(ItemInit.NODACHI_HEAD_4.get(), "Nodachi Head(Finished)");
 
-        add("item.advancedlootableweapons.sabre_head", "Wooden Sabre Head");
-        add("item.advancedlootableweapons.sabre_hot_tool_head", "Sabre Head(Stage 1)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_2", "Sabre Head(Stage 2)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_3", "Sabre Head(Stage 3)");
-        add("item.advancedlootableweapons.sabre_hot_tool_head_4", "Sabre Head(Finished)");
+        add(ItemInit.WOODEN_SABRE_HEAD.get(), "Wooden Sabre Head");
+        add(ItemInit.SABRE_HEAD.get(), "Sabre Head(Stage 1)");
+        add(ItemInit.SABRE_HEAD_2.get(), "Sabre Head(Stage 2)");
+        add(ItemInit.SABRE_HEAD_3.get(), "Sabre Head(Stage 3)");
+        add(ItemInit.SABRE_HEAD_4.get(), "Sabre Head(Finished)");
 
-        add("item.advancedlootableweapons.makhaira_head", "Wooden Makhaira Head");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head", "Makhaira Head(Stage 1)");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head_2", "Makhaira Head(Stage 2)");
-        add("item.advancedlootableweapons.makhaira_hot_tool_head_3", "Makhaira Head(Finished)");
+        add(ItemInit.WOODEN_MAKHAIRA_HEAD.get(), "Wooden Makhaira Head");
+        add(ItemInit.MAKHAIRA_HEAD.get(), "Makhaira Head(Stage 1)");
+        add(ItemInit.MAKHAIRA_HEAD_2.get(), "Makhaira Head(Stage 2)");
+        add(ItemInit.MAKHAIRA_HEAD_3.get(), "Makhaira Head(Finished)");
 
-        add("item.advancedlootableweapons.spear_head", "Wooden Spear Head");
-        add("item.advancedlootableweapons.spear_hot_tool_head", "Spear Head(Stage 1)");
-        add("item.advancedlootableweapons.spear_hot_tool_head_2", "Spear Head(Finished)");
+        add(ItemInit.WOODEN_SPEAR_HEAD.get(), "Wooden Spear Head");
+        add(ItemInit.SPEAR_HEAD.get(), "Spear Head(Stage 1)");
+        add(ItemInit.SPEAR_HEAD_2.get(), "Spear Head(Finished)");
 
 
         add("item.advancedlootableweapons.helmet_kobold", "Kobold Steel Helmet");

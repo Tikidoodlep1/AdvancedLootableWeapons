@@ -105,7 +105,7 @@ public class ItemInit {
     public static final RegistryObject<Item> WOODEN_SABRE_HEAD = ITEMS.register("wooden_sabre_head", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> WOODEN_MAKHAIRA_HEAD = ITEMS.register("wooden_makhaira_head", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> WOODEN_SPEAR_HEAD = ITEMS.register("wooden_spear_head", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
-    public static final RegistryObject<Item> LONG_WEAPON_HANDLE = ITEMS.register("long_weapon_handle", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
+    public static final RegistryObject<Item> WOODEN_LONG_TOOL_ROD = ITEMS.register("wooden_long_tool_rod", () -> new Item(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
 
     //armors
