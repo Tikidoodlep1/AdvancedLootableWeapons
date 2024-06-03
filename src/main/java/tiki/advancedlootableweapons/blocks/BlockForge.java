@@ -163,9 +163,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-//		if(Alw.isPyrotechLoaded) {
-//			return new TileEntityForgeAirflowConsumer(false, false, this.getRegistryName());
-//		}
 		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 	

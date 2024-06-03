@@ -79,7 +79,6 @@ public class ItemInit {
 		
 		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
 		
-		
 		for (IRecipe irecipe : CraftingManager.REGISTRY) {
             if (irecipe instanceof ForgeToolHeadRecipe || irecipe instanceof ForgeToolRecipe || irecipe instanceof ForgeArmorPlateRecipe || 
             		irecipe instanceof ForgeArmorBindingRecipe || irecipe instanceof ForgeGeneralCaseRecipe) {
@@ -90,7 +89,6 @@ public class ItemInit {
             	}
             }
         }
-		
 		
 		for(String s : ConfigHandler.EXTRA_MATERIALS) {
 			List<ToolMaterial> addedMats = new ArrayList<ToolMaterial>();

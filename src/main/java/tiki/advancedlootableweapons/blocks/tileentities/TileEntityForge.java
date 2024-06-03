@@ -3,7 +3,6 @@ package tiki.advancedlootableweapons.blocks.tileentities;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
@@ -19,9 +18,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
@@ -67,22 +63,7 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 	}
 	
 	public TileEntityForge(boolean needsFuel, boolean needsIgnition, ResourceLocation block) {
-		if(needsFuel && needsIgnition) {
-			this.canUseFuel = false;
-		}else if(needsFuel && !needsIgnition) {
-			this.canUseFuel = needsFuel;
-		}
-		this.needsFuel = needsFuel;
-		this.requiresIgnition = needsIgnition;
-		this.block = block;
-		if(this.hasWorld()) {
-			if(this.getWorld().provider.isNether()) {
-				this.baseHeatingSpeed *= ConfigHandler.FORGE_NETHER_HEATING_MULTIPLIER;
-			}
-			this.biomeMinTemp = HotMetalHelper.getAvgTempForBiomeInC(this.getWorld().getBiome(this.getPos()), this.getPos()) + 273;
-			this.biomeMinTemp = this.biomeMinTemp < 273 ? 850 : this.biomeMinTemp;
-		}
-		
+		this(needsFuel, needsIgnition, 1.0f, "", block);
 	}
 	
 	public TileEntityForge(boolean needsFuel, boolean needsIgnition, float baseHeatingSpeed, String customName, ResourceLocation block) {

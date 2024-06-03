@@ -37,7 +37,7 @@ public class GuiForge extends GuiContainer
 		this.ySize = 166;
 		
 		//Get CraftTweaker defined heatable materials
-		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());	
+		this.heatableMaterials = ZenDynamicAlwResources.getMatListForBlock(tileentity.getBlock());
 	}
 	
 	private String getTileName() {
@@ -62,7 +62,7 @@ public class GuiForge extends GuiContainer
 		}
 		
 		//Don't append ... after a space, that looks wonky
-		if(this.tileName.charAt(this.tileName.length() - 4) == ' ') {
+		if(this.tileName.length() >= 4 && this.tileName.charAt(this.tileName.length() - 4) == ' ') {
 			this.tileName.deleteCharAt(this.tileName.length() - 4);
 		}
 		

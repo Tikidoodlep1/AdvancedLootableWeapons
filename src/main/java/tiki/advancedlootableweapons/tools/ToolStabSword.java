@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import org.lwjgl.input.Keyboard;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -13,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -25,7 +24,6 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -337,7 +335,7 @@ public class ToolStabSword extends Item implements IHasModel {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		KeyBinding run = Minecraft.getMinecraft().gameSettings.keyBindSprint;
 		
-		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
+		if(GameSettings.isKeyDown(sneak)) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
@@ -350,7 +348,7 @@ public class ToolStabSword extends Item implements IHasModel {
 			tooltip.add("");
 			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.level").getFormattedText() + " " + plateEffect + "/8");
 			tooltip.add(TextFormatting.DARK_BLUE + new TextComponentTranslation("alw.effectiveness.plate.pierce").getFormattedText() + " " + we.getPlatePenChance() + "%");
-		}else if(Keyboard.isKeyDown(run.getKeyCode())) {
+		}else if(GameSettings.isKeyDown(run)) {
 			NBTTagCompound tag = stack.getTagCompound();
 			if(tag != null && tag.hasKey("colors")) {
 				tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.colors.title").getFormattedText());

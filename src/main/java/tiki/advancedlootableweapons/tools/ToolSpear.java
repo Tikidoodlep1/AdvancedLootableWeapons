@@ -3,9 +3,8 @@ package tiki.advancedlootableweapons.tools;
 import java.util.List;
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
@@ -43,7 +42,7 @@ public class ToolSpear extends ToolStabSword {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
+		if(GameSettings.isKeyDown(sneak)) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
 			tooltip.add("");
 			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.pierce.thrown_spear").getFormattedText() + " " + we.getChainPenChance() + "%");

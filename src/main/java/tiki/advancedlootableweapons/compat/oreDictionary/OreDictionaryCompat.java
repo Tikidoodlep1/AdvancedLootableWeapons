@@ -2,6 +2,7 @@ package tiki.advancedlootableweapons.compat.oreDictionary;
 
 import net.minecraft.init.Items;
 import net.minecraftforge.oredict.OreDictionary;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
@@ -9,6 +10,8 @@ import tiki.advancedlootableweapons.init.ItemInit;
 public class OreDictionaryCompat {
 
 	public static void registerOres() {
+		
+		Alw.logger.info("Registering OreDictionary");
 		
 		OreDictionary.registerOre(ZenDynamicAlwResources.IGNITION_ORE, Items.FLINT_AND_STEEL);
 		OreDictionary.registerOre(ZenDynamicAlwResources.IGNITION_UPGRADE_ORE, Items.BLAZE_POWDER);

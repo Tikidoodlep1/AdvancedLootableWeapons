@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import org.lwjgl.input.Keyboard;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -264,8 +263,8 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		KeyBinding run = Minecraft.getMinecraft().gameSettings.keyBindSprint;
-		
-		if(Keyboard.isKeyDown(sneak.getKeyCode())) {
+					
+		if(GameSettings.isKeyDown(sneak)) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
@@ -278,7 +277,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 			tooltip.add("");
 			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.level").getFormattedText() + " " + plateEffect + "/8");
 			tooltip.add(TextFormatting.DARK_BLUE + new TextComponentTranslation("alw.effectiveness.plate.pierce").getFormattedText() + " " + we.getPlatePenChance() + "%");
-		}else if(Keyboard.isKeyDown(run.getKeyCode())) {
+		}else if(GameSettings.isKeyDown(run)) {
 			NBTTagCompound tag = stack.getTagCompound();
 			if(tag != null && tag.hasKey("colors")) {
 				tooltip.add(TextFormatting.RED + new TextComponentTranslation("alw.colors.title").getFormattedText());

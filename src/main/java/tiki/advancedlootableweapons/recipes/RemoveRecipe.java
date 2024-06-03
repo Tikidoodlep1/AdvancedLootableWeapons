@@ -8,6 +8,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class RemoveRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
+	@SuppressWarnings("unused")
 	private final ItemStack output;
 	
 	RemoveRecipe(ItemStack output) {
@@ -35,7 +36,7 @@ public class RemoveRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements I
 
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output;
+		return ItemStack.EMPTY;//output;
 	}
 	
 
