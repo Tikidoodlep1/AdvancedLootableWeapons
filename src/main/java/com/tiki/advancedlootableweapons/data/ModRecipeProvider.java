@@ -170,7 +170,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         singleItemRecipe(ItemInit.LIMED_HIDE.get(), ItemInit.CURED_HIDE.get(),recipeConsumer);
         singleItemRecipe(ItemInit.DELIMED_HIDE.get(), ItemInit.LIMED_HIDE.get(),recipeConsumer);
-        singleItemRecipe(Items.LEATHER, ItemInit.DELIMED_HIDE.get(),recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"leather_from_tanning"));
+        singleItemRecipe(Items.LEATHER, ItemInit.DELIMED_HIDE.get(),recipeConsumer,AdvancedLootableWeapons.id("leather_from_tanning"));
 
     }
 
@@ -202,42 +202,42 @@ public class ModRecipeProvider extends RecipeProvider {
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.BRONZE_INGOT.get(),4)
                 .ingredient1(Tags.Items.INGOTS_COPPER,3)
                 .ingredient2(ModItemTags.INGOTS_TIN,1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"bronze_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("bronze_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.CRYSTALLITE_INGOT.get(),2)
                 .ingredient1(ModItemTags.INGOTS_STEEL,1)
                 .ingredient2(ItemInit.CRYSTAL.get(),1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"crystallite_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("crystallite_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.DUSKSTEEL_INGOT.get(),4)
                 .ingredient1(ModItemTags.INGOTS_STEEL,1)
                 .ingredient2(ModItemTags.INGOTS_SHADOW_PLATINUM,3)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dusksteel_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("dusksteel_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.FROST_STEEL_INGOT.get(),2)
                 .ingredient1(ModItemTags.INGOTS_PLATINUM,1)
                 .ingredient2(ModItemTags.INGOTS_SILVER,1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"frost_steel_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("frost_steel_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.KOBOLD_STEEL_INGOT.get(),4)
                 .ingredient1(BlockInit.FELDSPAR.get(), 1)
                 .ingredient2(Tags.Items.INGOTS_IRON,2)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kobold_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("kobold_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.REFINED_OBSIDIAN_INGOT.get(),2)
                 .ingredient1(ItemInit.OBSIDIAN_SHARD.get(), 1)
                 .ingredient2(ModItemTags.INGOTS_STEEL,1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"refined_obsidian_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("refined_obsidian_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.SHADOW_PLATINUM_INGOT.get(),1)
                 .ingredient1(ModItemTags.INGOTS_PLATINUM, 1)
                 .ingredient2(ItemInit.CONGEALED_SHADOW.get(), 1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"shadow_platinum_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("shadow_platinum_alloying"));
 
         AlloyFurnaceRecipeBuilder.alloy(ItemInit.STEEL_INGOT.get(),5)
                 .ingredient1(Tags.Items.INGOTS_IRON, 4)
                 .ingredient2(ItemTags.COALS, 1)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"steel_alloying"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("steel_alloying"));
 
     }
 
@@ -245,64 +245,64 @@ public class ModRecipeProvider extends RecipeProvider {
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.BATTLEAXE_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"battleaxe_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("battleaxe_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.DAGGER_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"dagger_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("dagger_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.CLEAVER_HEAD.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"cleaver_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("cleaver_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.KABUTOWARI_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kabutowari_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("kabutowari_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.KODACHI_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"kodachi_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("kodachi_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.LONGSWORD_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"longsword_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("longsword_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.MACE_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"mace_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("mace_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.MAKHAIRA_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"makhaira_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("makhaira_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.RAPIER_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"rapier_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("rapier_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.SABRE_HEAD_4.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"sabre_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("sabre_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.SPEAR_HEAD_2.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"spear_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("spear_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.STAFF_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"staff_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("staff_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.TALWAR_HEAD_3.get())
                 .defaultFluid(Fluids.WATER)
                 .needsClay()
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"talwar_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("talwar_quenching"));
 
         DrumQuenchingRecipeBuilder.quenching(ItemInit.ZWEIHANDER_HEAD_5.get())
                 .defaultFluid(Fluids.WATER)
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"zweihander_quenching"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("zweihander_quenching"));
     }
 
     protected void drum(Consumer<FinishedRecipe> recipeConsumer) {
@@ -311,17 +311,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .time(500)
                 .defaultFluid(Fluids.WATER)
                 .additive(Ingredient.of(ModItemTags.SALT))
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"cured_hide_advanced"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("cured_hide_advanced"));
 
         DrumRecipeBuilder.drum(ItemInit.CURED_HIDE.get(),ItemInit.LIMED_HIDE.get())
                 .time(500)
                 .defaultFluid(FluidInit.MILK_OF_LIME.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"limed_hide_advanced"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("limed_hide_advanced"));
 
         DrumRecipeBuilder.drum(ItemInit.LIMED_HIDE.get(),ItemInit.DELIMED_HIDE.get())
                 .time(500)
                 .defaultFluid(FluidInit.MAGNESIUM_LACTATE.get())
-                .save(recipeConsumer,new ResourceLocation(AdvancedLootableWeapons.MODID,"delimed_hide_advanced"));
+                .save(recipeConsumer,AdvancedLootableWeapons.id("delimed_hide_advanced"));
     }
 
     protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
@@ -330,7 +330,7 @@ public class ModRecipeProvider extends RecipeProvider {
             if (weaponMaterial.metalStats() != null) {
                 ItemStack toolHead = createToolHead(weaponMaterial);
                 AnvilForgingRecipeBuilder.anvilMaterialForging(weaponMaterial.tier().getRepairIngredient(), toolHead)
-                        .save(recipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID, "anvil_forging_tool_head_" + entry.getKey()));
+                        .save(recipeConsumer, AdvancedLootableWeapons.id( "anvil_forging_tool_head_" + entry.getKey()));
             }
         }
 
@@ -517,8 +517,8 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected static void nineBlockStorageRecipesModded(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ItemLike pUnpacked, ItemLike pPacked, String pPackingRecipeName, @Nullable String pPackingRecipeGroup, String pUnpackingRecipeName, @Nullable String pUnpackingRecipeGroup) {
-        ShapelessRecipeBuilder.shapeless(pUnpacked, 9).requires(pPacked).group(pUnpackingRecipeGroup).unlockedBy(getHasName(pPacked), has(pPacked)).save(pFinishedRecipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID,pUnpackingRecipeName));
-        ShapedRecipeBuilder.shaped(pPacked).define('#', pUnpacked).pattern("###").pattern("###").pattern("###").group(pPackingRecipeGroup).unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, new ResourceLocation(AdvancedLootableWeapons.MODID,pPackingRecipeName));
+        ShapelessRecipeBuilder.shapeless(pUnpacked, 9).requires(pPacked).group(pUnpackingRecipeGroup).unlockedBy(getHasName(pPacked), has(pPacked)).save(pFinishedRecipeConsumer, AdvancedLootableWeapons.id(pUnpackingRecipeName));
+        ShapedRecipeBuilder.shaped(pPacked).define('#', pUnpacked).pattern("###").pattern("###").pattern("###").group(pPackingRecipeGroup).unlockedBy(getHasName(pUnpacked), has(pUnpacked)).save(pFinishedRecipeConsumer, AdvancedLootableWeapons.id(pPackingRecipeName));
     }
 
     protected void forgeHammer(Item hammer, TagKey<Item> ing, Consumer<FinishedRecipe> consumer) {

@@ -8,8 +8,10 @@ import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -55,7 +57,7 @@ public class ModLangProvider extends LanguageProvider {
         add(REICompat.DRUM_CAT,"Drum");
         add(REICompat.JAW_CRUSHER_CAT,"Jaw Crusher");
         add(REICompat.ALLOY_FURNACE_CAT,"Alloy Furnace");
-
+        addTranslatableText(TranslationKeys.ANVIL_FORGING_CAT,"Anvil Forging");
 
         add("enchantment.advancedlootableweapons.refined", "Refined");
 
@@ -385,8 +387,12 @@ public class ModLangProvider extends LanguageProvider {
         add("item.advancedlootableweapons.boots_dusksteel", "Dusksteel Boots");
     }
 
+    protected void addTranslatableText(MutableComponent translatable,String translation) {
+        add(((TranslatableComponent)translatable).getKey(),translation);
+    }
+
     protected void addTab(CreativeModeTab tab,String translation) {
-        add(((TranslatableComponent)tab.getDisplayName()).getKey(),translation);
+        addTranslatableText((MutableComponent) tab.getDisplayName(),translation);
     }
 
     protected void addMenu(Supplier<? extends MenuType<?>> supplier,String key) {

@@ -70,6 +70,7 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> nonnulllist = NonNullList.create();
         nonnulllist.add(this.ingredient);
+        nonnulllist.add(this.ingredient2);
         return nonnulllist;
     }
 

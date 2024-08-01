@@ -2,24 +2,15 @@ package com.tiki.advancedlootableweapons.compat.rei;
 
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.compat.rei.categories.AlloyFurnaceCategory;
-import com.tiki.advancedlootableweapons.compat.rei.categories.DrumCategory;
-import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
-import com.tiki.advancedlootableweapons.compat.rei.categories.JawCrusherCategory;
-import com.tiki.advancedlootableweapons.compat.rei.displays.AlloyFurnaceDisplay;
-import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
-import com.tiki.advancedlootableweapons.compat.rei.displays.DrumQuenchingDisplay;
-import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
+import com.tiki.advancedlootableweapons.compat.rei.categories.*;
+import com.tiki.advancedlootableweapons.compat.rei.displays.*;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
-import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
-import com.tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
-import com.tiki.advancedlootableweapons.recipes.DrumRecipe;
-import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
+import com.tiki.advancedlootableweapons.recipes.*;
 import dev.architectury.fluid.FluidStack;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -31,6 +22,12 @@ import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandle
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
+import net.minecraft.core.Registry;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 @REIPluginClient
 public class REICompat implements REIClientPlugin {
@@ -39,7 +36,7 @@ public class REICompat implements REIClientPlugin {
     public static final CategoryIdentifier<AlloyFurnaceDisplay> ALLOY_FURNACE = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/alloy_furnace");
     public static final CategoryIdentifier<DrumQuenchingDisplay> DRUM_QUENCHING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum_quenching");
     public static final CategoryIdentifier<DrumDisplay> DRUM = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum");
-    public static final CategoryIdentifier<AlloyFurnaceDisplay> ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/anvil_forging");
+    public static final CategoryIdentifier<AnvilForgingRecipeDisplay> ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/anvil_forging");
 
     public static final String ALLOY_FURNACE_CAT = "category.rei.advancedlootableweapons.alloy_furnace";
     public static final String JAW_CRUSHER_CAT = "category.rei.advancedlootableweapons.jaw_crusher";
@@ -57,16 +54,22 @@ public class REICompat implements REIClientPlugin {
         JawCrusherCategory jawCrusherCategory = new JawCrusherCategory(JAW_CRUSHER_CAT);
         DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory(QUENCHING);
         DrumCategory drumCategory = new DrumCategory(DRUM_CAT);
+        AnvilForgingCategory anvilForgingCategory = new AnvilForgingCategory();
 
         registry.add(alloyFurnaceCategory);
         registry.add(jawCrusherCategory);
         registry.add(drumQuenchingCategory);
         registry.add(drumCategory);
+        registry.add(anvilForgingCategory);
 
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
         registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
         registry.addWorkstations(drumCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
+        List<ItemStack> anvils = Registry.ITEM.stream().filter(item -> item.builtInRegistryHolder().is(ItemTags.ANVIL)).map(Item::getDefaultInstance).toList();
+        for (ItemStack stack : anvils) {
+            registry.addWorkstations(anvilForgingCategory.getCategoryIdentifier(), EntryStacks.of(stack));
+        }
     }
 
     @Override
@@ -75,6 +78,7 @@ public class REICompat implements REIClientPlugin {
         registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
         registry.registerRecipeFiller(DrumQuenchingRecipe.class,ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
         registry.registerRecipeFiller(DrumRecipe.class,ModRecipeTypes.DRUM, DrumDisplay::new);
+        registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, AnvilForgingRecipeDisplay::create);
     }
 
     @Override

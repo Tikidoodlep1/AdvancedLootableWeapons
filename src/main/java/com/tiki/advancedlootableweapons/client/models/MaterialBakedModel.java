@@ -143,7 +143,7 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
                     String material = entry.getKey();
                     JsonObject fakeModel = new JsonObject();
                     fakeModel.addProperty("parent",
-                            new ResourceLocation(AdvancedLootableWeapons.MODID,
+                            AdvancedLootableWeapons.id(
                                     "item/" + folder + "/" + material).toString());
 
                     BlockModel unbakedModel = deserializationContext.deserialize(fakeModel, BlockModel.class);

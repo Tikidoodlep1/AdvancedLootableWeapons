@@ -51,7 +51,7 @@ public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
         Point startPoint = new Point(bounds.getX() + 25, bounds.getY() + 3);
 
-        widgets.add(Widgets.createTexturedWidget(new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/rei/drum.png"),
+        widgets.add(Widgets.createTexturedWidget(AdvancedLootableWeapons.id( "textures/gui/rei/drum.png"),
                 new Rectangle(startPoint.x, startPoint.y, 100, 66)));
         List<EntryIngredient> entryIngredients = display.getInputEntries();
 

@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class JawCrusherScreen extends AbstractContainerScreen<JawCrusherContainer> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(AdvancedLootableWeapons.MODID, "textures/gui/jaw_crusher.png");
+	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/jaw_crusher.png");
 
 	public JawCrusherScreen(JawCrusherContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);

@@ -197,7 +197,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             if (weaponAttributes.hasItem()) {
                 String type = weaponAttributes.getType();
 
-                oneLayerItemHandHeld("wooden_"+type+"_head",new ResourceLocation(AdvancedLootableWeapons.MODID,"wooden_"+type+"_head"));
+                oneLayerItemHandHeld("wooden_"+type+"_head",AdvancedLootableWeapons.id("wooden_"+type+"_head"));
 
                 getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
 
@@ -206,8 +206,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                     if (entry.getValue().canMakeWeapon()) {
                         String material = entry.getKey();
 
-                        ResourceLocation modelPath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + type + "/" + material);
-                        ResourceLocation texturePath = new ResourceLocation(AdvancedLootableWeapons.MODID, "item/" + material + "_" + type);
+                        ResourceLocation modelPath = AdvancedLootableWeapons.id( "item/" + type + "/" + material);
+                        ResourceLocation texturePath = AdvancedLootableWeapons.id( "item/" + material + "_" + type);
                         if (existingFileHelper.exists(texturePath, PackType.CLIENT_RESOURCES, ".png", "textures")) {
                             if (weaponAttributes.isCustomModel()) {
                                 ResourceLocation parent = modLoc("item/custom/" + type);
@@ -305,10 +305,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void heatableItem(HeatableToolPartItem heatableToolPartItem) {
         String path = Registry.ITEM.getKey(heatableToolPartItem).getPath();
-        ResourceLocation base = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/"+path);
-        ResourceLocation hot = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/hot_"+path);
-        ResourceLocation warm = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/warm_"+path);
-        ResourceLocation cool = new ResourceLocation(AdvancedLootableWeapons.MODID,"item/cool_"+path);
+        ResourceLocation base = AdvancedLootableWeapons.id("item/"+path);
+        ResourceLocation hot = AdvancedLootableWeapons.id("item/hot_"+path);
+        ResourceLocation warm = AdvancedLootableWeapons.id("item/warm_"+path);
+        ResourceLocation cool = AdvancedLootableWeapons.id("item/cool_"+path);
             getBuilder(path).parent(GENERATED)
                     .texture("layer0",hot)
                     .override().model(getBuilder(hot.toString()).parent(GENERATED).texture("layer0",hot)).predicate(ALWClient.HEAT,0).end()
@@ -367,7 +367,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void duskSteel() {
         String s = Registry.ITEM.getKey(BlockInit.DUSKSTEEL_BLOCK.get().asItem()).toString();
-        getBuilder(s).parent(new ModelFile.UncheckedModelFile(new ResourceLocation(AdvancedLootableWeapons.MODID, "block/dusksteel_block_0")));//the model is generated
+        getBuilder(s).parent(new ModelFile.UncheckedModelFile(AdvancedLootableWeapons.id( "block/dusksteel_block_0")));//the model is generated
     }
 
     protected void simpleBlockItem(Block block) {
@@ -376,7 +376,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
 
     protected void simpleBlockItem(Item item) {
-        simpleBlockItem(item, new ResourceLocation(AdvancedLootableWeapons.MODID, "block/" + Registry.ITEM.getKey(item).getPath()));
+        simpleBlockItem(item, AdvancedLootableWeapons.id( "block/" + Registry.ITEM.getKey(item).getPath()));
     }
 
 

@@ -79,7 +79,7 @@ public class AnvilForgingButtons extends GuiComponent implements GuiEventListene
     }
 
     private static ItemStack lookup(String string) {
-        return Registry.ITEM.get(new ResourceLocation(AdvancedLootableWeapons.MODID,string)).getDefaultInstance();
+        return Registry.ITEM.get(AdvancedLootableWeapons.id(string)).getDefaultInstance();
     }
 
     public int updateScreenPosition(int p_181402_, int p_181403_) {

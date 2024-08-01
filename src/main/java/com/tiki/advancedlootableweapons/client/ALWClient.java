@@ -33,8 +33,8 @@ public class ALWClient {
         BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), DrumBlockEntityRenderer::new);
     }
 
-    public static final ResourceLocation MATERIAL_LOADER = new ResourceLocation(AdvancedLootableWeapons.MODID,"material_loader");
-    public static final ResourceLocation HEAT = new ResourceLocation(AdvancedLootableWeapons.MODID,"heat");
+    public static final ResourceLocation MATERIAL_LOADER = AdvancedLootableWeapons.id("material_loader");
+    public static final ResourceLocation HEAT = AdvancedLootableWeapons.id("heat");
 
     public static void models(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(MATERIAL_LOADER, MaterialBakedModel.Loader.INSTANCE);

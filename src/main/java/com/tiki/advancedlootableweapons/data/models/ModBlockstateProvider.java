@@ -63,57 +63,57 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
         getVariantBuilder(BlockInit.DUSKSTEEL_BLOCK.get()).forAllStates(state -> {
             int phase = state.getValue(DusksteelBlock.PHASE);
-            ResourceLocation name = new ResourceLocation(AdvancedLootableWeapons.MODID, "block/dusksteel_block_" + phase);
+            ResourceLocation name = AdvancedLootableWeapons.id( "block/dusksteel_block_" + phase);
             return ConfiguredModel.builder().modelFile(models().cubeAll("dusksteel_block_" + phase, name)).build();
         });
 
 
         horizontalBlock(BlockInit.FORGE.get(), models().getExistingFile(
-                new ResourceLocation(AdvancedLootableWeapons.MODID, "block/forge")), 180);
+                AdvancedLootableWeapons.id( "block/forge")), 180);
 
         horizontalBlock(BlockInit.JAW_CRUSHER.get(), models().getExistingFile(
-                new ResourceLocation(AdvancedLootableWeapons.MODID, "block/jaw_crusher")), 180);
+                AdvancedLootableWeapons.id( "block/jaw_crusher")), 180);
 
-        simpleBlock(BlockInit.CLAY_DRUM.get(),models().getExistingFile(new ResourceLocation(AdvancedLootableWeapons.MODID,"block/clay_drum")));
+        simpleBlock(BlockInit.CLAY_DRUM.get(),models().getExistingFile(AdvancedLootableWeapons.id("block/clay_drum")));
 
         int bellows = 270;
 
 
         horizontalBlock(BlockInit.OAK_BELLOWS.get(), models()
-                        .withExistingParent("block/oak_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/oak_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/oak_planks"))
                 , bellows);
 
         horizontalBlock(BlockInit.BIRCH_BELLOWS.get(), models()
-                        .withExistingParent("block/birch_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/birch_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/birch_planks"))
                 , bellows);
 
         horizontalBlock(BlockInit.JUNGLE_BELLOWS.get(), models()
-                        .withExistingParent("block/jungle_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/jungle_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/jungle_planks"))
                 , bellows);
 
         horizontalBlock(BlockInit.SPRUCE_BELLOWS.get(), models()
-                        .withExistingParent("block/spruce_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/spruce_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/spruce_planks"))
                 , bellows);
 
         horizontalBlock(BlockInit.ACACIA_BELLOWS.get(), models()
-                        .withExistingParent("block/acacia_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/acacia_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/acacia_planks"))
                 , bellows);
 
         horizontalBlock(BlockInit.DARK_OAK_BELLOWS.get(), models()
-                        .withExistingParent("block/dark_oak_bellows", new ResourceLocation(AdvancedLootableWeapons.MODID, "block/bellows"))
+                        .withExistingParent("block/dark_oak_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/dark_oak_planks"))
                 , bellows);
 
         getVariantBuilder(BlockInit.ALLOY_FURNACE.get()).forAllStates(state -> {
             boolean lit = state.getValue(AlloyFurnaceBlock.LIT);
-            ResourceLocation side = new ResourceLocation(AdvancedLootableWeapons.MODID, "block/alloy_furnace_side");
-            ResourceLocation front = new ResourceLocation(AdvancedLootableWeapons.MODID, "block/alloy_furnace_front" + (lit ? "_lit" : ""));
-            ResourceLocation top = new ResourceLocation(AdvancedLootableWeapons.MODID, "block/alloy_furnace_top");
+            ResourceLocation side = AdvancedLootableWeapons.id( "block/alloy_furnace_side");
+            ResourceLocation front = AdvancedLootableWeapons.id( "block/alloy_furnace_front" + (lit ? "_lit" : ""));
+            ResourceLocation top = AdvancedLootableWeapons.id( "block/alloy_furnace_top");
             return ConfiguredModel.builder()
                     .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
                     .modelFile(models().orientable("alloy_furnace" + (lit ? "_on" : ""),

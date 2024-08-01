@@ -43,7 +43,6 @@ public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay
 
         widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 85, startPoint.y + 9)));
 
-
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 1)).entries(display.getInputEntries().get(0))
                 .markInput());
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 33, startPoint.y + 1)).entries(display.getInputEntries().get(1))

@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.*;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
@@ -61,4 +62,9 @@ public class AdvancedLootableWeapons
     private void clientSetup(final FMLClientSetupEvent event) {
         ALWClient.setup(event);
     }
+
+    public static ResourceLocation id(String path) {
+        return new ResourceLocation(MODID,path);
+    }
+
 }

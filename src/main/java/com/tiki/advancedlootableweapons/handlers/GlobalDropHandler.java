@@ -14,6 +14,6 @@ public class GlobalDropHandler {
 	public static final List<GlobalLootModifierSerializer<?>> dropList = new ArrayList<GlobalLootModifierSerializer<?>>();
 	
 	public static void initDropList() {
-		dropList.add(new ShadowModifierSerializer().setRegistryName(new ResourceLocation(AdvancedLootableWeapons.MODID, "shadow_mod_all")));
+		dropList.add(new ShadowModifierSerializer().setRegistryName(AdvancedLootableWeapons.id( "shadow_mod_all")));
 	}
 }
