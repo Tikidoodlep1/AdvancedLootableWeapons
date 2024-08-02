@@ -74,6 +74,14 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
         return nonnulllist;
     }
 
+    public Ingredient getFirst() {
+        return ingredient;
+    }
+
+    public Ingredient getSecond() {
+        return ingredient2;
+    }
+
     /**
      * Used to determine if this recipe can fit in a grid of the given width/height
      */

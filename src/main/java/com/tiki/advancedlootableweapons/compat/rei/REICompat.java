@@ -4,30 +4,45 @@ package com.tiki.advancedlootableweapons.compat.rei;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.categories.*;
 import com.tiki.advancedlootableweapons.compat.rei.displays.*;
+import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
+import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.recipes.*;
+import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import dev.architectury.fluid.FluidStack;
+import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
+import it.unimi.dsi.fastutil.objects.ReferenceSet;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
+import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCustomDisplay;
 import net.minecraft.core.Registry;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @REIPluginClient
 public class REICompat implements REIClientPlugin {
@@ -66,8 +81,8 @@ public class REICompat implements REIClientPlugin {
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
         registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
         registry.addWorkstations(drumCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
-        List<ItemStack> anvils = Registry.ITEM.stream().filter(item -> item.builtInRegistryHolder().is(ItemTags.ANVIL)).map(Item::getDefaultInstance).toList();
-        for (ItemStack stack : anvils) {
+        List<ItemStack> hammers = Registry.ITEM.stream().filter(ForgeHammerItem.class::isInstance).map(Item::getDefaultInstance).toList();
+        for (ItemStack stack : hammers) {
             registry.addWorkstations(anvilForgingCategory.getCategoryIdentifier(), EntryStacks.of(stack));
         }
     }
@@ -78,7 +93,8 @@ public class REICompat implements REIClientPlugin {
         registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
         registry.registerRecipeFiller(DrumQuenchingRecipe.class,ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
         registry.registerRecipeFiller(DrumRecipe.class,ModRecipeTypes.DRUM, DrumDisplay::new);
-        registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, AnvilForgingRecipeDisplay::create);
+        registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe,registry));
+
     }
 
     @Override
