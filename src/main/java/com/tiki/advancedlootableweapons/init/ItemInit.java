@@ -8,10 +8,13 @@ import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.SharpeningStoneItem;
 import com.tiki.advancedlootableweapons.items.TanningKnifeItem;
+import com.tiki.advancedlootableweapons.items.armor.ModArmorMaterials;
+import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorPlateItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -19,6 +22,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.tiki.advancedlootableweapons.init.ModMaterials.MAT_BRONZE;
+import static com.tiki.advancedlootableweapons.init.ModMaterials.MAT_SILVER;
 
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedLootableWeapons.MODID);
@@ -80,8 +86,8 @@ public class ItemInit {
     public static final RegistryObject<Item> IRON_FORGE_HAMMER = ITEMS.register("iron_forge_hammer", () -> new ForgeHammerItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> KOBOLD_STEEL_FORGE_HAMMER = ITEMS.register("kobold_steel_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_KOBOLD, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> COPPER_FORGE_HAMMER = ITEMS.register("copper_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_COPPER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> SILVER_FORGE_HAMMER = ITEMS.register("silver_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_SILVER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
-    public static final RegistryObject<Item> BRONZE_FORGE_HAMMER = ITEMS.register("bronze_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_BRONZE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> SILVER_FORGE_HAMMER = ITEMS.register("silver_forge_hammer", () -> new ForgeHammerItem(MAT_SILVER, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> BRONZE_FORGE_HAMMER = ITEMS.register("bronze_forge_hammer", () -> new ForgeHammerItem(MAT_BRONZE, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> PLATINUM_FORGE_HAMMER = ITEMS.register("platinum_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> STEEL_FORGE_HAMMER = ITEMS.register("steel_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_STEEL, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> SHADOW_PLATINUM_FORGE_HAMMER = ITEMS.register("shadow_platinum_forge_hammer", () -> new ForgeHammerItem(ModMaterials.MAT_SHADOW_PLATINUM, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
@@ -140,22 +146,22 @@ public class ItemInit {
     public static final RegistryObject<Item> CRYSTALLITE_ARMOR_PLATE = ITEMS.register("crystallite_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
     public static final RegistryObject<Item> DUSKSTEEL_ARMOR_PLATE = ITEMS.register("dusksteel_armor_plate", () -> new ArmorPlateItem(new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)));
 
-    /*public static final RegistryObject<Item> CHAIN_BINDING_IRON = new ItemArmorBinding("binding_chain_iron", ArmorMaterial.IRON);
-    public static final RegistryObject<Item> CHAIN_BINDING_GOLD = new ItemArmorBinding("binding_chain_gold", ArmorMaterial.GOLD);
-    public static final RegistryObject<Item> CHAIN_BINDING_COPPER = new ItemArmorBinding("binding_chain_copper", AMAT_COPPER);
-    public static final RegistryObject<Item> CHAIN_BINDING_SILVER = new ItemArmorBinding("binding_chain_silver", AMAT_SILVER);
-    public static final RegistryObject<Item> CHAIN_BINDING_BRONZE = new ItemArmorBinding("binding_chain_bronze", AMAT_BRONZE);
-    public static final RegistryObject<Item> CHAIN_BINDING_PLATINUM = new ItemArmorBinding("binding_chain_platinum", AMAT_PLATINUM);
-    public static final RegistryObject<Item> CHAIN_BINDING_STEEL = new ItemArmorBinding("binding_chain_steel", AMAT_STEEL);
-    public static final RegistryObject<Item> CHAIN_BINDING_OBSIDIAN = new ItemArmorBinding("binding_chain_obsidian", AMAT_OBSIDIAN);
+    public static final RegistryObject<Item> IRON_CHAIN_BINDING = ITEMS.register("iron_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ArmorMaterials.IRON));
+    public static final RegistryObject<Item> GOLD_CHAIN_BINDING = ITEMS.register("gold_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ArmorMaterials.GOLD));
+    public static final RegistryObject<Item> COPPER_CHAIN_BINDING = ITEMS.register("copper_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.COPPER));
+    public static final RegistryObject<Item> SILVER_CHAIN_BINDING = ITEMS.register("silver_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.SILVER));
+    public static final RegistryObject<Item> BRONZE_CHAIN_BINDING = ITEMS.register("bronze_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.BRONZE));
+    public static final RegistryObject<Item> PLATINUM_CHAIN_BINDING = ITEMS.register("platinum_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.PLATINUM));
+    public static final RegistryObject<Item> STEEL_CHAIN_BINDING = ITEMS.register("steel_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.STEEL));
+    public static final RegistryObject<Item> REFINED_OBSIDIAN_CHAIN_BINDING = ITEMS.register("refined_obsidian_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.REFINED_OBSIDIAN));
 
-    public static final RegistryObject<Item> CHAIN_BINDING_KOBOLD = new ItemArmorBinding("binding_chain_kobold", AMAT_KOBOLD);
-    public static final RegistryObject<Item> CHAIN_BINDING_SHADOW_PLATINUM = new ItemArmorBinding("binding_chain_shadow_platinum", AMAT_SHADOW_PLATINUM);
-    public static final RegistryObject<Item> CHAIN_BINDING_FROST_STEEL = new ItemArmorBinding("binding_chain_frost_steel", AMAT_FROST_STEEL);
-    public static final RegistryObject<Item> CHAIN_BINDING_CRYSTALLITE = new ItemArmorBinding("binding_chain_crystallite", AMAT_CRYSTALLITE);
-    public static final RegistryObject<Item> CHAIN_BINDING_DUSKSTEEL = new ItemArmorBinding("binding_chain_dusksteel", AMAT_DUSKSTEEL);
+    public static final RegistryObject<Item> KOBOLD_STEEL_CHAIN_BINDING = ITEMS.register("kobold_steel_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.KOBOLD));
+    public static final RegistryObject<Item> SHADOW_PLATINUM_CHAIN_BINDING = ITEMS.register("shadow_platinum_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.SHADOW_PLATINUM));
+    public static final RegistryObject<Item> FROST_STEEL_CHAIN_BINDING = ITEMS.register("frost_steel_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.FROST_STEEL));
+    public static final RegistryObject<Item> CRYSTALLITE_CHAIN_BINDING = ITEMS.register("crystallite_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.CRYSTALLITE));
+    public static final RegistryObject<Item> DUSKSTEEL_CHAIN_BINDING = ITEMS.register("dusksteel_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.DUSKSTEEL));
 
-    public static final RegistryObject<Item> LEATHER_BINDING = new ItemArmorBinding("binding_leather", ArmorMaterial.LEATHER);*/
+    public static final RegistryObject<Item> LEATHER_BINDING = ITEMS.register("leather_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ArmorMaterials.LEATHER));
 
     ////////// weapons
 
@@ -259,8 +265,8 @@ public class ItemInit {
     public static final RegistryObject<Item> IRON_WHETSTONE = ITEMS.register("iron_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), Tiers.IRON));
     public static final RegistryObject<Item> KOBOLD_STEEL_WHETSTONE = ITEMS.register("kobold_steel_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_KOBOLD));
     public static final RegistryObject<Item> COPPER_WHETSTONE = ITEMS.register("copper_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_COPPER));
-    public static final RegistryObject<Item> SILVER_WHETSTONE = ITEMS.register("silver_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_SILVER));
-    public static final RegistryObject<Item> BRONZE_WHETSTONE = ITEMS.register("bronze_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_BRONZE));
+    public static final RegistryObject<Item> SILVER_WHETSTONE = ITEMS.register("silver_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), MAT_SILVER));
+    public static final RegistryObject<Item> BRONZE_WHETSTONE = ITEMS.register("bronze_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), MAT_BRONZE));
     public static final RegistryObject<Item> PLATINUM_WHETSTONE = ITEMS.register("platinum_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_PLATINUM));
     public static final RegistryObject<Item> STEEL_WHETSTONE = ITEMS.register("steel_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_STEEL));
     public static final RegistryObject<Item> SHADOW_PLATINUM_WHETSTONE = ITEMS.register("shadow_platinum_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), ModMaterials.MAT_SHADOW_PLATINUM));

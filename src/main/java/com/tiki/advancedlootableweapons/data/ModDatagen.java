@@ -1,10 +1,16 @@
 package com.tiki.advancedlootableweapons.data;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.data.models.ModBlockstateProvider;
 import com.tiki.advancedlootableweapons.data.models.ModItemModelProvider;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+
+import java.util.stream.Stream;
 
 public class ModDatagen {
 
@@ -20,4 +26,17 @@ public class ModDatagen {
         dataGenerator.addProvider(new ModBlockstateProvider(dataGenerator,existingFileHelper));
         dataGenerator.addProvider(new ModLootTableProvider(dataGenerator));
     }
+
+
+    public static Stream<Block> getKnownBlocks() {
+        return getKnown(Registry.BLOCK);
+    }
+    public static Stream<Item> getKnownItems() {
+        return getKnown(Registry.ITEM);
+    }
+
+    public static <V> Stream<V> getKnown(Registry<V> registry) {
+        return registry.stream().filter(o -> registry.getKey(o).getNamespace().equals(AdvancedLootableWeapons.MODID));
+    }
+
 }

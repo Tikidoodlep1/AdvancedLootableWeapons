@@ -21,6 +21,15 @@ public class ModCreativeTabs {
 		}
 		
 	};
+
+	public static final CreativeModeTab ARMOR_TAB = new CreativeModeTab("alw_armor") {
+
+		@Override
+		public ItemStack makeIcon() {
+			return new ItemStack(ItemInit.IRON_ARMOR_PLATE.get());
+		}
+
+	};
 	
 	public static final CreativeModeTab BLOCK_TAB = new CreativeModeTab("alw_blocks") {
 

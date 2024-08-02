@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public enum ArmorAttributes implements ArmorMaterial {
+public enum ModArmorMaterials implements ArmorMaterial {
 
     KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY, 22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.KOBOLD_STEEL_INGOT.get());
@@ -42,13 +42,13 @@ public enum ArmorAttributes implements ArmorMaterial {
     FROST_STEEL("frost_steel", new int[]{4, 7, 9, 4}, CommonConfigHandler.FROST_STEEL_ARMOR_DURABILITY, 30, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.FROST_STEEL_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.FROST_STEEL_INGOT.get());
     }),
-    OBSIDIAN_STEEL("obsidian_steel", new int[]{3, 5, 6, 3}, CommonConfigHandler.OBSIDIAN_ARMOR_DURABILITY, 18, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.OBSIDIAN_ARMOR_HARDNESS, 0.0F, () -> {
+    REFINED_OBSIDIAN("refined_obsidian", new int[]{3, 5, 6, 3}, CommonConfigHandler.OBSIDIAN_ARMOR_DURABILITY, 18, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.OBSIDIAN_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.REFINED_OBSIDIAN_INGOT.get());
     }),
     CRYSTALLITE("crystallite", new int[]{5, 10, 13, 6}, CommonConfigHandler.CRYSTALLITE_ARMOR_DURABILITY, 20, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.CRYSTALLITE_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.CRYSTALLITE_INGOT.get());
     }),
-    DUSK_STEEL("dusk_steel", new int[] {5, 8, 11, 5}, CommonConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, 14, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.DUSKSTEEL_ARMOR_HARDNESS, 0.0F, () -> {
+    DUSKSTEEL("dusksteel", new int[] {5, 8, 11, 5}, CommonConfigHandler.DUSKSTEEL_ARMOR_DURABILITY, 14, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.DUSKSTEEL_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.DUSKSTEEL_INGOT.get());
     });
 
@@ -68,7 +68,7 @@ public enum ArmorAttributes implements ArmorMaterial {
     private final LazyLoadedValue<Ingredient> repairIngredient;
     private final ForgeConfigSpec.IntValue healthPerSlot;
 
-    ArmorAttributes(String name, int[] damageReductionAmount, ForgeConfigSpec.IntValue healthPerSlot, int enchantability, SoundEvent sound, ForgeConfigSpec.DoubleValue toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
+    ModArmorMaterials(String name, int[] damageReductionAmount, ForgeConfigSpec.IntValue healthPerSlot, int enchantability, SoundEvent sound, ForgeConfigSpec.DoubleValue toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial) {
         this.name = name;
         this.slotProtections = damageReductionAmount;
         this.healthPerSlot = healthPerSlot;

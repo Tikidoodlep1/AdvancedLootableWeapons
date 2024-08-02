@@ -164,6 +164,22 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_LINK.get());
         oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_LINK.get());
 
+        oneLayerItem(ItemInit.IRON_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.GOLD_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.COPPER_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.SILVER_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.BRONZE_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.PLATINUM_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.STEEL_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.REFINED_OBSIDIAN_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.KOBOLD_STEEL_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.SHADOW_PLATINUM_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.FROST_STEEL_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_BINDING.get());
+        oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_BINDING.get());
+
+        oneLayerItem(ItemInit.LEATHER_BINDING.get());
+
         oneLayerItemHandHeld(ItemInit.STONE_FORGE_HAMMER.get());
         oneLayerItemHandHeld(ItemInit.IRON_FORGE_HAMMER.get());
         oneLayerItemHandHeld(ItemInit.COPPER_FORGE_HAMMER.get());
