@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/unbound_frost_steel_chain_chestplate"
+  }
+}

@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
@@ -18,16 +19,25 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, AdvancedLootableWeapons.MODID, existingFileHelper);
     }
 
+    protected final Set<Item> use_sprite = new HashSet<>();
+
     @Override
     protected void registerModels() {
+
+        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(item -> item instanceof UnboundArmorItem).forEach(use_sprite::add);
+        use_sprite.forEach(this::oneLayerItem);
+
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
         simpleBlockItem(BlockInit.ADVANCED_FORGE.get());

@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("deprecation")
 public enum ModArmorMaterials implements ArmorMaterial {
 
-    KOBOLD("kobold", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY, 22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS, 0.0F, () -> {
+    KOBOLD_STEEL("kobold_steel", new int[]{1, 3, 4, 2}, CommonConfigHandler.KOBOLD_ARMOR_DURABILITY, 22, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.KOBOLD_ARMOR_HARDNESS, 0.0F, () -> {
         return Ingredient.of(ItemInit.KOBOLD_STEEL_INGOT.get());
     }),
     COPPER("copper", new int[]{2, 3, 4, 2}, CommonConfigHandler.COPPER_ARMOR_DURABILITY, 10, SoundEvents.ARMOR_EQUIP_IRON, CommonConfigHandler.COPPER_ARMOR_HARDNESS, 0.0F, () -> {

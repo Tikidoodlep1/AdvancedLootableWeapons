@@ -37,8 +37,8 @@ public class ModLangProvider extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        item_exclude.addAll(ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get)
-                        .filter(item -> (item instanceof BlockItem) || (item instanceof HeatableToolPartItem)).toList());
+        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get)
+                        .filter(item -> (item instanceof BlockItem) || (item instanceof HeatableToolPartItem)).forEach(item_exclude::add);
         blockTranslations();
         itemTranslations();
 

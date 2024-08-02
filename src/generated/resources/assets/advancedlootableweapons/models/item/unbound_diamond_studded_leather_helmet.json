@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "advancedlootableweapons:item/unbound_diamond_studded_leather_helmet"
+  }
+}
