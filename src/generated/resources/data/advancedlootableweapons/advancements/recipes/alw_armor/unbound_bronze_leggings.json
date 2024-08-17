@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:unbound_bronze_leggings"
+    ]
+  },
+  "criteria": {
+    "has_bronze_armor_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:bronze_armor_plate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:unbound_bronze_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze_armor_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

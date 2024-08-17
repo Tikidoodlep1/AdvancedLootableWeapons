@@ -190,6 +190,19 @@ public class ModRecipeProvider extends RecipeProvider {
         armorSet(ItemInit.CRYSTALLITE_CHAIN_LINK.get(),ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET,recipeConsumer);
         armorSet(ItemInit.DUSKSTEEL_CHAIN_LINK.get(),ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET,recipeConsumer);
 
+        armorSet(ItemInit.IRON_ARMOR_PLATE.get(),ItemInit.UNBOUND_IRON_SET,recipeConsumer);
+        armorSet(ItemInit.GOLD_ARMOR_PLATE.get(),ItemInit.UNBOUND_GOLD_SET,recipeConsumer);
+        armorSet(ItemInit.KOBOLD_STEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_KOBOLD_STEEL_SET,recipeConsumer);
+        armorSet(ItemInit.COPPER_ARMOR_PLATE.get(),ItemInit.UNBOUND_COPPER_SET,recipeConsumer);
+        armorSet(ItemInit.SILVER_ARMOR_PLATE.get(),ItemInit.UNBOUND_SILVER_SET,recipeConsumer);
+        armorSet(ItemInit.BRONZE_ARMOR_PLATE.get(),ItemInit.UNBOUND_BRONZE_SET,recipeConsumer);
+        armorSet(ItemInit.PLATINUM_ARMOR_PLATE.get(),ItemInit.UNBOUND_PLATINUM_SET,recipeConsumer);
+        armorSet(ItemInit.STEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_STEEL_SET,recipeConsumer);
+        armorSet(ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get(),ItemInit.UNBOUND_SHADOW_PLATINUM_SET,recipeConsumer);
+        armorSet(ItemInit.FROST_STEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_FROST_STEEL_SET,recipeConsumer);
+        armorSet(ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get(),ItemInit.UNBOUND_REFINED_OBSIDIAN_SET,recipeConsumer);
+        armorSet(ItemInit.CRYSTALLITE_ARMOR_PLATE.get(),ItemInit.UNBOUND_CRYSTALLITE_SET,recipeConsumer);
+        armorSet(ItemInit.DUSKSTEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_DUSKSTEEL_SET,recipeConsumer);
 
         armorSet(ItemInit.DIAMOND_STUDDED_LEATHER.get(),ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET,recipeConsumer);
         armorSet(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,recipeConsumer);

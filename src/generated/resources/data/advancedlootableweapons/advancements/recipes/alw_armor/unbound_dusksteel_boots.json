@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:unbound_dusksteel_boots"
+    ]
+  },
+  "criteria": {
+    "has_dusksteel_armor_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:dusksteel_armor_plate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:unbound_dusksteel_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dusksteel_armor_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "advancedlootableweapons:iron_armor_plate"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:unbound_iron_chestplate"
+  }
+}

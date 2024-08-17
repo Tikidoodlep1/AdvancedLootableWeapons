@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:unbound_gold_leggings"
+    ]
+  },
+  "criteria": {
+    "has_gold_armor_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:gold_armor_plate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:unbound_gold_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_armor_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

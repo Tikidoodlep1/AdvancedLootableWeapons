@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "advancedlootableweapons:kobold_steel_armor_plate"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:unbound_kobold_steel_chestplate"
+  }
+}
