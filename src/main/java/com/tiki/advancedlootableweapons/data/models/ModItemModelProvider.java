@@ -14,6 +14,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -33,11 +34,30 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected final Set<Item> use_sprite = new HashSet<>();
 
+    protected boolean shouldUseOneLayerModel(Item item) {
+        return item instanceof UnboundArmorItem || (item instanceof BoundArmorItem boundArmorItem && !boundArmorItem.usesVanillaMaterial());
+    }
+
     @Override
     protected void registerModels() {
 
-        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(item -> item instanceof UnboundArmorItem || item instanceof BoundArmorItem).forEach(use_sprite::add);
+        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(this::shouldUseOneLayerModel).forEach(use_sprite::add);
         use_sprite.forEach(this::oneLayerItem);
+
+        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
+        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/leather_chestplate"));
+        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/leather_leggings"));
+        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/leather_boots"));
+
+        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/golden_helmet"));
+        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/golden_chestplate"));
+        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/golden_leggings"));
+        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/golden_boots"));
+
+        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/iron_helmet"));
+        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/iron_chestplate"));
+        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/iron_leggings"));
+        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/iron_boots"));
 
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
@@ -348,10 +368,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void oneLayerItem(Item item, ResourceLocation texture) {
         String path = Registry.ITEM.getKey(item).getPath();
-        if (existingFileHelper.exists(new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath())
+        if (existingFileHelper.exists(texture
                 , PackType.CLIENT_RESOURCES, ".png", "textures")) {
             getBuilder(path).parent(GENERATED)
-                    .texture("layer0", new ResourceLocation(texture.getNamespace(), "item/" + texture.getPath()));
+                    .texture("layer0", texture);
         } else {
             System.out.println("no texture for " + item + " found, skipping");
         }
@@ -359,7 +379,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     protected void oneLayerItem(Item item) {
         ResourceLocation texture = Registry.ITEM.getKey(item);
-        oneLayerItem(item, texture);
+        oneLayerItem(item, new ResourceLocation(texture.getNamespace(),"item/"+texture.getPath()));
     }
 
     protected void oneLayerItemHandHeld(Item item, ResourceLocation texture) {
