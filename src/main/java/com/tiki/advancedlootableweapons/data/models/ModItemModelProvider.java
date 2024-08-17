@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 import net.minecraft.core.Registry;
@@ -35,7 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(item -> item instanceof UnboundArmorItem).forEach(use_sprite::add);
+        ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(item -> item instanceof UnboundArmorItem || item instanceof BoundArmorItem).forEach(use_sprite::add);
         use_sprite.forEach(this::oneLayerItem);
 
         simpleBlockItem(BlockInit.FORGE.get().asItem());
