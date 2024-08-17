@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "advancedlootableweapons:crystallite_chain_link"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:unbound_crystallite_chain_leggings"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:unbound_crystallite_chain_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_crystallite_chain_link": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:crystallite_chain_link"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:unbound_crystallite_chain_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_crystallite_chain_link",
+      "has_the_recipe"
+    ]
+  ]
+}

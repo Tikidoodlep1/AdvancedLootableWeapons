@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "advancedlootableweapons:platinum_chain_link"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:unbound_platinum_chain_chestplate"
+  }
+}

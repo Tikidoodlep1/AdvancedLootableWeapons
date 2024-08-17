@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:unbound_dusksteel_chain_leggings"
+    ]
+  },
+  "criteria": {
+    "has_dusksteel_chain_link": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:dusksteel_chain_link"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:unbound_dusksteel_chain_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dusksteel_chain_link",
+      "has_the_recipe"
+    ]
+  ]
+}

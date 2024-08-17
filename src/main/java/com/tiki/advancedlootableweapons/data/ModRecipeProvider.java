@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.core.Registry;
@@ -15,6 +16,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -172,6 +175,24 @@ public class ModRecipeProvider extends RecipeProvider {
         singleItemRecipe(ItemInit.DELIMED_HIDE.get(), ItemInit.LIMED_HIDE.get(),recipeConsumer);
         singleItemRecipe(Items.LEATHER, ItemInit.DELIMED_HIDE.get(),recipeConsumer,AdvancedLootableWeapons.id("leather_from_tanning"));
 
+        armorSet(Items.LEATHER,ItemInit.UNBOUND_LEATHER_SET,recipeConsumer);
+        armorSet(ItemInit.IRON_CHAIN_LINK.get(),ItemInit.UNBOUND_IRON_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.GOLD_CHAIN_LINK.get(),ItemInit.UNBOUND_GOLD_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(),ItemInit.UNBOUND_KOBOLD_STEEL_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.COPPER_CHAIN_LINK.get(),ItemInit.UNBOUND_COPPER_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.SILVER_CHAIN_LINK.get(),ItemInit.UNBOUND_SILVER_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.BRONZE_CHAIN_LINK.get(),ItemInit.UNBOUND_BRONZE_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.PLATINUM_CHAIN_LINK.get(),ItemInit.UNBOUND_PLATINUM_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.STEEL_CHAIN_LINK.get(),ItemInit.UNBOUND_STEEL_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(),ItemInit.UNBOUND_SHADOW_PLATINUM_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.FROST_STEEL_CHAIN_LINK.get(),ItemInit.UNBOUND_FROST_STEEL_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(),ItemInit.UNBOUND_REFINED_OBSIDIAN_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.CRYSTALLITE_CHAIN_LINK.get(),ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET,recipeConsumer);
+        armorSet(ItemInit.DUSKSTEEL_CHAIN_LINK.get(),ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET,recipeConsumer);
+
+
+        armorSet(ItemInit.DIAMOND_STUDDED_LEATHER.get(),ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET,recipeConsumer);
+        armorSet(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get(),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,recipeConsumer);
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -534,4 +555,17 @@ public class ModRecipeProvider extends RecipeProvider {
                         has(ing))
                 .save(consumer);
     }
+
+    protected void armorSet(Item material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map, Consumer<FinishedRecipe>consumer) {
+        armorSet(material,map.get(EquipmentSlot.HEAD).get(),map.get(EquipmentSlot.CHEST).get(),
+                map.get(EquipmentSlot.LEGS).get(),map.get(EquipmentSlot.FEET).get(),consumer);
+    }
+
+        protected void armorSet(Item material,Item helmet,Item chestplate,Item leggings,Item boots,Consumer<FinishedRecipe>consumer) {
+        ShapedRecipeBuilder.shaped(boots).define('X', material).pattern("X X").pattern("X X").unlockedBy(getHasName(material), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(chestplate).define('X', material).pattern("X X").pattern("XXX").pattern("XXX").unlockedBy(getHasName(material), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(helmet).define('X', material).pattern("XXX").pattern("X X").unlockedBy(getHasName(material), has(material)).save(consumer);
+        ShapedRecipeBuilder.shaped(leggings).define('X', material).pattern("XXX").pattern("X X").pattern("X X").unlockedBy(getHasName(material), has(material)).save(consumer);
+    }
+
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "advancedlootableweapons:refined_obsidian_chain_link"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:unbound_refined_obsidian_chain_leggings"
+  }
+}

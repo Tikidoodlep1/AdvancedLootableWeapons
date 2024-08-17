@@ -206,6 +206,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         oneLayerItem(ItemInit.IRON_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.GOLD_ARMOR_PLATE.get());
+        oneLayerItem(ItemInit.DIAMOND_STUDDED_LEATHER.get());
         oneLayerItem(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.COPPER_ARMOR_PLATE.get());
         oneLayerItem(ItemInit.SILVER_ARMOR_PLATE.get());
