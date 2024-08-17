@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.items.armor;
 
-public enum ArmorTypes {
+public enum ArmorType {
 	STUDDED,
 	CHAIN,
 	PLATE;

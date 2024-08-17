@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.items.weapons;
 
-import com.tiki.advancedlootableweapons.items.armor.ArmorTypes;
+import com.tiki.advancedlootableweapons.items.armor.ArmorType;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -94,7 +94,7 @@ public enum WeaponAttributes {
 		return this.shouldSlash;
 	}
 	
-	public double getEffectByArmorType(ArmorTypes make) {
+	public double getEffectByArmorType(ArmorType make) {
 		switch(make) {
 		case CHAIN:
 			return this.chainEffectiveness;
@@ -107,7 +107,7 @@ public enum WeaponAttributes {
 		}
 	}
 	
-	public int getPenChanceByArmorType(ArmorTypes make) {
+	public int getPenChanceByArmorType(ArmorType make) {
 		switch(make) {
 		case CHAIN:
 			return this.chainPenChance;
