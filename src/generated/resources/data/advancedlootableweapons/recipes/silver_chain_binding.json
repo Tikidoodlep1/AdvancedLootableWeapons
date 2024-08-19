@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:silver_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:silver_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:silver_chain_binding"
+  }
+}

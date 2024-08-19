@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:copper_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:copper_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:copper_chain_binding"
+  }
+}

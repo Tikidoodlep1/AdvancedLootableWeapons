@@ -28,5 +28,20 @@ public class ItemsTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.INGOTS_TIN).add(ItemInit.TIN_INGOT.get());
 
         tag(ModItemTags.SALT).add(ItemInit.SALT.get());
+
+        tag(ModItemTags.CHAIN_BINDINGS).
+                add(ItemInit.IRON_CHAIN_LINK.get(),
+                        ItemInit.GOLD_CHAIN_LINK.get(),
+                        ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(),
+                        ItemInit.COPPER_CHAIN_LINK.get(),
+                        ItemInit.SILVER_CHAIN_LINK.get(),
+                        ItemInit.BRONZE_CHAIN_LINK.get(),
+                        ItemInit.PLATINUM_CHAIN_LINK.get(),
+                        ItemInit.STEEL_CHAIN_LINK.get(),
+                        ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(),
+                        ItemInit.FROST_STEEL_CHAIN_LINK.get(),
+                        ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(),
+                        ItemInit.CRYSTALLITE_CHAIN_LINK.get(),
+                        ItemInit.DUSKSTEEL_CHAIN_LINK.get());
     }
 }

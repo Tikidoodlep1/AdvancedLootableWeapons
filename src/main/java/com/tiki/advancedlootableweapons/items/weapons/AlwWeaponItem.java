@@ -178,9 +178,10 @@ public class AlwWeaponItem extends Item implements Vanishable {
             Multimap<Attribute,AttributeModifier> baseModifiers = ArrayListMultimap.create(defaultModifiers.get());
             WeaponMaterial material = getMaterial(stack);
 
-            baseModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(MATERIAL_UUID, "Material modifier",material.tier().getAttackDamageBonus(),
-                    AttributeModifier.Operation.ADDITION));
-
+            if (material != WeaponMaterial.NULL) {
+                baseModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(MATERIAL_UUID, "Material modifier", material.tier().getAttackDamageBonus(),
+                        AttributeModifier.Operation.ADDITION));
+            }
             return baseModifiers;
         }else {
             return ImmutableMultimap.of();

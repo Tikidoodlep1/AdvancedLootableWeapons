@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:crystallite_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:crystallite_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:crystallite_chain_binding"
+  }
+}

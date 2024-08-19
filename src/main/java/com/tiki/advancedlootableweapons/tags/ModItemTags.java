@@ -1,7 +1,9 @@
 package com.tiki.advancedlootableweapons.tags;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -20,8 +22,12 @@ public class ModItemTags {
     public static final TagKey<Item> INGOTS_SHADOW_PLATINUM = forge("ingots/shadow_platinum");
     public static final TagKey<Item> SALT = forge("dusts/salt");
 
+    public static final TagKey<Item> CHAIN_BINDINGS = mod("chain_bindings");
 
     private static TagKey<Item> forge(String name) {
         return ItemTags.create(new ResourceLocation("forge", name));
+    }
+    private static TagKey<Item> mod(String name) {
+        return ItemTags.create(new ResourceLocation(AdvancedLootableWeapons.MODID,name));
     }
 }

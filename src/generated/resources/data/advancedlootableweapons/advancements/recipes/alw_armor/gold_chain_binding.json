@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:gold_chain_binding"
+    ]
+  },
+  "criteria": {
+    "has_gold_chain_link": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:gold_chain_link"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:gold_chain_binding"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_chain_link",
+      "has_the_recipe"
+    ]
+  ]
+}

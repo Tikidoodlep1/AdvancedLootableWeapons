@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.tiki.advancedlootableweapons.items.armor.*;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.items.weapons.WeaponAttributes;
 
+import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -159,6 +161,7 @@ public class ItemInit {
     public static final RegistryObject<Item> CRYSTALLITE_CHAIN_BINDING = ITEMS.register("crystallite_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.CRYSTALLITE));
     public static final RegistryObject<Item> DUSKSTEEL_CHAIN_BINDING = ITEMS.register("dusksteel_chain_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ModArmorMaterials.DUSKSTEEL));
 
+    public static final RegistryObject<Item> LEATHER_STRIP = ITEMS.register("leather_strip",() -> new Item(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
     public static final RegistryObject<Item> LEATHER_BINDING = ITEMS.register("leather_binding",() -> new ArmorBindingItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB), ArmorMaterials.LEATHER));
 
     public static final Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> UNBOUND_LEATHER_SET = createUnboundSet(ArmorMaterials.LEATHER);
@@ -195,49 +198,51 @@ public class ItemInit {
     public static final Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> UNBOUND_DIAMOND_STUDDED_STEEL_SET = createUnboundDiamondStuddedSet(ModArmorMaterials.STEEL);
 
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_LEATHER_SET = createBoundSet(ArmorMaterials.LEATHER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> LEATHER_SET = createBoundSet(ArmorMaterials.LEATHER);
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_IRON_CHAIN_SET = createBoundChainSet(ArmorMaterials.IRON);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_GOLD_CHAIN_SET = createBoundChainSet(ArmorMaterials.GOLD);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_KOBOLD_STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.KOBOLD_STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_COPPER_CHAIN_SET = createBoundChainSet(ModArmorMaterials.COPPER);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_SILVER_CHAIN_SET = createBoundChainSet(ModArmorMaterials.SILVER);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_BRONZE_CHAIN_SET = createBoundChainSet(ModArmorMaterials.BRONZE);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_PLATINUM_CHAIN_SET = createBoundChainSet(ModArmorMaterials.PLATINUM);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_SHADOW_PLATINUM_CHAIN_SET = createBoundChainSet(ModArmorMaterials.SHADOW_PLATINUM);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_FROST_STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.FROST_STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_REFINED_OBSIDIAN_CHAIN_SET = createBoundChainSet(ModArmorMaterials.REFINED_OBSIDIAN);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_CRYSTALLITE_CHAIN_SET = createBoundChainSet(ModArmorMaterials.CRYSTALLITE);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_DUSKSTEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.DUSKSTEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> IRON_CHAIN_SET = createBoundChainSet(ArmorMaterials.IRON);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> GOLD_CHAIN_SET = createBoundChainSet(ArmorMaterials.GOLD);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> KOBOLD_STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.KOBOLD_STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> COPPER_CHAIN_SET = createBoundChainSet(ModArmorMaterials.COPPER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> SILVER_CHAIN_SET = createBoundChainSet(ModArmorMaterials.SILVER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BRONZE_CHAIN_SET = createBoundChainSet(ModArmorMaterials.BRONZE);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> PLATINUM_CHAIN_SET = createBoundChainSet(ModArmorMaterials.PLATINUM);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> SHADOW_PLATINUM_CHAIN_SET = createBoundChainSet(ModArmorMaterials.SHADOW_PLATINUM);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> FROST_STEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.FROST_STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> REFINED_OBSIDIAN_CHAIN_SET = createBoundChainSet(ModArmorMaterials.REFINED_OBSIDIAN);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> CRYSTALLITE_CHAIN_SET = createBoundChainSet(ModArmorMaterials.CRYSTALLITE);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DUSKSTEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.DUSKSTEEL);
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_IRON_SET = createBoundSet(ArmorMaterials.IRON);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_GOLD_SET = createBoundSet(ArmorMaterials.GOLD);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_KOBOLD_STEEL_SET = createBoundSet(ModArmorMaterials.KOBOLD_STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_COPPER_SET = createBoundSet(ModArmorMaterials.COPPER);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_SILVER_SET = createBoundSet(ModArmorMaterials.SILVER);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_BRONZE_SET = createBoundSet(ModArmorMaterials.BRONZE);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_STEEL_SET = createBoundSet(ModArmorMaterials.STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_PLATINUM_SET = createBoundSet(ModArmorMaterials.PLATINUM);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_SHADOW_PLATINUM_SET = createBoundSet(ModArmorMaterials.SHADOW_PLATINUM);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_FROST_STEEL_SET = createBoundSet(ModArmorMaterials.FROST_STEEL);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_REFINED_OBSIDIAN_SET = createBoundSet(ModArmorMaterials.REFINED_OBSIDIAN);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_CRYSTALLITE_SET = createBoundSet(ModArmorMaterials.CRYSTALLITE);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_DUSKSTEEL_SET = createBoundSet(ModArmorMaterials.DUSKSTEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> IRON_SET = createBoundSet(ArmorMaterials.IRON);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> GOLD_SET = createBoundSet(ArmorMaterials.GOLD);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> KOBOLD_STEEL_SET = createBoundSet(ModArmorMaterials.KOBOLD_STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> COPPER_SET = createBoundSet(ModArmorMaterials.COPPER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> SILVER_SET = createBoundSet(ModArmorMaterials.SILVER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BRONZE_SET = createBoundSet(ModArmorMaterials.BRONZE);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> STEEL_SET = createBoundSet(ModArmorMaterials.STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> PLATINUM_SET = createBoundSet(ModArmorMaterials.PLATINUM);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> SHADOW_PLATINUM_SET = createBoundSet(ModArmorMaterials.SHADOW_PLATINUM);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> FROST_STEEL_SET = createBoundSet(ModArmorMaterials.FROST_STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> REFINED_OBSIDIAN_SET = createBoundSet(ModArmorMaterials.REFINED_OBSIDIAN);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> CRYSTALLITE_SET = createBoundSet(ModArmorMaterials.CRYSTALLITE);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DUSKSTEEL_SET = createBoundSet(ModArmorMaterials.DUSKSTEEL);
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_DIAMOND_STUDDED_LEATHER_SET = createBoundDiamondStuddedSet(ArmorMaterials.LEATHER);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> BOUND_DIAMOND_STUDDED_STEEL_SET = createBoundDiamondStuddedSet(ModArmorMaterials.STEEL);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DIAMOND_STUDDED_LEATHER_SET = createBoundDiamondStuddedSet(ArmorMaterials.LEATHER);
+    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DIAMOND_STUDDED_STEEL_SET = createBoundDiamondStuddedSet(ModArmorMaterials.STEEL);
 
     public static Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> createUnboundSet(ArmorMaterial armorMaterial) {
         String name = armorMaterial.getName();
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register("unbound_"+name+"_boots",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var leggings = ITEMS.register("unbound_"+name+"_leggings",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var chestplate = ITEMS.register("unbound_"+name+"_chestplate",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var helmet = ITEMS.register("unbound_"+name+"_helmet",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+
+        Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register("unbound_"+name+"_"+entry.getValue(),() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     public static Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> createUnboundChainSet(ArmorMaterial armorMaterial) {
@@ -245,11 +250,12 @@ public class ItemInit {
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register("unbound_"+name+"_chain_boots",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var leggings = ITEMS.register("unbound_"+name+"_chain_leggings",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var chestplate = ITEMS.register("unbound_"+name+"_chain_chestplate",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var helmet = ITEMS.register("unbound_"+name+"_chain_helmet",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+        Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register("unbound_"+name+"_chain_"+entry.getValue(),() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     public static Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> createUnboundDiamondStuddedSet(ArmorMaterial armorMaterial) {
@@ -257,11 +263,12 @@ public class ItemInit {
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register("unbound_diamond_studded_"+name+"_boots",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var leggings = ITEMS.register("unbound_diamond_studded_"+name+"_leggings",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var chestplate = ITEMS.register("unbound_diamond_studded_"+name+"_chestplate",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        var helmet = ITEMS.register("unbound_diamond_studded_"+name+"_helmet",() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+        Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register("unbound_diamond_studded_"+name+"_"+entry.getValue(),() -> new UnboundArmorItem(new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB)));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     public static Map<EquipmentSlot,RegistryObject<BoundArmorItem>> createBoundSet(ArmorMaterial armorMaterial) {
@@ -269,11 +276,13 @@ public class ItemInit {
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register(name+"_boots",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.FEET,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.PLATE));
-        var leggings = ITEMS.register(name+"_leggings",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.LEGS,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.PLATE));
-        var chestplate = ITEMS.register(name+"_chestplate",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.CHEST,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.PLATE));
-        var helmet = ITEMS.register(name+"_helmet",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.HEAD,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.PLATE));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+        Map<EquipmentSlot,RegistryObject<BoundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register(name+"_"+entry.getValue(),() -> new BoundArmorItem(armorMaterial,entry.getKey(),
+                    new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.PLATE));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     public static Map<EquipmentSlot,RegistryObject<BoundArmorItem>> createBoundChainSet(ArmorMaterial armorMaterial) {
@@ -281,11 +290,13 @@ public class ItemInit {
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register(name+"_chain_boots",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.FEET,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.CHAIN));
-        var leggings = ITEMS.register(name+"_chain_leggings",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.LEGS,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.CHAIN));
-        var chestplate = ITEMS.register(name+"_chain_chestplate",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.CHEST,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.CHAIN));
-        var helmet = ITEMS.register(name+"_chain_helmet",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.HEAD,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.CHAIN));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+        Map<EquipmentSlot,RegistryObject<BoundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register(name+"_chain_"+entry.getValue(),() -> new BoundArmorItem(armorMaterial,entry.getKey(),
+                    new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.CHAIN));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     public static Map<EquipmentSlot,RegistryObject<BoundArmorItem>> createBoundDiamondStuddedSet(ArmorMaterial armorMaterial) {
@@ -293,11 +304,13 @@ public class ItemInit {
         if (name.contains(":")) {
             name = name.split(":")[1];
         }
-        var boots = ITEMS.register("diamond_studded_"+name+"_boots",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.FEET,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
-        var leggings = ITEMS.register("diamond_studded_"+name+"_leggings",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.LEGS,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
-        var chestplate = ITEMS.register("diamond_studded_"+name+"_chestplate",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.CHEST,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
-        var helmet = ITEMS.register("diamond_studded_"+name+"_helmet",() -> new BoundArmorItem(armorMaterial,EquipmentSlot.HEAD,new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
-        return Map.of(EquipmentSlot.FEET,boots,EquipmentSlot.LEGS,leggings,EquipmentSlot.CHEST,chestplate,EquipmentSlot.HEAD,helmet);
+        Map<EquipmentSlot,RegistryObject<BoundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register("diamond_studded_"+name+"_"+entry.getValue(),() -> new BoundArmorItem(armorMaterial,entry.getKey(),
+                    new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
+            map.put(entry.getKey(),item);
+        }
+        return map;
     }
 
     ////////// weapons

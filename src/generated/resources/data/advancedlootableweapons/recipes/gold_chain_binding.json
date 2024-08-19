@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:gold_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:gold_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:gold_chain_binding"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:leather_binding"
+    },
+    {
+      "item": "advancedlootableweapons:unbound_leather_helmet"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:leather_helmet"
+  }
+}

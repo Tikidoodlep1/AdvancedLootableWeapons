@@ -42,22 +42,25 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         ItemInit.ITEMS.getEntries().stream().map(RegistryObject::get).filter(this::shouldUseOneLayerModel).forEach(use_sprite::add);
+        use_sprite.addAll(ItemInit.DIAMOND_STUDDED_LEATHER_SET.values().stream().map(RegistryObject::get).toList());
+        use_sprite.addAll(ItemInit.IRON_CHAIN_SET.values().stream().map(RegistryObject::get).toList());
+        use_sprite.addAll(ItemInit.GOLD_CHAIN_SET.values().stream().map(RegistryObject::get).toList());
         use_sprite.forEach(this::oneLayerItem);
 
-        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
-        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/leather_chestplate"));
-        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/leather_leggings"));
-        oneLayerItem(ItemInit.BOUND_LEATHER_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/leather_boots"));
+        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
+        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/leather_chestplate"));
+        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/leather_leggings"));
+        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/leather_boots"));
 
-        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/golden_helmet"));
-        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/golden_chestplate"));
-        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/golden_leggings"));
-        oneLayerItem(ItemInit.BOUND_GOLD_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/golden_boots"));
+        oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/golden_helmet"));
+        oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/golden_chestplate"));
+        oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/golden_leggings"));
+        oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/golden_boots"));
 
-        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/iron_helmet"));
-        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/iron_chestplate"));
-        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/iron_leggings"));
-        oneLayerItem(ItemInit.BOUND_IRON_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/iron_boots"));
+        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/iron_helmet"));
+        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/iron_chestplate"));
+        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/iron_leggings"));
+        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/iron_boots"));
 
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());

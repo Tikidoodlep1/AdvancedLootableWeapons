@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:refined_obsidian_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:refined_obsidian_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:refined_obsidian_chain_binding"
+  }
+}

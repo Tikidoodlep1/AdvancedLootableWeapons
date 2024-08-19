@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:kobold_steel_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:kobold_steel_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:kobold_steel_chain_binding"
+  }
+}

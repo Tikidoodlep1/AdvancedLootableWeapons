@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:platinum_chain_link"
+    },
+    {
+      "item": "advancedlootableweapons:platinum_chain_link"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:platinum_chain_binding"
+  }
+}

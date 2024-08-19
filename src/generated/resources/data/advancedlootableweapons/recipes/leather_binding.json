@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:leather_strip"
+    },
+    {
+      "item": "advancedlootableweapons:leather_strip"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:leather_binding"
+  }
+}

@@ -6,14 +6,26 @@ import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Utils {
+
+    public static final Map<EquipmentSlot,String> ARMOR_SLOTS = new EnumMap<>(EquipmentSlot.class);
+    static {
+        ARMOR_SLOTS.put(EquipmentSlot.HEAD,"helmet");
+        ARMOR_SLOTS.put(EquipmentSlot.CHEST,"chestplate");
+        ARMOR_SLOTS.put(EquipmentSlot.LEGS,"leggings");
+        ARMOR_SLOTS.put(EquipmentSlot.FEET,"boots");
+    }
+
 
     public static FluidStack getFluidStack(JsonObject json) {
         String itemName = GsonHelper.getAsString(json, "fluid");
