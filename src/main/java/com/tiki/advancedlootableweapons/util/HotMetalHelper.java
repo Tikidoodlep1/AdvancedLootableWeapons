@@ -21,10 +21,10 @@ public class HotMetalHelper {
 
 		if (metalStats == null) return 0;//not a heatable material
 
-		int MP = metalStats.mp;
-		int TC = metalStats.tc;
-		int SH = metalStats.sh;
-		double IW = metalStats.iw;
+		int MP = metalStats.mp();
+		int TC = metalStats.tc();
+		int SH = metalStats.sh();
+		double IW = metalStats.iw();
 
 		int damage = currentDamage == 0 ? 1 : currentDamage;
 		int tempDiff = temp > (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) ? temp - (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) : (MP/(HOT_TOOL_HEAD_MAX_DUR/damage)) - temp;

@@ -12,37 +12,31 @@ import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScre
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
+import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.recipes.*;
-import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import dev.architectury.fluid.FluidStack;
-import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
-import it.unimi.dsi.fastutil.objects.ReferenceSet;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
-import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCustomDisplay;
 import net.minecraft.core.Registry;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.Ingredient;
+import org.checkerframework.checker.units.qual.A;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @REIPluginClient
 public class REICompat implements REIClientPlugin {
@@ -52,6 +46,8 @@ public class REICompat implements REIClientPlugin {
     public static final CategoryIdentifier<DrumQuenchingDisplay> DRUM_QUENCHING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum_quenching");
     public static final CategoryIdentifier<DrumDisplay> DRUM = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum");
     public static final CategoryIdentifier<AnvilForgingRecipeDisplay> ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/anvil_forging");
+    public static final CategoryIdentifier<SequencedAnvilForgingDisplay> SEQUENCED_ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/sequenced_anvil_forging");
+
 
     public static final String ALLOY_FURNACE_CAT = "category.rei.advancedlootableweapons.alloy_furnace";
     public static final String JAW_CRUSHER_CAT = "category.rei.advancedlootableweapons.jaw_crusher";
@@ -60,7 +56,7 @@ public class REICompat implements REIClientPlugin {
     public static final String DRUM_CAT = "category.rei.advancedlootableweapons.drum";
 
     public static FluidStack convert(net.minecraftforge.fluids.FluidStack stack) {
-        return FluidStack.create(stack.getFluid(),stack.getAmount());
+        return FluidStack.create(stack.getFluid(), stack.getAmount());
     }
 
     @Override
@@ -70,17 +66,19 @@ public class REICompat implements REIClientPlugin {
         DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory(QUENCHING);
         DrumCategory drumCategory = new DrumCategory(DRUM_CAT);
         AnvilForgingCategory anvilForgingCategory = new AnvilForgingCategory();
+        SequencedAnvilForgingCategory sequencedAnvilForgingCategory = new SequencedAnvilForgingCategory();
 
         registry.add(alloyFurnaceCategory);
         registry.add(jawCrusherCategory);
         registry.add(drumQuenchingCategory);
         registry.add(drumCategory);
         registry.add(anvilForgingCategory);
+        registry.add(sequencedAnvilForgingCategory);
 
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
-        registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
-        registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
-        registry.addWorkstations(drumCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.CLAY_DRUM.get()));
+        registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
+        registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.CLAY_DRUM.get()));
+        registry.addWorkstations(drumCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.CLAY_DRUM.get()));
         List<ItemStack> hammers = Registry.ITEM.stream().filter(ForgeHammerItem.class::isInstance).map(Item::getDefaultInstance).toList();
         for (ItemStack stack : hammers) {
             registry.addWorkstations(anvilForgingCategory.getCategoryIdentifier(), EntryStacks.of(stack));
@@ -90,11 +88,106 @@ public class REICompat implements REIClientPlugin {
     @Override
     public void registerDisplays(DisplayRegistry registry) {
         registry.registerRecipeFiller(AlloyFurnaceRecipe.class, ModRecipeTypes.ALLOY_FURNACE, AlloyFurnaceDisplay::new);
-        registry.registerRecipeFiller(JawCrusherRecipe.class,ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
-        registry.registerRecipeFiller(DrumQuenchingRecipe.class,ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
-        registry.registerRecipeFiller(DrumRecipe.class,ModRecipeTypes.DRUM, DrumDisplay::new);
-        registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe,registry));
+        registry.registerRecipeFiller(JawCrusherRecipe.class, ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
+        registry.registerRecipeFiller(DrumQuenchingRecipe.class, ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
+        registry.registerRecipeFiller(DrumRecipe.class, ModRecipeTypes.DRUM, DrumDisplay::new);
+        //  registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe,registry));
 
+        List<AbstractAnvilForgingRecipe> allRecipes = registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ANVIL_FORGING);
+
+        List<AbstractAnvilForgingRecipe> nonToolRecipes = new ArrayList<>();
+        List<AbstractAnvilForgingRecipe> toolRecipes = new ArrayList<>();
+
+        for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
+            ItemStack result = abstractAnvilForgingRecipe.getResultItem();
+            if (result.getItem() instanceof HeatableToolPartItem || result.getItem() instanceof AlwWeaponItem) {
+                toolRecipes.add(abstractAnvilForgingRecipe);
+            } else if (result.getItem() instanceof BoundArmorItem) {
+                nonToolRecipes.add(abstractAnvilForgingRecipe);
+            }
+        }
+
+
+        nonToolRecipes.forEach(abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry));
+
+        List<AbstractAnvilForgingRecipe> startRecipes = new ArrayList<>();
+        List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
+
+        WeaponMaterial weaponMaterial = WeaponMaterial.STEEL;
+
+        for (Iterator<AbstractAnvilForgingRecipe> iterator = toolRecipes.iterator(); iterator.hasNext(); ) {
+            AbstractAnvilForgingRecipe toolrecipe = iterator.next();
+            ItemStack result = toolrecipe.getResultItem();
+            if (result.getItem() instanceof AlwWeaponItem) {
+                ItemStack stack = new ItemStack(result.getItem());
+                String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
+                AlwWeaponItem.setMaterial(stack, materialName);
+                SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
+                Ingredient input1 = toolrecipe.getFirst();
+                Ingredient input2 = toolrecipe.getSecond();
+
+                ItemStack stack1 = getFirstOrEmpty(input1);
+                ItemStack stack2 = getFirstOrEmpty(input2);
+
+                ItemStack disp1 = new ItemStack(stack1.getItem());
+                ItemStack disp2 = new ItemStack(stack2.getItem());
+
+                if (disp1.getItem() instanceof HeatableToolPartItem) {
+                    AlwWeaponItem.setMaterial(disp1, materialName);
+                }
+
+                if (disp2.getItem() instanceof HeatableToolPartItem) {
+                    AlwWeaponItem.setMaterial(disp2, materialName);
+                }
+
+                builder.addItem(disp1, disp2);
+
+                builders.add(builder);
+                iterator.remove();
+            }
+        }
+
+
+        for (int i = 0; i < 10;i++) {
+            for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
+                ItemStack result = toolrecipe.getResultItem();
+                ItemStack stack = new ItemStack(result.getItem());
+
+
+                for (SequencedAnvilForgingDisplay.Builder builder : builders) {
+                    if (builder.finished) continue;
+                    if (stack.getItem() == builder.getLast()) {
+                        String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
+                        AlwWeaponItem.setMaterial(stack, materialName);
+                        Ingredient input1 = toolrecipe.getFirst();
+                        Ingredient input2 = toolrecipe.getSecond();
+                        ItemStack stack1 = getFirstOrEmpty(input1);
+                        ItemStack stack2 = getFirstOrEmpty(input2);
+
+                        ItemStack disp1 = new ItemStack(stack1.getItem());
+                        ItemStack disp2 = new ItemStack(stack2.getItem());
+
+                        if (disp1.getItem() instanceof HeatableToolPartItem) {
+                            AlwWeaponItem.setMaterial(disp1, materialName);
+                        }
+
+                        if (disp2.getItem() instanceof HeatableToolPartItem) {
+                            AlwWeaponItem.setMaterial(disp2, materialName);
+                        }
+                        builder.addItem(disp1, disp2);
+                    }
+                }
+            }
+        }
+        for (SequencedAnvilForgingDisplay.Builder builder : builders) {
+            registry.add(builder.build());
+        }
+    }
+
+    public static ItemStack getFirstOrEmpty(Ingredient ingredient) {
+        ItemStack[] matches = ingredient.getItems();
+        if (matches.length == 0) return ItemStack.EMPTY;
+        return matches[0];
     }
 
     @Override
@@ -111,7 +204,7 @@ public class REICompat implements REIClientPlugin {
         registry.register(SimpleTransferHandler.create(AlloyFurnaceContainer.class, ALLOY_FURNACE,
                 new SimpleTransferHandler.IntRange(0, 2)));
 
-         registry.register(SimpleTransferHandler.create(JawCrusherContainer.class, JAW_CRUSHER,
-                 new SimpleTransferHandler.IntRange(0, 1)));
+        registry.register(SimpleTransferHandler.create(JawCrusherContainer.class, JAW_CRUSHER,
+                new SimpleTransferHandler.IntRange(0, 1)));
     }
 }

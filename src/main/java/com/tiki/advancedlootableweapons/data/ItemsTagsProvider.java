@@ -30,18 +30,18 @@ public class ItemsTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.SALT).add(ItemInit.SALT.get());
 
         tag(ModItemTags.CHAIN_BINDINGS).
-                add(ItemInit.IRON_CHAIN_LINK.get(),
-                        ItemInit.GOLD_CHAIN_LINK.get(),
-                        ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(),
-                        ItemInit.COPPER_CHAIN_LINK.get(),
-                        ItemInit.SILVER_CHAIN_LINK.get(),
-                        ItemInit.BRONZE_CHAIN_LINK.get(),
-                        ItemInit.PLATINUM_CHAIN_LINK.get(),
-                        ItemInit.STEEL_CHAIN_LINK.get(),
-                        ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(),
-                        ItemInit.FROST_STEEL_CHAIN_LINK.get(),
-                        ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(),
-                        ItemInit.CRYSTALLITE_CHAIN_LINK.get(),
-                        ItemInit.DUSKSTEEL_CHAIN_LINK.get());
+                add(ItemInit.IRON_CHAIN_BINDING.get(),
+                        ItemInit.GOLD_CHAIN_BINDING.get(),
+                        ItemInit.KOBOLD_STEEL_CHAIN_BINDING.get(),
+                        ItemInit.COPPER_CHAIN_BINDING.get(),
+                        ItemInit.SILVER_CHAIN_BINDING.get(),
+                        ItemInit.BRONZE_CHAIN_BINDING.get(),
+                        ItemInit.PLATINUM_CHAIN_BINDING.get(),
+                        ItemInit.STEEL_CHAIN_BINDING.get(),
+                        ItemInit.SHADOW_PLATINUM_CHAIN_BINDING.get(),
+                        ItemInit.FROST_STEEL_CHAIN_BINDING.get(),
+                        ItemInit.REFINED_OBSIDIAN_CHAIN_BINDING.get(),
+                        ItemInit.CRYSTALLITE_CHAIN_BINDING.get(),
+                        ItemInit.DUSKSTEEL_CHAIN_BINDING.get());
     }
 }

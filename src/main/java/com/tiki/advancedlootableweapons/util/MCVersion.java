@@ -26,7 +26,7 @@ public class MCVersion {
     }
 
     public static MutableComponent empty() {
-        return (MutableComponent) TextComponent.EMPTY;
+        return new TextComponent("");
     }
 
     public static Fluid lookup(ResourceLocation location) {
