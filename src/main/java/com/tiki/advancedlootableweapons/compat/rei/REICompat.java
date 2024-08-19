@@ -110,71 +110,73 @@ public class REICompat implements REIClientPlugin {
 
         nonToolRecipes.forEach(abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry));
 
-        List<AbstractAnvilForgingRecipe> startRecipes = new ArrayList<>();
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 
-        WeaponMaterial weaponMaterial = WeaponMaterial.STEEL;
 
-        for (Iterator<AbstractAnvilForgingRecipe> iterator = toolRecipes.iterator(); iterator.hasNext(); ) {
-            AbstractAnvilForgingRecipe toolrecipe = iterator.next();
-            ItemStack result = toolrecipe.getResultItem();
-            if (result.getItem() instanceof AlwWeaponItem) {
-                ItemStack stack = new ItemStack(result.getItem());
-                String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                AlwWeaponItem.setMaterial(stack, materialName);
-                SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
-                Ingredient input1 = toolrecipe.getFirst();
-                Ingredient input2 = toolrecipe.getSecond();
-
-                ItemStack stack1 = getFirstOrEmpty(input1);
-                ItemStack stack2 = getFirstOrEmpty(input2);
-
-                ItemStack disp1 = new ItemStack(stack1.getItem());
-                ItemStack disp2 = new ItemStack(stack2.getItem());
-
-                if (disp1.getItem() instanceof HeatableToolPartItem) {
-                    AlwWeaponItem.setMaterial(disp1, materialName);
-                }
-
-                if (disp2.getItem() instanceof HeatableToolPartItem) {
-                    AlwWeaponItem.setMaterial(disp2, materialName);
-                }
-
-                builder.addItem(disp1, disp2);
-
-                builders.add(builder);
-                iterator.remove();
-            }
-        }
-
-
-        for (int i = 0; i < 10;i++) {
-            for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
+        for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP.values()) {
+            if (!weaponMaterial.canMakeWeapon() || weaponMaterial.metalStats() == null)continue;
+            for (Iterator<AbstractAnvilForgingRecipe> iterator = toolRecipes.iterator(); iterator.hasNext(); ) {
+                AbstractAnvilForgingRecipe toolrecipe = iterator.next();
                 ItemStack result = toolrecipe.getResultItem();
-                ItemStack stack = new ItemStack(result.getItem());
+                if (result.getItem() instanceof AlwWeaponItem) {
+                    ItemStack stack = new ItemStack(result.getItem());
+                    String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
+                    AlwWeaponItem.setMaterial(stack, materialName);
+                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
+                    Ingredient input1 = toolrecipe.getFirst();
+                    Ingredient input2 = toolrecipe.getSecond();
+
+                    ItemStack stack1 = getFirstOrEmpty(input1);
+                    ItemStack stack2 = getFirstOrEmpty(input2);
+
+                    ItemStack disp1 = new ItemStack(stack1.getItem());
+                    ItemStack disp2 = new ItemStack(stack2.getItem());
+
+                    if (disp1.getItem() instanceof HeatableToolPartItem) {
+                        AlwWeaponItem.setMaterial(disp1, materialName);
+                    }
+
+                    if (disp2.getItem() instanceof HeatableToolPartItem) {
+                        AlwWeaponItem.setMaterial(disp2, materialName);
+                    }
+
+                    builder.addItem(disp1, disp2);
+
+                    builders.add(builder);
+                }
+            }
 
 
-                for (SequencedAnvilForgingDisplay.Builder builder : builders) {
-                    if (builder.finished) continue;
-                    if (stack.getItem() == builder.getLast()) {
-                        String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                        AlwWeaponItem.setMaterial(stack, materialName);
-                        Ingredient input1 = toolrecipe.getFirst();
-                        Ingredient input2 = toolrecipe.getSecond();
-                        ItemStack stack1 = getFirstOrEmpty(input1);
-                        ItemStack stack2 = getFirstOrEmpty(input2);
+            for (int i = 0; i < 9; i++) {
+                for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
+                    ItemStack result = toolrecipe.getResultItem();
+                    ItemStack stack = new ItemStack(result.getItem());
 
-                        ItemStack disp1 = new ItemStack(stack1.getItem());
-                        ItemStack disp2 = new ItemStack(stack2.getItem());
 
-                        if (disp1.getItem() instanceof HeatableToolPartItem) {
-                            AlwWeaponItem.setMaterial(disp1, materialName);
+                    for (SequencedAnvilForgingDisplay.Builder builder : builders) {
+                        if (builder.finished) continue;
+                        if (stack.getItem() == builder.getLast()) {
+                            String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
+                            AlwWeaponItem.setMaterial(stack, materialName);
+                            Ingredient input1 = toolrecipe.getFirst();
+                            Ingredient input2 = toolrecipe.getSecond();
+                            ItemStack stack1 = getFirstOrEmpty(input1);
+                            ItemStack stack2 = getFirstOrEmpty(input2);
+
+                            ItemStack disp1 = new ItemStack(stack1.getItem());
+                            ItemStack disp2 = new ItemStack(stack2.getItem());
+
+                            if (disp1.getItem() instanceof HeatableToolPartItem) {
+                                AlwWeaponItem.setMaterial(disp1, materialName);
+                            } else {
+                                disp1 = getFirstOrEmpty(weaponMaterial.tier().getRepairIngredient());
+                            }
+
+                            if (disp2.getItem() instanceof HeatableToolPartItem) {
+                                AlwWeaponItem.setMaterial(disp2, materialName);
+                            }
+                            builder.addItem(disp1, disp2);
                         }
-
-                        if (disp2.getItem() instanceof HeatableToolPartItem) {
-                            AlwWeaponItem.setMaterial(disp2, materialName);
-                        }
-                        builder.addItem(disp1, disp2);
                     }
                 }
             }
