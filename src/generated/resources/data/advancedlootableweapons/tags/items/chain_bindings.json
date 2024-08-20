@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "advancedlootableweapons:iron_chain_link",
-    "advancedlootableweapons:gold_chain_link",
-    "advancedlootableweapons:kobold_steel_chain_link",
-    "advancedlootableweapons:copper_chain_link",
-    "advancedlootableweapons:silver_chain_link",
-    "advancedlootableweapons:bronze_chain_link",
-    "advancedlootableweapons:platinum_chain_link",
-    "advancedlootableweapons:steel_chain_link",
-    "advancedlootableweapons:shadow_platinum_chain_link",
-    "advancedlootableweapons:frost_steel_chain_link",
-    "advancedlootableweapons:refined_obsidian_chain_link",
-    "advancedlootableweapons:crystallite_chain_link",
-    "advancedlootableweapons:dusksteel_chain_link"
+    "advancedlootableweapons:iron_chain_binding",
+    "advancedlootableweapons:gold_chain_binding",
+    "advancedlootableweapons:kobold_steel_chain_binding",
+    "advancedlootableweapons:copper_chain_binding",
+    "advancedlootableweapons:silver_chain_binding",
+    "advancedlootableweapons:bronze_chain_binding",
+    "advancedlootableweapons:platinum_chain_binding",
+    "advancedlootableweapons:steel_chain_binding",
+    "advancedlootableweapons:shadow_platinum_chain_binding",
+    "advancedlootableweapons:frost_steel_chain_binding",
+    "advancedlootableweapons:refined_obsidian_chain_binding",
+    "advancedlootableweapons:crystallite_chain_binding",
+    "advancedlootableweapons:dusksteel_chain_binding"
   ]
 }

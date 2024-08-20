@@ -1,0 +1,14 @@
+{
+  "type": "advancedlootableweapons:anvil_material_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:unbound_steel_chestplate"
+  },
+  "ingredient2": {
+    "tag": "advancedlootableweapons:chain_bindings"
+  },
+  "result": {
+    "item": "advancedlootableweapons:steel_chestplate",
+    "Count": 1,
+    "nbt": "{Damage:0}"
+  }
+}

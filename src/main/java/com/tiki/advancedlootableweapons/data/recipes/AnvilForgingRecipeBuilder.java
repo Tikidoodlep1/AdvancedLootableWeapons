@@ -41,6 +41,10 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient, null, stack);
     }
 
+    public static AnvilForgingRecipeBuilder anvilArmorForging(Item input,Ingredient pIngredient, ItemStack result) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), Ingredient.of(input), pIngredient, result);
+    }
+
     public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result) {
         return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(), Ingredient.of(ingredient), null, new ItemStack(result));
     }

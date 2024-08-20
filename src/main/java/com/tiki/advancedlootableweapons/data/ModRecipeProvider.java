@@ -155,6 +155,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_KABUTOWARI_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("S  ")
+                .pattern("S S")
+                .pattern(" S ").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_LONG_TOOL_ROD.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .pattern("S").pattern("S").unlockedBy("has_sticks", has(Tags.Items.RODS_WOODEN))
+                .save(recipeConsumer);
+
         ShapedRecipeBuilder.shaped(BlockInit.DIORITE_CLAY_POWDER.get(), 2)
                 .define('#', ItemInit.FELDSPAR_POWDER.get()).define('X', ItemInit.DIORITE_POWDER.get())
                 .pattern("X#X").pattern("#X#").pattern("X#X")
@@ -528,6 +540,11 @@ public class ModRecipeProvider extends RecipeProvider {
         toolForging(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(), recipeConsumer);
         twoToolForging(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.ZWEIHANDER.get(), recipeConsumer);
 
+        //armors
+
+
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_STEEL_SET,ItemInit.STEEL_SET,recipeConsumer);
+
     }
 
     protected void toolForging(ItemLike input, ItemLike result, Consumer<FinishedRecipe> consumer) {
@@ -639,6 +656,17 @@ public class ModRecipeProvider extends RecipeProvider {
             ShapelessRecipeBuilder.shapeless(bound.get())
                     .requires(material)
                     .requires(unbound.get())
+                    .unlockedBy(getHasName(unbound.get()), has(unbound.get()))
+                    .save(consumer);
+        }
+    }
+
+    protected void armorSetForging(Ingredient material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
+                            Map<EquipmentSlot, RegistryObject<BoundArmorItem>> finished, Consumer<FinishedRecipe> consumer) {
+        for (EquipmentSlot slot : Utils.ARMOR_SLOTS.keySet()) {
+            RegistryObject<UnboundArmorItem> unbound = map.get(slot);
+            RegistryObject<BoundArmorItem> bound = finished.get(slot);
+            AnvilForgingRecipeBuilder.anvilArmorForging(unbound.get(),material,new ItemStack(bound.get()))
                     .unlockedBy(getHasName(unbound.get()), has(unbound.get()))
                     .save(consumer);
         }
