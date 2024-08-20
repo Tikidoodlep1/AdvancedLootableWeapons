@@ -28,6 +28,6 @@ public class ModItemTags {
         return ItemTags.create(new ResourceLocation("forge", name));
     }
     private static TagKey<Item> mod(String name) {
-        return ItemTags.create(new ResourceLocation(AdvancedLootableWeapons.MODID,name));
+        return ItemTags.create(AdvancedLootableWeapons.id(name));
     }
 }

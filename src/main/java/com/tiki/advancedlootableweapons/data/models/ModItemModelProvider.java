@@ -45,6 +45,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         use_sprite.addAll(ItemInit.DIAMOND_STUDDED_LEATHER_SET.values().stream().map(RegistryObject::get).toList());
         use_sprite.addAll(ItemInit.IRON_CHAIN_SET.values().stream().map(RegistryObject::get).toList());
         use_sprite.addAll(ItemInit.GOLD_CHAIN_SET.values().stream().map(RegistryObject::get).toList());
+        use_sprite.add(ItemInit.LEATHER_STRIP.get());
+        use_sprite.add(ItemInit.LEATHER_BINDING.get());
         use_sprite.forEach(this::oneLayerItem);
 
         oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
@@ -211,8 +213,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.FROST_STEEL_CHAIN_BINDING.get());
         oneLayerItem(ItemInit.CRYSTALLITE_CHAIN_BINDING.get());
         oneLayerItem(ItemInit.DUSKSTEEL_CHAIN_BINDING.get());
-
-        oneLayerItem(ItemInit.LEATHER_BINDING.get());
 
         oneLayerItemHandHeld(ItemInit.STONE_FORGE_HAMMER.get());
         oneLayerItemHandHeld(ItemInit.IRON_FORGE_HAMMER.get());
