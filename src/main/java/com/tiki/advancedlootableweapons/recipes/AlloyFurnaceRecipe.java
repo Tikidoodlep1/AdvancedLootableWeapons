@@ -1,10 +1,7 @@
 package com.tiki.advancedlootableweapons.recipes;
 
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -110,7 +107,7 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeInit.ALLOY_FURNACE_RECIPE.get();
+		return RecipeInit.ALLOY_FURNACE.get();
 	}
 
 	@Override

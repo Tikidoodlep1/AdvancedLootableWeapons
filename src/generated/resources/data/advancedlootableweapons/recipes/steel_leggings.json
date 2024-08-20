@@ -1,5 +1,5 @@
 {
-  "type": "advancedlootableweapons:anvil_material_forging",
+  "type": "advancedlootableweapons:anvil_armor_forging",
   "ingredient": {
     "item": "advancedlootableweapons:unbound_steel_leggings"
   },
@@ -7,8 +7,6 @@
     "tag": "advancedlootableweapons:chain_bindings"
   },
   "result": {
-    "item": "advancedlootableweapons:steel_leggings",
-    "Count": 1,
-    "nbt": "{Damage:0}"
+    "item": "advancedlootableweapons:steel_leggings"
   }
 }

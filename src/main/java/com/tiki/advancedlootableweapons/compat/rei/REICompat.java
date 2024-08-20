@@ -108,7 +108,7 @@ public class REICompat implements REIClientPlugin {
         }
 
 
-        nonToolRecipes.forEach(abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry));
+        nonToolRecipes.forEach(abstractAnvilForgingRecipe -> registry.add(AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry)));
 
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 

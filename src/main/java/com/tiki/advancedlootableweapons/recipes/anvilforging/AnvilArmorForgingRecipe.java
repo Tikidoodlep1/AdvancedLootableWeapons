@@ -2,7 +2,6 @@ package com.tiki.advancedlootableweapons.recipes.anvilforging;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
-import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -10,10 +9,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class AnvilTwoToolForgingRecipe extends AbstractAnvilForgingRecipe {
+public class AnvilArmorForgingRecipe extends AbstractAnvilForgingRecipe {
 
-	public AnvilTwoToolForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult) {
-		super(ModRecipeTypes.ANVIL_FORGING, RecipeInit.ANVIL_TWO_TOOL_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult);
+	public AnvilArmorForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult) {
+		super(ModRecipeTypes.ANVIL_FORGING, RecipeInit.ANVIL_ARMOR_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult);
 	}
 
 	/**
@@ -21,15 +20,13 @@ public class AnvilTwoToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	 */
 	@Override
 	public boolean matches(RecipeWrapper pInv, Level pLevel) {
-		ItemStack stackA = pInv.getItem(0);
-		ItemStack stackB = pInv.getItem(1);
-		return this.ingredient.test(stackA) && this.ingredient2.test(stackB) && HeatableToolPartItem.isSameMaterial(stackA,stackB);
+		return this.ingredient.test(pInv.getItem(0)) && ingredient2.test(pInv.getItem(1));
 	}
 
 	@Override
 	public ItemStack getProcessedResult(ItemStack input) {
 		ItemStack copy = result.copy();
-		HeatableToolPartItem.setMaterial(copy,HeatableToolPartItem.getMaterial(input));
+		//copy.setTag(input.getTag());
 		return copy;
 	}
 

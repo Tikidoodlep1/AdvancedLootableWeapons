@@ -116,7 +116,7 @@ public class DrumQuenchingRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return RecipeInit.DRUM_QUENCHING_RECIPE.get();
+            return RecipeInit.DRUM_QUENCHING.get();
         }
 
         /**

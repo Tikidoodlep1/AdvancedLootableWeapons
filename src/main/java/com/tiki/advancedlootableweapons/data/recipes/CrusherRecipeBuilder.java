@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.RecipeInit;
-import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.Registry;
@@ -35,11 +34,11 @@ public class CrusherRecipeBuilder implements RecipeBuilder {
     }
 
     public static CrusherRecipeBuilder crusher(Ingredient pIngredient, ItemLike pResult) {
-        return new CrusherRecipeBuilder(RecipeInit.JAW_CRUSHER_RECIPE.get(), pIngredient, pResult, 1);
+        return new CrusherRecipeBuilder(RecipeInit.JAW_CRUSHER.get(), pIngredient, pResult, 1);
     }
 
     public static CrusherRecipeBuilder crusher(Ingredient pIngredient, ItemLike pResult, int pCount) {
-        return new CrusherRecipeBuilder(RecipeInit.JAW_CRUSHER_RECIPE.get(), pIngredient, pResult, pCount);
+        return new CrusherRecipeBuilder(RecipeInit.JAW_CRUSHER.get(), pIngredient, pResult, pCount);
     }
 
     public CrusherRecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {

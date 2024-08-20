@@ -38,19 +38,19 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
     }
 
     public static AnvilForgingRecipeBuilder anvilMaterialForging(Ingredient pIngredient, ItemStack stack) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), pIngredient, null, stack);
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING.get(), pIngredient, null, stack);
     }
 
     public static AnvilForgingRecipeBuilder anvilArmorForging(Item input,Ingredient pIngredient, ItemStack result) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get(), Ingredient.of(input), pIngredient, result);
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_ARMOR_FORGING.get(), Ingredient.of(input), pIngredient, result);
     }
 
     public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING_RECIPE.get(), Ingredient.of(ingredient), null, new ItemStack(result));
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING.get(), Ingredient.of(ingredient), null, new ItemStack(result));
     }
 
     public static AnvilForgingRecipeBuilder anvilTwoToolForging(ItemLike ingredient,ItemLike ingredient2,ItemLike result) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TWO_TOOL_FORGING_RECIPE.get(),Ingredient.of(ingredient),Ingredient.of(ingredient2),
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TWO_TOOL_FORGING.get(),Ingredient.of(ingredient),Ingredient.of(ingredient2),
                 new ItemStack(result));
     }
 
@@ -130,7 +130,7 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         }
 
         boolean saveNBT() {
-            return type == RecipeInit.ANVIL_MATERIAL_FORGING_RECIPE.get();
+            return type == RecipeInit.ANVIL_MATERIAL_FORGING.get();
         }
 
 

@@ -1,9 +1,6 @@
 package com.tiki.advancedlootableweapons.recipes;
 
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
@@ -69,7 +66,7 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeInit.JAW_CRUSHER_RECIPE.get();
+		return RecipeInit.JAW_CRUSHER.get();
 	}
 
 	@Override

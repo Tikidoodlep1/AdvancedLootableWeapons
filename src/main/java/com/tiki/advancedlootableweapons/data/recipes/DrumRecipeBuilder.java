@@ -130,7 +130,7 @@ public class DrumRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return RecipeInit.DRUM_RECIPE.get();
+            return RecipeInit.DRUM.get();
         }
 
         /**

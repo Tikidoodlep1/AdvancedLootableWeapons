@@ -85,7 +85,7 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeInit.DRUM_RECIPE.get();
+        return RecipeInit.DRUM.get();
     }
 
     @Override

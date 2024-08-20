@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
+import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -263,7 +265,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 
 
 			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, recipeWrapper, this.level).isPresent()
-					|| itemstack.getItem() instanceof HeatableToolPartItem) {
+					|| itemstack.getItem() instanceof HeatableToolPartItem || item instanceof UnboundArmorItem || item instanceof ArmorBindingItem) {
 				if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 					return ItemStack.EMPTY;
 				}

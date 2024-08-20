@@ -97,7 +97,7 @@ public class DrumQuenchingRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeInit.DRUM_QUENCHING_RECIPE.get();
+        return RecipeInit.DRUM_QUENCHING.get();
     }
 
     @Override

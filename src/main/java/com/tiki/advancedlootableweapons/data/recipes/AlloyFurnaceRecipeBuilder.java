@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.RecipeInit;
-import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
-import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -155,7 +153,7 @@ public class AlloyFurnaceRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return RecipeInit.ALLOY_FURNACE_RECIPE.get();
+            return RecipeInit.ALLOY_FURNACE.get();
         }
 
         /**
