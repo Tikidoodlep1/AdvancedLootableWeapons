@@ -51,6 +51,7 @@ public class AdvancedLootableWeapons
         if (FMLEnvironment.dist.isClient()) {
             eventBus.addListener(this::clientSetup);
             eventBus.addListener(ALWClient::models);
+            eventBus.addListener(ALWClient::colors);
         }
         eventBus.addListener(ModDatagen::start);
     }
@@ -61,6 +62,7 @@ public class AdvancedLootableWeapons
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ALWClient.setup(event);
+
     }
 
     public static ResourceLocation id(String path) {

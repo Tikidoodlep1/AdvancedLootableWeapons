@@ -10,12 +10,16 @@ import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScre
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,6 +35,13 @@ public class ALWClient {
         MenuScreens.register(MenuInit.JAW_CRUSHER.get(), JawCrusherScreen::new);
         event.enqueueWork(ALWClient::registerItemModelPredicates);
         BlockEntityRenderers.register(BlockEntityInit.DRUM_TE.get(), DrumBlockEntityRenderer::new);
+    }
+
+    public static void colors(ColorHandlerEvent.Item event) {
+        ItemColors itemColors = event.getItemColors();
+        itemColors.register((p_92708_, p_92709_) -> {
+            return p_92709_ > 0 ? -1 : ((DyeableLeatherItem)p_92708_.getItem()).getColor(p_92708_);
+        }, Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS, Items.LEATHER_HORSE_ARMOR);
     }
 
     public static final ResourceLocation MATERIAL_LOADER = AdvancedLootableWeapons.id("material_loader");

@@ -4,20 +4,19 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ArmorMaterials;
+import net.minecraft.world.item.DyeableArmorItem;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class BoundArmorItem extends ArmorItem {
-
+public class DyeableBoundArmorItem extends DyeableArmorItem {
     private final ArmorType armorType;
     protected final String armorTexture;
 
     protected String armorTextureOverlay;
 
-    public BoundArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, ArmorType armorType) {
+    public DyeableBoundArmorItem(ArmorMaterial pMaterial, EquipmentSlot pSlot, Properties pProperties, ArmorType armorType) {
         super(pMaterial, pSlot, pProperties);
         this.armorType = armorType;
         switch (armorType) {

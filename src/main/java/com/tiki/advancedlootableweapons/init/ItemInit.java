@@ -228,7 +228,7 @@ public class ItemInit {
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> CRYSTALLITE_SET = createBoundSet(ModArmorMaterials.CRYSTALLITE);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DUSKSTEEL_SET = createBoundSet(ModArmorMaterials.DUSKSTEEL);
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DIAMOND_STUDDED_LEATHER_SET = createBoundDiamondStuddedSet(ArmorMaterials.LEATHER);
+    public static final Map<EquipmentSlot,RegistryObject<DyeableBoundArmorItem>> DIAMOND_STUDDED_LEATHER_SET = createDyeableBoundDiamondStuddedSet(ArmorMaterials.LEATHER);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DIAMOND_STUDDED_STEEL_SET = createBoundDiamondStuddedSet(ModArmorMaterials.STEEL);
 
     public static Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> createUnboundSet(ArmorMaterial armorMaterial) {
@@ -307,6 +307,20 @@ public class ItemInit {
         Map<EquipmentSlot,RegistryObject<BoundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
         for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
             var item = ITEMS.register("diamond_studded_"+name+"_"+entry.getValue(),() -> new BoundArmorItem(armorMaterial,entry.getKey(),
+                    new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
+            map.put(entry.getKey(),item);
+        }
+        return map;
+    }
+
+    public static Map<EquipmentSlot,RegistryObject<DyeableBoundArmorItem>> createDyeableBoundDiamondStuddedSet(ArmorMaterial armorMaterial) {
+        String name = armorMaterial.getName();
+        if (name.contains(":")) {
+            name = name.split(":")[1];
+        }
+        Map<EquipmentSlot,RegistryObject<DyeableBoundArmorItem>> map = new EnumMap<>(EquipmentSlot.class);
+        for (Map.Entry<EquipmentSlot, String> entry : Utils.ARMOR_SLOTS.entrySet()) {
+            var item = ITEMS.register("diamond_studded_"+name+"_"+entry.getValue(),() -> new DyeableBoundArmorItem(armorMaterial,entry.getKey(),
                     new Item.Properties().tab(ModCreativeTabs.ARMOR_TAB),ArmorType.STUDDED));
             map.put(entry.getKey(),item);
         }

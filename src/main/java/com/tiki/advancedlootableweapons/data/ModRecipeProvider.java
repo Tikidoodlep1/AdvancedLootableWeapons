@@ -648,11 +648,11 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(leggings).define('X', material).pattern("XXX").pattern("X X").pattern("X X").unlockedBy(getHasName(material), has(material)).save(consumer);
     }
 
-    protected void armorSet(Ingredient material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
-                            Map<EquipmentSlot, RegistryObject<BoundArmorItem>> finished, Consumer<FinishedRecipe> consumer) {
+    protected <I extends Item> void armorSet(Ingredient material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
+                            Map<EquipmentSlot, RegistryObject<I>> finished, Consumer<FinishedRecipe> consumer) {
         for (EquipmentSlot slot : Utils.ARMOR_SLOTS.keySet()) {
             RegistryObject<UnboundArmorItem> unbound = map.get(slot);
-            RegistryObject<BoundArmorItem> bound = finished.get(slot);
+            RegistryObject<I> bound = finished.get(slot);
             ShapelessRecipeBuilder.shapeless(bound.get())
                     .requires(material)
                     .requires(unbound.get())
