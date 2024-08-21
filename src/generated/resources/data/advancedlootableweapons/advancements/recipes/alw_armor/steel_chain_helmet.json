@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:steel_chain_helmet"
+    ]
+  },
+  "criteria": {
+    "has_unbound_steel_chain_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:unbound_steel_chain_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:steel_chain_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_unbound_steel_chain_helmet",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -543,7 +543,34 @@ public class ModRecipeProvider extends RecipeProvider {
         //armors
 
 
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_BRONZE_SET,ItemInit.BRONZE_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_COPPER_SET,ItemInit.COPPER_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_CRYSTALLITE_SET,ItemInit.CRYSTALLITE_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DUSKSTEEL_SET,ItemInit.DUSKSTEEL_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_FROST_STEEL_SET,ItemInit.FROST_STEEL_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_KOBOLD_STEEL_SET,ItemInit.KOBOLD_STEEL_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_PLATINUM_SET,ItemInit.PLATINUM_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SHADOW_PLATINUM_SET,ItemInit.SHADOW_PLATINUM_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SILVER_SET,ItemInit.SILVER_SET,recipeConsumer);
         armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_STEEL_SET,ItemInit.STEEL_SET,recipeConsumer);
+
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_BRONZE_CHAIN_SET,ItemInit.BRONZE_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_COPPER_CHAIN_SET,ItemInit.COPPER_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET,ItemInit.CRYSTALLITE_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET,ItemInit.DUSKSTEEL_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_FROST_STEEL_CHAIN_SET,ItemInit.FROST_STEEL_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_KOBOLD_STEEL_CHAIN_SET,ItemInit.KOBOLD_STEEL_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_PLATINUM_CHAIN_SET,ItemInit.PLATINUM_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SHADOW_PLATINUM_CHAIN_SET,ItemInit.SHADOW_PLATINUM_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SILVER_CHAIN_SET,ItemInit.SILVER_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_STEEL_CHAIN_SET,ItemInit.STEEL_CHAIN_SET,recipeConsumer);
+
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_GOLD_CHAIN_SET,ItemInit.GOLD_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_IRON_CHAIN_SET,ItemInit.IRON_CHAIN_SET,recipeConsumer);
+
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,ItemInit.DIAMOND_STUDDED_STEEL_SET,recipeConsumer);
+
+
 
     }
 

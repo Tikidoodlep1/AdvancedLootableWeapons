@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_armor_forging",
+  "ingredient": {
+    "item": "advancedlootableweapons:unbound_platinum_chain_leggings"
+  },
+  "ingredient2": {
+    "tag": "advancedlootableweapons:chain_bindings"
+  },
+  "result": {
+    "item": "advancedlootableweapons:platinum_chain_leggings"
+  }
+}
