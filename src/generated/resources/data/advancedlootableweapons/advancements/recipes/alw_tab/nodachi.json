@@ -2,16 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "advancedlootableweapons:wooden_makhaira_head"
+      "advancedlootableweapons:nodachi"
     ]
   },
   "criteria": {
-    "has_planks": {
+    "has_wooden_nodachi_head": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:planks"
+            "items": [
+              "advancedlootableweapons:wooden_nodachi_head"
+            ]
           }
         ]
       }
@@ -19,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "advancedlootableweapons:wooden_makhaira_head"
+        "recipe": "advancedlootableweapons:nodachi"
       }
     }
   },
   "requirements": [
     [
-      "has_planks",
+      "has_wooden_nodachi_head",
       "has_the_recipe"
     ]
   ]

@@ -98,9 +98,9 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenWeapon(recipeConsumer, ItemInit.KABUTOWARI.get(), ItemInit.WOODEN_KABUTOWARI_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.KODACHI.get(), ItemInit.WOODEN_KODACHI_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.LONGSWORD.get(), ItemInit.WOODEN_LONGSWORD_HEAD.get(), false);
-        woodenWeapon(recipeConsumer, ItemInit.WOODEN_MACE_HEAD.get(), ItemInit.WOODEN_MACE_HEAD.get(), false);
-        woodenWeapon(recipeConsumer, ItemInit.WOODEN_MAKHAIRA_HEAD.get(), ItemInit.WOODEN_MAKHAIRA_HEAD.get(), false);
-        woodenWeapon(recipeConsumer, ItemInit.WOODEN_NODACHI_HEAD.get(), ItemInit.WOODEN_NODACHI_HEAD.get(), false);
+        woodenWeapon(recipeConsumer, ItemInit.MACE.get(), ItemInit.WOODEN_MACE_HEAD.get(), false);
+        woodenWeapon(recipeConsumer, ItemInit.MAKHAIRA.get(), ItemInit.WOODEN_MAKHAIRA_HEAD.get(), false);
+        woodenWeapon(recipeConsumer, ItemInit.NODACHI.get(), ItemInit.WOODEN_NODACHI_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.RAPIER.get(), ItemInit.WOODEN_RAPIER_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.SABRE.get(), ItemInit.WOODEN_SABRE_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.STAFF.get(), ItemInit.WOODEN_STAFF_HEAD.get(), true);
@@ -150,9 +150,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_netherrack", has(Blocks.NETHERRACK))
                 .save(recipeConsumer);
 
-        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_SPEAR_HEAD.get())
+        //wooden parts
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_BATTLEAXE_HEAD.get())
                 .define('S', ItemTags.PLANKS)
-                .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .pattern("S S")
+                .pattern("SSS")
+                .pattern("S S").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_CLEAVER_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S")
+                .pattern("SS")
+                .pattern("SS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_DAGGER_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S")
+                .pattern("S ").unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(recipeConsumer);
 
         ShapedRecipeBuilder.shaped(ItemInit.WOODEN_KABUTOWARI_HEAD.get())
@@ -166,6 +183,75 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('S', Tags.Items.RODS_WOODEN)
                 .pattern("S").pattern("S").unlockedBy("has_sticks", has(Tags.Items.RODS_WOODEN))
                 .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_LONGSWORD_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("  S")
+                .pattern(" S ")
+                .pattern("S  ").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_MACE_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("S S")
+                .pattern(" S ")
+                .pattern("S S").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_MAKHAIRA_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("S ")
+                .pattern("SS")
+                .pattern("SS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_NODACHI_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("S")
+                .pattern("S")
+                .pattern("S").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_RAPIER_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("  S")
+                .pattern(" S ")
+                .pattern("SS ").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_SABRE_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S")
+                .pattern("S ")
+                .pattern("S ").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_SPEAR_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S ").pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_STAFF_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("  S")
+                .pattern(" SS")
+                .pattern("SS ").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_TALWAR_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S")
+                .pattern("S ")
+                .pattern(" S").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_ZWEIHANDER_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern(" S ")
+                .pattern(" S ")
+                .pattern("SSS").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+        ////
 
         ShapedRecipeBuilder.shaped(BlockInit.DIORITE_CLAY_POWDER.get(), 2)
                 .define('#', ItemInit.FELDSPAR_POWDER.get()).define('X', ItemInit.DIORITE_POWDER.get())

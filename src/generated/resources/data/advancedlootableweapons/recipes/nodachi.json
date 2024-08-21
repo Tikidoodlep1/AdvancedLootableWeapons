@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "W": {
+      "item": "advancedlootableweapons:wooden_nodachi_head"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:nodachi",
+    "count": 1,
+    "nbt": "{Damage:0,material:\"wood\"}"
+  }
+}

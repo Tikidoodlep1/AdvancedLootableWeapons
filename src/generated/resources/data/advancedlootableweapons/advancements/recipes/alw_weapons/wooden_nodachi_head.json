@@ -6,14 +6,12 @@
     ]
   },
   "criteria": {
-    "has_wooden_nodachi_head": {
+    "has_planks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": [
-              "advancedlootableweapons:wooden_nodachi_head"
-            ]
+            "tag": "minecraft:planks"
           }
         ]
       }
@@ -27,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_wooden_nodachi_head",
+      "has_planks",
       "has_the_recipe"
     ]
   ]

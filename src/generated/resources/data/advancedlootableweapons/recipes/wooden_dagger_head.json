@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "S ",
-    "SS",
-    "SS"
+    " S",
+    "S "
   ],
   "key": {
     "S": {
@@ -11,6 +10,6 @@
     }
   },
   "result": {
-    "item": "advancedlootableweapons:wooden_makhaira_head"
+    "item": "advancedlootableweapons:wooden_dagger_head"
   }
 }

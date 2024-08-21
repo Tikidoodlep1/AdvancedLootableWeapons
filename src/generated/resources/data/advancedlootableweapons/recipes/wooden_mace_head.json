@@ -1,20 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "W",
-    "S"
+    "S S",
+    " S ",
+    "S S"
   ],
   "key": {
-    "W": {
-      "item": "advancedlootableweapons:wooden_mace_head"
-    },
     "S": {
-      "item": "minecraft:stick"
+      "tag": "minecraft:planks"
     }
   },
   "result": {
-    "item": "advancedlootableweapons:wooden_mace_head",
-    "count": 1,
-    "nbt": "{material:\"wood\"}"
+    "item": "advancedlootableweapons:wooden_mace_head"
   }
 }
