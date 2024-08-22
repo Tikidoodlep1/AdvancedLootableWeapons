@@ -626,6 +626,8 @@ public class ModRecipeProvider extends RecipeProvider {
         toolForging(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(), recipeConsumer);
         twoToolForging(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.ZWEIHANDER.get(), recipeConsumer);
 
+        toolForging(ItemInit.TOOL_HEAD.get(),ItemInit.CHAIN_RING.get(),6,recipeConsumer);
+
         //armors
 
 
@@ -661,7 +663,11 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void toolForging(ItemLike input, ItemLike result, Consumer<FinishedRecipe> consumer) {
-        AnvilForgingRecipeBuilder.anvilToolForging(input, result).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
+        toolForging(input,result,1,consumer);
+    }
+
+    protected void toolForging(ItemLike input, ItemLike result, int count,Consumer<FinishedRecipe> consumer) {
+        AnvilForgingRecipeBuilder.anvilToolForging(input, result,count).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
     }
 
     protected void twoToolForging(ItemLike input, ItemLike input2, ItemLike result, Consumer<FinishedRecipe> consumer) {

@@ -53,8 +53,8 @@ public class SequencedAnvilForgingCategory implements DisplayCategory<SequencedA
 
             int y = 45 * (i/8);
 
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 2+y)).entries(entryIngredient).markInput());
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 20+y)).entries(entryIngredient2).markInput());
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 2+y)).entries(entryIngredient).markInput().markOutput());
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 20+y)).entries(entryIngredient2).markInput().markOutput());
 
         }
 

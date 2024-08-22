@@ -46,7 +46,11 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
     }
 
     public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result) {
-        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING.get(), Ingredient.of(ingredient), null, new ItemStack(result));
+        return anvilToolForging(ingredient,result,1);
+    }
+
+    public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result,int count) {
+        return new AnvilForgingRecipeBuilder(RecipeInit.ANVIL_TOOL_FORGING.get(), Ingredient.of(ingredient), null, new ItemStack(result,count));
     }
 
     public static AnvilForgingRecipeBuilder anvilTwoToolForging(ItemLike ingredient,ItemLike ingredient2,ItemLike result) {

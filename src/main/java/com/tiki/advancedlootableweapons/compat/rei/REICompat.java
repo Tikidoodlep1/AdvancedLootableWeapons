@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.compat.rei.categories.*;
 import com.tiki.advancedlootableweapons.compat.rei.displays.*;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
@@ -118,7 +119,7 @@ public class REICompat implements REIClientPlugin {
             for (Iterator<AbstractAnvilForgingRecipe> iterator = toolRecipes.iterator(); iterator.hasNext(); ) {
                 AbstractAnvilForgingRecipe toolrecipe = iterator.next();
                 ItemStack result = toolrecipe.getResultItem();
-                if (result.getItem() instanceof AlwWeaponItem) {
+                if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get()) {
                     ItemStack stack = new ItemStack(result.getItem());
                     String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
                     AlwWeaponItem.setMaterial(stack, materialName);
