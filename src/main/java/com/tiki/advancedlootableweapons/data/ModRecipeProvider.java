@@ -28,6 +28,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.PartialNBTIngredient;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
@@ -349,13 +350,33 @@ public class ModRecipeProvider extends RecipeProvider {
         //armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_LEATHER_SET, ItemInit.LEATHER_SET, recipeConsumer);
         armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET, ItemInit.DIAMOND_STUDDED_LEATHER_SET, recipeConsumer);
 
-        CustomShapelessRecipeBuilder.customShapeless(ItemInit.GOLD_CHAIN_LINK.get())
-                .serializer(ModRecipeSerializers.CHAIN_LINK.get())
-                .requires(ItemInit.CHAIN_RING.get())
-                .requires(ItemInit.CHAIN_RING.get())
-                .requires(ItemInit.CHAIN_RING.get())
+        chainLink(ItemInit.IRON_CHAIN_LINK.get(), WeaponMaterial.IRON, recipeConsumer);
+        chainLink(ItemInit.GOLD_CHAIN_LINK.get(), WeaponMaterial.GOLD, recipeConsumer);
+        chainLink(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(), WeaponMaterial.KOBOLD_STEEL, recipeConsumer);
+        chainLink(ItemInit.COPPER_CHAIN_LINK.get(), WeaponMaterial.COPPER, recipeConsumer);
+        chainLink(ItemInit.SILVER_CHAIN_LINK.get(), WeaponMaterial.SILVER, recipeConsumer);
+        chainLink(ItemInit.BRONZE_CHAIN_LINK.get(), WeaponMaterial.BRONZE, recipeConsumer);
+        chainLink(ItemInit.PLATINUM_CHAIN_LINK.get(), WeaponMaterial.PLATINUM, recipeConsumer);
+        chainLink(ItemInit.STEEL_CHAIN_LINK.get(), WeaponMaterial.STEEL, recipeConsumer);
+        chainLink(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(), WeaponMaterial.SHADOW_PLATINUM, recipeConsumer);
+        chainLink(ItemInit.FROST_STEEL_CHAIN_LINK.get(), WeaponMaterial.FROST_STEEL, recipeConsumer);
+        chainLink(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(), WeaponMaterial.REFINED_OBSIDIAN, recipeConsumer);
+        chainLink(ItemInit.CRYSTALLITE_CHAIN_LINK.get(), WeaponMaterial.CRYSTALLITE, recipeConsumer);
+        chainLink(ItemInit.DUSKSTEEL_CHAIN_LINK.get(), WeaponMaterial.DUSKSTEEL, recipeConsumer);
+    }
+
+    protected void chainLink(Item result,WeaponMaterial material,Consumer<FinishedRecipe> consumer) {
+        ItemStack stack = new ItemStack(ItemInit.CHAIN_RING.get());
+        HeatableToolPartItem.setMaterial(stack,material);
+        Ingredient chain_ring = PartialNBTIngredient.of(stack.getItem(),stack.getTag());
+
+        ShapelessRecipeBuilder.shapeless(result)
+                //.serializer(ModRecipeSerializers.CHAIN_LINK.get())
+                .requires(chain_ring)
+                .requires(chain_ring)
+                .requires(chain_ring)
                 .unlockedBy(getHasName(ItemInit.CHAIN_RING.get()),has(ItemInit.CHAIN_RING.get()))
-                .save(recipeConsumer);
+                .save(consumer);
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {

@@ -115,11 +115,11 @@ public class REICompat implements REIClientPlugin {
 
 
         for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP.values()) {
-            if (!weaponMaterial.canMakeWeapon() || weaponMaterial.metalStats() == null)continue;
-            for (Iterator<AbstractAnvilForgingRecipe> iterator = toolRecipes.iterator(); iterator.hasNext(); ) {
-                AbstractAnvilForgingRecipe toolrecipe = iterator.next();
+            if ((weaponMaterial.metalStats() == null))continue;
+            for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get()) {
+                    if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
                     ItemStack stack = new ItemStack(result.getItem());
                     String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
                     AlwWeaponItem.setMaterial(stack, materialName);

@@ -4,20 +4,20 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"dusksteel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"dusksteel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"dusksteel\"}"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:gold_chain_link"
+    "item": "advancedlootableweapons:dusksteel_chain_link"
   }
 }

@@ -4,20 +4,20 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"steel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"steel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"gold\"}"
+      "nbt": "{material:\"steel\"}"
     }
   ],
   "result": {
-    "item": "advancedlootableweapons:gold_chain_link"
+    "item": "advancedlootableweapons:steel_chain_link"
   }
 }

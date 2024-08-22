@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:dusksteel_chain_link"
+    ]
+  },
+  "criteria": {
+    "has_chain_ring": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:chain_ring"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:dusksteel_chain_link"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chain_ring",
+      "has_the_recipe"
+    ]
+  ]
+}

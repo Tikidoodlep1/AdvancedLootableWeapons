@@ -10,42 +10,50 @@ import net.minecraft.world.item.Tiers;
 import java.util.HashMap;
 import java.util.Map;
 
-public record WeaponMaterial(Tier tier, MetalStats metalStats,boolean canMakeWeapon) {
+public record WeaponMaterial(Tier tier, MetalStats metalStats, boolean canMakeWeapon) {
 
-	public static final Map<String, WeaponMaterial> LOOKUP = new HashMap<>();
-	public static final WeaponMaterial NULL = new WeaponMaterial(null, null,false);
-	public static final WeaponMaterial STEEL = new WeaponMaterial(ModMaterials.MAT_STEEL,MetalStats.STEEL,true);
+    public static final Map<String, WeaponMaterial> LOOKUP = new HashMap<>();
+    public static final WeaponMaterial NULL = new WeaponMaterial(null, null, false);
 
-	static {
-		LOOKUP.put("wood",new WeaponMaterial(Tiers.WOOD, null,true));
-		LOOKUP.put("stone",new WeaponMaterial(Tiers.STONE, null,false));
-		LOOKUP.put("copper",new WeaponMaterial(ModMaterials.MAT_COPPER,MetalStats.COPPER,true));
-		LOOKUP.put("iron",new WeaponMaterial(Tiers.IRON,MetalStats.IRON,true));
-		LOOKUP.put("gold",new WeaponMaterial(Tiers.GOLD,MetalStats.GOLD,false));
-		LOOKUP.put("diamond",new WeaponMaterial(Tiers.DIAMOND,null,false));
-		LOOKUP.put("netherite",new WeaponMaterial(Tiers.NETHERITE,null,false));
-		LOOKUP.put("bronze",new WeaponMaterial(ModMaterials.MAT_BRONZE,MetalStats.BRONZE,true));
-		LOOKUP.put("kobold_steel",new WeaponMaterial(ModMaterials.MAT_KOBOLD,MetalStats.KOBOLD_STEEL,true));
-		LOOKUP.put("silver",new WeaponMaterial(ModMaterials.MAT_SILVER,MetalStats.SILVER,true));
-		LOOKUP.put("platinum",new WeaponMaterial(ModMaterials.MAT_PLATINUM,MetalStats.PLATINUM,true));
-		LOOKUP.put("refined_obsidian",new WeaponMaterial(ModMaterials.MAT_REFINED_OBSIDIAN,MetalStats.REFINED_OBSIDIAN,true));
-		LOOKUP.put("shadow_platinum",new WeaponMaterial(ModMaterials.MAT_SHADOW_PLATINUM,MetalStats.SHADOW_PLATINUM,true));
-		LOOKUP.put("frost_steel",new WeaponMaterial(ModMaterials.MAT_FROST_STEEL,MetalStats.FROST_STEEL,true));
-		LOOKUP.put("dusksteel",new WeaponMaterial(ModMaterials.MAT_DUSKSTEEL,MetalStats.DUSKSTEEL,true));
-		LOOKUP.put("crystallite",new WeaponMaterial(ModMaterials.MAT_CRYSTALLITE,MetalStats.CRYSTALLITE,true));
-		LOOKUP.put("steel",STEEL);
-	}
+    public static final WeaponMaterial STEEL = register("steel", new WeaponMaterial(ModMaterials.STEEL, MetalStats.STEEL, true));
+    public static final WeaponMaterial FROST_STEEL = register("frost_steel", new WeaponMaterial(ModMaterials.FROST_STEEL, MetalStats.FROST_STEEL, true));
+    public static final WeaponMaterial WOOD = register("wood", new WeaponMaterial(Tiers.WOOD, null, true));
+    public static final WeaponMaterial STONE = register("stone", new WeaponMaterial(Tiers.STONE, null, false));
+    public static final WeaponMaterial COPPER = register("copper", new WeaponMaterial(ModMaterials.COPPER, MetalStats.COPPER, true));
+    public static final WeaponMaterial IRON = register("iron", new WeaponMaterial(Tiers.IRON, MetalStats.IRON, true));
+    public static final WeaponMaterial GOLD = register("gold", new WeaponMaterial(Tiers.GOLD, MetalStats.GOLD, false));
+    public static final WeaponMaterial DIAMOND = register("diamond", new WeaponMaterial(Tiers.DIAMOND, null, false));
+    public static final WeaponMaterial NETHERITE = register("netherite", new WeaponMaterial(Tiers.NETHERITE, null, false));
+    public static final WeaponMaterial BRONZE = register("bronze", new WeaponMaterial(ModMaterials.BRONZE, MetalStats.BRONZE, true));
+    public static final WeaponMaterial KOBOLD_STEEL = register("kobold_steel", new WeaponMaterial(ModMaterials.KOBOLD_STEEL, MetalStats.KOBOLD_STEEL, true));
+    public static final WeaponMaterial SILVER = register("silver", new WeaponMaterial(ModMaterials.SILVER, MetalStats.SILVER, true));
+    public static final WeaponMaterial PLATINUM = register("platinum", new WeaponMaterial(ModMaterials.PLATINUM, MetalStats.PLATINUM, true));
+    public static final WeaponMaterial REFINED_OBSIDIAN = register("refined_obsidian", new WeaponMaterial(ModMaterials.REFINED_OBSIDIAN, MetalStats.REFINED_OBSIDIAN, true));
+    public static final WeaponMaterial SHADOW_PLATINUM = register("shadow_platinum", new WeaponMaterial(ModMaterials.SHADOW_PLATINUM, MetalStats.SHADOW_PLATINUM, true));
+    public static final WeaponMaterial DUSKSTEEL = register("dusksteel", new WeaponMaterial(ModMaterials.DUSKSTEEL, MetalStats.DUSKSTEEL, true));
+    public static final WeaponMaterial CRYSTALLITE = register("crystallite", new WeaponMaterial(ModMaterials.CRYSTALLITE, MetalStats.CRYSTALLITE, true));
 
-	public static TranslatableComponent getTranslationKey(String material) {
-		return new TranslatableComponent(AdvancedLootableWeapons.MODID+".material."+material);
-	}
 
-	public static String getMaterialNameF(WeaponMaterial mat) {
-		for(Map.Entry<String,WeaponMaterial> e : LOOKUP.entrySet()) {
-			if(e.getValue() == mat) {
-				return e.getKey();
-			}
-		}
-		return "";
-	}
+    public static WeaponMaterial register(String name, WeaponMaterial material) {
+        LOOKUP.put(name, material);
+        return material;
+    }
+
+
+    public static TranslatableComponent getTranslationKey(String material) {
+        return new TranslatableComponent(AdvancedLootableWeapons.MODID + ".material." + material);
+    }
+
+    public static WeaponMaterial getByName(String name) {
+        return LOOKUP.getOrDefault(name,NULL);
+    }
+
+    public static String getMaterialNameF(WeaponMaterial mat) {
+        for (Map.Entry<String, WeaponMaterial> e : LOOKUP.entrySet()) {
+            if (e.getValue() == mat) {
+                return e.getKey();
+            }
+        }
+        return "";
+    }
 }

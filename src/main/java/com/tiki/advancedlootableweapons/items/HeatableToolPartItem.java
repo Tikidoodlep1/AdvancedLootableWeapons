@@ -43,22 +43,6 @@ public class HeatableToolPartItem extends Item {
         return true;
     }
 
-    public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
-        setMaterial(stack,WeaponMaterial.getMaterialNameF(mat));
-    }
-
-    public static void setMaterial(ItemStack stack,String matName) {
-        stack.getOrCreateTag().putString("material", matName);
-    }
-
-    public static String getMaterial(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getString("material") : "";
-    }
-
-    public static double getHeat(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getDouble(HEAT) : 0;
-    }
-
     @Override
     public boolean isBarVisible(ItemStack pStack) {
         return getHeat(pStack) > 0;
@@ -66,8 +50,7 @@ public class HeatableToolPartItem extends Item {
 
     @Override
     public int getBarWidth(ItemStack pStack) {
-        int i = (int) (MAX_BAR_WIDTH * getHeat(pStack) / MAX_HEAT);
-        return i;
+        return (int) (MAX_BAR_WIDTH * getHeat(pStack) / MAX_HEAT);
     }
 
     @Override
@@ -80,12 +63,6 @@ public class HeatableToolPartItem extends Item {
         int greenScale = (int) Math.min(150 * heatPercentage,0xff);
         int blueScale = (int) Math.min(75 * heatPercentage,0xff);
         return Mth.color(redScale,greenScale,blueScale);
-    }
-
-    public static boolean isSameMaterial(ItemStack stackA, ItemStack stackB) {
-        String matA = getMaterial(stackA);
-        String matB = getMaterial(stackB);
-        return Objects.equals(matA,matB);
     }
 
     public static final String QUENCH_KEY ="advancedlootableweapons.tool_head.quenched";
@@ -134,11 +111,6 @@ public class HeatableToolPartItem extends Item {
         return temp.translation.copy().append(" ").append(baseName);
     }
 
-    @Override
-    public boolean isEnchantable(ItemStack p_41456_) {
-        return false;
-    }
-
     /**
      * related to ItemPropertyFunction
      * damage < 3000 = hot
@@ -182,12 +154,39 @@ public class HeatableToolPartItem extends Item {
         }
     }
 
-    public static void setHeat(ItemStack stack, double temp) {
-        stack.getOrCreateTag().putDouble(HEAT,temp);
-    }
-
     public HeatableToolPartItem addToRegistryMap() {
         ItemInit.hotToolHeads.add(this);
         return this;
     }
+
+    ///////helpers
+
+    public static void setHeat(ItemStack stack, double temp) {
+        stack.getOrCreateTag().putDouble(HEAT,temp);
+    }
+
+
+    public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
+        setMaterial(stack,WeaponMaterial.getMaterialNameF(mat));
+    }
+
+    public static void setMaterial(ItemStack stack,String matName) {
+        stack.getOrCreateTag().putString("material", matName);
+    }
+
+    public static String getMaterial(ItemStack stack) {
+        return stack.hasTag() ? stack.getTag().getString("material") : "";
+    }
+
+    public static double getHeat(ItemStack stack) {
+        return stack.hasTag() ? stack.getTag().getDouble(HEAT) : 0;
+    }
+
+    public static boolean isSameMaterial(ItemStack stackA, ItemStack stackB) {
+        String matA = getMaterial(stackA);
+        String matB = getMaterial(stackB);
+        return Objects.equals(matA,matB);
+    }
+
+
 }
