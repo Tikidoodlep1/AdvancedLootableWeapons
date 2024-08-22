@@ -198,7 +198,7 @@ public class ItemInit {
     public static final Map<EquipmentSlot,RegistryObject<UnboundArmorItem>> UNBOUND_DIAMOND_STUDDED_STEEL_SET = createUnboundDiamondStuddedSet(ModArmorMaterials.STEEL);
 
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> LEATHER_SET = createBoundSet(ArmorMaterials.LEATHER);
+    //public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> LEATHER_SET = createBoundSet(ArmorMaterials.LEATHER);
 
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> IRON_CHAIN_SET = createBoundChainSet(ArmorMaterials.IRON);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> GOLD_CHAIN_SET = createBoundChainSet(ArmorMaterials.GOLD);
@@ -214,8 +214,8 @@ public class ItemInit {
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> CRYSTALLITE_CHAIN_SET = createBoundChainSet(ModArmorMaterials.CRYSTALLITE);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> DUSKSTEEL_CHAIN_SET = createBoundChainSet(ModArmorMaterials.DUSKSTEEL);
 
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> IRON_SET = createBoundSet(ArmorMaterials.IRON);
-    public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> GOLD_SET = createBoundSet(ArmorMaterials.GOLD);
+    //public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> IRON_SET = createBoundSet(ArmorMaterials.IRON);
+    //public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> GOLD_SET = createBoundSet(ArmorMaterials.GOLD);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> KOBOLD_STEEL_SET = createBoundSet(ModArmorMaterials.KOBOLD_STEEL);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> COPPER_SET = createBoundSet(ModArmorMaterials.COPPER);
     public static final Map<EquipmentSlot,RegistryObject<BoundArmorItem>> SILVER_SET = createBoundSet(ModArmorMaterials.SILVER);

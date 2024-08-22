@@ -345,7 +345,7 @@ public class ModRecipeProvider extends RecipeProvider {
         unboundArmorSet(ItemInit.DIAMOND_STUDDED_LEATHER.get(), ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET, recipeConsumer);
         unboundArmorSet(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get(), ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET, recipeConsumer);
 
-        armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_LEATHER_SET, ItemInit.LEATHER_SET, recipeConsumer);
+        //armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_LEATHER_SET, ItemInit.LEATHER_SET, recipeConsumer);
         armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET, ItemInit.DIAMOND_STUDDED_LEATHER_SET, recipeConsumer);
     }
 

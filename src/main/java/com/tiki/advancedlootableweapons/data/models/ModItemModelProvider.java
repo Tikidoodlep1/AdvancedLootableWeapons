@@ -49,12 +49,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         use_sprite.add(ItemInit.LEATHER_BINDING.get());
         use_sprite.forEach(this::oneLayerItem);
 
-        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
+        /*oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/leather_helmet"));
         oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/leather_chestplate"));
         oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/leather_leggings"));
-        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/leather_boots"));
+        oneLayerItem(ItemInit.LEATHER_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/leather_boots"));*/
 
-        oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/golden_helmet"));
+        /*oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/golden_helmet"));
         oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/golden_chestplate"));
         oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/golden_leggings"));
         oneLayerItem(ItemInit.GOLD_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/golden_boots"));
@@ -62,7 +62,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.HEAD).get(),new ResourceLocation("item/iron_helmet"));
         oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.CHEST).get(),new ResourceLocation("item/iron_chestplate"));
         oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.LEGS).get(),new ResourceLocation("item/iron_leggings"));
-        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/iron_boots"));
+        oneLayerItem(ItemInit.IRON_SET.get(EquipmentSlot.FEET).get(),new ResourceLocation("item/iron_boots"));*/
 
         simpleBlockItem(BlockInit.FORGE.get().asItem());
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
