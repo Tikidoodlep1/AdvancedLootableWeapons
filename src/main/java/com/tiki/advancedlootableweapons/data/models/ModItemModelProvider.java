@@ -350,6 +350,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         heatableItem(ItemInit.ZWEIHANDER_HEAD_4.get());
         heatableItem(ItemInit.ZWEIHANDER_HEAD_5.get());
 
+        heatableItem(ItemInit.CHAIN_RING.get());
+
     }
 
     protected final ModelFile GENERATED = getExistingFile(mcLoc("item/generated"));

@@ -424,6 +424,8 @@ public class ItemInit {
     public static final RegistryObject<HeatableToolPartItem> SPEAR_HEAD_2 = ITEMS.register("spear_head_2", () -> new HeatableToolPartItem(2, true, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)).addToRegistryMap());
     public static final RegistryObject<HeatableToolPartItem> SPEAR_HEAD = ITEMS.register("spear_head", () -> new HeatableToolPartItem(1, true, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)).addToRegistryMap());
 
+    public static final RegistryObject<HeatableToolPartItem> CHAIN_RING = ITEMS.register("chain_ring", () -> new HeatableToolPartItem(1, true, new Item.Properties().tab(ModCreativeTabs.WEAPON_TAB)).addToRegistryMap());
+
     //whetstones
     public static final RegistryObject<Item> STONE_WHETSTONE = ITEMS.register("stone_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), Tiers.WOOD));
     public static final RegistryObject<Item> IRON_WHETSTONE = ITEMS.register("iron_whetstone", () -> new SharpeningStoneItem(new Item.Properties().stacksTo(16).tab(ModCreativeTabs.WEAPON_TAB), Tiers.IRON));

@@ -169,6 +169,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ItemInit.SPEAR_HEAD.get(), "Spear Head(Stage 1)");
         add(ItemInit.SPEAR_HEAD_2.get(), "Spear Head(Finished)");
+
+        add(ItemInit.CHAIN_RING.get(),"Chain Ring");
     }
 
     protected void addTranslatableText(MutableComponent translatable,String translation) {

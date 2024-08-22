@@ -6,6 +6,6 @@
   "result": {
     "item": "advancedlootableweapons:tool_head",
     "Count": 1,
-    "nbt": "{Damage:6000,material:\"shadow_platinum\"}"
+    "nbt": "{heat:0.0d,material:\"shadow_platinum\"}"
   }
 }
