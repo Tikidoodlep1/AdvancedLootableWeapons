@@ -15,6 +15,7 @@ import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
@@ -23,6 +24,10 @@ import net.minecraft.world.level.Level;
 public class HeatableToolPartItem extends Item {
     private final int level;
     private final boolean isMain;
+
+    public static final String HEAT = "heat";
+    public static final int MAX_HEAT = 6000;
+    public static final double COOLING_RATE = 1;
 
     public HeatableToolPartItem(int level, boolean isMain, Properties prop) {
         super(prop);
@@ -50,7 +55,34 @@ public class HeatableToolPartItem extends Item {
         return stack.hasTag() ? stack.getTag().getString("material") : "";
     }
 
-    public static boolean isSameMaterial(ItemStack stackA,ItemStack stackB) {
+    public static double getHeat(ItemStack stack) {
+        return stack.hasTag() ? stack.getTag().getDouble(HEAT) : 0;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack pStack) {
+        return getHeat(pStack) > 0;
+    }
+
+    @Override
+    public int getBarWidth(ItemStack pStack) {
+        int i = (int) (MAX_BAR_WIDTH * getHeat(pStack) / MAX_HEAT);
+        return i;
+    }
+
+    @Override
+    public int getBarColor(ItemStack pStack) {
+        double heat = getHeat(pStack);
+
+        double heatPercentage = heat / MAX_HEAT;
+
+        int redScale = (int)Math.min(300 * heatPercentage,0xff);
+        int greenScale = (int) Math.min(150 * heatPercentage,0xff);
+        int blueScale = (int) Math.min(75 * heatPercentage,0xff);
+        return Mth.color(redScale,greenScale,blueScale);
+    }
+
+    public static boolean isSameMaterial(ItemStack stackA, ItemStack stackB) {
         String matA = getMaterial(stackA);
         String matB = getMaterial(stackB);
         return Objects.equals(matA,matB);
@@ -68,6 +100,10 @@ public class HeatableToolPartItem extends Item {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
         }
 
+        double heat = getHeat(stack);
+        tooltip.add(MCVersion.literal("Heat: "+(int)heat));
+
+
         if(nbt!= null && isMain) {
             boolean quenched = nbt.getBoolean("quenched");
             tooltip.add(quenched ? MCVersion.translation(QUENCH_KEY).withStyle(ChatFormatting.BLUE) :
@@ -76,16 +112,18 @@ public class HeatableToolPartItem extends Item {
 
         tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "Forging Quality"));
         tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
-        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDamage")));
-        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDurability")));
+        if (nbt != null) {
+            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDamage")));
+            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDurability")));
+        }
         tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity player, int p_41407_, boolean p_41408_) {
-        int damage = stack.getDamageValue();
-        if (!world.isClientSide && damage < getMaxDamage()) {
-            this.setDamage(stack, damage + 1);
+        double heat = getHeat(stack);
+        if (!world.isClientSide && heat > 0) {
+            setHeat(stack,Math.max(getHeat(stack) - COOLING_RATE,0));
         }
     }
 
@@ -106,12 +144,13 @@ public class HeatableToolPartItem extends Item {
      * damage < 3000 = hot
      */
     public static final PropertyDispatch.QuadFunction<ItemStack, Level, LivingEntity, Integer, Temp> HEAT_FUNCTION = (stack, world, player, id) -> {
-        if (stack.getDamageValue() <= 3000) {
-            return Temp.hot;
-        } else if (stack.getDamageValue() > 3000 && stack.getDamageValue() < 5000) {
+        double heat = getHeat(stack);
+        if (heat < 2000) {
+            return Temp.cool;
+        } else if (heat >= 2000 && heat < 4000) {
             return Temp.warm;
         } else {
-            return Temp.cool;
+            return Temp.hot;
         }
     };
 
@@ -131,20 +170,20 @@ public class HeatableToolPartItem extends Item {
         if (allowdedIn(pCategory)) {//be careful not to put them in every tab
             ItemStack hot = new ItemStack(this);
             setMaterial(hot, WeaponMaterial.STEEL);
+            setHeat(hot,MAX_HEAT);
             pItems.add(hot);
             ItemStack warm = new ItemStack(this);
             setMaterial(warm, WeaponMaterial.STEEL);
-            setTemperature(warm,getMaxDamage() / 2);
+            setHeat(warm,MAX_HEAT / 2);
             ItemStack cool = new ItemStack(this);
             setMaterial(cool, WeaponMaterial.STEEL);
-            setTemperature(cool,0);
             pItems.add(warm);
             pItems.add(cool);
         }
     }
 
-    public static void setTemperature(ItemStack stack, int temp) {
-        stack.setDamageValue(stack.getMaxDamage() - temp);
+    public static void setHeat(ItemStack stack, double temp) {
+        stack.getOrCreateTag().putDouble(HEAT,temp);
     }
 
     public HeatableToolPartItem addToRegistryMap() {

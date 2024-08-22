@@ -672,7 +672,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
         ItemStack stack = new ItemStack(ItemInit.TOOL_HEAD.get());
         HeatableToolPartItem.setMaterial(stack, weaponMaterial);
-        HeatableToolPartItem.setTemperature(stack, 0);
+        HeatableToolPartItem.setHeat(stack, 0);
         return stack;
     }
 
