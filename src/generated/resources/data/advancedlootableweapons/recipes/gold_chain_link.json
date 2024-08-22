@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:chain_link",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:chain_ring"
+    },
+    {
+      "item": "advancedlootableweapons:chain_ring"
+    },
+    {
+      "item": "advancedlootableweapons:chain_ring"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:gold_chain_link"
+  }
+}

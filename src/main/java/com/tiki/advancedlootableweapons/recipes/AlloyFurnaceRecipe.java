@@ -7,7 +7,7 @@ import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -107,7 +107,7 @@ public class AlloyFurnaceRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeInit.ALLOY_FURNACE.get();
+		return ModRecipeSerializers.ALLOY_FURNACE.get();
 	}
 
 	@Override

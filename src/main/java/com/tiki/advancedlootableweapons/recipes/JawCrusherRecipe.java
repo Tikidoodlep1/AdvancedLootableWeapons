@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -66,7 +66,7 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeInit.JAW_CRUSHER.get();
+		return ModRecipeSerializers.JAW_CRUSHER.get();
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.data.recipes;
 
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.Registry;
@@ -116,7 +116,7 @@ public class DrumQuenchingRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return RecipeInit.DRUM_QUENCHING.get();
+            return ModRecipeSerializers.DRUM_QUENCHING.get();
         }
 
         /**

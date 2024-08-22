@@ -13,7 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class RecipeInit {
+public class ModRecipeSerializers {
 
 	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AdvancedLootableWeapons.MODID);
 	
@@ -40,7 +40,11 @@ public class RecipeInit {
 
 	public static final RegistryObject<RecipeSerializer<DrumQuenchingRecipe>> DRUM_QUENCHING = RECIPE_SERIALIZERS.register("drum_quenching",
 			DrumQuenchingRecipe.Serializer::new);
-	
+
+	public static final RegistryObject<ThreeMatchingItemsRecipe.CustomSerializer> CHAIN_LINK = RECIPE_SERIALIZERS.register("chain_link",
+            ThreeMatchingItemsRecipe.CustomSerializer::new);
+
+
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZERS.register(bus);
 	}

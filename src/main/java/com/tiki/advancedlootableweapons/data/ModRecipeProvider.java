@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
@@ -347,6 +348,14 @@ public class ModRecipeProvider extends RecipeProvider {
 
         //armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_LEATHER_SET, ItemInit.LEATHER_SET, recipeConsumer);
         armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET, ItemInit.DIAMOND_STUDDED_LEATHER_SET, recipeConsumer);
+
+        CustomShapelessRecipeBuilder.customShapeless(ItemInit.GOLD_CHAIN_LINK.get())
+                .serializer(ModRecipeSerializers.CHAIN_LINK.get())
+                .requires(ItemInit.CHAIN_RING.get())
+                .requires(ItemInit.CHAIN_RING.get())
+                .requires(ItemInit.CHAIN_RING.get())
+                .unlockedBy(getHasName(ItemInit.CHAIN_RING.get()),has(ItemInit.CHAIN_RING.get()))
+                .save(recipeConsumer);
     }
 
     protected void smelting(Consumer<FinishedRecipe> recipeConsumer) {

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.tiki.advancedlootableweapons.blocks.block_entity.DrumBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -85,7 +85,7 @@ public class DrumRecipe implements Recipe<SingleFluidRecipeWrapper> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeInit.DRUM.get();
+        return ModRecipeSerializers.DRUM.get();
     }
 
     @Override

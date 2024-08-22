@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.recipes.anvilforging;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.init.RecipeInit;
+import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +12,7 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 public class AnvilToolForgingRecipe extends AbstractAnvilForgingRecipe {
 
 	public AnvilToolForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult) {
-		super(ModRecipeTypes.ANVIL_FORGING, RecipeInit.ANVIL_TOOL_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult);
+		super(ModRecipeTypes.ANVIL_FORGING, ModRecipeSerializers.ANVIL_TOOL_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult);
 	}
 
 	/**
