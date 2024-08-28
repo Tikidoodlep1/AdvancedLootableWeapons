@@ -124,8 +124,10 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         private JsonObject serializeStack(ItemStack stack) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("item",Registry.ITEM.getKey(stack.getItem()).toString());
+            if (stack.getCount() > 1) {
+                jsonObject.addProperty("count", stack.getCount());
+            }
             if (saveNBT()) {
-                jsonObject.addProperty("Count", stack.getCount());
                 if (stack.hasTag()) {
                     jsonObject.addProperty("nbt", stack.getTag().toString());
                 }

@@ -4,6 +4,7 @@
     "item": "advancedlootableweapons:tool_head"
   },
   "result": {
-    "item": "advancedlootableweapons:chain_ring"
+    "item": "advancedlootableweapons:chain_ring",
+    "count": 6
   }
 }

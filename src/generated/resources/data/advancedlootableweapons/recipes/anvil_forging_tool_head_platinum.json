@@ -5,7 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "Count": 1,
     "nbt": "{heat:0.0d,material:\"platinum\"}"
   }
 }

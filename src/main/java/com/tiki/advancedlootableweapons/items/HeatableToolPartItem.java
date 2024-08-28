@@ -140,18 +140,21 @@ public class HeatableToolPartItem extends Item {
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         //super.fillItemCategory(pCategory, pItems);
         if (allowdedIn(pCategory)) {//be careful not to put them in every tab
-            ItemStack hot = new ItemStack(this);
-            setMaterial(hot, WeaponMaterial.STEEL);
+            ItemStack hot = createPart(WeaponMaterial.STEEL);
             setHeat(hot,MAX_HEAT);
             pItems.add(hot);
-            ItemStack warm = new ItemStack(this);
-            setMaterial(warm, WeaponMaterial.STEEL);
+            ItemStack warm = createPart(WeaponMaterial.STEEL);
             setHeat(warm,MAX_HEAT / 2);
-            ItemStack cool = new ItemStack(this);
-            setMaterial(cool, WeaponMaterial.STEEL);
             pItems.add(warm);
+            ItemStack cool = createPart(WeaponMaterial.STEEL);
             pItems.add(cool);
         }
+    }
+
+    public ItemStack createPart(WeaponMaterial weaponMaterial) {
+        ItemStack stack = new ItemStack(this);
+        setMaterial(stack,weaponMaterial);
+        return stack;
     }
 
     public HeatableToolPartItem addToRegistryMap() {

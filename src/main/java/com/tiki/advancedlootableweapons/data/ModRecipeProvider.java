@@ -366,8 +366,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void chainLink(Item result,WeaponMaterial material,Consumer<FinishedRecipe> consumer) {
-        ItemStack stack = new ItemStack(ItemInit.CHAIN_RING.get());
-        HeatableToolPartItem.setMaterial(stack,material);
+        ItemStack stack = ItemInit.CHAIN_RING.get().createPart(material);
         Ingredient chain_ring = PartialNBTIngredient.of(stack.getItem(),stack.getTag());
 
         ShapelessRecipeBuilder.shapeless(result)
@@ -533,7 +532,7 @@ public class ModRecipeProvider extends RecipeProvider {
         for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
             WeaponMaterial weaponMaterial = entry.getValue();
             if (weaponMaterial.metalStats() != null) {
-                ItemStack toolHead = createToolHead(weaponMaterial);
+                ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(weaponMaterial);
                 AnvilForgingRecipeBuilder.anvilMaterialForging(weaponMaterial.tier().getRepairIngredient(), toolHead)
                         .save(recipeConsumer, AdvancedLootableWeapons.id("anvil_forging_tool_head_" + entry.getKey()));
             }
@@ -702,14 +701,6 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected void twoToolForging(ItemLike input, ItemLike input2, ItemLike result, Consumer<FinishedRecipe> consumer) {
         AnvilForgingRecipeBuilder.anvilTwoToolForging(input, input2, result).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
-    }
-
-
-    protected static ItemStack createToolHead(WeaponMaterial weaponMaterial) {
-        ItemStack stack = new ItemStack(ItemInit.TOOL_HEAD.get());
-        HeatableToolPartItem.setMaterial(stack, weaponMaterial);
-        HeatableToolPartItem.setHeat(stack, 0);
-        return stack;
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer, ItemLike result, Item ing) {
