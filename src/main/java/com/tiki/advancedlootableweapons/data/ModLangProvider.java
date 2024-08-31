@@ -46,7 +46,7 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultFluid(FluidInit.MAGNESIUM_LACTATE);
 
         add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
-        add(ArmorBindingItem.INFO,"Bonus Durability");
+        add(ArmorBindingItem.INFO,"Bonus Durability:");
 
         add(HeatableToolPartItem.QUENCH_KEY,"Quenched");
         add(HeatableToolPartItem.UNQUENCH_KEY,"Unquenched");

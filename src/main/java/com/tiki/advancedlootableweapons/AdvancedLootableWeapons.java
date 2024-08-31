@@ -83,6 +83,11 @@ public class AdvancedLootableWeapons
                 if (CommonConfigHandler.USE_ARMOR_WEIGHT.get()) {
                     event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier("Armor Bonus", armorBonus.bonusSpeed()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
                 }
+                if (slot == EquipmentSlot.CHEST) {
+                    if (CommonConfigHandler.USE_ARMOR_BONUS_DAMAGE.get()) {
+                        event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("Armor Bonus", armorBonus.damageBonus(), AttributeModifier.Operation.ADDITION));
+                    }
+                }
             }
         }
     }

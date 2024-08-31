@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.recipes.anvilforging;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
+import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +33,9 @@ public class AnvilArmorForgingRecipe extends AbstractAnvilForgingRecipe {
 
 	@Override
 	public ItemStack assemble(RecipeWrapper pInv) {
-		return getProcessedResult(pInv.getItem(0));
+		ItemStack binding = pInv.getItem(1);
+		ItemStack resultCopy = result.copy();
+		BoundArmorItem.setArmorBinding(resultCopy,binding.getItem());
+		return resultCopy;
 	}
 }

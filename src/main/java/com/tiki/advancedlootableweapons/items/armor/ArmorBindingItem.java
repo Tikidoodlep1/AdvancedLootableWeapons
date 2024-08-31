@@ -32,8 +32,7 @@ public class ArmorBindingItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {
 		super.appendHoverText(pStack, pLevel, tooltip, pIsAdvanced);
-		tooltip.add(MCVersion.translation(INFO)
-				.withStyle(ChatFormatting.BLUE).append( ": " + this.extraDur));
-
+		tooltip.add(MCVersion.empty().append(MCVersion.translation(INFO).withStyle(ChatFormatting.BLUE))
+				.append(MCVersion.literal( " " + this.extraDur)));
 	}
 }
