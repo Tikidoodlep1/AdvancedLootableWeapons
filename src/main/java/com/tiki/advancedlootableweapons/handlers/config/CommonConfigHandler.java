@@ -6,28 +6,27 @@ public class CommonConfigHandler {
 	public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 	public static final ForgeConfigSpec SPEC;
 	
-	public static ForgeConfigSpec.ConfigValue<Boolean> USE_IMAGINARY_RESOURCES;
+	public static ForgeConfigSpec.BooleanValue USE_IMAGINARY_RESOURCES;
 	
-	public static ForgeConfigSpec.ConfigValue<Boolean> USE_CUSTOM_WEAPON_REACH;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_DAGGERS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_KABUTOWARIS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_RAPIERS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_TALWARS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_CLEAVERS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_MACES;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_STAFFS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_SPEARS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_LONGSWORDS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_KODACHIS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_BATTLEAXES;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ZWEIHANDERS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_NODACHIS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_SABRES;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_MAKHAIRAS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ARMORS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ARMOR_FORGING;
-	public static ForgeConfigSpec.ConfigValue<Boolean> DISABLE_VANILLA_ARMORS;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ENABLE_ADVANCED_LEATHER_TANNING;
+	public static ForgeConfigSpec.BooleanValue USE_CUSTOM_WEAPON_REACH;
+	public static ForgeConfigSpec.BooleanValue ENABLE_DAGGERS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_KABUTOWARIS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_RAPIERS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_TALWARS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_CLEAVERS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_MACES;
+	public static ForgeConfigSpec.BooleanValue ENABLE_STAFFS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_SPEARS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_LONGSWORDS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_KODACHIS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_BATTLEAXES;
+	public static ForgeConfigSpec.BooleanValue ENABLE_ZWEIHANDERS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_NODACHIS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_SABRES;
+	public static ForgeConfigSpec.BooleanValue ENABLE_MAKHAIRAS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_ARMORS;
+	public static ForgeConfigSpec.BooleanValue ENABLE_ARMOR_FORGING;
+	public static ForgeConfigSpec.BooleanValue ENABLE_ADVANCED_LEATHER_TANNING;
 	
 	public static ForgeConfigSpec.DoubleValue GLOBAL_DAGGER_BASE_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue GLOBAL_KABUTOWARI_BASE_DAMAGE;
@@ -80,13 +79,13 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.IntValue GLOBAL_CHAIN_LINK_CRAFTING_EXP;
 	public static ForgeConfigSpec.IntValue GLOBAL_ARMOR_PLATE_CRAFTING_EXP;
 	
-	public static ForgeConfigSpec.ConfigValue<Boolean> USE_ARMOR_WEIGHT;
-	public static ForgeConfigSpec.ConfigValue<Boolean> USE_ARMOR_BONUS_HEALTH;
-	public static ForgeConfigSpec.ConfigValue<Boolean> USE_ARMOR_BONUS_DAMAGE;
+	public static ForgeConfigSpec.BooleanValue USE_ARMOR_WEIGHT;
+	public static ForgeConfigSpec.BooleanValue USE_ARMOR_BONUS_HEALTH;
+	public static ForgeConfigSpec.BooleanValue USE_ARMOR_BONUS_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue ARMOR_BONUS_HEALTH_MULTIPLIER;
 	public static ForgeConfigSpec.DoubleValue ARMOR_BONUS_DAMAGE_MULTIPLIER;
 	
-	public static ForgeConfigSpec.DoubleValue KOBOLD_DAMAGE;
+	public static ForgeConfigSpec.DoubleValue KOBOLD_STEEL_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue COPPER_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue SILVER_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue BRONZE_DAMAGE;
@@ -94,10 +93,10 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue STEEL_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue SHADOW_PLATINUM_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue FROST_STEEL_DAMAGE;
-	public static ForgeConfigSpec.DoubleValue OBSIDIAN_DAMAGE;
+	public static ForgeConfigSpec.DoubleValue REFINED_OBSIDIAN_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue CRYSTALLITE_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue DUSKSTEEL_DAMAGE;
-	public static ForgeConfigSpec.IntValue KOBOLD_DURABILITY;
+	public static ForgeConfigSpec.IntValue KOBOLD_STEEL_DURABILITY;
 	public static ForgeConfigSpec.IntValue COPPER_DURABILITY;
 	public static ForgeConfigSpec.IntValue SILVER_DURABILITY;
 	public static ForgeConfigSpec.IntValue BRONZE_DURABILITY;
@@ -105,11 +104,18 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.IntValue STEEL_DURABILITY;
 	public static ForgeConfigSpec.IntValue SHADOW_PLATINUM_DURABILITY;
 	public static ForgeConfigSpec.IntValue FROST_STEEL_DURABILITY;
-	public static ForgeConfigSpec.IntValue OBSIDIAN_DURABILITY;
+	public static ForgeConfigSpec.IntValue REFINED_OBSIDIAN_DURABILITY;
 	public static ForgeConfigSpec.IntValue CRYSTALLITE_DURABILITY;
 	public static ForgeConfigSpec.IntValue DUSKSTEEL_DURABILITY;
+
+	public static ForgeConfigSpec.IntValue DIAMOND_STUDDED_LEATHER_ARMOR_DURABILITY;
+	public static ForgeConfigSpec.IntValue DIAMOND_STUDDED_STEEL_ARMOR_DURABILITY;
+
+
+	public static ForgeConfigSpec.IntValue IRON_ARMOR_DURABILITY;
+	public static ForgeConfigSpec.IntValue GOLD_ARMOR_DURABILITY;
 	
-	public static ForgeConfigSpec.IntValue KOBOLD_ARMOR_DURABILITY;
+	public static ForgeConfigSpec.IntValue KOBOLD_STEEL_ARMOR_DURABILITY;
 	public static ForgeConfigSpec.IntValue COPPER_ARMOR_DURABILITY;
 	public static ForgeConfigSpec.IntValue SILVER_ARMOR_DURABILITY;
 	public static ForgeConfigSpec.IntValue BRONZE_ARMOR_DURABILITY;
@@ -120,7 +126,14 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.IntValue OBSIDIAN_ARMOR_DURABILITY;
 	public static ForgeConfigSpec.IntValue CRYSTALLITE_ARMOR_DURABILITY;
 	public static ForgeConfigSpec.IntValue DUSKSTEEL_ARMOR_DURABILITY;
-	public static ForgeConfigSpec.DoubleValue KOBOLD_ARMOR_HARDNESS;
+
+	public static ForgeConfigSpec.DoubleValue DIAMOND_STUDDED_LEATHER_ARMOR_HARDNESS;
+	public static ForgeConfigSpec.DoubleValue DIAMOND_STUDDED_STEEL_ARMOR_HARDNESS;
+
+	public static ForgeConfigSpec.DoubleValue IRON_ARMOR_HARDNESS;
+	public static ForgeConfigSpec.DoubleValue GOLD_ARMOR_HARDNESS;
+
+	public static ForgeConfigSpec.DoubleValue KOBOLD_STEEL_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue COPPER_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue SILVER_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue BRONZE_ARMOR_HARDNESS;
@@ -128,7 +141,7 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue STEEL_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue SHADOW_PLATINUM_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue FROST_STEEL_ARMOR_HARDNESS;
-	public static ForgeConfigSpec.DoubleValue OBSIDIAN_ARMOR_HARDNESS;
+	public static ForgeConfigSpec.DoubleValue REFINED_OBSIDIAN_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue CRYSTALLITE_ARMOR_HARDNESS;
 	public static ForgeConfigSpec.DoubleValue DUSKSTEEL_ARMOR_HARDNESS;
 
@@ -138,15 +151,15 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue FORGE_TEMP_INCREASE;
 
 	public static ForgeConfigSpec.IntValue SHADOW_DROP_RATE;
-	public static ForgeConfigSpec.ConfigValue<Boolean> LAND_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> AIR_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> WATER_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> PEACEFUL_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> NEUTRAL_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> HOSTILE_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> BOSS_DROPS_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> ONLY_BOSS_DROPS_SHADOW;
-	public static ForgeConfigSpec.ConfigValue<Boolean> NON_VANILLA_DROPS_SHADOW;
+	public static ForgeConfigSpec.BooleanValue LAND_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue AIR_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue WATER_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue PEACEFUL_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue NEUTRAL_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue HOSTILE_MOBS_DROP_SHADOW;
+	public static ForgeConfigSpec.BooleanValue BOSS_DROPS_SHADOW;
+	public static ForgeConfigSpec.BooleanValue ONLY_BOSS_DROPS_SHADOW;
+	public static ForgeConfigSpec.BooleanValue NON_VANILLA_DROPS_SHADOW;
 	
 	static {
 		BUILDER.push("Advanced Lootable Weapons Config");
@@ -172,14 +185,13 @@ public class CommonConfigHandler {
 		ENABLE_MAKHAIRAS = BUILDER.comment("Enable or disable makhairas in-game. (True/False)").define("Enable Makhairas", true);
 		ENABLE_ARMORS = BUILDER.comment("Enable or disable armor made from the custom materials. If this is disabled, \\\"Enable Armor Forging\\\" will also be disabled by default. (True/False)").define("Enable Custom Armor Sets", true);
 		ENABLE_ARMOR_FORGING = BUILDER.comment("Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)").define("Enable Armor Forging", true);
-		DISABLE_VANILLA_ARMORS = BUILDER.comment("Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)").define("Disable Vanilla Armors", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
 		BELLOWS_EXHAUSTION = BUILDER.comment("The amount of exhaustion using a bellows gives the player.").defineInRange("Bellows Exhaustion", 0.1F, 0.0F, 20.0F);
 		FORGE_TEMP_DECREASE = BUILDER.comment("Forge Temperature Decrease. Set to 0.0F to disable temperature drop.").defineInRange("Forge Temperature Decrease", 0.02F, 0.0F, 10.0F);
 		FORGE_TEMP_INCREASE = BUILDER.comment("Forge Temperature Increase.").defineInRange("Forge Temperature Increase", 1, 0.0F, 20.0F);
 
 		BUILDER.comment("MATERIAL MODIFICATION");
-		KOBOLD_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F);
+		KOBOLD_STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F);
 		COPPER_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of copper.").defineInRange("Copper Base Damage", 3.5F, 0F, 100F);
 		SILVER_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of silver.").defineInRange("Silver Base Damage", 4F, 0F, 100F);
 		BRONZE_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of bronze.").defineInRange("Bronze Base Damage", 4.25F, 0F, 100F);
@@ -187,10 +199,10 @@ public class CommonConfigHandler {
 		STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of steel.").defineInRange("Steel Base Damage", 5.5F, 0F, 100F);
 		SHADOW_PLATINUM_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of shadow platinum.").defineInRange("Shadow Platinum Base Damage", 5.75F, 0F, 100F);
 		FROST_STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of frost steel.").defineInRange("Frost Steel Base Damage", 6.0F, 0F, 100F);
-		OBSIDIAN_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of obsidian.").defineInRange("Obsidian Base Damage", 6.25F, 0F, 100F);
+		REFINED_OBSIDIAN_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of refined obsidian.").defineInRange("Obsidian Base Damage", 6.25F, 0F, 100F);
 		CRYSTALLITE_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of crystallite.").defineInRange("Crystallite Base Damage", 6.75F, 0F, 100F);
 		DUSKSTEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of dusksteel.").defineInRange("Dusksteel Damage", 7.5F, 0F, 100F);
-		KOBOLD_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of kobold steel have.").defineInRange("Kobold Steel Base Durability", 203, 0, 1000);
+		KOBOLD_STEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of kobold steel have.").defineInRange("Kobold Steel Base Durability", 203, 0, 1000);
 		COPPER_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of copper have.").defineInRange("Copper Base Durability", 256, 0, 1000);
 		SILVER_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of silver have.").defineInRange("Silver Base Durability", 277, 0, 1000);
 		BRONZE_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of bronze have.").defineInRange("Bronze Base Durability", 330, 0, 1000);
@@ -198,11 +210,17 @@ public class CommonConfigHandler {
 		STEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of steel have.").defineInRange("Steel Base Durability", 416, 0, 1000);
 		SHADOW_PLATINUM_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of shadow platinum have.").defineInRange("Shadow Platinum Base Durability", 461, 0, 1000);
 		FROST_STEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of frost steel have.").defineInRange("Frost Steel Base Durability", 507, 0, 1000);
-		OBSIDIAN_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of obsidian have.").defineInRange("Obsidian Base Durability", 598, 0, 1000);
+		REFINED_OBSIDIAN_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of refined obsidian have.").defineInRange("Obsidian Base Durability", 598, 0, 1000);
 		CRYSTALLITE_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of crystallite have.").defineInRange("Crystallite Base Durability", 627, 0, 1000);
 		DUSKSTEEL_DURABILITY = BUILDER.comment("Use to change the durability that the weapons made of dusksteel have.").defineInRange("Dusksteel Base Durability", 812, 0, 1000);
-		
-		KOBOLD_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of kobold steel have.").defineInRange("Kobold Steel Base Armor Durability", 20, 0, 1000);
+
+		DIAMOND_STUDDED_LEATHER_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of studded leather have.").defineInRange("Studded Leather Base Armor Durability", 5, 0, 1000);
+		DIAMOND_STUDDED_STEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of studded steel have.").defineInRange("Studded Steel Base Armor Durability", 38, 0, 1000);
+
+		IRON_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of iron have.").defineInRange("Iron Base Armor Durability", 15, 0, 1000);
+		GOLD_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of gold have.").defineInRange("Gold Base Armor Durability", 7, 0, 1000);
+
+		KOBOLD_STEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of kobold steel have.").defineInRange("Kobold Steel Base Armor Durability", 20, 0, 1000);
 		COPPER_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of copper have.").defineInRange("Copper Base Armor Durability", 25, 0, 1000);
 		SILVER_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of silver have.").defineInRange("Silver Base Armor Durability", 27, 0, 1000);
 		BRONZE_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of bronze have.").defineInRange("Bronze Base Armor Durability", 32, 0, 1000);
@@ -213,7 +231,14 @@ public class CommonConfigHandler {
 		OBSIDIAN_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of obsidian have.").defineInRange("Obsidian Base Armor Durability", 57, 0, 1000);
 		CRYSTALLITE_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of crystallite have.").defineInRange("Crystallite Base Armor Durability", 60, 0, 1000);
 		DUSKSTEEL_ARMOR_DURABILITY = BUILDER.comment("Use to change the durability that the armors made of dusksteel have.").defineInRange("Dusksteel Base Armor Durability", 78, 0, 1000);
-		KOBOLD_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of kobold steel.").defineInRange("Kobold Steel Armor Toughness", 1.25F, 0F, 100F);
+
+		DIAMOND_STUDDED_LEATHER_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of diamond studded leather have.").defineInRange("Diamond Studded Leather Armor Toughness", 0d, 0, 100);
+		DIAMOND_STUDDED_STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of diamond studded steel have.").defineInRange("Diamond Studded Steel Armor Toughness", 2.5, 0, 100);
+
+		IRON_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of iron.").defineInRange("Iron Armor Toughness", 0, 0F, 100F);
+		GOLD_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of gold.").defineInRange("Gold Armor Toughness", 0, 0F, 100F);
+
+		KOBOLD_STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of kobold steel.").defineInRange("Kobold Steel Armor Toughness", 1.25F, 0F, 100F);
 		COPPER_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of copper.").defineInRange("Copper Armor Toughness", 1.56F, 0F, 100F);
 		SILVER_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of silver.").defineInRange("Silver Armor Toughness", 1.69F, 0F, 100F);
 		BRONZE_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of bronze.").defineInRange("Bronze Armor Toughness", 2.0F, 0F, 100F);
@@ -221,7 +246,7 @@ public class CommonConfigHandler {
 		STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of steel.").defineInRange("Steel Armor Toughness", 2.5F, 0F, 100F);
 		SHADOW_PLATINUM_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of shadow platinum.").defineInRange("Shadow Platinum Armor Toughness", 2.75F, 0F, 100F);
 		FROST_STEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of frost steel.").defineInRange("Frost Steel Armor Toughness", 3.06F, 0F, 100F);
-		OBSIDIAN_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of obsidian.").defineInRange("Obsidian Armor Toughness", 3.56F, 0F, 100F);
+		REFINED_OBSIDIAN_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of refined obsidian.").defineInRange("Obsidian Armor Toughness", 3.56F, 0F, 100F);
 		CRYSTALLITE_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of crystallite.").defineInRange("Crystallite Armor Toughness", 3.75F, 0F, 100F);
 		DUSKSTEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of dusksteel.").defineInRange("Dusksteel Armor Toughness", 4.88F, 0F, 100F);
 		

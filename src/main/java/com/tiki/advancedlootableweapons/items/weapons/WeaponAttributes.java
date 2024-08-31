@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.items.weapons;
 
-import com.tiki.advancedlootableweapons.items.armor.ArmorType;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public enum WeaponAttributes {
@@ -94,30 +94,22 @@ public enum WeaponAttributes {
 		return this.shouldSlash;
 	}
 	
-	public double getEffectByArmorType(ArmorType make) {
-		switch(make) {
-		case CHAIN:
-			return this.chainEffectiveness;
-		case PLATE:
-			return this.plateEffectiveness;
-		case STUDDED:
-			return this.studdedEffectiveness;
-		default:
-			return 1.0;
+	public double getEffectByArmorType(ArmorMaterial make) {
+		if (make.getName().contains("chain")) {
+			return chainEffectiveness;
+		} else if (make.getName().contains("studded")) {
+			return studdedEffectiveness;
 		}
+		return plateEffectiveness;
 	}
 	
-	public int getPenChanceByArmorType(ArmorType make) {
-		switch(make) {
-		case CHAIN:
-			return this.chainPenChance;
-		case PLATE:
-			return this.platePenChance;
-		case STUDDED:
-			return this.studdedPenChance;
-		default:
-			return 0;
+	public int getPenChanceByArmorType(ArmorMaterial make) {
+		if (make.getName().contains("chain")) {
+			return chainPenChance;
+		} else if (make.getName().contains("studded")) {
+			return studdedPenChance;
 		}
+		return platePenChance;
 	}
 	
 	public double getStuddedEffect() {

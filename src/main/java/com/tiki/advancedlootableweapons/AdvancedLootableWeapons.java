@@ -2,12 +2,23 @@ package com.tiki.advancedlootableweapons;
 
 import com.tiki.advancedlootableweapons.client.ALWClient;
 import com.tiki.advancedlootableweapons.data.ModDatagen;
+import com.tiki.advancedlootableweapons.handlers.ArmorBonus;
+import com.tiki.advancedlootableweapons.handlers.GlobalDropHandler;
 import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.*;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +27,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.IForgeRegistry;
+import org.checkerframework.checker.units.qual.A;
+
+import javax.annotation.Nonnull;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AdvancedLootableWeapons.MODID)
@@ -51,11 +66,39 @@ public class AdvancedLootableWeapons
             eventBus.addListener(ALWClient::colors);
         }
         eventBus.addListener(ModDatagen::start);
-    }
-    
-    private void setup(final FMLCommonSetupEvent event) {
+        eventBus.addGenericListener(GlobalLootModifierSerializer.class,this::registerLootSerializers);
+        MinecraftForge.EVENT_BUS.addListener(this::attributeModifiers);
     }
 
+    private void attributeModifiers(ItemAttributeModifierEvent event) {
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack.getItem() instanceof ArmorItem armorItem) {
+            ArmorBonus armorBonus = ArmorBonus.getArmorBonus(armorItem.getMaterial());
+            EquipmentSlot slot = event.getSlotType();
+            if (slot == armorItem.getSlot()) {
+                if (CommonConfigHandler.USE_ARMOR_BONUS_HEALTH.get()) {
+                    event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier("Armor Bonus", armorBonus.bonusHealth()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
+                }
+
+                if (CommonConfigHandler.USE_ARMOR_WEIGHT.get()) {
+                    event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier("Armor Bonus", armorBonus.bonusSpeed()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
+                }
+            }
+        }
+    }
+
+
+    private void registerLootSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
+        IForgeRegistry<GlobalLootModifierSerializer<?>> registry = event.getRegistry();
+        GlobalDropHandler.initDropList();
+        for(GlobalLootModifierSerializer<?> s : GlobalDropHandler.dropList) {
+            registry.register(s);
+        }
+        ModRecipeTypes.poke();
+    }
+
+    private void setup(final FMLCommonSetupEvent event) {
+    }
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ALWClient.setup(event);

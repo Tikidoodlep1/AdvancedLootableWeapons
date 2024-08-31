@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class ModMaterials {
     //Mats
-    public static final ConfigurableForgeTier KOBOLD_STEEL = new ConfigurableForgeTier(1, CommonConfigHandler.KOBOLD_DURABILITY, 6.0F, CommonConfigHandler.KOBOLD_DAMAGE, 22,
+    public static final ConfigurableForgeTier KOBOLD_STEEL = new ConfigurableForgeTier(1, CommonConfigHandler.KOBOLD_STEEL_DURABILITY, 6.0F, CommonConfigHandler.KOBOLD_STEEL_DAMAGE, 22,
             BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(ItemInit.KOBOLD_STEEL_INGOT.get()));
     public static final ConfigurableForgeTier COPPER = new ConfigurableForgeTier(1, CommonConfigHandler.COPPER_DURABILITY, 6.0F, CommonConfigHandler.COPPER_DAMAGE, 22,
             BlockTags.NEEDS_STONE_TOOL, () -> Ingredient.of(Items.COPPER_INGOT));
@@ -23,7 +23,7 @@ public class ModMaterials {
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.SHADOW_PLATINUM_INGOT.get()));
     public static final ConfigurableForgeTier FROST_STEEL = new ConfigurableForgeTier(3, CommonConfigHandler.FROST_STEEL_DURABILITY, 7.0F, CommonConfigHandler.FROST_STEEL_DAMAGE, 30,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.FROST_STEEL_INGOT.get()));
-    public static final ConfigurableForgeTier REFINED_OBSIDIAN = new ConfigurableForgeTier(3, CommonConfigHandler.OBSIDIAN_DURABILITY, 7.5F, CommonConfigHandler.OBSIDIAN_DAMAGE, 18,
+    public static final ConfigurableForgeTier REFINED_OBSIDIAN = new ConfigurableForgeTier(3, CommonConfigHandler.REFINED_OBSIDIAN_DURABILITY, 7.5F, CommonConfigHandler.REFINED_OBSIDIAN_DAMAGE, 18,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.REFINED_OBSIDIAN_INGOT.get()));
     public static final ConfigurableForgeTier CRYSTALLITE = new ConfigurableForgeTier(4, CommonConfigHandler.CRYSTALLITE_DURABILITY, 7.5F, CommonConfigHandler.CRYSTALLITE_DAMAGE, 20,
             BlockTags.NEEDS_DIAMOND_TOOL, () -> Ingredient.of(ItemInit.CRYSTALLITE_INGOT.get()));
