@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{heat:0.0d,material:\"refined_obsidian\"}"
+    "nbt": "{material:\"refined_obsidian\"}"
   }
 }

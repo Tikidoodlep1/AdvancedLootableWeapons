@@ -1,5 +1,7 @@
 {
-  "advancedlootableweapons.armor_binding.info": "Bonus Durability",
+  "advancedlootableweapons.armor.armor_binding.info": "Binding:",
+  "advancedlootableweapons.armor.tier.info": "Tier:",
+  "advancedlootableweapons.armor_binding.info": "Bonus Durability:",
   "advancedlootableweapons.forge_hammer.info": "Hit an anvil with me to start forging weapons!",
   "advancedlootableweapons.material.bronze": "Bronze",
   "advancedlootableweapons.material.copper": "Copper",
@@ -18,6 +20,7 @@
   "advancedlootableweapons.material.steel": "Steel",
   "advancedlootableweapons.material.stone": "Stone",
   "advancedlootableweapons.material.wood": "Wood",
+  "advancedlootableweapons.none": "None",
   "advancedlootableweapons.temperature.cool": "Cool",
   "advancedlootableweapons.temperature.hot": "Hot",
   "advancedlootableweapons.temperature.warm": "Warm",

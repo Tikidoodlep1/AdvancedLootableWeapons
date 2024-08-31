@@ -95,12 +95,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
         return Ingredient.of(ItemInit.DUSKSTEEL_INGOT.get());
     });
 
-    private static final float HELMET_DURABILITY_OFFSET = 0.75F;
-    private static final float CHEST_DURABILITY_OFFSET = 1F;
-    private static final float LEGGINGS_DURABILITY_OFFSET = 0.9F;
-    private static final float BOOTS_DURABILITY_OFFSET = 0.7F;
-
-    private static final float[] slotDurMultipliers = new float[]{HELMET_DURABILITY_OFFSET,CHEST_DURABILITY_OFFSET,LEGGINGS_DURABILITY_OFFSET,BOOTS_DURABILITY_OFFSET};
+    private static final int[] slotDurMultipliers = new int[]{13, 15, 16, 11};
 
     private final String name;
     private final int[] slotProtections;

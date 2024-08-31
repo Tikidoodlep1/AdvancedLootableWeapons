@@ -8,6 +8,7 @@ import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
+import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.data.DataGenerator;
@@ -47,6 +48,10 @@ public class ModLangProvider extends LanguageProvider {
 
         add(ForgeHammerItem.INFO,"Hit an anvil with me to start forging weapons!");
         add(ArmorBindingItem.INFO,"Bonus Durability:");
+
+        add(BoundArmorItem.BINDING_INFO,"Binding:");
+        add(BoundArmorItem.TIER_INFO,"Tier:");
+        add(TranslationKeys.NONE.getString(),"None");
 
         add(HeatableToolPartItem.QUENCH_KEY,"Quenched");
         add(HeatableToolPartItem.UNQUENCH_KEY,"Unquenched");

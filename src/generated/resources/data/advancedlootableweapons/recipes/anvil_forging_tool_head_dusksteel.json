@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{heat:0.0d,material:\"dusksteel\"}"
+    "nbt": "{material:\"dusksteel\"}"
   }
 }
