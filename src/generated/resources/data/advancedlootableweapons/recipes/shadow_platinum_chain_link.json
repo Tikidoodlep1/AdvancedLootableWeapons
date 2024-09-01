@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"shadow_platinum\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"shadow_platinum\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"shadow_platinum\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"shadow_platinum\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"shadow_platinum\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"shadow_platinum\"}"
     }
   ],
   "result": {

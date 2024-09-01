@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"dusksteel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"dusksteel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"dusksteel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"dusksteel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"dusksteel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"dusksteel\"}"
     }
   ],
   "result": {

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.annotation.Nullable;
 
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
@@ -26,6 +27,7 @@ public class HeatableToolPartItem extends Item {
     private final boolean isMain;
 
     public static final String HEAT = "heat";
+    public static final String MATERIAL = AdvancedLootableWeapons.id("material").toString();
     public static final int MAX_HEAT = 6000;
     public static final double COOLING_RATE = 1;
 
@@ -72,7 +74,7 @@ public class HeatableToolPartItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
         if (!getMaterial(stack).isEmpty()) {
-            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("material")));
+            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString(MATERIAL)));
         } else {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
         }
@@ -174,11 +176,11 @@ public class HeatableToolPartItem extends Item {
     }
 
     public static void setMaterial(ItemStack stack,String matName) {
-        stack.getOrCreateTag().putString("material", matName);
+        stack.getOrCreateTag().putString(MATERIAL, matName);
     }
 
     public static String getMaterial(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getString("material") : "";
+        return stack.hasTag() ? stack.getTag().getString(MATERIAL) : "";
     }
 
     public static double getHeat(ItemStack stack) {

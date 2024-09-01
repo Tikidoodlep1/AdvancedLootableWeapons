@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"refined_obsidian\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"refined_obsidian\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"refined_obsidian\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"refined_obsidian\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"refined_obsidian\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"refined_obsidian\"}"
     }
   ],
   "result": {

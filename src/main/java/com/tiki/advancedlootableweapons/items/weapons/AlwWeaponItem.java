@@ -10,6 +10,8 @@ import com.google.common.collect.Multimap;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -39,7 +41,6 @@ import net.minecraftforge.common.util.Lazy;
 
 public class AlwWeaponItem extends Item implements Vanishable {
 
-    public static final String MATERIAL_KEY = "material";
     public static final String BONUS_DURABILITY_KEY = "bonus_durability";
     private final double attackDamage;
     public final WeaponAttributes attributes;
@@ -71,21 +72,17 @@ public class AlwWeaponItem extends Item implements Vanishable {
 
     public WeaponMaterial getMaterial(ItemStack stack) {
         CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(MATERIAL_KEY)) {
-            String material = tag.getString(MATERIAL_KEY);
+        if (tag != null && tag.contains(HeatableToolPartItem.MATERIAL)) {
+            String material = tag.getString(HeatableToolPartItem.MATERIAL);
             return WeaponMaterial.LOOKUP.getOrDefault(material,WeaponMaterial.NULL);
         }
         return WeaponMaterial.NULL;
     }
 
-    public static void setMaterial(ItemStack stack,String material) {
-        stack.getOrCreateTag().putString(MATERIAL_KEY,material);
-    }
-
     public MutableComponent getMaterialName(ItemStack stack) {
         CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(MATERIAL_KEY)) {
-            return WeaponMaterial.getTranslationKey(tag.getString(MATERIAL_KEY));
+        if (tag != null && tag.contains(HeatableToolPartItem.MATERIAL)) {
+            return WeaponMaterial.getTranslationKey(tag.getString(HeatableToolPartItem.MATERIAL));
         }
         return new TextComponent("");
     }
@@ -212,7 +209,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
             for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
                 if (entry.getValue().canMakeWeapon()) {
                     ItemStack stack = new ItemStack(this);
-                    setMaterial(stack,entry.getKey());
+                    HeatableToolPartItem.setMaterial(stack,entry.getKey());
                     pItems.add(stack);
                 }
             }

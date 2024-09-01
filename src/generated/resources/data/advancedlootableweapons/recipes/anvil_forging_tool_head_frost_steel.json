@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{material:\"frost_steel\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"frost_steel\"}"
   }
 }

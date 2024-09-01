@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:nodachi",
     "count": 1,
-    "nbt": "{Damage:0,material:\"wood\"}"
+    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"wood\"}"
   }
 }

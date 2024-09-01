@@ -721,7 +721,7 @@ public class ModRecipeProvider extends RecipeProvider {
         String base = Registry.ITEM.getKey(head).getPath().replace("_head", "");
 
         ItemStack woodWeapon = new ItemStack(result);
-        AlwWeaponItem.setMaterial(woodWeapon, "wood");
+        HeatableToolPartItem.setMaterial(woodWeapon, "wood");
 
         NBTOutputShapedRecipeBuilder.shaped(woodWeapon).define('W', head).define('S', handle)
                 .pattern("W").pattern("S").unlockedBy("has_" + base + "_head", has(head)).save(consumer);

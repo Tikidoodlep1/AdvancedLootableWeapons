@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{material:\"crystallite\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"crystallite\"}"
   }
 }

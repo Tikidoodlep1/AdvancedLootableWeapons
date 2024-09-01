@@ -51,7 +51,7 @@ public record ArmorBonus(int tier,double[] bonusHealth, double[] bonusSpeed, dou
 
     public static final ArmorBonus IRON_CHAIN = register(ModArmorMaterials.IRON_CHAIN, new ArmorBonus(2,new double[]{1.5,2.125,2.125,1.5},new double[]{-0.0016741125D,-0.0083705625D,-0.0083705625D,-0.0016741125D},1.406));
     public static final ArmorBonus GOLD_CHAIN = register(ModArmorMaterials.GOLD_CHAIN, new ArmorBonus(2,new double[]{1.5,2.125,2.125,1.5},new double[]{-0.00816074D,-0.01632148D,-0.01632148D,-0.00816074D},3.084D));
-    public static final ArmorBonus FROST_STEEL_CHAIN = register(ModArmorMaterials.FROST_STEEL,
+    public static final ArmorBonus FROST_STEEL_CHAIN = register(ModArmorMaterials.FROST_STEEL_CHAIN,
             new ArmorBonus(6,new double[]{5,5.75,5.75,5},
                     new double[]{-0.00150134409D,-0.00750538116D,-0.00750538116D, -0.00150134409D}, 2.101));
     public static final ArmorBonus COPPER_CHAIN = register(ModArmorMaterials.COPPER_CHAIN, new ArmorBonus(3,new double[]{2.5,3.125,3.125,2.5},

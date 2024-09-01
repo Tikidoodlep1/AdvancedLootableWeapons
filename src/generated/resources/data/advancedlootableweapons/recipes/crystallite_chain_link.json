@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"crystallite\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"crystallite\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"crystallite\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"crystallite\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"crystallite\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"crystallite\"}"
     }
   ],
   "result": {

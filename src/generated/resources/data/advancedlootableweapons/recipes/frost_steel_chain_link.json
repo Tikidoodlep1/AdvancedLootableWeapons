@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"frost_steel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"frost_steel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"frost_steel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"frost_steel\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{material:\"frost_steel\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"frost_steel\"}"
     }
   ],
   "result": {

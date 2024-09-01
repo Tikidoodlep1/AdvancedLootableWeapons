@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{material:\"copper\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"copper\"}"
   }
 }

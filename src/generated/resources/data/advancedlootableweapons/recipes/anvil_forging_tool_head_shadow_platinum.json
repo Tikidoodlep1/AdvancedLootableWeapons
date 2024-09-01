@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{material:\"shadow_platinum\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"shadow_platinum\"}"
   }
 }

@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
+import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -52,8 +53,8 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
             @Override
             public BakedModel resolve(BakedModel pModel, ItemStack pStack, @Nullable ClientLevel pLevel, @Nullable LivingEntity pEntity, int pSeed) {
                 CompoundTag tag = pStack.getTag();
-                if (tag!= null && tag.contains(AlwWeaponItem.MATERIAL_KEY)) {
-                    return models.get(tag.getString(AlwWeaponItem.MATERIAL_KEY));
+                if (tag!= null && tag.contains(HeatableToolPartItem.MATERIAL)) {
+                    return models.get(tag.getString(HeatableToolPartItem.MATERIAL));
                 }
                 return pModel;
             }

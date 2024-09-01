@@ -122,7 +122,7 @@ public class REICompat implements REIClientPlugin {
                     if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
                     ItemStack stack = new ItemStack(result.getItem());
                     String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                    AlwWeaponItem.setMaterial(stack, materialName);
+                    HeatableToolPartItem.setMaterial(stack, materialName);
                     SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
                     Ingredient input1 = toolrecipe.getFirst();
                     Ingredient input2 = toolrecipe.getSecond();
@@ -134,11 +134,11 @@ public class REICompat implements REIClientPlugin {
                     ItemStack disp2 = new ItemStack(stack2.getItem());
 
                     if (disp1.getItem() instanceof HeatableToolPartItem) {
-                        AlwWeaponItem.setMaterial(disp1, materialName);
+                        HeatableToolPartItem.setMaterial(disp1, materialName);
                     }
 
                     if (disp2.getItem() instanceof HeatableToolPartItem) {
-                        AlwWeaponItem.setMaterial(disp2, materialName);
+                        HeatableToolPartItem.setMaterial(disp2, materialName);
                     }
 
                     builder.addItem(disp1, disp2);
@@ -158,7 +158,7 @@ public class REICompat implements REIClientPlugin {
                         if (builder.finished) continue;
                         if (stack.getItem() == builder.getLast()) {
                             String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                            AlwWeaponItem.setMaterial(stack, materialName);
+                            HeatableToolPartItem.setMaterial(stack, materialName);
                             Ingredient input1 = toolrecipe.getFirst();
                             Ingredient input2 = toolrecipe.getSecond();
                             ItemStack stack1 = getFirstOrEmpty(input1);
@@ -168,13 +168,13 @@ public class REICompat implements REIClientPlugin {
                             ItemStack disp2 = new ItemStack(stack2.getItem());
 
                             if (disp1.getItem() instanceof HeatableToolPartItem) {
-                                AlwWeaponItem.setMaterial(disp1, materialName);
+                                HeatableToolPartItem.setMaterial(disp1, materialName);
                             } else {
                                 disp1 = getFirstOrEmpty(weaponMaterial.tier().getRepairIngredient());
                             }
 
                             if (disp2.getItem() instanceof HeatableToolPartItem) {
-                                AlwWeaponItem.setMaterial(disp2, materialName);
+                                HeatableToolPartItem.setMaterial(disp2, materialName);
                             }
                             builder.addItem(disp1, disp2);
                         }
