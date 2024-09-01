@@ -97,8 +97,8 @@ public class ModLangProvider extends LanguageProvider {
 
         ItemInit.ITEMS.getEntries().stream().filter(itemRegistryObject -> !item_exclude.contains(itemRegistryObject.get())).forEach(this::addDefaultItem);
 
-        for (String s : WeaponMaterial.LOOKUP.keySet()) {
-            add(WeaponMaterial.getTranslationKey(s).getKey(),getBasicName(s));
+        for (WeaponMaterial s : WeaponMaterial.LOOKUP) {
+            add(s.getTranslationKey().getString(),getBasicName(s.name()));
         }
 
         add(ItemInit.TOOL_HEAD.get(), "Tool Head");

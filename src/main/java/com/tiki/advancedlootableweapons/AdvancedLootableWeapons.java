@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons;
 
+import com.mojang.logging.LogUtils;
 import com.tiki.advancedlootableweapons.client.ALWClient;
 import com.tiki.advancedlootableweapons.data.ModDatagen;
 import com.tiki.advancedlootableweapons.handlers.ArmorBonus;
@@ -29,6 +30,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.checkerframework.checker.units.qual.A;
+import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
 
@@ -38,7 +40,7 @@ public class AdvancedLootableWeapons
 {
     public static final String MODID = "advancedlootableweapons";
     // Directly reference a slf4j logger
-    //private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public AdvancedLootableWeapons()
     {
