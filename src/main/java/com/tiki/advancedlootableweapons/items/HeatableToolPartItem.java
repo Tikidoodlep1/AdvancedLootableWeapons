@@ -6,16 +6,18 @@ import java.util.Objects;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 
 import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Registry;
 import net.minecraft.data.models.blockstates.PropertyDispatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -73,10 +75,11 @@ public class HeatableToolPartItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
-        if (!getMaterial(stack).isEmpty()) {
-            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString(MATERIAL)));
+        Item material = getCraftingMaterial(stack);
+        if (material != Items.AIR) {
+            tooltip.add(material.getDescription().copy().withStyle(ChatFormatting.DARK_AQUA));
         } else {
-            tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "No Material"));
+            tooltip.add(TranslationKeys.NONE);
         }
 
         double heat = getHeat(stack);
@@ -142,20 +145,23 @@ public class HeatableToolPartItem extends Item {
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         //super.fillItemCategory(pCategory, pItems);
         if (allowdedIn(pCategory)) {//be careful not to put them in every tab
-            ItemStack hot = createPart(WeaponMaterial.STEEL);
+
+            Item item = ItemInit.STEEL_INGOT.get();
+
+            ItemStack hot = createPart(item);
             setHeat(hot,MAX_HEAT);
             pItems.add(hot);
-            ItemStack warm = createPart(WeaponMaterial.STEEL);
+            ItemStack warm = createPart(item);
             setHeat(warm,MAX_HEAT / 2);
             pItems.add(warm);
-            ItemStack cool = createPart(WeaponMaterial.STEEL);
+            ItemStack cool = createPart(item);
             pItems.add(cool);
         }
     }
 
-    public ItemStack createPart(WeaponMaterial weaponMaterial) {
+    public ItemStack createPart(Item item) {
         ItemStack stack = new ItemStack(this);
-        setMaterial(stack,weaponMaterial);
+        setCraftingMaterial(stack,item);
         return stack;
     }
 
@@ -170,17 +176,17 @@ public class HeatableToolPartItem extends Item {
         stack.getOrCreateTag().putDouble(HEAT,temp);
     }
 
-
-    public static void setMaterial(ItemStack stack,WeaponMaterial mat) {
-        setMaterial(stack,WeaponMaterial.getMaterialNameF(mat));
-    }
-
-    public static void setMaterial(ItemStack stack,String matName) {
-        stack.getOrCreateTag().putString(MATERIAL, matName);
-    }
-
-    public static String getMaterial(ItemStack stack) {
+    static String getMaterial(ItemStack stack) {
         return stack.hasTag() ? stack.getTag().getString(MATERIAL) : "";
+    }
+
+    public static Item getCraftingMaterial(ItemStack stack){
+        String s = getMaterial(stack);
+        return Registry.ITEM.get(new ResourceLocation(s));
+    }
+
+    public static void setCraftingMaterial(ItemStack stack,Item item){
+        stack.getOrCreateTag().putString(MATERIAL,Registry.ITEM.getKey(item).toString());
     }
 
     public static double getHeat(ItemStack stack) {

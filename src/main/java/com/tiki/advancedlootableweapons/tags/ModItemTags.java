@@ -3,7 +3,6 @@ package com.tiki.advancedlootableweapons.tags;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -14,7 +13,7 @@ public class ModItemTags {
     public static final TagKey<Item> INGOTS_CRYSTALLITE = forge("ingots/crystallite");
     public static final TagKey<Item> INGOTS_DUSKSTEEL = forge("ingots/dusksteel");
     public static final TagKey<Item> INGOTS_FROST_STEEL = forge("ingots/frost_steel");
-    public static final TagKey<Item> INGOTS_KOBOLD = forge("ingots/kobold");
+    public static final TagKey<Item> INGOTS_KOBOLD_STEEL = forge("ingots/kobold_steel");
     public static final TagKey<Item> INGOTS_PLATINUM = forge("ingots/platinum");
     public static final TagKey<Item> INGOTS_REFINED_OBSIDIAN = forge("ingots/refined_obsidian");
     public static final TagKey<Item> INGOTS_SILVER = forge("ingots/silver");

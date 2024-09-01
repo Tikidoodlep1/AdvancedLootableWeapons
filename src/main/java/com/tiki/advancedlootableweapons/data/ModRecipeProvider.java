@@ -6,11 +6,9 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
-import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.core.Registry;
@@ -59,7 +57,7 @@ public class ModRecipeProvider extends RecipeProvider {
         forgeHammer(ItemInit.DUSKSTEEL_FORGE_HAMMER.get(), ModItemTags.INGOTS_DUSKSTEEL, recipeConsumer);
         forgeHammer(ItemInit.FROST_STEEL_FORGE_HAMMER.get(), ModItemTags.INGOTS_FROST_STEEL, recipeConsumer);
         forgeHammer(ItemInit.IRON_FORGE_HAMMER.get(), Tags.Items.INGOTS_IRON, recipeConsumer);
-        forgeHammer(ItemInit.KOBOLD_STEEL_FORGE_HAMMER.get(), ModItemTags.INGOTS_KOBOLD, recipeConsumer);
+        forgeHammer(ItemInit.KOBOLD_STEEL_FORGE_HAMMER.get(), ModItemTags.INGOTS_KOBOLD_STEEL, recipeConsumer);
         forgeHammer(ItemInit.REFINED_OBSIDIAN_FORGE_HAMMER.get(), ModItemTags.INGOTS_REFINED_OBSIDIAN, recipeConsumer);
         forgeHammer(ItemInit.PLATINUM_FORGE_HAMMER.get(), ModItemTags.INGOTS_PLATINUM, recipeConsumer);
         forgeHammer(ItemInit.SHADOW_PLATINUM_FORGE_HAMMER.get(), ModItemTags.INGOTS_SHADOW_PLATINUM, recipeConsumer);
@@ -73,7 +71,7 @@ public class ModRecipeProvider extends RecipeProvider {
         sharpeningStone(ItemInit.DUSKSTEEL_WHETSTONE.get(), ModItemTags.INGOTS_DUSKSTEEL, recipeConsumer);
         sharpeningStone(ItemInit.FROST_STEEL_WHETSTONE.get(), ModItemTags.INGOTS_FROST_STEEL, recipeConsumer);
         sharpeningStone(ItemInit.IRON_WHETSTONE.get(), Tags.Items.INGOTS_IRON, recipeConsumer);
-        sharpeningStone(ItemInit.KOBOLD_STEEL_WHETSTONE.get(), ModItemTags.INGOTS_KOBOLD, recipeConsumer);
+        sharpeningStone(ItemInit.KOBOLD_STEEL_WHETSTONE.get(), ModItemTags.INGOTS_KOBOLD_STEEL, recipeConsumer);
         sharpeningStone(ItemInit.REFINED_OBSIDIAN_WHETSTONE.get(), ModItemTags.INGOTS_REFINED_OBSIDIAN, recipeConsumer);
         sharpeningStone(ItemInit.PLATINUM_WHETSTONE.get(), ModItemTags.INGOTS_PLATINUM, recipeConsumer);
         sharpeningStone(ItemInit.SHADOW_PLATINUM_WHETSTONE.get(), ModItemTags.INGOTS_SHADOW_PLATINUM, recipeConsumer);
@@ -350,22 +348,22 @@ public class ModRecipeProvider extends RecipeProvider {
         //armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_LEATHER_SET, ItemInit.LEATHER_SET, recipeConsumer);
         armorSet(Ingredient.of(ItemInit.LEATHER_BINDING.get()), ItemInit.UNBOUND_DIAMOND_STUDDED_LEATHER_SET, ItemInit.DIAMOND_STUDDED_LEATHER_SET, recipeConsumer);
 
-        chainLink(ItemInit.IRON_CHAIN_LINK.get(), WeaponMaterial.IRON, recipeConsumer);
-        chainLink(ItemInit.GOLD_CHAIN_LINK.get(), WeaponMaterial.GOLD, recipeConsumer);
-        chainLink(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(), WeaponMaterial.KOBOLD_STEEL, recipeConsumer);
-        chainLink(ItemInit.COPPER_CHAIN_LINK.get(), WeaponMaterial.COPPER, recipeConsumer);
-        chainLink(ItemInit.SILVER_CHAIN_LINK.get(), WeaponMaterial.SILVER, recipeConsumer);
-        chainLink(ItemInit.BRONZE_CHAIN_LINK.get(), WeaponMaterial.BRONZE, recipeConsumer);
-        chainLink(ItemInit.PLATINUM_CHAIN_LINK.get(), WeaponMaterial.PLATINUM, recipeConsumer);
-        chainLink(ItemInit.STEEL_CHAIN_LINK.get(), WeaponMaterial.STEEL, recipeConsumer);
-        chainLink(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(), WeaponMaterial.SHADOW_PLATINUM, recipeConsumer);
-        chainLink(ItemInit.FROST_STEEL_CHAIN_LINK.get(), WeaponMaterial.FROST_STEEL, recipeConsumer);
-        chainLink(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(), WeaponMaterial.REFINED_OBSIDIAN, recipeConsumer);
-        chainLink(ItemInit.CRYSTALLITE_CHAIN_LINK.get(), WeaponMaterial.CRYSTALLITE, recipeConsumer);
-        chainLink(ItemInit.DUSKSTEEL_CHAIN_LINK.get(), WeaponMaterial.DUSKSTEEL, recipeConsumer);
+        chainLink(ItemInit.IRON_CHAIN_LINK.get(), WeaponMaterial.IRON.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.GOLD_CHAIN_LINK.get(), WeaponMaterial.GOLD.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.KOBOLD_STEEL_CHAIN_LINK.get(), WeaponMaterial.KOBOLD_STEEL.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.COPPER_CHAIN_LINK.get(), WeaponMaterial.COPPER.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.SILVER_CHAIN_LINK.get(), WeaponMaterial.SILVER.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.BRONZE_CHAIN_LINK.get(), WeaponMaterial.BRONZE.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.PLATINUM_CHAIN_LINK.get(), WeaponMaterial.PLATINUM.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.STEEL_CHAIN_LINK.get(), WeaponMaterial.STEEL.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.SHADOW_PLATINUM_CHAIN_LINK.get(), WeaponMaterial.SHADOW_PLATINUM.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.FROST_STEEL_CHAIN_LINK.get(), WeaponMaterial.FROST_STEEL.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(), WeaponMaterial.REFINED_OBSIDIAN.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.CRYSTALLITE_CHAIN_LINK.get(), WeaponMaterial.CRYSTALLITE.defaultItem().get(), recipeConsumer);
+        chainLink(ItemInit.DUSKSTEEL_CHAIN_LINK.get(), WeaponMaterial.DUSKSTEEL.defaultItem().get(), recipeConsumer);
     }
 
-    protected void chainLink(Item result,WeaponMaterial material,Consumer<FinishedRecipe> consumer) {
+    protected void chainLink(Item result,Item material,Consumer<FinishedRecipe> consumer) {
         ItemStack stack = ItemInit.CHAIN_RING.get().createPart(material);
         Ingredient chain_ring = PartialNBTIngredient.of(stack.getItem(),stack.getTag());
 
@@ -529,12 +527,11 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
-        for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
-            WeaponMaterial weaponMaterial = entry.getValue();
-            if (weaponMaterial.metalStats() != null) {
-                ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(weaponMaterial);
-                AnvilForgingRecipeBuilder.anvilMaterialForging(weaponMaterial.tier().getRepairIngredient(), toolHead)
-                        .save(recipeConsumer, AdvancedLootableWeapons.id("anvil_forging_tool_head_" + entry.getKey()));
+        for (WeaponMaterial material : WeaponMaterial.LOOKUP) {
+            if (material.metalStats() != null) {
+                ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(material.defaultItem().get());
+                AnvilForgingRecipeBuilder.anvilMaterialForging(material.tier().getRepairIngredient(), toolHead)
+                        .save(recipeConsumer, AdvancedLootableWeapons.id("anvil_forging_tool_head_" + material.name()));
             }
         }
 
@@ -721,7 +718,7 @@ public class ModRecipeProvider extends RecipeProvider {
         String base = Registry.ITEM.getKey(head).getPath().replace("_head", "");
 
         ItemStack woodWeapon = new ItemStack(result);
-        HeatableToolPartItem.setMaterial(woodWeapon, "wood");
+        HeatableToolPartItem.setCraftingMaterial(woodWeapon, WeaponMaterial.WOOD.defaultItem().get());
 
         NBTOutputShapedRecipeBuilder.shaped(woodWeapon).define('W', head).define('S', handle)
                 .pattern("W").pattern("S").unlockedBy("has_" + base + "_head", has(head)).save(consumer);

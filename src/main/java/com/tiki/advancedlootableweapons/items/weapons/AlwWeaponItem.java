@@ -71,20 +71,13 @@ public class AlwWeaponItem extends Item implements Vanishable {
     }
 
     public WeaponMaterial getMaterial(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(HeatableToolPartItem.MATERIAL)) {
-            String material = tag.getString(HeatableToolPartItem.MATERIAL);
-            return WeaponMaterial.LOOKUP.getOrDefault(material,WeaponMaterial.NULL);
-        }
-        return WeaponMaterial.NULL;
+        Item material = HeatableToolPartItem.getCraftingMaterial(stack);
+        return WeaponMaterial.findMaterial(material);
     }
 
     public MutableComponent getMaterialName(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(HeatableToolPartItem.MATERIAL)) {
-            return WeaponMaterial.getTranslationKey(tag.getString(HeatableToolPartItem.MATERIAL));
-        }
-        return new TextComponent("");
+        WeaponMaterial weaponMaterial = getMaterial(stack);
+        return weaponMaterial.getTranslationKey();
     }
     
     public double getAttackDamage() {
@@ -206,10 +199,10 @@ public class AlwWeaponItem extends Item implements Vanishable {
     @Override
     public void fillItemCategory(CreativeModeTab pCategory, NonNullList<ItemStack> pItems) {
         if (allowdedIn(pCategory)) {
-            for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
-                if (entry.getValue().canMakeWeapon()) {
+            for (WeaponMaterial material : WeaponMaterial.LOOKUP) {
+                if (material.canMakeWeapon()) {
                     ItemStack stack = new ItemStack(this);
-                    HeatableToolPartItem.setMaterial(stack,entry.getKey());
+                    HeatableToolPartItem.setCraftingMaterial(stack,material.defaultItem().get());
                     pItems.add(stack);
                 }
             }

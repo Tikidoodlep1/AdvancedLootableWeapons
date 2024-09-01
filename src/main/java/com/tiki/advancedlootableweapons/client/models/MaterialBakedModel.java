@@ -7,7 +7,6 @@ import com.mojang.datafixers.util.Pair;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
-import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModel;
@@ -53,8 +52,10 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
             @Override
             public BakedModel resolve(BakedModel pModel, ItemStack pStack, @Nullable ClientLevel pLevel, @Nullable LivingEntity pEntity, int pSeed) {
                 CompoundTag tag = pStack.getTag();
-                if (tag!= null && tag.contains(HeatableToolPartItem.MATERIAL)) {
-                    return models.get(tag.getString(HeatableToolPartItem.MATERIAL));
+
+                if (tag != null) {
+                    WeaponMaterial weaponMaterial = WeaponMaterial.findMaterial(HeatableToolPartItem.getCraftingMaterial(pStack));
+                    return models.get(weaponMaterial.name());
                 }
                 return pModel;
             }
@@ -139,9 +140,9 @@ public class MaterialBakedModel implements IModelGeometry<MaterialBakedModel> {
             String folder = GsonHelper.getAsString(modelContents,"folder");
 
             Map<String,BlockModel> models = new HashMap<>();
-            for(Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
-                if (entry.getValue().canMakeWeapon()) {
-                    String material = entry.getKey();
+            for(WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
+                if (weaponMaterial.canMakeWeapon()) {
+                    String material = weaponMaterial.name();
                     JsonObject fakeModel = new JsonObject();
                     fakeModel.addProperty("parent",
                             AdvancedLootableWeapons.id(

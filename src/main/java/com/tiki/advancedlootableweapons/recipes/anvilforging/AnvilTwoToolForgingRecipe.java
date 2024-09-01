@@ -29,7 +29,7 @@ public class AnvilTwoToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	@Override
 	public ItemStack getProcessedResult(ItemStack input) {
 		ItemStack copy = result.copy();
-		HeatableToolPartItem.setMaterial(copy,HeatableToolPartItem.getMaterial(input));
+		HeatableToolPartItem.setCraftingMaterial(copy,HeatableToolPartItem.getCraftingMaterial(input));
 		return copy;
 	}
 

@@ -152,7 +152,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 		if(entity.itemHandler.getStackInSlot(0).getItem() instanceof HeatableToolPartItem toolHead) {
 			ItemStack stack = entity.itemHandler.getStackInSlot(0);
 			stack.setDamageValue(stack.getDamageValue() -
-					HotMetalHelper.getHeatGainLoss(toolHead.getMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));
+					HotMetalHelper.getHeatGainLoss(HeatableToolPartItem.getCraftingMaterial(stack), (int) entity.containerTemp, stack.getDamageValue()));
 		}
 	}
 

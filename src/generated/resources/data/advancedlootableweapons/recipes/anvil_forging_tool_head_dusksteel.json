@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{\"advancedlootableweapons:material\":\"dusksteel\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:dusksteel_ingot\"}"
   }
 }

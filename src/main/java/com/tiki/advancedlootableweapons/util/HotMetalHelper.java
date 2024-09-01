@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.util;
 
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
+import net.minecraft.world.item.Item;
 
 public class HotMetalHelper {
 
@@ -13,9 +14,9 @@ public class HotMetalHelper {
 
 	public static final int HOT_TOOL_HEAD_MAX_DUR = 6000;
 
-	public static int getHeatGainLoss(String material, int temp, int currentDamage) {
+	public static int getHeatGainLoss(Item material, int temp, int currentDamage) {
 
-		WeaponMaterial weaponMaterial = WeaponMaterial.LOOKUP.getOrDefault(material,WeaponMaterial.NULL);
+		WeaponMaterial weaponMaterial = WeaponMaterial.findMaterial(material);
 
 		MetalStats metalStats = weaponMaterial.metalStats();
 

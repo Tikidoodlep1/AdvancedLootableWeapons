@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"copper\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"minecraft:copper_ingot\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"copper\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"minecraft:copper_ingot\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"copper\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"minecraft:copper_ingot\"}"
     }
   ],
   "result": {

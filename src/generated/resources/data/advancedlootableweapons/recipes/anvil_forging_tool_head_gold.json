@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{\"advancedlootableweapons:material\":\"gold\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:gold_ingot\"}"
   }
 }

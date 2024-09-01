@@ -15,6 +15,6 @@
   "result": {
     "item": "advancedlootableweapons:spear",
     "count": 1,
-    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"wood\"}"
+    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"minecraft:oak_planks\"}"
   }
 }

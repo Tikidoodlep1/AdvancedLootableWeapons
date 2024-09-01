@@ -32,11 +32,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.checkerframework.checker.units.qual.A;
-import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @REIPluginClient
@@ -114,15 +111,15 @@ public class REICompat implements REIClientPlugin {
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 
 
-        for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP.values()) {
+        for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP) {
             if ((weaponMaterial.metalStats() == null))continue;
             for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get()) {
                     if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
                     ItemStack stack = new ItemStack(result.getItem());
-                    String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                    HeatableToolPartItem.setMaterial(stack, materialName);
+                    Item material = weaponMaterial.defaultItem().get();
+                    HeatableToolPartItem.setCraftingMaterial(stack, material);
                     SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
                     Ingredient input1 = toolrecipe.getFirst();
                     Ingredient input2 = toolrecipe.getSecond();
@@ -134,11 +131,11 @@ public class REICompat implements REIClientPlugin {
                     ItemStack disp2 = new ItemStack(stack2.getItem());
 
                     if (disp1.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setMaterial(disp1, materialName);
+                        HeatableToolPartItem.setCraftingMaterial(disp1, material);
                     }
 
                     if (disp2.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setMaterial(disp2, materialName);
+                        HeatableToolPartItem.setCraftingMaterial(disp2, material);
                     }
 
                     builder.addItem(disp1, disp2);
@@ -157,8 +154,8 @@ public class REICompat implements REIClientPlugin {
                     for (SequencedAnvilForgingDisplay.Builder builder : builders) {
                         if (builder.finished) continue;
                         if (stack.getItem() == builder.getLast()) {
-                            String materialName = WeaponMaterial.getMaterialNameF(weaponMaterial);
-                            HeatableToolPartItem.setMaterial(stack, materialName);
+                            Item materialName = weaponMaterial.defaultItem().get();
+                            HeatableToolPartItem.setCraftingMaterial(stack, materialName);
                             Ingredient input1 = toolrecipe.getFirst();
                             Ingredient input2 = toolrecipe.getSecond();
                             ItemStack stack1 = getFirstOrEmpty(input1);
@@ -168,13 +165,13 @@ public class REICompat implements REIClientPlugin {
                             ItemStack disp2 = new ItemStack(stack2.getItem());
 
                             if (disp1.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setMaterial(disp1, materialName);
+                                HeatableToolPartItem.setCraftingMaterial(disp1, materialName);
                             } else {
                                 disp1 = getFirstOrEmpty(weaponMaterial.tier().getRepairIngredient());
                             }
 
                             if (disp2.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setMaterial(disp2, materialName);
+                                HeatableToolPartItem.setCraftingMaterial(disp2, materialName);
                             }
                             builder.addItem(disp1, disp2);
                         }

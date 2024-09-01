@@ -32,9 +32,9 @@ public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGri
             Ingredient main = anvilToolForgingRecipe.getFirst();
             ItemStack stack = main.getItems()[0];
 
-            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP.values()) {
+            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
                 ItemStack copy = new ItemStack(stack.getItem());
-                HeatableToolPartItem.setMaterial(copy,weaponMaterial);
+                HeatableToolPartItem.setCraftingMaterial(copy,weaponMaterial.defaultItem().get());
                 ItemStack result = anvilToolForgingRecipe.getProcessedResult(copy);
                 registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredient.of(EntryStacks.of(copy))), List.of(EntryIngredient.of(EntryStacks.of(result)))));
             }
@@ -44,11 +44,11 @@ public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGri
             ItemStack stack = main.getItems()[0];
             ItemStack stack2 = second.getItems()[0];
 
-            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP.values()) {
+            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
                 ItemStack copy = new ItemStack(stack.getItem());
                 ItemStack copy2 = new ItemStack(stack2.getItem());
-                HeatableToolPartItem.setMaterial(copy,weaponMaterial);
-                HeatableToolPartItem.setMaterial(copy2,weaponMaterial);
+                HeatableToolPartItem.setCraftingMaterial(copy,weaponMaterial.defaultItem().get());
+                HeatableToolPartItem.setCraftingMaterial(copy2,weaponMaterial.defaultItem().get());
                 ItemStack result = abstractAnvilForgingRecipe.getProcessedResult(copy);
                 registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredient.of(EntryStacks.of(copy)),EntryIngredient.of(EntryStacks.of(copy2))),
                         List.of(EntryIngredient.of(EntryStacks.of(result)))));

@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{\"advancedlootableweapons:material\":\"iron\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
   }
 }

@@ -4,17 +4,17 @@
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"bronze\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:bronze_ingot\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"bronze\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:bronze_ingot\"}"
     },
     {
       "type": "forge:partial_nbt",
       "item": "advancedlootableweapons:chain_ring",
-      "nbt": "{\"advancedlootableweapons:material\":\"bronze\"}"
+      "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:bronze_ingot\"}"
     }
   ],
   "result": {

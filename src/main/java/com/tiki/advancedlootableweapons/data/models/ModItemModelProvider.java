@@ -14,7 +14,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -24,7 +23,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -252,10 +250,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
                 getBuilder(type).customLoader(MaterialBakedModelBuilder::begin).folder(type);
 
-                for (Map.Entry<String, WeaponMaterial> entry : WeaponMaterial.LOOKUP.entrySet()) {
+                for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
 
-                    if (entry.getValue().canMakeWeapon()) {
-                        String material = entry.getKey();
+                    if (weaponMaterial.canMakeWeapon()) {
+                        String material = weaponMaterial.name();
 
                         ResourceLocation modelPath = AdvancedLootableWeapons.id( "item/" + type + "/" + material);
                         ResourceLocation texturePath = AdvancedLootableWeapons.id( "item/" + material + "_" + type);

@@ -5,6 +5,6 @@
   },
   "result": {
     "item": "advancedlootableweapons:tool_head",
-    "nbt": "{\"advancedlootableweapons:material\":\"refined_obsidian\"}"
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:refined_obsidian_ingot\"}"
   }
 }
