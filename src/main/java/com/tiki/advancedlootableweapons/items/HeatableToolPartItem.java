@@ -30,7 +30,7 @@ public class HeatableToolPartItem extends Item {
 
     public static final String HEAT = "heat";
     public static final String MATERIAL = AdvancedLootableWeapons.id("material").toString();
-    public static final int MAX_HEAT = 6000;
+    public static final int MAX_HEAT = 3000;
     public static final double COOLING_RATE = 1;
 
     public HeatableToolPartItem(int level, boolean isMain, Properties prop) {
@@ -122,9 +122,9 @@ public class HeatableToolPartItem extends Item {
      */
     public static final PropertyDispatch.QuadFunction<ItemStack, Level, LivingEntity, Integer, Temp> HEAT_FUNCTION = (stack, world, player, id) -> {
         double heat = getHeat(stack);
-        if (heat < 2000) {
+        if (heat < MAX_HEAT / 3) {
             return Temp.cool;
-        } else if (heat >= 2000 && heat < 4000) {
+        } else if (heat >= MAX_HEAT / 3 && heat < MAX_HEAT * 2/3) {
             return Temp.warm;
         } else {
             return Temp.hot;

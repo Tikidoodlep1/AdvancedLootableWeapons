@@ -157,7 +157,7 @@ public class AdvancedForgeBlockEntity extends BlockEntity implements MenuProvide
 			int ambientTemp = 30;
 			double heat = HeatableToolPartItem.getHeat(stack);
 			if (HeatableToolPartItem.MAX_HEAT > heat) {
-				HeatableToolPartItem.setHeat(stack,heat + HotMetalHelper.getHeatGainLoss(material, (int) this.containerTemp, (int) heat, ambientTemp + 273));//CommonConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+				HeatableToolPartItem.setHeat(stack,heat + HotMetalHelper.getHeatGainLoss(material, (int) this.containerTemp+273, (int) heat, ambientTemp + 273));//CommonConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				//stack.setItemDamage(stack.getItemDamage() - (int) (HotMetalHelper.getHeatGainLoss(material, (int) this.currentTemp, stack.getItemDamage(), ambientTemp + 273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 				//this.heat = stack.getItemDamage();
 			}

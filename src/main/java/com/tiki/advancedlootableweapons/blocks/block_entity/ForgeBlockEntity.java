@@ -55,29 +55,19 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int data) {
-            switch (data) {
-                case 0:
-                    return (int) ForgeBlockEntity.this.containerTemp;
-                case 1:
-                    return ForgeBlockEntity.this.itemTemp;
-                case 2:
-                    return ForgeBlockEntity.this.increaseFrames;
-                default:
-                    return 0;
-            }
+            return switch (data) {
+                case 0 -> (int) ForgeBlockEntity.this.containerTemp;
+                case 1 -> ForgeBlockEntity.this.itemTemp;
+                case 2 -> ForgeBlockEntity.this.increaseFrames;
+                default -> 0;
+            };
         }
 
         public void set(int data, int val) {
             switch (data) {
-                case 0:
-                    ForgeBlockEntity.this.containerTemp = val;
-                    break;
-                case 1:
-                    ForgeBlockEntity.this.itemTemp = val;
-                    break;
-                case 2:
-                    ForgeBlockEntity.this.increaseFrames = val;
-                    break;
+                case 0 -> ForgeBlockEntity.this.containerTemp = val;
+                case 1 -> ForgeBlockEntity.this.itemTemp = val;
+                case 2 -> ForgeBlockEntity.this.increaseFrames = val;
             }
         }
 
@@ -160,7 +150,7 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
 				int ambientTemp = 30;
 				double heat = HeatableToolPartItem.getHeat(stack);
 				if (HeatableToolPartItem.MAX_HEAT > heat) {
-					HeatableToolPartItem.setHeat(stack,heat + HotMetalHelper.getHeatGainLoss(material, (int) this.containerTemp, (int) heat, ambientTemp + 273));//CommonConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
+					HeatableToolPartItem.setHeat(stack,heat + HotMetalHelper.getHeatGainLoss(material, (int) this.containerTemp + 273, (int) heat, ambientTemp + 273));//CommonConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 					//stack.setItemDamage(stack.getItemDamage() - (int) (HotMetalHelper.getHeatGainLoss(material, (int) this.currentTemp, stack.getItemDamage(), ambientTemp + 273) * this.baseHeatingSpeed * ConfigHandler.TOOL_HEAD_HEATING_MULTIPLIER));
 					//this.heat = stack.getItemDamage();
 				}

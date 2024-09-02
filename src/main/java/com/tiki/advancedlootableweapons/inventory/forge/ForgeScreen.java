@@ -45,8 +45,7 @@ public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> {
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		renderTooltip(pPoseStack, pMouseX, pMouseY);
 		if(pMouseX > this.getGuiLeft() + BAR_X_OFFSET && pMouseX < this.getGuiLeft() + BAR_X_OFFSET + BAR_WIDTH && pMouseY > this.getGuiTop() + 4 && pMouseY < this.getGuiTop() + 70) {
-			double temp = ((menu.getContainerTemp()-32)*5/9);
-			this.renderTooltip(pPoseStack, new TextComponent("Forge Temperature: " + (int)temp + " Celcius"), pMouseX, pMouseY);
+			this.renderTooltip(pPoseStack, new TextComponent("Forge Temperature: " + menu.getContainerTemp() + " Celcius"), pMouseX, pMouseY);
 		}
 	}
 }
