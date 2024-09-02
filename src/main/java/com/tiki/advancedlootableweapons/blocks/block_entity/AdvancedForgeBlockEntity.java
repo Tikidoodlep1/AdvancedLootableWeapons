@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.blocks.block_entity;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
+import com.tiki.advancedlootableweapons.inventory.advanced_forge.AdvancedForgeContainer;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
@@ -99,7 +100,7 @@ public class AdvancedForgeBlockEntity extends BlockEntity implements MenuProvide
 
 	@Override
 	public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-		return new ForgeContainer(pContainerId, pPlayerInventory, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
+		return new AdvancedForgeContainer(pContainerId, pPlayerInventory, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.CRYSTALLITE_ORE.get(), BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get(),
                         BlockInit.DEEPSLATE_PLATINUM_ORE.get(), BlockInit.DEEPSLATE_SILVER_ORE.get(), BlockInit.DEEPSLATE_TIN_ORE.get(),
                         BlockInit.DIORITE_BRICKS.get(),
-                        BlockInit.DUSKSTEEL_BLOCK.get(), BlockInit.FELDSPAR.get(), BlockInit.FORGE.get(),
+                        BlockInit.DUSKSTEEL_BLOCK.get(), BlockInit.FELDSPAR.get(), BlockInit.FORGE.get(),BlockInit.ADVANCED_FORGE.get(),
                         BlockInit.FROST_STEEL_BLOCK.get(), BlockInit.GRANITE_BRICKS.get(), BlockInit.JAW_CRUSHER.get(),
                         BlockInit.KOBOLD_STEEL_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(), BlockInit.PLATINUM_ORE.get(),
                         BlockInit.REFINED_OBSIDIAN_BLOCK.get(),

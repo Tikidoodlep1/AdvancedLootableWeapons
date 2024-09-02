@@ -26,7 +26,7 @@
   "advancedlootableweapons.temperature.warm": "Warm",
   "advancedlootableweapons.tool_head.quenched": "Quenched",
   "advancedlootableweapons.tool_head.unquenched": "Unquenched",
-  "attribute.defaultItem.generic.bonusAttackDamage": "Bonus Attack Damage",
+  "attribute.name.generic.bonusAttackDamage": "Bonus Attack Damage",
   "block.advancedlootableweapons.acacia_bellows": "Acacia Bellows",
   "block.advancedlootableweapons.advanced_forge": "Advanced Forge",
   "block.advancedlootableweapons.advanced_forge_1": "Advanced Forge",
