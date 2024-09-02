@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 public class HotMetalHelper {
 
 	public static final double AREA_CONST = 2.4D;
-	public static final double DIST_CONST = 0.5D;
 
 	public static final int BASIC_FORGE_TEMP = 1755;
 	public static final int ADVANCED_FORGE_TEMP = 2250;
@@ -17,32 +16,11 @@ public class HotMetalHelper {
 	public static final double HEAT_TRANSFER_CONST = 10.0D;
 
 
-	public static int getHeatGainLoss(Item material, int temp, int currentDamage) {
-
-		WeaponMaterial weaponMaterial = WeaponMaterial.findMaterial(material);
-
-		MetalStats metalStats = weaponMaterial.metalStats();
-
-		if (metalStats == null) return 0;//not a heatable material
-
-		int MP = metalStats.mp();
-		int TC = metalStats.tc();
-		int SH = metalStats.sh();
-		double IW = metalStats.iw();
-
-		int damage = currentDamage == 0 ? 1 : currentDamage;
-		int tempDiff = temp > (MP/(HeatableToolPartItem.MAX_HEAT/damage)) ? temp - (MP/(HeatableToolPartItem.MAX_HEAT/damage)) : (MP/(HeatableToolPartItem.MAX_HEAT/damage)) - temp;
-
-		return (int) Math.max(Math.ceil(Math.sqrt( ((TC * AREA_CONST) * (tempDiff/ DIST_CONST) / (IW * SH * damage)) )), 1);
-	}
-
 	/**
 	 * @param containerTemp in K
 	 * @param ambientTemp in K
 	 */
 	public static double getHeatGainLoss(Item material, int containerTemp, int itemTemp, int ambientTemp) {
-
-
 
 		WeaponMaterial weaponMaterial = WeaponMaterial.findMaterial(material);
 		MetalStats metalStats = weaponMaterial.metalStats();

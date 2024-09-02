@@ -12,7 +12,10 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeContainer> {
 
-	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/forge.png");
+	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/advanced_forge.png");
+
+	static final int BAR_X_OFFSET = 135;
+	static final int BAR_WIDTH = 19;
 
 	public AdvancedForgeScreen(AdvancedForgeContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
@@ -30,7 +33,7 @@ public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeCo
 		this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 		
 		int temp = (int)(menu.getContainerTemp() * 0.037);
-		this.blit(pPoseStack, this.getGuiLeft() + 122, this.getGuiTop() + 69 - temp, 176, 65 - temp, 18, temp);
+		this.blit(pPoseStack, this.getGuiLeft() + BAR_X_OFFSET, this.getGuiTop() + 69 - temp, 176, 65 - temp, 18, temp);
 	}
 	
 	@Override
@@ -38,7 +41,7 @@ public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeCo
 		renderBackground(pPoseStack);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		renderTooltip(pPoseStack, pMouseX, pMouseY);
-		if(pMouseX > this.getGuiLeft() + 122 && pMouseX < this.getGuiLeft() + 141 && pMouseY > this.getGuiTop() + 4 && pMouseY < this.getGuiTop() + 70) {
+		if(pMouseX > this.getGuiLeft() + BAR_X_OFFSET && pMouseX < this.getGuiLeft() + BAR_X_OFFSET + BAR_WIDTH && pMouseY > this.getGuiTop() + 4 && pMouseY < this.getGuiTop() + 70) {
 			double temp = ((menu.getContainerTemp()-32)*5/9);
 			this.renderTooltip(pPoseStack, new TextComponent("Forge Temperature: " + (int)temp + " Celcius"), pMouseX, pMouseY);
 		}

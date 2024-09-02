@@ -1,7 +1,9 @@
 package com.tiki.advancedlootableweapons.inventory.advanced_forge;
 
+import com.tiki.advancedlootableweapons.blocks.block_entity.AdvancedForgeBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
+import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -16,21 +18,23 @@ public class AdvancedForgeContainer extends AbstractContainerMenu {
 	private final ContainerLevelAccess access;
 
 	public AdvancedForgeContainer(int id, Inventory inv) {
-		this(id, inv,new AdvancedForgeHandler(), new SimpleContainerData(3),ContainerLevelAccess.NULL);
+		this(id, inv,new ForgeHandler(AdvancedForgeBlockEntity.SLOTS), new SimpleContainerData(3),ContainerLevelAccess.NULL);
 	}
 	
 	public AdvancedForgeContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
-		super(MenuInit.FORGE.get(), id);
+		super(MenuInit.ADVANCED_FORGE.get(), id);
 		this.access = access;
-		checkContainerSize(inv, 1);
+		checkContainerSize(inv, 3);
 		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 
-		this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
-		
-		addDataSlots(data);
+		this.addSlot(new SlotItemHandler(handler, 0, 51, 36));
+        this.addSlot(new SlotItemHandler(handler, 1, 80, 36));
+        this.addSlot(new SlotItemHandler(handler, 2, 109, 36));
+
+        addDataSlots(data);
 	}
 	
 	public int getContainerTemp() {
@@ -72,7 +76,7 @@ public class AdvancedForgeContainer extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = AdvancedForgeBlockEntity.SLOTS;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

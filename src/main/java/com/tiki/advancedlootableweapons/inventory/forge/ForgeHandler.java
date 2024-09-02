@@ -7,6 +7,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class ForgeHandler extends ItemStackHandler {
 
+    public ForgeHandler() {
+
+    }
+
+    public ForgeHandler(int slots) {
+        super(slots);
+    }
+
     @Override
     public boolean isItemValid(int slot, @NotNull ItemStack stack) {
         return stack.getItem() instanceof HeatableToolPartItem;

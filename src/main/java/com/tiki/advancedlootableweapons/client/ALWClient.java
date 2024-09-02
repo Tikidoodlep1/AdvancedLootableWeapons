@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.handlers.ArmorBonus;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
+import com.tiki.advancedlootableweapons.inventory.advanced_forge.AdvancedForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
@@ -39,6 +40,8 @@ public class ALWClient {
     public static void setup(FMLClientSetupEvent event) {
         MenuScreens.register(MenuInit.ALLOY_FURNACE.get(), AlloyFurnaceScreen::new);
         MenuScreens.register(MenuInit.FORGE.get(), ForgeScreen::new);
+        MenuScreens.register(MenuInit.ADVANCED_FORGE.get(), AdvancedForgeScreen::new);
+
         MenuScreens.register(MenuInit.ANVIL_FORGING.get(), AnvilForgingScreen::new);
         MenuScreens.register(MenuInit.JAW_CRUSHER.get(), JawCrusherScreen::new);
         event.enqueueWork(ALWClient::registerItemModelPredicates);

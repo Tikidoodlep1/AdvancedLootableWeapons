@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 import java.util.Random;
 
@@ -67,8 +70,21 @@ public class ForgeBlock extends BaseEntityBlock {
     	pLevel.addParticle(ParticleTypes.SMALL_FLAME, x, y + 0.75D, z + d3, 0.0D, 0.0D, 0.0D);
 		pLevel.addParticle(ParticleTypes.SMOKE, x, y + 0.75D, z + d3, 0.0D, 0.0D, 0.0D);
     }
-    
-    @Override
+
+
+	@Override
+	public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+		if (!pState.is(pNewState.getBlock())) {
+			BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+			if (blockentity instanceof ForgeBlockEntity forgeBlockEntity) {
+				Containers.dropContents(pLevel, pPos, new RecipeWrapper(forgeBlockEntity.getItemHandler()));
+				pLevel.updateNeighbourForOutputSignal(pPos, this);
+			}
+			super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+		}
+	}
+
+	@Override
     public RenderShape getRenderShape(BlockState state) {
     	return RenderShape.MODEL;
     }

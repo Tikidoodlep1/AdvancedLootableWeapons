@@ -49,6 +49,10 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
 
+    public ForgeHandler getItemHandler() {
+        return itemHandler;
+    }
+
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int data) {
             switch (data) {
@@ -135,13 +139,6 @@ public class ForgeBlockEntity extends BlockEntity implements MenuProvider {
         this.containerTemp = tag.getInt("containerTemp");
         this.itemTemp = tag.getInt("itemTemp");
         this.increaseFrames = tag.getInt("increaseFrames");
-    }
-
-    public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
-        }
     }
 
     public static void tick(Level world, BlockPos pos, BlockState state, ForgeBlockEntity entity) {
