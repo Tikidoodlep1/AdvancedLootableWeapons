@@ -1,14 +1,9 @@
-package com.tiki.advancedlootableweapons.blocks;
+package com.tiki.advancedlootableweapons.block;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -21,19 +16,18 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-import java.util.Random;
-
-public class ForgeBlock extends BaseEntityBlock {
+public class AlloyFurnaceBlock extends BaseEntityBlock {
 	
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-	
-	public ForgeBlock(Properties prop) {
+	public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+	public AlloyFurnaceBlock(Properties prop) {
 		super(prop);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
 	}
 	
 	@Override
@@ -54,54 +48,27 @@ public class ForgeBlock extends BaseEntityBlock {
     
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, LIT);
     }
     
     @Override
-    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, Random pRandom) {
-    	double x = pPos.getX() + 0.5D + pRandom.nextDouble() * 4.0D / 16.0D;
-    	double y = pPos.getY() + pRandom.nextDouble() * 6.0D / 16.0D;
-    	double z = pPos.getZ() + 0.5D;
-    	double d3 = pRandom.nextDouble() * 0.6D - 0.3D;
-    	
-    	if(pRandom.nextDouble() < 0.1D) {
-    		pLevel.playLocalSound(pPos.getX()+0.5D, pPos.getY()+0.5D, pPos.getZ()+0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
-    	}
-    	pLevel.addParticle(ParticleTypes.SMALL_FLAME, x, y + 0.75D, z + d3, 0.0D, 0.0D, 0.0D);
-		pLevel.addParticle(ParticleTypes.SMOKE, x, y + 0.75D, z + d3, 0.0D, 0.0D, 0.0D);
-    }
-
-
-	@Override
-	public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-		if (!pState.is(pNewState.getBlock())) {
-			BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-			if (blockentity instanceof ForgeBlockEntity forgeBlockEntity) {
-				Containers.dropContents(pLevel, pPos, new RecipeWrapper(forgeBlockEntity.getItemHandler()));
-				pLevel.updateNeighbourForOutputSignal(pPos, this);
-			}
-			super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-		}
-	}
-
-	@Override
     public RenderShape getRenderShape(BlockState state) {
     	return RenderShape.MODEL;
     }
     
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new ForgeBlockEntity(pos, state);
+		return new AlloyFurnaceBlockEntity(pos, state);
 	}
 	
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if(!world.isClientSide()) {
 			BlockEntity entity = world.getBlockEntity(pos);
-			if(entity instanceof ForgeBlockEntity forge) {
-				player.openMenu(forge);
+			if(entity instanceof AlloyFurnaceBlockEntity alloyFurnaceBlockEntity) {
+				player.openMenu(alloyFurnaceBlockEntity);
 			}else {
-				throw new IllegalStateException("Forge Container Provider is Missing!");
+				throw new IllegalStateException("Alloy Furnace Container Provider is Missing!");
 			}
 		}
 		return InteractionResult.sidedSuccess(world.isClientSide());
@@ -109,6 +76,6 @@ public class ForgeBlock extends BaseEntityBlock {
 	
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : createTickerHelper(type, BlockEntityInit.FORGE_TE.get(), ForgeBlockEntity::tick);
+		return world.isClientSide ? null :createTickerHelper(type, BlockEntityInit.ALLOY_FURNACE_TE.get(), AlloyFurnaceBlockEntity::tick);
 	}
 }

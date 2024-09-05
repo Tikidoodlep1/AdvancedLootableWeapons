@@ -66,6 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.ALLOY_FURNACE.get());
         simpleBlockItem(BlockInit.ADVANCED_FORGE.get());
         simpleBlockItem(BlockInit.CLAY_DRUM.get());
+        simpleBlockItem(BlockInit.TANNING_RACK.get());
 
         simpleBlockItem(BlockInit.OAK_BELLOWS.get());
         simpleBlockItem(BlockInit.BIRCH_BELLOWS.get());
@@ -73,6 +74,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.SPRUCE_BELLOWS.get());
         simpleBlockItem(BlockInit.ACACIA_BELLOWS.get());
         simpleBlockItem(BlockInit.DARK_OAK_BELLOWS.get());
+
 
         simpleBlockItem(BlockInit.CRYSTALLITE_ORE.get());
         simpleBlockItem(BlockInit.PLATINUM_ORE.get());
@@ -362,9 +364,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         ResourceLocation cool = AdvancedLootableWeapons.id("item/cool_"+path);
             getBuilder(path).parent(GENERATED)
                     .texture("layer0",hot)
-                    .override().model(getBuilder(hot.toString()).parent(GENERATED).texture("layer0",hot)).predicate(ALWClient.HEAT,0).end()
-                    .override().model(getBuilder(warm.toString()).parent(GENERATED).texture("layer0",warm)).predicate(ALWClient.HEAT,1).end()
-                    .override().model(getBuilder(cool.toString()).parent(GENERATED).texture("layer0",cool)).predicate(ALWClient.HEAT,2).end();
+                    .override().model(getBuilder(hot.toString()).parent(GENERATED).texture("layer0",hot)).predicate(HeatableToolPartItem.HEAT,0).end()
+                    .override().model(getBuilder(warm.toString()).parent(GENERATED).texture("layer0",warm)).predicate(HeatableToolPartItem.HEAT,1).end()
+                    .override().model(getBuilder(cool.toString()).parent(GENERATED).texture("layer0",cool)).predicate(HeatableToolPartItem.HEAT,2).end();
     }
 
 

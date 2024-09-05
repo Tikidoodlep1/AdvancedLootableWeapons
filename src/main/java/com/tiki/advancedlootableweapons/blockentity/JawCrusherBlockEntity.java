@@ -1,27 +1,20 @@
-package com.tiki.advancedlootableweapons.blocks.block_entity;
-
-import java.util.Optional;
-import java.util.Random;
+package com.tiki.advancedlootableweapons.blockentity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
+import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -38,7 +31,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
 
 public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -72,7 +64,7 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 
 	@Override
 	public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-		return new JawCrusherContainer(pContainerId, pPlayerInventory, itemHandler, ContainerLevelAccess.create(level,worldPosition));
+		return new JawCrusherMenu(pContainerId, pPlayerInventory, itemHandler, ContainerLevelAccess.create(level,worldPosition));
 	}
 
 	public void setCustomName(Component pName) {

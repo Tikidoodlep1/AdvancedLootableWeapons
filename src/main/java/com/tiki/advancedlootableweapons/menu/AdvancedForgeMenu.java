@@ -1,41 +1,40 @@
-package com.tiki.advancedlootableweapons.inventory.forge;
+package com.tiki.advancedlootableweapons.menu;
 
+import com.tiki.advancedlootableweapons.blockentity.AdvancedForgeBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
-
+import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ForgeContainer extends AbstractContainerMenu {
+public class AdvancedForgeMenu extends AbstractContainerMenu {
 
 	private final ContainerData data;
 	private final ContainerLevelAccess access;
 
-	public ForgeContainer(int id, Inventory inv) {
-		this(id, inv,new ForgeHandler(), new SimpleContainerData(3),ContainerLevelAccess.NULL);
+	public AdvancedForgeMenu(int id, Inventory inv) {
+		this(id, inv,new ForgeHandler(AdvancedForgeBlockEntity.SLOTS), new SimpleContainerData(3),ContainerLevelAccess.NULL);
 	}
 	
-	public ForgeContainer(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
-		super(MenuInit.FORGE.get(), id);
+	public AdvancedForgeMenu(int id, Inventory inv, ItemStackHandler handler, ContainerData data, ContainerLevelAccess access) {
+		super(MenuInit.ADVANCED_FORGE.get(), id);
 		this.access = access;
-		checkContainerSize(inv, 1);
+		checkContainerSize(inv, 3);
 		this.data = data;
 		
 		this.addPlayerInv(inv);
 		this.addPlayerHotbar(inv);
 
-		this.addSlot(new SlotItemHandler(handler, 0, 81, 36));
-		
-		addDataSlots(data);
+		this.addSlot(new SlotItemHandler(handler, 0, 51, 36));
+        this.addSlot(new SlotItemHandler(handler, 1, 80, 36));
+        this.addSlot(new SlotItemHandler(handler, 2, 109, 36));
+
+        addDataSlots(data);
 	}
 	
 	public int getContainerTemp() {
@@ -44,7 +43,7 @@ public class ForgeContainer extends AbstractContainerMenu {
 	
 	@Override
 	public boolean stillValid(Player pPlayer) {
-		return stillValid(access, pPlayer, BlockInit.FORGE.get());
+		return stillValid(access, pPlayer, BlockInit.ADVANCED_FORGE.get());
 	}
 	
 	private void addPlayerInv(Inventory playerInventory) {
@@ -77,7 +76,7 @@ public class ForgeContainer extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = AdvancedForgeBlockEntity.SLOTS;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

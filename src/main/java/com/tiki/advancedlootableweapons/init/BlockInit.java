@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.init;
 import java.util.function.Supplier;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.*;
+import com.tiki.advancedlootableweapons.block.*;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -91,6 +91,8 @@ public class BlockInit {
 			.destroyTime(2.7F).explosionResistance(3.7F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.STONE).dynamicShape()), ModCreativeTabs.BLOCK_TAB, true);
 	public static final RegistryObject<Block> JAW_CRUSHER = registerBlock("jaw_crusher", () -> new JawCrusherBlock(BlockBehaviour.Properties.of(Material.METAL)
 			.destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops().noOcclusion().sound(SoundType.METAL).dynamicShape()), ModCreativeTabs.BLOCK_TAB, true);
+	public static final RegistryObject<Block> TANNING_RACK = registerBlock("tanning_rack", () -> new TanningRackBlock(BlockBehaviour.Properties.of(Material.WOOD)
+			.destroyTime(1.5F).explosionResistance(3).noOcclusion().sound(SoundType.METAL).dynamicShape()), ModCreativeTabs.BLOCK_TAB, true);
 
 	public static final RegistryObject<Block> CLAY_DRUM = registerBlock("clay_drum",() ->
 			new DrumBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(2.5F).explosionResistance(2.6F).requiresCorrectToolForDrops()),ModCreativeTabs.BLOCK_TAB, true);

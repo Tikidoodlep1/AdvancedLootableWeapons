@@ -1,8 +1,9 @@
-package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
+package com.tiki.advancedlootableweapons.menu;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
+import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -12,15 +13,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class JawCrusherContainer extends AbstractContainerMenu {
+public class JawCrusherMenu extends AbstractContainerMenu {
 
     private final ContainerLevelAccess access;
 
-    public JawCrusherContainer(int id, Inventory inv) {
+    public JawCrusherMenu(int id, Inventory inv) {
         this(id, inv, new JawCrusherHandler(2), ContainerLevelAccess.NULL);
     }
 
-    public JawCrusherContainer(int id, Inventory inv, ItemStackHandler handler, ContainerLevelAccess access) {
+    public JawCrusherMenu(int id, Inventory inv, ItemStackHandler handler, ContainerLevelAccess access) {
         super(MenuInit.JAW_CRUSHER.get(), id);
         checkContainerSize(inv, 2);
         this.access = access;

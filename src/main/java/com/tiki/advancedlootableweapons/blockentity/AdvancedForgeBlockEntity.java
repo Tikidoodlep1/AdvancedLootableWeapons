@@ -1,18 +1,15 @@
-package com.tiki.advancedlootableweapons.blocks.block_entity;
+package com.tiki.advancedlootableweapons.blockentity;
 
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
-import com.tiki.advancedlootableweapons.inventory.advanced_forge.AdvancedForgeContainer;
+import com.tiki.advancedlootableweapons.menu.AdvancedForgeMenu;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -98,7 +95,7 @@ public class AdvancedForgeBlockEntity extends BlockEntity implements MenuProvide
 
 	@Override
 	public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-		return new AdvancedForgeContainer(pContainerId, pPlayerInventory, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
+		return new AdvancedForgeMenu(pContainerId, pPlayerInventory, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level,worldPosition));
 	}
 
 	@Override

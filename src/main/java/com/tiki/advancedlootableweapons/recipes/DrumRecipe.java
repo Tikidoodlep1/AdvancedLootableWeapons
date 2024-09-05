@@ -1,7 +1,7 @@
 package com.tiki.advancedlootableweapons.recipes;
 
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.blocks.block_entity.DrumBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.DrumBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;

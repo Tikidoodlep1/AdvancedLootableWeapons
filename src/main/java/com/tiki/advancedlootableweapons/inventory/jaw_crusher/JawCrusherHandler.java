@@ -1,6 +1,6 @@
 package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;

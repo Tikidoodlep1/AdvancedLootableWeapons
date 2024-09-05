@@ -4,7 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.AdvancedForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AdvancedForgeBlockEntity;
+import com.tiki.advancedlootableweapons.menu.ForgeMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -12,7 +13,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> {
+public class ForgeScreen extends AbstractContainerScreen<ForgeMenu> {
 
 	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/forge.png");
 
@@ -20,13 +21,12 @@ public class ForgeScreen extends AbstractContainerScreen<ForgeContainer> {
 	static final int BAR_WIDTH = 19;
 	static final int BAR_HEIGHT = 65;
 
-	public ForgeScreen(ForgeContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
+	public ForgeScreen(ForgeMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
 
 	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.setShaderTexture(0, TEXTURE);

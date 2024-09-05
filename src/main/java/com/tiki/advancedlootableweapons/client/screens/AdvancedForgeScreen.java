@@ -1,9 +1,10 @@
-package com.tiki.advancedlootableweapons.inventory.advanced_forge;
+package com.tiki.advancedlootableweapons.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AdvancedForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AdvancedForgeBlockEntity;
+import com.tiki.advancedlootableweapons.menu.AdvancedForgeMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeContainer> {
+public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeMenu> {
 
     private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id("textures/gui/advanced_forge.png");
 
@@ -19,13 +20,12 @@ public class AdvancedForgeScreen extends AbstractContainerScreen<AdvancedForgeCo
     static final int BAR_WIDTH = 19;
     static final int BAR_HEIGHT = 65;
 
-    public AdvancedForgeScreen(AdvancedForgeContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public AdvancedForgeScreen(AdvancedForgeMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
     @Override
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);

@@ -41,6 +41,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.FORGE.get(), BlockInit.GRANITE_BRICKS.get(), BlockInit.GRANITE_CLAY.get(),
                         BlockInit.JAW_CRUSHER.get(), BlockInit.TIN_ORE.get());
 
+        tag(BlockTags.MINEABLE_WITH_AXE).add(BlockInit.TANNING_RACK.get());
+
         tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(BlockInit.STEEL_BLOCK.get(),
                         BlockInit.KOBOLD_STEEL_BLOCK.get(),

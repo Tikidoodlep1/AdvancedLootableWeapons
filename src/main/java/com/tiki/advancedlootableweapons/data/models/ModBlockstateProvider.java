@@ -1,8 +1,8 @@
 package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.AlloyFurnaceBlock;
-import com.tiki.advancedlootableweapons.blocks.DusksteelBlock;
+import com.tiki.advancedlootableweapons.block.AlloyFurnaceBlock;
+import com.tiki.advancedlootableweapons.block.DusksteelBlock;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import net.minecraft.data.DataGenerator;
@@ -107,6 +107,9 @@ public class ModBlockstateProvider extends BlockStateProvider {
         horizontalBlock(BlockInit.DARK_OAK_BELLOWS.get(), models()
                         .withExistingParent("block/dark_oak_bellows", AdvancedLootableWeapons.id( "block/bellows"))
                         .texture("#3", new ResourceLocation("block/dark_oak_planks"))
+                , bellows);
+
+        horizontalBlock(BlockInit.TANNING_RACK.get(), models().getExistingFile(AdvancedLootableWeapons.id("block/tanning_rack"))
                 , bellows);
 
         getVariantBuilder(BlockInit.ALLOY_FURNACE.get()).forAllStates(state -> {

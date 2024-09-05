@@ -42,6 +42,7 @@ public class ModBlockLoot extends BlockLoot {
         dropSelf(BlockInit.JAW_CRUSHER.get());
         dropSelf(BlockInit.ADVANCED_FORGE.get());
         dropSelf(BlockInit.CLAY_DRUM.get());
+        dropSelf(BlockInit.TANNING_RACK.get());
 
         dropSelf(BlockInit.OAK_BELLOWS.get());
         dropSelf(BlockInit.BIRCH_BELLOWS.get());

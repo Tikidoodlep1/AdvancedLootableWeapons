@@ -1,8 +1,7 @@
-package com.tiki.advancedlootableweapons.blocks;
+package com.tiki.advancedlootableweapons.block;
 
-import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AdvancedForgeBlockEntity;
-import com.tiki.advancedlootableweapons.blocks.block_entity.ForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AdvancedForgeBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.SoundInit;
 import net.minecraft.core.BlockPos;

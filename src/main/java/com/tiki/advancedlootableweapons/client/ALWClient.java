@@ -3,11 +3,12 @@ package com.tiki.advancedlootableweapons.client;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.client.models.MaterialBakedModel;
 import com.tiki.advancedlootableweapons.client.screens.AnvilForgingScreen;
+import com.tiki.advancedlootableweapons.client.screens.TanningRackScreen;
 import com.tiki.advancedlootableweapons.handlers.ArmorBonus;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
-import com.tiki.advancedlootableweapons.inventory.advanced_forge.AdvancedForgeScreen;
+import com.tiki.advancedlootableweapons.client.screens.AdvancedForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.inventory.forge.ForgeScreen;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
@@ -41,6 +42,7 @@ public class ALWClient {
         MenuScreens.register(MenuInit.ALLOY_FURNACE.get(), AlloyFurnaceScreen::new);
         MenuScreens.register(MenuInit.FORGE.get(), ForgeScreen::new);
         MenuScreens.register(MenuInit.ADVANCED_FORGE.get(), AdvancedForgeScreen::new);
+        MenuScreens.register(MenuInit.TANNING_RACK.get(), TanningRackScreen::new);
 
         MenuScreens.register(MenuInit.ANVIL_FORGING.get(), AnvilForgingScreen::new);
         MenuScreens.register(MenuInit.JAW_CRUSHER.get(), JawCrusherScreen::new);
@@ -57,7 +59,6 @@ public class ALWClient {
     }
 
     public static final ResourceLocation MATERIAL_LOADER = AdvancedLootableWeapons.id("material_loader");
-    public static final ResourceLocation HEAT = AdvancedLootableWeapons.id("heat");
 
     public static void models(ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(MATERIAL_LOADER, MaterialBakedModel.Loader.INSTANCE);
@@ -89,7 +90,7 @@ public class ALWClient {
 
     public static void registerItemModelPredicates() {
         for(Item i : ItemInit.hotToolHeads) {
-            ItemProperties.register(i, HEAT, HEAT_FUNCTION_WRAPPER);
+            ItemProperties.register(i, HeatableToolPartItem.HEAT, HEAT_FUNCTION_WRAPPER);
         }
     }
 }

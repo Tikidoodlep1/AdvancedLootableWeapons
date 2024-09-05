@@ -1,11 +1,8 @@
 package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.inventory.advanced_forge.AdvancedForgeContainer;
-import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
+import com.tiki.advancedlootableweapons.menu.*;
 import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
-import com.tiki.advancedlootableweapons.inventory.forge.ForgeContainer;
-import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,15 +15,16 @@ public class MenuInit {
 
 	public static final DeferredRegister<MenuType<?>> GUIS = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedLootableWeapons.MODID);
 	
-	public static final RegistryObject<MenuType<AlloyFurnaceContainer>> ALLOY_FURNACE = registerMenuType(AlloyFurnaceContainer::new, "alloy_furnace");
+	public static final RegistryObject<MenuType<AlloyFurnaceMenu>> ALLOY_FURNACE = registerMenuType(AlloyFurnaceMenu::new, "alloy_furnace");
 	
-	public static final RegistryObject<MenuType<ForgeContainer>> FORGE = registerMenuType(ForgeContainer::new, "forge");
-	public static final RegistryObject<MenuType<AdvancedForgeContainer>> ADVANCED_FORGE = registerMenuType(AdvancedForgeContainer::new, "advanced_forge");
+	public static final RegistryObject<MenuType<ForgeMenu>> FORGE = registerMenuType(ForgeMenu::new, "forge");
+	public static final RegistryObject<MenuType<AdvancedForgeMenu>> ADVANCED_FORGE = registerMenuType(AdvancedForgeMenu::new, "advanced_forge");
+	public static final RegistryObject<MenuType<TanningRackMenu>> TANNING_RACK = registerMenuType(TanningRackMenu::new, "tanning_rack");
 
 
 	public static final RegistryObject<MenuType<AnvilForgingMenu>> ANVIL_FORGING = registerMenuType(AnvilForgingMenu::new, "anvil_forging");
 
-	public static final RegistryObject<MenuType<JawCrusherContainer>> JAW_CRUSHER = registerMenuType(JawCrusherContainer::new, "jaw_crusher");
+	public static final RegistryObject<MenuType<JawCrusherMenu>> JAW_CRUSHER = registerMenuType(JawCrusherMenu::new, "jaw_crusher");
 	
 	
 	private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(MenuType.MenuSupplier<T> factory, String name) {

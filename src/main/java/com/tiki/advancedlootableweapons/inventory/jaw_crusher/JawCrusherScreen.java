@@ -4,17 +4,18 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
+import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class JawCrusherScreen extends AbstractContainerScreen<JawCrusherContainer> {
+public class JawCrusherScreen extends AbstractContainerScreen<JawCrusherMenu> {
 
 	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/jaw_crusher.png");
 
-	public JawCrusherScreen(JawCrusherContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
+	public JawCrusherScreen(JawCrusherMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
 

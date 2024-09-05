@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks;
+package com.tiki.advancedlootableweapons.block;
 
 import java.util.Random;
 

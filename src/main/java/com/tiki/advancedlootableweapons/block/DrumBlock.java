@@ -1,7 +1,6 @@
-package com.tiki.advancedlootableweapons.blocks;
+package com.tiki.advancedlootableweapons.block;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
-import com.tiki.advancedlootableweapons.blocks.block_entity.DrumBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.DrumBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

@@ -8,9 +8,9 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
+import com.tiki.advancedlootableweapons.menu.AlloyFurnaceMenu;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceScreen;
-import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherContainer;
+import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
 import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
@@ -201,10 +201,10 @@ public class REICompat implements REIClientPlugin {
     @Override
     public void registerTransferHandlers(TransferHandlerRegistry registry) {
         //inputs are 0 and 1
-        registry.register(SimpleTransferHandler.create(AlloyFurnaceContainer.class, ALLOY_FURNACE,
+        registry.register(SimpleTransferHandler.create(AlloyFurnaceMenu.class, ALLOY_FURNACE,
                 new SimpleTransferHandler.IntRange(0, 2)));
 
-        registry.register(SimpleTransferHandler.create(JawCrusherContainer.class, JAW_CRUSHER,
+        registry.register(SimpleTransferHandler.create(JawCrusherMenu.class, JAW_CRUSHER,
                 new SimpleTransferHandler.IntRange(0, 1)));
     }
 }

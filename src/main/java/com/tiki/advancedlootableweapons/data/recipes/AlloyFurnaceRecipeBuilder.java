@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.data.recipes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.core.Registry;

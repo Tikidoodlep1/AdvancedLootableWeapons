@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.tiki.advancedlootableweapons.blocks.block_entity.AlloyFurnaceBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.data.recipes.AlloyFurnaceRecipeBuilder;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 

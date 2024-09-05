@@ -28,7 +28,7 @@ public class HeatableToolPartItem extends Item {
     private final int level;
     private final boolean isMain;
 
-    public static final String HEAT = "heat";
+    public static final ResourceLocation HEAT = AdvancedLootableWeapons.id("heat");
     public static final String MATERIAL = AdvancedLootableWeapons.id("material").toString();
     public static final int MAX_HEAT = 3000;
     public static final double COOLING_RATE = 1;
@@ -173,7 +173,7 @@ public class HeatableToolPartItem extends Item {
     ///////helpers
 
     public static void setHeat(ItemStack stack, double temp) {
-        stack.getOrCreateTag().putDouble(HEAT,temp);
+        stack.getOrCreateTag().putDouble(HEAT.toString(),temp);
     }
 
     static String getMaterial(ItemStack stack) {
@@ -190,7 +190,7 @@ public class HeatableToolPartItem extends Item {
     }
 
     public static double getHeat(ItemStack stack) {
-        return stack.hasTag() ? stack.getTag().getDouble(HEAT) : 0;
+        return stack.hasTag() ? stack.getTag().getDouble(HEAT.toString()) : 0;
     }
 
     public static boolean isSameMaterial(ItemStack stackA, ItemStack stackB) {

@@ -4,16 +4,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 
+import com.tiki.advancedlootableweapons.menu.AlloyFurnaceMenu;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceContainer> {
+public class AlloyFurnaceScreen extends AbstractContainerScreen<AlloyFurnaceMenu> {
 	private static final ResourceLocation TEXTURE = AdvancedLootableWeapons.id( "textures/gui/alloy_furnace.png");
 
-	public AlloyFurnaceScreen(AlloyFurnaceContainer container, Inventory inv, Component name) {
+	public AlloyFurnaceScreen(AlloyFurnaceMenu container, Inventory inv, Component name) {
 		super(container, inv, name);
 	}
 

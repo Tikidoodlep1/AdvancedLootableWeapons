@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.block_entity;
+package com.tiki.advancedlootableweapons.blockentity;
 
 import com.mojang.math.Vector3f;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;

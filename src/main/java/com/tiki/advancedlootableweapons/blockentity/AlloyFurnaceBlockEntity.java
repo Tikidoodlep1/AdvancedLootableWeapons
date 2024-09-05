@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.blocks.block_entity;
+package com.tiki.advancedlootableweapons.blockentity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -6,19 +6,16 @@ import javax.annotation.Nullable;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
-import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceContainer;
+import com.tiki.advancedlootableweapons.menu.AlloyFurnaceMenu;
 import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -40,7 +37,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import org.jetbrains.annotations.NotNull;
 
 public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider {
     public static final int SLOT_INPUT_1 = 0;
@@ -64,33 +60,21 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     private Component name;
     protected final ContainerData dataAccess = new ContainerData() {
         public int get(int data) {
-            switch (data) {
-                case DATA_LIT_TIME:
-                    return AlloyFurnaceBlockEntity.this.litTime;
-                case DATA_LIT_DURATION:
-                    return AlloyFurnaceBlockEntity.this.litDuration;
-                case DATA_COOKING_PROGRESS:
-                    return AlloyFurnaceBlockEntity.this.cookingProgress;
-                case DATA_COOKING_TOTAL_TIME:
-                    return AlloyFurnaceBlockEntity.this.cookingTotalTime;
-                default:
-                    return 0;
-            }
+            return switch (data) {
+                case DATA_LIT_TIME -> litTime;
+                case DATA_LIT_DURATION -> litDuration;
+                case DATA_COOKING_PROGRESS -> cookingProgress;
+                case DATA_COOKING_TOTAL_TIME -> cookingTotalTime;
+                default -> 0;
+            };
         }
 
         public void set(int data, int val) {
             switch (data) {
-                case DATA_LIT_TIME:
-                    AlloyFurnaceBlockEntity.this.litTime = val;
-                    break;
-                case DATA_LIT_DURATION:
-                    AlloyFurnaceBlockEntity.this.litDuration = val;
-                    break;
-                case DATA_COOKING_PROGRESS:
-                    AlloyFurnaceBlockEntity.this.cookingProgress = val;
-                    break;
-                case DATA_COOKING_TOTAL_TIME:
-                    AlloyFurnaceBlockEntity.this.cookingTotalTime = val;
+                case DATA_LIT_TIME -> litTime = val;
+                case DATA_LIT_DURATION -> litDuration = val;
+                case DATA_COOKING_PROGRESS -> cookingProgress = val;
+                case DATA_COOKING_TOTAL_TIME -> cookingTotalTime = val;
             }
         }
 
@@ -123,7 +107,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int containerId, Inventory inv, Player player) {
-        return new AlloyFurnaceContainer(containerId, inv, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level, worldPosition));
+        return new AlloyFurnaceMenu(containerId, inv, this.itemHandler, this.dataAccess, ContainerLevelAccess.create(level, worldPosition));
     }
 
     public void setCustomName(Component pName) {

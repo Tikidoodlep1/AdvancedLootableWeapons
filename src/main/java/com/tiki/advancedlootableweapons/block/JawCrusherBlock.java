@@ -1,6 +1,6 @@
-package com.tiki.advancedlootableweapons.blocks;
+package com.tiki.advancedlootableweapons.block;
 
-import com.tiki.advancedlootableweapons.blocks.block_entity.JawCrusherBlockEntity;
+import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

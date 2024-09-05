@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "advancedlootableweapons:block/tanning_rack",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "advancedlootableweapons:block/tanning_rack",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "advancedlootableweapons:block/tanning_rack"
+    },
+    "facing=east": {
+      "model": "advancedlootableweapons:block/tanning_rack",
+      "y": 180
+    }
+  }
+}
