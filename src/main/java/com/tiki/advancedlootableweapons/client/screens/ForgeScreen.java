@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.forge;
+package com.tiki.advancedlootableweapons.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

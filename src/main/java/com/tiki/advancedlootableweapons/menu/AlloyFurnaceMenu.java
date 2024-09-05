@@ -4,7 +4,7 @@ import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 
-import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
+import com.tiki.advancedlootableweapons.inventory.AlloyFurnaceHandler;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

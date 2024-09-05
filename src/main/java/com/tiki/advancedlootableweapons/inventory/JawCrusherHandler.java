@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.jaw_crusher;
+package com.tiki.advancedlootableweapons.inventory;
 
 import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import net.minecraft.world.item.ItemStack;

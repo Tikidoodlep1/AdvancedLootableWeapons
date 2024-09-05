@@ -1,8 +1,10 @@
 package com.tiki.advancedlootableweapons.block;
 
+import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import com.tiki.advancedlootableweapons.blockentity.ForgeBlockEntity;
 import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.blockentity.TanningRackBlockEntity;
+import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.menu.TanningRackMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,6 +17,8 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -72,5 +76,11 @@ public class TanningRackBlock extends BaseEntityBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         super.createBlockStateDefinition(pBuilder);
         pBuilder.add(FACING);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState pState, BlockEntityType<T> type) {
+        return level.isClientSide ? null :createTickerHelper(type, BlockEntityInit.TANNING_RACK.get(), TanningRackBlockEntity::tick);
     }
 }

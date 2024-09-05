@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
-import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
+import com.tiki.advancedlootableweapons.inventory.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
 
 import com.tiki.advancedlootableweapons.util.MCVersion;

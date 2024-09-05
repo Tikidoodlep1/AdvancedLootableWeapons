@@ -1,6 +1,7 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.block.TanningRackBlock;
 import com.tiki.advancedlootableweapons.data.recipes.*;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -47,7 +48,11 @@ public class ModRecipeProvider extends RecipeProvider {
         drumQuenching(pFinishedRecipeConsumer);
         drum(pFinishedRecipeConsumer);
         anvilForging(pFinishedRecipeConsumer);
+        tanningRack(pFinishedRecipeConsumer);
+    }
 
+    protected void tanningRack(Consumer<FinishedRecipe> recipeConsumer) {
+        TanningRackRecipeBuilder.tanning(Items.LEATHER,ItemInit.DELIMED_HIDE.get()).save(recipeConsumer);
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {

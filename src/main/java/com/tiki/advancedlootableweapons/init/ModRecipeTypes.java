@@ -12,6 +12,7 @@ public class ModRecipeTypes {
     public static final RecipeType<AbstractAnvilForgingRecipe> ANVIL_FORGING = register("anvil_forging");
     public static final RecipeType<DrumRecipe> DRUM = register("drum");
     public static final RecipeType<DrumQuenchingRecipe> DRUM_QUENCHING = register("drum_quenching");
+    public static final RecipeType<TanningRackRecipe> TANNING_RACK = register("tanning_rack");
 
     private static <T extends Recipe<?>> RecipeType<T> register(String path) {
         return RecipeType.register(AdvancedLootableWeapons.MODID+":"+path);

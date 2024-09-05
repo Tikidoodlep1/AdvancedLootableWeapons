@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.menu;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 
-import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
+import com.tiki.advancedlootableweapons.inventory.ForgeHandler;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

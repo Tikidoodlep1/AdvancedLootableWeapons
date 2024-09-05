@@ -44,6 +44,9 @@ public class ModRecipeSerializers {
 	public static final RegistryObject<ThreeMatchingItemsRecipe.CustomSerializer> CHAIN_LINK = RECIPE_SERIALIZERS.register("chain_link",
             ThreeMatchingItemsRecipe.CustomSerializer::new);
 
+	public static final RegistryObject<RecipeSerializer<TanningRackRecipe>> TANNING_RACK = RECIPE_SERIALIZERS.register("tanning_rack",
+			TanningRackRecipe.Serializer::new);
+
 
 	public static void register(IEventBus bus) {
 		RECIPE_SERIALIZERS.register(bus);

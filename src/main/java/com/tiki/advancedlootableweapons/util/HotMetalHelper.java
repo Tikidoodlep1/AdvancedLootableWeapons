@@ -43,8 +43,8 @@ public class HotMetalHelper {
 		double wPerSec = HEAT_TRANSFER_CONST * AREA_CONST * newTempDiff;
 		double newTempGainLoss = (wPerSec/(IW*SH))/20;
 
-		AdvancedLootableWeapons.LOGGER.debug("getHeatGainLoss = " + material + ", " + itemTemp + ", " + ambientTemp);
-		AdvancedLootableWeapons.LOGGER.debug("Temp Diff = " + newTempDiff + ", Temp Gain/Loss = " + newTempGainLoss + " for itemTemp " + val + " and containerTemp " + containerTemp);
+	//	AdvancedLootableWeapons.LOGGER.debug("getHeatGainLoss = " + material + ", " + itemTemp + ", " + ambientTemp);
+		//AdvancedLootableWeapons.LOGGER.debug("Temp Diff = " + newTempDiff + ", Temp Gain/Loss = " + newTempGainLoss + " for itemTemp " + val + " and containerTemp " + containerTemp);
 
 //		int tempGainLossFinal = (int)(newTempGainLoss < 0.2 ? newTempGainLoss : Math.ceil(newTempGainLoss));
 		return newTempGainLoss; //tempGainLossFinal == 0 ? -1 : tempGainLossFinal;

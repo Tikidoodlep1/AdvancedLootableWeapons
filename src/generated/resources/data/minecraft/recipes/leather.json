@@ -1,0 +1,10 @@
+{
+  "type": "advancedlootableweapons:tanning_rack",
+  "ingredient": {
+    "item": "advancedlootableweapons:delimed_hide"
+  },
+  "cookingTime": 600,
+  "result": {
+    "item": "minecraft:leather"
+  }
+}

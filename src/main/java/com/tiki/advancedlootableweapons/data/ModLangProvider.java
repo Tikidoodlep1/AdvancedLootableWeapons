@@ -60,8 +60,10 @@ public class ModLangProvider extends LanguageProvider {
 
         addDefaultMenu(MenuInit.ANVIL_FORGING);
         addDefaultMenu(MenuInit.JAW_CRUSHER);
+        addDefaultMenu(MenuInit.ALLOY_FURNACE);
+        addDefaultMenu(MenuInit.TANNING_RACK);
+
         add("container.advancedlootableweapons.sharpeningStone", "Sharpen Weapon");
-        add("container.advancedlootableweapons.alloy_furnace", "Alloy Furnace");
         add("container.advancedlootableweapons.forge", "Forge");
         add("container.advancedlootableweapons.forge2", "Advanced Forge");
         add("container.advancedlootableweapons.forgeWeapon", "Anvil Forging");

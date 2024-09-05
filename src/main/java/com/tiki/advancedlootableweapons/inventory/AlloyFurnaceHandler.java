@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.alloy_furnace;
+package com.tiki.advancedlootableweapons.inventory;
 
 import com.tiki.advancedlootableweapons.blockentity.AlloyFurnaceBlockEntity;
 import net.minecraft.world.item.ItemStack;

@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.menu;
 import com.tiki.advancedlootableweapons.blockentity.JawCrusherBlockEntity;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
-import com.tiki.advancedlootableweapons.inventory.jaw_crusher.JawCrusherHandler;
+import com.tiki.advancedlootableweapons.inventory.JawCrusherHandler;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory.forge;
+package com.tiki.advancedlootableweapons.inventory;
 
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import net.minecraft.world.item.ItemStack;

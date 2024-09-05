@@ -3,7 +3,7 @@ package com.tiki.advancedlootableweapons.blockentity;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.menu.AdvancedForgeMenu;
-import com.tiki.advancedlootableweapons.inventory.forge.ForgeHandler;
+import com.tiki.advancedlootableweapons.inventory.ForgeHandler;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.util.HotMetalHelper;
 import net.minecraft.core.BlockPos;

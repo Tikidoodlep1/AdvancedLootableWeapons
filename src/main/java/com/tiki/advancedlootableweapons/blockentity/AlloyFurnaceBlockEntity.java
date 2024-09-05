@@ -7,7 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.menu.AlloyFurnaceMenu;
-import com.tiki.advancedlootableweapons.inventory.alloy_furnace.AlloyFurnaceHandler;
+import com.tiki.advancedlootableweapons.inventory.AlloyFurnaceHandler;
 import com.tiki.advancedlootableweapons.recipes.AlloyFurnaceRecipe;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.util.Utils;
@@ -80,7 +80,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
 
         @Override
         public int getCount() {
-            return 4;
+            return NUM_DATA_VALUES;
         }
 
     };

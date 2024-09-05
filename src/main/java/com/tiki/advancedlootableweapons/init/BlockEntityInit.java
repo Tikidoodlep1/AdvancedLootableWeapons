@@ -24,7 +24,7 @@ public class BlockEntityInit {
 					.build(null));
 
 	public static final RegistryObject<BlockEntityType<TanningRackBlockEntity>> TANNING_RACK =
-			BLOCK_ENTITIES.register("tanning_rack", () -> BlockEntityType.Builder.of(TanningRackBlockEntity::new, BlockInit.ADVANCED_FORGE.get())
+			BLOCK_ENTITIES.register("tanning_rack", () -> BlockEntityType.Builder.of(TanningRackBlockEntity::new, BlockInit.TANNING_RACK.get())
 					.build(null));
 
 	public static final RegistryObject<BlockEntityType<JawCrusherBlockEntity>> JAW_CRUSHER_TE =
