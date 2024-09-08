@@ -511,5 +511,6 @@
   "item.advancedlootableweapons.zweihander_head_5": "Zweihander Head(Finished)",
   "itemGroup.alw_blocks": "ALW Blocks",
   "itemGroup.alw_tab": "Advanced Lootable Weapons",
-  "itemGroup.alw_weapons": "ALW Weapons & Hot Tool Heads"
+  "itemGroup.alw_weapons": "ALW Weapons & Hot Tool Heads",
+  "tooltip.advancedlootableweapons.refined": "Refined %s"
 }

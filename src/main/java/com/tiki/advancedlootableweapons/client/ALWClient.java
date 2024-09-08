@@ -2,16 +2,12 @@ package com.tiki.advancedlootableweapons.client;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.client.models.MaterialBakedModel;
-import com.tiki.advancedlootableweapons.client.screens.AnvilForgingScreen;
-import com.tiki.advancedlootableweapons.client.screens.TanningRackScreen;
+import com.tiki.advancedlootableweapons.client.screens.*;
 import com.tiki.advancedlootableweapons.handlers.ArmorBonus;
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
+import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.MenuInit;
-import com.tiki.advancedlootableweapons.client.screens.AdvancedForgeScreen;
-import com.tiki.advancedlootableweapons.client.screens.AlloyFurnaceScreen;
-import com.tiki.advancedlootableweapons.client.screens.ForgeScreen;
-import com.tiki.advancedlootableweapons.client.screens.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.util.MCVersion;
@@ -19,6 +15,7 @@ import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
@@ -43,7 +40,7 @@ public class ALWClient {
         MenuScreens.register(MenuInit.FORGE.get(), ForgeScreen::new);
         MenuScreens.register(MenuInit.ADVANCED_FORGE.get(), AdvancedForgeScreen::new);
         MenuScreens.register(MenuInit.TANNING_RACK.get(), TanningRackScreen::new);
-
+        MenuScreens.register(MenuInit.WHETSTONE.get(), WhetstoneScreen::new);
         MenuScreens.register(MenuInit.ANVIL_FORGING.get(), AnvilForgingScreen::new);
         MenuScreens.register(MenuInit.JAW_CRUSHER.get(), JawCrusherScreen::new);
         event.enqueueWork(ALWClient::registerItemModelPredicates);

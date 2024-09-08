@@ -11,7 +11,10 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.WhetstoneItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
+import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -42,6 +45,7 @@ import net.minecraftforge.common.util.Lazy;
 public class AlwWeaponItem extends Item implements Vanishable {
 
     public static final String BONUS_DURABILITY_KEY = "bonus_durability";
+    public static final double REFINED_BOOST = .5;
     private final double attackDamage;
     public final WeaponAttributes attributes;
     private final Lazy<Multimap<Attribute, AttributeModifier>> defaultModifiers;
@@ -144,18 +148,17 @@ public class AlwWeaponItem extends Item implements Vanishable {
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(new TextComponent(ChatFormatting.GREEN + "Chance to pierce Chain armor: " + this.attributes.getChainPenChance()));
         tooltip.add(new TextComponent(ChatFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + this.attributes.getPlatePenChance()));
+        int refined = WhetstoneItem.getRefined(stack);
+        if (refined > 0) {
+            tooltip.add(MCVersion.translation(TranslationKeys.REFINED_C,refined));
+        }
     }
     
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment.category.canEnchant(Items.IRON_SWORD);
     }
-    
-    @Override
-    public boolean isEnchantable(ItemStack p_41456_) {
-        return true;
-    }
-    
+
     @Override
     public boolean isCorrectToolForDrops(BlockState pBlock) {
         return pBlock.is(Blocks.COBWEB);
@@ -169,7 +172,8 @@ public class AlwWeaponItem extends Item implements Vanishable {
             WeaponMaterial material = getMaterial(stack);
 
             if (material != WeaponMaterial.NULL) {
-                baseModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(MATERIAL_UUID, "Material modifier", material.tier().getAttackDamageBonus(),
+                int refined = WhetstoneItem.getRefined(stack);
+                baseModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(MATERIAL_UUID, "Material modifier", material.tier().getAttackDamageBonus() + REFINED_BOOST * refined,
                         AttributeModifier.Operation.ADDITION));
             }
             return baseModifiers;

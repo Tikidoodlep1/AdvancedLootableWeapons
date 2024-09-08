@@ -52,6 +52,7 @@ public class ModLangProvider extends LanguageProvider {
         add(BoundArmorItem.BINDING_INFO,"Binding:");
         add(BoundArmorItem.TIER_INFO,"Tier:");
         add(TranslationKeys.NONE.getString(),"None");
+        add(TranslationKeys.REFINED_C,"Refined %s");
 
         add(HeatableToolPartItem.QUENCH_KEY,"Quenched");
         add(HeatableToolPartItem.UNQUENCH_KEY,"Unquenched");

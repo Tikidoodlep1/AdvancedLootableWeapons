@@ -25,7 +25,7 @@ public class MenuInit {
 	public static final RegistryObject<MenuType<AnvilForgingMenu>> ANVIL_FORGING = registerMenuType(AnvilForgingMenu::new, "anvil_forging");
 
 	public static final RegistryObject<MenuType<JawCrusherMenu>> JAW_CRUSHER = registerMenuType(JawCrusherMenu::new, "jaw_crusher");
-	
+	public static final RegistryObject<MenuType<WhetstoneMenu>> WHETSTONE = registerMenuType(WhetstoneMenu::new,"whetstone");
 	
 	private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(MenuType.MenuSupplier<T> factory, String name) {
 		return GUIS.register(name,  () -> new MenuType<>(factory));
