@@ -1,7 +1,6 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.categories.DrumQuenchingCategory;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.*;
@@ -64,22 +63,18 @@ public class ModLangProvider extends LanguageProvider {
         addDefaultMenu(MenuInit.ALLOY_FURNACE);
         addDefaultMenu(MenuInit.TANNING_RACK);
 
-        add("container.advancedlootableweapons.sharpeningStone", "Sharpen Weapon");
         add("container.advancedlootableweapons.forge", "Forge");
         add("container.advancedlootableweapons.forge2", "Advanced Forge");
-        add("container.advancedlootableweapons.forgeWeapon", "Anvil Forging");
 
-        add(REICompat.QUENCHING,"Drum Quenching");
-        add(REICompat.DRUM_CAT,"Drum");
-        add(REICompat.JAW_CRUSHER_CAT,"Jaw Crusher");
-        add(REICompat.ALLOY_FURNACE_CAT,"Alloy Furnace");
+        addTranslatableText(TranslationKeys.DRUM_QUENCHING_CAT,"Drum Quenching");
+        addTranslatableText(TranslationKeys.DRUM_CAT,"Drum");
+        addTranslatableText(TranslationKeys.JAW_CRUSHER_CAT,"Jaw Crusher");
+        addTranslatableText(TranslationKeys.ALLOY_FURNACE_CAT,"Alloy Furnace");
         addTranslatableText(TranslationKeys.ANVIL_FORGING_CAT,"Anvil Forging");
-
-        add("enchantment.advancedlootableweapons.refined", "Refined");
-
+        addTranslatableText(TranslationKeys.TANNING_RACK_CAT,"Tanning Rack");
+        addTranslatableText(TranslationKeys.createTime(0),"%s sec");
 
         add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
-
 
         addTab(ModCreativeTabs.MISC_TAB, "Advanced Lootable Weapons");
         addTab(ModCreativeTabs.BLOCK_TAB, "ALW Blocks");

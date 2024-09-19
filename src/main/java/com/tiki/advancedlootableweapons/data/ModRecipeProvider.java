@@ -155,6 +155,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_netherrack", has(Blocks.NETHERRACK))
                 .save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(BlockInit.TANNING_RACK.get())
+                .define('S', Items.STRING)
+                .define('T', Tags.Items.RODS_WOODEN)
+                .define('H', ItemInit.UNTRIMMED_HIDE.get())
+                .define('P', ItemTags.PLANKS)
+                .pattern("STS")
+                .pattern("THT")
+                .pattern("PPP")
+                .unlockedBy("has_untrimmed_hide", has(ItemInit.UNTRIMMED_HIDE.get()))
+                .save(recipeConsumer);
+
         //wooden parts
 
         ShapedRecipeBuilder.shaped(ItemInit.WOODEN_BATTLEAXE_HEAD.get())

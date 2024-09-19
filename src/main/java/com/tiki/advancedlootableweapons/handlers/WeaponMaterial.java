@@ -5,7 +5,6 @@ import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModMaterials;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import com.tiki.advancedlootableweapons.util.MetalStats;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -16,16 +15,13 @@ import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public record WeaponMaterial(String name,TagKey<Item> valid, Supplier<Item> defaultItem, Tier tier, MetalStats metalStats, boolean canMakeWeapon) {
 
     public static final List<WeaponMaterial> LOOKUP = new ArrayList<>();
     public static final WeaponMaterial NULL = new WeaponMaterial("null",null,() ->  Items.AIR,null, null, false);
-    static final Map<Item,WeaponMaterial> CACHE = new HashMap<>();
 
     public static final WeaponMaterial STEEL = register(new WeaponMaterial("steel",ModItemTags.INGOTS_STEEL, ItemInit.STEEL_INGOT,ModMaterials.STEEL, MetalStats.STEEL, true));
     public static final WeaponMaterial FROST_STEEL = register(new WeaponMaterial("frost_steel",ModItemTags.INGOTS_FROST_STEEL, ItemInit.FROST_STEEL_INGOT,ModMaterials.FROST_STEEL, MetalStats.FROST_STEEL, true));

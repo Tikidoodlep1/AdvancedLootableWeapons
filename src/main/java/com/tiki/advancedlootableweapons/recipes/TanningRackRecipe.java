@@ -73,6 +73,10 @@ public class TanningRackRecipe implements Recipe<RecipeWrapper> {
         return cookTime;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
     public static class Serializer extends AbstractRecipeSerializer<TanningRackRecipe> {
 
 

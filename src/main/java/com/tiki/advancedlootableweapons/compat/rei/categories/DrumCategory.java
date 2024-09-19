@@ -5,7 +5,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -16,17 +16,13 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
-    private final String categoryName;
-
-    public DrumCategory(String categoryName) {
-        this.categoryName = categoryName;
+    public DrumCategory() {
     }
 
     @Override
@@ -36,7 +32,7 @@ public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
     @Override
     public Component getTitle() {
-        return MCVersion.translation(categoryName);
+        return TranslationKeys.DRUM_CAT;
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.DrumQuenchingDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -14,16 +15,13 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
 
 public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDisplay> {
 
-    private String categoryName;
-    public static final String REQUIRES_CLAY = "category.advancedlootableweapons.drum_quenching.requires_clay";
-    public DrumQuenchingCategory(String categoryName) {
-        this.categoryName = categoryName;
+    public static final String REQUIRES_CLAY = "category.rei.advancedlootableweapons.drum_quenching.requires_clay";
+    public DrumQuenchingCategory() {
     }
 
     @Override
@@ -33,7 +31,7 @@ public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDispl
 
     @Override
     public Component getTitle() {
-        return MCVersion.translation(categoryName);
+        return TranslationKeys.DRUM_QUENCHING_CAT;
     }
 
     @Override

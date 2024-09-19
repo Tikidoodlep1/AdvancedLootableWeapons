@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.JawCrusherDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
-import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -19,10 +19,7 @@ import java.util.List;
 
 public class JawCrusherCategory implements DisplayCategory<JawCrusherDisplay> {
 
-    private final String categoryName;
-
-    public JawCrusherCategory(String categoryName) {
-        this.categoryName = categoryName;
+    public JawCrusherCategory() {
     }
 
     @Override
@@ -32,7 +29,7 @@ public class JawCrusherCategory implements DisplayCategory<JawCrusherDisplay> {
 
     @Override
     public Component getTitle() {
-        return MCVersion.translation(categoryName);
+        return TranslationKeys.JAW_CRUSHER_CAT;
     }
 
     @Override

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "STS",
+    "THT",
+    "PPP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "tag": "forge:rods/wooden"
+    },
+    "H": {
+      "item": "advancedlootableweapons:untrimmed_hide"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "advancedlootableweapons:tanning_rack"
+  }
+}

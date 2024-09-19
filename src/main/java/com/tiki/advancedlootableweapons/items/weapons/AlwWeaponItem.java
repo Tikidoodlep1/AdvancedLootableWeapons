@@ -51,7 +51,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
     private final Lazy<Multimap<Attribute, AttributeModifier>> defaultModifiers;
 
     private static final UUID MATERIAL_UUID = UUID.fromString("2e03b879-e09e-41b4-b64e-93a10fa31944");
-    
+
     public AlwWeaponItem(WeaponAttributes attributes, Item.Properties pProperties) {
         super(pProperties);
         this.attributes = attributes;
@@ -60,10 +60,10 @@ public class AlwWeaponItem extends Item implements Vanishable {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attributes.getBaseAttackSpeed(), AttributeModifier.Operation.ADDITION));
-            if(ForgeMod.REACH_DISTANCE.isPresent()) {
+            if (ForgeMod.REACH_DISTANCE.isPresent()) {
                 builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(AttributeModifiers.BLOCK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
             }
-            if(ForgeMod.ATTACK_RANGE.isPresent()) {
+            if (ForgeMod.ATTACK_RANGE.isPresent()) {
                 builder.put(ForgeMod.ATTACK_RANGE.get(), new AttributeModifier(AttributeModifiers.ATTACK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
             }
             return builder.build();
@@ -83,11 +83,11 @@ public class AlwWeaponItem extends Item implements Vanishable {
         WeaponMaterial weaponMaterial = getMaterial(stack);
         return weaponMaterial.getTranslationKey();
     }
-    
+
     public double getAttackDamage() {
         return this.attackDamage;
     }
-    
+
     @Override
     public int getMaxDamage(ItemStack stack) {
         int maxDur = super.getMaxDamage(stack);
@@ -101,12 +101,12 @@ public class AlwWeaponItem extends Item implements Vanishable {
         }
         return maxDur;
     }
-    
+
     @Override
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
         return !pPlayer.isCreative();
     }
-    
+
     @Override
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
         if (pState.is(Blocks.COBWEB)) {
@@ -116,7 +116,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
             return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !pState.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
         }
     }
-    
+
     @Override
     public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         pStack.hurtAndBreak(1, pAttacker, (p_43296_) -> {
@@ -124,7 +124,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
         });
         return true;
     }
-    
+
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
@@ -150,10 +150,10 @@ public class AlwWeaponItem extends Item implements Vanishable {
         tooltip.add(new TextComponent(ChatFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + this.attributes.getPlatePenChance()));
         int refined = WhetstoneItem.getRefined(stack);
         if (refined > 0) {
-            tooltip.add(MCVersion.translation(TranslationKeys.REFINED_C,refined));
+            tooltip.add(MCVersion.translation(TranslationKeys.REFINED_C, refined));
         }
     }
-    
+
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment.category.canEnchant(Items.IRON_SWORD);
@@ -163,12 +163,12 @@ public class AlwWeaponItem extends Item implements Vanishable {
     public boolean isCorrectToolForDrops(BlockState pBlock) {
         return pBlock.is(Blocks.COBWEB);
     }
-    
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot,ItemStack stack) {
-        if(slot == EquipmentSlot.MAINHAND) {
 
-            Multimap<Attribute,AttributeModifier> baseModifiers = ArrayListMultimap.create(defaultModifiers.get());
+    @Override
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        if (slot == EquipmentSlot.MAINHAND) {
+
+            Multimap<Attribute, AttributeModifier> baseModifiers = ArrayListMultimap.create(defaultModifiers.get());
             WeaponMaterial material = getMaterial(stack);
 
             if (material != WeaponMaterial.NULL) {
@@ -177,25 +177,25 @@ public class AlwWeaponItem extends Item implements Vanishable {
                         AttributeModifier.Operation.ADDITION));
             }
             return baseModifiers;
-        }else {
+        } else {
             return ImmutableMultimap.of();
         }
     }
 
     @Override
     public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
-        if(this.attributes.getReach() > 0) {
-            return target.getBoundingBox().inflate(this.attributes.getReach()/2, 0.25, this.attributes.getReach()/2);
-        }else {
-            return target.getBoundingBox().inflate(1-this.attributes.getReach(), 0.25, 1-this.attributes.getReach());
+        if (this.attributes.getReach() > 0) {
+            return target.getBoundingBox().inflate(this.attributes.getReach() / 2, 0.25, this.attributes.getReach() / 2);
+        } else {
+            return target.getBoundingBox().inflate(1 - this.attributes.getReach(), 0.25, 1 - this.attributes.getReach());
         }
     }
-    
+
     @Override
     public boolean canPerformAction(ItemStack stack, net.minecraftforge.common.ToolAction toolAction) {
-        if(attributes.shouldSlash()) {
+        if (attributes.shouldSlash()) {
             return net.minecraftforge.common.ToolActions.DEFAULT_SWORD_ACTIONS.contains(toolAction);
-        }else {
+        } else {
             return toolAction == ToolActions.SWORD_DIG;
         }
     }
@@ -206,7 +206,7 @@ public class AlwWeaponItem extends Item implements Vanishable {
             for (WeaponMaterial material : WeaponMaterial.LOOKUP) {
                 if (material.canMakeWeapon()) {
                     ItemStack stack = new ItemStack(this);
-                    HeatableToolPartItem.setCraftingMaterial(stack,material.defaultItem().get());
+                    HeatableToolPartItem.setCraftingMaterial(stack, material.defaultItem().get());
                     pItems.add(stack);
                 }
             }

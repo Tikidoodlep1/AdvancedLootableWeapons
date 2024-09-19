@@ -17,6 +17,7 @@ import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.recipes.*;
+import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import dev.architectury.fluid.FluidStack;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -26,6 +27,7 @@ import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import net.minecraft.core.Registry;
@@ -45,13 +47,8 @@ public class REICompat implements REIClientPlugin {
     public static final CategoryIdentifier<DrumDisplay> DRUM = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/drum");
     public static final CategoryIdentifier<AnvilForgingRecipeDisplay> ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/anvil_forging");
     public static final CategoryIdentifier<SequencedAnvilForgingDisplay> SEQUENCED_ANVIL_FORGING = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/sequenced_anvil_forging");
+    public static final CategoryIdentifier<TanningRackDisplay> TANNING_RACK = CategoryIdentifier.of(AdvancedLootableWeapons.MODID, "plugins/tanning_rack");
 
-
-    public static final String ALLOY_FURNACE_CAT = "category.rei.advancedlootableweapons.alloy_furnace";
-    public static final String JAW_CRUSHER_CAT = "category.rei.advancedlootableweapons.jaw_crusher";
-
-    public static final String QUENCHING = "category.rei.advancedlootableweapons.drum_quenching";
-    public static final String DRUM_CAT = "category.rei.advancedlootableweapons.drum";
 
     public static FluidStack convert(net.minecraftforge.fluids.FluidStack stack) {
         return FluidStack.create(stack.getFluid(), stack.getAmount());
@@ -59,12 +56,13 @@ public class REICompat implements REIClientPlugin {
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
-        AlloyFurnaceCategory alloyFurnaceCategory = new AlloyFurnaceCategory(ALLOY_FURNACE_CAT);
-        JawCrusherCategory jawCrusherCategory = new JawCrusherCategory(JAW_CRUSHER_CAT);
-        DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory(QUENCHING);
-        DrumCategory drumCategory = new DrumCategory(DRUM_CAT);
+        AlloyFurnaceCategory alloyFurnaceCategory = new AlloyFurnaceCategory(TranslationKeys.ALLOY_FURNACE_CAT);
+        JawCrusherCategory jawCrusherCategory = new JawCrusherCategory();
+        DrumQuenchingCategory drumQuenchingCategory = new DrumQuenchingCategory();
+        DrumCategory drumCategory = new DrumCategory();
         AnvilForgingCategory anvilForgingCategory = new AnvilForgingCategory();
         SequencedAnvilForgingCategory sequencedAnvilForgingCategory = new SequencedAnvilForgingCategory();
+        TanningRackCategory tanningRackCategory = new TanningRackCategory();
 
         registry.add(alloyFurnaceCategory);
         registry.add(jawCrusherCategory);
@@ -72,14 +70,17 @@ public class REICompat implements REIClientPlugin {
         registry.add(drumCategory);
         registry.add(anvilForgingCategory);
         registry.add(sequencedAnvilForgingCategory);
+        registry.add(tanningRackCategory);
 
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
         registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.CLAY_DRUM.get()));
         registry.addWorkstations(drumCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.CLAY_DRUM.get()));
+        registry.addWorkstations(tanningRackCategory.getCategoryIdentifier(),EntryStacks.of(BlockInit.TANNING_RACK.get()));
         List<ItemStack> hammers = Registry.ITEM.stream().filter(ForgeHammerItem.class::isInstance).map(Item::getDefaultInstance).toList();
         for (ItemStack stack : hammers) {
             registry.addWorkstations(anvilForgingCategory.getCategoryIdentifier(), EntryStacks.of(stack));
+            registry.addWorkstations(sequencedAnvilForgingCategory.getCategoryIdentifier(), EntryStacks.of(stack));
         }
     }
 
@@ -89,6 +90,7 @@ public class REICompat implements REIClientPlugin {
         registry.registerRecipeFiller(JawCrusherRecipe.class, ModRecipeTypes.CRUSHING, JawCrusherDisplay::new);
         registry.registerRecipeFiller(DrumQuenchingRecipe.class, ModRecipeTypes.DRUM_QUENCHING, DrumQuenchingDisplay::new);
         registry.registerRecipeFiller(DrumRecipe.class, ModRecipeTypes.DRUM, DrumDisplay::new);
+        registry.registerRecipeFiller(TanningRackRecipe.class,ModRecipeTypes.TANNING_RACK,TanningRackDisplay::new);
         //  registry.registerRecipeFiller(AbstractAnvilForgingRecipe.class,ModRecipeTypes.ANVIL_FORGING, abstractAnvilForgingRecipe -> AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe,registry));
 
         List<AbstractAnvilForgingRecipe> allRecipes = registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ANVIL_FORGING);

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:tanning_rack"
+    ]
+  },
+  "criteria": {
+    "has_untrimmed_hide": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:untrimmed_hide"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:tanning_rack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_untrimmed_hide",
+      "has_the_recipe"
+    ]
+  ]
+}
