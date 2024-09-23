@@ -30,39 +30,24 @@ public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGri
 
         if (abstractAnvilForgingRecipe instanceof AnvilToolForgingRecipe anvilToolForgingRecipe) {
             Ingredient main = anvilToolForgingRecipe.getFirst();
-            ItemStack stack = main.getItems()[0];
-
-            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
-                ItemStack copy = new ItemStack(stack.getItem());
-                HeatableToolPartItem.setCraftingMaterial(copy,weaponMaterial.defaultItem().get());
-                ItemStack result = anvilToolForgingRecipe.getProcessedResult(copy);
-                registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredient.of(EntryStacks.of(copy))), List.of(EntryIngredient.of(EntryStacks.of(result)))));
-            }
+            registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredients.ofIngredient(main)), List.of(EntryIngredient.of(EntryStacks.of(abstractAnvilForgingRecipe.getResultItem())))));
         } else if (abstractAnvilForgingRecipe instanceof AnvilTwoToolForgingRecipe) {
             Ingredient main = abstractAnvilForgingRecipe.getFirst();
             Ingredient second = abstractAnvilForgingRecipe.getSecond();
-            ItemStack stack = main.getItems()[0];
-            ItemStack stack2 = second.getItems()[0];
 
-            for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
-                ItemStack copy = new ItemStack(stack.getItem());
-                ItemStack copy2 = new ItemStack(stack2.getItem());
-                HeatableToolPartItem.setCraftingMaterial(copy,weaponMaterial.defaultItem().get());
-                HeatableToolPartItem.setCraftingMaterial(copy2,weaponMaterial.defaultItem().get());
-                ItemStack result = abstractAnvilForgingRecipe.getProcessedResult(copy);
-                registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredient.of(EntryStacks.of(copy)),EntryIngredient.of(EntryStacks.of(copy2))),
-                        List.of(EntryIngredient.of(EntryStacks.of(result)))));
-            }
+            registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredients.ofIngredient(main), EntryIngredients.ofIngredient(second)),
+                    List.of(EntryIngredient.of(EntryStacks.of(abstractAnvilForgingRecipe.getResultItem())))));
+
+
         } else if (abstractAnvilForgingRecipe instanceof AnvilArmorForgingRecipe) {
             Ingredient main = abstractAnvilForgingRecipe.getFirst();
             Ingredient second = abstractAnvilForgingRecipe.getSecond();
             ItemStack result = abstractAnvilForgingRecipe.getResultItem();
-            return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(List.of(main,second)),List.of(EntryIngredients.of(result)));
+            return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(List.of(main, second)), List.of(EntryIngredients.of(result)));
         }
 
-        return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(ingredients),List.of(EntryIngredients.of(abstractAnvilForgingRecipe.getResultItem())));
+        return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(ingredients), List.of(EntryIngredients.of(abstractAnvilForgingRecipe.getResultItem())));
     }
-
 
 
     @Override
