@@ -12,6 +12,8 @@ import com.tiki.advancedlootableweapons.init.*;
 import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.util.MCVersion;
+import com.tiki.advancedlootableweapons.world.ModOrePlacements;
+import com.tiki.advancedlootableweapons.world.Worldgen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -24,13 +26,18 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -82,6 +89,7 @@ public class AdvancedLootableWeapons
         eventBus.addGenericListener(GlobalLootModifierSerializer.class,this::registerLootSerializers);
         MinecraftForge.EVENT_BUS.addListener(this::attributeModifiers);
         MinecraftForge.EVENT_BUS.addListener(this::leftClickBlock);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::addOres);
     }
 
     private void attributeModifiers(ItemAttributeModifierEvent event) {
@@ -121,8 +129,24 @@ public class AdvancedLootableWeapons
             }
             event.setCanceled(true);
         }
+    }
+
+    private void addOres(BiomeLoadingEvent event) {
+        if (isValidBiome(event.getCategory())) {
+            BiomeGenerationSettingsBuilder generation = event.getGeneration();
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_SILVER_EXTRA);
+        }
+    }
+
+    public static void onBiomeLoad(BiomeLoadingEvent event) {
 
     }
+
+    private static boolean isValidBiome(Biome.BiomeCategory biomeCategory) {
+        //If this does weird things to unclassified biomes (Category.NONE), then we should also mark that biome as invalid
+        return biomeCategory != Biome.BiomeCategory.THEEND && biomeCategory != Biome.BiomeCategory.NETHER;
+    }
+
 
 
     private void registerLootSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
