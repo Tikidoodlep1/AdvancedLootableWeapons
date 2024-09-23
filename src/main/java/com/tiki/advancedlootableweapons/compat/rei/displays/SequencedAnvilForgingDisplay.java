@@ -45,8 +45,8 @@ public class SequencedAnvilForgingDisplay extends BasicDisplay {
             return this;
         }
 
-        public Item getLast() {
-            return itemOrder.get(itemOrder.size()-1).getKey().getItem();
+        public ItemStack getLast() {
+            return itemOrder.get(itemOrder.size()-1).getKey();
         }
 
         public static Builder builder(ItemStack last) {

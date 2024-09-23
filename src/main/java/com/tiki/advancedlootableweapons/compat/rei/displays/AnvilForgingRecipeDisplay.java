@@ -1,22 +1,13 @@
 package com.tiki.advancedlootableweapons.compat.rei.displays;
 
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
-import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
-import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
-import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilArmorForgingRecipe;
-import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilToolForgingRecipe;
-import com.tiki.advancedlootableweapons.recipes.anvilforging.AnvilTwoToolForgingRecipe;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.SimpleGridMenuDisplay;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 
@@ -25,10 +16,10 @@ public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGri
         super(inputs, outputs);
     }
 
-    public static AnvilForgingRecipeDisplay create(AbstractAnvilForgingRecipe abstractAnvilForgingRecipe, DisplayRegistry registry) {
+    public static AnvilForgingRecipeDisplay create(AbstractAnvilForgingRecipe abstractAnvilForgingRecipe) {
         List<Ingredient> ingredients = abstractAnvilForgingRecipe.getIngredients();
 
-        if (abstractAnvilForgingRecipe instanceof AnvilToolForgingRecipe anvilToolForgingRecipe) {
+      /*  if (abstractAnvilForgingRecipe instanceof AnvilToolForgingRecipe anvilToolForgingRecipe) {
             Ingredient main = anvilToolForgingRecipe.getFirst();
             registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredients.ofIngredient(main)), List.of(EntryIngredient.of(EntryStacks.of(abstractAnvilForgingRecipe.getResultItem())))));
         } else if (abstractAnvilForgingRecipe instanceof AnvilTwoToolForgingRecipe) {
@@ -44,7 +35,7 @@ public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGri
             Ingredient second = abstractAnvilForgingRecipe.getSecond();
             ItemStack result = abstractAnvilForgingRecipe.getResultItem();
             return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(List.of(main, second)), List.of(EntryIngredients.of(result)));
-        }
+        }*/
 
         return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(ingredients), List.of(EntryIngredients.of(abstractAnvilForgingRecipe.getResultItem())));
     }

@@ -556,11 +556,6 @@ public class ModRecipeProvider extends RecipeProvider {
         toolForgingFamily(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get(), recipeConsumer);
         twoToolForgingFamily(ItemInit.TOOL_ROD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONG_TOOL_ROD.get(), recipeConsumer);
 
-
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),
-                        ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),new ItemStack(ItemInit.STEEL_ARMOR_PLATE.get(),3))
-                .save(recipeConsumer);
-
         // battleaxe
 
         toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.BATTLEAXE_HEAD.get(), recipeConsumer);
@@ -704,8 +699,27 @@ public class ModRecipeProvider extends RecipeProvider {
 
         armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,ItemInit.DIAMOND_STUDDED_STEEL_SET,recipeConsumer);
 
+        //armor plates
 
+        armorPlate(WeaponMaterial.IRON, ItemInit.IRON_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.GOLD, ItemInit.GOLD_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.KOBOLD_STEEL, ItemInit.KOBOLD_STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.COPPER, ItemInit.COPPER_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.SILVER, ItemInit.SILVER_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.BRONZE, ItemInit.BRONZE_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.PLATINUM, ItemInit.PLATINUM_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.STEEL, ItemInit.STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.SHADOW_PLATINUM, ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.FROST_STEEL, ItemInit.FROST_STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.REFINED_OBSIDIAN, ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.CRYSTALLITE, ItemInit.CRYSTALLITE_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.DUSKSTEEL, ItemInit.DUSKSTEEL_ARMOR_PLATE.get(), recipeConsumer);    }
 
+    protected void armorPlate(WeaponMaterial material,Item result,Consumer<FinishedRecipe> recipeConsumer) {
+        Item mat = material.defaultItem().get();
+        Ingredient ingredient = ItemInit.TOOL_HEAD.get().makeIngredient(mat);
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ingredient,ingredient, new ItemStack(result, 3))
+                .save(recipeConsumer);
     }
 
     protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result, Consumer<FinishedRecipe> consumer) {
