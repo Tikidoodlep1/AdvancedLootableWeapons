@@ -12,12 +12,12 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.LootModifier;
 
-public class ShadowModifier extends LootModifier {
+public class ShadowLootModifier extends LootModifier {
 
 	public final Item prop1;
 	public final LootItemCondition[] conditions;
 	
-	protected ShadowModifier(LootItemCondition[] conditionsIn, Item prop1) {
+	protected ShadowLootModifier(LootItemCondition[] conditionsIn, Item prop1) {
 		super(conditionsIn);
 		this.prop1 = prop1;
 		this.conditions = conditionsIn;

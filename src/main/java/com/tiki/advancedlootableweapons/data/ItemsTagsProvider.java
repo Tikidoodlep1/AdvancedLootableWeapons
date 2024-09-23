@@ -6,6 +6,7 @@ import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -46,5 +47,7 @@ public class ItemsTagsProvider extends ItemTagsProvider {
                         ItemInit.REFINED_OBSIDIAN_CHAIN_BINDING.get(),
                         ItemInit.CRYSTALLITE_CHAIN_BINDING.get(),
                         ItemInit.DUSKSTEEL_CHAIN_BINDING.get());
+
+        tag(ModItemTags.HIDES).add(Items.LEATHER,Items.RABBIT_HIDE);
     }
 }

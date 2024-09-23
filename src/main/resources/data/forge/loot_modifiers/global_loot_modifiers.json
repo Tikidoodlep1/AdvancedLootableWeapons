@@ -1,6 +1,7 @@
 { 
 	"replace": false,
 	"entries": [ 
-		"advancedlootableweapons:shadow_mod_all"
+		"advancedlootableweapons:shadow_mod_all",
+		"advancedlootableweapons:hide_replacement"
 	]
 }

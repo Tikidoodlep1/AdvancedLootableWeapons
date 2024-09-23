@@ -23,6 +23,8 @@ public class ModItemTags {
 
     public static final TagKey<Item> CHAIN_BINDINGS = mod("chain_bindings");
 
+    public static final TagKey<Item> HIDES = mod("hides");
+
     private static TagKey<Item> forge(String name) {
         return ItemTags.create(new ResourceLocation("forge", name));
     }

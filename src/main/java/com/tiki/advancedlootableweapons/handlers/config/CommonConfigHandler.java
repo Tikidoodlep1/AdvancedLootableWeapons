@@ -27,6 +27,7 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.BooleanValue ENABLE_ARMORS;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ARMOR_FORGING;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ADVANCED_LEATHER_TANNING;
+	public static ForgeConfigSpec.BooleanValue HIDE_REPLACEMENT;
 	
 	public static ForgeConfigSpec.DoubleValue GLOBAL_DAGGER_BASE_DAMAGE;
 	public static ForgeConfigSpec.DoubleValue GLOBAL_KABUTOWARI_BASE_DAMAGE;
@@ -151,15 +152,6 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue FORGE_TEMP_INCREASE;
 
 	public static ForgeConfigSpec.IntValue SHADOW_DROP_RATE;
-	public static ForgeConfigSpec.BooleanValue LAND_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue AIR_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue WATER_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue PEACEFUL_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue NEUTRAL_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue HOSTILE_MOBS_DROP_SHADOW;
-	public static ForgeConfigSpec.BooleanValue BOSS_DROPS_SHADOW;
-	public static ForgeConfigSpec.BooleanValue ONLY_BOSS_DROPS_SHADOW;
-	public static ForgeConfigSpec.BooleanValue NON_VANILLA_DROPS_SHADOW;
 	
 	static {
 		BUILDER.push("Advanced Lootable Weapons Config");
@@ -189,6 +181,8 @@ public class CommonConfigHandler {
 		BELLOWS_EXHAUSTION = BUILDER.comment("The amount of exhaustion using a bellows gives the player.").defineInRange("Bellows Exhaustion", 0.1F, 0.0F, 20.0F);
 		FORGE_TEMP_DECREASE = BUILDER.comment("Forge Temperature Decrease. Set to 0.0F to disable temperature drop.").defineInRange("Forge Temperature Decrease", 0.02F, 0.0F, 10.0F);
 		FORGE_TEMP_INCREASE = BUILDER.comment("Forge Temperature Increase.").defineInRange("Forge Temperature Increase", 1, 0.0F, 20.0F);
+
+		HIDE_REPLACEMENT = BUILDER.comment("Mobs drop untrimmed hides instead of leather and rabbit hide").define("hide_replacement", true);
 
 		BUILDER.comment("MATERIAL MODIFICATION");
 		KOBOLD_STEEL_DAMAGE = BUILDER.comment("Use to change the damage of all wepaons that are made of kobold steel.").defineInRange("Kobold Steel Base Damage", 3F, 0F, 100F);
@@ -311,15 +305,6 @@ public class CommonConfigHandler {
 		
 		BUILDER.comment("GENERAL SHADOW DROP MODIFICATION");
 		SHADOW_DROP_RATE = BUILDER.comment("The drop rate for the shadow item in percentage, 5 = 5%").defineInRange("Shadow Drop Rate (Percent)", 5, 0, 100);
-		LAND_MOBS_DROP_SHADOW = BUILDER.comment("Should land mobs drop the shadow item? (True/False)").define("Land Mobs - Shadow", true);
-		AIR_MOBS_DROP_SHADOW = BUILDER.comment("Should air mobs drop the shadow item? (True/False)").define("Air Mobs - Shadow", false);
-		WATER_MOBS_DROP_SHADOW = BUILDER.comment("Should water mobs drop the shadow item? (True/False)").define("Water Mobs - Shadow", false);
-		PEACEFUL_MOBS_DROP_SHADOW = BUILDER.comment("Should passive mobs drop the shadow item? (True/False)").define("Passive Mobs - Shadow", false);
-		NEUTRAL_MOBS_DROP_SHADOW = BUILDER.comment("Should neutral mobs drop the shadow item? (True/False)").define("Neutral Mobs - Shadow", false);
-		HOSTILE_MOBS_DROP_SHADOW = BUILDER.comment("Should hostile mobs drop the shadow item? (True/False)").define("Hostile Mobs - Shadow", true);
-		BOSS_DROPS_SHADOW = BUILDER.comment("Should bosses drop the shadow item? (True/False)").define("Bosses - Shadow", true);
-		ONLY_BOSS_DROPS_SHADOW = BUILDER.comment("Should \"boss\" mobs be the only ones to drop shadows? (True/False)").define("Only Bosses Drop Shadows", false);
-		NON_VANILLA_DROPS_SHADOW = BUILDER.comment("Should any non-vanilla mobs drop shadows? This does NOT take into account if the mob is passive, flying, water, etc. (True/False)").define("Non-Vanilla Mobs - Shadow", true);
 		
 		BUILDER.pop();
 		SPEC = BUILDER.build();

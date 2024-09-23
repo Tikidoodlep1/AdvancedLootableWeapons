@@ -3,6 +3,8 @@ package com.tiki.advancedlootableweapons.loot_modifiers;
 import java.util.List;
 import javax.annotation.Nonnull;
 
+import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
+import com.tiki.advancedlootableweapons.tags.ModItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -24,10 +26,11 @@ public class HideModifier extends LootModifier {
 	@Nonnull
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+		if (!CommonConfigHandler.HIDE_REPLACEMENT.get()) return generatedLoot;
 		int looting = context.getLootingModifier();
 		int leatherCount = 1;
 		for(ItemStack stack : generatedLoot) {
-			if(stack.getItem() == Items.LEATHER || stack.getItem() == Items.RABBIT_HIDE) {
+			if(stack.is(ModItemTags.HIDES)) {
 				leatherCount = stack.getCount();
 				generatedLoot.remove(stack);
 			}
