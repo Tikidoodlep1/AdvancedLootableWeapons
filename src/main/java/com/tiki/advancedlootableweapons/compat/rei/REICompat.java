@@ -96,27 +96,27 @@ public class REICompat implements REIClientPlugin {
 
         List<AbstractAnvilForgingRecipe> allRecipes = registry.getRecipeManager().getAllRecipesFor(ModRecipeTypes.ANVIL_FORGING);
 
-        List<AbstractAnvilForgingRecipe> nonToolRecipes = new ArrayList<>();
-        List<AbstractAnvilForgingRecipe> toolRecipes = new ArrayList<>();
+        List<AbstractAnvilForgingRecipe> nonSequencedRecipes = new ArrayList<>();
+        List<AbstractAnvilForgingRecipe> sequencedRecipes = new ArrayList<>();
 
         for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
             ItemStack result = abstractAnvilForgingRecipe.getResultItem();
-            if (result.getItem() instanceof HeatableToolPartItem || result.getItem() instanceof AlwWeaponItem || result.getItem() instanceof ArmorPlateItem) {
-                toolRecipes.add(abstractAnvilForgingRecipe);
-            } else if (result.getItem() instanceof BoundArmorItem) {
-                nonToolRecipes.add(abstractAnvilForgingRecipe);
+            if (abstractAnvilForgingRecipe.isUseSequence()) {
+                sequencedRecipes.add(abstractAnvilForgingRecipe);
+            } else {
+                nonSequencedRecipes.add(abstractAnvilForgingRecipe);
             }
         }
 
 
-        nonToolRecipes.forEach(abstractAnvilForgingRecipe -> registry.add(AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry)));
+        nonSequencedRecipes.forEach(abstractAnvilForgingRecipe -> registry.add(AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry)));
 
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 
 
         for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP) {
             if ((weaponMaterial.metalStats() == null))continue;
-            for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
+            for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get() || result.getItem() instanceof ArmorPlateItem) {
                     if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
@@ -149,7 +149,7 @@ public class REICompat implements REIClientPlugin {
 
 
             for (int i = 0; i < 9; i++) {
-                for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
+                for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                     ItemStack result = toolrecipe.getResultItem();
                     ItemStack stack = new ItemStack(result.getItem());
 

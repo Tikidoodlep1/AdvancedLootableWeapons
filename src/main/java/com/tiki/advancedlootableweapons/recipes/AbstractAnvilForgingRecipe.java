@@ -15,12 +15,13 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
     protected final Ingredient ingredient;
     protected final Ingredient ingredient2;
     protected final ItemStack result;
+    private final boolean useSequence;
     private final RecipeType<?> type;
     private final RecipeSerializer<?> serializer;
     protected final ResourceLocation id;
     protected final String group;
 
-    public AbstractAnvilForgingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult) {
+    public AbstractAnvilForgingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult,boolean useSequence) {
         this.type = pType;
         this.serializer = pSerializer;
         this.id = pId;
@@ -28,6 +29,7 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
         this.ingredient = pIngredient;
         this.ingredient2 = ingredient2;
         this.result = pResult;
+        this.useSequence = useSequence;
     }
 
     @Override
@@ -72,6 +74,10 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
         nonnulllist.add(this.ingredient);
         nonnulllist.add(this.ingredient2);
         return nonnulllist;
+    }
+
+    public boolean isUseSequence() {
+        return useSequence;
     }
 
     public Ingredient getFirst() {
