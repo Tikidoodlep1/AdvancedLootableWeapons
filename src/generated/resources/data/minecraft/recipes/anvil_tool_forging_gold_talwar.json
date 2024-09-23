@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:anvil_two_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:talwar_head_3",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:gold_ingot\"}"
+  },
+  "ingredient2": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:tool_rod_2",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:gold_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:talwar",
+    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"minecraft:gold_ingot\"}"
+  }
+}

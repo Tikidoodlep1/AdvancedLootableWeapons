@@ -1,9 +1,0 @@
-{
-  "type": "advancedlootableweapons:anvil_tool_forging",
-  "ingredient": {
-    "item": "advancedlootableweapons:talwar_head_2"
-  },
-  "result": {
-    "item": "advancedlootableweapons:talwar_head_3"
-  }
-}

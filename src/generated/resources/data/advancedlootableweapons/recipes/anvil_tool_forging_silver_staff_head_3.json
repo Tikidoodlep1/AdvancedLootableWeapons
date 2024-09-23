@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:staff_head_2",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:silver_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:staff_head_3",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:silver_ingot\"}"
+  }
+}

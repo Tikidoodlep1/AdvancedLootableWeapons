@@ -100,7 +100,6 @@ public class REICompat implements REIClientPlugin {
         List<AbstractAnvilForgingRecipe> sequencedRecipes = new ArrayList<>();
 
         for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
-            ItemStack result = abstractAnvilForgingRecipe.getResultItem();
             if (abstractAnvilForgingRecipe.isUseSequence()) {
                 sequencedRecipes.add(abstractAnvilForgingRecipe);
             } else {
@@ -114,34 +113,17 @@ public class REICompat implements REIClientPlugin {
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 
 
-        for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP) {
-            if ((weaponMaterial.metalStats() == null))continue;
             for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get() || result.getItem() instanceof ArmorPlateItem) {
-                    if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
-                    ItemStack stack = new ItemStack(result.getItem());
-                    Item material = weaponMaterial.defaultItem().get();
-                    HeatableToolPartItem.setCraftingMaterial(stack, material);
-                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
+                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(result);
                     Ingredient input1 = toolrecipe.getFirst();
                     Ingredient input2 = toolrecipe.getSecond();
 
                     ItemStack stack1 = getFirstOrEmpty(input1);
                     ItemStack stack2 = getFirstOrEmpty(input2);
 
-                    ItemStack disp1 = new ItemStack(stack1.getItem());
-                    ItemStack disp2 = new ItemStack(stack2.getItem());
-
-                    if (disp1.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setCraftingMaterial(disp1, material);
-                    }
-
-                    if (disp2.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setCraftingMaterial(disp2, material);
-                    }
-
-                    builder.addItem(disp1, disp2);
+                    builder.addItem(stack1, stack2);
 
                     builders.add(builder);
                 }
@@ -157,8 +139,6 @@ public class REICompat implements REIClientPlugin {
                     for (SequencedAnvilForgingDisplay.Builder builder : builders) {
                         if (builder.finished) continue;
                         if (stack.getItem() == builder.getLast()) {
-                            Item materialName = weaponMaterial.defaultItem().get();
-                            HeatableToolPartItem.setCraftingMaterial(stack, materialName);
                             Ingredient input1 = toolrecipe.getFirst();
                             Ingredient input2 = toolrecipe.getSecond();
                             ItemStack stack1 = getFirstOrEmpty(input1);
@@ -167,21 +147,12 @@ public class REICompat implements REIClientPlugin {
                             ItemStack disp1 = new ItemStack(stack1.getItem());
                             ItemStack disp2 = new ItemStack(stack2.getItem());
 
-                            if (disp1.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setCraftingMaterial(disp1, materialName);
-                            } else {
-                                disp1 = getFirstOrEmpty(weaponMaterial.tier().getRepairIngredient());
-                            }
 
-                            if (disp2.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setCraftingMaterial(disp2, materialName);
-                            }
                             builder.addItem(disp1, disp2);
                         }
                     }
                 }
             }
-        }
         for (SequencedAnvilForgingDisplay.Builder builder : builders) {
             registry.add(builder.build());
         }

@@ -7,6 +7,7 @@
     "tag": "advancedlootableweapons:chain_bindings"
   },
   "result": {
-    "item": "advancedlootableweapons:bronze_helmet"
+    "item": "advancedlootableweapons:bronze_helmet",
+    "nbt": "{Damage:0}"
   }
 }

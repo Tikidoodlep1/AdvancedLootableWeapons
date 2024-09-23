@@ -1,9 +1,0 @@
-{
-  "type": "advancedlootableweapons:anvil_tool_forging",
-  "ingredient": {
-    "item": "advancedlootableweapons:rapier_head_3"
-  },
-  "result": {
-    "item": "advancedlootableweapons:rapier_head_4"
-  }
-}

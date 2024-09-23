@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:kodachi_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:crystallite_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:kodachi_head_2",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:crystallite_ingot\"}"
+  }
+}

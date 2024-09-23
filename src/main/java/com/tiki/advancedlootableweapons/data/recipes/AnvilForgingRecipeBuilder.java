@@ -50,7 +50,15 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
     }
 
     public static AnvilForgingRecipeBuilder anvilToolForging(ItemLike ingredient,ItemLike result,int count) {
-        return new AnvilForgingRecipeBuilder(ModRecipeSerializers.ANVIL_TOOL_FORGING.get(), Ingredient.of(ingredient), null, new ItemStack(result,count));
+        return anvilToolForging(Ingredient.of(ingredient), result,count);
+    }
+
+    public static AnvilForgingRecipeBuilder anvilToolForging(Ingredient ingredient,ItemLike result,int count) {
+        return anvilToolForging(ingredient,  new ItemStack(result,count));
+    }
+
+    public static AnvilForgingRecipeBuilder anvilToolForging(Ingredient ingredient,ItemStack result) {
+        return new AnvilForgingRecipeBuilder(ModRecipeSerializers.ANVIL_TOOL_FORGING.get(), ingredient, null, result);
     }
 
     public static AnvilForgingRecipeBuilder anvilTwoToolForging(ItemLike ingredient,ItemLike ingredient2,ItemLike result) {
@@ -139,7 +147,7 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         }
 
         boolean saveNBT() {
-            return type == ModRecipeSerializers.ANVIL_MATERIAL_FORGING.get();
+            return true;
         }
 
 

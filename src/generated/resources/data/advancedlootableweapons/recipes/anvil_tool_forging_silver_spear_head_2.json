@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:spear_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:silver_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:spear_head_2",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:silver_ingot\"}"
+  }
+}

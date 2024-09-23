@@ -1,9 +1,0 @@
-{
-  "type": "advancedlootableweapons:anvil_tool_forging",
-  "ingredient": {
-    "item": "advancedlootableweapons:kodachi_head"
-  },
-  "result": {
-    "item": "advancedlootableweapons:kodachi_head_2"
-  }
-}

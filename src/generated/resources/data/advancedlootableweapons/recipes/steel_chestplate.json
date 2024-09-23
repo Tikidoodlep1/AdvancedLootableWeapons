@@ -7,6 +7,7 @@
     "tag": "advancedlootableweapons:chain_bindings"
   },
   "result": {
-    "item": "advancedlootableweapons:steel_chestplate"
+    "item": "advancedlootableweapons:steel_chestplate",
+    "nbt": "{Damage:0}"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:tool_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:longsword_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  }
+}
