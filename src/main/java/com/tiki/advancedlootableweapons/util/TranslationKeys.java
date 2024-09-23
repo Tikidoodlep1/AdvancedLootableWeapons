@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.util;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
@@ -16,6 +17,9 @@ public class TranslationKeys {
 
     public static final MutableComponent NONE = MCVersion.translation("advancedlootableweapons.none");
     public static final String REFINED_C = "tooltip.advancedlootableweapons.refined";
+    public static final MutableComponent QUENCH_KEY = MCVersion.translation("advancedlootableweapons.tool_head.quenched").withStyle(ChatFormatting.BLUE);
+    public static final MutableComponent UNQUENCH_KEY = MCVersion.translation("advancedlootableweapons.tool_head.unquenched").withStyle(ChatFormatting.RED);
+    public static final MutableComponent FORGING_QUALITY = MCVersion.translation("advancedlootableweapons.tool_head.forging_quality").withStyle(ChatFormatting.BLUE);
 
     static DecimalFormat df = new DecimalFormat("###.##");
 

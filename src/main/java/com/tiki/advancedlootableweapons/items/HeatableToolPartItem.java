@@ -22,7 +22,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.crafting.PartialNBTIngredient;
 
 public class HeatableToolPartItem extends Item {
     private final int level;
@@ -69,9 +71,6 @@ public class HeatableToolPartItem extends Item {
         return Mth.color(redScale,greenScale,blueScale);
     }
 
-    public static final String QUENCH_KEY ="advancedlootableweapons.tool_head.quenched";
-    public static final String UNQUENCH_KEY ="advancedlootableweapons.tool_head.unquenched";
-
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag) {
         CompoundTag nbt = stack.getTag();
@@ -88,11 +87,10 @@ public class HeatableToolPartItem extends Item {
 
         if(nbt!= null && isMain) {
             boolean quenched = nbt.getBoolean("quenched");
-            tooltip.add(quenched ? MCVersion.translation(QUENCH_KEY).withStyle(ChatFormatting.BLUE) :
-                    MCVersion.translation(UNQUENCH_KEY).withStyle(ChatFormatting.RED));
+            tooltip.add(quenched ? TranslationKeys.QUENCH_KEY : TranslationKeys.UNQUENCH_KEY);
         }
 
-        tooltip.add(MCVersion.literal(ChatFormatting.BLUE + "Forging Quality"));
+        tooltip.add(TranslationKeys.FORGING_QUALITY);
         tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
         if (nbt != null) {
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDamage")));
@@ -159,10 +157,16 @@ public class HeatableToolPartItem extends Item {
         }
     }
 
-    public ItemStack createPart(Item item) {
+    public ItemStack createPart(Item material) {
         ItemStack stack = new ItemStack(this);
-        setCraftingMaterial(stack,item);
+        setCraftingMaterial(stack,material);
         return stack;
+    }
+
+    public Ingredient makeIngredient(Item material) {
+        ItemStack stack = createPart(material);
+        Ingredient ingredient = PartialNBTIngredient.of(this,stack.getTag());
+        return ingredient;
     }
 
     public HeatableToolPartItem addToRegistryMap() {

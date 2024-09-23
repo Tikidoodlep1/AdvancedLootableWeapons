@@ -557,6 +557,11 @@ public class ModRecipeProvider extends RecipeProvider {
         toolForging(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get(), recipeConsumer);
         twoToolForging(ItemInit.TOOL_ROD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONG_TOOL_ROD.get(), recipeConsumer);
 
+
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),
+                        ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),new ItemStack(ItemInit.STEEL_ARMOR_PLATE.get(),3))
+                .save(recipeConsumer);
+
         // battleaxe
 
         toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.BATTLEAXE_HEAD.get(), recipeConsumer);

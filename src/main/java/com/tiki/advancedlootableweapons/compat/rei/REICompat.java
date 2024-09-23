@@ -8,6 +8,7 @@ import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
+import com.tiki.advancedlootableweapons.items.armor.ArmorPlateItem;
 import com.tiki.advancedlootableweapons.menu.AlloyFurnaceMenu;
 import com.tiki.advancedlootableweapons.client.screens.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
@@ -100,7 +101,7 @@ public class REICompat implements REIClientPlugin {
 
         for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
             ItemStack result = abstractAnvilForgingRecipe.getResultItem();
-            if (result.getItem() instanceof HeatableToolPartItem || result.getItem() instanceof AlwWeaponItem) {
+            if (result.getItem() instanceof HeatableToolPartItem || result.getItem() instanceof AlwWeaponItem || result.getItem() instanceof ArmorPlateItem) {
                 toolRecipes.add(abstractAnvilForgingRecipe);
             } else if (result.getItem() instanceof BoundArmorItem) {
                 nonToolRecipes.add(abstractAnvilForgingRecipe);
@@ -117,7 +118,7 @@ public class REICompat implements REIClientPlugin {
             if ((weaponMaterial.metalStats() == null))continue;
             for (AbstractAnvilForgingRecipe toolrecipe : toolRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
-                if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get()) {
+                if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get() || result.getItem() instanceof ArmorPlateItem) {
                     if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
                     ItemStack stack = new ItemStack(result.getItem());
                     Item material = weaponMaterial.defaultItem().get();

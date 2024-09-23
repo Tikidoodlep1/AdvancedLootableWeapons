@@ -53,8 +53,9 @@ public class ModLangProvider extends LanguageProvider {
         add(TranslationKeys.NONE.getString(),"None");
         add(TranslationKeys.REFINED_C,"Refined %s");
 
-        add(HeatableToolPartItem.QUENCH_KEY,"Quenched");
-        add(HeatableToolPartItem.UNQUENCH_KEY,"Unquenched");
+        addTranslatableText(TranslationKeys.QUENCH_KEY,"Quenched");
+        addTranslatableText(TranslationKeys.UNQUENCH_KEY,"Unquenched");
+        addTranslatableText(TranslationKeys.FORGING_QUALITY,"Forging Quality");
 
         add(DrumQuenchingCategory.REQUIRES_CLAY,"Requires Clay");
 
@@ -72,6 +73,7 @@ public class ModLangProvider extends LanguageProvider {
         addTranslatableText(TranslationKeys.ALLOY_FURNACE_CAT,"Alloy Furnace");
         addTranslatableText(TranslationKeys.ANVIL_FORGING_CAT,"Anvil Forging");
         addTranslatableText(TranslationKeys.TANNING_RACK_CAT,"Tanning Rack");
+        addTranslatableText(TranslationKeys.SEQUENCED_ANVIL_FORGING_CAT,"Sequenced Anvil Forging");
         addTranslatableText(TranslationKeys.createTime(0),"%s sec");
 
         add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
