@@ -105,11 +105,11 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         private final ItemStack result;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
-        private final RecipeSerializer<?> type;
+        private final RecipeSerializer<?> serializer;
 
         public Result(ResourceLocation pId, RecipeSerializer<?> pType, String pGroup, Ingredient pIngredient, @Nullable Ingredient ingredient2, ItemStack pResult, Advancement.Builder pAdvancement, ResourceLocation pAdvancementId) {
             this.id = pId;
-            this.type = pType;
+            this.serializer = pType;
             this.group = pGroup;
             this.ingredient = pIngredient;
             this.ingredient2 = ingredient2;
@@ -159,7 +159,7 @@ public class AnvilForgingRecipeBuilder implements RecipeBuilder {
         }
 
         public RecipeSerializer<?> getType() {
-            return this.type;
+            return this.serializer;
         }
 
         /**

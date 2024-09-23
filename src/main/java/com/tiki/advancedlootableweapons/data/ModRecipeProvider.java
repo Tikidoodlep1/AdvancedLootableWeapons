@@ -734,7 +734,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 Item mat = weaponMaterial.defaultItem().get();
                 ItemStack weapon = new ItemStack(result);
                 HeatableToolPartItem.setCraftingMaterial(weapon,mat);
-                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon).save(consumer, new ResourceLocation(weaponMaterial.name()+"/anvil_tool_forging_" +getItemName(result)));
+                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon)
+                        .save(consumer, AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_" +getItemName(result)));
             }
         }
     }
