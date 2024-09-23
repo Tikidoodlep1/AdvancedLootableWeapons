@@ -23,13 +23,12 @@ public class AnvilTwoToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	public boolean matches(RecipeWrapper pInv, Level pLevel) {
 		ItemStack stackA = pInv.getItem(0);
 		ItemStack stackB = pInv.getItem(1);
-		return this.ingredient.test(stackA) && this.ingredient2.test(stackB) && HeatableToolPartItem.isSameMaterial(stackA,stackB);
+		return this.ingredient.test(stackA) && this.ingredient2.test(stackB);
 	}
 
 	@Override
 	public ItemStack getProcessedResult(ItemStack input) {
 		ItemStack copy = result.copy();
-		HeatableToolPartItem.setCraftingMaterial(copy,HeatableToolPartItem.getCraftingMaterial(input));
 		return copy;
 	}
 

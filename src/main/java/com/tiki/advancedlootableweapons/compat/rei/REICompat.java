@@ -4,7 +4,6 @@ package com.tiki.advancedlootableweapons.compat.rei;
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.categories.*;
 import com.tiki.advancedlootableweapons.compat.rei.displays.*;
-import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
@@ -14,8 +13,6 @@ import com.tiki.advancedlootableweapons.client.screens.AlloyFurnaceScreen;
 import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
 import com.tiki.advancedlootableweapons.client.screens.JawCrusherScreen;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
-import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
-import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.weapons.AlwWeaponItem;
 import com.tiki.advancedlootableweapons.recipes.*;
 import com.tiki.advancedlootableweapons.util.TranslationKeys;
@@ -28,7 +25,6 @@ import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import net.minecraft.core.Registry;
@@ -38,6 +34,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @REIPluginClient
 public class REICompat implements REIClientPlugin {
@@ -100,7 +97,6 @@ public class REICompat implements REIClientPlugin {
         List<AbstractAnvilForgingRecipe> sequencedRecipes = new ArrayList<>();
 
         for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
-            ItemStack result = abstractAnvilForgingRecipe.getResultItem();
             if (abstractAnvilForgingRecipe.isUseSequence()) {
                 sequencedRecipes.add(abstractAnvilForgingRecipe);
             } else {
@@ -109,79 +105,47 @@ public class REICompat implements REIClientPlugin {
         }
 
 
-        nonSequencedRecipes.forEach(abstractAnvilForgingRecipe -> registry.add(AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe, registry)));
+        nonSequencedRecipes.forEach(abstractAnvilForgingRecipe -> registry.add(AnvilForgingRecipeDisplay.create(abstractAnvilForgingRecipe)));
 
         List<SequencedAnvilForgingDisplay.Builder> builders = new ArrayList<>();
 
 
-        for (WeaponMaterial weaponMaterial :WeaponMaterial.LOOKUP) {
-            if ((weaponMaterial.metalStats() == null))continue;
             for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get() || result.getItem() instanceof ArmorPlateItem) {
-                    if (result.getItem() != ItemInit.CHAIN_RING.get() && !weaponMaterial.canMakeWeapon()) continue;
-                    ItemStack stack = new ItemStack(result.getItem());
-                    Item material = weaponMaterial.defaultItem().get();
-                    HeatableToolPartItem.setCraftingMaterial(stack, material);
-                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(stack);
+                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(result);
                     Ingredient input1 = toolrecipe.getFirst();
                     Ingredient input2 = toolrecipe.getSecond();
 
                     ItemStack stack1 = getFirstOrEmpty(input1);
                     ItemStack stack2 = getFirstOrEmpty(input2);
 
-                    ItemStack disp1 = new ItemStack(stack1.getItem());
-                    ItemStack disp2 = new ItemStack(stack2.getItem());
-
-                    if (disp1.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setCraftingMaterial(disp1, material);
-                    }
-
-                    if (disp2.getItem() instanceof HeatableToolPartItem) {
-                        HeatableToolPartItem.setCraftingMaterial(disp2, material);
-                    }
-
-                    builder.addItem(disp1, disp2);
+                    builder.addItem(stack1, stack2);
 
                     builders.add(builder);
                 }
             }
 
 
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 8; i++) {
                 for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                     ItemStack result = toolrecipe.getResultItem();
-                    ItemStack stack = new ItemStack(result.getItem());
 
 
                     for (SequencedAnvilForgingDisplay.Builder builder : builders) {
                         if (builder.finished) continue;
-                        if (stack.getItem() == builder.getLast()) {
-                            Item materialName = weaponMaterial.defaultItem().get();
-                            HeatableToolPartItem.setCraftingMaterial(stack, materialName);
+                        if (ItemStack.isSame(result,builder.getLast()) && (Objects.equals(result.getTag(),builder.getLast().getTag()) || result.getItem() instanceof ArmorPlateItem)) {
                             Ingredient input1 = toolrecipe.getFirst();
                             Ingredient input2 = toolrecipe.getSecond();
                             ItemStack stack1 = getFirstOrEmpty(input1);
                             ItemStack stack2 = getFirstOrEmpty(input2);
 
-                            ItemStack disp1 = new ItemStack(stack1.getItem());
-                            ItemStack disp2 = new ItemStack(stack2.getItem());
 
-                            if (disp1.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setCraftingMaterial(disp1, materialName);
-                            } else {
-                                disp1 = getFirstOrEmpty(weaponMaterial.tier().getRepairIngredient());
-                            }
-
-                            if (disp2.getItem() instanceof HeatableToolPartItem) {
-                                HeatableToolPartItem.setCraftingMaterial(disp2, materialName);
-                            }
-                            builder.addItem(disp1, disp2);
+                            builder.addItem(stack1, stack2);
                         }
                     }
                 }
             }
-        }
         for (SequencedAnvilForgingDisplay.Builder builder : builders) {
             registry.add(builder.build());
         }

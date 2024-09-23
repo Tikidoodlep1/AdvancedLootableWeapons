@@ -1,0 +1,12 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:kabutowari_head_4",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:shadow_platinum_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:kabutowari_head_5",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:shadow_platinum_ingot\"}"
+  }
+}

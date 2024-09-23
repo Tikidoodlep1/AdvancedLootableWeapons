@@ -26,7 +26,6 @@ public class AnvilToolForgingRecipe extends AbstractAnvilForgingRecipe {
 	@Override
 	public ItemStack getProcessedResult(ItemStack input) {
 		ItemStack copy = result.copy();
-		copy.setTag(input.getTag());
 		return copy;
 	}
 

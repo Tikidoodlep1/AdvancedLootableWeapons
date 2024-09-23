@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:anvil_two_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:spear_head_2",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:steel_ingot\"}"
+  },
+  "ingredient2": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:long_tool_rod",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:steel_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:spear",
+    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"advancedlootableweapons:steel_ingot\"}"
+  }
+}

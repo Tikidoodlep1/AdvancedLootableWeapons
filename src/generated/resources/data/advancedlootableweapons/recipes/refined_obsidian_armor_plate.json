@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:anvil_two_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:tool_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:refined_obsidian_ingot\"}"
+  },
+  "ingredient2": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:tool_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"advancedlootableweapons:refined_obsidian_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:refined_obsidian_armor_plate",
+    "count": 3
+  }
+}

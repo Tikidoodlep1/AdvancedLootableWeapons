@@ -1,0 +1,17 @@
+{
+  "type": "advancedlootableweapons:anvil_two_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:battleaxe_head_5",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  },
+  "ingredient2": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:long_tool_rod",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:battleaxe",
+    "nbt": "{Damage:0,\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  }
+}

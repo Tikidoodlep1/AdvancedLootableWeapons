@@ -1,0 +1,13 @@
+{
+  "type": "advancedlootableweapons:anvil_tool_forging",
+  "ingredient": {
+    "type": "forge:partial_nbt",
+    "item": "advancedlootableweapons:tool_head",
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  },
+  "result": {
+    "item": "advancedlootableweapons:chain_ring",
+    "count": 6,
+    "nbt": "{\"advancedlootableweapons:material\":\"minecraft:iron_ingot\"}"
+  }
+}

@@ -7,6 +7,7 @@
     "tag": "advancedlootableweapons:chain_bindings"
   },
   "result": {
-    "item": "advancedlootableweapons:iron_chain_leggings"
+    "item": "advancedlootableweapons:iron_chain_leggings",
+    "nbt": "{Damage:0}"
   }
 }

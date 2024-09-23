@@ -1,9 +1,0 @@
-{
-  "type": "advancedlootableweapons:anvil_tool_forging",
-  "ingredient": {
-    "item": "advancedlootableweapons:sabre_head_2"
-  },
-  "result": {
-    "item": "advancedlootableweapons:sabre_head_3"
-  }
-}

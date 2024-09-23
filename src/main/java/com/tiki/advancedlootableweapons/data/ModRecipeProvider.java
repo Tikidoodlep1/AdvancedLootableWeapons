@@ -1,7 +1,6 @@
 package com.tiki.advancedlootableweapons.data;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
-import com.tiki.advancedlootableweapons.block.TanningRackBlock;
 import com.tiki.advancedlootableweapons.data.recipes.*;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
 import com.tiki.advancedlootableweapons.init.BlockInit;
@@ -544,136 +543,131 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
         for (WeaponMaterial material : WeaponMaterial.LOOKUP) {
-            if (material.metalStats() != null) {
+            if (material.canBeForged()) {
                 ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(material.defaultItem().get());
                 AnvilForgingRecipeBuilder.anvilMaterialForging(material.tier().getRepairIngredient(), toolHead)
-                        .save(recipeConsumer, AdvancedLootableWeapons.id("anvil_forging_tool_head_" + material.name()));
+                        .save(recipeConsumer, AdvancedLootableWeapons.id(material.name()+"/anvil_forging_"+getItemName(toolHead.getItem())));
             }
         }
 
         //tool rods
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TOOL_ROD.get(), recipeConsumer);
-        toolForging(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get(), recipeConsumer);
-        twoToolForging(ItemInit.TOOL_ROD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONG_TOOL_ROD.get(), recipeConsumer);
-
-
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),
-                        ItemInit.TOOL_HEAD.get().makeIngredient(ItemInit.STEEL_INGOT.get()),new ItemStack(ItemInit.STEEL_ARMOR_PLATE.get(),3))
-                .save(recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.TOOL_ROD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_ROD.get(), ItemInit.TOOL_ROD_2.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.TOOL_ROD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONG_TOOL_ROD.get(), recipeConsumer);
 
         // battleaxe
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.BATTLEAXE_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.BATTLEAXE_HEAD.get(), ItemInit.BATTLEAXE_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.BATTLEAXE_HEAD_2.get(), ItemInit.BATTLEAXE_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.BATTLEAXE_HEAD_3.get(), ItemInit.BATTLEAXE_HEAD_4.get(), recipeConsumer);
-        toolForging(ItemInit.BATTLEAXE_HEAD_4.get(), ItemInit.BATTLEAXE_HEAD_5.get(), recipeConsumer);
-        twoToolForging(ItemInit.BATTLEAXE_HEAD_5.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.BATTLEAXE.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.BATTLEAXE_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.BATTLEAXE_HEAD.get(), ItemInit.BATTLEAXE_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.BATTLEAXE_HEAD_2.get(), ItemInit.BATTLEAXE_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.BATTLEAXE_HEAD_3.get(), ItemInit.BATTLEAXE_HEAD_4.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.BATTLEAXE_HEAD_4.get(), ItemInit.BATTLEAXE_HEAD_5.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.BATTLEAXE_HEAD_5.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.BATTLEAXE.get(), recipeConsumer);
 
         // cleaver
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.CLEAVER_HEAD.get(), recipeConsumer);
-        twoToolForging(ItemInit.CLEAVER_HEAD.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.CLEAVER.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.CLEAVER_HEAD.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.CLEAVER_HEAD.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.CLEAVER.get(), recipeConsumer);
 
         //dagger chain
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get(), recipeConsumer);
-        twoToolForging(ItemInit.DAGGER_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.DAGGER.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.DAGGER_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.DAGGER_HEAD.get(), ItemInit.DAGGER_HEAD_2.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.DAGGER_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.DAGGER.get(), recipeConsumer);
 
         // kabutowari
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.KABUTOWARI_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.KABUTOWARI_HEAD.get(), ItemInit.KABUTOWARI_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.KABUTOWARI_HEAD_2.get(), ItemInit.KABUTOWARI_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.KABUTOWARI_HEAD_3.get(), ItemInit.KABUTOWARI_HEAD_4.get(), recipeConsumer);
-        toolForging(ItemInit.KABUTOWARI_HEAD_4.get(), ItemInit.KABUTOWARI_HEAD_5.get(), recipeConsumer);
-        twoToolForging(ItemInit.KABUTOWARI_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.KABUTOWARI.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.KABUTOWARI_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.KABUTOWARI_HEAD.get(), ItemInit.KABUTOWARI_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.KABUTOWARI_HEAD_2.get(), ItemInit.KABUTOWARI_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.KABUTOWARI_HEAD_3.get(), ItemInit.KABUTOWARI_HEAD_4.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.KABUTOWARI_HEAD_4.get(), ItemInit.KABUTOWARI_HEAD_5.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.KABUTOWARI_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.KABUTOWARI.get(), recipeConsumer);
 
         // kodachi
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.KODACHI_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.KODACHI_HEAD.get(), ItemInit.KODACHI_HEAD_2.get(), recipeConsumer);
-        twoToolForging(ItemInit.KODACHI_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.KODACHI.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.KODACHI_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.KODACHI_HEAD.get(), ItemInit.KODACHI_HEAD_2.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.KODACHI_HEAD_2.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.KODACHI.get(), recipeConsumer);
 
         // longsword
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.LONGSWORD_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.LONGSWORD_HEAD.get(), ItemInit.LONGSWORD_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.LONGSWORD_HEAD_2.get(), ItemInit.LONGSWORD_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.LONGSWORD_HEAD_3.get(), ItemInit.LONGSWORD_HEAD_4.get(), recipeConsumer);
-        twoToolForging(ItemInit.LONGSWORD_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONGSWORD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.LONGSWORD_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.LONGSWORD_HEAD.get(), ItemInit.LONGSWORD_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.LONGSWORD_HEAD_2.get(), ItemInit.LONGSWORD_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.LONGSWORD_HEAD_3.get(), ItemInit.LONGSWORD_HEAD_4.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.LONGSWORD_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.LONGSWORD.get(), recipeConsumer);
 
         // mace
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.MACE_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.MACE_HEAD.get(), ItemInit.MACE_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.MACE_HEAD_2.get(), ItemInit.MACE_HEAD_3.get(), recipeConsumer);
-        twoToolForging(ItemInit.MACE_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.MACE.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.MACE_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.MACE_HEAD.get(), ItemInit.MACE_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.MACE_HEAD_2.get(), ItemInit.MACE_HEAD_3.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.MACE_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.MACE.get(), recipeConsumer);
 
         // makhaira
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.MAKHAIRA_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.MAKHAIRA_HEAD.get(), ItemInit.MAKHAIRA_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.MAKHAIRA_HEAD_2.get(), ItemInit.MAKHAIRA_HEAD_3.get(), recipeConsumer);
-        twoToolForging(ItemInit.MAKHAIRA_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.MAKHAIRA.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.MAKHAIRA_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.MAKHAIRA_HEAD.get(), ItemInit.MAKHAIRA_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.MAKHAIRA_HEAD_2.get(), ItemInit.MAKHAIRA_HEAD_3.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.MAKHAIRA_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.MAKHAIRA.get(), recipeConsumer);
 
         // nodachi
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.NODACHI_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.NODACHI_HEAD.get(), ItemInit.NODACHI_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.NODACHI_HEAD_2.get(), ItemInit.NODACHI_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.NODACHI_HEAD_3.get(), ItemInit.NODACHI_HEAD_4.get(), recipeConsumer);
-        twoToolForging(ItemInit.NODACHI_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.NODACHI.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.NODACHI_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.NODACHI_HEAD.get(), ItemInit.NODACHI_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.NODACHI_HEAD_2.get(), ItemInit.NODACHI_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.NODACHI_HEAD_3.get(), ItemInit.NODACHI_HEAD_4.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.NODACHI_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.NODACHI.get(), recipeConsumer);
 
         // rapier
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.RAPIER_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.RAPIER_HEAD.get(), ItemInit.RAPIER_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.RAPIER_HEAD_2.get(), ItemInit.RAPIER_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.RAPIER_HEAD_3.get(), ItemInit.RAPIER_HEAD_4.get(), recipeConsumer);
-        twoToolForging(ItemInit.RAPIER_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.RAPIER.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.RAPIER_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.RAPIER_HEAD.get(), ItemInit.RAPIER_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.RAPIER_HEAD_2.get(), ItemInit.RAPIER_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.RAPIER_HEAD_3.get(), ItemInit.RAPIER_HEAD_4.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.RAPIER_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.RAPIER.get(), recipeConsumer);
 
         // sabre
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.SABRE_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.SABRE_HEAD.get(), ItemInit.SABRE_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.SABRE_HEAD_2.get(), ItemInit.SABRE_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.SABRE_HEAD_3.get(), ItemInit.SABRE_HEAD_4.get(), recipeConsumer);
-        twoToolForging(ItemInit.SABRE_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.SABRE.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.SABRE_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.SABRE_HEAD.get(), ItemInit.SABRE_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.SABRE_HEAD_2.get(), ItemInit.SABRE_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.SABRE_HEAD_3.get(), ItemInit.SABRE_HEAD_4.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.SABRE_HEAD_4.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.SABRE.get(), recipeConsumer);
 
         // spear
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.SPEAR_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.SPEAR_HEAD.get(), ItemInit.SPEAR_HEAD_2.get(), recipeConsumer);
-        twoToolForging(ItemInit.SPEAR_HEAD_2.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.SPEAR.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.SPEAR_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.SPEAR_HEAD.get(), ItemInit.SPEAR_HEAD_2.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.SPEAR_HEAD_2.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.SPEAR.get(), recipeConsumer);
 
         // staff
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.STAFF_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.STAFF_HEAD.get(), ItemInit.STAFF_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.STAFF_HEAD_2.get(), ItemInit.STAFF_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.STAFF_HEAD_3.get(), ItemInit.STAFF_HEAD_4.get(), recipeConsumer);
-        twoToolForging(ItemInit.STAFF_HEAD_4.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.STAFF.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.STAFF_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.STAFF_HEAD.get(), ItemInit.STAFF_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.STAFF_HEAD_2.get(), ItemInit.STAFF_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.STAFF_HEAD_3.get(), ItemInit.STAFF_HEAD_4.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.STAFF_HEAD_4.get(), ItemInit.LONG_TOOL_ROD.get(), ItemInit.STAFF.get(), recipeConsumer);
 
         // talwar
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.TALWAR_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.TALWAR_HEAD.get(), ItemInit.TALWAR_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.TALWAR_HEAD_2.get(), ItemInit.TALWAR_HEAD_3.get(), recipeConsumer);
-        twoToolForging(ItemInit.TALWAR_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.TALWAR.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.TALWAR_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TALWAR_HEAD.get(), ItemInit.TALWAR_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TALWAR_HEAD_2.get(), ItemInit.TALWAR_HEAD_3.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.TALWAR_HEAD_3.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.TALWAR.get(), recipeConsumer);
 
         // zweihander
 
-        toolForging(ItemInit.TOOL_HEAD.get(), ItemInit.ZWEIHANDER_HEAD.get(), recipeConsumer);
-        toolForging(ItemInit.ZWEIHANDER_HEAD.get(), ItemInit.ZWEIHANDER_HEAD_2.get(), recipeConsumer);
-        toolForging(ItemInit.ZWEIHANDER_HEAD_2.get(), ItemInit.ZWEIHANDER_HEAD_3.get(), recipeConsumer);
-        toolForging(ItemInit.ZWEIHANDER_HEAD_3.get(), ItemInit.ZWEIHANDER_HEAD_4.get(), recipeConsumer);
-        toolForging(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(), recipeConsumer);
-        twoToolForging(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.ZWEIHANDER.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.ZWEIHANDER_HEAD.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.ZWEIHANDER_HEAD.get(), ItemInit.ZWEIHANDER_HEAD_2.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.ZWEIHANDER_HEAD_2.get(), ItemInit.ZWEIHANDER_HEAD_3.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.ZWEIHANDER_HEAD_3.get(), ItemInit.ZWEIHANDER_HEAD_4.get(), recipeConsumer);
+        toolForgingFamily(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(), recipeConsumer);
+        twoToolForgingFamily(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.ZWEIHANDER.get(), recipeConsumer);
 
-        toolForging(ItemInit.TOOL_HEAD.get(),ItemInit.CHAIN_RING.get(),6,recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(),ItemInit.CHAIN_RING.get(),6,recipeConsumer);
 
         //armors
 
@@ -705,20 +699,59 @@ public class ModRecipeProvider extends RecipeProvider {
 
         armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,ItemInit.DIAMOND_STUDDED_STEEL_SET,recipeConsumer);
 
+        //armor plates
 
+        armorPlate(WeaponMaterial.IRON, ItemInit.IRON_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.GOLD, ItemInit.GOLD_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.KOBOLD_STEEL, ItemInit.KOBOLD_STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.COPPER, ItemInit.COPPER_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.SILVER, ItemInit.SILVER_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.BRONZE, ItemInit.BRONZE_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.PLATINUM, ItemInit.PLATINUM_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.STEEL, ItemInit.STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.SHADOW_PLATINUM, ItemInit.SHADOW_PLATINUM_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.FROST_STEEL, ItemInit.FROST_STEEL_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.REFINED_OBSIDIAN, ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.CRYSTALLITE, ItemInit.CRYSTALLITE_ARMOR_PLATE.get(), recipeConsumer);
+        armorPlate(WeaponMaterial.DUSKSTEEL, ItemInit.DUSKSTEEL_ARMOR_PLATE.get(), recipeConsumer);    }
 
+    protected void armorPlate(WeaponMaterial material,Item result,Consumer<FinishedRecipe> recipeConsumer) {
+        Item mat = material.defaultItem().get();
+        Ingredient ingredient = ItemInit.TOOL_HEAD.get().makeIngredient(mat);
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ingredient,ingredient, new ItemStack(result, 3))
+                .save(recipeConsumer);
     }
 
-    protected void toolForging(ItemLike input, ItemLike result, Consumer<FinishedRecipe> consumer) {
-        toolForging(input,result,1,consumer);
+    protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result, Consumer<FinishedRecipe> consumer) {
+        toolForgingFamily(input,result,1,consumer);
     }
 
-    protected void toolForging(ItemLike input, ItemLike result, int count,Consumer<FinishedRecipe> consumer) {
-        AnvilForgingRecipeBuilder.anvilToolForging(input, result,count).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
+
+    //tool -> tool
+    protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result,int count, Consumer<FinishedRecipe> consumer) {
+        for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
+            if (weaponMaterial.canBeForged()) {
+                Item mat = weaponMaterial.defaultItem().get();
+                ItemStack part = result.createPart(mat);
+                part.setCount(count);
+                AnvilForgingRecipeBuilder.anvilToolForging(input.makeIngredient(mat),
+                        part)
+                        .save(consumer,AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_"+getItemName(result)));
+            }
+        }
     }
 
-    protected void twoToolForging(ItemLike input, ItemLike input2, ItemLike result, Consumer<FinishedRecipe> consumer) {
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(input, input2, result).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
+    //tool + tool -> tool
+    protected void twoToolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem input2, ItemLike result, Consumer<FinishedRecipe> consumer) {
+        for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
+            if (weaponMaterial.canBeForged()) {
+                Item mat = weaponMaterial.defaultItem().get();
+                ItemStack weapon = new ItemStack(result);
+                HeatableToolPartItem.setCraftingMaterial(weapon,mat);
+                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon)
+                        .save(consumer, AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_" +getItemName(result)));
+            }
+        }
     }
 
     protected static void twoByTwo(Consumer<FinishedRecipe> consumer, ItemLike result, Item ing) {
