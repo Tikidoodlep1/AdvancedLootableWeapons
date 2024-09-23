@@ -313,6 +313,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(recipeConsumer);
 
+        ShapelessRecipeBuilder.shapeless(ItemInit.DIAMOND_STUDDED_STEEL_ARMOR_PLATE.get(), 3)
+                .requires(Items.LEATHER)
+                .requires(Items.LEATHER)
+                .requires(Items.LEATHER)
+                .requires(Items.DIAMOND)
+                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .save(recipeConsumer);
+
         unboundArmorSet(Items.LEATHER, ItemInit.UNBOUND_LEATHER_SET, recipeConsumer);
 
         twoShapeless(ItemInit.IRON_CHAIN_BINDING.get(), ItemInit.IRON_CHAIN_LINK.get(), recipeConsumer);
