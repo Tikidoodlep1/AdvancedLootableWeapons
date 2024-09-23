@@ -9,17 +9,28 @@ import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.*;
 
+import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
+import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
+import com.tiki.advancedlootableweapons.util.MCVersion;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -70,6 +81,7 @@ public class AdvancedLootableWeapons
         eventBus.addListener(ModDatagen::start);
         eventBus.addGenericListener(GlobalLootModifierSerializer.class,this::registerLootSerializers);
         MinecraftForge.EVENT_BUS.addListener(this::attributeModifiers);
+        MinecraftForge.EVENT_BUS.addListener(this::leftClickBlock);
     }
 
     private void attributeModifiers(ItemAttributeModifierEvent event) {
@@ -92,6 +104,24 @@ public class AdvancedLootableWeapons
                 }
             }
         }
+    }
+
+    private void leftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        Player player = event.getPlayer();
+        Level level = player.level;
+        BlockPos pos = event.getPos();
+        BlockState state = level.getBlockState(pos);
+        ItemStack stack = event.getItemStack();
+
+        if (state.is(BlockTags.ANVIL) && stack.getItem() instanceof ForgeHammerItem) {
+            if (!level.isClientSide) {
+                player.openMenu(new SimpleMenuProvider((pContainerId, pPlayerInventory, pPlayer) -> new
+                        AnvilForgingMenu(pContainerId, pPlayerInventory, ContainerLevelAccess.create(level, pos)),
+                        MCVersion.translation("container.advancedlootableweapons.anvil_forging")));
+            }
+            event.setCanceled(true);
+        }
+
     }
 
 

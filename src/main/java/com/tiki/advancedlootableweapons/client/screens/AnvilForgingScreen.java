@@ -2,6 +2,7 @@ package com.tiki.advancedlootableweapons.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.recipes.AbstractAnvilForgingRecipe;
 import net.minecraft.client.Minecraft;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.player.Inventory;
 import java.util.List;
 
 public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu> {
-    private static final ResourceLocation BG_LOCATION = new ResourceLocation("textures/gui/container/stonecutter.png");
+    private static final ResourceLocation BG_LOCATION = AdvancedLootableWeapons.id("textures/gui/anvil_forging.png");//stonecutter clone for now
     private static final int SCROLLER_WIDTH = 12;
     private static final int SCROLLER_HEIGHT = 15;
     private static final int RECIPES_COLUMNS = 4;
