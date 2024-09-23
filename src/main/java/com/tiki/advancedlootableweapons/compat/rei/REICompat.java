@@ -100,7 +100,7 @@ public class REICompat implements REIClientPlugin {
         List<AbstractAnvilForgingRecipe> sequencedRecipes = new ArrayList<>();
 
         for (AbstractAnvilForgingRecipe abstractAnvilForgingRecipe : allRecipes) {
-            if (abstractAnvilForgingRecipe.isUseSequence()) {
+            if (abstractAnvilForgingRecipe.isUseSequence() && false) {
                 sequencedRecipes.add(abstractAnvilForgingRecipe);
             } else {
                 nonSequencedRecipes.add(abstractAnvilForgingRecipe);
@@ -130,7 +130,7 @@ public class REICompat implements REIClientPlugin {
             }
 
 
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 8; i++) {
                 for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                     ItemStack result = toolrecipe.getResultItem();
                     ItemStack stack = new ItemStack(result.getItem());

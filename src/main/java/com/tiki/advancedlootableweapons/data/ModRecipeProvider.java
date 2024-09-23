@@ -543,10 +543,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
     protected void anvilForging(Consumer<FinishedRecipe> recipeConsumer) {
         for (WeaponMaterial material : WeaponMaterial.LOOKUP) {
-            if (material.metalStats() != null) {
+            if (material.canBeForged()) {
                 ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(material.defaultItem().get());
                 AnvilForgingRecipeBuilder.anvilMaterialForging(material.tier().getRepairIngredient(), toolHead)
-                        .save(recipeConsumer, AdvancedLootableWeapons.id("anvil_forging_tool_head_" + material.name()));
+                        .save(recipeConsumer, AdvancedLootableWeapons.id(material.name()+"/anvil_forging_"+getItemName(toolHead.getItem())));
             }
         }
 
@@ -722,13 +722,9 @@ public class ModRecipeProvider extends RecipeProvider {
                 part.setCount(count);
                 AnvilForgingRecipeBuilder.anvilToolForging(input.makeIngredient(mat),
                         part)
-                        .save(consumer,AdvancedLootableWeapons.id("anvil_tool_forging_"+weaponMaterial.name()+"_"+getItemName(result)));
+                        .save(consumer,AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_"+getItemName(result)));
             }
         }
-    }
-
-    protected void twoToolForging(ItemLike input, ItemLike input2, ItemLike result, Consumer<FinishedRecipe> consumer) {
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(input, input2, result).save(consumer, new ResourceLocation("anvil_forging_" + getItemName(result)));
     }
 
     //tool + tool -> tool
@@ -738,7 +734,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 Item mat = weaponMaterial.defaultItem().get();
                 ItemStack weapon = new ItemStack(result);
                 HeatableToolPartItem.setCraftingMaterial(weapon,mat);
-                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon).save(consumer, new ResourceLocation("anvil_tool_forging_" +weaponMaterial.name()+"_" +getItemName(result)));
+                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon).save(consumer, new ResourceLocation(weaponMaterial.name()+"/anvil_tool_forging_" +getItemName(result)));
             }
         }
     }
