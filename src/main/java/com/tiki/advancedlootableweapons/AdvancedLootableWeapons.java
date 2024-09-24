@@ -135,19 +135,16 @@ public class AdvancedLootableWeapons
         if (isValidBiome(event.getCategory())) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
             generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_SILVER_EXTRA);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_TIN);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_PLATINUM_EXTRA);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_CRYSTALLITE_EXTRA);
         }
-    }
-
-    public static void onBiomeLoad(BiomeLoadingEvent event) {
-
     }
 
     private static boolean isValidBiome(Biome.BiomeCategory biomeCategory) {
         //If this does weird things to unclassified biomes (Category.NONE), then we should also mark that biome as invalid
-        return biomeCategory != Biome.BiomeCategory.THEEND && biomeCategory != Biome.BiomeCategory.NETHER;
+        return biomeCategory != Biome.BiomeCategory.THEEND && biomeCategory != Biome.BiomeCategory.NETHER && biomeCategory != Biome.BiomeCategory.NONE;//void uses none
     }
-
-
 
     private void registerLootSerializers(@Nonnull final RegistryEvent.Register<GlobalLootModifierSerializer<?>> event) {
         IForgeRegistry<GlobalLootModifierSerializer<?>> registry = event.getRegistry();
