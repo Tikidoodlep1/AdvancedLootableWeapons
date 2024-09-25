@@ -62,6 +62,9 @@ public class ModBlockLoot extends BlockLoot {
 
         dropSelf(BlockInit.DIORITE_CLAY_POWDER.get());
         dropSelf(BlockInit.GRANITE_CLAY_POWDER.get());
+
+        dropSelf(BlockInit.GYPSUM.get());
+        dropSelf(BlockInit.DOLOMITE.get());
     }
 
     @Override

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:milk_of_lime_bucket"
+    ]
+  },
+  "criteria": {
+    "has_gypsum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:gypsum"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:milk_of_lime_bucket"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gypsum",
+      "has_the_recipe"
+    ]
+  ]
+}

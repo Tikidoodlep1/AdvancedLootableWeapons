@@ -88,9 +88,7 @@ public class ModLangProvider extends LanguageProvider {
     }
 
     protected void blockTranslations() {
-
         BlockInit.BLOCKS.getEntries().forEach(this::addDefaultBlock);
-        add("block.advancedlootableweapons.advanced_forge_1", "Advanced Forge");
     }
 
     protected void itemTranslations() {

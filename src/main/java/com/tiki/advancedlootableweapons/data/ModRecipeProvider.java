@@ -51,7 +51,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void tanningRack(Consumer<FinishedRecipe> recipeConsumer) {
-        TanningRackRecipeBuilder.tanning(Items.LEATHER,ItemInit.DELIMED_HIDE.get()).save(recipeConsumer);
+        TanningRackRecipeBuilder.tanning(Items.LEATHER, ItemInit.DELIMED_HIDE.get()).save(recipeConsumer);
     }
 
     protected void crafting(Consumer<FinishedRecipe> recipeConsumer) {
@@ -313,6 +313,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(recipeConsumer);
 
+        ShapelessRecipeBuilder.shapeless(ItemInit.MILK_OF_LIME_BUCKET.get())
+                .requires(Items.WATER_BUCKET)
+                .requires(BlockInit.GYPSUM.get())
+                .unlockedBy(getHasName(BlockInit.GYPSUM.get()), has(BlockInit.GYPSUM.get()))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(ItemInit.MAGNESIUM_LACTATE_BUCKET.get())
+                .requires(Items.WATER_BUCKET)
+                .requires(BlockInit.DOLOMITE.get())
+                .unlockedBy(getHasName(BlockInit.DOLOMITE.get()), has(BlockInit.DOLOMITE.get()))
+                .save(recipeConsumer);
+
         unboundArmorSet(Items.LEATHER, ItemInit.UNBOUND_LEATHER_SET, recipeConsumer);
 
         twoShapeless(ItemInit.IRON_CHAIN_BINDING.get(), ItemInit.IRON_CHAIN_LINK.get(), recipeConsumer);
@@ -378,16 +390,16 @@ public class ModRecipeProvider extends RecipeProvider {
         chainLink(ItemInit.DUSKSTEEL_CHAIN_LINK.get(), WeaponMaterial.DUSKSTEEL.defaultItem().get(), recipeConsumer);
     }
 
-    protected void chainLink(Item result,Item material,Consumer<FinishedRecipe> consumer) {
+    protected void chainLink(Item result, Item material, Consumer<FinishedRecipe> consumer) {
         ItemStack stack = ItemInit.CHAIN_RING.get().createPart(material);
-        Ingredient chain_ring = PartialNBTIngredient.of(stack.getItem(),stack.getTag());
+        Ingredient chain_ring = PartialNBTIngredient.of(stack.getItem(), stack.getTag());
 
         ShapelessRecipeBuilder.shapeless(result)
                 //.serializer(ModRecipeSerializers.CHAIN_LINK.get())
                 .requires(chain_ring)
                 .requires(chain_ring)
                 .requires(chain_ring)
-                .unlockedBy(getHasName(ItemInit.CHAIN_RING.get()),has(ItemInit.CHAIN_RING.get()))
+                .unlockedBy(getHasName(ItemInit.CHAIN_RING.get()), has(ItemInit.CHAIN_RING.get()))
                 .save(consumer);
     }
 
@@ -546,7 +558,7 @@ public class ModRecipeProvider extends RecipeProvider {
             if (material.canBeForged()) {
                 ItemStack toolHead = ItemInit.TOOL_HEAD.get().createPart(material.defaultItem().get());
                 AnvilForgingRecipeBuilder.anvilMaterialForging(material.tier().getRepairIngredient(), toolHead)
-                        .save(recipeConsumer, AdvancedLootableWeapons.id(material.name()+"/anvil_forging_"+getItemName(toolHead.getItem())));
+                        .save(recipeConsumer, AdvancedLootableWeapons.id(material.name() + "/anvil_forging_" + getItemName(toolHead.getItem())));
             }
         }
 
@@ -667,37 +679,37 @@ public class ModRecipeProvider extends RecipeProvider {
         toolForgingFamily(ItemInit.ZWEIHANDER_HEAD_4.get(), ItemInit.ZWEIHANDER_HEAD_5.get(), recipeConsumer);
         twoToolForgingFamily(ItemInit.ZWEIHANDER_HEAD_5.get(), ItemInit.TOOL_ROD_2.get(), ItemInit.ZWEIHANDER.get(), recipeConsumer);
 
-        toolForgingFamily(ItemInit.TOOL_HEAD.get(),ItemInit.CHAIN_RING.get(),6,recipeConsumer);
+        toolForgingFamily(ItemInit.TOOL_HEAD.get(), ItemInit.CHAIN_RING.get(), 6, recipeConsumer);
 
         //armors
 
 
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_BRONZE_SET,ItemInit.BRONZE_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_COPPER_SET,ItemInit.COPPER_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_CRYSTALLITE_SET,ItemInit.CRYSTALLITE_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DUSKSTEEL_SET,ItemInit.DUSKSTEEL_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_FROST_STEEL_SET,ItemInit.FROST_STEEL_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_KOBOLD_STEEL_SET,ItemInit.KOBOLD_STEEL_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_PLATINUM_SET,ItemInit.PLATINUM_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SHADOW_PLATINUM_SET,ItemInit.SHADOW_PLATINUM_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SILVER_SET,ItemInit.SILVER_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_STEEL_SET,ItemInit.STEEL_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_BRONZE_SET, ItemInit.BRONZE_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_COPPER_SET, ItemInit.COPPER_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_CRYSTALLITE_SET, ItemInit.CRYSTALLITE_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_DUSKSTEEL_SET, ItemInit.DUSKSTEEL_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_FROST_STEEL_SET, ItemInit.FROST_STEEL_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_KOBOLD_STEEL_SET, ItemInit.KOBOLD_STEEL_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_PLATINUM_SET, ItemInit.PLATINUM_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_SHADOW_PLATINUM_SET, ItemInit.SHADOW_PLATINUM_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_SILVER_SET, ItemInit.SILVER_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_STEEL_SET, ItemInit.STEEL_SET, recipeConsumer);
 
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_BRONZE_CHAIN_SET,ItemInit.BRONZE_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_COPPER_CHAIN_SET,ItemInit.COPPER_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET,ItemInit.CRYSTALLITE_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET,ItemInit.DUSKSTEEL_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_FROST_STEEL_CHAIN_SET,ItemInit.FROST_STEEL_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_KOBOLD_STEEL_CHAIN_SET,ItemInit.KOBOLD_STEEL_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_PLATINUM_CHAIN_SET,ItemInit.PLATINUM_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SHADOW_PLATINUM_CHAIN_SET,ItemInit.SHADOW_PLATINUM_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_SILVER_CHAIN_SET,ItemInit.SILVER_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_STEEL_CHAIN_SET,ItemInit.STEEL_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_BRONZE_CHAIN_SET, ItemInit.BRONZE_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_COPPER_CHAIN_SET, ItemInit.COPPER_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET, ItemInit.CRYSTALLITE_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET, ItemInit.DUSKSTEEL_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_FROST_STEEL_CHAIN_SET, ItemInit.FROST_STEEL_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_KOBOLD_STEEL_CHAIN_SET, ItemInit.KOBOLD_STEEL_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_PLATINUM_CHAIN_SET, ItemInit.PLATINUM_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_SHADOW_PLATINUM_CHAIN_SET, ItemInit.SHADOW_PLATINUM_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_SILVER_CHAIN_SET, ItemInit.SILVER_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_STEEL_CHAIN_SET, ItemInit.STEEL_CHAIN_SET, recipeConsumer);
 
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_GOLD_CHAIN_SET,ItemInit.GOLD_CHAIN_SET,recipeConsumer);
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_IRON_CHAIN_SET,ItemInit.IRON_CHAIN_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_GOLD_CHAIN_SET, ItemInit.GOLD_CHAIN_SET, recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_IRON_CHAIN_SET, ItemInit.IRON_CHAIN_SET, recipeConsumer);
 
-        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS),ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET,ItemInit.DIAMOND_STUDDED_STEEL_SET,recipeConsumer);
+        armorSetForging(Ingredient.of(ModItemTags.CHAIN_BINDINGS), ItemInit.UNBOUND_DIAMOND_STUDDED_STEEL_SET, ItemInit.DIAMOND_STUDDED_STEEL_SET, recipeConsumer);
 
         //armor plates
 
@@ -713,30 +725,31 @@ public class ModRecipeProvider extends RecipeProvider {
         armorPlate(WeaponMaterial.FROST_STEEL, ItemInit.FROST_STEEL_ARMOR_PLATE.get(), recipeConsumer);
         armorPlate(WeaponMaterial.REFINED_OBSIDIAN, ItemInit.REFINED_OBSIDIAN_ARMOR_PLATE.get(), recipeConsumer);
         armorPlate(WeaponMaterial.CRYSTALLITE, ItemInit.CRYSTALLITE_ARMOR_PLATE.get(), recipeConsumer);
-        armorPlate(WeaponMaterial.DUSKSTEEL, ItemInit.DUSKSTEEL_ARMOR_PLATE.get(), recipeConsumer);    }
+        armorPlate(WeaponMaterial.DUSKSTEEL, ItemInit.DUSKSTEEL_ARMOR_PLATE.get(), recipeConsumer);
+    }
 
-    protected void armorPlate(WeaponMaterial material,Item result,Consumer<FinishedRecipe> recipeConsumer) {
+    protected void armorPlate(WeaponMaterial material, Item result, Consumer<FinishedRecipe> recipeConsumer) {
         Item mat = material.defaultItem().get();
         Ingredient ingredient = ItemInit.TOOL_HEAD.get().makeIngredient(mat);
-        AnvilForgingRecipeBuilder.anvilTwoToolForging(ingredient,ingredient, new ItemStack(result, 3))
+        AnvilForgingRecipeBuilder.anvilTwoToolForging(ingredient, ingredient, new ItemStack(result, 3))
                 .save(recipeConsumer);
     }
 
     protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result, Consumer<FinishedRecipe> consumer) {
-        toolForgingFamily(input,result,1,consumer);
+        toolForgingFamily(input, result, 1, consumer);
     }
 
 
     //tool -> tool
-    protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result,int count, Consumer<FinishedRecipe> consumer) {
+    protected void toolForgingFamily(HeatableToolPartItem input, HeatableToolPartItem result, int count, Consumer<FinishedRecipe> consumer) {
         for (WeaponMaterial weaponMaterial : WeaponMaterial.LOOKUP) {
             if (weaponMaterial.canBeForged()) {
                 Item mat = weaponMaterial.defaultItem().get();
                 ItemStack part = result.createPart(mat);
                 part.setCount(count);
                 AnvilForgingRecipeBuilder.anvilToolForging(input.makeIngredient(mat),
-                        part)
-                        .save(consumer,AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_"+getItemName(result)));
+                                part)
+                        .save(consumer, AdvancedLootableWeapons.id(weaponMaterial.name() + "/anvil_tool_forging_" + getItemName(result)));
             }
         }
     }
@@ -747,9 +760,9 @@ public class ModRecipeProvider extends RecipeProvider {
             if (weaponMaterial.canBeForged()) {
                 Item mat = weaponMaterial.defaultItem().get();
                 ItemStack weapon = new ItemStack(result);
-                HeatableToolPartItem.setCraftingMaterial(weapon,mat);
-                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat),weapon)
-                        .save(consumer, AdvancedLootableWeapons.id(weaponMaterial.name()+"/anvil_tool_forging_" +getItemName(result)));
+                HeatableToolPartItem.setCraftingMaterial(weapon, mat);
+                AnvilForgingRecipeBuilder.anvilTwoToolForging(input.makeIngredient(mat), input2.makeIngredient(mat), weapon)
+                        .save(consumer, AdvancedLootableWeapons.id(weaponMaterial.name() + "/anvil_tool_forging_" + getItemName(result)));
             }
         }
     }
@@ -763,7 +776,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected static void twoShapeless(ItemLike result, Item ing, Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(result)
                 .requires(ing).requires(ing)
-                .unlockedBy(getHasName(ing),has(ing))
+                .unlockedBy(getHasName(ing), has(ing))
                 .save(consumer);
     }
 
@@ -840,7 +853,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected <I extends Item> void armorSet(Ingredient material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
-                            Map<EquipmentSlot, RegistryObject<I>> finished, Consumer<FinishedRecipe> consumer) {
+                                             Map<EquipmentSlot, RegistryObject<I>> finished, Consumer<FinishedRecipe> consumer) {
         for (EquipmentSlot slot : Utils.ARMOR_SLOTS.keySet()) {
             RegistryObject<UnboundArmorItem> unbound = map.get(slot);
             RegistryObject<I> bound = finished.get(slot);
@@ -853,11 +866,11 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void armorSetForging(Ingredient material, Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
-                            Map<EquipmentSlot, RegistryObject<BoundArmorItem>> finished, Consumer<FinishedRecipe> consumer) {
+                                   Map<EquipmentSlot, RegistryObject<BoundArmorItem>> finished, Consumer<FinishedRecipe> consumer) {
         for (EquipmentSlot slot : Utils.ARMOR_SLOTS.keySet()) {
             RegistryObject<UnboundArmorItem> unbound = map.get(slot);
             RegistryObject<BoundArmorItem> bound = finished.get(slot);
-            AnvilForgingRecipeBuilder.anvilArmorForging(unbound.get(),material,new ItemStack(bound.get()))
+            AnvilForgingRecipeBuilder.anvilArmorForging(unbound.get(), material, new ItemStack(bound.get()))
                     .unlockedBy(getHasName(unbound.get()), has(unbound.get()))
                     .save(consumer);
         }

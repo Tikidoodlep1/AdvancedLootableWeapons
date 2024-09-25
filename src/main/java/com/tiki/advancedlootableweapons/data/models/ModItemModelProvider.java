@@ -105,6 +105,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.DIORITE_BRICKS.get());
         simpleBlockItem(BlockInit.GRANITE_BRICKS.get());
 
+        simpleBlockItem(BlockInit.GYPSUM.get());
+        simpleBlockItem(BlockInit.DOLOMITE.get());
+
         oneLayerItem(ItemInit.DIORITE_CLAY_BALL.get());
         oneLayerItem(ItemInit.GRANITE_CLAY_BALL.get());
 

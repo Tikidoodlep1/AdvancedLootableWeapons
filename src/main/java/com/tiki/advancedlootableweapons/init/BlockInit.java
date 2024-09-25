@@ -63,7 +63,11 @@ public class BlockInit {
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
 	public static final RegistryObject<Block> DIORITE_BRICKS = registerBlock("diorite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
-	
+	public static final RegistryObject<Block> GYPSUM = registerBlock("gypsum",() -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
+	public static final RegistryObject<Block> DOLOMITE = registerBlock("dolomite",() -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
+
 	//Ores
 	public static final RegistryObject<Block> SILVER_ORE = registerBlock("silver_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.3F).explosionResistance(3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);

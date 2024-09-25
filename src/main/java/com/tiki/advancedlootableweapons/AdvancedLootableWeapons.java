@@ -138,6 +138,9 @@ public class AdvancedLootableWeapons
             generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_TIN);
             generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_PLATINUM_EXTRA);
             generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_CRYSTALLITE_EXTRA);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_GYPSUM);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_FELDSPAR);
+            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_DOLOMITE);
         }
     }
 
@@ -160,7 +163,6 @@ public class AdvancedLootableWeapons
 
     private void clientSetup(final FMLClientSetupEvent event) {
         ALWClient.setup(event);
-
     }
 
     public static ResourceLocation id(String path) {

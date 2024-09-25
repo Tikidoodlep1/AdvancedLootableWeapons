@@ -53,6 +53,9 @@ public class ModBlockstateProvider extends BlockStateProvider {
         simpleBlock(BlockInit.DIORITE_BRICKS.get());
         simpleBlock(BlockInit.GRANITE_BRICKS.get());
 
+        simpleBlock(BlockInit.GYPSUM.get());
+        simpleBlock(BlockInit.DOLOMITE.get());
+
         simpleBlock(BlockInit.MILK_OF_LIME.get(),
                 ConfiguredModel.builder().modelFile(models().getBuilder("milk_of_lime")
                 .texture("particle", FluidInit.MOL_TEXTURE)).build());

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:magnesium_lactate_bucket"
+    ]
+  },
+  "criteria": {
+    "has_dolomite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:dolomite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:magnesium_lactate_bucket"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dolomite",
+      "has_the_recipe"
+    ]
+  ]
+}
