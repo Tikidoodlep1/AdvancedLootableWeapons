@@ -48,14 +48,37 @@ public class SequencedAnvilForgingCategory implements DisplayCategory<SequencedA
         int size = inputs.size();
         for (int i = 0; i < size; i+=2) {
             EntryIngredient entryIngredient = inputs.get(i);
-            EntryIngredient entryIngredient2 = inputs.get(i+1);
-            int x = 9 * (i % 8);
+            EntryIngredient entryIngredient2 = inputs.get(i + 1);
 
-            int y = 45 * (i/8);
+            int gap = 14;
 
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 2+y)).entries(entryIngredient).markInput().markOutput());
-            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 20+y)).entries(entryIngredient2).markInput().markOutput());
+            int x = gap * (i % 8);
 
+            int y = 50 * (i / 8);
+
+
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 12 + y)).entries(entryIngredient).markInput().markOutput());
+            widgets.add(Widgets.createSlot(new Point(startPoint.x + 10 + x, startPoint.y + 30 + y)).entries(entryIngredient2).markInput().markOutput());
+
+
+            int xp = display.xps.getInt(i / 2);
+
+            int j = i + 2;
+
+            if (i / 2 == display.xps.size() - 2) {
+                widgets.add(Widgets.createLabel(new Point(startPoint.x + 142 , startPoint.y + 23),
+                        TranslationKeys.createXp(xp)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+            } else {
+
+                x = gap * (j % 8);
+
+                y = 50 * (j / 8);
+
+
+                widgets.add(Widgets.createLabel(new Point(startPoint.x + 30 + x, startPoint.y + 2 + y),
+                        TranslationKeys.createXp(xp)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+
+            }
         }
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 120, startPoint.y + 38)).entries(output).disableBackground().markOutput());

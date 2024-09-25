@@ -15,13 +15,14 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
     protected final Ingredient ingredient;
     protected final Ingredient ingredient2;
     protected final ItemStack result;
+    protected final int xp;
     private final boolean useSequence;
     private final RecipeType<?> type;
     private final RecipeSerializer<?> serializer;
     protected final ResourceLocation id;
     protected final String group;
 
-    public AbstractAnvilForgingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult,boolean useSequence) {
+    public AbstractAnvilForgingRecipe(RecipeType<?> pType, RecipeSerializer<?> pSerializer, ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult, int xp, boolean useSequence) {
         this.type = pType;
         this.serializer = pSerializer;
         this.id = pId;
@@ -29,6 +30,7 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
         this.ingredient = pIngredient;
         this.ingredient2 = ingredient2;
         this.result = pResult;
+        this.xp = xp;
         this.useSequence = useSequence;
     }
 
@@ -74,6 +76,10 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
         nonnulllist.add(this.ingredient);
         nonnulllist.add(this.ingredient2);
         return nonnulllist;
+    }
+
+    public int getXp() {
+        return xp;
     }
 
     public boolean isUseSequence() {
@@ -134,8 +140,9 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
                 ingredient2 = Ingredient.EMPTY;
             }
 
-                ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-                return this.factory.create(pRecipeId, s, ingredient, ingredient2, itemstack);
+            ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
+            int xp = GsonHelper.getAsInt(pJson, "xp", 0);
+            return this.factory.create(pRecipeId, s, ingredient, ingredient2, itemstack, xp);
         }
 
         @Override
@@ -144,7 +151,8 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
             Ingredient ingredient = Ingredient.fromNetwork(pBuffer);
             Ingredient ingredient2 = Ingredient.fromNetwork(pBuffer);
             ItemStack itemstack = pBuffer.readItem();
-            return this.factory.create(pRecipeId, s, ingredient,ingredient2, itemstack);
+            int xp = pBuffer.readInt();
+            return this.factory.create(pRecipeId, s, ingredient, ingredient2, itemstack, xp);
         }
 
         @Override
@@ -153,10 +161,11 @@ public abstract class AbstractAnvilForgingRecipe implements Recipe<RecipeWrapper
             pRecipe.ingredient.toNetwork(pBuffer);
             pRecipe.ingredient2.toNetwork(pBuffer);
             pBuffer.writeItem(pRecipe.result);
+            pBuffer.writeInt(pRecipe.xp);
         }
 
         public interface DualItemMaker<T extends AbstractAnvilForgingRecipe> {
-            T create(ResourceLocation pId, String pGroup, Ingredient pIngredient,Ingredient ingredient2, ItemStack pResult);
+            T create(ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult, int xp);
         }
     }
 }

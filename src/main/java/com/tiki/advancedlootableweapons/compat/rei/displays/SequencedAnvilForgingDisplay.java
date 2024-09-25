@@ -2,11 +2,12 @@ package com.tiki.advancedlootableweapons.compat.rei.displays;
 
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -15,8 +16,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SequencedAnvilForgingDisplay extends BasicDisplay {
-    public SequencedAnvilForgingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+    public final IntList xps;
+
+    public SequencedAnvilForgingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, IntList xps) {
         super(inputs, outputs);
+        this.xps = xps;
     }
 
     @Override
@@ -28,17 +32,16 @@ public class SequencedAnvilForgingDisplay extends BasicDisplay {
         public final ItemStack last;
         public final List<Pair<ItemStack,ItemStack>> itemOrder = new ArrayList<>();
         public boolean finished;
+        public final IntList xps = new IntArrayList();
 
-        public Builder(ItemStack last) {
+        public Builder(ItemStack last, int xp) {
             this.last = last;
+            xps.add(xp);
         }
 
-        public Builder addItem(ItemStack item) {
-            return addItem(item, ItemStack.EMPTY);
-        }
-
-        public Builder addItem(ItemStack item,ItemStack item2) {
+        public Builder addItem(ItemStack item,ItemStack item2,int xp) {
             itemOrder.add(Pair.of(item,item2));
+            xps.add(0,xp);
             if (!(item.getItem()instanceof HeatableToolPartItem)) {
                 finished = true;
             }
@@ -49,8 +52,8 @@ public class SequencedAnvilForgingDisplay extends BasicDisplay {
             return itemOrder.get(itemOrder.size()-1).getKey();
         }
 
-        public static Builder builder(ItemStack last) {
-            return new Builder(last);
+        public static Builder builder(ItemStack last,int xp) {
+            return new Builder(last,xp);
         }
 
         public SequencedAnvilForgingDisplay build() {
@@ -61,7 +64,7 @@ public class SequencedAnvilForgingDisplay extends BasicDisplay {
                 inputs.add(EntryIngredients.of(pair.getKey()));
                 inputs.add(EntryIngredients.of(pair.getValue()));
             }
-            return new SequencedAnvilForgingDisplay(inputs,List.of(EntryIngredients.of(last)));
+            return new SequencedAnvilForgingDisplay(inputs,List.of(EntryIngredients.of(last)),xps);
         }
     }
 }

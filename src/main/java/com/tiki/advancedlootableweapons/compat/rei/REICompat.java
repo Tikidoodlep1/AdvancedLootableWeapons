@@ -113,14 +113,14 @@ public class REICompat implements REIClientPlugin {
             for (AbstractAnvilForgingRecipe toolrecipe : sequencedRecipes) {
                 ItemStack result = toolrecipe.getResultItem();
                 if (result.getItem() instanceof AlwWeaponItem || result.getItem() == ItemInit.CHAIN_RING.get() || result.getItem() instanceof ArmorPlateItem) {
-                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(result);
+                    SequencedAnvilForgingDisplay.Builder builder = SequencedAnvilForgingDisplay.Builder.builder(result,toolrecipe.getXp());
                     Ingredient input1 = toolrecipe.getFirst();
                     Ingredient input2 = toolrecipe.getSecond();
 
                     ItemStack stack1 = getFirstOrEmpty(input1);
                     ItemStack stack2 = getFirstOrEmpty(input2);
 
-                    builder.addItem(stack1, stack2);
+                    builder.addItem(stack1, stack2,0);
 
                     builders.add(builder);
                 }
@@ -141,7 +141,7 @@ public class REICompat implements REIClientPlugin {
                             ItemStack stack2 = getFirstOrEmpty(input2);
 
 
-                            builder.addItem(stack1, stack2);
+                            builder.addItem(stack1, stack2,toolrecipe.getXp());
                         }
                     }
                 }

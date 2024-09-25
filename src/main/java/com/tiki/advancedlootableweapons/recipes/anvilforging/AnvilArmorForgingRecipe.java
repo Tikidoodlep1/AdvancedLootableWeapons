@@ -12,8 +12,8 @@ import net.minecraftforge.items.wrapper.RecipeWrapper;
 
 public class AnvilArmorForgingRecipe extends AbstractAnvilForgingRecipe {
 
-	public AnvilArmorForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult) {
-		super(ModRecipeTypes.ANVIL_FORGING, ModRecipeSerializers.ANVIL_ARMOR_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult,false);
+	public AnvilArmorForgingRecipe(ResourceLocation pId, String pGroup, Ingredient pIngredient, Ingredient ingredient2, ItemStack pResult,int xp) {
+		super(ModRecipeTypes.ANVIL_FORGING, ModRecipeSerializers.ANVIL_ARMOR_FORGING.get(), pId, pGroup, pIngredient,ingredient2, pResult, xp, false);
 	}
 
 	/**

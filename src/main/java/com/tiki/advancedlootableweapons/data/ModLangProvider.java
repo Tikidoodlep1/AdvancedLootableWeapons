@@ -75,6 +75,7 @@ public class ModLangProvider extends LanguageProvider {
         addTranslatableText(TranslationKeys.TANNING_RACK_CAT,"Tanning Rack");
         addTranslatableText(TranslationKeys.SEQUENCED_ANVIL_FORGING_CAT,"Sequenced Anvil Forging");
         addTranslatableText(TranslationKeys.createTime(0),"%s sec");
+        addTranslatableText(TranslationKeys.createXp(0),"XP: %s");
 
         add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
 

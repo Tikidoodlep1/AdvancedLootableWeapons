@@ -27,6 +27,10 @@ public class TranslationKeys {
          return MCVersion.translation("category.rei.cooking.time", df.format(ticks/ 20d));
     }
 
+    public static MutableComponent createXp(int xp) {
+        return MCVersion.translation("category.rei.xp", xp);
+    }
+
     static MutableComponent createREICategory(String key) {
         return MCVersion.translation("category.rei.advancedlootableweapons."+key);
     }

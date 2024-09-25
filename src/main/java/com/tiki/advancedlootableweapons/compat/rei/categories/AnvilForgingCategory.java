@@ -52,6 +52,9 @@ public class AnvilForgingCategory implements DisplayCategory<AnvilForgingRecipeD
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 85, startPoint.y + 9)).entries(display.getOutputEntries().get(0))
                 .disableBackground().markOutput());
 
+        widgets.add(Widgets.createLabel(new Point(bounds.x + bounds.width - 5, bounds.y + 5),
+                TranslationKeys.createXp(display.xp)).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+
         return widgets;
     }
 

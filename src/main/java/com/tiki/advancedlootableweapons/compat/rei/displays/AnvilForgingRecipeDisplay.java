@@ -12,32 +12,16 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.List;
 
 public class AnvilForgingRecipeDisplay extends BasicDisplay implements SimpleGridMenuDisplay {
-    public AnvilForgingRecipeDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+    public final int xp;
+
+    public AnvilForgingRecipeDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, int xp) {
         super(inputs, outputs);
+        this.xp = xp;
     }
 
-    public static AnvilForgingRecipeDisplay create(AbstractAnvilForgingRecipe abstractAnvilForgingRecipe) {
-        List<Ingredient> ingredients = abstractAnvilForgingRecipe.getIngredients();
-
-      /*  if (abstractAnvilForgingRecipe instanceof AnvilToolForgingRecipe anvilToolForgingRecipe) {
-            Ingredient main = anvilToolForgingRecipe.getFirst();
-            registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredients.ofIngredient(main)), List.of(EntryIngredient.of(EntryStacks.of(abstractAnvilForgingRecipe.getResultItem())))));
-        } else if (abstractAnvilForgingRecipe instanceof AnvilTwoToolForgingRecipe) {
-            Ingredient main = abstractAnvilForgingRecipe.getFirst();
-            Ingredient second = abstractAnvilForgingRecipe.getSecond();
-
-            registry.add(new AnvilForgingRecipeDisplay(List.of(EntryIngredients.ofIngredient(main), EntryIngredients.ofIngredient(second)),
-                    List.of(EntryIngredient.of(EntryStacks.of(abstractAnvilForgingRecipe.getResultItem())))));
-
-
-        } else if (abstractAnvilForgingRecipe instanceof AnvilArmorForgingRecipe) {
-            Ingredient main = abstractAnvilForgingRecipe.getFirst();
-            Ingredient second = abstractAnvilForgingRecipe.getSecond();
-            ItemStack result = abstractAnvilForgingRecipe.getResultItem();
-            return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(List.of(main, second)), List.of(EntryIngredients.of(result)));
-        }*/
-
-        return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(ingredients), List.of(EntryIngredients.of(abstractAnvilForgingRecipe.getResultItem())));
+    public static AnvilForgingRecipeDisplay create(AbstractAnvilForgingRecipe recipe) {
+        List<Ingredient> ingredients = recipe.getIngredients();
+        return new AnvilForgingRecipeDisplay(EntryIngredients.ofIngredients(ingredients), List.of(EntryIngredients.of(recipe.getResultItem())),recipe.getXp());
     }
 
 
