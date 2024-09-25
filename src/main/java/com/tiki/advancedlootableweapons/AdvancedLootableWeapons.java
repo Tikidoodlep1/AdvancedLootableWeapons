@@ -134,13 +134,20 @@ public class AdvancedLootableWeapons
     private void addOres(BiomeLoadingEvent event) {
         if (isValidBiome(event.getCategory())) {
             BiomeGenerationSettingsBuilder generation = event.getGeneration();
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_SILVER_EXTRA);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_TIN);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_PLATINUM_EXTRA);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_CRYSTALLITE_EXTRA);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_GYPSUM);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_FELDSPAR);
-            generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_DOLOMITE);
+            if (CommonConfigHandler.ENABLE_TIN_ORE_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_TIN);
+            if (CommonConfigHandler.ENABLE_SILVER_ORE_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_SILVER_EXTRA);
+            if (CommonConfigHandler.ENABLE_PLATINUM_ORE_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_PLATINUM_EXTRA);
+            if (CommonConfigHandler.ENABLE_CRYSTALLITE_ORE_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModOrePlacements.ORE_CRYSTALLITE_EXTRA);
+            if (CommonConfigHandler.ENABLE_GYPSUM_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_GYPSUM);
+            if (CommonConfigHandler.ENABLE_FELDSPAR_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_FELDSPAR);
+            if (CommonConfigHandler.ENABLE_DOLOMITE_GENERATION.get())
+                generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,ModOrePlacements.ORE_DOLOMITE);
         }
     }
 

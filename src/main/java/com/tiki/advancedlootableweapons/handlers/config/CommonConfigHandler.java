@@ -9,21 +9,7 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.BooleanValue USE_IMAGINARY_RESOURCES;
 	
 	public static ForgeConfigSpec.BooleanValue USE_CUSTOM_WEAPON_REACH;
-	public static ForgeConfigSpec.BooleanValue ENABLE_DAGGERS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_KABUTOWARIS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_RAPIERS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_TALWARS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_CLEAVERS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_MACES;
-	public static ForgeConfigSpec.BooleanValue ENABLE_STAFFS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_SPEARS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_LONGSWORDS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_KODACHIS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_BATTLEAXES;
-	public static ForgeConfigSpec.BooleanValue ENABLE_ZWEIHANDERS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_NODACHIS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_SABRES;
-	public static ForgeConfigSpec.BooleanValue ENABLE_MAKHAIRAS;
+
 	public static ForgeConfigSpec.BooleanValue ENABLE_ARMORS;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ARMOR_FORGING;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ADVANCED_LEATHER_TANNING;
@@ -60,25 +46,6 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue GLOBAL_SABRE_ATTACK_SPEED;
 	public static ForgeConfigSpec.DoubleValue GLOBAL_MAKHAIRA_ATTACK_SPEED;
 	public static ForgeConfigSpec.DoubleValue GLOBAL_SPEAR_ATTACK_SPEED;
-	
-	public static ForgeConfigSpec.IntValue GLOBAL_DAGGER_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_KABUTOWARI_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_RAPIER_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_TALWAR_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_CLEAVER_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_MACE_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_STAFF_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_LONGSWORD_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_BATTLEAXE_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_ZWEIHANDER_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_KODACHI_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_NODACHI_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_SABRE_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_MAKHAIRA_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_SPEAR_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_CHAIN_LINK_CRAFTING_EXP;
-	public static ForgeConfigSpec.IntValue GLOBAL_ARMOR_PLATE_CRAFTING_EXP;
 	
 	public static ForgeConfigSpec.BooleanValue USE_ARMOR_WEIGHT;
 	public static ForgeConfigSpec.BooleanValue USE_ARMOR_BONUS_HEALTH;
@@ -152,6 +119,15 @@ public class CommonConfigHandler {
 	public static ForgeConfigSpec.DoubleValue FORGE_TEMP_INCREASE;
 
 	public static ForgeConfigSpec.IntValue SHADOW_DROP_RATE;
+
+	public static ForgeConfigSpec.BooleanValue ENABLE_TIN_ORE_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_SILVER_ORE_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_PLATINUM_ORE_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_CRYSTALLITE_ORE_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_DOLOMITE_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_FELDSPAR_GENERATION;
+	public static ForgeConfigSpec.BooleanValue ENABLE_GYPSUM_GENERATION;
+
 	
 	static {
 		BUILDER.push("Advanced Lootable Weapons Config");
@@ -160,21 +136,7 @@ public class CommonConfigHandler {
 		BUILDER.comment("GENERAL OPTIONS");
 		USE_IMAGINARY_RESOURCES = BUILDER.comment("Use the custom made resources Kobold Steel, Shadow Platinum, Frost Steel, Crystallite, Dusksteel. (True/False)").define("Use Imaginary Resources", true);
 		USE_CUSTOM_WEAPON_REACH = BUILDER.comment("Use the custom set weapon reach. Disabling this will make all weapons have the same reach as a vanilla sword/tool. (True/False)").define("Use Custom Weapon Reach", true);
-		ENABLE_DAGGERS = BUILDER.comment("Enable or disable daggers in-game. (True/False)").define("Enable Daggers", true);
-		ENABLE_KABUTOWARIS = BUILDER.comment("Enable or disable kabutowaris in-game. (True/False)").define("Enable Kabutowaris", true);
-		ENABLE_RAPIERS = BUILDER.comment("Enable or disable rapiers in-game. (True/False)").define("Enable Rapiers", true);
-		ENABLE_TALWARS = BUILDER.comment("Enable or disable talwars in-game. (True/False)").define("Enable Talwars", true);
-		ENABLE_CLEAVERS = BUILDER.comment("Enable or disable cleavers in-game. (True/False)").define("Enable Cleavers", true);
-		ENABLE_MACES = BUILDER.comment("Enable or disable maces in-game. (True/False)").define("Enable Maces", true);
-		ENABLE_STAFFS = BUILDER.comment("Enable or disable staffs in-game. (True/False)").define("Enable Staffs", true);
-		ENABLE_SPEARS = BUILDER.comment("Enable or disable spears in-game. (True/False)").define("Enable Spears", true);
-		ENABLE_LONGSWORDS = BUILDER.comment("Enable or disable longswords in-game. (True/False)").define("Enable Longswords", true);
-		ENABLE_KODACHIS = BUILDER.comment("Enable or disable kodachis in-game. (True/False)").define("Enable Kodachis", true);
-		ENABLE_BATTLEAXES = BUILDER.comment("Enable or disable battleaxes in-game. (True/False)").define("Enable Battleaxes", true);
-		ENABLE_ZWEIHANDERS = BUILDER.comment("Enable or disable zweihanders in-game. (True/False)").define("Enable Zweihanders", true);
-		ENABLE_NODACHIS = BUILDER.comment("Enable or disable nodachis in-game. (True/False)").define("Enable Nodachis", true);
-		ENABLE_SABRES = BUILDER.comment("Enable or disable kodachis in-game. (True/False)").define("Enable Sabres", true);
-		ENABLE_MAKHAIRAS = BUILDER.comment("Enable or disable makhairas in-game. (True/False)").define("Enable Makhairas", true);
+
 		ENABLE_ARMORS = BUILDER.comment("Enable or disable armor made from the custom materials. If this is disabled, \\\"Enable Armor Forging\\\" will also be disabled by default. (True/False)").define("Enable Custom Armor Sets", true);
 		ENABLE_ARMOR_FORGING = BUILDER.comment("Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)").define("Enable Armor Forging", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
@@ -277,25 +239,6 @@ public class CommonConfigHandler {
 		GLOBAL_MAKHAIRA_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Sabres\" is true. This modifies the damage of all types of sabres, regardless of material.").defineInRange("Global Sabre Attack Speed", 2.4F, 0.0F, 100.0F);
 		GLOBAL_SPEAR_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Makhairas\" is true. This modifies the damage of all types of makhairas, regardless of material.").defineInRange("Global Makhaira Attack Speed", 2.2F, 0.0F, 100.0F);
 		
-		GLOBAL_DAGGER_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Daggers\" is true. This modifies the exp you get from crafting daggers.").defineInRange("Global Dagger Crafting Exp", 2, 0, 100);
-		GLOBAL_KABUTOWARI_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Kabutowaris\" is true. This modifies the exp you get from crafting kabutowaris.").defineInRange("Global Kabutowari Crafting Exp", 5, 0, 100);
-		GLOBAL_RAPIER_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Rapiers\" is true. This modifies the exp you get from crafting rapiers.").defineInRange("Global Rapier Crafting Exp", 4, 0, 100);
-		GLOBAL_TALWAR_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable talwars\" is true. This modifies the exp you get from crafting talwars.").defineInRange("Global Talwars Crafting Exp", 3, 0, 100);
-		GLOBAL_CLEAVER_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Cleavers\" is true. This modifies the exp you get from crafting cleavers.").defineInRange("Global Cleaver Crafting Exp", 1, 0, 100);
-		GLOBAL_MACE_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Maces\" is true. This modifies the exp you get from crafting maces.").defineInRange("Global Mace Crafting Exp", 3, 0, 100);
-		GLOBAL_STAFF_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Staffs\" is true. This modifies the exp you get from crafting staffs.").defineInRange("Global Staff Crafting Exp", 6, 0, 100);
-		GLOBAL_LONGSWORD_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Longswords\" is true. This modifies the exp you get from crafting longswords.").defineInRange("Global Longsword Crafting Exp", 4, 0, 100);
-		GLOBAL_BATTLEAXE_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Battleaxes\" is true. This modifies the exp you get from crafting battleaxes.").defineInRange("Global Battleaxe Crafting Exp", 6, 0, 100);
-		GLOBAL_ZWEIHANDER_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Zweihanders\" is true. This modifies the exp you get from crafting zweihanders.").defineInRange("Global Zweihanders Crafting Exp", 6, 0, 100);
-		GLOBAL_KODACHI_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Kodachis\" is true. This modifies the exp you get from crafting kodachis.").defineInRange("Global Staff Kodachi Exp", 2, 0, 100);
-		GLOBAL_NODACHI_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Nodahcis\" is true. This modifies the exp you get from crafting nodachis.").defineInRange("Global Staff Nodachi Exp", 4, 0, 100);
-		GLOBAL_SABRE_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Sabres\" is true. This modifies the exp you get from crafting sabres.").defineInRange("Global Sabre Crafting Exp", 4, 0, 100);
-		GLOBAL_MAKHAIRA_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Makhairas\" is true. This modifies the exp you get from crafting makhairas.").defineInRange("Global Makhaira Crafting Exp", 3, 0, 100);
-		GLOBAL_SPEAR_CRAFTING_EXP = BUILDER.comment("Will only work if \"Enable Spears\" is true. This modifies the exp you get from crafting spears.").defineInRange("Global Spear Crafting Exp", 3, 0, 100);
-		GLOBAL_LONG_WEAPON_HANDLE_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting long weapon handles.").defineInRange("Global Long Weapon Handle Crafting Exp", 4, 0, 100);
-		GLOBAL_CHAIN_LINK_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting chain links.").defineInRange("Global Chain Link Crafting Exp", 2, 0, 100);
-		GLOBAL_ARMOR_PLATE_CRAFTING_EXP = BUILDER.comment("This modifies the exp you get from crafting armor plates.").defineInRange("Global Armor Plate Crafting Exp", 4, 0, 100);
-		
 		BUILDER.comment("ARMOR MODIFICATION");
 		USE_ARMOR_WEIGHT = BUILDER.comment("If enabled, armor will slow you down proportionate to it's real-world weight. (True/False)").define("Use Armor Weight", true);
 		USE_ARMOR_BONUS_HEALTH = BUILDER.comment("If enabled, armor will give you bonus health when worn. (True/False)").define("Use Armor Bonus Health", false);
@@ -305,8 +248,18 @@ public class CommonConfigHandler {
 		
 		BUILDER.comment("GENERAL SHADOW DROP MODIFICATION");
 		SHADOW_DROP_RATE = BUILDER.comment("The drop rate for the shadow item in percentage, 5 = 5%").defineInRange("Shadow Drop Rate (Percent)", 5, 0, 100);
-		
 		BUILDER.pop();
+
+		BUILDER.push("Ore generation");
+		ENABLE_TIN_ORE_GENERATION = BUILDER.define("enable_tin_ore_generation",true);
+		ENABLE_SILVER_ORE_GENERATION = BUILDER.define("enable_silver_ore_generation",true);
+		ENABLE_PLATINUM_ORE_GENERATION = BUILDER.define("enable_platinum_ore_generation",true);
+		ENABLE_CRYSTALLITE_ORE_GENERATION = BUILDER.define("enable_crystallite_ore_generation",true);
+		ENABLE_DOLOMITE_GENERATION = BUILDER.define("enable_dolomite_generation",true);
+		ENABLE_FELDSPAR_GENERATION = BUILDER.define("enable_feldspar_generation",true);
+		ENABLE_GYPSUM_GENERATION = BUILDER.define("enable_gypsum_generation",true);
+		BUILDER.pop();
+
 		SPEC = BUILDER.build();
 	}
 }
