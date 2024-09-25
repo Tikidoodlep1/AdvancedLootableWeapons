@@ -5,13 +5,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfigHandler {
 	public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 	public static final ForgeConfigSpec SPEC;
-	
-	public static ForgeConfigSpec.BooleanValue USE_IMAGINARY_RESOURCES;
-	
+
 	public static ForgeConfigSpec.BooleanValue USE_CUSTOM_WEAPON_REACH;
 
-	public static ForgeConfigSpec.BooleanValue ENABLE_ARMORS;
-	public static ForgeConfigSpec.BooleanValue ENABLE_ARMOR_FORGING;
 	public static ForgeConfigSpec.BooleanValue ENABLE_ADVANCED_LEATHER_TANNING;
 	public static ForgeConfigSpec.BooleanValue HIDE_REPLACEMENT;
 	
@@ -134,11 +130,8 @@ public class CommonConfigHandler {
 		
 		//Common Config Stuff
 		BUILDER.comment("GENERAL OPTIONS");
-		USE_IMAGINARY_RESOURCES = BUILDER.comment("Use the custom made resources Kobold Steel, Shadow Platinum, Frost Steel, Crystallite, Dusksteel. (True/False)").define("Use Imaginary Resources", true);
 		USE_CUSTOM_WEAPON_REACH = BUILDER.comment("Use the custom set weapon reach. Disabling this will make all weapons have the same reach as a vanilla sword/tool. (True/False)").define("Use Custom Weapon Reach", true);
 
-		ENABLE_ARMORS = BUILDER.comment("Enable or disable armor made from the custom materials. If this is disabled, \\\"Enable Armor Forging\\\" will also be disabled by default. (True/False)").define("Enable Custom Armor Sets", true);
-		ENABLE_ARMOR_FORGING = BUILDER.comment("Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)").define("Enable Armor Forging", true);
 		ENABLE_ADVANCED_LEATHER_TANNING = BUILDER.comment("Enable the advanced leather tanning process. This entails needing some way to transfer fluids aswell as iron to make tanning knives. (True/False)").define("Enable Advanced Leather Tanning", true);
 		BELLOWS_EXHAUSTION = BUILDER.comment("The amount of exhaustion using a bellows gives the player.").defineInRange("Bellows Exhaustion", 0.1F, 0.0F, 20.0F);
 		FORGE_TEMP_DECREASE = BUILDER.comment("Forge Temperature Decrease. Set to 0.0F to disable temperature drop.").defineInRange("Forge Temperature Decrease", 0.02F, 0.0F, 10.0F);
@@ -207,34 +200,34 @@ public class CommonConfigHandler {
 		DUSKSTEEL_ARMOR_HARDNESS = BUILDER.comment("Use to change the armor toughness per piece of all armors that are made of dusksteel.").defineInRange("Dusksteel Armor Toughness", 4.88F, 0F, 100F);
 		
 		BUILDER.comment("WEAPON MODIFICATION");
-		GLOBAL_DAGGER_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Daggers\" is true. This modifies the damage of all types of daggers, regardless of material.").defineInRange("Global Dagger Base Damage", 1.5F, 0.0F, 100.0F);
-		GLOBAL_KABUTOWARI_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Kabutowaris\" is true. This modifies the damage of all types of kabutowaris, regardless of material.").defineInRange("Global Kabutowari Base Damage", 1.0F, 0.0F, 100.0F);
-		GLOBAL_RAPIER_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Rapiers\" is true. This modifies the damage of all types of rapiers, regardless of material.").defineInRange("Global Rapier Base Damage", 0.5F, 0.0F, 100.0F);
-		GLOBAL_TALWAR_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Talwars\" is true. This modifies the damage of all types of talwars, regardless of material.").defineInRange("Global Talwar Base Damage", 3.25F, 0.0F, 100.0F);
-		GLOBAL_CLEAVER_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Cleavers\" is true. This modifies the damage of all types of cleavers, regardless of material.").defineInRange("Global Cleaver Base Damage", 4.5F, 0.0F, 100.0F);
-		GLOBAL_MACE_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Maces\" is true. This modifies the damage of all types of maces, regardless of material.").defineInRange("Global Mace Base Damage", 2.5F, 0.0F, 100.0F);
-		GLOBAL_STAFF_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Staffs\" is true. This modifies the damage of all types of staffs, regardless of material.").defineInRange("Global Staff Base Damage", 2.0F, 0.0F, 100.0F);
-		GLOBAL_SPEAR_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Spears\" is true. This modifies the damage of all types of spears, regardless of material.").defineInRange("Global Spear Base Damage", 2.5F, 0.0F, 100.0F);
-		GLOBAL_LONGSWORD_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Longswords\" is true. This modifies the damage of all types of longswords, regardless of material.").defineInRange("Global Longsword Base Damage", 3.5F, 0.0F, 100.0F);
-		GLOBAL_KODACHI_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Kodachis\" is true. This modifies the damage of all types of kodachis, regardless of material.").defineInRange("Global Kodachi Base Damage", 0.75F, 0.0F, 100.0F);
-		GLOBAL_BATTLEAXE_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Battleaxes\" is true. This modifies the damage of all types of battleaxes, regardless of material.").defineInRange("Global Battleaxe Base Damage", 4.0F, 0.0F, 100.0F);
-		GLOBAL_ZWEIHANDER_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Zweihanders\" is true. This modifies the damage of all types of zweihanders, regardless of material.").defineInRange("Global Zweihander Base Damage", 3.75F, 0.0F, 100.0F);
-		GLOBAL_NODACHI_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Nodachis\" is true. This modifies the damage of all types of nodachis, regardless of material.").defineInRange("Global Nodachi Base Damage", 3.65F, 0.0F, 100.0F);
-		GLOBAL_SABRE_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Sabres\" is true. This modifies the damage of all types of sabres, regardless of material.").defineInRange("Global Sabre Base Damage", 3.0F, 0.0F, 100.0F);
-		GLOBAL_MAKHAIRA_BASE_DAMAGE = BUILDER.comment("Will only work if \"Enable Makhairas\" is true. This modifies the damage of all types of makhairas, regardless of material.").defineInRange("Global Makhaira Base Damage", 2.75F, 0.0F, 100.0F);
+		GLOBAL_DAGGER_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of daggers, regardless of material.").defineInRange("Global Dagger Base Damage", 1.5F, 0.0F, 100.0F);
+		GLOBAL_KABUTOWARI_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of kabutowaris, regardless of material.").defineInRange("Global Kabutowari Base Damage", 1.0F, 0.0F, 100.0F);
+		GLOBAL_RAPIER_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of rapiers, regardless of material.").defineInRange("Global Rapier Base Damage", 0.5F, 0.0F, 100.0F);
+		GLOBAL_TALWAR_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of talwars, regardless of material.").defineInRange("Global Talwar Base Damage", 3.25F, 0.0F, 100.0F);
+		GLOBAL_CLEAVER_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of cleavers, regardless of material.").defineInRange("Global Cleaver Base Damage", 4.5F, 0.0F, 100.0F);
+		GLOBAL_MACE_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of maces, regardless of material.").defineInRange("Global Mace Base Damage", 2.5F, 0.0F, 100.0F);
+		GLOBAL_STAFF_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of staffs, regardless of material.").defineInRange("Global Staff Base Damage", 2.0F, 0.0F, 100.0F);
+		GLOBAL_SPEAR_BASE_DAMAGE = BUILDER.comment("Will onlThis modifies the damage of all types of spears, regardless of material.").defineInRange("Global Spear Base Damage", 2.5F, 0.0F, 100.0F);
+		GLOBAL_LONGSWORD_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of longswords, regardless of material.").defineInRange("Global Longsword Base Damage", 3.5F, 0.0F, 100.0F);
+		GLOBAL_KODACHI_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of kodachis, regardless of material.").defineInRange("Global Kodachi Base Damage", 0.75F, 0.0F, 100.0F);
+		GLOBAL_BATTLEAXE_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of battleaxes, regardless of material.").defineInRange("Global Battleaxe Base Damage", 4.0F, 0.0F, 100.0F);
+		GLOBAL_ZWEIHANDER_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of zweihanders, regardless of material.").defineInRange("Global Zweihander Base Damage", 3.75F, 0.0F, 100.0F);
+		GLOBAL_NODACHI_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of nodachis, regardless of material.").defineInRange("Global Nodachi Base Damage", 3.65F, 0.0F, 100.0F);
+		GLOBAL_SABRE_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of sabres, regardless of material.").defineInRange("Global Sabre Base Damage", 3.0F, 0.0F, 100.0F);
+		GLOBAL_MAKHAIRA_BASE_DAMAGE = BUILDER.comment("This modifies the damage of all types of makhairas, regardless of material.").defineInRange("Global Makhaira Base Damage", 2.75F, 0.0F, 100.0F);
 		
-		GLOBAL_DAGGER_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Daggers\" is true. This modifies the damage of all types of daggers, regardless of material.").defineInRange("Global Dagger Attack Speed", 3.2F, 0.0F, 100.0F);
-		GLOBAL_KABUTOWARI_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Kabutowaris\" is true. This modifies the damage of all types of kabutowaris, regardless of material.").defineInRange("Global Kabutowari Attack Speed", 2.4F, 0.0F, 100.0F);
-		GLOBAL_RAPIER_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Rapiers\" is true. This modifies the damage of all types of rapiers, regardless of material.").defineInRange("Global Rapier Attack Speed", 3.6F, 0.0F, 100.0F);
-		GLOBAL_TALWAR_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Talwars\" is true. This modifies the damage of all types of talwars, regardless of material.").defineInRange("Global Talwar Attack Speed", 1.8F, 0.0F, 100.0F);
-		GLOBAL_CLEAVER_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Cleavers\" is true. This modifies the damage of all types of cleavers, regardless of material.").defineInRange("Global Cleaver Attack Speed", 1.0F, 0.0F, 100.0F);
-		GLOBAL_MACE_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Maces\" is true. This modifies the damage of all types of maces, regardless of material.").defineInRange("Global Mace Attack Speed", 2.2F, 0.0F, 100.0F);
-		GLOBAL_STAFF_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Staffs\" is true. This modifies the damage of all types of staffs, regardless of material.").defineInRange("Global Staff Attack Speed", 1.6F, 0.0F, 100.0F);
-		GLOBAL_LONGSWORD_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Spears\" is true. This modifies the damage of all types of spears, regardless of material.").defineInRange("Global Spear Attack Speed", 1.0F, 0.0F, 100.0F);
-		GLOBAL_BATTLEAXE_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Longswords\" is true. This modifies the damage of all types of longswords, regardless of material.").defineInRange("Global Longsword Attack Speed", 1.8F, 0.0F, 100.0F);
-		GLOBAL_ZWEIHANDER_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Kodachis\" is true. This modifies the damage of all types of kodachis, regardless of material.").defineInRange("Global Kodachi Attack Speed", 2.9F, 0.0F, 100.0F);
-		GLOBAL_KODACHI_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Battleaxes\" is true. This modifies the damage of all types of battleaxes, regardless of material.").defineInRange("Global Battleaxe Attack Speed", 1.1F, 0.0F, 100.0F);
-		GLOBAL_NODACHI_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Zweihanders\" is true. This modifies the damage of all types of zweihanders, regardless of material.").defineInRange("Global Zweihander Attack Speed", 1.3F, 0.0F, 100.0F);
+		GLOBAL_DAGGER_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of daggers, regardless of material.").defineInRange("Global Dagger Attack Speed", 3.2F, 0.0F, 100.0F);
+		GLOBAL_KABUTOWARI_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of kabutowaris, regardless of material.").defineInRange("Global Kabutowari Attack Speed", 2.4F, 0.0F, 100.0F);
+		GLOBAL_RAPIER_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of rapiers, regardless of material.").defineInRange("Global Rapier Attack Speed", 3.6F, 0.0F, 100.0F);
+		GLOBAL_TALWAR_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of talwars, regardless of material.").defineInRange("Global Talwar Attack Speed", 1.8F, 0.0F, 100.0F);
+		GLOBAL_CLEAVER_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of cleavers, regardless of material.").defineInRange("Global Cleaver Attack Speed", 1.0F, 0.0F, 100.0F);
+		GLOBAL_MACE_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of maces, regardless of material.").defineInRange("Global Mace Attack Speed", 2.2F, 0.0F, 100.0F);
+		GLOBAL_STAFF_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of staffs, regardless of material.").defineInRange("Global Staff Attack Speed", 1.6F, 0.0F, 100.0F);
+		GLOBAL_LONGSWORD_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of spears, regardless of material.").defineInRange("Global Spear Attack Speed", 1.0F, 0.0F, 100.0F);
+		GLOBAL_BATTLEAXE_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of longswords, regardless of material.").defineInRange("Global Longsword Attack Speed", 1.8F, 0.0F, 100.0F);
+		GLOBAL_ZWEIHANDER_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of kodachis, regardless of material.").defineInRange("Global Kodachi Attack Speed", 2.9F, 0.0F, 100.0F);
+		GLOBAL_KODACHI_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of battleaxes, regardless of material.").defineInRange("Global Battleaxe Attack Speed", 1.1F, 0.0F, 100.0F);
+		GLOBAL_NODACHI_ATTACK_SPEED = BUILDER.comment("This modifies the damage of all types of zweihanders, regardless of material.").defineInRange("Global Zweihander Attack Speed", 1.3F, 0.0F, 100.0F);
 		GLOBAL_SABRE_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Nodachis\" is true. This modifies the damage of all types of nodachis, regardless of material.").defineInRange("Global Nodachi Attack Speed", 1.4F, 0.0F, 100.0F);
 		GLOBAL_MAKHAIRA_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Sabres\" is true. This modifies the damage of all types of sabres, regardless of material.").defineInRange("Global Sabre Attack Speed", 2.4F, 0.0F, 100.0F);
 		GLOBAL_SPEAR_ATTACK_SPEED = BUILDER.comment("Will only work if \"Enable Makhairas\" is true. This modifies the damage of all types of makhairas, regardless of material.").defineInRange("Global Makhaira Attack Speed", 2.2F, 0.0F, 100.0F);

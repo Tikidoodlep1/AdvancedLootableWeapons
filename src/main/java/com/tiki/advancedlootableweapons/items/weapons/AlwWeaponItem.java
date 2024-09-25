@@ -1,18 +1,16 @@
 package com.tiki.advancedlootableweapons.items.weapons;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.handlers.WeaponMaterial;
+import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.AttributeModifiers;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
 import com.tiki.advancedlootableweapons.items.WhetstoneItem;
-import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import net.minecraft.ChatFormatting;
@@ -22,7 +20,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -60,10 +57,8 @@ public class AlwWeaponItem extends Item implements Vanishable {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attributes.getBaseAttackSpeed(), AttributeModifier.Operation.ADDITION));
-            if (ForgeMod.REACH_DISTANCE.isPresent()) {
+            if (CommonConfigHandler.USE_CUSTOM_WEAPON_REACH.get()) {
                 builder.put(ForgeMod.REACH_DISTANCE.get(), new AttributeModifier(AttributeModifiers.BLOCK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
-            }
-            if (ForgeMod.ATTACK_RANGE.isPresent()) {
                 builder.put(ForgeMod.ATTACK_RANGE.get(), new AttributeModifier(AttributeModifiers.ATTACK_REACH_UUID, "Reach Modifier", attributes.getReach() - 4, AttributeModifier.Operation.ADDITION));
             }
             return builder.build();
