@@ -28,24 +28,24 @@ import net.minecraftforge.common.crafting.PartialNBTIngredient;
 
 public class HeatableToolPartItem extends Item {
     private final int level;
-    private final boolean isMain;
+    private final boolean needQuenching;
 
     public static final ResourceLocation HEAT = AdvancedLootableWeapons.id("heat");
     public static final String MATERIAL = AdvancedLootableWeapons.id("material").toString();
     public static final int MAX_HEAT = 3000;
     public static final double COOLING_RATE = 1;
 
-    public HeatableToolPartItem(int level, boolean isMain, Properties prop) {
+    public HeatableToolPartItem(int level, boolean needQuenching, Properties prop) {
         super(prop);
         this.level = level;
-        this.isMain = isMain;
+        this.needQuenching = needQuenching;
     }
 
     public int getLevel() {
         return this.level;
     }
 
-    public boolean isFinished() {
+    public boolean isNeedQuenching() {
         return true;
     }
 
@@ -85,18 +85,19 @@ public class HeatableToolPartItem extends Item {
         tooltip.add(MCVersion.literal("Heat: "+(int)heat));
 
 
-        if(nbt!= null && isMain) {
+        if(nbt!= null && needQuenching) {
             boolean quenched = nbt.getBoolean("quenched");
             tooltip.add(quenched ? TranslationKeys.QUENCH_KEY : TranslationKeys.UNQUENCH_KEY);
         }
 
-        tooltip.add(TranslationKeys.FORGING_QUALITY);
-        tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
-        if (nbt != null) {
+
+        if (nbt != null && (nbt.contains("addedDamage") || nbt.contains("addedDurability"))) {
+            tooltip.add(TranslationKeys.FORGING_QUALITY);
+            tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDamage")));
             tooltip.add(MCVersion.literal(ChatFormatting.BLUE + nbt.getString("addedDurability")));
+            tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
         }
-        tooltip.add(MCVersion.literal(ChatFormatting.GRAY + "--------------------"));
     }
 
     @Override

@@ -141,8 +141,8 @@ public class AlwWeaponItem extends Item implements Vanishable {
 
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(new TextComponent(ChatFormatting.GREEN + "Chance to pierce Chain armor: " + this.attributes.getChainPenChance()));
-        tooltip.add(new TextComponent(ChatFormatting.DARK_BLUE + "Chance to pierce Plate armor: " + this.attributes.getPlatePenChance()));
+        tooltip.add(TranslationKeys.createChainPenChance(this.attributes.getChainPenChance()));
+        tooltip.add(TranslationKeys.createPlatePenChance(this.attributes.getPlatePenChance()));
         int refined = WhetstoneItem.getRefined(stack);
         if (refined > 0) {
             tooltip.add(MCVersion.translation(TranslationKeys.REFINED_C, refined));

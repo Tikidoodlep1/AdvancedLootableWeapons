@@ -31,7 +31,7 @@ public class DrumQuenchingRecipeBuilder implements RecipeBuilder {
     }
 
     public static DrumQuenchingRecipeBuilder quenching(HeatableToolPartItem item) {
-        if (!item.isFinished()) throw new RuntimeException("can't quench "+item);
+        if (!item.isNeedQuenching()) throw new RuntimeException("can't quench "+item);
         return new DrumQuenchingRecipeBuilder(item);
     }
 

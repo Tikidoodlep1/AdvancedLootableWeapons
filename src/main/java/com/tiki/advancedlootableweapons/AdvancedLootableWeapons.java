@@ -51,6 +51,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.UUID;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(AdvancedLootableWeapons.MODID)
@@ -92,22 +93,26 @@ public class AdvancedLootableWeapons
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::addOres);
     }
 
+    //copied from ArmorItem
+    private static final UUID[] ARMOR_MODIFIER_UUID_PER_SLOT = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
+
     private void attributeModifiers(ItemAttributeModifierEvent event) {
         ItemStack itemStack = event.getItemStack();
         if (itemStack.getItem() instanceof ArmorItem armorItem) {
             ArmorBonus armorBonus = ArmorBonus.getArmorBonus(armorItem.getMaterial());
             EquipmentSlot slot = event.getSlotType();
             if (slot == armorItem.getSlot()) {
+                UUID uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
                 if (CommonConfigHandler.USE_ARMOR_BONUS_HEALTH.get()) {
-                    event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier("Armor Bonus", armorBonus.bonusHealth()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
+                    event.addModifier(Attributes.MAX_HEALTH, new AttributeModifier(uuid,"Armor Bonus", armorBonus.bonusHealth()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
                 }
 
                 if (CommonConfigHandler.USE_ARMOR_WEIGHT.get()) {
-                    event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier("Armor Bonus", armorBonus.bonusSpeed()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
+                    event.addModifier(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid,"Armor Bonus", armorBonus.bonusSpeed()[slot.getIndex()], AttributeModifier.Operation.ADDITION));
                 }
                 if (slot == EquipmentSlot.CHEST) {
                     if (CommonConfigHandler.USE_ARMOR_BONUS_DAMAGE.get()) {
-                        event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier("Armor Bonus", armorBonus.damageBonus(), AttributeModifier.Operation.ADDITION));
+                        event.addModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(uuid,"Armor Bonus", armorBonus.damageBonus(), AttributeModifier.Operation.ADDITION));
                     }
                 }
             }

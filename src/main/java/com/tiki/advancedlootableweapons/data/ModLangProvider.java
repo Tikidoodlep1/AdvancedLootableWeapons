@@ -77,6 +77,10 @@ public class ModLangProvider extends LanguageProvider {
         addTranslatableText(TranslationKeys.createTime(0),"%s sec");
         addTranslatableText(TranslationKeys.createXp(0),"XP: %s");
 
+        addTranslatableText(TranslationKeys.STUDDED_PEN_CHANCE,"Chance to pierce Studded armor: ");
+        addTranslatableText(TranslationKeys.CHAIN_PEN_CHANCE,"Chance to pierce Chain armor: ");
+        addTranslatableText(TranslationKeys.PLATE_PEN_CHANCE,"Chance to pierce Plate armor: ");
+
         add("attribute.name.generic.bonusAttackDamage", "Bonus Attack Damage");
 
         addTab(ModCreativeTabs.MISC_TAB, "Advanced Lootable Weapons");

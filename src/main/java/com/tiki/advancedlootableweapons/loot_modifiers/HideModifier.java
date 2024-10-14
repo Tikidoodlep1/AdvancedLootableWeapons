@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.loot_modifiers;
 
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.Nonnull;
 
@@ -27,15 +28,19 @@ public class HideModifier extends LootModifier {
 	@Override
 	protected List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
 		if (!CommonConfigHandler.HIDE_REPLACEMENT.get()) return generatedLoot;
+		if (!context.getQueriedLootTableId().getPath().startsWith("entities/")) return generatedLoot;
 		int looting = context.getLootingModifier();
-		int leatherCount = 1;
-		for(ItemStack stack : generatedLoot) {
-			if(stack.is(ModItemTags.HIDES)) {
-				leatherCount = stack.getCount();
-				generatedLoot.remove(stack);
-			}
+		int leatherCount = 0;
+        for (Iterator<ItemStack> iterator = generatedLoot.iterator(); iterator.hasNext(); ) {
+            ItemStack stack = iterator.next();
+            if (stack.is(ModItemTags.HIDES)) {
+                leatherCount += stack.getCount();
+                iterator.remove();
+            }
+        }
+		if (leatherCount > 0) {
+			generatedLoot.add(new ItemStack(prop1, (int) (leatherCount * 1.25) + (looting + 1)));
 		}
-		generatedLoot.add(new ItemStack(prop1, (int)(leatherCount*1.25) + (looting+1) ));
 		return generatedLoot;
 	}
 }
