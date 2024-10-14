@@ -17,11 +17,15 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class JawCrusherBlock extends BaseEntityBlock {
 	
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+
+	public static final VoxelShape Z_AXIS_AABB = Shapes.box(2.3 / 16D, 0.0D, 2.9 / 16D, 14.1 / 16D, 11.0 / 16D, 13.1 / 16D);
+	public static final VoxelShape X_AXIS_AABB = Shapes.box(2.9/16D, 0.0D, 2.3/16D, 13.1/16D, 11.0/16D, 14.1/16D);
 
 	public JawCrusherBlock(Properties pProperties) {
 		super(pProperties);
@@ -30,8 +34,10 @@ public class JawCrusherBlock extends BaseEntityBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-		return super.getShape(pState, pLevel, pPos, pContext);//todo
+		Direction direction = pState.getValue(FACING);
+		return direction.getAxis() == Direction.Axis.X ? X_AXIS_AABB : Z_AXIS_AABB;
 	}
+
 
 	@Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {

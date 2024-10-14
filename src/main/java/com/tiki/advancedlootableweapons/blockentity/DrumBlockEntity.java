@@ -150,7 +150,7 @@ public class DrumBlockEntity extends BlockEntity {
                             blockPos.getY() + rand.nextFloat(), blockPos.getZ() + rand.nextFloat(),
                             8, 0, 0, 0, .01f);
 
-                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundInit.QUENCH, SoundSource.BLOCKS,
+                    level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundInit.QUENCH.get(), SoundSource.BLOCKS,
                             1.0f, 1.0f);
 
                     process();

@@ -1,6 +1,7 @@
 {
   "parent": "advancedlootableweapons:block/bellows",
   "textures": {
-    "#3": "minecraft:block/dark_oak_planks"
+    "3": "minecraft:block/dark_oak_planks",
+    "particle": "minecraft:block/dark_oak_planks"
   }
 }

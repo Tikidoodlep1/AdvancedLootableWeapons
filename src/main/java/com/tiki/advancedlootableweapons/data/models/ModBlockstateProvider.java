@@ -2,9 +2,11 @@ package com.tiki.advancedlootableweapons.data.models;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.block.AlloyFurnaceBlock;
+import com.tiki.advancedlootableweapons.block.BellowsBlock;
 import com.tiki.advancedlootableweapons.block.DusksteelBlock;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -79,41 +81,15 @@ public class ModBlockstateProvider extends BlockStateProvider {
 
         simpleBlock(BlockInit.CLAY_DRUM.get(),models().getExistingFile(AdvancedLootableWeapons.id("block/clay_drum")));
 
-        int bellows = 270;
-
-
-        horizontalBlock(BlockInit.OAK_BELLOWS.get(), models()
-                        .withExistingParent("block/oak_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/oak_planks"))
-                , bellows);
-
-        horizontalBlock(BlockInit.BIRCH_BELLOWS.get(), models()
-                        .withExistingParent("block/birch_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/birch_planks"))
-                , bellows);
-
-        horizontalBlock(BlockInit.JUNGLE_BELLOWS.get(), models()
-                        .withExistingParent("block/jungle_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/jungle_planks"))
-                , bellows);
-
-        horizontalBlock(BlockInit.SPRUCE_BELLOWS.get(), models()
-                        .withExistingParent("block/spruce_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/spruce_planks"))
-                , bellows);
-
-        horizontalBlock(BlockInit.ACACIA_BELLOWS.get(), models()
-                        .withExistingParent("block/acacia_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/acacia_planks"))
-                , bellows);
-
-        horizontalBlock(BlockInit.DARK_OAK_BELLOWS.get(), models()
-                        .withExistingParent("block/dark_oak_bellows", AdvancedLootableWeapons.id( "block/bellows"))
-                        .texture("#3", new ResourceLocation("block/dark_oak_planks"))
-                , bellows);
+        bellows(BlockInit.OAK_BELLOWS.get(), "oak");
+        bellows(BlockInit.BIRCH_BELLOWS.get(), "birch");
+        bellows(BlockInit.JUNGLE_BELLOWS.get(),"jungle");
+        bellows(BlockInit.SPRUCE_BELLOWS.get(),"spruce");
+        bellows(BlockInit.ACACIA_BELLOWS.get(),"acacia");
+       bellows(BlockInit.DARK_OAK_BELLOWS.get(),"dark_oak");
 
         horizontalBlock(BlockInit.TANNING_RACK.get(), models().getExistingFile(AdvancedLootableWeapons.id("block/tanning_rack"))
-                , bellows);
+                ,180);
 
         getVariantBuilder(BlockInit.ALLOY_FURNACE.get()).forAllStates(state -> {
             boolean lit = state.getValue(AlloyFurnaceBlock.LIT);
@@ -125,6 +101,17 @@ public class ModBlockstateProvider extends BlockStateProvider {
                     .modelFile(models().orientable("alloy_furnace" + (lit ? "_on" : ""),
                             side, front, top)).build();
         });
+    }
+
+    protected void bellows(BellowsBlock block,String mat) {
+        int xRot = 270;
+        String name = Registry.BLOCK.getKey(block).getPath();
+        ResourceLocation mainTexture = new ResourceLocation("block/"+mat+"_planks");
+        horizontalBlock(block, models()
+                        .withExistingParent("block/"+name, AdvancedLootableWeapons.id( "block/bellows"))
+                        .texture("3", mainTexture)
+                        .texture("particle",mainTexture)
+                , xRot);
     }
 
 }

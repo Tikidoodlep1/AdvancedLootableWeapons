@@ -1,6 +1,7 @@
 {
   "parent": "advancedlootableweapons:block/bellows",
   "textures": {
-    "#3": "minecraft:block/acacia_planks"
+    "3": "minecraft:block/acacia_planks",
+    "particle": "minecraft:block/acacia_planks"
   }
 }

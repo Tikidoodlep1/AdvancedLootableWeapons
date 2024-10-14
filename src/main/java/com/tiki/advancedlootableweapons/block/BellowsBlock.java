@@ -6,6 +6,9 @@ import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.SoundInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,6 +30,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Random;
 
 public class BellowsBlock extends Block {
 
@@ -62,7 +67,9 @@ public class BellowsBlock extends Block {
 	@Override
 	public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
 		if(!pLevel.isClientSide) {
-		//	AdvancedLootableWeapons.logger.info("Activating bellows server side");
+			pLevel.playSound(null, pPos, SoundInit.BELLOWS.get(), SoundSource.BLOCKS, 1, 1);
+
+			//	AdvancedLootableWeapons.logger.info("Activating bellows server side");
 			BlockEntity te = pLevel.getBlockEntity(pPos.relative(pState.getValue(FACING)));
 			BlockState placeholderState = pLevel.getBlockState(pPos.relative(pState.getValue(FACING)));
 			if(te == null && placeholderState.getBlock() instanceof AdvancedForgeBlock) {
@@ -77,24 +84,19 @@ public class BellowsBlock extends Block {
 				((AdvancedForgeBlockEntity)te).bellowsInteraction();
 				pPlayer.getFoodData().addExhaustion((float) (double)CommonConfigHandler.BELLOWS_EXHAUSTION.get());
 			}
-
-		}else {
-			pLevel.playSound(pPlayer, pPos, SoundInit.BELLOWS, SoundSource.BLOCKS, 6.0F, 1.0F);
-		/*	t.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Random rand = new Random();
-					double d0 = pPos.relative(pState.getValue(FACING)).getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-					double d1 = pPos.relative(pState.getValue(FACING)).getY() + 0.8D + rand.nextDouble() * 6.0D / 16.0D;
-					double d2 = pPos.relative(pState.getValue(FACING)).getZ() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-					pLevel.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + (rand.nextDouble() / 2), d1, d2, 0.0D, 0.0D, 0.0D);
-					pLevel.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-				}
-			}, 500);*/
-
+			pLevel.scheduleTick(pPos,this,10);
 		}
 
 		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random rand) {
+		double d0 = pPos.relative(pState.getValue(FACING)).getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+		double d1 = pPos.relative(pState.getValue(FACING)).getY() + 0.5D + rand.nextDouble() * 6.0D / 16.0D;
+		double d2 = pPos.relative(pState.getValue(FACING)).getZ() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
+		pLevel.sendParticles(ParticleTypes.LARGE_SMOKE, d0 + (rand.nextDouble() / 2), d1, d2,  1,0,0,0,0);
+		pLevel.sendParticles(ParticleTypes.LARGE_SMOKE, d0, d1, d2, 1,0,0,0,0);
 	}
 
 	/*@Override

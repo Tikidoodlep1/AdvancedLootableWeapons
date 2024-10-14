@@ -13,7 +13,6 @@ import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.world.ModOrePlacements;
-import com.tiki.advancedlootableweapons.world.Worldgen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -47,7 +46,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -72,7 +70,8 @@ public class AdvancedLootableWeapons
         
         BlockEntityInit.register(eventBus);
         MenuInit.register(eventBus);
-        
+        SoundInit.register(eventBus);
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigHandler.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfigHandler.SPEC);
         

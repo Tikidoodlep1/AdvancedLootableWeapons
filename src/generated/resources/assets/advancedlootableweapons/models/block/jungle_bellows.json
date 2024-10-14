@@ -1,6 +1,7 @@
 {
   "parent": "advancedlootableweapons:block/bellows",
   "textures": {
-    "#3": "minecraft:block/jungle_planks"
+    "3": "minecraft:block/jungle_planks",
+    "particle": "minecraft:block/jungle_planks"
   }
 }
