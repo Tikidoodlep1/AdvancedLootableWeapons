@@ -71,6 +71,9 @@ public class ItemInit {
     public static final RegistryObject<Item> CRYSTAL = ITEMS.register("crystal", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> SHADOW = ITEMS.register("shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
     public static final RegistryObject<Item> CONGEALED_SHADOW = ITEMS.register("congealed_shadow", () -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CHARCOAL_POWDER = ITEMS.register("charcoal_powder",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CLAY_QUENCHING_MIX = ITEMS.register("clay_quenching_mix",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
+    public static final RegistryObject<Item> CLAY_QUENCHING_SLIP = ITEMS.register("clay_quenching_slip",() -> new Item(new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));
 
     //tanning
     public static final RegistryObject<Item> TANNING_KNIFE = ITEMS.register("tanning_knife", () -> new TanningKnifeItem(Tiers.IRON, new Item.Properties().tab(ModCreativeTabs.MISC_TAB)));

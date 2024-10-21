@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import com.tiki.advancedlootableweapons.init.BlockEntityInit;
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
+import com.tiki.advancedlootableweapons.init.SoundInit;
 import com.tiki.advancedlootableweapons.menu.JawCrusherMenu;
 import com.tiki.advancedlootableweapons.inventory.JawCrusherHandler;
 import com.tiki.advancedlootableweapons.recipes.JawCrusherRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -116,6 +118,7 @@ public class JawCrusherBlockEntity extends BlockEntity implements MenuProvider {
 				this.itemHandler.extractItem(INPUT_SLOT, 1, false);
 				this.itemHandler.setStackInSlot(OUTPUT_SLOT, ItemHandlerHelper.copyStackWithSize(baseResult,
 						baseResult.getCount() + actualBonus + itemHandler.getStackInSlot(OUTPUT_SLOT).getCount()));
+				level.playSound(null, worldPosition, SoundInit.JAW_CRUSHER.get(), SoundSource.BLOCKS, 1, 1);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 
 import com.tiki.advancedlootableweapons.init.ModRecipeTypes;
 import com.tiki.advancedlootableweapons.init.ModRecipeSerializers;
+import com.tiki.advancedlootableweapons.util.Utils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -84,7 +85,7 @@ public class JawCrusherRecipe implements Recipe<RecipeWrapper> {
 
 		@Override
 		public JawCrusherRecipe fromJson(final ResourceLocation pRecipeId, final JsonObject json) {
-			Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
+			Ingredient input = Ingredient.fromJson(Utils.getNonNull(json, "ingredient"));
 			ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
 			int maxCount = json.has("bonus") ? GsonHelper.getAsInt(json, "bonus") : 0;

@@ -25,11 +25,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                         BlockInit.CRYSTALLITE_ORE.get(), BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get(),
                         BlockInit.DEEPSLATE_PLATINUM_ORE.get(), BlockInit.DEEPSLATE_SILVER_ORE.get(), BlockInit.DEEPSLATE_TIN_ORE.get(),
                         BlockInit.DIORITE_BRICKS.get(),BlockInit.DOLOMITE.get(),
-                        BlockInit.DUSKSTEEL_BLOCK.get(), BlockInit.FELDSPAR.get(), BlockInit.FORGE.get(),BlockInit.ADVANCED_FORGE.get(),
+                        BlockInit.DUSKSTEEL_BLOCK.get(), BlockInit.ENDSTONE_CRYSTALLITE_ORE.get(),
+                        BlockInit.FELDSPAR.get(), BlockInit.FORGE.get(),BlockInit.ADVANCED_FORGE.get(),
                         BlockInit.FROST_STEEL_BLOCK.get(), BlockInit.GRANITE_BRICKS.get(),
                         BlockInit.GYPSUM.get(),BlockInit.JAW_CRUSHER.get(),
                         BlockInit.KOBOLD_STEEL_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(), BlockInit.PLATINUM_ORE.get(),
-                        BlockInit.REFINED_OBSIDIAN_BLOCK.get(),
+                        BlockInit.REFINED_OBSIDIAN_BLOCK.get(),BlockInit.SALT_ORE.get(),
                         BlockInit.SHADOW_PLATINUM_BLOCK.get(), BlockInit.SILVER_ORE.get(),
                         BlockInit.SILVER_BLOCK.get(), BlockInit.STEEL_BLOCK.get(), BlockInit.TIN_BLOCK.get(),
                         BlockInit.TIN_ORE.get()
@@ -40,11 +41,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(BlockInit.ALLOY_FURNACE.get(), BlockInit.COBBLED_FELDSPAR.get(), BlockInit.DEEPSLATE_TIN_ORE.get(),
                         BlockInit.DIORITE_BRICKS.get(), BlockInit.DIORITE_CLAY.get(), BlockInit.FELDSPAR.get(),
                         BlockInit.FORGE.get(), BlockInit.GRANITE_BRICKS.get(), BlockInit.GRANITE_CLAY.get(),
-                        BlockInit.JAW_CRUSHER.get(), BlockInit.TIN_ORE.get());
+                        BlockInit.JAW_CRUSHER.get(), BlockInit.TIN_ORE.get(),BlockInit.SALT_ORE.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE).add(BlockInit.TANNING_RACK.get());
 
-        tag(BlockTags.NEEDS_STONE_TOOL)
+        tag(BlockTags.NEEDS_IRON_TOOL)
                 .add(BlockInit.STEEL_BLOCK.get(),
                         BlockInit.KOBOLD_STEEL_BLOCK.get(),
                         BlockInit.TIN_BLOCK.get(),
@@ -59,10 +60,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
                         BlockInit.SILVER_ORE.get(),
                         BlockInit.PLATINUM_ORE.get(),
-                        BlockInit.CRYSTALLITE_ORE.get(),
                         BlockInit.DEEPSLATE_SILVER_ORE.get(),
                         BlockInit.DEEPSLATE_PLATINUM_ORE.get(),
                         BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get());
+
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(BlockInit.CRYSTALLITE_ORE.get(),BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get(),
+                        BlockInit.ENDSTONE_CRYSTALLITE_ORE.get()
+                );
 
         tag(BlockTags.BEACON_BASE_BLOCKS).add(BlockInit.BRONZE_BLOCK.get(), BlockInit.CRYSTALLITE_BLOCK.get(), BlockInit.DUSKSTEEL_BLOCK.get(),
                 BlockInit.FROST_STEEL_BLOCK.get(), BlockInit.KOBOLD_STEEL_BLOCK.get(), BlockInit.PLATINUM_BLOCK.get(),

@@ -32,6 +32,7 @@ public class ItemsTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.INGOTS_KOBOLD_STEEL).add(ItemInit.KOBOLD_STEEL_INGOT.get());
 
         tag(ModItemTags.SALT).add(ItemInit.SALT.get());
+        tag(ModItemTags.DUSTS_COAL).add(ItemInit.CHARCOAL_POWDER.get());
 
         tag(ModItemTags.CHAIN_BINDINGS).
                 add(ItemInit.IRON_CHAIN_BINDING.get(),

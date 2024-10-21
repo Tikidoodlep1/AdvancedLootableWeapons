@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [
+      {
+        "item": "advancedlootableweapons:feldspar_powder"
+      },
+      {
+        "item": "advancedlootableweapons:granite_powder"
+      }
+    ],
+    {
+      "tag": "forge:dusts/coal"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:clay"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:clay_quenching_mix"
+  }
+}

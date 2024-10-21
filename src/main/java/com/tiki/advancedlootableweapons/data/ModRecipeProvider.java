@@ -112,6 +112,24 @@ public class ModRecipeProvider extends RecipeProvider {
         woodenWeapon(recipeConsumer, ItemInit.TALWAR.get(), ItemInit.WOODEN_TALWAR_HEAD.get(), false);
         woodenWeapon(recipeConsumer, ItemInit.ZWEIHANDER.get(), ItemInit.WOODEN_ZWEIHANDER_HEAD.get(), true);
 
+        ShapelessRecipeBuilder.shapeless(ItemInit.CLAY_QUENCHING_MIX.get())
+                .requires(Ingredient.of(ItemInit.FELDSPAR_POWDER.get(),ItemInit.GRANITE_POWDER.get()))
+                .requires(ModItemTags.DUSTS_COAL)
+                .requires(Ingredient.of(Items.WATER_BUCKET))
+                .requires(Items.CLAY)
+                .unlockedBy("has_charcoal_dust",has(ModItemTags.DUSTS_COAL))
+                .save(recipeConsumer);
+
+        ShapelessRecipeBuilder.shapeless(ItemInit.CLAY_QUENCHING_SLIP.get())
+                .requires(Ingredient.of(ItemInit.FELDSPAR_POWDER.get(),ItemInit.GRANITE_POWDER.get()))
+                .requires(ModItemTags.DUSTS_COAL)
+                .requires(ModItemTags.DUSTS_COAL)
+                .requires(Ingredient.of(Items.WATER_BUCKET))
+                .requires(Items.CLAY)
+                .unlockedBy("has_charcoal_dust",has(ModItemTags.DUSTS_COAL))
+                .save(recipeConsumer);
+
+
         twoByTwo(recipeConsumer, BlockInit.DIORITE_BRICKS.get(), ItemInit.DIORITE_BRICK.get());
         twoByTwo(recipeConsumer, BlockInit.GRANITE_BRICKS.get(), ItemInit.GRANITE_BRICK.get());
         twoByTwo(recipeConsumer, Blocks.OBSIDIAN, ItemInit.OBSIDIAN_SHARD.get());
@@ -418,8 +436,9 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void crusher(Consumer<FinishedRecipe> recipeConsumer) {
-        CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get()), ItemInit.FELDSPAR_POWDER.get(), 4)
+        CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get(),BlockInit.COBBLED_FELDSPAR.get()), ItemInit.FELDSPAR_POWDER.get(), 4)
                 .save(recipeConsumer);
+        CrusherRecipeBuilder.crusher(Ingredient.of(ItemTags.COALS),ItemInit.CHARCOAL_POWDER.get());
 
         CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.DIORITE), ItemInit.DIORITE_POWDER.get(), 4)
                 .save(recipeConsumer);

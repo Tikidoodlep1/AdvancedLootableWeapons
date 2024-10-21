@@ -20,6 +20,7 @@ public class ModItemTags {
     public static final TagKey<Item> INGOTS_STEEL = forge("ingots/steel");
     public static final TagKey<Item> INGOTS_SHADOW_PLATINUM = forge("ingots/shadow_platinum");
     public static final TagKey<Item> SALT = forge("dusts/salt");
+    public static final TagKey<Item> DUSTS_COAL = forge("dusts/coal");
 
     public static final TagKey<Item> CHAIN_BINDINGS = mod("chain_bindings");
 

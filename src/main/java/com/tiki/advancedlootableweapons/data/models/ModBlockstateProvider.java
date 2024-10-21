@@ -26,11 +26,14 @@ public class ModBlockstateProvider extends BlockStateProvider {
         simpleBlock(BlockInit.PLATINUM_ORE.get());
         simpleBlock(BlockInit.SILVER_ORE.get());
         simpleBlock(BlockInit.TIN_ORE.get());
+        simpleBlock(BlockInit.SALT_ORE.get());
 
 /*todo        simpleBlock(BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get());
         simpleBlock(BlockInit.DEEPSLATE_PLATINUM_ORE.get());
         simpleBlock(BlockInit.DEEPSLATE_SILVER_ORE.get());
         simpleBlock(BlockInit.DEEPSLATE_TIN_ORE.get());*/
+
+        simpleBlock(BlockInit.ENDSTONE_CRYSTALLITE_ORE.get());
 
         simpleBlock(BlockInit.STEEL_BLOCK.get());
         simpleBlock(BlockInit.KOBOLD_STEEL_BLOCK.get());

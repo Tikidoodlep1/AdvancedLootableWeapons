@@ -1,5 +1,6 @@
 package com.tiki.advancedlootableweapons.util;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.Util;
@@ -52,6 +53,16 @@ public class Utils {
 
     public static String getFluidDescId(Fluid fluid) {
         return Util.makeDescriptionId("fluid", Registry.FLUID.getKey(fluid));
+    }
+
+    //todo, remove in 1.20
+    public static JsonElement getNonNull(JsonObject pJson, String pMemberName) {
+        JsonElement jsonelement = pJson.get(pMemberName);
+        if (jsonelement != null && !jsonelement.isJsonNull()) {
+            return jsonelement;
+        } else {
+            throw new JsonSyntaxException("Missing field " + pMemberName);
+        }
     }
 
 }

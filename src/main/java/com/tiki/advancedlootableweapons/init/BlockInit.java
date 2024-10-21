@@ -63,8 +63,8 @@ public class BlockInit {
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
 	public static final RegistryObject<Block> DIORITE_BRICKS = registerBlock("diorite_bricks", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
-	public static final RegistryObject<Block> GYPSUM = registerBlock("gypsum",() -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
+	public static final RegistryObject<Block> GYPSUM = registerBlock("gypsum",() -> new GypsumBlock(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE).randomTicks()), ModCreativeTabs.BLOCK_TAB, true);
 	public static final RegistryObject<Block> DOLOMITE = registerBlock("dolomite",() -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(1.4F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
 
@@ -85,7 +85,11 @@ public class BlockInit {
 			.destroyTime(4.8F).explosionResistance(3.4F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB, true);
 	public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = registerBlock("deepslate_tin_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(4.1F).explosionResistance(2.8F).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)), ModCreativeTabs.BLOCK_TAB, true);
-	
+	public static final RegistryObject<Block> ENDSTONE_CRYSTALLITE_ORE = registerBlock("endstone_crystallite_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+			.destroyTime(4.5F).explosionResistance(4.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);
+	public static final RegistryObject<Block> SALT_ORE = registerBlock("salt_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+					.destroyTime(4.1F).explosionResistance(2.8F).requiresCorrectToolForDrops().sound(SoundType.STONE)),ModCreativeTabs.BLOCK_TAB,true);
+
 	//Functionals
 	public static final RegistryObject<Block> ALLOY_FURNACE = registerBlock("alloy_furnace", () -> new AlloyFurnaceBlock(BlockBehaviour.Properties.of(Material.STONE)
 			.destroyTime(3.5F).explosionResistance(4.1F).requiresCorrectToolForDrops().sound(SoundType.STONE)), ModCreativeTabs.BLOCK_TAB, true);

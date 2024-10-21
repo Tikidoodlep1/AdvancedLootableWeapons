@@ -80,11 +80,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleBlockItem(BlockInit.PLATINUM_ORE.get());
         simpleBlockItem(BlockInit.SILVER_ORE.get());
         simpleBlockItem(BlockInit.TIN_ORE.get());
+        simpleBlockItem(BlockInit.SALT_ORE.get());
 
         simpleBlockItem(BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get());
         simpleBlockItem(BlockInit.DEEPSLATE_PLATINUM_ORE.get());
         simpleBlockItem(BlockInit.DEEPSLATE_SILVER_ORE.get());
         simpleBlockItem(BlockInit.DEEPSLATE_TIN_ORE.get());
+
+        simpleBlockItem(BlockInit.ENDSTONE_CRYSTALLITE_ORE.get());
 
         simpleBlockItem(BlockInit.COBBLED_FELDSPAR.get());
         simpleBlockItem(BlockInit.FELDSPAR.get());
@@ -122,6 +125,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         oneLayerItem(ItemInit.DIORITE_POWDER.get());
         oneLayerItem(ItemInit.FELDSPAR_POWDER.get());
         oneLayerItem(ItemInit.GRANITE_POWDER.get());
+        oneLayerItem(ItemInit.CHARCOAL_POWDER.get());
+        oneLayerItem(ItemInit.CLAY_QUENCHING_MIX.get());
+        oneLayerItem(ItemInit.CLAY_QUENCHING_SLIP.get());
 
         oneLayerItem(ItemInit.OBSIDIAN_SHARD.get());
 

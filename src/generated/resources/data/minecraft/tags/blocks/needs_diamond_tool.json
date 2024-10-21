@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "advancedlootableweapons:crystallite_ore",
+    "advancedlootableweapons:deepslate_crystallite_ore",
+    "advancedlootableweapons:endstone_crystallite_ore"
+  ]
+}

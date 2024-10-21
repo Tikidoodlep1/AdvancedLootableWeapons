@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:clay_quenching_slip"
+    ]
+  },
+  "criteria": {
+    "has_charcoal_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/coal"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:clay_quenching_slip"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_charcoal_dust",
+      "has_the_recipe"
+    ]
+  ]
+}

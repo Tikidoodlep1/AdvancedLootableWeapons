@@ -19,11 +19,14 @@ public class ModBlockLoot extends BlockLoot {
         add(BlockInit.PLATINUM_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_PLATINUM.get()));
         add(BlockInit.SILVER_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_SILVER.get()));
         add(BlockInit.TIN_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_TIN.get()));
+        add(BlockInit.SALT_ORE.get(), (block) -> createOreDrop(block, ItemInit.SALT.get()));
 
         add(BlockInit.DEEPSLATE_CRYSTALLITE_ORE.get(), (block) -> createOreDrop(block, ItemInit.CRYSTAL.get()));
         add(BlockInit.DEEPSLATE_PLATINUM_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_PLATINUM.get()));
         add(BlockInit.DEEPSLATE_SILVER_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_SILVER.get()));
         add(BlockInit.DEEPSLATE_TIN_ORE.get(), (block) -> createOreDrop(block, ItemInit.RAW_TIN.get()));
+
+        add(BlockInit.ENDSTONE_CRYSTALLITE_ORE.get(), (block) -> createOreDrop(block, ItemInit.CRYSTAL.get()));
 
         dropSelf(BlockInit.STEEL_BLOCK.get());
         dropSelf(BlockInit.KOBOLD_STEEL_BLOCK.get());
