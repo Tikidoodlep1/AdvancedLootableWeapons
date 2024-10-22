@@ -1,6 +1,8 @@
 package com.tiki.advancedlootableweapons.data.loot;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
+import com.tiki.advancedlootableweapons.block.AdvancedForgeBlock;
+import com.tiki.advancedlootableweapons.block.state.AdvancedForgeMultiblock;
 import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import net.minecraft.core.Registry;
@@ -43,7 +45,7 @@ public class ModBlockLoot extends BlockLoot {
         dropSelf(BlockInit.FORGE.get());
         dropSelf(BlockInit.ALLOY_FURNACE.get());
         dropSelf(BlockInit.JAW_CRUSHER.get());
-        dropSelf(BlockInit.ADVANCED_FORGE.get());
+        add(BlockInit.ADVANCED_FORGE.get(), block -> createSinglePropConditionTable(block, AdvancedForgeBlock.ADVANCED_FORGE_MULTIBLOCK, AdvancedForgeMultiblock.main));
         dropSelf(BlockInit.CLAY_DRUM.get());
         dropSelf(BlockInit.TANNING_RACK.get());
 
