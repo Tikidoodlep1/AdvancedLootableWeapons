@@ -27,6 +27,7 @@ import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandle
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
+import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -70,6 +71,7 @@ public class REICompat implements REIClientPlugin {
         registry.add(sequencedAnvilForgingCategory);
         registry.add(tanningRackCategory);
 
+        registry.addWorkstations(BuiltinPlugin.SMELTING,EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(alloyFurnaceCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.ALLOY_FURNACE.get()));
         registry.addWorkstations(jawCrusherCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.JAW_CRUSHER.get()));
         registry.addWorkstations(drumQuenchingCategory.getCategoryIdentifier(), EntryStacks.of(BlockInit.CLAY_DRUM.get()));

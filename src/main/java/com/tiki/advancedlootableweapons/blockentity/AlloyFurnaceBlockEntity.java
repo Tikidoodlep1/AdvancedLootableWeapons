@@ -25,6 +25,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -56,6 +57,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     private int cookingTotalTime = MAX_COOKING_TIME;
 
     private AlloyFurnaceRecipe cachedRecipe = null;
+    private SmeltingRecipe smeltingRecipe = null;
 
     private Component name;
     protected final ContainerData dataAccess = new ContainerData() {
@@ -97,6 +99,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             }
         }
     };
+
+    private final RecipeWrapper wrapper = new RecipeWrapper(itemHandler);
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
@@ -182,7 +186,7 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
         if (lookForRecipe) {
             lookForRecipe();
             lookForRecipe = false;
-            if (cachedRecipe != null) {
+            if (cachedRecipe != null || smeltingRecipe != null) {
                 findFuel = true;
             }
         }
@@ -200,7 +204,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             }
         }
 
-        if (cachedRecipe != null) {
+        //the recipe is finished, cook the items and reset the timer
+        if (cachedRecipe != null || smeltingRecipe != null) {
             if (hasRoom() && isLit()) {
                 cookingProgress++;
                 //the recipe is finished, cook the items and reset the timer
@@ -220,7 +225,8 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     //find fuel and use it to cook
     protected void findFuel() {
         //there is no recipe, don't look for fuel
-        if (cachedRecipe == null) return;
+        findFuel = false;
+        if (cachedRecipe == null && smeltingRecipe == null) return;
         //don't bother looking for fuel if there's no room left
         if (!hasRoom()) return;
         int burnTime = ForgeHooks.getBurnTime(itemHandler.getStackInSlot(SLOT_FUEL),RecipeType.SMELTING);
@@ -228,7 +234,6 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
             this.litDuration = burnTime;
             this.litTime = burnTime;
             itemHandler.extractItem(SLOT_FUEL,1,false);
-            findFuel = false;
         }
     }
 
@@ -237,32 +242,52 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     }
 
     protected void smelt() {
-        boolean normalOrientation = getOrientation();
 
-        if (normalOrientation) {
+        if (cachedRecipe != null) {
+
+            boolean normalOrientation = getOrientation();
+
+            if (normalOrientation) {
+                //shrink 1st stack using 1st recipe input
+                itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount1(), false);
+                //shrink 2nd stack using 2nd recipe input
+                itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount2(), false);
+            } else {
+                //shrink 1st stack using 2nd recipe input
+                itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount2(), false);
+                //shrink 2nd stack using 1st recipe input
+                itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount1(), false);
+            }
+            int existingCount = itemHandler.getStackInSlot(SLOT_RESULT).getCount();
+            //add result to output
+            itemHandler.setStackInSlot(SLOT_RESULT, ItemHandlerHelper.
+                    copyStackWithSize(cachedRecipe.getResultItem(), cachedRecipe.getResultItem().getCount() + existingCount));
+        } else if (smeltingRecipe != null) {
+            ItemStack result = smeltingRecipe.assemble(wrapper);
+
             //shrink 1st stack using 1st recipe input
-            itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount1(), false);
+            itemHandler.extractItem(SLOT_INPUT_1,1, false);
             //shrink 2nd stack using 2nd recipe input
-            itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount2(), false);
-        } else {
-            //shrink 1st stack using 2nd recipe input
-            itemHandler.extractItem(SLOT_INPUT_1, cachedRecipe.getCount2(), false);
-            //shrink 2nd stack using 1st recipe input
-            itemHandler.extractItem(SLOT_INPUT_2, cachedRecipe.getCount1(), false);
+            itemHandler.extractItem(SLOT_INPUT_2, 1, false);
+            int existingCount = itemHandler.getStackInSlot(SLOT_RESULT).getCount();
+            //add result to output
+            itemHandler.setStackInSlot(SLOT_RESULT, ItemHandlerHelper.copyStackWithSize(result, result.getCount() * 2 + existingCount));
         }
-        int existingCount = itemHandler.getStackInSlot(SLOT_RESULT).getCount();
-        //add result to output
-        itemHandler.setStackInSlot(SLOT_RESULT, ItemHandlerHelper.
-                copyStackWithSize(cachedRecipe.getResultItem(),cachedRecipe.getResultItem().getCount() + existingCount));
     }
 
     protected boolean getOrientation() {
-        return cachedRecipe.normalOrientation(new RecipeWrapper(itemHandler));
+        return cachedRecipe.normalOrientation(wrapper);
     }
 
     //check if there's enough room to process the current recipe
     protected boolean hasRoom() {
-        ItemStack result = cachedRecipe.assemble(null);
+        ItemStack result = ItemStack.EMPTY;
+        if (cachedRecipe != null) {
+            result = cachedRecipe.assemble(wrapper);
+        } else if (smeltingRecipe != null) {
+            ItemStack assemble = smeltingRecipe.assemble(wrapper);
+            result = ItemHandlerHelper.copyStackWithSize(assemble,assemble.getCount() * 2);
+        }
         ItemStack output = itemHandler.getStackInSlot(SLOT_RESULT);
         //if the output is empty, then there's always enough room
         if (output.isEmpty()) return true;
@@ -278,17 +303,36 @@ public class AlloyFurnaceBlockEntity extends BlockEntity implements MenuProvider
     protected void lookForRecipe() {
         //check if the prior recipe matches
         if (cachedRecipe != null) {
-            if (cachedRecipe.matches(new RecipeWrapper(itemHandler), level)) {
+            if (cachedRecipe.matches(wrapper, level)) {
                 return;
             }
             //else invalidate and set progress to 0
             cachedRecipe = null;
             cookingProgress = 0;
         }
+
+        if (smeltingRecipe != null) {
+            ItemStack stack1 = itemHandler.getStackInSlot(SLOT_INPUT_1);
+            if (smeltingRecipe.matches(wrapper, level) && ItemStack.isSameItemSameTags(stack1,itemHandler.getStackInSlot(SLOT_INPUT_2))) {
+                return;
+            }
+            //else invalidate and set progress to 0
+            smeltingRecipe = null;
+            cookingProgress = 0;
+        }
+
         //lookup a new recipe
-        cachedRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ALLOY_FURNACE, new RecipeWrapper(itemHandler), level).orElse(null);
+        cachedRecipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ALLOY_FURNACE,wrapper, level).orElse(null);
         if (cachedRecipe != null) {
             cookingTotalTime = cachedRecipe.getCookTime();
+        } else {
+            ItemStack stack1 = itemHandler.getStackInSlot(SLOT_INPUT_1);
+            if (!stack1.isEmpty() && ItemStack.isSameItemSameTags(stack1,itemHandler.getStackInSlot(SLOT_INPUT_2))) {
+                smeltingRecipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING,wrapper,level).orElse(null);
+                if (smeltingRecipe != null) {
+                    cookingTotalTime = smeltingRecipe.getCookingTime();
+                }
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.tiki.advancedlootableweapons.inventory;
+package com.tiki.advancedlootableweapons.menu;
 
 import com.google.common.collect.Lists;
 import com.tiki.advancedlootableweapons.init.MenuInit;

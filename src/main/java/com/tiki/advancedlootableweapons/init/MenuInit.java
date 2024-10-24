@@ -2,7 +2,7 @@ package com.tiki.advancedlootableweapons.init;
 
 import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.menu.*;
-import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
+import com.tiki.advancedlootableweapons.menu.AnvilForgingMenu;
 
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;

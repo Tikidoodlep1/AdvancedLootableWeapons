@@ -9,7 +9,7 @@ import com.tiki.advancedlootableweapons.handlers.config.ClientConfigHandler;
 import com.tiki.advancedlootableweapons.handlers.config.CommonConfigHandler;
 import com.tiki.advancedlootableweapons.init.*;
 
-import com.tiki.advancedlootableweapons.inventory.AnvilForgingMenu;
+import com.tiki.advancedlootableweapons.menu.AnvilForgingMenu;
 import com.tiki.advancedlootableweapons.items.ForgeHammerItem;
 import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.world.ModOrePlacements;
