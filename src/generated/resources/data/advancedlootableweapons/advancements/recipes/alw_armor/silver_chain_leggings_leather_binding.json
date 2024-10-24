@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advancedlootableweapons:silver_chain_leggings_leather_binding"
+    ]
+  },
+  "criteria": {
+    "has_leather_binding": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advancedlootableweapons:leather_binding"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advancedlootableweapons:silver_chain_leggings_leather_binding"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_leather_binding",
+      "has_the_recipe"
+    ]
+  ]
+}

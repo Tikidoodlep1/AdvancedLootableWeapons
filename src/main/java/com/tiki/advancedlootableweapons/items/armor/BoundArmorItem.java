@@ -18,7 +18,8 @@ public class BoundArmorItem extends ArmorItem {
     public static final String TIER_INFO = "advancedlootableweapons.armor.tier.info";
 
 
-    @Override
+    //uses a mixin now
+    /*@Override
     public int getMaxDamage(ItemStack stack) {
         int base = super.getMaxDamage(stack);
 
@@ -29,7 +30,7 @@ public class BoundArmorItem extends ArmorItem {
         }
 
         return base;
-    }
+    }*/
 
     public static Item getArmorBinding(ItemStack stack){
         if (!stack.hasTag() || !stack.getTag().contains(BINDING)) return Items.AIR;

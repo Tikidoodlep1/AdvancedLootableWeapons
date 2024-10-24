@@ -131,18 +131,18 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
 
             for (int l = this.startIndex; l < k; ++l) {
                 int i1 = l - this.startIndex;
-                double d0 = pMouseX - (double) (i + i1 % 4 * 16);
-                double d1 = pMouseY - (double) (j + i1 / 4 * 18);
+                double d0 = pMouseX -  (i + i1 % 4 * 16);
+                double d1 = pMouseY -  (j + i1 / 4 * 18);
                 if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.menu.clickMenuButton(this.minecraft.player, l)) {
                     Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-                    this.minecraft.gameMode.handleInventoryButtonClick((this.menu).containerId, l);
+                    this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, l);
                     return true;
                 }
             }
 
             i = this.leftPos + 119;
             j = this.topPos + 9;
-            if (pMouseX >= (double) i && pMouseX < (double) (i + 12) && pMouseY >= (double) j && pMouseY < (double) (j + 54)) {
+            if (pMouseX >=  i && pMouseX < i + 12 && pMouseY >=  j && pMouseY < j + 54) {
                 this.scrolling = true;
             }
         }
@@ -155,9 +155,9 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
         if (this.scrolling && this.isScrollBarActive()) {
             int i = this.topPos + 14;
             int j = i + 54;
-            this.scrollOffs = ((float) pMouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
+            this.scrollOffs = ((float) pMouseY - i - 7.5F) / ((j - i) - 15.0F);
             this.scrollOffs = Mth.clamp(this.scrollOffs, 0.0F, 1.0F);
-            this.startIndex = (int) ((double) (this.scrollOffs * (float) this.getOffscreenRows()) + 0.5D) * 4;
+            this.startIndex = (int) (this.scrollOffs * (float) this.getOffscreenRows() + 0.5D) * 4;
             return true;
         } else {
             return super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
@@ -167,9 +167,9 @@ public class AnvilForgingScreen extends AbstractContainerScreen<AnvilForgingMenu
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         if (this.isScrollBarActive()) {
             int i = this.getOffscreenRows();
-            float f = (float) pDelta / (float) i;
+            float f = (float) pDelta / i;
             this.scrollOffs = Mth.clamp(this.scrollOffs - f, 0.0F, 1.0F);
-            this.startIndex = (int) ((double) (this.scrollOffs * (float) i) + 0.5D) * 4;
+            this.startIndex = (int) ( this.scrollOffs * (float) i + 0.5D) * 4;
         }
 
         return true;

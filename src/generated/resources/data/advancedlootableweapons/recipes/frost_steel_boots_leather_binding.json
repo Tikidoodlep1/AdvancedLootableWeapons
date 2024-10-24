@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:unbound_frost_steel_boots"
+    },
+    {
+      "item": "advancedlootableweapons:leather_binding"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:frost_steel_boots",
+    "nbt": "{Damage:0,\"advancedlootableweapons:binding\":\"advancedlootableweapons:leather_binding\"}"
+  }
+}

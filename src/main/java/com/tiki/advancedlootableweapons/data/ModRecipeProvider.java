@@ -7,6 +7,7 @@ import com.tiki.advancedlootableweapons.init.BlockInit;
 import com.tiki.advancedlootableweapons.init.FluidInit;
 import com.tiki.advancedlootableweapons.init.ItemInit;
 import com.tiki.advancedlootableweapons.items.HeatableToolPartItem;
+import com.tiki.advancedlootableweapons.items.armor.ArmorBindingItem;
 import com.tiki.advancedlootableweapons.items.armor.BoundArmorItem;
 import com.tiki.advancedlootableweapons.items.armor.UnboundArmorItem;
 import com.tiki.advancedlootableweapons.tags.ModItemTags;
@@ -30,6 +31,7 @@ import net.minecraftforge.common.crafting.PartialNBTIngredient;
 import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -212,9 +214,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern(" S ").unlockedBy("has_planks", has(ItemTags.PLANKS))
                 .save(recipeConsumer);
 
+        ShapedRecipeBuilder.shaped(ItemInit.WOODEN_KODACHI_HEAD.get())
+                .define('S', ItemTags.PLANKS)
+                .pattern("S ")
+                .pattern(" S").unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(recipeConsumer);
+
         ShapedRecipeBuilder.shaped(ItemInit.WOODEN_LONG_TOOL_ROD.get())
                 .define('S', Tags.Items.RODS_WOODEN)
-                .pattern("S").pattern("S").unlockedBy("has_sticks", has(Tags.Items.RODS_WOODEN))
+                .pattern("S")
+                .pattern("S").unlockedBy("has_sticks", has(Tags.Items.RODS_WOODEN))
                 .save(recipeConsumer);
 
         ShapedRecipeBuilder.shaped(ItemInit.WOODEN_LONGSWORD_HEAD.get())
@@ -295,6 +304,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('#', ItemInit.FELDSPAR_POWDER.get()).define('X', ItemInit.GRANITE_POWDER.get())
                 .pattern("X#X").pattern("#X#").pattern("X#X")
                 .unlockedBy("has_feldspar_powder", has(ItemInit.FELDSPAR_POWDER.get())).save(recipeConsumer);
+
+        ShapedRecipeBuilder.shaped(ItemInit.TANNING_KNIFE.get())
+                .define('#', ItemTags.STONE_TOOL_MATERIALS).define('X', Tags.Items.RODS_WOODEN)
+                .pattern("#X").pattern("X ")
+                .unlockedBy("has_cobblestone", has(ItemTags.STONE_TOOL_MATERIALS)).save(recipeConsumer);
 
         ShapelessRecipeBuilder.shapeless(ItemInit.TRIMMED_HIDE.get()).requires(ItemInit.UNTRIMMED_HIDE.get()).requires(ItemInit.TANNING_KNIFE.get())
                 .unlockedBy("has_tanning_knife", has(ItemInit.TANNING_KNIFE.get()))
@@ -406,6 +420,61 @@ public class ModRecipeProvider extends RecipeProvider {
         chainLink(ItemInit.REFINED_OBSIDIAN_CHAIN_LINK.get(), WeaponMaterial.REFINED_OBSIDIAN.defaultItem().get(), recipeConsumer);
         chainLink(ItemInit.CRYSTALLITE_CHAIN_LINK.get(), WeaponMaterial.CRYSTALLITE.defaultItem().get(), recipeConsumer);
         chainLink(ItemInit.DUSKSTEEL_CHAIN_LINK.get(), WeaponMaterial.DUSKSTEEL.defaultItem().get(), recipeConsumer);
+
+        leatherBindingArmorSet(ItemInit.UNBOUND_BRONZE_SET, ItemInit.BRONZE_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_COPPER_SET, ItemInit.COPPER_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_CRYSTALLITE_SET, ItemInit.CRYSTALLITE_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_DUSKSTEEL_SET, ItemInit.DUSKSTEEL_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_FROST_STEEL_SET, ItemInit.FROST_STEEL_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_KOBOLD_STEEL_SET, ItemInit.KOBOLD_STEEL_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_PLATINUM_SET, ItemInit.PLATINUM_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_SHADOW_PLATINUM_SET, ItemInit.SHADOW_PLATINUM_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_SILVER_SET, ItemInit.SILVER_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_STEEL_SET, ItemInit.STEEL_SET, recipeConsumer);
+
+        leatherBindingArmorSet(ItemInit.UNBOUND_BRONZE_CHAIN_SET, ItemInit.BRONZE_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_COPPER_CHAIN_SET, ItemInit.COPPER_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_CRYSTALLITE_CHAIN_SET, ItemInit.CRYSTALLITE_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_DUSKSTEEL_CHAIN_SET, ItemInit.DUSKSTEEL_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_FROST_STEEL_CHAIN_SET, ItemInit.FROST_STEEL_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_KOBOLD_STEEL_CHAIN_SET, ItemInit.KOBOLD_STEEL_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_PLATINUM_CHAIN_SET, ItemInit.PLATINUM_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_SHADOW_PLATINUM_CHAIN_SET, ItemInit.SHADOW_PLATINUM_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_SILVER_CHAIN_SET, ItemInit.SILVER_CHAIN_SET, recipeConsumer);
+        leatherBindingArmorSet(ItemInit.UNBOUND_STEEL_CHAIN_SET, ItemInit.STEEL_CHAIN_SET, recipeConsumer);
+
+        leatherBindingArmor(Items.IRON_HELMET,ItemInit.UNBOUND_IRON_SET.get(EquipmentSlot.HEAD).get(),recipeConsumer);
+        leatherBindingArmor(Items.IRON_CHESTPLATE,ItemInit.UNBOUND_IRON_SET.get(EquipmentSlot.CHEST).get(),recipeConsumer);
+        leatherBindingArmor(Items.IRON_LEGGINGS,ItemInit.UNBOUND_IRON_SET.get(EquipmentSlot.LEGS).get(),recipeConsumer);
+        leatherBindingArmor(Items.IRON_BOOTS,ItemInit.UNBOUND_IRON_SET.get(EquipmentSlot.FEET).get(),recipeConsumer);
+
+        leatherBindingArmor(Items.GOLDEN_HELMET,ItemInit.UNBOUND_GOLD_SET.get(EquipmentSlot.HEAD).get(),recipeConsumer);
+        leatherBindingArmor(Items.GOLDEN_CHESTPLATE,ItemInit.UNBOUND_GOLD_SET.get(EquipmentSlot.CHEST).get(),recipeConsumer);
+        leatherBindingArmor(Items.GOLDEN_LEGGINGS,ItemInit.UNBOUND_GOLD_SET.get(EquipmentSlot.LEGS).get(),recipeConsumer);
+        leatherBindingArmor(Items.GOLDEN_BOOTS,ItemInit.UNBOUND_GOLD_SET.get(EquipmentSlot.FEET).get(),recipeConsumer);
+
+
+    }
+
+    static final EquipmentSlot[] armor = Arrays.stream(EquipmentSlot.values()).filter(equipmentSlot -> equipmentSlot.getType() == EquipmentSlot.Type.ARMOR).toArray(EquipmentSlot[]::new);
+
+    protected void leatherBindingArmor(Item result,Item unboundArmor,Consumer<FinishedRecipe> consumer)  {
+        ItemStack armor = result.getDefaultInstance();
+        BoundArmorItem.setArmorBinding(armor,ItemInit.LEATHER_BINDING.get());
+        CustomShapelessRecipeBuilder.customShapeless(armor)
+                .requires(unboundArmor)
+                .requires(ItemInit.LEATHER_BINDING.get())
+                .unlockedBy("has_leather_binding",has(ItemInit.LEATHER_BINDING.get()))
+                .save(consumer,AdvancedLootableWeapons.id(getItemName(result) +"_leather_binding"));
+    }
+
+    protected void leatherBindingArmorSet(Map<EquipmentSlot, RegistryObject<UnboundArmorItem>> map,
+                                           Map<EquipmentSlot, RegistryObject<BoundArmorItem>> finished, Consumer<FinishedRecipe> consumer)  {
+        for (EquipmentSlot slot : armor) {
+            Item boundArmor = finished.get(slot).get();
+            Item unboundArmor = map.get(slot).get();
+            leatherBindingArmor(boundArmor,unboundArmor,consumer);
+        }
     }
 
     protected void chainLink(Item result, Item material, Consumer<FinishedRecipe> consumer) {

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:unbound_dusksteel_chain_helmet"
+    },
+    {
+      "item": "advancedlootableweapons:leather_binding"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:dusksteel_chain_helmet",
+    "nbt": "{Damage:0,\"advancedlootableweapons:binding\":\"advancedlootableweapons:leather_binding\"}"
+  }
+}

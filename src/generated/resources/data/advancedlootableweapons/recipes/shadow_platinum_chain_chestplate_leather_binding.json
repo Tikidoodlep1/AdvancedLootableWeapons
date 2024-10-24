@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "advancedlootableweapons:unbound_shadow_platinum_chain_chestplate"
+    },
+    {
+      "item": "advancedlootableweapons:leather_binding"
+    }
+  ],
+  "result": {
+    "item": "advancedlootableweapons:shadow_platinum_chain_chestplate",
+    "nbt": "{Damage:0,\"advancedlootableweapons:binding\":\"advancedlootableweapons:leather_binding\"}"
+  }
+}

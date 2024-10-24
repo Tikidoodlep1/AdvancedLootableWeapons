@@ -105,7 +105,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 				pAccess.execute((level, pos) -> {
 					long l = level.getGameTime();
 					if (AnvilForgingMenu.this.lastSoundTime != l) {
-						level.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
+						level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
 						AnvilForgingMenu.this.lastSoundTime = l;
 					}
 
