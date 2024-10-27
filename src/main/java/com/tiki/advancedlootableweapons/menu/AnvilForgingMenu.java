@@ -64,6 +64,11 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 			AnvilForgingMenu.this.slotsChanged();
 			AnvilForgingMenu.this.slotUpdateListener.run();
 		}
+
+		@Override
+		public int getSlotLimit(int slot) {
+			return slot == RESULT_SLOT ? super.getSlotLimit(slot) : 1;
+		}
 	};
 
 	private final RecipeWrapper recipeWrapper = new RecipeWrapper(handler);
@@ -80,7 +85,7 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 		this.access = pAccess;
 		this.level = pPlayerInventory.player.level;
 		this.inputSlot1 = this.addSlot(new SlotItemHandler(this.handler, 0, 20, 33));
-		this.inputSlot2 = this.addSlot(new SlotItemHandler(this.handler, 1, 20, 53));
+		this.inputSlot2 = this.addSlot(new SlotItemHandler(this.handler, 1, 20, 51));
 
 		this.resultSlot = this.addSlot(new Slot(this.resultContainer, 2, 143, 33) {
 			/**
@@ -261,20 +266,10 @@ public class AnvilForgingMenu extends AbstractContainerMenu {
 				if (!this.moveItemStackTo(itemstack1, INV_SLOT_START, USE_ROW_SLOT_END, false)) {
 					return ItemStack.EMPTY;
 				}
-			}
-
-
-			else if (this.level.getRecipeManager().getRecipeFor(ModRecipeTypes.ANVIL_FORGING, recipeWrapper, this.level).isPresent()
-					|| itemstack.getItem() instanceof HeatableToolPartItem || item instanceof UnboundArmorItem || item instanceof ArmorBindingItem) {
+			} else {
 				if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (pIndex >= INV_SLOT_START && pIndex < USE_ROW_SLOT_START) {
-				if (!this.moveItemStackTo(itemstack1, USE_ROW_SLOT_START, USE_ROW_SLOT_END, false)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (pIndex >= USE_ROW_SLOT_START && pIndex < USE_ROW_SLOT_END && !this.moveItemStackTo(itemstack1, INV_SLOT_START, USE_ROW_SLOT_START, false)) {
-				return ItemStack.EMPTY;
 			}
 
 			if (itemstack1.isEmpty()) {
