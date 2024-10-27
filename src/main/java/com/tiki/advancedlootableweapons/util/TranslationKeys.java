@@ -26,7 +26,7 @@ public class TranslationKeys {
     public static final MutableComponent CHAIN_PEN_CHANCE = MCVersion.translation("advancedlootableweapons.weapon.chain_penetration_chance").withStyle(ChatFormatting.DARK_GREEN);
     public static final MutableComponent STUDDED_PEN_CHANCE = MCVersion.translation("advancedlootableweapons.weapon.studded_penetration_chance").withStyle(ChatFormatting.DARK_RED);
 
-    static DecimalFormat df = new DecimalFormat("###.##");
+    public static DecimalFormat df = new DecimalFormat("###.##");
 
     public static MutableComponent createTime(int ticks) {
          return MCVersion.translation("category.rei.cooking.time", df.format(ticks/ 20d));

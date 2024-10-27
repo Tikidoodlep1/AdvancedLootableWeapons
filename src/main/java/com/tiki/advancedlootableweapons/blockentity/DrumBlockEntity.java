@@ -198,9 +198,10 @@ public class DrumBlockEntity extends BlockEntity {
         //using setStackInSlot bypasses insertion/extraction checks and is faster
         //shrink 1st stack using 1st recipe input
         ItemStack input = itemStackHandler.getStackInSlot(INPUT_SLOT);
-        itemStackHandler.setStackInSlot(INPUT_SLOT, ItemHandlerHelper.copyStackWithSize(input,input.getCount() - 1));
+        itemStackHandler.setStackInSlot(INPUT_SLOT, ItemStack.EMPTY);
+        itemStackHandler.getStackInSlot(ADDITIVE_SLOT).shrink(1);
         //add result to output
-        itemStackHandler.setStackInSlot(OUTPUT_SLOT,result);
+        itemStackHandler.setStackInSlot(OUTPUT_SLOT,ItemHandlerHelper.copyStackWithSize(result,input.getCount()));
     }
 
     protected void lookForRecipe() {

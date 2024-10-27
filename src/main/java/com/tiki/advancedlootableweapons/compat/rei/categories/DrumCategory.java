@@ -5,6 +5,7 @@ import com.tiki.advancedlootableweapons.AdvancedLootableWeapons;
 import com.tiki.advancedlootableweapons.compat.rei.REICompat;
 import com.tiki.advancedlootableweapons.compat.rei.displays.DrumDisplay;
 import com.tiki.advancedlootableweapons.init.BlockInit;
+import com.tiki.advancedlootableweapons.util.MCVersion;
 import com.tiki.advancedlootableweapons.util.TranslationKeys;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -16,9 +17,12 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+
+import static com.tiki.advancedlootableweapons.util.TranslationKeys.df;
 
 public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
@@ -70,6 +74,9 @@ public class DrumCategory implements DisplayCategory<DrumDisplay> {
 
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 49, startPoint.y + 44))
                 .animationDurationTicks(display.time));
+
+        widgets.add(Widgets.createLabel(new Point(bounds.x + 136, bounds.getMaxY() - 30),
+                new TranslatableComponent("category.rei.campfire.time", df.format(display.time / 20d))).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 80, startPoint.y + 43)).entries(display.getOutputEntries().get(0))
                 .disableBackground().markOutput());

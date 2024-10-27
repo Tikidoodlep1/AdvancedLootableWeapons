@@ -505,13 +505,13 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     protected void crusher(Consumer<FinishedRecipe> recipeConsumer) {
-        CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get(),BlockInit.COBBLED_FELDSPAR.get()), ItemInit.FELDSPAR_POWDER.get(), 4)
+        CrusherRecipeBuilder.crusher(Ingredient.of(BlockInit.FELDSPAR.get(),BlockInit.COBBLED_FELDSPAR.get()), ItemInit.FELDSPAR_POWDER.get(), 3)
                 .save(recipeConsumer);
         CrusherRecipeBuilder.crusher(Ingredient.of(ItemTags.COALS),ItemInit.CHARCOAL_POWDER.get());
 
-        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.DIORITE), ItemInit.DIORITE_POWDER.get(), 4)
+        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.DIORITE), ItemInit.DIORITE_POWDER.get(), 3)
                 .save(recipeConsumer);
-        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.GRANITE), ItemInit.GRANITE_POWDER.get(), 4)
+        CrusherRecipeBuilder.crusher(Ingredient.of(Blocks.GRANITE), ItemInit.GRANITE_POWDER.get(), 3)
                 .save(recipeConsumer);
     }
 

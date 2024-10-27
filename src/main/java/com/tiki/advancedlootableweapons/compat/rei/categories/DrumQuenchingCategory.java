@@ -15,8 +15,11 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
+
+import static com.tiki.advancedlootableweapons.util.TranslationKeys.df;
 
 public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDisplay> {
 
@@ -59,6 +62,8 @@ public class DrumQuenchingCategory implements DisplayCategory<DrumQuenchingDispl
                     .color(0xFF404040, 0xFFBBBBBB).noShadow().leftAligned());
         }
 
+        widgets.add(Widgets.createLabel(new Point(bounds.x + 106, bounds.getMaxY() - 45),
+                new TranslatableComponent("category.rei.campfire.time", df.format(display.time / 20d))).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
 
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 52, startPoint.y + 9))
                 .animationDurationTicks(display.time));

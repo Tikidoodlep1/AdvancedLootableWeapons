@@ -14,8 +14,11 @@ import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
+
+import static com.tiki.advancedlootableweapons.util.TranslationKeys.df;
 
 public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay> {
 
@@ -41,7 +44,6 @@ public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay
         widgets.add(Widgets.createRecipeBase(bounds));
         Point startPoint = new Point(bounds.getCenterX() - 52, bounds.getCenterY() - 16);
 
-        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 85, startPoint.y + 9)));
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 10, startPoint.y + 1)).entries(display.getInputEntries().get(0))
                 .markInput());
@@ -51,10 +53,15 @@ public class AlloyFurnaceCategory implements DisplayCategory<AlloyFurnaceDisplay
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 52, startPoint.y + 9))
                 .animationDurationTicks(display.cookTime));
 
+        widgets.add(Widgets.createLabel(new Point(bounds.x + 106, bounds.getMaxY() - 15),
+                new TranslatableComponent("category.rei.campfire.time", df.format(display.cookTime / 20d))).noShadow().rightAligned().color(0xFF404040, 0xFFBBBBBB));
+
         widgets.add(Widgets.createBurningFire(new Point(startPoint.x + 24, startPoint.y + 22))
                 .animationDurationMS(10000));
 
-        widgets.add(Widgets.createSlot(new Point(startPoint.x + 85, startPoint.y + 9)).entries(display.getOutputEntries().get(0))
+        widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x + 95, startPoint.y + 9)));
+
+        widgets.add(Widgets.createSlot(new Point(startPoint.x + 95, startPoint.y + 9)).entries(display.getOutputEntries().get(0))
                 .disableBackground().markOutput());
 
         return widgets;

@@ -85,8 +85,8 @@ public class HeatableToolPartItem extends Item {
         tooltip.add(MCVersion.literal("Heat: "+(int)heat));
 
 
-        if(nbt!= null && needQuenching) {
-            boolean quenched = nbt.getBoolean("quenched");
+        if(needQuenching) {
+            boolean quenched = nbt != null && nbt.getBoolean("quenched");
             tooltip.add(quenched ? TranslationKeys.QUENCH_KEY : TranslationKeys.UNQUENCH_KEY);
         }
 
