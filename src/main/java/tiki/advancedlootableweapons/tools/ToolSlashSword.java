@@ -124,36 +124,64 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 			case "longsword":
 				this.attackSpeed = ConfigHandler.GLOBAL_LONGSWORD_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_LONGSWORD_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.14F;
 				break;
 			case "kodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_KODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_KODACHI_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 3.49F;
 				break;
 			case "battleaxe":
 				this.attackSpeed = ConfigHandler.GLOBAL_BATTLEAXE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_BATTLEAXE_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.32F;
 				break;
 			case "zweihander":
 				this.attackSpeed = ConfigHandler.GLOBAL_ZWEIHANDER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_ZWEIHANDER_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.25F;
 				break;
 			case "nodachi":
 				this.attackSpeed = ConfigHandler.GLOBAL_NODACHI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_NODACHI_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_NODACHI_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.66F;
 				break;
 			case "sabre":
 				this.attackSpeed = ConfigHandler.GLOBAL_SABRE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SABRE_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_SABRE_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 3.92F;
 				break;
 			case "makhaira":
 				this.attackSpeed = ConfigHandler.GLOBAL_MAKHAIRA_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MAKHAIRA_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_MAKHAIRA_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 3.56F;
 		}
 	}
@@ -250,6 +278,7 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
         {
+        	Alw.logger.debug("REGISTERING ITEM ATTRIBUTE MODIFIERS FOR ITEM " + this.getUnlocalizedName() + ". Attack damage " + this.getAttackDamage());
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0));
             multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0));
@@ -263,8 +292,8 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		KeyBinding run = Minecraft.getMinecraft().gameSettings.keyBindSprint;
-					
-		if(GameSettings.isKeyDown(sneak)) {
+		
+		if(GameSettings.isKeyDown(sneak) && ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
@@ -288,7 +317,9 @@ public class ToolSlashSword extends ItemSword implements IHasModel {
 				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.shine").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[4]));
 			}
 		}else {
-			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + " " + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			if(ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
+				tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + " " + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			}
 			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + run.getDisplayName() + " " + new TextComponentTranslation("alw.colors.info.name").getFormattedText());
 		}
 	}

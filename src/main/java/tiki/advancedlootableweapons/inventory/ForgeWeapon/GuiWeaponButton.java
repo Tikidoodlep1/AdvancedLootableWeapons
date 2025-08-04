@@ -54,7 +54,7 @@ public class GuiWeaponButton extends GuiButton {
 	}
 	
 	public GuiWeaponButton(int buttonId, int widthIn, int heightIn, ForgingGuiButtonRepresentation rep) {
-		super(buttonId, rep.getX(), rep.getY(), widthIn, heightIn, rep.getName());
+		super(buttonId, 0, 0, widthIn, heightIn, rep.getName());
 		this.name = rep.getName();
 		this.overlayX = rep.getOverlayX();
 		this.overlayY = rep.getOverlayY();

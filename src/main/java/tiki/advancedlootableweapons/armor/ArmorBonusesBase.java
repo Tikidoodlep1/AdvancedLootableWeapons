@@ -254,6 +254,10 @@ public class ArmorBonusesBase extends ItemArmor implements IHasModel, ISpecialAr
 		Random rand = new Random();
 		ArmorProperties propCopy = new ArmorProperties(properties.Priority, properties.AbsorbRatio, properties.AbsorbMax);
 		
+		if(!ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
+			return propCopy;
+		}
+		
 		if(armor.getItem() instanceof ArmorBonusesBase) {
 			ArmorTypes makeup = ((ArmorBonusesBase)armor.getItem()).getArmorType();
 			Entity ent = source.getTrueSource();

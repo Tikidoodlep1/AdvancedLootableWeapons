@@ -34,18 +34,6 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
 		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
 		List<ItemStack> containerItems = new ArrayList<ItemStack>();
-//		for(int i = 0; i < this.input.size(); i++) {
-//			Ingredient in = this.input.get(i);
-//			for(ItemStack stack : in.getMatchingStacks()) {
-//				if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() < inv.getStackInSlot(i).getCount()) {
-//					if(keptItems.get(i) == ItemStack.EMPTY) {
-//						ItemStack slot = inv.getStackInSlot(i);
-//						slot.setCount(inv.getStackInSlot(i).getCount() - stack.getCount());
-//						keptItems.set(i, slot);
-//					}
-//				}
-//			}
-//		}
 		
 		for(int i = 0; i < inv.getSizeInventory(); i++) {
 			if(inv.getStackInSlot(i) != ItemStack.EMPTY) {
@@ -84,24 +72,26 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 			return false;
 		}
 		
-		int matches = 0;
+		boolean[] matches = new boolean[this.input.size()];
 		
 		inventory: for(int i = 0; i < inv.getSizeInventory(); i++) {
-//			if(i == 2) { Accounted for in TE
-//				continue; // Avoid fuel slot, shouldn't be taken into account
-//			}
-			for(Ingredient in : this.input) {
+			for(int j = 0; j < this.input.size(); j++) { //Ingredient in : this.input) {
+				Ingredient in = this.input.get(j);
 				for(ItemStack stack : in.getMatchingStacks()) {
 					if(stack.getItem() == inv.getStackInSlot(i).getItem() && stack.getCount() <= inv.getStackInSlot(i).getCount()) {
-						matches++;
+						matches[j] = true;
 						continue inventory;
 					}
 				}
 			}
-			
 		}
 		
-		return matches == this.input.size();
+		for(int i = 0; i < matches.length; i++) {
+			if(!matches[i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
@@ -127,6 +117,7 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 			for(final JsonElement element : JsonUtils.getJsonArray(json, "ingredients")) {
 				Ingredient ingr = CraftingHelper.getIngredient(element, context);
 				JsonObject ingrObj = element.getAsJsonObject();
+								
 				if(ingrObj.has("ore") && ingrObj.has("count")) {
 					ItemStack[] is = ingr.getMatchingStacks();
 					for(int i = 0; i < is.length; i++) {

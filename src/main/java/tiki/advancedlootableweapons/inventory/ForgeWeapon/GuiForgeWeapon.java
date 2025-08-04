@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,12 +22,37 @@ import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
+import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.handlers.PacketHandler;
 import tiki.advancedlootableweapons.packet.PacketForgeWeaponButtonPress;
 
 public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
+		 
 		
 		public static final ResourceLocation TEXTURES = new ResourceLocation(ModInfo.ID + ":textures/gui/forge_weapon_new.png");
+	    
+	    //Keep a list of buttons added with CraftTweaker
+	    private final ArrayList<GuiWeaponButton> buttons = new ArrayList<GuiWeaponButton>();
+	    
+	    //Make a list of lists of buttons used as "pages" of buttons that are iterable
+	    private final ArrayList<ArrayList<GuiButton>> buttonPages = new ArrayList<ArrayList<GuiButton>>();
+	    //Buttons present on all pages
+	    private final GuiWeaponButton[] staticButtons = new GuiWeaponButton[4];
+	    private int staticButtonsLength = 2;
+	    private int rows = 5;
+	    private int cols = 3;
+	    private int rowCounter = 1;
+	    private int colCounter = 1;
+	    
+	    private int pageCounter = 0;
+	    private int currPage = 0;
+	    
+	    private int buttonPressed;
+	    //private Container container;
+	    private final InventoryPlayer player;
+	    private final CrTForgingGuiRepresentation CUSTOM_TEXTURE;
+	    private final ResourceLocation block;
+	    
 	    private final GuiWeaponButton daggerButton = new GuiWeaponButton(0, 30, 40, 23, 23, I18n.format("alw.weapon.dagger.name"), 1, 1);
 	    private final GuiWeaponButton kabutowariButton = new GuiWeaponButton(1, 60, 40, 23, 23, I18n.format("alw.weapon.kabutowari.name"), 22, 1);
 	    private final GuiWeaponButton talwarButton = new GuiWeaponButton(2, 90, 40, 23, 23, I18n.format("alw.weapon.talwar.name"), 64, 1);
@@ -54,38 +78,16 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    private final GuiWeaponButton rightButton = new GuiWeaponButton(100, 145 - 57 + 7, 12 + 10, 16, 13, I18n.format("alw.button.next.name"), 232, 1, 0, 23, 23, 23);
 	    private final GuiWeaponButton leftButton = new GuiWeaponButton(101, 81 - 57 + 7, 12 + 10, 16, 13, I18n.format("alw.button.prev.name"), 232, 1, 0, 36, 23, 36);
 	    
-	    //Keep a list of buttons added with CraftTweaker
-	    private final ArrayList<GuiWeaponButton> addedButtons = new ArrayList<GuiWeaponButton>();
-	    
-	    //Make a list of lists of buttons used as "pages" of buttons that are iterable
-	    private final ArrayList<ArrayList<GuiButton>> buttonPages = new ArrayList<ArrayList<GuiButton>>();
-	    //Buttons present on all pages
-	    private final GuiWeaponButton[] staticButtons = new GuiWeaponButton[4];
-	    private int staticButtonsLength = 2;
-	    private int rows = 5;
-	    private int cols = 3;
-	    private int rowCounter = 1;
-	    private int colCounter = 1;
-	    private int pageCounter = 0;
-	    private int currPage = 0;
-	    
-	    private int buttonPressed;
-	    //private Container container;
-	    private final InventoryPlayer player;
-	    private final CrTForgingGuiRepresentation CUSTOM_TEXTURE;
-	    private final ResourceLocation block;
-	    
 	    public GuiForgeWeapon(InventoryPlayer inventoryIn, Container container, ResourceLocation block)
 	    {
 	    	super(container);
-	    	//this.block = block;
-	        //this.container = container;
 	        this.player = inventoryIn;
+	        	        
 	        //Check if CraftTeaker is giving this gui more buttons
 	        if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
 	        	CUSTOM_TEXTURE = ZenDynamicAlwResources.guiLists.get(block);
 	        	for(ForgingGuiButtonRepresentation rep : CUSTOM_TEXTURE.buttons) {
-	        		addedButtons.add(new GuiWeaponButton(rep.getId(), rep.getX(), rep.getY(), 23, 23, rep.getName(), rep.getOverlayX(), rep.getOverlayY()));
+	        		buttons.add(new GuiWeaponButton(rep.getId(), 0, 0, 23, 23, rep.getName(), rep.getOverlayX(), rep.getOverlayY()));
 	        	}
 	        }else {
 	        	CUSTOM_TEXTURE = null;
@@ -101,6 +103,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    public void initGui() {
 	    	super.initGui();
 	    	
+	    	//Debug Calls
 	    	for(Entry<ResourceLocation, CrTForgingGuiRepresentation> gui : ZenDynamicAlwResources.guiLists.entrySet()) {
 	    		Alw.logger.debug("Block is " + gui.getKey());
 	    		String rep = "Representation is: [Texture: " + gui.getValue().textureLocation + ", " + "Slots: " + Arrays.toString(gui.getValue().slots.toArray()) + ", ";
@@ -116,7 +119,7 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    		Alw.logger.debug("Custom button list: " + this.CUSTOM_TEXTURE.buttons);
 	    		Alw.logger.debug("Button list: " + this.CUSTOM_TEXTURE == null ? "null" : Arrays.toString(this.CUSTOM_TEXTURE.buttons.toArray(new ForgingGuiButtonRepresentation[0])));
 	    	}
-	    	Alw.logger.debug(Arrays.toString(this.addedButtons.toArray(new GuiWeaponButton[0])));
+	    	Alw.logger.debug(Arrays.toString(this.buttons.toArray(new GuiWeaponButton[0])));
 	    	
 	    	this.rowCounter = 1;
 	    	this.colCounter = 1;
@@ -127,26 +130,59 @@ public class GuiForgeWeapon extends GuiContainer implements IContainerListener {
 	    		page.clear();
 	    	}
 	    	
-	    	this.addButton(daggerButton);
-        	this.addButton(kabutowariButton);
-        	this.addButton(talwarButton);
-        	this.addButton(rapierButton);
-        	this.addButton(maceButton);
-        	this.addButton(cleaverButton);
-        	this.addButton(staffButton);
-        	this.addButton(longswordButton);
-        	this.addButton(kodachiButton);
-        	this.addButton(battleaxeButton);
-        	this.addButton(zweihanderButton);
-        	this.addButton(nodachiButton);
-        	this.addButton(sabreButton);
-        	this.addButton(makhairaButton);
-        	this.addButton(spearButton);
-        	this.addButton(chainButton);
-        	this.addButton(plateButton);
+	    	if(ConfigHandler.ENABLE_DAGGERS) {
+	    		this.addButton(daggerButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_KABUTOWARIS) {
+	    		this.addButton(kabutowariButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_TALWARS) {
+	    		this.addButton(talwarButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_RAPIERS) {
+	    		this.addButton(rapierButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_MACES) {
+	    		this.addButton(maceButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_CLEAVERS) {
+	    		this.addButton(cleaverButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_STAFFS) {
+	    		this.addButton(staffButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_LONGSWORDS) {
+	    		this.addButton(longswordButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_KODACHIS) {
+	    		this.addButton(kodachiButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_BATTLEAXES) {
+	    		this.addButton(battleaxeButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_ZWEIHANDERS) {
+	    		this.addButton(zweihanderButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_NODACHIS) {
+	    		this.addButton(nodachiButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_SABRES) {
+	    		this.addButton(sabreButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_MAKHAIRAS) {
+	    		this.addButton(makhairaButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_SPEARS) {
+	    		this.addButton(spearButton);
+	    	}
+	    	if(ConfigHandler.ENABLE_ARMOR_FORGING) {
+	    		this.addButton(chainButton);
+	        	this.addButton(plateButton);
+	    	}
+        	
         	
         	//add all extra buttons
-        	for(GuiWeaponButton button : this.addedButtons) {
+        	for(GuiWeaponButton button : this.buttons) {
         		this.addButton(button);
         	}
         	

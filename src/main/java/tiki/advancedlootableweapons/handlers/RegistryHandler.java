@@ -30,10 +30,13 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
+		Alw.proxy.initColoredItemRendererLists();
 		Alw.proxy.registerCustomModelLoaders();
+		
 		OreDictionaryCompat.registerOres();
 		ItemInit.generateAcceptedForgeItems();
 		ItemInit.createRecipes();
+		Alw.logger.debug("Finished Registering Items for ALW.");
 	}
 	
 	@SubscribeEvent
@@ -73,7 +76,7 @@ public class RegistryHandler {
 		EntityInit.registerEntities();
 		Alw.proxy.registerEntityRenders();
 		ConfigHandler.registerConfig(event);
-		ItemInit.checkConfigOptions();
+		ItemInit.generateExtraItemsFromConfig();
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		LootHandler.registerLootFunctions();
 	}
@@ -90,11 +93,17 @@ public class RegistryHandler {
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)
 	{
+		ItemInit.checkConfigOptions();
 		Alw.isCrTLoaded = Loader.isModLoaded("crafttweaker");
 		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
 		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
 		
+//		String s = "PostInit OreDict ingotSteel: ";
+//		for(ItemStack stack : OreDictionary.getOres("ingotSteel")) {
+//			s += stack.getItem().getRegistryName() + "*" + stack.getCount() + ", ";
+//		}
+//		Alw.logger.info(s);
 		//Dumping furnace recipes to json files for the alloy furnace
 //		Gson gson = new Gson();
 //		for(Entry<ItemStack, ItemStack> e : FurnaceRecipes.instance().getSmeltingList().entrySet()) {

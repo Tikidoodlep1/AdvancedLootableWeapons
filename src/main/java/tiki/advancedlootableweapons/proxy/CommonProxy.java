@@ -27,6 +27,17 @@ import tiki.advancedlootableweapons.loot.LootTableInjector;
 
 public class CommonProxy {
 	
+//	public void onOreRegister(OreDictionary.OreRegisterEvent event) {
+//		Alw.logger.info("Registering OreDictionary item " + event.getOre().getItem().getRegistryName() + "*" + event.getOre().getCount() + " to ore name " + event.getName());
+//		
+//		String s = "OreDict " + event.getName() + ": ";
+//		for(ItemStack stack : OreDictionary.getOres(event.getName())) {
+//			s += stack.getItem().getRegistryName() + "*" + stack.getCount() + ", ";
+//		}
+//		Alw.logger.info(s);
+//	}
+	public void initColoredItemRendererLists() {}
+	
 	public void addColoredItemRenderer() {}
 	
 	public void registerItemRenderer(Item item, int meta, String id) {}
@@ -119,6 +130,12 @@ public class CommonProxy {
 //			Alw.logger.info("Armor slot " + i++ + " is " + (stack.isEmpty() ? "empty" : stack.getDisplayName()) + ", player health is: " + ((EntityPlayer)event.getEntity()).getHealth() );
 //		});// end forEach
 		
+		
+//		String s = "onPlayerClone OreDict ingotSteel: ";
+//		for(ItemStack stack : OreDictionary.getOres("ingotSteel")) {
+//			s += stack.getItem().getRegistryName() + "*" + stack.getCount() + ", ";
+//		}
+//		Alw.logger.info(s);
 	}
 	
 	public void onLootTableLoad(final LootTableLoadEvent event) {

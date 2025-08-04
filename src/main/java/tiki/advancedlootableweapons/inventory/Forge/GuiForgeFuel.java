@@ -55,7 +55,7 @@ public class GuiForgeFuel extends GuiContainer
 			len = this.fontRenderer.getStringWidth(this.tileName.toString());
 		}
 		
-		if(this.tileName.charAt(this.tileName.length() - 4) == ' ') {
+		if(this.tileName.length() >= 4 && this.tileName.charAt(this.tileName.length() - 4) == ' ') {
 			this.tileName.deleteCharAt(this.tileName.length() - 4);
 		}
 		

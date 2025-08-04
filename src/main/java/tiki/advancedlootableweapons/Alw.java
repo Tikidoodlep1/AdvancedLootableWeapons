@@ -137,4 +137,9 @@ public class Alw {
 	public void onTooltipEvent(final ItemTooltipEvent event) {
 		proxy.onTooltip(event);
 	}
+	
+//	@SubscribeEvent
+//	public void onOreRegister(final OreDictionary.OreRegisterEvent event) {
+//		proxy.onOreRegister(event);
+//	}
 }

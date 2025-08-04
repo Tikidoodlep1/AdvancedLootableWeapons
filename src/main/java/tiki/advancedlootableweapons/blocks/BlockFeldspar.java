@@ -10,7 +10,7 @@ import tiki.advancedlootableweapons.init.BlockInit;
 public class BlockFeldspar extends BlockBase {
 
 	public BlockFeldspar(String name) {
-		super(name, Material.ROCK, "pickaxe", 1, true);
+		super(name, Material.ROCK, "pickaxe", 0, true);
 	}
 	
 	@Override

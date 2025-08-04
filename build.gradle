@@ -1,11 +1,10 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url = "https://jitpack.io" }
         maven { url = "https://maven.minecraftforge.net" }
     }
     dependencies {
-        classpath('com.github.DStrand1:ForgeGradle:FG_2.3-SNAPSHOT') {
+        classpath('net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT') {
             changing = true
         }
     }
@@ -15,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 //Sound credit
 //Sound Effect from <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=104894">Pixabay</a>
-version = "1.4.6-1.12.2"
+version = "1.4.6.5-1.12.2"
 group = "tiki.advancedlootableweapons" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "advancedlootableweapons"
 

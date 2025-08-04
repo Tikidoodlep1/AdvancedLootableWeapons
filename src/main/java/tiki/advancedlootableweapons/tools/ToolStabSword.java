@@ -35,6 +35,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.IHasModel;
 import tiki.advancedlootableweapons.armor.ArmorBonusesBase;
@@ -128,41 +129,71 @@ public class ToolStabSword extends Item implements IHasModel {
 			case "dagger":
 				this.attackSpeed = ConfigHandler.GLOBAL_DAGGER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_DAGGER_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_DAGGER_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 3.21F;
 				break;
 			case "kabutowari":
 				this.attackSpeed = ConfigHandler.GLOBAL_KABUTOWARI_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_KABUTOWARI_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_KABUTOWARI_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 3.39F;
 				break;
 			case "rapier":
 				this.attackSpeed = ConfigHandler.GLOBAL_RAPIER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_RAPIER_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_RAPIER_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.29F;
 				break;
 			case "talwar":
 				this.attackSpeed = ConfigHandler.GLOBAL_TALWAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_TALWAR_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " +
+						ConfigHandler.GLOBAL_TALWAR_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 4.0F;
 				break;
 			case "cleaver":
 				this.attackSpeed = ConfigHandler.GLOBAL_CLEAVER_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_CLEAVER_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_CLEAVER_BASE_DAMAGE + 
+						" for weapon type " + type);
 				this.reach = 3.28F;
 				break;
 			case "mace":
 				this.attackSpeed = ConfigHandler.GLOBAL_MACE_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_MACE_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_MACE_BASE_DAMAGE + 
+						" for weapon type " + type);
 				this.reach = 3.75F;
 				break;
 			case "staff":
 				this.attackSpeed = ConfigHandler.GLOBAL_STAFF_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_STAFF_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_STAFF_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 5.28F;
 				break;
 			case "spear":
 				this.attackSpeed = ConfigHandler.GLOBAL_SPEAR_ATTACK_SPEED - 4.0;
 				this.attackDamage = ConfigHandler.GLOBAL_SPEAR_BASE_DAMAGE + material.getAttackDamage();
+				Alw.logger.debug("Logging config base damage of " + 
+						ConfigHandler.GLOBAL_SPEAR_BASE_DAMAGE + 
+						" for weapon type " + 
+						type);
 				this.reach = 5.74F;
 				break;
 		}
@@ -321,6 +352,7 @@ public class ToolStabSword extends Item implements IHasModel {
 		
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND)
         {
+        	Alw.logger.debug("REGISTERING ITEM ATTRIBUTE MODIFIERS FOR ITEM " + this.getUnlocalizedName() + ". Attack damage " + this.getAttackDamage());
         	multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)this.getAttackDamage(), 0));
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0));
             multimap.put(Alw.ATTACK_RANGE.getName(), new AttributeModifier(Alw.ATTACK_RANGE_MODIFIER, "weapon modifier", (double)this.getReach() - 4.0D, 0));
@@ -335,7 +367,7 @@ public class ToolStabSword extends Item implements IHasModel {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		KeyBinding run = Minecraft.getMinecraft().gameSettings.keyBindSprint;
 		
-		if(GameSettings.isKeyDown(sneak)) {
+		if(GameSettings.isKeyDown(sneak) && ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness(type);
 			int studdedEffect = (int)Math.ceil(((we.getStuddedEffect()*100)/6)-9);
 			int chainEffect = (int)Math.ceil(((we.getChainEffect()*100)/6)-9);
@@ -359,7 +391,9 @@ public class ToolStabSword extends Item implements IHasModel {
 				tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.colors.shine").getFormattedText() + " " +  Integer.toHexString(tag.getIntArray("colors")[4]));
 			}
 		}else {
-			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + " " + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			if(ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
+				tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + sneak.getDisplayName() + " " + new TextComponentTranslation("alw.effectiveness.info.name").getFormattedText());
+			}
 			tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("alw.hold").getFormattedText() + " " + run.getDisplayName() + " " + new TextComponentTranslation("alw.colors.info.name").getFormattedText());
 		}
 	}

@@ -75,21 +75,7 @@ public class ItemInit {
 		forgeRecipeInputs.addAll(acceptedForgeMetals);
 	}
 	
-	public static void checkConfigOptions() {
-		
-		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
-		
-		for (IRecipe irecipe : CraftingManager.REGISTRY) {
-            if (irecipe instanceof ForgeToolHeadRecipe || irecipe instanceof ForgeToolRecipe || irecipe instanceof ForgeArmorPlateRecipe || 
-            		irecipe instanceof ForgeArmorBindingRecipe || irecipe instanceof ForgeGeneralCaseRecipe) {
-            	for(Ingredient i : irecipe.getIngredients()) {
-            		for(ItemStack s : i.getMatchingStacks()) {
-            			forgeRecipeInputs.add(s.getItem());
-            		}
-            	}
-            }
-        }
-		
+	public static void generateExtraItemsFromConfig() {
 		for(String s : ConfigHandler.EXTRA_MATERIALS) {
 			List<ToolMaterial> addedMats = new ArrayList<ToolMaterial>();
 			addedMats.add(ToolMaterial.WOOD);
@@ -146,6 +132,22 @@ public class ItemInit {
 				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist. Use /materials in-game to get a list of valid tool materials.");
 			}
 		}
+	}
+	
+	public static void checkConfigOptions() {
+		
+		IForgeRegistryModifiable<IRecipe> recipes = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
+		
+		for (IRecipe irecipe : CraftingManager.REGISTRY) {
+            if (irecipe instanceof ForgeToolHeadRecipe || irecipe instanceof ForgeToolRecipe || irecipe instanceof ForgeArmorPlateRecipe || 
+            		irecipe instanceof ForgeArmorBindingRecipe || irecipe instanceof ForgeGeneralCaseRecipe) {
+            	for(Ingredient i : irecipe.getIngredients()) {
+            		for(ItemStack s : i.getMatchingStacks()) {
+            			forgeRecipeInputs.add(s.getItem());
+            		}
+            	}
+            }
+        }
 		
 		if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING) {
 			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "tanning_leather_simple"));
@@ -317,6 +319,71 @@ public class ItemInit {
 			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_leggings_steel"));
 			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "unbound_boots_steel"));
 		}
+		
+		if(!ConfigHandler.ENABLE_BATTLEAXES) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "battleaxe_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_battleaxe"));
+		}
+		if(!ConfigHandler.ENABLE_CLEAVERS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "cleaver_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_cleaver"));
+		}
+		if(!ConfigHandler.ENABLE_DAGGERS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "dagger_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_dagger"));
+		}
+		if(!ConfigHandler.ENABLE_KABUTOWARIS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "kabutowari_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_kabutowari"));
+		}
+		if(!ConfigHandler.ENABLE_KODACHIS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "kodachi_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_kodachi"));
+		}
+		if(!ConfigHandler.ENABLE_LONGSWORDS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "longsword_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_longsword"));
+		}
+		if(!ConfigHandler.ENABLE_MACES) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "mace_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_mace"));
+		}
+		if(!ConfigHandler.ENABLE_MAKHAIRAS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "makhaira_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_makhaira"));
+		}
+		if(!ConfigHandler.ENABLE_NODACHIS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "nodachi_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_nodachi"));
+		}
+		if(!ConfigHandler.ENABLE_RAPIERS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "rapier_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_rapier"));
+		}
+		if(!ConfigHandler.ENABLE_SABRES) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "sabre_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_sabre"));
+		}
+		if(!ConfigHandler.ENABLE_SPEARS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "spear_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_spear"));
+		}
+		if(!ConfigHandler.ENABLE_STAFFS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "staff_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_staff"));
+		}
+		if(!ConfigHandler.ENABLE_TALWARS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "talwar_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_talwar"));
+		}
+		if(!ConfigHandler.ENABLE_ZWEIHANDERS) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "zweihander_wood"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_zweihander"));
+		}
+		if(!ConfigHandler.ENABLE_ARMOR_FORGING) {
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_chain_ring"));
+			removeRecipe(recipes, new ResourceLocation(ModInfo.ID, "forge_armor_plate"));
+		}
 	}
 	
 	public static void removeRecipe(IForgeRegistryModifiable<IRecipe> registry, ResourceLocation recipeLoc) {
@@ -324,6 +391,8 @@ public class ItemInit {
 		registry.remove(recipeLoc);
 		if(recipe != null) {
 			registry.register(RemoveRecipe.from(recipe));
+		}else {
+			Alw.logger.error("Attempting to remove recipe " + recipeLoc + " but recipe could not be found in registry!");
 		}
 	}
 	
@@ -345,38 +414,38 @@ public class ItemInit {
 		GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_spear_head"), new ResourceLocation("spear_head"), new ItemStack(SPEAR_HEAD), new Object[] {" w ", "www", Character.valueOf('w'), new ItemStack(Blocks.PLANKS, 1, OreDictionary.WILDCARD_VALUE)});
 		
 		if(ConfigHandler.ENABLE_ARMORS && !ConfigHandler.ENABLE_ARMOR_FORGING) {
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_kobold"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_copper"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_silver"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_bronze"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_shadow_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_frost_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_crystallite"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_dusksteel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_kobold"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_KOBOLD), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_copper"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_COPPER), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_silver"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SILVER), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_bronze"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_BRONZE), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_PLATINUM), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_STEEL), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_shadow_platinum"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_SHADOW_PLATINUM), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_frost_steel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_FROST_STEEL), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_crystallite"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_CRYSTALLITE), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_helmet_dusksteel"), new ResourceLocation("armor_helmet"), new ItemStack(PLATE_HELMET_DUSKSTEEL), new Object[] {"iii", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
 			
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_kobold"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_copper"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_silver"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_bronze"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_shadow_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_frost_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_crystallite"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_dusksteel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_kobold"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_KOBOLD), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_copper"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_COPPER), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_silver"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SILVER), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_bronze"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_BRONZE), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_PLATINUM), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_STEEL), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_shadow_platinum"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_SHADOW_PLATINUM), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_frost_steel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_FROST_STEEL), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_crystallite"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_CRYSTALLITE), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_chestplate_dusksteel"), new ResourceLocation("armor_chestplate"), new ItemStack(PLATE_CHESTPLATE_DUSKSTEEL), new Object[] {"i i", "iii", "iii", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
 			
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_kobold"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_copper"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_silver"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SILVER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_bronze"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_BRONZE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_shadow_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SHADOW_PLATINUM), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_frost_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_FROST_STEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_crystallite"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_CRYSTALLITE), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
-			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_dusksteel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_DUSKSTEEL), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_kobold"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_KOBOLD), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_copper"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_COPPER), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_silver"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SILVER), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SILVER)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_bronze"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_BRONZE), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_BRONZE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_PLATINUM), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_STEEL), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_shadow_platinum"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_SHADOW_PLATINUM), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_SHADOW_PLATINUM)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_frost_steel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_FROST_STEEL), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_FROST_STEEL)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_crystallite"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_CRYSTALLITE), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_CRYSTALLITE)});
+			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_leggings_dusksteel"), new ResourceLocation("armor_leggings"), new ItemStack(PLATE_LEGGINGS_DUSKSTEEL), new Object[] {"iii", "i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_DUSKSTEEL)});
 			
 			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_kobold"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_KOBOLD), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_KOBOLD)});
 			GameRegistry.addShapedRecipe(new ResourceLocation(ModInfo.ID + ":recipe_boots_copper"), new ResourceLocation("armor_boots"), new ItemStack(PLATE_BOOTS_COPPER), new Object[] {"i i", "i i", Character.valueOf('i'), new ItemStack(INGOT_COPPER)});

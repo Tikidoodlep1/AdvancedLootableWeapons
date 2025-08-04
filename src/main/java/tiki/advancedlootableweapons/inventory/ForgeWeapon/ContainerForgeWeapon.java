@@ -1,6 +1,7 @@
 package tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -20,6 +21,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -28,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -74,8 +77,8 @@ public class ContainerForgeWeapon extends Container {
         this.world = worldIn;
         this.buttonPressed = -1;
         Block block = worldIn.getBlockState(pos).getBlock();
-        if(ZenDynamicAlwResources.guiLists.containsKey(block)) {
-        	CUSTOM_CONTAINER = ZenDynamicAlwResources.guiLists.get(block);
+        if(ZenDynamicAlwResources.guiLists.containsKey(block.getRegistryName())) {
+        	CUSTOM_CONTAINER = ZenDynamicAlwResources.guiLists.get(block.getRegistryName());
         	Iterator<Point> iter = CUSTOM_CONTAINER.getSlots().iterator();
         	slot1 = iter.next();
         	slot2 = iter.next();
@@ -207,7 +210,7 @@ public class ContainerForgeWeapon extends Container {
 			this.invCraft.setInventorySlotContents(i, this.inputSlot.getStackInSlot(i));
 		}
 		recipe = this.findMatchingRecipe(this.invCraft, this.world);
-		//System.out.println("Block: " + this.world.getBlockState(this.pos).getBlock().getRegistryName());
+//		System.out.println("Block: " + this.world.getBlockState(this.pos).getBlock().getRegistryName());
 //		if(recipe != null) {
 //			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
 //			System.out.println("Ingredients:" );
@@ -219,7 +222,7 @@ public class ContainerForgeWeapon extends Container {
 //			System.out.println("Recipe is NULL!");
 //		}
 		
-		//Alw.logger.info("Is side server? " + (!player.world.isRemote));
+//		Alw.logger.info("Is side server? " + (!player.world.isRemote));
 		
 		ItemStack outputSlot = this.inputSlot.getStackInSlot(2);
 		if(recipe != null && outputSlot == ItemStack.EMPTY && this.getCanCraft(this.player)) {
@@ -383,6 +386,8 @@ public class ContainerForgeWeapon extends Container {
             else if (irecipe instanceof ForgeToolRecipe)
             {
             	int recipeButtonId = getButtonIdFromName(((ForgeToolRecipe)irecipe).getButton()) == -1 ? getButtonIdFromNameInExtras(((ForgeToolRecipe)irecipe).getButton()) : getButtonIdFromName(((ForgeToolRecipe)irecipe).getButton());
+//            	Alw.logger.info("Recipe Name: " + irecipe.getRegistryName().getResourcePath() + "\n" + "Recipe Button: " + recipeButtonId + ", Button Pressed: " + this.buttonPressed
+//            			+ "\n" + "Recipe Block: " + ((ForgeToolRecipe)irecipe).block.getRegistryName() + "\n" + "Recipe Matches Inventory: " + irecipe.matches(craftMatrix, worldIn));
             	if(recipeButtonId == this.buttonPressed && 
             			(((ForgeToolRecipe)irecipe).block == null || ((ForgeToolRecipe)irecipe).block == Blocks.AIR || ((ForgeToolRecipe)irecipe).block == this.world.getBlockState(this.pos).getBlock())
             			&& irecipe.matches(craftMatrix, worldIn)) {
