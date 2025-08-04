@@ -3,12 +3,10 @@ package tiki.advancedlootableweapons.entity.render;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import tiki.advancedlootableweapons.entity.EntitySpear;
 
 public class RenderThrownItem<T extends Entity> extends Render<T> {
 	
@@ -32,18 +30,8 @@ public class RenderThrownItem<T extends Entity> extends Render<T> {
 	
 	@Override
 	public void doRender(T entity, double x, double y, double z, float yaw, float partialTicks) {
-		if(entity instanceof EntitySpear) {
-			GlStateManager.pushMatrix();
-			
-			int color = ((EntitySpear)entity).getTagData().getIntArray("colors")[2];
-			GL11.glColor4f( ((color >> 16) & 0xFF) / 255F, ((color >> 8) & 0xFF) / 255F, ((color) & 0xFF) / 255F, ((color >> 24) & 0xFF) / 255F);
-			super.doRender(entity, x, y, z, yaw, partialTicks);
-			renderEntityModel(entity, x, y, z, yaw, partialTicks);
-			GlStateManager.popMatrix();
-		}else {
-			super.doRender(entity, x, y, z, yaw, partialTicks);
-			renderEntityModel(entity, x, y, z, yaw, partialTicks);
-		}
+		super.doRender(entity, x, y, z, yaw, partialTicks);
+		renderEntityModel(entity, x, y, z, yaw, partialTicks);
 	}
 
 	@Override

@@ -27,6 +27,8 @@ import tiki.advancedlootableweapons.loot.LootTableInjector;
 
 public class CommonProxy {
 	
+	public void initColoredItemRendererLists() {}
+	
 	public void addColoredItemRenderer() {}
 	
 	public void registerItemRenderer(Item item, int meta, String id) {}

@@ -108,6 +108,7 @@ public class ConfigHandler {
 	public static boolean USE_ARMOR_WEIGHT = true;
 	public static boolean USE_ARMOR_BONUS_HEALTH = false;
 	public static boolean USE_ARMOR_BONUS_DAMAGE = true;
+	public static boolean USE_WEAPON_EFFECTIVENESS = true;
 	public static float ARMOR_BONUS_HEALTH_MULTIPLIER = 1.0F;
 	public static float ARMOR_BONUS_DAMAGE_MULTIPLIER = 1.0F;
 	
@@ -380,7 +381,8 @@ public class ConfigHandler {
 		
 		//**********************************ARMOR MODIFICATION**********************************
 		category = "GENERAL ARMOR MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Armor modifications such as chestplates giving extra damage, armor slowing, etc");
+		ArmorConfig.setCategoryComment(category, "Armor modifications such as chestplates giving extra damage, armor slowing, etc");
+		//ArmorConfig.setCategoryComment(category, "Armor modifications such as chestplates giving extra damage, armor slowing, etc");
 		USE_ARMOR_WEIGHT = ArmorConfig.getBoolean("Use Armor Weight", category, true, "If enabled, armor will slow you down proportionate to it's real-world weight. (True/False)");
 		USE_ARMOR_BONUS_HEALTH = ArmorConfig.getBoolean("Use Armor Bonus Health", category, false, "If enabled, armor will give you bonus health when worn. (True/False)");
 		USE_ARMOR_BONUS_DAMAGE = ArmorConfig.getBoolean("Use Armor Bonus Damage", category, true, "If enabled, chestplates will make you deal extra damage equivalent to the real-world weight with the armor tier factored in. (True/False)");
@@ -389,17 +391,18 @@ public class ConfigHandler {
 		ARMOR_BONUS_DAMAGE_MULTIPLIER = ArmorConfig.getFloat("Armor Bonus Damage Multiplier", category, 1.0F, 0.1F, 10.0F, "Only works if \"Use Armor Bonus Damage\" is enabled. A multiplier for the bonus damage given by chestplates.");
 		
 		ENABLE_ARMORS = ArmorConfig.getBoolean("Enable Custom Armor Sets", category, true, "Enable or disable armor made from the custom materials. If this is disabled, \"Enable Armor Forging\" will also be disabled by default. (True/False)");
-		ENABLE_ARMOR_FORGING = ArmorConfig.getBoolean("Enable Armor Forging", category, true, "Enable or diable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/false)");
+		ENABLE_ARMOR_FORGING = ArmorConfig.getBoolean("Enable Armor Forging", category, true, "Enable or disable the armor forging. If this is disabled, armors will be crafted using the vanilla recipes (True/False)");
+		USE_WEAPON_EFFECTIVENESS = ArmorConfig.getBoolean("Enable Weapon Effectiveness Against ALW Armors", category, true, "Enable or disable the weapon effectiveness system for ALW weapons and armor (True/False)");
 		DISABLE_VANILLA_ARMORS = ArmorConfig.getBoolean("Disable Vanilla Armors", category, true, "Make vanilla armors uncraftable, forcing players use only modded armors. (True/False)");
 		
 		category = "ARMOR MATERIAL MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Modifications to the materials of all armors such as durability and hardness. Note that the damage formula is quite complicated and is not 1 to 1 for armor and damage reduced.");
+		ArmorConfig.setCategoryComment(category, "Modifications to the materials of all armors such as durability and hardness. Note that the damage formula is quite complicated and is not 1 to 1 for armor and damage reduced.");
 		
-		CHAIN_DURABILITY_MULTIPLIER = ArmorConfig.getFloat("Chain Durability Multiplier", category, 0.75F, 0.1F, 200.0F, "");
-		CHAIN_PROTECTION_MULTIPLIER = ArmorConfig.getFloat("Chain Protection Multiplier", category, 0.8F, 0.1F, 200.0F, "");
+		CHAIN_DURABILITY_MULTIPLIER = ArmorConfig.getFloat("Chain Durability Multiplier", category, 0.75F, 0.1F, 200.0F, "Multiplier of durability chain armor should have compared to plate armor");
+		CHAIN_PROTECTION_MULTIPLIER = ArmorConfig.getFloat("Chain Protection Multiplier", category, 0.8F, 0.1F, 200.0F, "Multiplier of protection chain armor should have compared to plate armor");
 		
 		category = "LEATHER MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Leather Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Leather Armor Modification");
 		LEATHER_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Leather Helmet Armor", category, 1, 0, 20, "");
 		LEATHER_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Leather Chestplate Armor", category, 3, 0, 20, "");
 		LEATHER_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Leather Leggings Armor", category, 2, 0, 20, "");
@@ -409,7 +412,7 @@ public class ConfigHandler {
 		LEATHER_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Leather Armor Enchantability", category, 15, 0, 100, "");
 		
 		category = "DIAMOND STUDDED LEATHER MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Diamond Studded LeatherArmor Modification");
+		ArmorConfig.setCategoryComment(category, "Diamond Studded Leather Armor Modification");
 		DIAMOND_STUDDED_LEATHER_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Diamond Studded Leather Helmet Armor", category, 3, 0, 20, "");
 		DIAMOND_STUDDED_LEATHER_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Diamond Studded Leather Chestplate Armor", category, 6, 0, 20, "");
 		DIAMOND_STUDDED_LEATHER_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Diamond Studded Leather Leggings Armor", category, 5, 0, 20, "");
@@ -419,7 +422,7 @@ public class ConfigHandler {
 		DIAMOND_STUDDED_LEATHER_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Diamond Studded Leather Armor Enchantability", category, 18, 0, 100, "");
 		
 		category = "IRON MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Iron Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Iron Armor Modification");
 		IRON_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Iron Helmet Armor", category, 2, 0, 20, "");
 		IRON_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Iron Chestplate Armor", category, 6, 0, 20, "");
 		IRON_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Iron Leggings Armor", category, 5, 0, 20, "");
@@ -429,7 +432,7 @@ public class ConfigHandler {
 		IRON_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Iron Armor Enchantability", category, 9, 0, 100, "");
 		
 		category = "GOLD MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Gold Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Gold Armor Modification");
 		GOLD_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Gold Helmet Armor", category, 2, 0, 20, "");
 		GOLD_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Gold Chestplate Armor", category, 5, 0, 20, "");
 		GOLD_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Gold Leggings Armor", category, 3, 0, 20, "");
@@ -439,7 +442,7 @@ public class ConfigHandler {
 		GOLD_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Gold Armor Enchantability", category, 25, 0, 100, "");
 		
 		category = "KOBOLD MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Kobold Steel Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Kobold Steel Armor Modification");
 		KOBOLD_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Kobold Steel Helmet Armor", category, 2, 0, 20, "");
 		KOBOLD_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Kobold Steel Chestplate Armor", category, 4, 0, 20, "");
 		KOBOLD_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Kobold Steel Leggings Armor", category, 3, 0, 20, "");
@@ -449,7 +452,7 @@ public class ConfigHandler {
 		KOBOLD_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Kobold Steel Armor Enchantability", category, 22, 0, 100, "");
 		
 		category = "COPPER MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Copper Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Copper Armor Modification");
 		COPPER_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Copper Helmet Armor", category, 2, 0, 20, "");
 		COPPER_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Copper Chestplate Armor", category, 4, 0, 20, "");
 		COPPER_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Copper Leggings Armor", category, 3, 0, 20, "");
@@ -459,7 +462,7 @@ public class ConfigHandler {
 		COPPER_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Copper Armor Enchantability", category, 10, 0, 100, "");
 		
 		category = "SILVER MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Silver Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Silver Armor Modification");
 		SILVER_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Silver Helmet Armor", category, 3, 0, 20, "");
 		SILVER_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Silver Chestplate Armor", category, 7, 0, 20, "");
 		SILVER_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Silver Leggings Armor", category, 5, 0, 20, "");
@@ -469,7 +472,7 @@ public class ConfigHandler {
 		SILVER_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Silver Armor Enchantability", category, 24, 0, 100, "");
 		
 		category = "BRONZE MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Bronze Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Bronze Armor Modification");
 		BRONZE_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Bronze Helmet Armor", category, 3, 0, 20, "");
 		BRONZE_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Bronze Chestplate Armor", category, 8, 0, 20, "");
 		BRONZE_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Bronze Leggings Armor", category, 6, 0, 20, "");
@@ -479,7 +482,7 @@ public class ConfigHandler {
 		BRONZE_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Bronze Armor Enchantability", category, 12, 0, 100, "");
 		
 		category = "PLATINUM MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Platinum Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Platinum Armor Modification");
 		PLATINUM_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Platinum Helmet Armor", category, 3, 0, 20, "");
 		PLATINUM_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Platinum Chestplate Armor", category, 8, 0, 20, "");
 		PLATINUM_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Platinum Leggings Armor", category, 6, 0, 20, "");
@@ -489,7 +492,7 @@ public class ConfigHandler {
 		PLATINUM_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Platinum Armor Enchantability", category, 26, 0, 100, "");
 		
 		category = "STEEL MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Steel Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Steel Armor Modification");
 		STEEL_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Steel Helmet Armor", category, 3, 0, 20, "");
 		STEEL_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Steel Chestplate Armor", category, 6, 0, 20, "");
 		STEEL_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Steel Leggings Armor", category, 5, 0, 20, "");
@@ -499,7 +502,7 @@ public class ConfigHandler {
 		STEEL_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Steel Armor Enchantability", category, 18, 0, 100, "");
 		
 		category = "DIAMOND STUDDED STEEL MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Diamond Studded Steel Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Diamond Studded Steel Armor Modification");
 		DIAMOND_STUDDED_STEEL_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Diamond Studded Steel Helmet Armor", category, 3, 0, 20, "");
 		DIAMOND_STUDDED_STEEL_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Diamond Studded Steel Chestplate Armor", category, 8, 0, 20, "");
 		DIAMOND_STUDDED_STEEL_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Diamond Studded Steel Leggings Armor", category, 6, 0, 20, "");
@@ -509,7 +512,7 @@ public class ConfigHandler {
 		DIAMOND_STUDDED_STEEL_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Diamond Studded Steel Armor Enchantability", category, 19, 0, 100, "");
 		
 		category = "SHADOW PLATINUM MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Shadow Platinum Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Shadow Platinum Armor Modification");
 		SHADOW_PLATINUM_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Shadow Platinum Helmet Armor", category, 3, 0, 20, "");
 		SHADOW_PLATINUM_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Shadow Platinum Chestplate Armor", category, 8, 0, 20, "");
 		SHADOW_PLATINUM_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Shadow Platinum Leggings Armor", category, 6, 0, 20, "");
@@ -519,7 +522,7 @@ public class ConfigHandler {
 		SHADOW_PLATINUM_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Shadow Platinum Armor Enchantability", category, 21, 0, 100, "");
 		
 		category = "FROST STEEL MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Frost Steel Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Frost Steel Armor Modification");
 		FROST_STEEL_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Frost Steel Helmet Armor", category, 3, 0, 20, "");
 		FROST_STEEL_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Frost Steel Chestplate Armor", category, 8, 0, 20, "");
 		FROST_STEEL_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Frost Steel Leggings Armor", category, 6, 0, 20, "");
@@ -529,7 +532,7 @@ public class ConfigHandler {
 		FROST_STEEL_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Frost Steel Armor Enchantability", category, 30, 0, 100, "");
 		
 		category = "OBSIDIAN MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Obsidian Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Obsidian Armor Modification");
 		OBSIDIAN_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Obsidian Helmet Armor", category, 3, 0, 20, "");
 		OBSIDIAN_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Obsidian Chestplate Armor", category, 6, 0, 20, "");
 		OBSIDIAN_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Obsidian Leggings Armor", category, 5, 0, 20, "");
@@ -539,7 +542,7 @@ public class ConfigHandler {
 		OBSIDIAN_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Obsidian Armor Enchantability", category, 18, 0, 100, "");
 		
 		category = "CRYSTALLITE MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Crystallite Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Crystallite Armor Modification");
 		CRYSTALLITE_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Crystallite Helmet Armor", category, 3, 0, 20, "");
 		CRYSTALLITE_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Crystallite Chestplate Armor", category, 8, 0, 20, "");
 		CRYSTALLITE_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Crystallite Leggings Armor", category, 6, 0, 20, "");
@@ -549,7 +552,7 @@ public class ConfigHandler {
 		CRYSTALLITE_ARMOR_ENCHANTABILITY = ArmorConfig.getInt("Crystallite Armor Enchantability", category, 20, 0, 100, "");
 		
 		category = "DUSKSTEEL MODIFICATION";
-		ArmorConfig.addCustomCategoryComment(category, "Dusksteel Armor Modification");
+		ArmorConfig.setCategoryComment(category, "Dusksteel Armor Modification");
 		DUSKSTEEL_ARMOR_HELMET_REDUCTION = ArmorConfig.getInt("Dusksteel Helmet Armor", category, 3, 0, 20, "");
 		DUSKSTEEL_ARMOR_CHESTPLATE_REDUCTION = ArmorConfig.getInt("Dusksteel Chestplate Armor", category, 8, 0, 20, "");
 		DUSKSTEEL_ARMOR_LEGGINGS_REDUCTION = ArmorConfig.getInt("Dusksteel Leggings Armor", category, 6, 0, 20, "");
@@ -571,7 +574,7 @@ public class ConfigHandler {
 		
 		USE_LEGACY_TEXTURES = WeaponConfig.getBoolean("Use Legacy Weapon Textures", category, false, "Change weapons to use the legacy textures. This makes weapon textures more easily changed via resource packs.");
 		
-		WeaponConfig.addCustomCategoryComment(category, "Enable or disable weapon types");
+		WeaponConfig.setCategoryComment(category, "Enable or disable weapon types");
 		ENABLE_DAGGERS = WeaponConfig.getBoolean("Enable Daggers", category, true, "Enable or disable daggers in-game. (True/False)");
 		ENABLE_KABUTOWARIS = WeaponConfig.getBoolean("Enable Kabutowaris", category, true, "Enable or disable Kabutowaris in-game. (True/False)");
 		ENABLE_RAPIERS = WeaponConfig.getBoolean("Enable Rapiers", category, true, "Enable or disable rapiers in-game. (True/False)");
@@ -588,7 +591,7 @@ public class ConfigHandler {
 		ENABLE_SABRES = WeaponConfig.getBoolean("Enable Sabres", category, true, "Enable or disable sabres in-game. (True/False)");
 		ENABLE_MAKHAIRAS = WeaponConfig.getBoolean("Enable Makhairas", category, true, "Enable or disable makhairas in-game. (True/False)");
 		
-		WeaponConfig.addCustomCategoryComment(category, "Weapon Modifications such as setting base weapon damages and attack speeds");
+		WeaponConfig.setCategoryComment(category, "Weapon Modifications such as setting base weapon damages and attack speeds");
 		USE_CUSTOM_WEAPON_REACH = WeaponConfig.getBoolean("Use Custom Weapon Reach", category, true, "Use the custom set weapon reach. Disabling this will make things like spears have the same reach as things like daggers. (True/False)");
 		GLOBAL_DAGGER_BASE_DAMAGE = WeaponConfig.getFloat("Global Dagger Base Damage", category, 1.5F, 0.0F, 100.0F, "Will only work if \"Enable Daggers\" is true. This modifies the damage of all types of daggers, regardless of material.");
 		GLOBAL_KABUTOWARI_BASE_DAMAGE = WeaponConfig.getFloat("Global Kabutowari Base Damage", category, 1.0F, 0.0F, 100.0F, "Will only work if \"Enable Kabutowaris\" is true. This modifies the damage of all types of kabutowaris, regardless of material.");
@@ -642,7 +645,7 @@ public class ConfigHandler {
 		GLOBAL_ARMOR_PLATE_CRAFTING_EXP = WeaponConfig.getInt("Global Armor Plate Crafting Exp", category, 4, 0, 100, "This modifies the exp you get from crafting armor plates.");
 
 		category = "WEAPON MATERIAL MODIFICATION";
-		WeaponConfig.addCustomCategoryComment(category, "Modifications to the materials of all weapons such as durability and damage");
+		WeaponConfig.setCategoryComment(category, "Modifications to the materials of all weapons such as durability and damage");
 		EXTRA_MATERIALS.addAll(Arrays.stream(WeaponConfig.getStringList("Extra Weapon Materials", category, new String[] {}, "Put tool materials here (Ex. DIAMOND for vanilla diamonds) to add a new craftable set of ALW weapons. The repair item will be used as the base item (Ex. Iron ingots for iron). If the tool material does not have a repair item (Crafts into granite clay), specify one using a comma as a delimiter. (Ex TF:CONSTANTAN,thermalfoundation:material#164 using # to specify item metadata) Available tool materials can be seen with /materials in game. NOTE: If you're haiving issues with the items crafting into air, try adding \"zz\" to the beginning of the ALW jar file.")).collect(Collectors.toSet()));
 		
 		KOBOLD_DAMAGE = WeaponConfig.getFloat("Kobold Steel Base Damage", category, 4.25F, 0.0F, 100.0F, "Use to change the damage of all wepaons that are made of kobold steel.");
@@ -678,7 +681,7 @@ public class ConfigHandler {
 		String category;
 		
 		category = "SHADOW DROPS - INDIVIDUAL MODIFICATION";
-		MobConfig.addCustomCategoryComment(category, "You can modify whether you want mobs to drop the shadow item.");
+		MobConfig.setCategoryComment(category, "You can modify whether you want mobs to drop the shadow item.");
 		VEX_DROP_SHADOW = MobConfig.getBoolean("Vex - Shadow", category, true, "Should the vex drop the shadow item. (True/False)");
 		EVOKER_DROP_SHADOW = MobConfig.getBoolean("Evoker - Shadow", category, true, "Should the evoker drop the shadow item. (True/False)");
 		WITHERSKELETON_DROP_SHADOW = MobConfig.getBoolean("Wither Skeleton - Shadow", category, true, "Should the wither drop the shadow item. (True/False)");
@@ -693,7 +696,7 @@ public class ConfigHandler {
 		String category;
 		
 		category = "GENERAL BLOCK/ITEM CONFIG";
-		//ItemConfig.addCustomCategoryComment(category, "");
+		//ItemConfig.setCategoryComment(category, "");
 		ENABLE_ADVANCED_LEATHER_TANNING = ItemConfig.getBoolean("Enable Advanced Leather Tanning", category, true, "Enable the advanced leather tanning process. This entails needing some way to transfer fluids. (True/False)");
 		ENABLE_QUENCHING = ItemConfig.getBoolean("Enable Quenching", category, true, "Enable or Disable quenching of weapons. (True/False)");
 		ENABLE_REGIONAL_QUENCHING = ItemConfig.getBoolean("Enable Regional Quenching", category, true, "Enable or Disable regional quenching techniques. Ex. Should the Kabutowari use clay tempering and the longsword traditional water quenching? (True/False)");
@@ -722,7 +725,7 @@ public class ConfigHandler {
 		String category;
 	
 		category = "RESOURCE GENERATION";
-		WorldConfig.addCustomCategoryComment(category, "Modify anything related to resource generation.");
+		WorldConfig.setCategoryComment(category, "Modify anything related to resource generation.");
 		FELDSPAR_BLOCKS_PER_VEIN = WorldConfig.getInt("Feldspar Max Blocks Per Vein", category, 15, 1, 100, "");
 		FELDSPAR_MAX_VEINS_PER_CHUNK = WorldConfig.getInt("Feldspar Max Veins Per Chunk", category, 8, 1, 100, "");
 		FELDSPAR_MIN_SPAWN_HEIGHT = WorldConfig.getInt("Feldspar Min Spawn Height", category, 33, 0, 256, "");

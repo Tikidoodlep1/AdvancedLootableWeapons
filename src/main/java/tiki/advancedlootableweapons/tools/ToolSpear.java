@@ -29,6 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.advancedlootableweapons.entity.EntitySpear;
+import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.util.WeaponEffectiveness;
 
 public class ToolSpear extends ToolStabSword {
@@ -42,11 +43,11 @@ public class ToolSpear extends ToolStabSword {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		KeyBinding sneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		if(GameSettings.isKeyDown(sneak)) {
+		if(GameSettings.isKeyDown(sneak) && ConfigHandler.USE_WEAPON_EFFECTIVENESS) {
 			WeaponEffectiveness we = WeaponEffectiveness.getWeaponEffectiveness("thrown_spear");
 			tooltip.add("");
-			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.pierce.thrown_spear").getFormattedText() + " " + we.getChainPenChance() + "%");
-			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.pierce.thrown_spear").getFormattedText() + " " + we.getPlatePenChance() + "%");
+			tooltip.add(TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("alw.effectiveness.chain.thrown_spear").getFormattedText() + " " + we.getChainPenChance() + "%");
+			tooltip.add(TextFormatting.AQUA + new TextComponentTranslation("alw.effectiveness.plate.thrown_spear").getFormattedText() + " " + we.getPlatePenChance() + "%");
 		}
 	}
 	

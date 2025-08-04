@@ -30,7 +30,9 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
 		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
+		Alw.proxy.initColoredItemRendererLists();
 		Alw.proxy.registerCustomModelLoaders();
+		
 		OreDictionaryCompat.registerOres();
 		ItemInit.generateAcceptedForgeItems();
 		ItemInit.createRecipes();
@@ -73,7 +75,7 @@ public class RegistryHandler {
 		EntityInit.registerEntities();
 		Alw.proxy.registerEntityRenders();
 		ConfigHandler.registerConfig(event);
-		ItemInit.checkConfigOptions();
+		ItemInit.generateExtraItemsFromConfig();
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		LootHandler.registerLootFunctions();
 	}
@@ -90,6 +92,8 @@ public class RegistryHandler {
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)
 	{
+		ItemInit.checkConfigOptions();
+		
 		Alw.isCrTLoaded = Loader.isModLoaded("crafttweaker");
 		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
