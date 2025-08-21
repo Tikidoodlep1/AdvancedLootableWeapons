@@ -47,14 +47,14 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
             ret.set(i, ForgeHooks.getContainerItem(inv.get(i)));
         }
         
-        int j = 0;
+        //int j = 0; //For a 1 input crafting inventory, we only need to check remaining items for the single input slot. Therefore, we shouldn't be iterating on J.
         for(ItemStack i : input.get(0).getMatchingStacks()) {
 			if(i.getItem() == inv.get(0).getItem() && i.getItemDamage() == inv.get(0).getItemDamage() && inv.get(0).getCount() >= i.getCount()) {
 				ItemStack keep = inv.get(0);
 				keep.setCount(keep.getCount() - i.getCount());
-				ret.set(j, keep);
+				ret.set(0, keep);
 			}
-			j++;
+			//j++;
 		}
         return ret;
 	}

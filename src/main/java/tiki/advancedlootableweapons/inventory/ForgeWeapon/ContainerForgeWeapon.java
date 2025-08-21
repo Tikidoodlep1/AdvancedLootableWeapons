@@ -1,7 +1,6 @@
 package tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.awt.Point;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -21,7 +20,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -30,7 +28,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tiki.advancedlootableweapons.compat.crafttweaker.ForgingGuiButtonRepresentation;
-import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.compat.crafttweaker.CrTForgingGuiRepresentation;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;

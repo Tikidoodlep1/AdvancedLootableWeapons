@@ -1,0 +1,12 @@
+{ 
+	"name": "patchouli.alw.book.name",
+    "landing_text": "patchouli.alw.book.landing_text",
+    "book_texture": "advancedlootableweapons:textures/patchouli/book_gui.png",
+    "version": 1,
+    "creative_tab": "alwcreativetab",
+    "use_resource_pack": true,
+    "macros": {
+		"$(alw)": "$(#75697e)Advanced Lootable Weapons$()",
+		"$(term)": "$(#5aa1f2)"
+	}
+}

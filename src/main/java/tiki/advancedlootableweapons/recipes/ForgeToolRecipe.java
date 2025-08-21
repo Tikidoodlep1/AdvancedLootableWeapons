@@ -389,13 +389,13 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			addedDamage += checkHeat(input2);
 			
 			addedDur += input2Tag.getInteger("addedDurability");
-			addedDur += (int)(checkHeat(input2) * 100);
+			addedDur += (int)(checkHeat(input2) * 50);
 		}
 		addedDamage += input1Tag.getDouble("addedDamage");
 		addedDamage += checkHeat(input1);
 			
 		addedDur += input1Tag.getInteger("addedDurability");
-		addedDur += (int)(checkHeat(input1) * 100);
+		addedDur += (int)(checkHeat(input1) * 50);
 		
 		result.setTagCompound(input1Tag);
 		
@@ -454,6 +454,21 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 	
 	private double map(double value, double curRangeLowBound, double curRangeHighBound, double wantRangeLowBound, double wantRangeHighBound) {
 		return wantRangeLowBound + (wantRangeHighBound - wantRangeLowBound) * ((value - curRangeLowBound) / (curRangeHighBound - curRangeLowBound));
+	}
+	
+	/**
+     * What I'm thinking with this:
+     * 	Implement a custom Grindstone, and give weapons an NBT quality. Based on the quality, the grindstone minigame becomes easier or harder to play.
+     * 	Based on the performance of the grindstone minigame, the weapon gains increased damage. I'm thinking that every time a weapon is used, it could lose sharpness, and damage.
+     * 	Then, they can re-play the minigame, only when the blade is dull enough, using this quality as a base, to earn up to a certain amount of bonus damage.
+     */
+	public double WeaponQualityFormula(int heat, int qualityStages) {
+		double stepDividend = 1030d;
+		double maxHeat = 6000d;
+		
+		double desiredBase = Math.pow(qualityStages+1, stepDividend/maxHeat);
+		
+		return Math.floor(Math.pow(desiredBase, heat / stepDividend) - 1) / 11d;
 	}
 	
 	public static class Factory implements IRecipeFactory {

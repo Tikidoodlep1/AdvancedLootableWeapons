@@ -53,6 +53,8 @@ public class BlockMill extends BlockBase implements ITileEntityProvider {
 		super(name, material, "pickaxe", 1, true);
 		setSoundType(SoundType.STONE);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		this.fullBlock = false;
+		this.translucent = true;
 	}
 	
 	@Override

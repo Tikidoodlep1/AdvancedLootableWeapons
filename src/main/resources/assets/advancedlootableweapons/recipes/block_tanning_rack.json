@@ -17,7 +17,8 @@
 		},
 		"P":
 		{
-			"item": "minecraft:string"
+			"type": "forge:ore_dict",
+			"ore": "string"
 		},
 		"S":
 		{

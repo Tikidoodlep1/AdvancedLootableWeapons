@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import betterwithmods.common.BWMBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -33,12 +34,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.blocks.BlockForge2Placeholder;
+import tiki.advancedlootableweapons.blocks.tileentities.TileEntityBellows;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.handlers.SoundHandler;
 
-public class BlockBellows extends BlockBase {
+public class BlockBellows extends BlockBase implements ITileEntityProvider {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;	
 	public static final AxisAlignedBB BELLOWS_AABB_NS = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 0.4D, 1.0D);
@@ -123,6 +125,10 @@ public class BlockBellows extends BlockBase {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote) {
 			Alw.logger.debug("Activating bellows server side");
+			TileEntity bte = worldIn.getTileEntity(pos);
+			if(bte instanceof TileEntityBellows) {
+				((TileEntityBellows)bte).startAnimating();
+			}
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
 			IBlockState placeholderState = worldIn.getBlockState(pos.offset(state.getValue(FACING)));
 			if(te == null && placeholderState.getBlock() instanceof BlockForge2Placeholder) {
@@ -243,5 +249,22 @@ public class BlockBellows extends BlockBase {
 	public int getMetaFromState(IBlockState state) 
 	{
 		return ((EnumFacing)state.getValue(FACING)).getIndex();
+	}
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state) 
+	{
+		return true;
+	}
+	
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) 
+	{
+		return new TileEntityBellows();
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityBellows();
 	}
 }

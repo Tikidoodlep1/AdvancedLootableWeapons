@@ -2,10 +2,8 @@ package tiki.advancedlootableweapons.loot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
@@ -25,6 +23,7 @@ import net.minecraft.world.storage.loot.functions.EnchantWithLevels;
 import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraft.world.storage.loot.functions.SetDamage;
 import net.minecraftforge.event.LootTableLoadEvent;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.EnchantmentInit;
@@ -42,12 +41,14 @@ public class LootTableInjector {
 
 	public static void InjectLoot(final LootTableLoadEvent event) {
 		//To test: /setblock ~ ~ ~ chest 0 replace {LootTable:"minecraft:chests/abandoned_mineshaft"}
-		if(event.getName().toString().startsWith("minecraft:chests")) { //minecraft is 10 length, 18 marks the backslash
-			InjectChestLoot(event.getName().toString().substring(19), event.getTable());
-		}else if(event.getName().toString().startsWith("minecraft:entities")) {
-			InjectEntityLoot(event.getName().toString().substring(21), event.getTable());
+		Alw.logger.debug("[LOOT TABLES] Injecting " + event.getName());
+		if(event.getName().toString().startsWith("minecraft:chests/")) {
+			Alw.logger.debug("\tFor name " + event.getName().toString().replaceAll("minecraft:chests/", ""));
+			InjectChestLoot(event.getName().toString().replaceFirst("minecraft:chests/", ""), event.getTable());
+		}else if(event.getName().toString().startsWith("minecraft:entities/")) {
+			Alw.logger.debug("\tFor name " + event.getName().toString().replaceAll("minecraft:entities/", ""));
+			InjectEntityLoot(event.getName().toString().replaceFirst("minecraft:entities/", ""), event.getTable());
 		}
-		
 	}
 	
 	public static void InjectChestLoot(String name, LootTable table) {
@@ -62,15 +63,14 @@ public class LootTableInjector {
 					new SetBonusDamage(new LootCondition[] {}, new RandomValueRange(2.5F, 4.5F)),
 					new SetBonusDur(new LootCondition[] {}, new RandomValueRange(0.0F, 25.0F)),
 					new SetName(new LootCondition[] {}, "Explorer's Pocket Knife"),
-					new SetLore(new LootCondition[] {new RandomChance(0.001F)}, "It's dangerous to go alone, take this!"),
+					new SetLore(new LootCondition[] {new RandomChance(0.005F)}, "It's dangerous to go alone, take this!"),
 					new SetDamage(new LootCondition[] {}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.18F)}, new RandomValueRange(1.0F, 18.0F), false)
 					}, 
-					new LootCondition[] {}, 
-					"alw_weapon_mineshaft_inject");
+					new LootCondition[0], "alw_weapon_mineshaft_inject");
 			//end weapon pool
 			table.addPool(new LootPool(new LootEntry[] {loadedMineshaft, weaponMineshaft},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_abandoned_mineshaft_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_abandoned_mineshaft_inject"));
 			break;
 		case "desert_pyramid":
 			LootEntry loadedPyramid = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/desert_pyramid"), 100, 1, new LootCondition[] {}, "alw_desert_pyramid_inject");
@@ -87,12 +87,11 @@ public class LootTableInjector {
 					new SetDamage(new LootCondition[] {new RandomChance(0.15F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.31F)}, new RandomValueRange(5.0F, 21.0F), false)
 					}, 
-					new LootCondition[] {}, 
-					"alw_weapon_pyramid_inject");
+					new LootCondition[0], "alw_weapon_pyramid_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedPyramid, weaponPyramid},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(1.0F), ModInfo.ID + "_desert_pyramid_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(1.0F), ModInfo.ID + "_desert_pyramid_inject"));
 			break;
 		case "end_city_treasure":
 			LootEntry loadedEndCity = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/end_city_treasure"), 100, 1, new LootCondition[] {}, "alw_end_treasure_inject");
@@ -109,21 +108,20 @@ public class LootTableInjector {
 					new SetDamage(new LootCondition[] {new RandomChance(0.25F)}, new RandomValueRange(0.1F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.84F)}, new RandomValueRange(12.0F, 30.0F), false)
 					}, 
-					new LootCondition[] {}, 
-					"alw_weapon_end_city_inject");
+					new LootCondition[0], "alw_weapon_end_city_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedEndCity},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(1.0F), ModInfo.ID + "_end_city_treasure_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(1.0F), ModInfo.ID + "_end_city_treasure_inject"));
 			table.addPool(new LootPool(
 					new LootEntry[] {weaponEndCity, new LootEntryEmpty(78, 0, new LootCondition[] {}, "alw_weapon_end_city_empty_inject")},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 3.0F), new RandomValueRange(1.0F), ModInfo.ID + "_end_city_treasure_weapon_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 3.0F), new RandomValueRange(1.0F), ModInfo.ID + "_end_city_treasure_weapon_inject"));
 			break;
 		case "igloo_chest":
 			LootEntry loadedIgloo = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/igloo_chest"), 100, 1, new LootCondition[] {}, "alw_igloo_inject");
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedIgloo},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_igloo_chest_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_igloo_chest_inject"));
 			break;
 		case "jungle_temple":
 			LootEntry loadedJungleTemple = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/jungle_temple"), 100, 1, new LootCondition[] {}, "alw_jungle_temple_inject");
@@ -140,11 +138,11 @@ public class LootTableInjector {
 					new SetLore(new LootCondition[] {new RandomChance(0.01F)}, "Those who lose their way..."),
 					new SetDamage(new LootCondition[] {new RandomChance(0.1F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.24F)}, new RandomValueRange(1.0F, 20.0F), false)
-			}, new LootCondition[] {}, "alw_weapon_jungle_temple_inject");
+			}, new LootCondition[0], "alw_weapon_jungle_temple_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedJungleTemple, weaponJungleTemple},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_jungle_temple_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_jungle_temple_inject"));
 			break;
 		case "nether_bridge":
 			LootEntry loadedNether = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/nether_bridge"), 100, 1, new LootCondition[] {}, "alw_nether_bridge_inject");
@@ -162,7 +160,7 @@ public class LootTableInjector {
 					new SetLore(new LootCondition[] {new RandomChance(0.01F)}, "Proof of the Lost"),
 					new SetDamage(new LootCondition[] {new RandomChance(0.15F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.21F)}, new RandomValueRange(6.0F, 20.0F), false)
-			}, new LootCondition[] {}, "alw_weapon_nether_inject");
+			}, new LootCondition[0], "alw_weapon_nether_inject");
 			
 			List<Enchantment> netherEnchs = new ArrayList<Enchantment>(1);
 			netherEnchs.add(Enchantments.VANISHING_CURSE);
@@ -175,28 +173,28 @@ public class LootTableInjector {
 					new SetDamage(new LootCondition[] {new RandomChance(0.15F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantRandomly(new LootCondition[] {}, netherEnchs),
 					new EnchantWithLevels(new LootCondition[] {}, new RandomValueRange(6.0F, 20.0F), false)
-			}, new LootCondition[] {}, "alw_cursed_weapon_nether_inject");
+			}, new LootCondition[0], "alw_cursed_weapon_nether_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedNether}, 
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(2.0F), ModInfo.ID + "_nether_bridge_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(2.0F), ModInfo.ID + "_nether_bridge_inject"));
 			table.addPool(new LootPool(
 					new LootEntry[] {weaponNether, weaponNetherCursed, new LootEntryEmpty(82, 0, new LootCondition[] {}, "_alw_nether_weapon_empty_inject")},
-					new LootCondition[] {}, new RandomValueRange(0.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_nether_bridge_weapon_inject"));
+					new LootCondition[0], new RandomValueRange(0.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_nether_bridge_weapon_inject"));
 			break;
 		case "simple_dungeon":
 			LootEntry loadedDungeon = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/simple_dungeon"), 100, 1, new LootCondition[] {}, "alw_dungeon_inject");
 			
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedDungeon},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_simple_dungeon_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_simple_dungeon_inject"));
 			break;
 		case "spawn_bonus_chest":
 			LootEntry loadedSpawnChest = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/spawn_bonus_chest"), 100, 1, new LootCondition[] {}, "alw_spawn_chest_inject");
 			
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedSpawnChest},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_spawn_bonus_chest_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_spawn_bonus_chest_inject"));
 			break;
 		case "stronghold_corridor":
 			LootEntry loadedCorridor = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/stronghold_corridor"), 100, 1, new LootCondition[] {}, "alw_corridor_inject");
@@ -217,11 +215,11 @@ public class LootTableInjector {
 					new SetDamage(new LootCondition[] {new RandomChance(0.15F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantRandomly(new LootCondition[] {new RandomChance(0.20F)}, corridorEnchs),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.08F)}, new RandomValueRange(8.0F, 22.0F), false)
-			}, new LootCondition[] {}, "alw_weapon_corridor_inject");
+			}, new LootCondition[0], "alw_weapon_corridor_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedCorridor, weaponCorridor},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_stronghold_corridor_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_stronghold_corridor_inject"));
 			break;
 		case "stronghold_crossing":
 			LootEntry loadedCrossing = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/stronghold_crossing"), 100, 1, new LootCondition[] {}, "alw_crossing_inject");
@@ -236,11 +234,11 @@ public class LootTableInjector {
 					new SetName(new LootCondition[] {new RandomChance(0.4F)}, "Sharp Edge"),
 					new SetDamage(new LootCondition[] {new RandomChance(0.15F)}, new RandomValueRange(0.3F, 0.99F)),
 					new EnchantWithLevels(new LootCondition[] {new RandomChance(0.29F)}, new RandomValueRange(4.0F, 18.0F), false)
-			}, new LootCondition[] {}, "alw_weapon_crossing_inject");
+			}, new LootCondition[0], "alw_weapon_crossing_inject");
 			//end weapon pool
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedCrossing, weaponCrossing},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_stronghold_crossing_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_stronghold_crossing_inject"));
 			break;
 		case "stronghold_library":
 			
@@ -250,14 +248,14 @@ public class LootTableInjector {
 			
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedBlacksmith},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_village_blacksmith_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_village_blacksmith_inject"));
 			break;
 		case "woodland_mansion":
 			LootEntry loadedMansion = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/chest/woodland_mansion"), 100, 1, new LootCondition[] {}, "alw_mansion_inject");
 			
 			table.addPool(new LootPool(
 					new LootEntry[] {loadedMansion},
-					new LootCondition[] {}, new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_woodland_mansion_inject"));
+					new LootCondition[0], new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_woodland_mansion_inject"));
 			break;
 		}
 	}
@@ -268,16 +266,24 @@ public class LootTableInjector {
 			if(!ConfigHandler.EVOKER_DROP_SHADOW) {
 				break;
 			}
+			LootEntry loadedGenericShadowIllager = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/entity/drop_shadow_generic"), 100, 1, new LootCondition[] {}, "alw_generic_shadow_inject");
+			table.addPool(new LootPool(new LootEntry[] {loadedGenericShadowIllager}, new LootCondition[] {}, 
+					new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_generic_shadow_inject"));
+			break;
 		case "vindication_illager":
 			if(!ConfigHandler.VINDICATOR_DROP_SHADOW) {
 				break;
 			}
+			LootEntry loadedGenericShadowVindicator = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/entity/drop_shadow_generic"), 100, 1, new LootCondition[] {}, "alw_generic_shadow_inject");
+			table.addPool(new LootPool(new LootEntry[] {loadedGenericShadowVindicator}, new LootCondition[] {}, 
+					new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_generic_shadow_inject"));
+			break;
 		case "vex":
 			if(!ConfigHandler.VEX_DROP_SHADOW) {
 				break;
 			}
-			LootEntry loadedGenericShadow = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/entity/drop_shadow_generic"), 100, 1, new LootCondition[] {}, "alw_generic_shadow_inject");
-			table.addPool(new LootPool(new LootEntry[] {loadedGenericShadow}, new LootCondition[] {}, 
+			LootEntry loadedGenericShadowVex = new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/entity/drop_shadow_generic"), 100, 1, new LootCondition[] {}, "alw_generic_shadow_inject");
+			table.addPool(new LootPool(new LootEntry[] {loadedGenericShadowVex}, new LootCondition[] {}, 
 					new RandomValueRange(1.0F, 1.0F), new RandomValueRange(0.0F), ModInfo.ID + "_generic_shadow_inject"));
 			break;
 		case "wither_skeleton":
@@ -329,6 +335,23 @@ public class LootTableInjector {
 				}
 			}
 		}
+		
+		//DEBUG PRINTS
+		StringBuilder b = new StringBuilder("");
+		for(int i = 0; i < mats.length; i++) {
+			b.append(mats[i].name());
+			if(i < mats.length - 1) {
+				b.append(", ");
+			}
+		}
+		StringBuilder b1 = new StringBuilder("[" + '\n');
+		for(int i = 0; i < arr.size(); i++) {
+			b1.append('\t' + arr.get(i).getRegistryName().getResourcePath() + '\n');
+		}
+		b1.append("]");
+		Alw.logger.debug("Generating Weapons by Name and Materials. Name (" + name + "), Materials [" + b.toString() + "], Output: " + b1.toString());
+		//END DEBUG PRINTS
+		
 		return arr.toArray(new Item[0]);
 	}
 	

@@ -3,22 +3,20 @@
 	
 	"ingredients": [
     {
-		"item": "minecraft:clay_ball"
+		"type": "forge:ore_dict",
+		"ore": "ballClay"
     },
-    [
-    	{
-    		"item": "advancedlootableweapons:powder_granite"
-			
-    	},
-    	{
-    		"item": "advancedlootableweapons:powder_feldspar"
-    	}
-    ],
-    {
-		"item": "advancedlootableweapons:powder_charcoal"
+    { 
+    	"type": "forge:ore_dict",
+		"ore": "dustClayBase"
     },
     {
-		"item": "advancedlootableweapons:powder_charcoal"
+		"type": "forge:ore_dict",
+		"ore": "dustCoal"
+    },
+    {
+		"type": "forge:ore_dict",
+		"ore": "dustCoal"
     },
     [
     	{

@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityAlloyFurnace;
+import tiki.advancedlootableweapons.blocks.tileentities.TileEntityBellows;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityForge2;
@@ -20,6 +21,7 @@ public class TileEntityHandler
 		GameRegistry.registerTileEntity(TileEntityMill.class, new ResourceLocation(ModInfo.ID + ":mill"));
 		GameRegistry.registerTileEntity(TileEntityTanningRack.class, new ResourceLocation(ModInfo.ID + ":tanning_rack"));
 		GameRegistry.registerTileEntity(TileEntityDrum.class, new ResourceLocation(ModInfo.ID + ":drum"));
+		GameRegistry.registerTileEntity(TileEntityBellows.class, new ResourceLocation(ModInfo.ID + ":bellows"));
 		
 //		Alw.logger.info("Is Pyrotech loaded when registering TE's: " + Alw.isPyrotechLoaded);
 //		if(Alw.isPyrotechLoaded) {

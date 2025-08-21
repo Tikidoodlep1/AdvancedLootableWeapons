@@ -18,9 +18,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
+import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.loot.LootTableInjector;
@@ -68,9 +70,9 @@ public class CommonProxy {
 		if(event.getSide() == Side.SERVER) {
 			BlockPos blockPos = event.getPos();
 			Block block = event.getWorld().getBlockState(blockPos).getBlock();
-			if(ConfigHandler.VALID_ANVILS.contains(block.getRegistryName().toString())) {
+			if(OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).contains(new ItemStack(block))) {
 				EntityPlayer player = event.getEntityPlayer();
-				if(ConfigHandler.VALID_HAMMERS.contains(player.inventory.getCurrentItem().getItem().getRegistryName().toString())) {
+				if(OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).contains(player.inventory.getCurrentItem())) {
 					player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ());
 					event.setCanceled(true);
 				}
@@ -80,9 +82,9 @@ public class CommonProxy {
 		if(event.getSide() == Side.CLIENT) {
 			BlockPos blockPos = event.getPos();
 			Block block = event.getWorld().getBlockState(blockPos).getBlock();
-			if(ConfigHandler.VALID_ANVILS.contains(block.getRegistryName().toString())) {
+			if(OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).contains(new ItemStack(block))) {
 				EntityPlayer player = event.getEntityPlayer();
-				if(ConfigHandler.VALID_HAMMERS.contains(player.inventory.getCurrentItem().getItem().getRegistryName().toString())) {
+				if(OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).contains(player.inventory.getCurrentItem())) {
 					event.setCanceled(true); // Cancel event but don't open GUI so the GUI can correctly pick the anvil block instead of AIR!
 				}
 			}

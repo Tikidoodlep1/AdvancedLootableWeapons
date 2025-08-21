@@ -1,0 +1,41 @@
+{
+    "name": "Milling",
+    "icon": "advancedlootableweapons:powder_feldspar",
+    "category": "advancedlootableweapons:getting_started",
+    "pages": [
+        {
+            "type": "text",
+            "text": "To create many of the resources needed for heat insulation, you'll need to mill silicate rocks! The mixture of silicate rocks like Diorite or Granite with Feldspar make clays that are useful for heat insulation, but also relatively easy to shape, making them the ideal material to house a forge in!"
+        },
+        {
+            "type": "spotlight",
+            "anchor": "block_mill",
+            "item": "advancedlootableweapons:block_mill",
+            "text": "First, you'll need a $(item)Mill$(). The $(item)Mill$() takes stones such as $(item)Diorite$(), $(item)Granite$(), or $(item)Feldspar$() and crushes them into their powder variants. $(p)To use it, place it in the world and toss some blocks in it. Then, close the GUI and $(thing)$(k:sneak)-$(k:use)$() the mill to crush the contents into powder."
+        },
+        {
+            "type": "mill_crafting_page",
+            "input1": "advancedlootableweapons:rock_feldspar",
+            "output1": "advancedlootableweapons:powder_feldspar",
+            "count1": "$(bold)2-4$()",
+            "input2": "minecraft:stone:1#1",
+            "output2": "advancedlootableweapons:powder_granite",
+            "count2": "$(bold)2-4$()"
+        },
+        {
+            "type": "mill_crafting_page",
+            "input1": "minecraft:stone:3",
+            "output1": "advancedlootableweapons:powder_diorite",
+            "count1": "$(bold)2-4$()",
+            "input2": "minecraft:coal#1",
+            "output2": "advancedlootableweapons:powder_charcoal",
+            "count2": "$(bold)1-2$()"
+        }
+    ],
+    "sortnum": 1,
+    "extra_recipe_mappings": 
+    {
+    	"advancedlootableweapons:powder_feldspar,advancedlootableweapons:powder_granite": 2,
+    	"advancedlootableweapons:powder_diorite,advancedlootableweapons:powder_charcoal": 3
+    }
+}

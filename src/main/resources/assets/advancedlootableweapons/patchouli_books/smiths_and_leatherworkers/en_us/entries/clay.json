@@ -1,0 +1,54 @@
+{
+    "name": "Clays",
+    "icon": "advancedlootableweapons:brick_granite",
+    "category": "advancedlootableweapons:getting_started",
+    "pages": [
+        {
+            "type": "text",
+            "text": "Now that you have powder, you'll need to make it into clay before it's usable in any kind of structural piece.<br>To do that, you'll need to make powder blocks. Once you have a powder block of choice, you can place it in water like $(item)Concrete Powder$(), then break it to get clay balls!"
+        },
+        {
+            "type": "crafting",
+            "recipe": "advancedlootableweapons:block_powder_granite",
+            "recipe2": "advancedlootableweapons:block_powder_diorite"
+        },
+        { 
+        	"type": "text",
+        	"text": "$(item)Granite clay balls$() & $(item)Diorite clay balls$() can be crafted back into clay blocks too. Unlike the clay powder blocks, these don't fall and are unchanged by water, making them safe building blocks!"
+        },
+        {
+            "type": "crafting",
+            "recipe": "advancedlootableweapons:block_clay_granite",
+            "recipe2": "advancedlootableweapons:block_clay_diorite"
+        },
+        {
+            "type": "smelting",
+            "recipe": "advancedlootableweapons:clay_granite",
+            "recipe2": "advancedlootableweapons:clay_diorite",
+            "text": "$(item)Granite clay balls$() & $(item)Diorite clay balls$() can be smelted into their respective bricks."
+        },
+        {
+            "type": "smelting",
+            "recipe": "advancedlootableweapons:block_clay_granite",
+            "recipe2": "advancedlootableweapons:block_clay_diorite",
+            "text": "You can also smelt them into their respective brick blocks by smelting the clay blocks whole!"
+        },
+        { 
+        	"type": "text",
+        	"text": "There are other important clays that aren't for structural use, but rather used to better control the temperature of a blade during $(thing)quenching$(). These kinds of clays are called $(term)Body$() and $(term)Slip$(). The use of $(term)Body$() and $(term)Slip$() during quenching helps the blade achieve two different levels of hardness. Without this method, a compromise of hardness to durability must be made, resultig in a lower quality blade overall."
+        },
+        {
+            "type": "crafting",
+            "recipe": "advancedlootableweapons:yaki_quenching_mix",
+            "recipe2": "advancedlootableweapons:yaki_quenching_slip"
+        }
+    ],
+    "sortnum": 2,
+    "extra_recipe_mappings": 
+    {
+    	"advancedlootableweapons:clay_granite,advancedlootableweapons:clay_diorite": 1,
+    	"advancedlootableweapons:block_clay_granite,advancedlootableweapons:block_clay_diorite": 3,
+    	"advancedlootableweapons:block_brick_granite,advancedlootableweapons:block_brick_diorite": 5,
+    	"advancedlootableweapons:clay_quenching_mix,advancedlootableweapons:clay_quenching_slip": 7
+    }
+}

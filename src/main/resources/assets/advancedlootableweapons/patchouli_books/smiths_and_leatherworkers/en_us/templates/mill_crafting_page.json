@@ -1,0 +1,64 @@
+{
+  "components": [
+  	{ 
+      "type": "text",
+      "text": "#count1",
+      "x": 80,
+      "y": 50
+    },
+    {
+      "type": "item",
+      "item": "#input1",
+      "x": 27,
+      "y": 5
+    },
+    {
+      "type": "item",
+      "item": "#output1",
+      "x": 76,
+      "y": 34
+    },
+    {
+      "type": "image",
+      "image": "advancedlootableweapons:textures/patchouli/mill_gui.png",
+      "x": 25,
+      "y": 0,
+      "u": 0,
+      "v": 0,
+      "width": 69,
+      "height": 63,
+      "texture_width": 69,
+      "texture_height": 63
+    },
+    {
+      "type": "text",
+      "text": "#count2",
+      "x": 80,
+      "y": 118
+    },
+    {
+      "type": "item",
+      "item": "#input2",
+      "x": 27,
+      "y": 73
+    },
+    {
+      "type": "item",
+      "item": "#output2",
+      "x": 76,
+      "y": 102
+    },
+    {
+      "type": "image",
+      "image": "advancedlootableweapons:textures/patchouli/mill_gui.png",
+      "x": 25,
+      "y": 68,
+      "u": 0,
+      "v": 0,
+      "width": 69,
+      "height": 63,
+      "texture_width": 69,
+      "texture_height": 63
+    }
+  ]
+}

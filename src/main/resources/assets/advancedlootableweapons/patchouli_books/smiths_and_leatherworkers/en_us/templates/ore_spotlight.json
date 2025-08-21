@@ -1,0 +1,37 @@
+{
+  "components": [
+    {
+      "type": "header",
+      "text": "#title",
+      "x": -1,
+      "y": -3,
+      "centered": true,
+      "scale": 1
+    },
+    {
+      "type": "custom",
+      "class": "tiki.advancedlootableweapons.compat.patchouli.OreDictionaryComponent",
+      "oreDict": "#ore",
+      "x": 49,
+      "y": 9
+    },
+    {
+      "type": "image",
+      "image": "patchouli:textures/gui/crafting.png",
+      "x": 24,
+      "y": 5,
+      "u": 0,
+      "v": 102,
+      "width": 66,
+      "height": 26,
+      "texture_width": 128,
+      "texture_height": 128
+    },
+    {
+      "type": "text",
+      "text": "#text",
+      "x": 5,
+      "y": 30
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+    "name": "A Smith's Best Friend",
+    "icon": "minecraft:anvil",
+    "category": "advancedlootableweapons:getting_started",
+    "pages": [
+        {
+            "type": "advancedlootableweapons:ore_spotlight",
+            "ore": "itemAlwForgeHammer",
+            "title": "Forge Hammer",
+            "text": "Forge Hammers are the most important tool for forging. With a forge hammer in hand, $(thing)$(k:attack)$() an $(thing)Anvil$() to open the Forging GUI."
+        },
+        { 
+        	"type": "crafting",
+            "recipe": "advancedlootableweapons:forge_hammer_iron",
+            "title": "Forge Hammer Recipe",
+            "flag": "advancedlootableweapons:forgeHammerOreDictHasAlwHammers"
+        },
+        {
+            "type": "spotlight",
+            "anchor": "block_forge",
+            "item": "advancedlootableweapons:block_forge",
+            "title": "Forge",
+            "text": "$(thing)Forges$() are the next building block to making your own weapons. Forges are used in tandem with a $(thing)Bellows$() to heat your pieces up. Technically speaking, you don't have to heat your pieces up, but the quality of the resulting weapons will drastically drop if you don't."
+        },
+        {
+            "type": "text",
+            "text": "The amount of heat that your metal holds when you forge it directly correlates to its malleability, preventing damage to the metal during the shaping process. Either forge works, but the $(thing)Advanced Forge$() can heat 3 pieces at once!"
+        },
+        { 
+        	"type": "crafting",
+            "recipe": "advancedlootableweapons:block_forge"
+        },
+        { 
+        	"type": "crafting",
+            "recipe": "advancedlootableweapons:block_advanced_forge"
+        },
+        {
+            "type": "spotlight",
+            "anchor": "block_bellows",
+            "item": "advancedlootableweapons:block_bellows",
+            "title": "Bellows",
+            "text": "Place your bellows with the single small tip facing the forge, then right click to stoke the fire. This increases the heat in the forge, and increases the rate at which your pieces will heat up."
+        },
+        {
+        	"type": "crafting",
+            "recipe": "advancedlootableweapons:block_bellows"
+        },
+        {
+            "type": "advancedlootableweapons:ore_spotlight",
+            "ore": "blockAlwAnvil",
+            "title": "Anvils",
+            "text": "Finally, you'll need an Anvil. Personally, I'd recommend keeping your forge close to your anvil to make sure your pieces cool as little as possible before shaping them!"
+        },
+        {
+	    	"type": "image",
+	    	"images": [
+	    		"advancedlootableweapons:textures/patchouli/forging_setup.png"
+	    	],
+	    	"title": "Complete Forging Setup",
+	    	"border": true
+	    }
+    ],
+    "sortnum": 3,	
+    "extra_recipe_mappings": 
+    {
+    	"advancedlootableweapons:stone_forge_hammer,advancedlootableweapons:iron_forge_hammer,advancedlootableweapons:kobold_forge_hammer": 1,
+    	"advancedlootableweapons:copper_forge_hammer,advancedlootableweapons:silver_forge_hammer,advancedlootableweapons:bronze_forge_hammer": 1,
+    	"advancedlootableweapons:platinum_forge_hammer,advancedlootableweapons:steel_forge_hammer,advancedlootableweapons:shadow_platinum_forge_hammer": 1,
+    	"advancedlootableweapons:frost_steel_forge_hammer,advancedlootableweapons:obsidian_forge_hammer,advancedlootableweapons:crystallite_forge_hammer": 1,
+    	"advancedlootableweapons:dusksteel_forge_hammer": 1,
+    	"advancedlootableweapons:block_forge,advancedlootableweapons:block_advanced_forge": 4,
+    	"advancedlootableweapons:block_bellows,advancedlootableweapons:block_bellows_birch,advancedlootableweapons:block_bellows_spruce": 6,
+    	"advancedlootableweapons:block_bellows_jungle,advancedlootableweapons:block_bellows_acacia,advancedlootableweapons:block_bellows_dark_oak": 6
+    }
+}

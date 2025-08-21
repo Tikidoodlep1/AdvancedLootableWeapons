@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.IHasModel;
 import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
+import tiki.advancedlootableweapons.compat.patchouli.PatchouliCompat;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.EnchantmentInit;
 import tiki.advancedlootableweapons.init.EntityInit;
@@ -89,6 +90,8 @@ public class RegistryHandler {
 		SoundHandler.registerSounds();
 		LootTableHandler.registerAll();
 		Alw.proxy.addColoredItemRenderer();
+		OreDictionaryCompat.registerConfigDependentOres();
+		PatchouliCompat.registerCustomFlags();
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)

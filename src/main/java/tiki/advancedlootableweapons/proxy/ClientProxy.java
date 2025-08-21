@@ -7,6 +7,7 @@ import java.util.Arrays;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,13 +19,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
+import tiki.advancedlootableweapons.blocks.tileentities.BellowsTESR;
 import tiki.advancedlootableweapons.blocks.tileentities.DrumTESR;
+import tiki.advancedlootableweapons.blocks.tileentities.TileEntityBellows;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
+import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.handlers.RenderHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
@@ -210,10 +217,17 @@ public class ClientProxy extends CommonProxy {
 			);
 		}
 		ItemInit.generatedItems.forEach((item) -> ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(getGenericWeaponResourceLocation(item), "inventory")));
+		
 	}
 	
 	@Override
 	public void modelBake(ModelBakeEvent event) {
+		try {
+			ResourceLocation loc = new ResourceLocation(ModInfo.ID, "block/block_bellows_top");
+			BellowsTESR.topModel = ModelLoaderRegistry.getModel(loc).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(loc.toString()));
+		} catch (Exception e) {
+			Alw.logger.error(e);
+		}
 	}
 	
 	@Override
@@ -240,13 +254,14 @@ public class ClientProxy extends CommonProxy {
 	public void registerTESRs() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDrum.class, new DrumTESR());
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMill.class, new MillTESR());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new BellowsTESR());
 	}
 	
 	public void onTooltip(ItemTooltipEvent event) {
-		if(!(event.getItemStack().getItem() instanceof ToolForgeHammer) && ConfigHandler.VALID_HAMMERS.contains(event.getItemStack().getItem().getRegistryName().toString())) {
+		if(!(event.getItemStack().getItem() instanceof ToolForgeHammer) && OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).contains(event.getItemStack())) {
 			event.getToolTip().add(TextFormatting.BLUE + I18n.format("alw.forge_hammer.tooltip"));
 			event.getToolTip().add(TextFormatting.LIGHT_PURPLE + "" + TextFormatting.ITALIC + I18n.format("alw.forge_hammer.config_marker.name"));
-		}else if(event.getItemStack().getItem() != Item.getItemFromBlock(Blocks.ANVIL) && ConfigHandler.VALID_ANVILS.contains(event.getItemStack().getItem().getRegistryName().toString())) {
+		}else if(event.getItemStack().getItem() != Item.getItemFromBlock(Blocks.ANVIL) && OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).contains(event.getItemStack())) {
 			event.getToolTip().add(TextFormatting.LIGHT_PURPLE + "" + TextFormatting.ITALIC + I18n.format("alw.anvil.config_marker.name"));
 		}
 	}

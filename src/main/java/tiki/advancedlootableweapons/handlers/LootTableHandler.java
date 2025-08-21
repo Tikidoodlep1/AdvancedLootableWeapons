@@ -8,7 +8,7 @@ public class LootTableHandler {
 
 	public static void registerAll() {
 		// Chests
-		register(new ResourceLocation(ModInfo.ID, "inject/chest/abandonded_mineshaft"));
+		register(new ResourceLocation(ModInfo.ID, "inject/chest/abandoned_mineshaft"));
 		register(new ResourceLocation(ModInfo.ID, "inject/chest/desert_pyramid"));
 		register(new ResourceLocation(ModInfo.ID, "inject/chest/end_city_treasure"));
 		register(new ResourceLocation(ModInfo.ID, "inject/chest/igloo_chest"));
@@ -24,6 +24,8 @@ public class LootTableHandler {
 		// Entities
 		register(new ResourceLocation(ModInfo.ID, "inject/entity/drop_shadow_generic"));
 		register(new ResourceLocation(ModInfo.ID, "inject/entity/wither_skeleton"));
+		register(new ResourceLocation(ModInfo.ID, "inject/entity/hide_generic"));
+		register(new ResourceLocation(ModInfo.ID, "inject/entity/rabbit"));
 	}
 	
 	public static void register(ResourceLocation name) {

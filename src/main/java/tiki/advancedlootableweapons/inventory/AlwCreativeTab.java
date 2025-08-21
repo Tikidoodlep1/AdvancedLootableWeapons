@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import tiki.advancedlootableweapons.init.ItemInit;
 
-public class AlwCreativeTab extends CreativeTabs{
+public class AlwCreativeTab extends CreativeTabs {
 	
 	public AlwCreativeTab(String label) {
 		super(label);

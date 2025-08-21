@@ -213,9 +213,9 @@ public class ToolStabSword extends Item implements IHasModel {
 			stack.setStackDisplayName(new TextComponentTranslation(randName1[randGen.nextInt(16)]).getFormattedText() + " (" + this.getItemStackDisplayName(stack) + ")");
 		}
 		
-		randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
+		//randDamage = (((float)randGen.nextInt(14)) * (this.material.getAttackDamage() / 100)) + randGen.nextFloat();
 		
-		totalDamage = ((this.getAttackDamage() + 1) + randDamage + addedDamage);
+		totalDamage = ((this.getAttackDamage() + 1) /*+ randDamage*/ + addedDamage);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(Alw.BONUS_ATTACK_DAMAGE_MODIFIER, "Weapon modifier", totalDamage, 0), EntityEquipmentSlot.MAINHAND);
 		stack.addAttributeModifier(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", (double)this.attackSpeed, 0), EntityEquipmentSlot.MAINHAND);
 		if(ConfigHandler.USE_CUSTOM_WEAPON_REACH) {

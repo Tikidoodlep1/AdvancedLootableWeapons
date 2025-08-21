@@ -994,6 +994,7 @@ alw.temp.outside.name=Outside Temperature:
 alw.temp.celcius.name=Celcius
 alw.temp.forge.name=Forge Temperature:
 
+
 alw.damage_tooltip.name= Damage
 alw.dur_tooltip.name= Durability
 alw.forging_quality.name=Forging Quality:
@@ -1008,3 +1009,8 @@ alw.forge_hammer.config_marker.name=This item has been marked as a valid forge h
 alw.anvil.config_marker.name=This item has been marked as a valid anvil via the Advanced Lootable Weapons config.
 alw.armor_binding.bonus_dur.name=Bonus Durability
 alw.forge_ignition.tooltip=This forge requires ignition to consume fuel! The following items can be used
+
+
+patchouli.alw.book.name=Guide to Smithing
+patchouli.alw.book.landing_text=Welcome to $(alw)! This book serves as a complete guide to forging weapons, armor, and more! Everything you'll need to know about $(alw) will be located here.
+
