@@ -8,15 +8,35 @@ import net.minecraft.util.math.BlockPos;
 
 public class RotatablePos {
 	
-	private Quaternion rot;
-	private float x, y, z;
+	private Quaternion rot, n, q, c, r, temp;
+	private float x, y, z, m, s, px, py, pz;
 	private float readOnlyX, readOnlyY, readOnlyZ;
+	private boolean scaled = false;
+	private boolean dirty = false;
+	Vector4f v;
 	
 	public RotatablePos(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.readOnlyX = x;
+		this.readOnlyY = y;
+		this.readOnlyZ = z;
 		this.rot = new Quaternion();
+		
+		this.px = 0f;
+		this.py = 0f;
+		this.pz = 0f;
+		
+		//Variables to prevent excess garbage collector runs
+		this.n = new Quaternion();
+		this.q = new Quaternion();
+		this.c = new Quaternion();
+		this.r = new Quaternion();
+		this.temp = new Quaternion();
+		this.v = new Vector4f();
+		this.m = 0f;
+		this.s = 0f;
 	}
 	
 	public RotatablePos(BlockPos pos) {
@@ -88,7 +108,10 @@ public class RotatablePos {
 	 * If you want to accumulate rotation data, use {@link RotatablePos#rotateAxisAngle}
 	 */
 	public void rotationFromAxisAngle(float x, float y, float z, float angleDegrees) {
-		this.rot.setFromAxisAngle(new Vector4f(x, y, z, (float)Math.toRadians(angleDegrees)));
+		v.set(x, y, z, (float)Math.toRadians(angleDegrees));
+		this.rot.setFromAxisAngle(v);
+		this.dirty = true;
+		v.set(0f, 0f, 0f, 1f);
 	}
 	
 	/**
@@ -100,13 +123,45 @@ public class RotatablePos {
 	 */
 	public void rotationFromEnumFacing(EnumFacing facing) {
 		rotationFromAxisAngle(0f, 1f, 0f, facing.getHorizontalAngle());
+		this.dirty = true;
+	}
+	
+	public void rotateAxisAngleAroundPivot(float x, float y, float z, float px, float py, float pz, float angleDegrees) {
+		this.px = px;
+		this.py = py;
+		this.pz = pz;
+		
+		this.rotateAxisAngle(x, y, z, angleDegrees);
+	}
+	
+	public void rotateEnumFacingAroundPivot(EnumFacing facing) {
+		this.rotateYAroundPivot(facing.getDirectionVec().getX(), facing.getDirectionVec().getY(), facing.getDirectionVec().getZ(), facing.getHorizontalAngle());
+	}
+	
+	public void rotateXAroundPivot(float px, float py, float pz, float angleDegrees) {
+		this.rotateAxisAngleAroundPivot(1f, 0f, 0f, px, py, pz, angleDegrees);
+	}
+	
+	public void rotateYAroundPivot(float px, float py, float pz, float angleDegrees) {
+		this.rotateAxisAngleAroundPivot(0f, 1f, 0f, px, py, pz, angleDegrees);
+	}
+
+	public void rotateZAroundPivot(float px, float py, float pz, float angleDegrees) {
+		this.rotateAxisAngleAroundPivot(0f, 0f, 1f, px, py, pz, angleDegrees);
 	}
 	
 	/**
 	 * This method WILL accumulate rotation data, unlike {@link RotatablePos#rotationFromAxisAngle}
 	 */
 	public void rotateAxisAngle(float x, float y, float z, float angleDegrees) {
-		Quaternion.mul(this.rot, new Quaternion(x, y, z, (float)Math.toRadians(angleDegrees)), this.rot);
+		this.m = (float)Math.sqrt(x*x + y*y + z*z);
+		this.s = (float)(Math.sin(0.5 * Math.toRadians(angleDegrees)) / m);
+		
+		this.temp.set(x*this.s, y*this.s, z*this.s, (float)Math.cos(0.5 * Math.toRadians(angleDegrees)));
+		Quaternion.mul(this.rot, this.temp, this.rot);
+		
+		this.dirty = true;
+		this.temp.setIdentity();
 	}
 	
 	/**
@@ -150,21 +205,117 @@ public class RotatablePos {
 	 * This method must be called after all rotations are applied. This will set the x, y, and z coordinates based on the rotation stored in the quaternion.
 	 */
 	public void applyRotation() {
-		Quaternion normalized = new Quaternion();
-		this.rot.normalise(normalized);
+		if(!this.dirty) {
+			return;
+		}
 		
-		Quaternion vectorQuat = new Quaternion(this.x, this.y, this.z, 0f);
+		//Alw.logger.debug("Applying rotation in RotatablePos#applyRotation. Pos => [{}, {}, {}], Read Only Pos => [{}, {}, {}]", this.x, this.y, this.z, this.readOnlyX, this.readOnlyY, this.readOnlyZ);
 		
-		Quaternion conjugate = new Quaternion();
-		this.rot.negate(conjugate);
+		if(this.px > 0 || this.py > 0 || this.pz > 0) {
+			this.x -= px;
+			this.y -= py;
+			this.z -= pz;
+		}
 		
-		Quaternion result = new Quaternion();
-		Quaternion.mul(normalized, vectorQuat, result);
-		Quaternion.mul(result, conjugate, result);
+		this.rot.normalise(n);
 		
-		this.x = result.x;
-		this.y = result.y;
-		this.z = result.z;
+		q.set(this.readOnlyX, this.readOnlyY, this.readOnlyZ, 0f);
+		
+		n.negate(c);
+		
+		Quaternion.mul(c, q, r);
+		Quaternion.mul(r, n, r);
+		
+		this.x = r.x;
+		this.y = r.y;
+		this.z = r.z;
+		
+		if(this.px > 0 || this.py > 0 || this.pz > 0) {
+			this.x += px;
+			this.y += py;
+			this.z += pz;
+		}
+		
+		this.dirty = false;
+		
+		//Alw.logger.debug("After applying rotation => [{}, {}, {}]", this.x, this.y, this.z);
+	}
+	
+	public boolean hasPendingRotation() {
+		return this.dirty;
+	}
+	
+	/**
+	 * Checks if the stored Quaternion has any applied or pending rotation data.
+	 */
+	public boolean hasRotation() {
+		return this.rot.x != 0f || this.rot.y != 0f || this.rot.z != 0f || this.rot.w != 1f || this.dirty;
+	}
+	
+	public void scaleAroundPivot(float sx, float sy, float sz, float px, float py, float pz) {
+		this.x = px + (this.x - px) * sx;
+		this.y = py + (this.y - py) * sy;
+		this.z = pz + (this.z - pz) * sz;
+		this.scaled = true;
+	}
+	
+	public void scaleAroundPivot(float s, float px, float py, float pz) {
+		this.scaleAroundPivot(s, s, s, px, py, pz);
+	}
+	
+	public void scaleAroundPivotP(float sx, float sy, float sz, float p) {
+		this.scaleAroundPivot(sx, sy, sz, p, p, p);
+	}
+	
+	public void scaleAroundPivot(float s, float p) {
+		this.scaleAroundPivot(s, s, s, p, p, p);
+	}
+	
+	public void scaleAroundCenter(float sx, float sy, float sz) {
+		this.scaleAroundPivot(sx, sy, sz, 0.5f, 0.5f, 0.5f);
+	}
+	
+	public void scaleAroundCenter(float s) {
+		this.scaleAroundCenter(s, s, s);
+	}
+	
+	public void scaleXAroundCenter(float s) {
+		this.scaleAroundCenter(s, 1, 1);
+	}
+	
+	public void scaleYAroundCenter(float s) {
+		this.scaleAroundCenter(1, s, 1);
+	}
+	
+	public void scaleZAroundCenter(float s) {
+		this.scaleAroundCenter(1, 1, s);
+	}
+	
+	public void scale(float sx, float sy, float sz) {
+		this.x *= sx;
+		this.y *= sy;
+		this.z *= sz;
+		this.scaled = true;
+	}
+	
+	public void scale(float s) {
+		this.scale(s, s, s);
+	}
+	
+	public void scaleX(float s) {
+		this.scale(s, 1, 1);
+	}
+	
+	public void scaleY(float s) {
+		this.scale(1, 2, 1);
+	}
+	
+	public void scaleZ(float s) {
+		this.scale(1, 1, s);
+	}
+	
+	public boolean isScaled() {
+		return this.scaled;
 	}
 	
 	/**
@@ -184,5 +335,8 @@ public class RotatablePos {
 	public void clean() {
 		this.reset();
 		this.rot.setIdentity();
+		this.px = 0f;
+		this.py = 0f;
+		this.pz = 0f;
 	}
 }

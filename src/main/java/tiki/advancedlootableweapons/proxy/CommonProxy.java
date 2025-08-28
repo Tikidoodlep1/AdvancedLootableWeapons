@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -52,7 +53,9 @@ public class CommonProxy {
 	
 	public void registerTESRs() {}
 	
-	public void modelBake(final ModelBakeEvent event) {}
+	public void onModelBake(final ModelBakeEvent event) {}
+	
+	public void onTextureStitch(final TextureStitchEvent.Pre event) {}
 	
 	public void registerCustomModelLoaders() {}
 	

@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.model.TRSRTransformation;
@@ -221,13 +222,20 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-	public void modelBake(ModelBakeEvent event) {
+	public void onModelBake(ModelBakeEvent event) {
 		try {
-			ResourceLocation loc = new ResourceLocation(ModInfo.ID, "block/block_bellows_top");
-			BellowsTESR.topModel = ModelLoaderRegistry.getModel(loc).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(loc.toString()));
+			ResourceLocation bellowsTop = new ResourceLocation(ModInfo.ID, "block/block_bellows_top");
+			BellowsTESR.topModel = ModelLoaderRegistry.getModel(bellowsTop).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(bellowsTop.toString()));
+			ResourceLocation bellowsLeather = new ResourceLocation(ModInfo.ID, "block/block_bellows_leather");
+			BellowsTESR.leatherModel = ModelLoaderRegistry.getModel(bellowsLeather).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(bellowsLeather.toString()));
 		} catch (Exception e) {
 			Alw.logger.error(e);
 		}
+	}
+	
+	@Override
+	public void onTextureStitch(TextureStitchEvent.Pre event) {
+		
 	}
 	
 	@Override

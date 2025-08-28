@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -129,7 +130,13 @@ public class Alw {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void onModelBake(final ModelBakeEvent event) {
-		proxy.modelBake(event);
+		proxy.onModelBake(event);
+	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void onTextureStitch(final TextureStitchEvent.Pre event) {
+		proxy.onTextureStitch(event);
 	}
 	
 	@SubscribeEvent

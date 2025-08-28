@@ -124,9 +124,10 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote) {
-			Alw.logger.debug("Activating bellows server side");
+			Alw.logger.info("Activating bellows server side");
 			TileEntity bte = worldIn.getTileEntity(pos);
 			if(bte instanceof TileEntityBellows) {
+				Alw.logger.info("Starting Bellows Animation");
 				((TileEntityBellows)bte).startAnimating();
 			}
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
@@ -162,8 +163,8 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 					}
 				}
 			}
-			
-		}else {
+		}
+		else {
 			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
 			t.schedule(new TimerTask() {
 				@Override
@@ -216,7 +217,7 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) 
 	{
-		return EnumBlockRenderType.MODEL;
+		return EnumBlockRenderType.INVISIBLE;
 	}
 	
 	@Override

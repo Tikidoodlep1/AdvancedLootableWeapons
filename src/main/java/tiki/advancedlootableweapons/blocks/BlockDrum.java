@@ -74,7 +74,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	        	if(fluid.getFluid().getTemperature() <= FluidRegistry.WATER.getTemperature()+50 && entityIn.isBurning()) {
 	        		entityIn.extinguish();
 	        	}else if(fluid.getFluid().getTemperature() >= 950) {
-	        		entityIn.setFire(5);
+	        		entityIn.setFire(1);
 	        	}
 	        }
 		}
