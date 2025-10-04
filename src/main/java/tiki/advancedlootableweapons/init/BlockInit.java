@@ -78,12 +78,7 @@ public class BlockInit {
 	public static final Block tanning_rack = new BlockTanningRack("block_tanning_rack").setHardness(1.3F);
 	public static final Block drum = new BlockDrum("block_drum").setHardness(2.0F).setResistance(5.5F);
 	
-	public static final Block bellows = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_birch = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_birch").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_spruce = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_spruce").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_jungle = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_jungle").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_acacia = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_acacia").setHardness(1.5F).setResistance(1.8F);
-	public static final Block bellows_dark_oak = !Alw.isPyrotechLoaded ? new BlockBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F) : new BlockPyrotechBellows("block_bellows_dark_oak").setHardness(1.5F).setResistance(1.8F);
+	public static final Block bellows = (!Alw.isPyrotechLoaded ? new BlockBellows("block_bellows") : new BlockPyrotechBellows("block_bellows")).setHardness(1.5F).setResistance(1.8F);
 	
 	//public static final Block forge_fuel = new BlockForgeFuel("block_forge_fuel", Material.ROCK, SoundType.STONE, "pickaxe", 0, true, getItemFuels(), new HashSet<Item>(), 1.0F);
 	//public static final Block forge2_fuel = new BlockForge2Fuel("block_advanced_forge_fuel", Material.ROCK, SoundType.STONE, "pickaxe", 1, true, getItemFuels(), new HashSet<Item>(), 1.0F);

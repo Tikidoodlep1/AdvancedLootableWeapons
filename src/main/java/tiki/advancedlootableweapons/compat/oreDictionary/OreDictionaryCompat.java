@@ -1,5 +1,6 @@
 package tiki.advancedlootableweapons.compat.oreDictionary;
 
+import java.util.HashSet;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -15,6 +16,9 @@ import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
 
 public class OreDictionaryCompat {
+	
+	public static HashSet<Item> anvilOres = null;
+	public static HashSet<Item> hammerOres = null;
 	
 	public static final String INGOT_COPPER = "ingotCopper";
 	public static final String INGOT_SILVER = "ingotSilver";
@@ -145,6 +149,9 @@ public class OreDictionaryCompat {
 				Alw.logger.warn("Anvil {" + blockId + "} from Block and Item Config is an invalid block id! Block id's must be in the format ResourceDomain:ResourcePath, ex. \"minecraft:dirt\"\nBlock will not be registered as a valid anvil for " + ModInfo.NAME + ".");
 			}
 		}
+		
+		OreDictionaryCompat.anvilOres = OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).stream().collect(HashSet::new, (list, is) -> {list.add(is.getItem());}, HashSet::addAll);
+		OreDictionaryCompat.hammerOres = OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).stream().collect(HashSet::new, (list, is) -> {list.add(is.getItem());}, HashSet::addAll);
 		
 		Alw.logger.info("Finished registering valid Forge Hammers (Size " + ConfigHandler.VALID_HAMMERS.size() + ") and valid Anvils (Size " + ConfigHandler.VALID_ANVILS.size() + ") to OreDictionary in " + (System.currentTimeMillis() - startTime) + "ms.");
 	}

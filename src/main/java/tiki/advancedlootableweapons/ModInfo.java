@@ -17,4 +17,6 @@ public class ModInfo {
 	public static final int GUI_TANNING_RACK = 6;
 	public static final int GUI_FORGE_FUEL = 7;
 	public static final int GUI_FORGE_2_FUEL = 8;
+	
+	public static final int PARTICLE_BUBBLE = 42;
 }

@@ -13,7 +13,6 @@ import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -27,8 +26,6 @@ import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fluids.UniversalBucket;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -131,24 +128,35 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 			if(te instanceof TileEntityDrum) {
 				TileEntityDrum drum = (TileEntityDrum) te;
 					
-					if(FluidUtil.interactWithFluidHandler(playerIn, hand, drum)) {
-						//worldIn.notifyBlockUpdate(pos, state, state, 2);
-						
+					if(FluidUtil.interactWithFluidHandler(playerIn, hand, drum)) {						
 						if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
 							drum.FluidInteraction(worldIn, pos, playerIn, hand);
 						}
-						
-						drum.onChanged();
 						return true;
 					}
 					
 					if(ConfigHandler.ENABLE_ADVANCED_LEATHER_TANNING || ConfigHandler.ENABLE_QUENCHING) {
 						drum.EntityInteraction(worldIn, pos, playerIn, hand);
 					}
-					drum.onChanged();
 					return true;
 			}
-			
+		}else {
+			TileEntity te = worldIn.getTileEntity(pos);
+				
+			if(te instanceof TileEntityDrum) {
+				TileEntityDrum drum = (TileEntityDrum) te;
+				
+				//Calling these with doFill and doDrain = FALSE! SIMULATION ONLY
+				FluidActionResult fluidActionResult = FluidUtil.tryFillContainerAndStow(playerIn.getHeldItem(hand), drum, playerIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null), Integer.MAX_VALUE, playerIn, false);
+	            if (!fluidActionResult.isSuccess())
+	            {
+	                fluidActionResult = FluidUtil.tryEmptyContainerAndStow(playerIn.getHeldItem(hand), drum, playerIn.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null), Integer.MAX_VALUE, playerIn, false);
+	            }
+	            
+	            if(fluidActionResult.isSuccess()) {
+	            	return true;
+	            }
+			}
 		}
 		
 		return false;

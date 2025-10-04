@@ -1,10 +1,14 @@
 package tiki.advancedlootableweapons.blocks.tileentities;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,8 +22,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -30,15 +36,20 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.TileFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
+import tiki.advancedlootableweapons.handlers.SoundHandler;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
+import tiki.advancedlootableweapons.particle.ParticleAirBubble;
 import tiki.advancedlootableweapons.recipes.DrumItemRecipe;
 import tiki.advancedlootableweapons.recipes.DrumQuenchingRecipe;
 
@@ -47,6 +58,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 	public static final int INPUT_SLOT = 0;
 	public static final int ADDITIVE_SLOT = 1;
 	public static final int OUTPUT_SLOT = 2;
+	private static final Random rand = new Random();
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 	private String customName;
 	private int progress = 0;
@@ -54,6 +66,9 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 	private IRecipe activeRecipe = null;
 	public boolean needsBubbles = false;
 	public boolean needsQuench = false;
+	
+	@SideOnly(Side.CLIENT)
+	private boolean clientHasPlayedQuenchSound = false;
 	
 	private Container tempContainer = new Container() {
 		@Override
@@ -64,8 +79,23 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 	private InventoryCrafting craft = new InventoryCrafting(tempContainer, 3, 1);
 	
 	public void FluidInteraction(World worldIn, BlockPos pos, EntityPlayer playerIn, EnumHand hand) {
-		if(this.getTank().getFluidAmount() <= 0) {
-			this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+		if(!worldIn.isRemote) {
+			if(this.getTank().getFluidAmount() <= 0) {
+				if(!this.inventory.get(ADDITIVE_SLOT).isEmpty()) {
+					EntityItem entityitem = new EntityItem(
+							worldIn, 
+							this.pos.getX() + (rand.nextFloat() * 0.8F + 0.1F), 
+							this.pos.getY() + (rand.nextFloat() * 0.8F + 0.1F), 
+							this.pos.getZ() + (rand.nextFloat() * 0.8F + 0.1F), 
+							this.inventory.get(ADDITIVE_SLOT));
+		            entityitem.motionX = rand.nextGaussian() * 0.05000000074505806D;
+		            entityitem.motionY = rand.nextGaussian() * 0.05000000074505806D + 0.20000000298023224D;
+		            entityitem.motionZ = rand.nextGaussian() * 0.05000000074505806D;
+		            worldIn.spawnEntity(entityitem);
+				}
+				this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+			}
+			this.onChanged();
 		}
 	}
 	
@@ -76,6 +106,7 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 			if(this.inventory.get(INPUT_SLOT).isEmpty()) {
 				this.inventory.set(INPUT_SLOT, activeStack);
 				playerIn.setHeldItem(hand, ItemStack.EMPTY);
+				this.onChanged();
 			}else if(this.inventory.get(ADDITIVE_SLOT).isEmpty() && !(activeStack.getItem() instanceof ItemHotToolHead)) {
 				this.inventory.set(ADDITIVE_SLOT, new ItemStack(activeStack.getItem()));
 				activeStack.shrink(1);
@@ -88,18 +119,21 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 			if(this.inventory.get(OUTPUT_SLOT) != ItemStack.EMPTY) {
 				if(playerIn.addItemStackToInventory(this.inventory.get(OUTPUT_SLOT))) {
 					this.inventory.set(OUTPUT_SLOT, ItemStack.EMPTY);
+					this.onChanged();
 				}
 			}else if(this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY) {
 				if(playerIn.addItemStackToInventory(this.inventory.get(INPUT_SLOT))) {
 					this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
 					this.progress = 0;
 					this.activeRecipe = null;
+					this.onChanged();
 				}
 			}else if(this.inventory.get(ADDITIVE_SLOT) != ItemStack.EMPTY) {
 				if(playerIn.addItemStackToInventory(this.inventory.get(ADDITIVE_SLOT))) {
 					this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
 					this.progress = 0;
 					this.activeRecipe = null;
+					this.onChanged();
 				}
 			}
 			
@@ -116,9 +150,9 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 		if(this.activeRecipe == null && this.getTank().getFluid() != null && this.inventory.get(INPUT_SLOT) != ItemStack.EMPTY && this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
 			IRecipe recipe = this.findMatchingRecipe(craft, this.getWorld());
 			
-			
 			if(recipe != null) {
 				this.activeRecipe = recipe;
+				this.progress = 0;
 			}else {
 				this.progress = 0;
 			}
@@ -229,9 +263,6 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 			compound.setString("Empty", fluidTag.getString("Empty"));
 		}
 		
-//		compound.setInteger("x", this.getPos().getX());
-//		compound.setInteger("y", this.getPos().getX());
-//		compound.setInteger("z", this.getPos().getX());
 		compound.setBoolean("bubbles", this.needsBubbles);
 		compound.setBoolean("quench", this.needsQuench);
 		compound.setInteger("progress", this.progress);
@@ -263,12 +294,9 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 	
 	//@SideOnly(Side.SERVER)
 	public void onChanged() {
-		SPacketUpdateTileEntity updatePacket = getUpdatePacket();
-		for(EntityPlayer p : this.getWorld().playerEntities) {
-			if(p instanceof EntityPlayerMP) {
-				((EntityPlayerMP)p).connection.getNetworkManager().sendPacket(updatePacket);
-			}
-		}
+		IBlockState state = this.world.getBlockState(pos);
+		this.markDirty();
+		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
 	
 	@Override
@@ -303,55 +331,120 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
 	
 	public void update()
 	{
-		boolean markChanged = false;
-		if(!this.world.isRemote && this.activeRecipe != null) {
-			if(this.activeRecipe instanceof DrumQuenchingRecipe && this.canQuench) {
-				++this.progress;
-				this.needsQuench = true;
-				markChanged = true;
-			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && !this.canQuench) {
-				Block under = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock();
-				this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || (FluidRegistry.lookupFluidForBlock(under) != null && FluidRegistry.lookupFluidForBlock(under).getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500);
-				//this.onChanged();
-			}else if(this.activeRecipe instanceof DrumItemRecipe) {
-				++this.progress;
-				this.needsBubbles = true;
-				markChanged = true;
-			}
-			
-			if(this.activeRecipe instanceof DrumItemRecipe && this.progress >= ((DrumItemRecipe)this.activeRecipe).getTime()) {
-				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
-					int activeInputCount = ((DrumItemRecipe)this.activeRecipe).getInputCount(craft);
-					int outputCount = (64 - this.inventory.get(OUTPUT_SLOT).getCount()) / this.activeRecipe.getCraftingResult(craft).getCount();
-					int inputCount = this.inventory.get(INPUT_SLOT).getCount() / activeInputCount;
-					int recipeCount = inputCount > outputCount ? outputCount : inputCount;
-					this.inventory.set(OUTPUT_SLOT, new ItemStack(this.activeRecipe.getCraftingResult(craft).getItem(), this.activeRecipe.getCraftingResult(craft).getCount() * recipeCount));
-					//System.out.println("SET OUTPUT SLOT TO " + this.inventory.get(OUTPUT_SLOT).getDisplayName() + "x" + this.inventory.get(OUTPUT_SLOT).getCount());
-					if(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount) <= 0) {
-						this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
-						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
-					}else {
-						this.inventory.get(INPUT_SLOT).setCount(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount));
-						this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+		if(!this.world.isRemote) {
+			if(this.activeRecipe != null) {
+				boolean markChanged = false;
+				if(this.activeRecipe instanceof DrumQuenchingRecipe && this.canQuench) {
+					++this.progress;
+					if(!this.needsQuench) {
+						this.needsQuench = true;
+						markChanged = true;
 					}
-					this.activeRecipe = null;
-					this.progress = 0;
+				}else if(this.activeRecipe instanceof DrumQuenchingRecipe && !this.canQuench) {
+					Block under = this.getWorld().getBlockState(this.pos.offset(EnumFacing.DOWN)).getBlock();
+					Fluid f = FluidRegistry.lookupFluidForBlock(under);
+					boolean fluid = f != null && f.getTemperature() >= FluidRegistry.LAVA.getTemperature() - 500;
+					if(this.canQuench != (under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || fluid)) {
+						this.canQuench = under == Blocks.FIRE || under == Blocks.LAVA || under == Blocks.FLOWING_LAVA || fluid;
+						markChanged = true;
+					}
+				}else if(this.activeRecipe instanceof DrumItemRecipe) {
+					++this.progress;
+					if(!this.needsBubbles) {
+						this.needsBubbles = true;
+						markChanged = true;
+					}
+				}
+				
+				if(this.progress == 6) {
+					markChanged = true;
+				}
+				
+				if(this.activeRecipe instanceof DrumItemRecipe && this.progress >= ((DrumItemRecipe)this.activeRecipe).getTime()) {
+					if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY) {
+						int activeInputCount = ((DrumItemRecipe)this.activeRecipe).getInputCount(craft);
+						int outputCount = (64 - this.inventory.get(OUTPUT_SLOT).getCount()) / this.activeRecipe.getCraftingResult(craft).getCount();
+						int inputCount = this.inventory.get(INPUT_SLOT).getCount() / activeInputCount;
+						int recipeCount = inputCount > outputCount ? outputCount : inputCount;
+						this.inventory.set(OUTPUT_SLOT, new ItemStack(this.activeRecipe.getCraftingResult(craft).getItem(), this.activeRecipe.getCraftingResult(craft).getCount() * recipeCount));
+						if(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount) <= 0) {
+							this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
+							this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+						}else {
+							this.inventory.get(INPUT_SLOT).setCount(this.inventory.get(INPUT_SLOT).getCount() - (activeInputCount * recipeCount));
+							this.inventory.set(ADDITIVE_SLOT, ItemStack.EMPTY);
+						}
+						this.activeRecipe = null;
+						this.progress = 0;
+						this.needsBubbles = false;
+						markChanged = true;
+					}
+				}else if(this.activeRecipe instanceof DrumQuenchingRecipe && this.progress >= ((DrumQuenchingRecipe)this.activeRecipe).getTime()) {
+					if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY && this.canQuench) {
+						this.inventory.set(OUTPUT_SLOT, this.activeRecipe.getCraftingResult(craft));
+						this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
+						this.activeRecipe = null;
+						this.progress = 0;
+						this.needsQuench = false;
+						markChanged = true;
+					}
+				}
+				
+				if(markChanged) {
+					this.onChanged();
+				}
+			}else {
+				boolean markChanged = false;
+				if(this.needsBubbles) {
 					this.needsBubbles = false;
 					markChanged = true;
 				}
-			}else if(this.activeRecipe instanceof DrumQuenchingRecipe && this.progress >= ((DrumQuenchingRecipe)this.activeRecipe).getTime()) {
-				if(this.inventory.get(OUTPUT_SLOT) == ItemStack.EMPTY && this.canQuench) {
-					this.inventory.set(OUTPUT_SLOT, this.activeRecipe.getCraftingResult(craft));
-					this.inventory.set(INPUT_SLOT, ItemStack.EMPTY);
-					this.activeRecipe = null;
-					this.progress = 0;
+				if(this.needsQuench) {
 					this.needsQuench = false;
 					markChanged = true;
 				}
+				
+				if(markChanged) {
+					this.onChanged();
+				}
 			}
-			
-			if(markChanged) {
-				this.onChanged();
+		}else {
+			if(this.needsBubbles) {
+				if(rand.nextFloat() >= 0.8) {
+					Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleAirBubble(
+							this.getWorld(), 
+							this.getPos().getX() + 0.25f + (rand.nextDouble() / 2d), 
+							this.getPos().getY() + 0.1875f,
+							this.getPos().getZ() + 0.25f + (rand.nextDouble() / 2d), 
+							0,  
+							0.02 + (0.02 * rand.nextDouble()), 
+							0,
+							this.getPos().getY() + 0.875));
+					if(rand.nextFloat() >= 0.8) {
+						Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleAirBubble(
+								this.getWorld(), 
+								this.getPos().getX() + 0.25 + (rand.nextDouble() / 2d), 
+								this.getPos().getY() + 0.1875, 
+								this.getPos().getZ() + 0.25 + (rand.nextDouble() / 2d), 
+								0, 
+								0.02 + (0.02 * rand.nextDouble()), 
+								0,
+								this.getPos().getY() + 0.875));
+					}
+				}
+			}else if(this.needsQuench) {
+				world.spawnParticle(
+						EnumParticleTypes.SPIT, 
+						this.getPos().getX() + 0.5 + (rand.nextDouble() - 0.5), 
+						this.getPos().getY() + 0.85 + (rand.nextDouble() - 0.5), 
+						this.getPos().getZ() + 0.5 + (rand.nextDouble() - 0.5), 
+						(rand.nextDouble() + 0.1) / 50d, 
+						rand.nextDouble() * 0.2, 
+						(rand.nextDouble() + 0.1) / 50d);
+				if(this.progress == 6 && !this.clientHasPlayedQuenchSound) {
+					world.playSound(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), SoundHandler.QUENCH, SoundCategory.BLOCKS, 0.8f, 1.0f, false);
+					this.clientHasPlayedQuenchSound = true;
+				}
 			}
 		}
 	}
@@ -482,6 +575,11 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
     IItemHandler handlerOutput = new SidedInvWrapper(this, EnumFacing.DOWN);
     IItemHandler handlerInput = new SidedInvWrapper(this, EnumFacing.UP);
 
+    @Override
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+    	return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     @Nullable
@@ -495,7 +593,10 @@ public class TileEntityDrum extends TileFluidHandler implements ITickable, ISide
         	}else {
         		return (T) handlerAdd;
         	}
+        }else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return (T) tank;
         }
         return super.getCapability(capability, facing);
     }
+    
 }

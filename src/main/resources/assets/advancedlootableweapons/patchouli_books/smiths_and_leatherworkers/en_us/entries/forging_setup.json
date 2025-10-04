@@ -60,7 +60,7 @@
 	    	"border": true
 	    }
     ],
-    "sortnum": 3,	
+    "sortnum": 3,
     "extra_recipe_mappings": 
     {
     	"advancedlootableweapons:stone_forge_hammer,advancedlootableweapons:iron_forge_hammer,advancedlootableweapons:kobold_forge_hammer": 1,
@@ -68,7 +68,7 @@
     	"advancedlootableweapons:platinum_forge_hammer,advancedlootableweapons:steel_forge_hammer,advancedlootableweapons:shadow_platinum_forge_hammer": 1,
     	"advancedlootableweapons:frost_steel_forge_hammer,advancedlootableweapons:obsidian_forge_hammer,advancedlootableweapons:crystallite_forge_hammer": 1,
     	"advancedlootableweapons:dusksteel_forge_hammer": 1,
-    	"advancedlootableweapons:block_forge,advancedlootableweapons:block_advanced_forge": 4,
+    	"advancedlootableweapons:block_forge,advancedlootableweapons:block_advanced_forge": 2,
     	"advancedlootableweapons:block_bellows,advancedlootableweapons:block_bellows_birch,advancedlootableweapons:block_bellows_spruce": 6,
     	"advancedlootableweapons:block_bellows_jungle,advancedlootableweapons:block_bellows_acacia,advancedlootableweapons:block_bellows_dark_oak": 6
     }

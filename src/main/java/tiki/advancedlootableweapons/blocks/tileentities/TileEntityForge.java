@@ -1,19 +1,26 @@
 package tiki.advancedlootableweapons.blocks.tileentities;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -28,6 +35,7 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 {
 	public static final int minTemp = 850;
 	public static final int maxTemp = 1750;
+	private static final Random rand = new Random();
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 	//private @Nonnull ItemStack fuelInventoryStack = ItemStack.EMPTY;
 	private String customName;
@@ -91,11 +99,6 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 	
 	public ResourceLocation getBlock() {
 		return this.block;
-	}
-	
-	public void bellowsInteraction() {
-		Alw.logger.debug("Activated bellows from TE forge");
-		this.increaseFrames = 60;
 	}
 	
 	@Override
@@ -185,6 +188,7 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 		this.needsFuel = compound.getBoolean("NeedsFuel");
 		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
 		this.biomeMinTemp = compound.getInteger("biomeTemp");
+		this.increaseFrames = compound.getInteger("IncreaseFrames");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -207,10 +211,16 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 		compound.setBoolean("NeedsFuel", this.needsFuel);
 		compound.setFloat("baseHeatingSpeed", this.baseHeatingSpeed);
 		compound.setInteger("biomeTemp", this.biomeMinTemp);
+		compound.setInteger("IncreaseFrames", this.increaseFrames);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), this.getUpdateTag());
 	}
 	
 	@Override
@@ -221,8 +231,25 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 	}
 	
 	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		this.handleUpdateTag(pkt.getNbtCompound());
+	}
+	
+	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
 		this.readFromNBT(tag);
+	}
+	
+	public void bellowsInteraction(BlockPos pos) {
+		//Passing in POS so I can make it an instance-based call if I make more bellows types in the future
+		this.increaseFrames = TileEntityBellows.getHeatIncreaseTimeInTicks();
+		this.onChanged();
+	}
+	
+	public void onChanged() {
+		IBlockState state = this.world.getBlockState(pos);
+		this.markDirty();
+		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
 	
 	@Override
@@ -277,11 +304,28 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 			}else if(currentTemp < maxTemp && increaseFrames > 0) {
 				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER * this.airflowMultiplier);
 				this.increaseFrames--;
+				if(this.increaseFrames <= 0) {
+					this.onChanged();
+				}
 			}else {
 				this.increaseFrames = 0;
+				this.onChanged();
 			}
 			if(!this.inventory.get(0).isEmpty() && canSmelt()) {
 				this.smeltItem();
+			}
+		}else {//Change Drum to render particles in the TE not the TESR please :(
+			if(this.increaseFrames > 0 && rand.nextDouble() < 0.4) {
+		        this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, 
+		        		this.pos.getX() + 0.5 + (rand.nextDouble()-0.5) * (rand.nextDouble() * 8.0D / 16.0D), 
+		        		this.pos.getY() + ((0.2 + rand.nextDouble()) * 6.0D / 16.0D), 
+		        		this.pos.getZ() + 0.5 + (rand.nextDouble()-0.5) * (rand.nextDouble() * 8.0D / 16.0D), 
+		        		0.00D, 0.01D, 0.00D);
+		        this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, 
+		        		this.pos.getX() + 0.5 + (rand.nextDouble()-0.5) * (rand.nextDouble() * 8.0D / 16.0D), 
+		        		this.pos.getY() + ((0.2 + rand.nextDouble()) * 6.0D / 16.0D), 
+		        		this.pos.getZ() + 0.5 + (rand.nextDouble()-0.5) * (rand.nextDouble() * 8.0D / 16.0D), 
+		        		0.00D, 0.01D, 0.00D);
 			}
 		}
 	}

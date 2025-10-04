@@ -907,7 +907,7 @@ sound.shadow.drop=Shadows Condensing
 sound.sharpening_stone.use=Fine Ginding of Metal
 sound.jaw_crusher.use=Crunching Rocks
 sound.bellows.use=Air Puff
-sound.quench=Evaporating Water
+sound.quench=Hissing Water
 
 
 alw.weapon.dagger.name=Dagger
@@ -982,6 +982,7 @@ alw.colors.shine=Shine:
 alw.hold=Hold
 alw.effectiveness.info.name=for Effectiveness Information
 alw.colors.info.name=for Color Information
+alw.wood.title=Wood:
 
 
 alw.forge.usable_mat_fuel.name=Usable Materials and Fuels

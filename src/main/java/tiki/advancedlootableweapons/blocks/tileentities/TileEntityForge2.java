@@ -1,24 +1,33 @@
 package tiki.advancedlootableweapons.blocks.tileentities;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import tiki.advancedlootableweapons.Alw;
+import tiki.advancedlootableweapons.blocks.BlockForge2;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
@@ -28,6 +37,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 {
 	public static final int minTemp = 850;
 	public static final int maxTemp = 2250;
+	private static final Random rand = new Random();
 	//private TileEntityForge2 mainTE = null;
 	private NonNullList<ItemStack> inventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
 	//private @Nonnull ItemStack fuelInventoryStack = ItemStack.EMPTY;
@@ -108,11 +118,6 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 	
 	public ResourceLocation getBlock() {
 		return this.block;
-	}
-	
-	public void bellowsInteraction() {
-		Alw.logger.debug("Activated bellows from TE forge 2");
-		this.increaseFrames = 60;
 	}
 	
 	public double getCurrentTemp() {
@@ -212,6 +217,7 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 		this.needsFuel = compound.getBoolean("NeedsFuel");
 		this.baseHeatingSpeed = compound.getFloat("baseHeatingSpeed");
 		this.biomeMinTemp = compound.getInteger("biomeTemp");
+		this.increaseFrames = compound.getInteger("IncreaseFrames");
 		
 		if(compound.hasKey("CustomName", 8)) this.setCustomName(compound.getString("CustomName"));
 	}
@@ -237,10 +243,16 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 		compound.setBoolean("NeedsFuel", this.needsFuel);
 		compound.setFloat("baseHeatingSpeed", this.baseHeatingSpeed);
 		compound.setInteger("biomeTemp", this.biomeMinTemp);
+		compound.setInteger("IncreaseFrames", this.increaseFrames);
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		
 		if(this.hasCustomName()) compound.setString("CustomName", this.customName);
 		return compound;
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.getPos(), this.getBlockMetadata(), this.getUpdateTag());
 	}
 	
 	@Override
@@ -251,8 +263,25 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 	}
 	
 	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		this.handleUpdateTag(pkt.getNbtCompound());
+	}
+	
+	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
 		this.readFromNBT(tag);
+	}
+	
+	public void bellowsInteraction(BlockPos pos) {
+		//Passing in POS so I can make it an instance-based call if I make more bellows types in the future
+		this.increaseFrames = TileEntityBellows.getHeatIncreaseTimeInTicks();
+		this.onChanged();
+	}
+	
+	public void onChanged() {
+		IBlockState state = this.world.getBlockState(pos);
+		this.markDirty();
+		this.world.notifyBlockUpdate(pos, state, state, 3);
 	}
 	
 	@Override
@@ -305,10 +334,33 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 			}else if(currentTemp < maxTemp && this.increaseFrames > 0) {
 				this.currentTemp += (1.078D * ConfigHandler.FORGE_TEMP_INCREASE_MULTIPLIER);
 				this.increaseFrames--;
+				if(this.increaseFrames == 0) {
+					this.onChanged();
+				}
 			}else {
 				this.increaseFrames = 0;
+				this.onChanged();
 			}
 			this.smeltItem();
+		}else {
+			if(this.increaseFrames > 0 && rand.nextDouble() < 0.4) {
+				//This makes the particles spawn in front of the block
+//				Vec3i forward = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).getDirectionVec();
+//				Vec3i rot = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).rotateY().getDirectionVec();
+//				
+//				double d0 = this.pos.getX() + forward.getX() + (0.5 * rot.getX()) + (rot.getX() * (rand.nextDouble()-0.5) * 8.0D / 16.0D);
+//		        double d1 = this.pos.getY() + ((1.2 + rand.nextDouble()) * 6.0D / 16.0D);
+//		        double d2 = this.pos.getZ() + forward.getZ() + (0.5 * rot.getZ()) + (rot.getX() * (rand.nextDouble()-0.5) * 8.0D / 16.0D);
+			
+				Vec3i rot = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).rotateY().getDirectionVec();
+				
+				double d0 = this.pos.getX() + (0.5 * rot.getX()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
+		        double d1 = this.pos.getY() + ((2.3 + rand.nextDouble()) * 6.0D / 16.0D);
+		        double d2 = this.pos.getZ() + (0.5 * rot.getZ()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
+		        
+		        this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.00D, 0.01D, 0.00D);
+		        this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.00D, 0.01D, 0.00D);
+			}
 		}
 	}
 	

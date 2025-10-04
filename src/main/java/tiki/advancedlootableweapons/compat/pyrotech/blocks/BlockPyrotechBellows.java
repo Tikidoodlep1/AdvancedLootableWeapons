@@ -48,11 +48,11 @@ public class BlockPyrotechBellows extends BlockBellows {
 				te = worldIn.getTileEntity(extra.getMainPos(worldIn, pos, placeholderState));
 			}
 			if(te instanceof TileEntityForge) {
-				((TileEntityForge)te).bellowsInteraction();				
+				((TileEntityForge)te).bellowsInteraction(pos);				
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}else if(te instanceof TileEntityForge2) {
-				((TileEntityForge2)te).bellowsInteraction();								
+				((TileEntityForge2)te).bellowsInteraction(pos);								
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}

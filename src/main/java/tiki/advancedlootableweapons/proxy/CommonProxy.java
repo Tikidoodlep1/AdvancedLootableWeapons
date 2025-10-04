@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -19,7 +20,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.oredict.OreDictionary;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
@@ -53,7 +53,11 @@ public class CommonProxy {
 	
 	public void registerTESRs() {}
 	
+	public void registerTEISRs() {}
+	
 	public void onModelBake(final ModelBakeEvent event) {}
+	
+	public void onModelRegister(final ModelRegistryEvent event) {}
 	
 	public void onTextureStitch(final TextureStitchEvent.Pre event) {}
 	
@@ -70,28 +74,19 @@ public class CommonProxy {
 	}
 	
 	public void onBlockAttemptBreak(final LeftClickBlock event) {
-		if(event.getSide() == Side.SERVER) {
-			BlockPos blockPos = event.getPos();
-			Block block = event.getWorld().getBlockState(blockPos).getBlock();
-			if(OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).contains(new ItemStack(block))) {
-				EntityPlayer player = event.getEntityPlayer();
-				if(OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).contains(player.inventory.getCurrentItem())) {
+		BlockPos blockPos = event.getPos();
+		Block block = event.getWorld().getBlockState(blockPos).getBlock();
+		
+		if(OreDictionaryCompat.anvilOres.contains(new ItemStack(block).getItem())) {
+			EntityPlayer player = event.getEntityPlayer();
+			if(OreDictionaryCompat.hammerOres.contains(player.inventory.getCurrentItem().getItem())) {
+				if(event.getSide() == Side.SERVER) {
 					player.openGui(Alw.instance, ModInfo.GUI_FORGE_WEAPON, player.getEntityWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ());
-					event.setCanceled(true);
 				}
+				event.setCanceled(true);
 			}
 		}
 		
-		if(event.getSide() == Side.CLIENT) {
-			BlockPos blockPos = event.getPos();
-			Block block = event.getWorld().getBlockState(blockPos).getBlock();
-			if(OreDictionary.getOres(OreDictionaryCompat.VALID_ANVIL).contains(new ItemStack(block))) {
-				EntityPlayer player = event.getEntityPlayer();
-				if(OreDictionary.getOres(OreDictionaryCompat.VALID_FORGE_HAMMER).contains(player.inventory.getCurrentItem())) {
-					event.setCanceled(true); // Cancel event but don't open GUI so the GUI can correctly pick the anvil block instead of AIR!
-				}
-			}
-		}
 	}
 
 	public void onBlockDrops(final HarvestDropsEvent event) {

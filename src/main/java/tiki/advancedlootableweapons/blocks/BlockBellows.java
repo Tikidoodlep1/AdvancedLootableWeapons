@@ -1,9 +1,7 @@
 package tiki.advancedlootableweapons.blocks;
 
+import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import betterwithmods.common.BWMBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
@@ -14,22 +12,25 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import tiki.advancedlootableweapons.Alw;
@@ -45,7 +46,6 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;	
 	public static final AxisAlignedBB BELLOWS_AABB_NS = new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 0.4D, 1.0D);
 	public static final AxisAlignedBB BELLOWS_AABB_EW = new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 0.4D, 0.75D);
-	private final Timer t = new Timer("ALWCoolDowns");
 	
 	public BlockBellows(String name) {
 		super(name, Material.WOOD, "axe", 0, true);
@@ -55,20 +55,17 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 		this.translucent = true;
 	}
 	
-//	@Override
-//	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-//		super.addInformation(stack, player, tooltip, advanced);
-//		
-//		if(stack.hasTagCompound()) {
-//			NBTTagCompound tag = stack.getTagCompound();
-//			if(tag.hasKey("wood")) {
-//				ItemStack wood = new ItemStack(tag.getCompoundTag("wood"));
-//				if(!wood.isEmpty()) {
-//					tooltip.add(wood.getDisplayName());
-//				}
-//			}
-//		}
-//	}
+	@Override
+	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
+		super.addInformation(stack, player, tooltip, advanced);
+		
+		if(stack.hasTagCompound()) {
+			NBTTagCompound tag = stack.getTagCompound();
+			if(tag.hasKey("Wood")) {
+				tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("alw.wood.title") + TextFormatting.WHITE + " " + tag.getString("Wood"));
+			}
+		}
+	}
 	
 	@Override
 	public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, SpawnPlacementType type) {
@@ -124,10 +121,8 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote) {
-			Alw.logger.info("Activating bellows server side");
 			TileEntity bte = worldIn.getTileEntity(pos);
 			if(bte instanceof TileEntityBellows) {
-				Alw.logger.info("Starting Bellows Animation");
 				((TileEntityBellows)bte).startAnimating();
 			}
 			TileEntity te = worldIn.getTileEntity(pos.offset(state.getValue(FACING)));
@@ -137,11 +132,11 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 				te = worldIn.getTileEntity(extra.getMainPos(worldIn, pos, placeholderState));
 			}
 			if(te instanceof TileEntityForge) {
-				((TileEntityForge)te).bellowsInteraction();				
+				((TileEntityForge)te).bellowsInteraction(pos);
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}else if(te instanceof TileEntityForge2) {
-				((TileEntityForge2)te).bellowsInteraction();								
+				((TileEntityForge2)te).bellowsInteraction(pos);
 				playerIn.getFoodStats().addExhaustion(ConfigHandler.BELLOWS_EXHAUSTION);
 				return true;
 			}
@@ -165,19 +160,7 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 			}
 		}
 		else {
-			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.0F, 1.0F);
-			t.schedule(new TimerTask() {
-				@Override
-				public void run() {
-					Random rand = new Random();
-					double d0 = pos.offset(state.getValue(FACING)).getX() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-			        double d1 = pos.offset(state.getValue(FACING)).getY() + 0.8D + rand.nextDouble() * 6.0D / 16.0D;
-			        double d2 = pos.offset(state.getValue(FACING)).getZ() + 0.3D + rand.nextDouble() * 6.0D / 16.0D;
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0 + (rand.nextDouble() / 2), d1, d2, 0.0D, 0.0D, 0.0D);
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-				}
-			}, 500);
-			
+			worldIn.playSound(playerIn, pos, SoundHandler.BELLOWS, SoundCategory.BLOCKS, 6.5F, 1.0F);
 		}
 		
 		return true;
@@ -212,6 +195,12 @@ public class BlockBellows extends BlockBase implements ITileEntityProvider {
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) 
 	{
 		worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing()), 2);
+		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("WoodTexture")) {
+			TileEntity te = worldIn.getTileEntity(pos);
+			if(te instanceof TileEntityBellows) {
+				((TileEntityBellows)te).setClientTexture(stack.getTagCompound().getString("WoodTexture"));
+			}
+		}
 	}
 	
 	@Override

@@ -82,6 +82,11 @@ public class BlockForge2 extends Block implements IHasModel
     }
 	
 	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) 
 	{
 		return Item.getItemFromBlock(this);

@@ -10,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tiki.advancedlootableweapons.Alw;
 
 public class TileEntityBellows extends TileEntity implements ITickable {
 
@@ -30,6 +29,8 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	//==========================================================================================================================================================
 	
 	@SideOnly(Side.CLIENT)
+	private String clientWoodTexture = "";
+	@SideOnly(Side.CLIENT)
 	private float clientTotalTicks = 0;
 	@SideOnly(Side.CLIENT)
 	private float clientPrevPartialTicks = 0f;
@@ -41,7 +42,6 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		if(animating) {
-			Alw.logger.info("Tile Entity is currently animating!");
 			if(currentAnimationTick >= animationTicks) {
 				if(!animationQueued) {
 					animating = false;
@@ -53,12 +53,10 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 				this.onChanged();
 			}
 			currentAnimationTick++;
-			Alw.logger.info("Current animation tick => " + currentAnimationTick + ", Client Total Ticks => " + clientTotalTicks);
 		}
 	}
 	
 	public void startAnimating() {
-		Alw.logger.debug("Tile Entity recieved call to start bellows animation!");
 		if(animating && !animationQueued) {
 			animationQueued = true;
 			this.onChanged();
@@ -95,7 +93,6 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	}
 	
 	public void onChanged() {
-		Alw.logger.info("TileEntityBellows#onChanged() called! Animating => " + this.animating);
 		IBlockState state = this.world.getBlockState(pos);
 		this.markDirty();
 		this.world.notifyBlockUpdate(pos, state, state, 3);
@@ -108,15 +105,17 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 		this.animating = compound.getBoolean("animating");
 		this.animationQueued = compound.getBoolean("animationQueued");
 		this.currentAnimationTick = compound.getInteger("animationProgress");
+		this.clientWoodTexture = compound.getString("woodTexture");
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
 		super.writeToNBT(compound);
-		compound.setBoolean("animating", animating);
-		compound.setBoolean("animationQueued", animationQueued);
-		compound.setInteger("animationProgress", currentAnimationTick);
+		compound.setBoolean("animating", this.animating);
+		compound.setBoolean("animationQueued", this.animationQueued);
+		compound.setInteger("animationProgress", this.currentAnimationTick);
+		compound.setString("woodTexture", this.clientWoodTexture);
 		
 		return compound;
 	}
@@ -134,9 +133,10 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	public NBTTagCompound getUpdateTag() {
 		NBTTagCompound compound = super.getUpdateTag();
 		
-		compound.setBoolean("animating", animating);
-		compound.setBoolean("animationQueued", animationQueued);
-		compound.setInteger("animationProgress", currentAnimationTick);
+		compound.setBoolean("animating", this.animating);
+		compound.setBoolean("animationQueued", this.animationQueued);
+		compound.setInteger("animationProgress", this.currentAnimationTick);
+		compound.setString("woodTexture", this.clientWoodTexture);
 		
 		return compound;
 	}
@@ -150,6 +150,7 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 		this.animating = compound.getBoolean("animating");
 		this.animationQueued = compound.getBoolean("animationQueued");
 		this.currentAnimationTick = compound.getInteger("animationProgress");
+		this.clientWoodTexture = compound.getString("woodTexture");
 		
 		super.handleUpdateTag(compound);
 	}
@@ -170,11 +171,26 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void checkTicks(float partialTicks) {
+	public void clientStoppedAnimating() {
+		this.clientTotalTicks = 0f;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void clientCheckTicks(float partialTicks) {
 		if(partialTicks < this.clientPrevPartialTicks) {
 			this.clientTotalTicks++;
 		}
 		this.clientPrevPartialTicks = partialTicks;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public void setClientTexture(String texture) {
+		this.clientWoodTexture = texture;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public String getClientTexture() {
+		return this.clientWoodTexture;
 	}
 
 }

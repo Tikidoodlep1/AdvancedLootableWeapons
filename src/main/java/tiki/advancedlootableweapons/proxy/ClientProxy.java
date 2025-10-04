@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -35,8 +36,10 @@ import tiki.advancedlootableweapons.compat.crafttweaker.ZenDynamicAlwResources;
 import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.handlers.RenderHandler;
+import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
+import tiki.advancedlootableweapons.items.teisr.BellowsTEISR;
 import tiki.advancedlootableweapons.tools.ToolForgeHammer;
 import tiki.advancedlootableweapons.tools.ToolSlashSword;
 import tiki.advancedlootableweapons.tools.ToolStabSword;
@@ -221,13 +224,20 @@ public class ClientProxy extends CommonProxy {
 		
 	}
 	
+//	@Override
+//	public void onModelRegister(final ModelRegistryEvent event) {
+//		
+//	}
+	
 	@Override
-	public void onModelBake(ModelBakeEvent event) {
+	public void onModelBake(final ModelBakeEvent event) {
 		try {
 			ResourceLocation bellowsTop = new ResourceLocation(ModInfo.ID, "block/block_bellows_top");
 			BellowsTESR.topModel = ModelLoaderRegistry.getModel(bellowsTop).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(bellowsTop.toString()));
 			ResourceLocation bellowsLeather = new ResourceLocation(ModInfo.ID, "block/block_bellows_leather");
 			BellowsTESR.leatherModel = ModelLoaderRegistry.getModel(bellowsLeather).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(bellowsLeather.toString()));
+			ResourceLocation bellowsBottom = new ResourceLocation(ModInfo.ID, "block/block_bellows_base");
+			BellowsTESR.bottomModel = ModelLoaderRegistry.getModel(bellowsBottom).bake(TRSRTransformation.identity(), DefaultVertexFormats.BLOCK, location -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(bellowsTop.toString()));
 		} catch (Exception e) {
 			Alw.logger.error(e);
 		}
@@ -235,7 +245,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void onTextureStitch(TextureStitchEvent.Pre event) {
-		
+		event.getMap().registerSprite(new ResourceLocation(ModInfo.ID, "blocks/bellows_leather"));
 	}
 	
 	@Override
@@ -263,6 +273,15 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDrum.class, new DrumTESR());
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMill.class, new MillTESR());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new BellowsTESR());
+	}
+	
+	@Override
+	public void registerTEISRs() {
+		Item bellows = Item.getItemFromBlock(BlockInit.bellows);
+		if(bellows != null && bellows instanceof ItemBlock) {
+			Alw.logger.info("Registering Bellows TEISR");
+			((ItemBlock)bellows).setTileEntityItemStackRenderer(new BellowsTEISR());
+		}
 	}
 	
 	public void onTooltip(ItemTooltipEvent event) {

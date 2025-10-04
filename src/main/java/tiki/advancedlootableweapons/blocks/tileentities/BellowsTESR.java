@@ -8,9 +8,12 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.model.animation.FastTESR;
 import tiki.advancedlootableweapons.Alw;
+import tiki.advancedlootableweapons.ModInfo;
+import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.util.RenderHelper;
 import tiki.advancedlootableweapons.util.UnpackedModel;
 import tiki.advancedlootableweapons.util.UnpackedModel.UnpackedFace;
@@ -19,13 +22,19 @@ import tiki.advancedlootableweapons.util.UnpackedModel.UnpackedVertex;
 public class BellowsTESR extends FastTESR<TileEntityBellows> {
 
 	//CONSTANTS
+	public static String error = "";
 	public static IBakedModel topModel = null;
 	public static IBakedModel leatherModel = null;
+	public static IBakedModel bottomModel = null;
 	private static UnpackedModel model = null;
+	private static TextureMap textureMapBlocks = null;
+	//private static final TextureAtlasSprite bellows = textureMapBlocks.getAtlasSprite("advancedlootableweapons:blocks/bellows");
+	private static TextureAtlasSprite leather = null;
+	private static TextureAtlasSprite defaultPlank = null;
+	private static TextureAtlasSprite nbtPlank = null;
 	
 	//FUNCTIONAL
 	//Stateless - Calculated before use
-	private static int light = 0;
 	private static int skylight = 0;
 	private static int blocklight = 0;
 	
@@ -41,63 +50,41 @@ public class BellowsTESR extends FastTESR<TileEntityBellows> {
 			@Nonnull BufferBuilder buffer
 		) {
 		
-		if(topModel == null) {
-			Alw.logger.error("Top Model is null in BellowsTESR. If you're seeing this, please report it to the mod author.");
-			//return;
+		if(te.getClientTexture() != "") {
+			init(te.getWorld().isBlockLoaded(te.getPos()) ? te.getWorld().getCombinedLight(te.getPos(), 0) : 0, te.getClientTexture());
+		}else {
+			init(te.getWorld().isBlockLoaded(te.getPos()) ? te.getWorld().getCombinedLight(te.getPos(), 0) : 0, "");
 		}
 		
-		if(leatherModel == null) {
-			Alw.logger.error("Top Model is null in BellowsTESR. If you're seeing this, please report it to the mod author.");
-			//return;
-		}
-		
-		if(model == null) {
-			IBlockState state = te.getWorld().getBlockState(te.getPos());
-			IBakedModel bottomModel = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
-			model = new UnpackedModel(
-					new IBakedModel[]{bottomModel, leatherModel, topModel}, 
-					new IBlockState[]{state, state, state}
-				);
-		}
-		
-		TextureMap textureMapBlocks = Minecraft.getMinecraft().getTextureMapBlocks();
-		TextureAtlasSprite bellows = textureMapBlocks.getAtlasSprite("advancedlootableweapons:blocks/bellows");
-		//TextureAtlasSprite plank = textureMapBlocks.getAtlasSprite("minecraft:planks_oak");
 		
 		float animationProgress = 0f;
-		float totalTicks = te.getClientTotalTicks();
+		float totalTicks = 0;
 		boolean animationQueued = false;
 		
-		//Alw.logger.info("Te => {}, Is Animating => {}, Should Animate => {}, Ticks W/Out Partial => {}", te.getPos(), te.isAnimating(), te.isAnimating() && (animationQueued || (totalTicks + partialTicks) <= TileEntityBellows.animationTicks), totalTicks);
-		
 		if(te.isAnimating()) {
-			te.checkTicks(partialTicks);
+			te.clientCheckTicks(partialTicks);
+			totalTicks = te.getClientTotalTicks();
+			
 			animationQueued = te.hasAnimationQueued();
 			animationProgress = (totalTicks + partialTicks) % TileEntityBellows.animationTicks / TileEntityBellows.animationTicks;
-		}else if(totalTicks > 0 || animationProgress > 0) {
-			//If the te isn't animating, we don't care about animations performed any more until the next animation, so set it to 0
-			Alw.logger.info("No longer animating, settting ticks and progress to 0.");
-			te.setClientTotalTicks(0f);
+		}else {
+			te.clientStoppedAnimating();
 		}
 		
 		boolean shouldAnimate = te.isAnimating() && (animationQueued || (totalTicks + partialTicks) <= TileEntityBellows.animationTicks);
-				
-		light = te.getWorld().isBlockLoaded(te.getPos()) ? te.getWorld().getCombinedLight(te.getPos(), 0) : 0;
-		skylight = (light >> 16) & 0xFFFF;
-		blocklight = light & 0xFFFF;
 		
 		buffer.setTranslation(x, y, z);
 		
 		//Bottom panel of the bellows
 		for(UnpackedFace face : model.getFaces(0)) {
 			for(UnpackedVertex v : face.getVertices()) {
-				v.getPos().rotateEnumFacingAroundPivot(te.getFacing());
+				v.getPos().rotateEnumFacingAroundPivot(0.5f, 0f, 0.5f, te.getFacing().rotateYCCW());
 				if(v.getPos().hasPendingRotation()) {
 					v.getPos().applyRotation();
 				}
 			}
 			
-			RenderHelper.addFaceToBuffer(buffer, face, bellows, skylight, blocklight);
+			RenderHelper.addFaceToBuffer(buffer, face, nbtPlank.getIconName() == "missingno" ? defaultPlank : nbtPlank, skylight, blocklight);
 			
 			for(UnpackedVertex v : face.getVertices()) {
 				if(v.getPos().hasRotation() || v.getPos().hasPendingRotation() || v.getPos().isScaled()) {
@@ -106,14 +93,14 @@ public class BellowsTESR extends FastTESR<TileEntityBellows> {
 			}
 		}
 		
-		float targetRotation = animationProgress > 0.3f ? 0f : 12.5f;
-		float startRotation = animationProgress > 0.3f ? 12.5f : 0f;
+		float targetRotation = animationProgress > 0.3f ? 0f : 10f;
+		float startRotation = animationProgress > 0.3f ? 10f : 0f;
 		
-		float targetScale = animationProgress > 0.3f ? 1f : 1.15f;
-		float startScale = animationProgress > 0.3f ? 1.15f : 1f;
+//		float targetScale = animationProgress > 0.3f ? 1f : 1.15f;
+//		float startScale = animationProgress > 0.3f ? 1.15f : 1f;
 		
-		float targetScaleY = animationProgress > 0.3f ? 1f : 0.5f;
-		float startScaleY = animationProgress > 0.3f ? 0.5f : 1f;
+		float targetScaleY = animationProgress > 0.3f ? 1f : 0.45f;
+		float startScaleY = animationProgress > 0.3f ? 0.45f : 1f;
 		
 		float frameRotation = 0f;
 		float frameScale = 1f;
@@ -122,32 +109,33 @@ public class BellowsTESR extends FastTESR<TileEntityBellows> {
 		if(shouldAnimate) {
 			if(animationProgress < 0.3) {
 				frameRotation = (float)MathHelper.clampedLerp(startRotation, targetRotation, RenderHelper.mapfZeroToOne(0f, 0.3f, animationProgress));
-				frameScale = (float)MathHelper.clampedLerp(startScale, targetScale, RenderHelper.mapfZeroToOne(0f, 0.3f, animationProgress));
+//				frameScale = (float)MathHelper.clampedLerp(startScale, targetScale, RenderHelper.mapfZeroToOne(0f, 0.3f, animationProgress));
 				frameScaleY = (float)MathHelper.clampedLerp(startScaleY, targetScaleY, RenderHelper.mapfZeroToOne(0f, 0.3f, animationProgress));
 			}else {
 				frameRotation = (float)MathHelper.clampedLerp(startRotation, targetRotation, RenderHelper.mapfZeroToOne(0.3f, 1f, animationProgress));
-				frameScale = (float)MathHelper.clampedLerp(startScale, targetScale, RenderHelper.mapfZeroToOne(0.3f, 1f, animationProgress));
+//				frameScale = (float)MathHelper.clampedLerp(startScale, targetScale, RenderHelper.mapfZeroToOne(0.3f, 1f, animationProgress));
 				frameScaleY = (float)MathHelper.clampedLerp(startScaleY, targetScaleY, RenderHelper.mapfZeroToOne(0.3f, 1f, animationProgress));
 			}
 			
-			Alw.logger.info("Animation Progress => {}, Target Rotation => {}, Frame Rotation => {}, Total Ticks => {}", animationProgress, targetRotation, frameRotation, totalTicks + partialTicks);
-			Alw.logger.info("Target Scale X/Z => {}, Frame Scale X/Z => {}, Target Scale Y => {}, Frame Scale Y => {}", targetScale, frameScale, targetScaleY, frameScaleY);
-
+			//Alw.logger.debug("Animation Progress => {}, Target Rotation => {}, Frame Rotation => {}, Total Ticks => {}, TE Facing => " + te.getFacing() + " at POS => " + te.getPos(), animationProgress, targetRotation, frameRotation, totalTicks + partialTicks);
+			//Alw.logger.debug("Target Scale X/Z => {}, Frame Scale X/Z => {}, Target Scale Y => {}, Frame Scale Y => {}", targetScale, frameScale, targetScaleY, frameScaleY);
 		}
 		
 		//Leather part of the bellows
 		for(UnpackedFace face : model.getFaces(1)) {
 			for(UnpackedVertex v : face.getVertices()) {
 				if(shouldAnimate) {
-					v.getPos().scaleAroundPivot(frameScale, frameScaleY, frameScale, 7.3f/16f, 0f, 7.5f/16f); //Not working? Rotation is off too
+					v.getPos().scaleAroundPivot(frameScale, frameScaleY, frameScale, 7.3f/16f, 0f, 7.5f/16f);
 				}
-				v.getPos().rotateEnumFacingAroundPivot(te.getFacing());
+				
+				v.getPos().rotateEnumFacingAroundPivot(0.5f, 0f, 0.5f, te.getFacing().rotateYCCW());
+				
 				if(v.getPos().hasPendingRotation()) {
 					v.getPos().applyRotation();
 				}
 			}
 			
-			RenderHelper.addFaceToBuffer(buffer, face, bellows, skylight, blocklight);
+			RenderHelper.addFaceToBuffer(buffer, face, leather, skylight, blocklight);
 			
 			for(UnpackedVertex v : face.getVertices()) {
 				if(v.getPos().hasRotation() || v.getPos().hasPendingRotation() || v.getPos().isScaled()) {
@@ -158,18 +146,20 @@ public class BellowsTESR extends FastTESR<TileEntityBellows> {
 		
 		//Top Panel of the bellows
 		for(UnpackedFace face : model.getFaces(2)) {
-			
 			for(UnpackedVertex v : face.getVertices()) {
 				if(shouldAnimate) {
-					v.getPos().rotateZ(frameRotation);
+					v.getPos().rotateZAroundPivot(-1f/16f, 0f, 8f/16f, frameRotation);
+					v.getPos().applyRotation();
 				}
-				v.getPos().rotateEnumFacingAroundPivot(te.getFacing());
+				
+				v.getPos().rotateEnumFacingAroundPivot(0.5f, 0f, 0.5f, te.getFacing().rotateYCCW());
+				
 				if(v.getPos().hasPendingRotation()) {
 					v.getPos().applyRotation();
 				}
 			}
 			
-			RenderHelper.addFaceToBuffer(buffer, face, bellows, skylight, blocklight);
+			RenderHelper.addFaceToBuffer(buffer, face, nbtPlank.getIconName() == "missingno" ? defaultPlank : nbtPlank, skylight, blocklight);
 			
 			for(UnpackedVertex v : face.getVertices()) {
 				if(v.getPos().hasRotation() || v.getPos().hasPendingRotation() || v.getPos().isScaled()) {
@@ -178,4 +168,82 @@ public class BellowsTESR extends FastTESR<TileEntityBellows> {
 			}
 		}
 	}
+	
+	public static void renderItemStack(ItemStack stack, @Nonnull BufferBuilder buffer) {
+		
+		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("WoodTexture")) {
+			init(0xF00000, stack.getTagCompound().getString("WoodTexture"));
+		}else {
+			init(0xF00000, "");
+		}
+		
+		//Bottom panel of the bellows
+		for(UnpackedFace face : model.getFaces(0)) {
+			RenderHelper.addFaceToBuffer(buffer, face, nbtPlank.getIconName() == "missingno" ? defaultPlank : nbtPlank, skylight, blocklight);
+		}
+		
+		//Leather part of the bellows
+		for(UnpackedFace face : model.getFaces(1)) {
+			RenderHelper.addFaceToBuffer(buffer, face, leather, skylight, blocklight);
+		}
+		
+		//Top Panel of the bellows
+		for(UnpackedFace face : model.getFaces(2)) {
+			RenderHelper.addFaceToBuffer(buffer, face, nbtPlank.getIconName() == "missingno" ? defaultPlank : nbtPlank, skylight, blocklight);
+		}
+	}
+	
+	public static void init(int light, String nbtTexture) {
+		error = "";
+		
+		if(topModel == null) {
+			error = "Top Model";
+		}
+		
+		if(leatherModel == null) {
+			if(error != "") {
+				error += ", ";
+			}
+			error += "Leather Model";
+		}
+		
+		if(bottomModel == null) {
+			if(error != "") {
+				error += ", ";
+			}
+			error += "Bottom Model";
+		}
+		
+		if(error != "") {
+			Alw.logger.error(error + " == null in BellowsTESR. If you're seeing this, please report it to the mod author along with a screenshot or log of this error."
+					+ "\n---- Version => " + ModInfo.VER);
+			return;
+		}
+		
+		if(textureMapBlocks == null) {
+			textureMapBlocks = Minecraft.getMinecraft().getTextureMapBlocks();
+		}
+		
+		if(leather == null || leather.getIconName() == "missingno") {
+			leather = textureMapBlocks.getAtlasSprite("advancedlootableweapons:blocks/bellows_leather");
+		}
+		
+		if(defaultPlank == null || defaultPlank.getIconName() == "missingno") {
+			defaultPlank = textureMapBlocks.getAtlasSprite("minecraft:blocks/planks_oak");
+		}
+		
+		nbtPlank = textureMapBlocks.getAtlasSprite(nbtTexture);
+		
+		if(model == null) {
+			IBlockState state = BlockInit.bellows.getDefaultState();
+			model = new UnpackedModel(
+					new IBakedModel[]{bottomModel, leatherModel, topModel}, 
+					new IBlockState[]{state, state, state}
+				);
+		}
+		
+		skylight = (light >> 16) & 0xFFFF;
+		blocklight = light & 0xFFFF;	
+	}
+	
 }

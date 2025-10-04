@@ -24,6 +24,7 @@ public class RotatablePos {
 		this.readOnlyZ = z;
 		this.rot = new Quaternion();
 		
+		//Pivot coordinates
 		this.px = 0f;
 		this.py = 0f;
 		this.pz = 0f;
@@ -134,8 +135,8 @@ public class RotatablePos {
 		this.rotateAxisAngle(x, y, z, angleDegrees);
 	}
 	
-	public void rotateEnumFacingAroundPivot(EnumFacing facing) {
-		this.rotateYAroundPivot(facing.getDirectionVec().getX(), facing.getDirectionVec().getY(), facing.getDirectionVec().getZ(), facing.getHorizontalAngle());
+	public void rotateEnumFacingAroundPivot(float px, float py, float pz, EnumFacing facing) {
+		this.rotateYAroundPivot(px, py, pz, facing.getHorizontalAngle());
 	}
 	
 	public void rotateXAroundPivot(float px, float py, float pz, float angleDegrees) {
@@ -219,7 +220,7 @@ public class RotatablePos {
 		
 		this.rot.normalise(n);
 		
-		q.set(this.readOnlyX, this.readOnlyY, this.readOnlyZ, 0f);
+		q.set(this.x, this.y, this.z, 0f);
 		
 		n.negate(c);
 		

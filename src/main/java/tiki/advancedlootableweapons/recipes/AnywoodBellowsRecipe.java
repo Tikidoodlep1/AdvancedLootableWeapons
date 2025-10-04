@@ -13,6 +13,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -27,9 +31,9 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.common.crafting.CraftingHelper.ShapedPrimer;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import tiki.advancedlootableweapons.Alw;
 
 public class AnywoodBellowsRecipe extends ShapedOreRecipe {
-	
 
 	public AnywoodBellowsRecipe(ResourceLocation group, ItemStack result, ShapedPrimer recipe) {
 		super(group, result, recipe);
@@ -44,20 +48,23 @@ public class AnywoodBellowsRecipe extends ShapedOreRecipe {
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
 		ItemStack result = this.getRecipeOutput();
-		ItemStack wood = ItemStack.EMPTY;
 		
-		if(isWood(inv.getStackInSlot(7))) {
-			if(wood.isEmpty()) {
-				wood = inv.getStackInSlot(7);
+		for(int i = 0; i < inv.getSizeInventory(); i++) {
+			if(isWood(inv.getStackInSlot(i))) {
+				IBlockState state = Block.getBlockFromItem(inv.getStackInSlot(i).getItem()).getStateFromMeta(inv.getStackInSlot(i).getMetadata());
+				TextureAtlasSprite sprite = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state);
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setString("WoodTexture", sprite.getIconName());
+				tag.setString("Wood", inv.getStackInSlot(i).getDisplayName());
+				
+				result.setTagCompound(tag);
+				break;
 			}
 		}
-		
-		NBTTagCompound tag = new NBTTagCompound();
-		tag.setTag("wood", wood.serializeNBT());
-		result.setTagCompound(tag);
 		
 		return result;
 	}

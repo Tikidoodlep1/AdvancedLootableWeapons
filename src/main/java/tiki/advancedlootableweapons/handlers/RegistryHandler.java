@@ -63,6 +63,7 @@ public class RegistryHandler {
 		}
 		
 		Alw.proxy.registerTESRs();
+		Alw.proxy.registerTEISRs();
 	}
 	
 	@SubscribeEvent
@@ -89,6 +90,7 @@ public class RegistryHandler {
 		PacketHandler.init();
 		SoundHandler.registerSounds();
 		LootTableHandler.registerAll();
+		ParticleHandler.RegisterParticles();
 		Alw.proxy.addColoredItemRenderer();
 		OreDictionaryCompat.registerConfigDependentOres();
 		PatchouliCompat.registerCustomFlags();
