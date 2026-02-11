@@ -1,0 +1,89 @@
+{
+  "components": [
+    { 
+      "type": "text",
+      "text": "1",
+      "x": 58,
+      "y": 12
+    },
+    { 
+      "type": "text",
+      "text": "2",
+      "x": 35,
+      "y": 21
+    },
+    { 
+      "type": "text",
+      "text": "3",
+      "x": 79,
+      "y": 21
+    },
+    {
+      "type": "item",
+      "item": "#fluid", 
+      "framed": true,
+      "x": 51,
+      "y": 22
+    },
+    {
+      "type": "item",
+      "item": "#input", 
+      "framed": true,
+      "x": 28,
+      "y": 32
+    },
+    {
+      "type": "item",
+      "item": "#additive", 
+      "framed": true,
+      "x": 74,
+      "y": 32
+    },
+    {
+      "type": "item",
+      "item": "#output",
+      "framed": true,
+      "link_recipe": true,
+      "x": 51,
+      "y": 86
+    },
+    {
+      "type": "item",
+      "item": "advancedlootableweapons:block_drum", 
+      "x": 51,
+      "y": 56
+    },
+    {
+      "type": "item",
+      "item": "minecraft:fire", 
+      "guard": "#fire->exists",
+      "framed": true,
+      "x": 31,
+      "y": 64
+    },
+    {
+      "type": "text",
+      "text": "Requires Fire Underneath", 
+      "guard": "#fire->exists",
+      "x": 31,
+      "y": 81
+    },
+    {
+      "type": "image",
+      "image": "advancedlootableweapons:textures/patchouli/drum_gui.png",
+      "x": 24,
+      "y": 16,
+      "u": 0,
+      "v": 0,
+      "width": 63,
+      "height": 80,
+      "texture_width": 64,
+      "texture_height": 128
+    },
+    {
+      "type": "frame",
+      "x": -1,
+      "y": -1
+    }
+  ]
+}

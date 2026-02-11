@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.IHasModel;
+import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.init.ItemInit;
 
@@ -21,7 +22,7 @@ public class BlockBase extends Block implements IHasModel
 			this.setHarvestLevel(toolClass, harvestLevel);
 			
 			BlockInit.blocks.add(this);
-			ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
+			ItemInit.items.add(new ItemBlock(this).setRegistryName(ModInfo.ID, name));
 		}
 	}
 	

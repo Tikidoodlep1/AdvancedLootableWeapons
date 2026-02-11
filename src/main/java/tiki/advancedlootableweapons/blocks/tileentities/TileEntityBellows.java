@@ -35,6 +35,10 @@ public class TileEntityBellows extends TileEntity implements ITickable {
 	@SideOnly(Side.CLIENT)
 	private float clientPrevPartialTicks = 0f;
 	
+	//==========================================================================================================================================================
+	//                                                                   BOTH SIDES
+	//==========================================================================================================================================================
+	
 	public TileEntityBellows() {
 		super();
 	}

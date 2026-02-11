@@ -344,20 +344,14 @@ public class TileEntityForge2 extends TileEntity implements ITickable, ISidedInv
 			this.smeltItem();
 		}else {
 			if(this.increaseFrames > 0 && rand.nextDouble() < 0.4) {
-				//This makes the particles spawn in front of the block
-//				Vec3i forward = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).getDirectionVec();
-//				Vec3i rot = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).rotateY().getDirectionVec();
-//				
-//				double d0 = this.pos.getX() + forward.getX() + (0.5 * rot.getX()) + (rot.getX() * (rand.nextDouble()-0.5) * 8.0D / 16.0D);
-//		        double d1 = this.pos.getY() + ((1.2 + rand.nextDouble()) * 6.0D / 16.0D);
-//		        double d2 = this.pos.getZ() + forward.getZ() + (0.5 * rot.getZ()) + (rot.getX() * (rand.nextDouble()-0.5) * 8.0D / 16.0D);
-			
-				Vec3i rot = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING).rotateY().getDirectionVec();
+				EnumFacing facing = this.world.getBlockState(this.pos).getValue(BlockForge2.FACING);
+				Vec3i centerOffset = new Vec3i(1, 0, 1);
+				Vec3i frontOffset = facing.getOpposite().getDirectionVec();
 				
-				double d0 = this.pos.getX() + (0.5 * rot.getX()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
+				double d0 = this.pos.getX() + (0.5 * centerOffset.getX()) + (0.15 * frontOffset.getX()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
 		        double d1 = this.pos.getY() + ((2.3 + rand.nextDouble()) * 6.0D / 16.0D);
-		        double d2 = this.pos.getZ() + (0.5 * rot.getZ()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
-		        
+		        double d2 = this.pos.getZ() + (0.5 * centerOffset.getZ()) + (0.15 * frontOffset.getZ()) + ((rand.nextDouble()-0.5) * 10.0D / 16.0D);
+
 		        this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.00D, 0.01D, 0.00D);
 		        this.world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.00D, 0.01D, 0.00D);
 			}

@@ -99,7 +99,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
     {
-        return false;
+        return true; //false; //This a bad change???
     }
 	
 	@Override

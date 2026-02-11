@@ -1,6 +1,6 @@
 {
-    "name": "Getting Started",
-    "description": "Forging requires the right set of tools and resources. In this chapter, you'll learn the setup of a true smith!",
+    "name": "Forging",
+    "description": "Forging is the cornerstone of $(alw). In this chapter, you'll learn to make weapons and armor from raw materials.",
     "icon": "advancedlootableweapons:block_forge",
-    "sortnum": 0
+    "sortnum": 1
 }

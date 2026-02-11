@@ -1,5 +1,6 @@
 package tiki.advancedlootableweapons.proxy;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.Block;
@@ -10,10 +11,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
@@ -22,6 +26,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
+import tiki.advancedlootableweapons.commands.SeeToolMatErrorsCommand;
 import tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
 import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
@@ -71,6 +76,7 @@ public class CommonProxy {
 	
 	public void registerCommands(final FMLServerStartingEvent e) {
 		e.registerServerCommand(new SeeToolMatsCommand());
+		e.registerServerCommand(new SeeToolMatErrorsCommand());
 	}
 	
 	public void onBlockAttemptBreak(final LeftClickBlock event) {
@@ -136,6 +142,15 @@ public class CommonProxy {
 //			s += stack.getItem().getRegistryName() + "*" + stack.getCount() + ", ";
 //		}
 //		Alw.logger.info(s);
+	}
+	
+	public void onEntityJoinWorld(final EntityJoinWorldEvent event) {
+		if(ItemInit.erroredToolMaterials.size() > 0) {
+			String errMats = Arrays.toString(ItemInit.erroredToolMaterials.toArray(new String[0]));
+			errMats = errMats.replace("[", "");
+			errMats = errMats.replace("]", "");
+			event.getEntity().sendMessage(new TextComponentString(TextFormatting.RED + "GENERATED TOOL MATERIAL ERRORS: You can see this message again by typing /materialerrors. Tool Materials " + errMats + " were added to the generated materials in the Alw Weapon config but have no crafting and repair item. Please specify a crafting/repair item. The weapons were unable to be generated for these materials."));
+		}
 	}
 	
 	public void onLootTableLoad(final LootTableLoadEvent event) {

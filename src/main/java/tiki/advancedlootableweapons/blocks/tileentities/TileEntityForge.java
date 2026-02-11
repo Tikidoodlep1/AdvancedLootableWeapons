@@ -314,7 +314,7 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 			if(!this.inventory.get(0).isEmpty() && canSmelt()) {
 				this.smeltItem();
 			}
-		}else {//Change Drum to render particles in the TE not the TESR please :(
+		}else {
 			if(this.increaseFrames > 0 && rand.nextDouble() < 0.4) {
 		        this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, 
 		        		this.pos.getX() + 0.5 + (rand.nextDouble()-0.5) * (rand.nextDouble() * 8.0D / 16.0D), 

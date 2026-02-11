@@ -1,6 +1,7 @@
 package tiki.advancedlootableweapons.init;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -54,6 +55,7 @@ public class ItemInit {
 	public static final Set<Item> acceptedForgeMetals = new HashSet<Item>();
 	public static final Set<Item> forgeRecipeInputs = new HashSet<Item>();
 	public static final HashMap<ToolMaterial, ItemStack> customRepairItems = new HashMap<ToolMaterial, ItemStack>();
+	public static final List<String> erroredToolMaterials = new ArrayList<String>();
 	
 	public static void generateAcceptedForgeItems() {
 		
@@ -119,8 +121,13 @@ public class ItemInit {
 					generatedItems.add(new ToolSpear("spear_" + s.replace(':', '_').toLowerCase(), ToolMaterial.valueOf(s)).setMaxStackSize(1));
 					
 					if(ToolMaterial.valueOf(s).getRepairItemStack() == ItemStack.EMPTY) {
-						acceptedForgeMetals.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
-						forgeRecipeInputs.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
+						if(customRepairItems.get(ToolMaterial.valueOf(s)) == null) {
+							Alw.logger.error("Tool Material " + s + " was added to the generated materials in the Alw Weapon config but has no crafting and repair item. Please specify a crafting/repair item. The weapons were unable to be generated for this material.");
+							erroredToolMaterials.add(s);
+						}else {
+							acceptedForgeMetals.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
+							forgeRecipeInputs.add(customRepairItems.get(ToolMaterial.valueOf(s)).getItem());
+						}
 					}else {
 						acceptedForgeMetals.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
 						forgeRecipeInputs.add(ToolMaterial.valueOf(s).getRepairItemStack().getItem());
@@ -129,7 +136,10 @@ public class ItemInit {
 					addedMats.add(ToolMaterial.valueOf(s));
 				}
 			}catch (IllegalArgumentException e) {
-				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist. Use /materials in-game to get a list of valid tool materials.");
+				String mats = Arrays.toString(ToolMaterial.values());
+				mats = mats.replace("[", "");
+				mats = mats.replace("]", "");
+				Alw.logger.error("Tried to add extra material " + s + ", but it does not currently exist. Use /materials in-game to get a list of all available materials. Currently available materials: " + mats);
 			}
 		}
 	}

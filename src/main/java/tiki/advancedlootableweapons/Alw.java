@@ -12,6 +12,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
@@ -70,6 +71,7 @@ public class Alw {
 	public static boolean isCoTLoaded = false;
 	public static boolean isBWMLoaded = false;
 	public static boolean isPyrotechLoaded = false;
+	public static boolean isAlwRotnLoaded = false;
 	
 	static {
 		FluidRegistry.enableUniversalBucket();
@@ -120,6 +122,11 @@ public class Alw {
 	@SubscribeEvent
 	public void onPlayerClone(final PlayerEvent.Clone event) {
 		proxy.onPlayerClone(event);
+	}
+	
+	@SubscribeEvent
+	public void onEntityJoinWorld(final EntityJoinWorldEvent event) {
+		proxy.onEntityJoinWorld(event);
 	}
 	
 	@SubscribeEvent

@@ -44,12 +44,6 @@ public class BlockForgeFuel extends BlockForge implements ITileEntityProvider
 	public static final PropertyBool REQUIRES_IGNITION = PropertyBool.create("requires_ignition");
 	private static boolean keepinventory;
 	
-	/**
-	 * @param name             Block registry name.
-	 * @param mat              {@link Material} for the block.
-	 * @param tool             A String representation of an Effective Tool Class. Options are: {"pickaxe", "axe", "shovel"}.
-	 * @param harvestLevel     The harvest level of the block. 0 = wood/gold, 1 = stone, 2 = iron, 3 = diamond.
-	 */
 	public BlockForgeFuel(String name, Material mat, SoundType sound, String tool, int harvestLevel, boolean shouldRegister)
 	{
 		super(name, mat, sound, shouldRegister);

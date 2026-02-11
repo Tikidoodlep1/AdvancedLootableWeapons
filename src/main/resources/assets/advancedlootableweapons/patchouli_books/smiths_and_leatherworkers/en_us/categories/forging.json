@@ -2,5 +2,5 @@
     "name": "Forging",
     "description": "Forging is the cornerstone of $(alw). In this chapter, you'll learn to make weapons and armor from raw materials.",
     "icon": "advancedlootableweapons:block_forge",
-    "sortnum": 1
+    "sortnum": 2
 }

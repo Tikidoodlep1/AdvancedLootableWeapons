@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -28,9 +29,14 @@ import tiki.advancedlootableweapons.world.WorldGenCustomOres;
 @EventBusSubscriber
 public class RegistryHandler {
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onItemRegister(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(ItemInit.items.toArray(new Item[0]));
+		//NEW TEST
+		ItemInit.generateExtraItemsFromConfig();
+		
+		for(Item i : ItemInit.items) {
+			event.getRegistry().register(i);
+		}
 		Alw.proxy.initColoredItemRendererLists();
 		Alw.proxy.registerCustomModelLoaders();
 		
@@ -42,7 +48,9 @@ public class RegistryHandler {
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
+		for(Block b : BlockInit.blocks) {
+			event.getRegistry().register(b);
+		}
 		TileEntityHandler.registerTileEntities();
 		Alw.proxy.registerCustomMeshesAndStateStuff();
 		//Alw.logger.info("Bellows is an instance of " + BlockInit.bellows.getClass().getName());
@@ -78,7 +86,10 @@ public class RegistryHandler {
 		EntityInit.registerEntities();
 		Alw.proxy.registerEntityRenders();
 		ConfigHandler.registerConfig(event);
-		ItemInit.generateExtraItemsFromConfig();
+		
+		//OLD
+//		ItemInit.generateExtraItemsFromConfig();
+		
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		LootHandler.registerLootFunctions();
 	}
@@ -103,6 +114,7 @@ public class RegistryHandler {
 		Alw.isCoTLoaded = Loader.isModLoaded("contenttweaker") && Alw.isCrTLoaded;
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
 		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
+		Alw.isAlwRotnLoaded = Loader.isModLoaded("advancedlootableweaponsrotn") && Alw.isPyrotechLoaded;
 		
 //		String s = "PostInit OreDict ingotSteel: ";
 //		for(ItemStack stack : OreDictionary.getOres("ingotSteel")) {

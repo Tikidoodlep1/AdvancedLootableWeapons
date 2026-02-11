@@ -71,7 +71,9 @@ public class BlockInit {
 	
 	//Functionals
 	public static final Block alloy_furnace = new BlockAlloyFurnace("block_alloy_furnace").setHardness(2.7F).setResistance(5.0F);
-	public static final Block forge = new BlockForge("block_forge", Material.ROCK, SoundType.STONE, true).setHardness(2.9F).setResistance(3.7F);
+	//DON'T DO THIS NORMALLY
+	public static final String forge_block_id = "block_forge";
+	public static final Block forge = new BlockForge(forge_block_id, Material.ROCK, SoundType.STONE, true).setHardness(2.9F).setResistance(3.7F);
 	public static final Block forge2 = new BlockForge2("block_advanced_forge", Material.ROCK, SoundType.STONE, true).setHardness(3.2F).setResistance(4.7F);
 	public static final Block forge2_1 = new BlockForge2Placeholder("block_advanced_forge_extra").setHardness(3.0F).setResistance(4.7F);
 	public static final Block mill = new BlockMill("block_mill", Material.IRON).setHardness(2.5F).setResistance(7.0F);

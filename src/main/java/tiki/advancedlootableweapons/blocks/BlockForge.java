@@ -43,7 +43,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 	public BlockForge(String name, Material mat, SoundType sound, boolean shouldRegister)
 	{
 		this(name, mat, sound, "pickaxe", 1, shouldRegister, new HashSet<Item>());
-		
 	}
 	
 	public BlockForge(String name, Material mat, SoundType sound, String tool, int level, boolean shouldRegister, HashSet<Item> acceptedMaterials)
@@ -218,9 +217,6 @@ public class BlockForge extends BlockBase implements ITileEntityProvider
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-//		if(Alw.isPyrotechLoaded) {
-//			return new TileEntityForgeAirflowConsumer(false, false, this.getRegistryName());
-//		}
 		return new TileEntityForge(false, false, this.getRegistryName());
 	}
 

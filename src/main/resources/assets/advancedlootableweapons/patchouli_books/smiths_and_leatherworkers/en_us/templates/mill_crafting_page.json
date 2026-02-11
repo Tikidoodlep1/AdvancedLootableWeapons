@@ -15,6 +15,7 @@
     {
       "type": "item",
       "item": "#output1",
+      "link_recipe": true,
       "x": 76,
       "y": 34
     },
@@ -45,6 +46,7 @@
     {
       "type": "item",
       "item": "#output2",
+      "link_recipe": true,
       "x": 76,
       "y": 102
     },

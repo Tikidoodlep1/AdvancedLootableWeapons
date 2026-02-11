@@ -46,7 +46,18 @@
             "recipe": "advancedlootableweapons:block_bellows"
         },
         {
-            "type": "advancedlootableweapons:ore_spotlight",
+        	"type": "spotlight",
+        	"anchor": "block_drum",
+        	"item": "advancedlootableweapons:block_drum",
+        	"title": "Clay Drum",
+            "text": "The $(thing)Clay Drum$() is a block that can store one bucket of any fluid. It's used in the leathermaking process and it's used to quench your blades before assembly."
+        },
+        {
+        	"type": "crafting",
+            "recipe": "advancedlootableweapons:block_drum"
+        },
+        {
+            "type": "advancedlootableweapons:ore_spotlight",  
             "ore": "blockAlwAnvil",
             "title": "Anvils",
             "text": "Finally, you'll need an Anvil. Personally, I'd recommend keeping your forge close to your anvil to make sure your pieces cool as little as possible before shaping them!"
@@ -69,7 +80,8 @@
     	"advancedlootableweapons:frost_steel_forge_hammer,advancedlootableweapons:obsidian_forge_hammer,advancedlootableweapons:crystallite_forge_hammer": 1,
     	"advancedlootableweapons:dusksteel_forge_hammer": 1,
     	"advancedlootableweapons:block_forge,advancedlootableweapons:block_advanced_forge": 2,
-    	"advancedlootableweapons:block_bellows,advancedlootableweapons:block_bellows_birch,advancedlootableweapons:block_bellows_spruce": 6,
-    	"advancedlootableweapons:block_bellows_jungle,advancedlootableweapons:block_bellows_acacia,advancedlootableweapons:block_bellows_dark_oak": 6
+    	"advancedlootableweapons:block_bellows": 6,
+    	"advancedlootableweapons:block_drum": 9,
+    	"minecraft:anvil": 10
     }
 }

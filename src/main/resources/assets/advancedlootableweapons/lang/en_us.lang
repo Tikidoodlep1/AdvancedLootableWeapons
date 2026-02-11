@@ -847,6 +847,7 @@ tile.block_bellows_dark_oak.name=Dark Oak Bellows
 tile.block_bellows_spruce.name=Spruce Bellows
 tile.block_drum.name=Clay Drum
 tile.block_tanning_rack.name=Tanning Rack
+tile.water_display.name=Water
 
 
 item.shadow.name=Shadow
@@ -893,6 +894,7 @@ enchantment.light=Lightweight
 
 
 alw.command.materials.use=/materials - Shows all available tool materials for creating custom ALW weapon sets
+alw.command.materialerrors.use=/materialerrors - Shows any generated materials from the config that have errors
 
 
 attribute.name.generic.bonusAttackDamage=Bonus Attack Damage

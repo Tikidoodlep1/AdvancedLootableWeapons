@@ -1,0 +1,58 @@
+{
+    "name": "From Hide to Leather",
+    "icon": "advancedlootableweapons:untrimmed_hide",
+    "category": "advancedlootableweapons:leather",
+    "pages": [
+    	{ 
+        	"type": "text",
+        	"text": "There are 5 steps to processing hide which are outlined in this chapter: $(thing)Trimming$(), $(thing)Curing$(), $(thing)Liming$(), $(thing)Deliming$(), and $(thing)Tanning$().<br>To begin, you'll need a couple of items. You'll need the $(item)Tanning Knife$() and $(item)Tanning Rack$() as shown on the next page, as well as one or two $(item)clay drums$() mentioned in the $(l:entryid#forging_setup)forging setup$() section."
+        },
+        {
+            "type": "crafting",
+            "recipe": "advancedlootableweapons:tanning_knife",
+            "recipe2": "advancedlootableweapons:block_tanning_rack"
+        },
+        { 
+        	"type": "crafting",
+        	"recipe": "advancedlootableweapons:trimmed_hide",
+        	"text": "First things first, getting hide! By default, $(alw) replaces all $(item)Leather$() drops with $(item)Untrimmed Hide$(). You'll need some of that. Then, use your brand new $(item)Tanning Knife$() to trim it!"
+        },
+        { 
+        	"type": "text",
+        	"text": "Next, toss the whole stack of trimmed hide in a $(item)clay drum$() with some $(item)water$() and one piece of $(item)salt$() in the order shown on the next page to cure the hide. Then, repeat that process with the recipes on the following pages to lime and delime the hide. Note that liming and deliming the hide does not require an additive ingredient like salt.<br><br>The drum can process a whole stack of resources at once and only requires a single item of the additive ingredient. Upon crafting, the recipe consumes the main ingredient and the additive ingredient, but leaves the fluid."
+        },
+        {
+            "type": "drum_crafting",
+            "fluid": "advancedlootableweapons:water_display",
+            "input": "advancedlootableweapons:trimmed_hide",
+            "additive": "advancedlootableweapons:raw_salt",
+            "output": "advancedlootableweapons:cured_hide"
+        },
+        {
+            "type": "drum_crafting",
+            "fluid": "advancedlootableweapons:milk_of_lime",
+            "input": "advancedlootableweapons:cured_hide",
+            "additive": "",
+            "output": "advancedlootableweapons:limed_hide"
+        },
+        {
+            "type": "drum_crafting",
+            "fluid": "advancedlootableweapons:magnesium_lactate",
+            "input": "advancedlootableweapons:limed_hide",
+            "additive": "",
+            "output": "advancedlootableweapons:delimed_hide"
+        },
+        { 
+        	"type": "text",
+        	"text": "Finally, to tan the hide into leather, put in in the $(item)Tanning Rack$() and wait for it to tan. Voila, leather!"
+        }
+    ],
+    "sortnum": 1,
+    "extra_recipe_mappings": 
+    {
+    	"advancedlootableweapons:tanning_knife,advancedlootableweapons:block_tanning_rack": 1,
+    	"advancedlootableweapons:trimmed_hide": 2,
+    	"advancedlootableweapons:cured_hide,advancedlootableweapons:limed_hide_hide": 3,
+    	"advancedlootableweapons:delimed_hide": 5
+    }
+}
