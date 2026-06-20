@@ -1,14 +1,14 @@
 [
 {
-  "modid": "advancedlootableweapons",
-  "name": "Advanced Lootable Weapons",
-  "description": "This aim of this mod is to create extremely diverse weapons without losing configurability.",
-  "version": "1.4.6.5-1.12.2",
+  "modid": "advancedlootableweaponsrotn",
+  "name": "Advanced Lootable Weapons RotN",
+  "description": "Alw RotN is an extension for Alw that's designed specifically for the modpack Rebirth of the Night.",
+  "version": "0.1.0-1.12.2",
   "mcversion": "1.12",
-  "url": "https://github.com/Tikidoodlep1/AdvancedLootableWeapons/wiki",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/advanced-lootable-weapons",
   "updateUrl": "",
   "authorList": ["Tiki"],
-  "credits": "Programming: Tiki, Textures: Foreck, Destroyer, Dino Soup, juancgutro, & Ravioli's Gale",
+  "credits": "Programming: Tiki",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
