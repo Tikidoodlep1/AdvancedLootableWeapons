@@ -84,7 +84,7 @@ dependencies {
   	//compile files('pyrotech-1.12.2-1.6.9.jar')
   	
   	//CurseMaven
-  	compile "curse.maven:advanced-lootable-weapons-632792:6845241"
+  	compile "curse.maven:advanced-lootable-weapons-632792:7611502"
   	//compile "curse.maven:bwm-suite-246760:3289033"
   	compile "curse.maven:pyrotech-306676:4798313"
   	compile "curse.maven:athenaeum-284350:4633750"
