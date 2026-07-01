@@ -1,6 +1,7 @@
 package tiki.advancedlootableweapons.inventory.ForgeWeapon;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
 import javax.annotation.Nullable;
@@ -20,6 +21,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.play.server.SPacketSoundEffect;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -207,17 +209,17 @@ public class ContainerForgeWeapon extends Container {
 			this.invCraft.setInventorySlotContents(i, this.inputSlot.getStackInSlot(i));
 		}
 		recipe = this.findMatchingRecipe(this.invCraft, this.world);
-//		System.out.println("Block: " + this.world.getBlockState(this.pos).getBlock().getRegistryName());
-//		if(recipe != null) {
-//			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
-//			System.out.println("Ingredients:" );
-//			for(Ingredient i : recipe.getIngredients()) {
-//				System.out.println(Arrays.toString(i.getMatchingStacks()));
-//			}
-//			System.out.println("Result: " + recipe.getRecipeOutput());
-//		}else {
-//			System.out.println("Recipe is NULL!");
-//		}
+		System.out.println("Block: " + this.world.getBlockState(this.pos).getBlock().getRegistryName());
+		if(recipe != null) {
+			System.out.println("Recipe Name: " + recipe.getRegistryName().toString());
+			System.out.println("Ingredients:" );
+			for(Ingredient i : recipe.getIngredients()) {
+				System.out.println(Arrays.toString(i.getMatchingStacks()));
+			}
+			System.out.println("Result: " + recipe.getRecipeOutput());
+		}else {
+			System.out.println("Recipe is NULL!");
+		}
 		
 //		Alw.logger.info("Is side server? " + (!player.world.isRemote));
 		

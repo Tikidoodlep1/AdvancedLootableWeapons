@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tiki.advancedlootableweapons.init.BlockInit;
 import tiki.advancedlootableweapons.recipes.ShapelessOneSlotRecipes;
 

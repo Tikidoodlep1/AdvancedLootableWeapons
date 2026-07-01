@@ -2,21 +2,21 @@
 	"forge_marker": 1,
     "variants": 
     {
-        "facing=north,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=north,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=north,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=north,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=east,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=east,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=east,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=east,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=south,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=south,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=south,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=south,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=west,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=west,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=west,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_1" },
-        "facing=west,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_1" }
+        "facing=north,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=north,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=north,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=north,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=east,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=east,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=east,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=east,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=south,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=south,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=south,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=south,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=west,left=false,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=west,left=false,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=west,left=true,right=false": { "model": "advancedlootableweapons:block_advanced_forge_extra" },
+        "facing=west,left=true,right=true": { "model": "advancedlootableweapons:block_advanced_forge_extra" }
     }
 }

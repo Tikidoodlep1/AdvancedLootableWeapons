@@ -18,36 +18,54 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 
-public class DrumQuenchingRecipe extends ShapelessOreRecipe {
+public class DrumQuenchingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	final ItemStack ingr;
 	final FluidStack fluid;
 	final int ticks;
 	final boolean needsClay;
+
+    private final ResourceLocation group;
+    private final NonNullList<Ingredient> input;
+    private final ItemStack result;
 	
 	public DrumQuenchingRecipe(ResourceLocation group, ItemStack input, FluidStack fluid, int time, boolean needsClay) {
-		super(group, NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(input)), input);
+		this.group = group;
+        this.input = NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(input));
+        this.result = input;
+
 		this.ingr = input;
 		this.fluid = fluid;
 		this.ticks = time;
 		this.needsClay = needsClay;
 	}
-	
-	@Override
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 3;
+    }
+
+    @Override
 	public ItemStack getRecipeOutput() {
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setBoolean("quenched", true);
-		ItemStack result = this.output.copy();
+		ItemStack result = this.result.copy();
 		result.setTagCompound(tag);
 		return result;
 	}
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return input;
+    }
 	
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
+		NonNullList<ItemStack> keptItems = IRecipe.super.getRemainingItems(inv);
 		
 		for(int i = 0; i < this.input.size(); i++) {
 			Ingredient in = this.input.get(i);
@@ -118,6 +136,11 @@ public class DrumQuenchingRecipe extends ShapelessOreRecipe {
 	public int getTime() {
 		return this.ticks;
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

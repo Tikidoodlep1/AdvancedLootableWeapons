@@ -21,25 +21,43 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
 
-public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
+public class ForgeToolHeadRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
-	//private final NonNullList<Ingredient> inputs;
+	private final NonNullList<Ingredient> input;
 	private final String button;
 	private final int exp;
 	public final Block block;
+    private final ItemStack result;
 	
 	public ForgeToolHeadRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
-		super(null, inputs, result);
-		//this.inputs = inputs;
+		this.result = result;
+		this.input = inputs;
 		this.button = button;
 		this.exp = exp;
 		this.block = block;
 	}
-	
-	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 2;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return input;
+    }
+
+    public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
 		if(input.get(0) == Ingredient.EMPTY) {
 			remainingItems.set(0, inventoryCrafting.get(0));
@@ -206,12 +224,14 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	}
 	
 	public ItemStack getCraftingResult(final NonNullList<ItemStack> inv) {
-		ItemStack result = this.output.copy();
+		ItemStack result = this.result.copy();
 		ItemStack input1 = inv.get(0);
 		ItemStack input2 = inv.get(1);
 		NBTTagCompound input1Tag = input1.getTagCompound();
 		NBTTagCompound input2Tag = input2.getTagCompound();
 		NBTTagCompound resultTag = new NBTTagCompound();
+
+        Alw.logger.info("Result: " + result + ", input1: " + input1 + ", input2: " + input2);
 		
 		if(isAcceptedIngot(input1)) {
 			resultTag.setTag("Material", input1.serializeNBT());
@@ -277,12 +297,14 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		ItemStack result = super.getCraftingResult(inv);
+		ItemStack result = this.result.copy();
 		ItemStack input1 = inv.getStackInSlot(0);
 		ItemStack input2 = inv.getStackInSlot(1);
 		NBTTagCompound input1Tag = input1.getTagCompound();
 		NBTTagCompound input2Tag = input2.getTagCompound();
 		NBTTagCompound resultTag = new NBTTagCompound();
+
+        Alw.logger.info("Result: " + result + ", input1: " + input1 + ", input2: " + input2);
 		
 		if(isAcceptedIngot(input1)) {
 			resultTag.setTag("Material", input1.serializeNBT());
@@ -367,6 +389,11 @@ public class ForgeToolHeadRecipe extends ShapelessOreRecipe {
 	private double map(double value, double curRangeLowBound, double curRangeHighBound, double wantRangeLowBound, double wantRangeHighBound) {
 		return wantRangeLowBound + (wantRangeHighBound - wantRangeLowBound) * ((value - curRangeLowBound) / (curRangeHighBound - curRangeLowBound));
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

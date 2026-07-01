@@ -10,6 +10,8 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
 import tiki.advancedlootableweapons.recipes.ForgeArmorBindingRecipe;
@@ -108,6 +110,7 @@ public class AnvilForgingRecipeMaker {
             	if(space != -1) {
             		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
             	}
+
             	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
             }
             else if (irecipe instanceof ForgeArmorBindingRecipe)
@@ -119,7 +122,7 @@ public class AnvilForgingRecipeMaker {
             	if(space != -1) {
             		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
             	}
-            	
+
             	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), 0, button.toString()));
             }
             else if (irecipe instanceof ForgeGeneralCaseRecipe)
@@ -131,6 +134,7 @@ public class AnvilForgingRecipeMaker {
             	if(space != -1) {
             		button.replace(space + 1, space + 2, button.substring(space + 1, space + 2).toUpperCase());
             	}
+
             	jeiRecipes.add(new AnvilForgingRecipe(recipe.getIngredients(), recipe.getRecipeOutput(), recipe.getExp(), button.toString()));
             }
         }

@@ -24,6 +24,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
@@ -31,7 +32,7 @@ import tiki.advancedlootableweapons.items.ItemHotToolHead;
 import tiki.advancedlootableweapons.tools.ToolSlashSword;
 import tiki.advancedlootableweapons.tools.ToolStabSword;
 
-public class ForgeToolRecipe extends ShapelessOreRecipe {
+public class ForgeToolRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	private final NonNullList<Ingredient> inputs;
 	private final String button;
@@ -39,9 +40,10 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 	private final String weaponType;
 	private ItemStack material = null;
 	public final Block block;
+    private final ItemStack result;
 	
 	public ForgeToolRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, String result, Block block) {
-		super(null, inputs, new ItemStack(getWeaponFromString(result)).setStackDisplayName("Example Output"));
+		this.result = new ItemStack(getWeaponFromString(result)).setStackDisplayName("Example Output");
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
@@ -50,15 +52,30 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 	}
 	
 	public ForgeToolRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
-		super(null, inputs, result);
+		this.result = result;
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
 		this.weaponType = "";
 		this.block = block;
 	}
-	
-	private ItemStack getModifiedOutput() {
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 2;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
+    }
+
+    private ItemStack getModifiedOutput() {
 //		System.out.println("Material Registry Name: " + this.material.getItem().getRegistryName());
 //		System.out.println("Forge Registry Contains " + (ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath()) + ": " + (ForgeRegistries.ITEMS.containsKey(new ResourceLocation(ModInfo.ID + ":" + weaponType + "_" + material.getItem().getRegistryName().getResourcePath()))) );
 		if(material != null && material.getItem().getRegistryName().getResourceDomain().equals("advancedlootableweapons") || material.getItem() == Items.IRON_INGOT) {
@@ -107,7 +124,7 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 			}
 		}
 		
-		return this.output.copy();
+		return this.result.copy();
 	}
 	
 	public static Item getWeaponFromString(String weapon) {
@@ -470,6 +487,11 @@ public class ForgeToolRecipe extends ShapelessOreRecipe {
 		
 		return Math.floor(Math.pow(desiredBase, heat / stepDividend) - 1) / 11d;
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

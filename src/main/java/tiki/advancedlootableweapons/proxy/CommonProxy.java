@@ -1,5 +1,6 @@
 package tiki.advancedlootableweapons.proxy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
@@ -23,12 +26,14 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.commands.SeeToolMatErrorsCommand;
 import tiki.advancedlootableweapons.commands.SeeToolMatsCommand;
 import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
+import tiki.advancedlootableweapons.compat.patchouli.PatchouliCompat;
 import tiki.advancedlootableweapons.handlers.ConfigHandler;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.loot.LootTableInjector;
@@ -115,16 +120,84 @@ public class CommonProxy {
 	public void onPlayerClone(final PlayerEvent.Clone event) {
 		if(event.getEntityPlayer() instanceof EntityPlayerMP) {
 			if(!ConfigHandler.DISABLE_VANILLA_ARMORS) {
-				ResourceLocation[] recipes = {new ResourceLocation("minecraft", "leather_helmet"), new ResourceLocation("minecraft", "leather_chestplate"),
-						new ResourceLocation("minecraft", "leather_leggings"), new ResourceLocation("minecraft", "leather_boots"),
-						new ResourceLocation("minecraft", "iron_helmet"), new ResourceLocation("minecraft", "iron_chestplate"),
-						new ResourceLocation("minecraft", "iron_leggings"), new ResourceLocation("minecraft", "iron_boots"),
-						new ResourceLocation("minecraft", "golden_helmet"), new ResourceLocation("minecraft", "golden_chestplate"),
-						new ResourceLocation("minecraft", "golden_leggings"), new ResourceLocation("minecraft", "golden_boots"),
-						new ResourceLocation("minecraft", "diamond_helmet"), new ResourceLocation("minecraft", "diamond_chestplate"),
-						new ResourceLocation("minecraft", "diamond_leggings"), new ResourceLocation("minecraft", "diamond_boots")};
-				event.getEntityPlayer().unlockRecipes(recipes);
+                ArrayList<IRecipe> recipes = new ArrayList<IRecipe>();
+                IRecipe leather_helmet = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "leather_helmet"));
+                if(leather_helmet != null) {
+                    recipes.add(leather_helmet);
+                }
+                IRecipe leather_chestplate = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "leather_chestplate"));
+                if(leather_chestplate != null) {
+                    recipes.add(leather_chestplate);
+                }
+                IRecipe leather_leggings = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "leather_leggings"));
+                if(leather_leggings != null) {
+                    recipes.add(leather_leggings);
+                }
+                IRecipe leather_boots = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "leather_boots"));
+                if(leather_boots != null) {
+                    recipes.add(leather_boots);
+                }
+
+                IRecipe iron_helmet = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "iron_helmet"));
+                if(iron_helmet != null) {
+                    recipes.add(iron_helmet);
+                }
+                IRecipe iron_chestplate = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "iron_chestplate"));
+                if(iron_chestplate != null) {
+                    recipes.add(iron_chestplate);
+                }
+                IRecipe iron_leggings = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "iron_leggings"));
+                if(iron_leggings != null) {
+                    recipes.add(iron_leggings);
+                }
+                IRecipe iron_boots = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "iron_boots"));
+                if(iron_boots != null) {
+                    recipes.add(iron_boots);
+                }
+
+                IRecipe gold_helmet = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "gold_helmet"));
+                if(gold_helmet != null) {
+                    recipes.add(gold_helmet);
+                }
+                IRecipe gold_chestplate = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "gold_chestplate"));
+                if(gold_chestplate != null) {
+                    recipes.add(gold_chestplate);
+                }
+                IRecipe gold_leggings = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "gold_leggings"));
+                if(gold_leggings != null) {
+                    recipes.add(gold_leggings);
+                }
+                IRecipe gold_boots = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "gold_boots"));
+                if(gold_boots != null) {
+                    recipes.add(gold_boots);
+                }
+
+                IRecipe diamond_helmet = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "diamond_helmet"));
+                if(diamond_helmet != null) {
+                    recipes.add(diamond_helmet);
+                }
+                IRecipe diamond_chestplate = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "diamond_chestplate"));
+                if(diamond_chestplate != null) {
+                    recipes.add(diamond_chestplate);
+                }
+                IRecipe diamond_leggings = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "diamond_leggings"));
+                if(diamond_leggings != null) {
+                    recipes.add(diamond_leggings);
+                }
+                IRecipe diamond_boots = ForgeRegistries.RECIPES.getValue(new ResourceLocation("minecraft", "diamond_boots"));
+                if(diamond_boots != null) {
+                    recipes.add(diamond_boots);
+                }
+
+                event.getEntityPlayer().unlockRecipes(recipes);
 			}
+
+            if(Alw.isPatchouliLoaded) {
+                if(PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers") != null
+                    && !PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers").isEmpty()) {
+                    event.getEntityPlayer().addItemStackToInventory(PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers"));
+                }
+            }
 		}
 		
 //		event.getEntityPlayer().getArmorInventoryList().forEach((stack) -> {
@@ -151,6 +224,26 @@ public class CommonProxy {
 			errMats = errMats.replace("]", "");
 			event.getEntity().sendMessage(new TextComponentString(TextFormatting.RED + "GENERATED TOOL MATERIAL ERRORS: You can see this message again by typing /materialerrors. Tool Materials " + errMats + " were added to the generated materials in the Alw Weapon config but have no crafting and repair item. Please specify a crafting/repair item. The weapons were unable to be generated for these materials."));
 		}
+
+        if(Alw.isPatchouliLoaded) {
+            if(event.getEntity() instanceof EntityPlayerMP) {
+                EntityPlayerMP player = (EntityPlayerMP)event.getEntity();
+
+                NBTTagCompound persistentData = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+                Alw.logger.info("Persistent Player Data: " + persistentData.toString());
+
+                if(!persistentData.getBoolean("firstJoin")) {
+                    if(PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers") != null
+                            && !PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers").isEmpty()) {
+                        player.addItemStackToInventory(PatchouliCompat.api.getBookStack("advancedlootableweapons:smiths_and_leatherworkers"));
+                    }
+                }
+
+                persistentData.setBoolean("firstJoin", true);
+                player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentData);
+            }
+
+        }
 	}
 	
 	public void onLootTableLoad(final LootTableLoadEvent event) {

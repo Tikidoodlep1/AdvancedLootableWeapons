@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,19 +21,43 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import tiki.advancedlootableweapons.Alw;
 
-public class AlloyingRecipe extends ShapelessOreRecipe {
-	
-	final float exp;
+import javax.annotation.Nullable;
+
+public class AlloyingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
+
+    private final ResourceLocation group;
+    private final NonNullList<Ingredient> input;
+    private final ItemStack result;
+	private final float exp;
 	
 	public AlloyingRecipe(ResourceLocation group, NonNullList<Ingredient> input, float exp, ItemStack result) {
-		super(group, input, result);
+		this.group = group;
+        this.input = input;
+        this.result = result;
 		this.exp = exp;
 	}
-	
-	@Override
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 3;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return input;
+    }
+
+    @Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
+		NonNullList<ItemStack> keptItems = IRecipe.super.getRemainingItems(inv);
 		List<ItemStack> containerItems = new ArrayList<ItemStack>();
 		
 		for(int i = 0; i < inv.getSizeInventory(); i++) {
@@ -64,7 +89,7 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 	}
 	
 	@Override
-	public boolean matches(InventoryCrafting inv, World world) {
+	public boolean matches(InventoryCrafting inv, @Nullable World world) {
 		if(inv.getSizeInventory() != 3) {
 			return false;
 		}
@@ -96,7 +121,7 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		return super.getCraftingResult(inv);
+		return this.getRecipeOutput();
 	}
 	
 	@Override
@@ -107,6 +132,11 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 	public float getExp() {
 		return this.exp;
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 
@@ -117,11 +147,13 @@ public class AlloyingRecipe extends ShapelessOreRecipe {
 			for(final JsonElement element : JsonUtils.getJsonArray(json, "ingredients")) {
 				Ingredient ingr = CraftingHelper.getIngredient(element, context);
 				JsonObject ingrObj = element.getAsJsonObject();
-								
+
 				if(ingrObj.has("ore") && ingrObj.has("count")) {
 					ItemStack[] is = ingr.getMatchingStacks();
 					for(int i = 0; i < is.length; i++) {
-						is[i].setCount(ingrObj.get("count").getAsInt());
+                        ItemStack stack = is[i].copy();
+						stack.setCount(ingrObj.get("count").getAsInt());
+                        is[i] = stack;
 					}
 					ingredients.add(Ingredient.fromStacks(is));
 				}else if(ingrObj.has("item") && ingrObj.has("count")) {

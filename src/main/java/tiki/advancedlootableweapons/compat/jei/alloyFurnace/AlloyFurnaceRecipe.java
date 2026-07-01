@@ -3,6 +3,7 @@ package tiki.advancedlootableweapons.compat.jei.alloyFurnace;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class AlloyFurnaceRecipe implements IRecipeWrapper {
 	private final NonNullList<Ingredient> inputs;
 	private final ItemStack output;
 	private final float exp;
-	
+
 	public AlloyFurnaceRecipe(NonNullList<Ingredient> inputs, ItemStack output, float exp) {
 		this.inputs = inputs;
 		this.output = output;

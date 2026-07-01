@@ -3,6 +3,7 @@ package tiki.advancedlootableweapons;
 import java.io.File;
 import java.util.UUID;
 
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -72,7 +73,8 @@ public class Alw {
 	public static boolean isBWMLoaded = false;
 	public static boolean isPyrotechLoaded = false;
 	public static boolean isAlwRotnLoaded = false;
-	
+    public static boolean isPatchouliLoaded = false;
+
 	static {
 		FluidRegistry.enableUniversalBucket();
 	}
@@ -129,7 +131,7 @@ public class Alw {
 		proxy.onEntityJoinWorld(event);
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onLootTableLoad(final LootTableLoadEvent event) {
 		proxy.onLootTableLoad(event);
 	}

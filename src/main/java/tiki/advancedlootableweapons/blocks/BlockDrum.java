@@ -3,6 +3,7 @@ package tiki.advancedlootableweapons.blocks;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -44,8 +45,11 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 		super(name, Material.ROCK, "pickaxe", 0, true);
 		setSoundType(SoundType.STONE);
 		this.fullBlock = false;
+        this.setLightOpacity(0);
 	}
-	
+
+	//TEST MORE RECIPES - Alloying lightly tested, ForgeToolHead lightly tested, ForgeTool lightly tested
+
 	@Override
 	public boolean isFullCube(IBlockState state)
     {
@@ -56,7 +60,7 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
 		return BlockFaceShape.BOWL;
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		TileEntity te = worldIn.getTileEntity(pos);
@@ -99,10 +103,10 @@ public class BlockDrum extends BlockBase implements ITileEntityProvider
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
     {
-        return true; //false; //This a bad change???
+        return false; //This a bad change???
     }
-	
-	@Override
+
+    @Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) 
 	{
 		return Item.getItemFromBlock(BlockInit.drum);

@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.IHasModel;
+import tiki.advancedlootableweapons.blocks.BlockForge;
+import tiki.advancedlootableweapons.blocks.BlockForge2;
 import tiki.advancedlootableweapons.compat.oreDictionary.OreDictionaryCompat;
 import tiki.advancedlootableweapons.compat.patchouli.PatchouliCompat;
 import tiki.advancedlootableweapons.init.BlockInit;
@@ -104,7 +106,11 @@ public class RegistryHandler {
 		ParticleHandler.RegisterParticles();
 		Alw.proxy.addColoredItemRenderer();
 		OreDictionaryCompat.registerConfigDependentOres();
-		PatchouliCompat.registerCustomFlags();
+        Alw.isPatchouliLoaded = Loader.isModLoaded("patchouli");
+        Alw.logger.info("Is Patchouli Loaded? " + Alw.isPatchouliLoaded);
+        if(Alw.isPatchouliLoaded) {
+            PatchouliCompat.registerCustomFlags();
+        }
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)
@@ -115,7 +121,7 @@ public class RegistryHandler {
 		Alw.isBWMLoaded = Loader.isModLoaded("betterwithmods");
 		Alw.isPyrotechLoaded = Loader.isModLoaded("pyrotech");
 		Alw.isAlwRotnLoaded = Loader.isModLoaded("advancedlootableweaponsrotn") && Alw.isPyrotechLoaded;
-		
+
 //		String s = "PostInit OreDict ingotSteel: ";
 //		for(ItemStack stack : OreDictionary.getOres("ingotSteel")) {
 //			s += stack.getItem().getRegistryName() + "*" + stack.getCount() + ", ";

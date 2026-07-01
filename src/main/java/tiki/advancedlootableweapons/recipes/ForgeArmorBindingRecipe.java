@@ -25,38 +25,65 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import tiki.advancedlootableweapons.armor.ArmorBonusesBase;
 import tiki.advancedlootableweapons.items.ItemArmorBinding;
 
-public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
+public class ForgeArmorBindingRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	private final NonNullList<Ingredient> inputs;
 	private final ItemStack result;
 	private final String button;
 	public final Block block;
-	
+    private final ResourceLocation group;
+
 	public ForgeArmorBindingRecipe(@Nullable final ResourceLocation group, final String button, final NonNullList<Ingredient> input, final ItemStack result, final Block block) {
-		super(group, input, result);
+		this.group = group;
 		this.inputs = input;
 		this.result = result;
 		this.button = button;
 		this.block = block;
 	}
-	
-	public String getButton() {
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 2;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
+    }
+
+    public String getButton() {
 		return this.button;
 	}
 	
 	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
-		
+        if(inputs.get(0) == Ingredient.EMPTY) {
+            remainingItems.set(0, inventoryCrafting.get(0));
+        }
+        if(inputs.get(1) == Ingredient.EMPTY) {
+            remainingItems.set(1, inventoryCrafting.get(1));
+        }
 		return remainingItems;
 	}
 	
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final InventoryCrafting inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.getSizeInventory(), ItemStack.EMPTY);
-		
+        if(inputs.get(0) == Ingredient.EMPTY) {
+            remainingItems.set(0, inventoryCrafting.getStackInSlot(0));
+        }
+        if(inputs.get(1) == Ingredient.EMPTY) {
+            remainingItems.set(1, inventoryCrafting.getStackInSlot(1));
+        }
 		return remainingItems;
 	}
 	
@@ -174,6 +201,11 @@ public class ForgeArmorBindingRecipe extends ShapelessOreRecipe {
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

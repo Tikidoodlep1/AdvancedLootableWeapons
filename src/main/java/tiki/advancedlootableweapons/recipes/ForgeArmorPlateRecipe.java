@@ -22,11 +22,12 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import tiki.advancedlootableweapons.ModInfo;
 import tiki.advancedlootableweapons.init.ItemInit;
 import tiki.advancedlootableweapons.items.ItemHotToolHead;
 
-public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
+public class ForgeArmorPlateRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	//Ingot to make an armor set: 9.8678
 	//Current with Armor Plates: 16
@@ -40,17 +41,33 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 	//private final Item mat1;
 	public final Block block;
 	private ItemStack material = ItemStack.EMPTY;
+    private final ItemStack result;
 	
 	public ForgeArmorPlateRecipe(final String button, final NonNullList<Ingredient> inputs, int exp, ItemStack result, Block block) {
-		super(null, inputs, result);
+		this.result = result;
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
 		//this.mat1 = mat;
 		this.block = block;
 	}
-	
-	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 2;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
+    }
+
+    public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
 		if(inputs.get(0) == Ingredient.EMPTY) {
 			remainingItems.set(0, inventoryCrafting.get(0));
@@ -229,7 +246,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 		ItemStack input2 = inv.get(1);
 		NBTTagCompound input1Tag = input1.getTagCompound();
 		this.setMaterial(input1, input2);
-		int origCount = this.output.getCount();
+		int origCount = this.result.getCount();
 		ItemStack result = getModifiedOutput();
 		result.setCount(origCount);
 		
@@ -269,7 +286,7 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 		ItemStack input2 = inv.getStackInSlot(1);
 		NBTTagCompound input1Tag = input1.getTagCompound();
 		this.setMaterial(input1, input2);
-		int origCount = super.getCraftingResult(inv).getCount();
+		int origCount = this.getRecipeOutput().getCount();
 		ItemStack result = getModifiedOutput();
 		result.setCount(origCount);
 		
@@ -386,6 +403,11 @@ public class ForgeArmorPlateRecipe extends ShapelessOreRecipe {
 			return;
 		}
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

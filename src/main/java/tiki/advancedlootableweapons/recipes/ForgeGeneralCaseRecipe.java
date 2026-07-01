@@ -20,24 +20,42 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import tiki.advancedlootableweapons.Alw;
 import tiki.advancedlootableweapons.init.ItemInit;
 
-public class ForgeGeneralCaseRecipe extends ShapelessOreRecipe {
+public class ForgeGeneralCaseRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	private final NonNullList<Ingredient> inputs;
 	private final String button;
 	private final int exp;
 	public final Block block;
+    private final ItemStack result;
 	
 	public ForgeGeneralCaseRecipe(final String button, final NonNullList<Ingredient> inputs, final int exp, final ItemStack result, final Block block) {
-		super(null, inputs, result);
+        this.result = result;
 		this.inputs = inputs;
 		this.button = button;
 		this.exp = exp;
 		this.block = block;
 	}
-	
-	public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 2;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return inputs;
+    }
+
+    public NonNullList<ItemStack> getRemainingItems(final NonNullList<ItemStack> inventoryCrafting) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inventoryCrafting.size(), ItemStack.EMPTY);
 		
 		if(inputs.get(0) == Ingredient.EMPTY) {
@@ -71,16 +89,16 @@ public class ForgeGeneralCaseRecipe extends ShapelessOreRecipe {
 		ItemStack input1 = inv.get(0);
 		ItemStack input2 = inv.get(1);
 		
-		if(this.input.get(0) != Ingredient.EMPTY) {
-			if(this.input.get(0).apply(input1)) {
+		if(this.inputs.get(0) != Ingredient.EMPTY) {
+			if(this.inputs.get(0).apply(input1)) {
 				match1 = true;
 			}
 		}else {
 			match1 = true;
 		}
 		
-		if(this.input.get(1) != Ingredient.EMPTY) {
-			if(this.input.get(1).apply(input2)) {
+		if(this.inputs.get(1) != Ingredient.EMPTY) {
+			if(this.inputs.get(1).apply(input2)) {
 				match2 = true;
 			}
 		}else {
@@ -101,16 +119,16 @@ public class ForgeGeneralCaseRecipe extends ShapelessOreRecipe {
 		ItemStack input1 = inv.getStackInSlot(0);
 		ItemStack input2 = inv.getStackInSlot(1);
 		
-		if(this.input.get(0) != Ingredient.EMPTY) {
-			if(this.input.get(0).apply(input1)) {
+		if(this.inputs.get(0) != Ingredient.EMPTY) {
+			if(this.inputs.get(0).apply(input1)) {
 				match1 = true;
 			}
 		}else {
 			match1 = true;
 		}
 		
-		if(this.input.get(1) != Ingredient.EMPTY) {
-			if(this.input.get(1).apply(input2)) {
+		if(this.inputs.get(1) != Ingredient.EMPTY) {
+			if(this.inputs.get(1).apply(input2)) {
 				match2 = true;
 			}
 		}else {
@@ -121,12 +139,13 @@ public class ForgeGeneralCaseRecipe extends ShapelessOreRecipe {
 	}
 	
 	public ItemStack getCraftingResult(final NonNullList<ItemStack> inv) {
-		return this.output;
+        Alw.logger.info("Result: " + this.result);
+		return this.result;
 	}
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		return this.output;
+		return this.result;
 	}
 	
 	public String getButton() {
@@ -136,6 +155,11 @@ public class ForgeGeneralCaseRecipe extends ShapelessOreRecipe {
 	public int getExp() {
 		return this.exp;
 	}
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
 	
 	public static class Factory implements IRecipeFactory {
 

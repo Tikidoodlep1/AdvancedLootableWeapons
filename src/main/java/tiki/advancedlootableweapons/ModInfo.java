@@ -3,8 +3,8 @@ package tiki.advancedlootableweapons;
 public class ModInfo {
 	public static final String ID = "advancedlootableweapons";
 	public static final String NAME = "Advanced Lootable Weapons";
-	public static final String VER = "1.4.6.6-1.12.2";
-	public static final String LOAD_AFTER = "required-after:forge@[14.23.5.2860,);before:advancedlootableweaponsrotn;after:betterwithmods;after:thermalfoundation;after:appliedenergistics2;after:spartanweaponry";
+	public static final String VER = "1.4.6.8-1.12.2";
+	public static final String LOAD_AFTER = "required-after:forge@[14.23.5.2847,);before:advancedlootableweaponsrotn;after:betterwithmods;after:thermalfoundation;after:appliedenergistics2;after:spartanweaponry";
 	public static final String CLIENTPROXY = "tiki.advancedlootableweapons.proxy.ClientProxy";
 	public static final String COMMONPROXY = "tiki.advancedlootableweapons.proxy.CommonProxy";
 	

@@ -264,7 +264,8 @@ public class TileEntityForge extends TileEntity implements ITickable, ISidedInve
 	public void setRequiresIgnition(boolean requiresIgnition) {
 		this.requiresIgnition = requiresIgnition;
 	}
-	
+
+    @Override
 	public void update()
 	{
 		if(!this.world.isRemote) {

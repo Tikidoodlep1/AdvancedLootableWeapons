@@ -17,26 +17,48 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import tiki.advancedlootableweapons.blocks.tileentities.TileEntityDrum;
 
-public class DrumItemRecipe extends ShapelessOreRecipe {
+public class DrumItemRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 	
 	final Ingredient ingr;
 	final FluidStack fluid;
 	final Ingredient additive;
 	final int ticks;
+
+    private final ResourceLocation group;
+    private final NonNullList<Ingredient> input;
+    private final ItemStack result;
 	
 	public DrumItemRecipe(ResourceLocation group, Ingredient input, FluidStack fluid, Ingredient additive, ItemStack result, int time) {
-		super(group, NonNullList.from(Ingredient.EMPTY, input, additive), result);
+		this.group = group;
+        this.input = NonNullList.from(Ingredient.EMPTY, input, additive);
+        this.result = result;
 		this.ingr = input;
 		this.fluid = fluid;
 		this.additive = additive;
 		this.ticks = time;
 	}
-	
-	@Override
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 3;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return input;
+    }
+
+    @Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
+		NonNullList<ItemStack> keptItems = IRecipe.super.getRemainingItems(inv);
 		
 		for(int i = 0; i < this.input.size(); i++) {
 			Ingredient in = this.input.get(i);
@@ -87,7 +109,7 @@ public class DrumItemRecipe extends ShapelessOreRecipe {
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		return super.getCraftingResult(inv);
+		return this.getRecipeOutput();
 	}
 	
 	@Override
@@ -111,7 +133,12 @@ public class DrumItemRecipe extends ShapelessOreRecipe {
 		}
 		return ingr.getMatchingStacks()[0].getCount();
 	}
-	
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
+    
 	public static class Factory implements IRecipeFactory {
 
 		@Override

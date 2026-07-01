@@ -19,24 +19,47 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
-	
+public class ShapelessOneSlotRecipes extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
+
+    private final ResourceLocation group;
+    private final NonNullList<Ingredient> input;
+    private final ItemStack result;
 	public final Block block;
 
 	public ShapelessOneSlotRecipes(ResourceLocation group, NonNullList<Ingredient> input, ItemStack result, String block) {
-		super(group, input, result);
+		this.group = group;
+        this.input = input;
+        this.result = result;
 		this.block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block));
 	}
 	
 	public ShapelessOneSlotRecipes(ResourceLocation group, NonNullList<Ingredient> input, ItemStack result, Block block) {
-		super(group, input, result);
+        this.group = group;
+        this.input = input;
+        this.result = result;
 		this.block = block;
 	}
-	
-	@Override
+
+    @Override
+    public boolean canFit(int width, int height) {
+        return width * height <= 1;
+    }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return result;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return input;
+    }
+
+    @Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-		NonNullList<ItemStack> keptItems = super.getRemainingItems(inv);
+		NonNullList<ItemStack> keptItems = IRecipe.super.getRemainingItems(inv);
 		return keptItems;
 	}
 	
@@ -94,19 +117,24 @@ public class ShapelessOneSlotRecipes extends ShapelessOreRecipe {
 	
 	@Override
 	public ItemStack getCraftingResult(final InventoryCrafting inv) {
-		return super.getCraftingResult(inv);
+		return result.copy();
 	}
 	
 	public ItemStack getCraftingResult(final NonNullList<ItemStack> inv) {
-		return output.copy();
+		return result.copy();
 	}
 	
 	@Override
 	public String getGroup() {
 		return group == null ? "" : group.toString();
 	}
-	
-	public static class Factory implements IRecipeFactory {
+
+    @Override
+    public boolean isDynamic() {
+        return true;
+    }
+
+    public static class Factory implements IRecipeFactory {
 
 		@Override
 		public IRecipe parse(JsonContext context, JsonObject json) {

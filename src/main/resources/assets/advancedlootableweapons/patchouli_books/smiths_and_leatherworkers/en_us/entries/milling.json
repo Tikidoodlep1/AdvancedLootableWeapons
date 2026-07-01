@@ -11,7 +11,7 @@
             "type": "spotlight",
             "anchor": "block_mill",
             "item": "advancedlootableweapons:block_mill",
-            "text": "First, you'll need a $(item)Mill$(). The $(item)Mill$() takes stones such as $(item)Diorite$(), $(item)Granite$(), or $(item)Feldspar$() and crushes them into their powder variants. $(p)To use it, place it in the world and toss some blocks in it. Then, close the GUI and $(thing)$(k:sneak)-$(k:use)$() the mill to crush the contents into powder."
+            "text": "First, you'll need a $(item)Mill$(). The $(item)Mill$() takes stones such as $(item)Diorite$(), $(item)Granite$(), or $(item)Feldspar$() and crushes them into their powder variants. $(p)To use it, place it in the world and toss some blocks in it. Then, close the GUI and $(thing)$(k:sneak)+$(k:use)$() the mill to crush the contents into powder."
         },
         {
             "type": "mill_crafting_page",
